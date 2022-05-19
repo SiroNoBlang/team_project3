@@ -36,7 +36,7 @@ public class NoticeListAction implements Action {
 		
 		
 		//게시물 목록 담아오기 
-		ArrayList<NoticeBean> noticeList = service.getNoticeleList(pageNum, listLimit);
+		ArrayList<NoticeBean> noticeList = service.getNoticeList(pageNum, listLimit);
 		
 		
 		int maxPage = (int)Math.ceil((double)listCount / listLimit);

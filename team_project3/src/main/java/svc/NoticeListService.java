@@ -26,7 +26,7 @@ public class NoticeListService {
 		return listCount;
 	}
 
-	public ArrayList<NoticeBean> getNoticeleList(int pageNum, int listLimit) {
+	public ArrayList<NoticeBean> getNoticeList(int pageNum, int listLimit) {
 		System.out.println("NoticeListService - getNoticeleList()");
 		
 		ArrayList<NoticeBean> noticeList = null;

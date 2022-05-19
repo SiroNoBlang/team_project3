@@ -28,7 +28,7 @@ public class EventListAction implements Action {
 			pageNum = Integer.parseInt(request.getParameter("page"));
 		}
 		
-		//공지사항 총 게시물 수 조회
+		//이벤트 총 게시물 수 조회
 		EventListService service = new EventListService();
 		String tableName = "admin_event";
 		
