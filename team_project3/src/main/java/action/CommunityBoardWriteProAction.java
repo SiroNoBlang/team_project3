@@ -29,7 +29,7 @@ public class CommunityBoardWriteProAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		System.out.println("CommunityBoardWriteProAction");
+//		System.out.println("CommunityBoardWriteProAction");
 		ActionForward forward = null;
 
 		String uploadPath = "Upload";
@@ -42,7 +42,7 @@ public class CommunityBoardWriteProAction implements Action {
 		MultipartRequest multi = new MultipartRequest(request, realPath, fileSize, "UTF-8", new DefaultFileRenamePolicy());
 	
 		String communityType = multi.getParameter("communityType");
-		System.out.println(communityType); //커뮤니티 카테고리 확인 작업
+//		System.out.println(communityType); //커뮤니티 카테고리 확인 작업
 		
 		CommunityBoardWriteProService service = new CommunityBoardWriteProService();
 		boolean isWriteSuccess = false;
@@ -53,6 +53,19 @@ public class CommunityBoardWriteProAction implements Action {
 		String board_file = "";
 		File file = null;
 
+		
+		String now = "";  //현재시간
+	    int format = 0;
+        String realFileName = "";  //현재시간과 확장자 합치기
+        
+        System.out.println(realFileName);
+        
+        File oldFile = new File(realPath + board_real_file);
+        File newFile = new File(realPath + realFileName);
+       
+        oldFile.renameTo(newFile); // 파일명 변경
+        
+		
 		
 		NoticeBean notice = null;
 		NoticeImgFileBean noticeImg = null;
@@ -86,18 +99,15 @@ public class CommunityBoardWriteProAction implements Action {
 					board_file = multi.getOriginalFileName(fileElement);
 					
 					
-					String now = new SimpleDateFormat("yyyyMMddHmsS").format(new Date());  //현재시간
-					
-			        String realFileName = now + board_real_file.substring(board_real_file.length());  //현재시간과 확장자 합치기
+					now = new SimpleDateFormat("yyyyMMddHmsS").format(new Date());  //현재시간
+				    format = board_real_file.lastIndexOf("."); // 파일 확장자 위치
+			        realFileName = now + board_real_file.substring(format,board_real_file.length());  //현재시간과 확장자 합치기
 			        
-			        System.out.println(realFileName);
 			        
-			        File oldFile = new File(realPath + board_real_file);
-			        File newFile = new File(realPath + realFileName);
+			        oldFile = new File(realPath + board_real_file);
+			        newFile = new File(realPath + realFileName);
 			       
 			        oldFile.renameTo(newFile); // 파일명 변경
-			        
-			        
 			        
 					noticeImg = new NoticeImgFileBean();
 					noticeImg.setNotice_img_file_name(board_file);
@@ -131,6 +141,18 @@ public class CommunityBoardWriteProAction implements Action {
 				board_real_file = multi.getFilesystemName(fileElement);
 				board_file = multi.getOriginalFileName(fileElement);
 				
+				
+				now = new SimpleDateFormat("yyyyMMddHmsS").format(new Date());  //현재시간
+			    format = board_real_file.lastIndexOf("."); // 파일 확장자 위치
+		        realFileName = now + board_real_file.substring(format,board_real_file.length());  //현재시간과 확장자 합치기
+		        
+		        
+		        oldFile = new File(realPath + board_real_file);
+		        newFile = new File(realPath + realFileName);
+		       
+		        oldFile.renameTo(newFile); // 파일명 변경
+
+		        
 				eventImg = new EventImgFileBean();
 				eventImg.setEvent_img_file_name(board_file);
 				eventImg.setEvent_img_file_real_name(board_real_file);
@@ -138,9 +160,8 @@ public class CommunityBoardWriteProAction implements Action {
 				eventImgList.add(eventImg);
 				
 				Path p1 = Paths.get(realPath, board_real_file); 
-				Path p2 = Paths.get(realPath, "admin_event_img", board_real_file);
+				Path p2 = Paths.get(realPath, "admin_event_img", realFileName);
 				Files.move(p1, p2, StandardCopyOption.REPLACE_EXISTING);
-				
 				
 				}
 			}
