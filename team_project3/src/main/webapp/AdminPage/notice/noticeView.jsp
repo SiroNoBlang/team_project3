@@ -122,6 +122,7 @@
 	<!-- partial -->
 	<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js'></script>
 	<script src='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/js/bootstrap.min.js'></script>
-	<script src="AdminPage/script.js"></script>
+	<script src="AdminPage/js/script.js"></script>
+	<script src="AdminPage/js/jquery-3.6.0.js"></script>
 </body>
 </html>
