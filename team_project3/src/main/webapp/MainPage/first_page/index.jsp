@@ -7,7 +7,15 @@ String nickname = (String)session.getAttribute("sNickname");
 <!DOCTYPE html>
 <html lang="en">
 <head>  
-	<title>Home 03</title>          
+	<title>Home 03</title>     
+	<script type="text/javascript">
+	function confirmLogout() {
+	if(confirm("로그아웃 할꺼임?")) {
+		location.href = "./Logout.ma";
+		}
+	} 
+
+	</script>     
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 <!--===============================================================================================-->	
