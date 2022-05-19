@@ -19,7 +19,7 @@ public class LogoutAction implements Action {
 		session.invalidate();
 		
 		forward = new ActionForward();
-		forward.setPath("../");
+		forward.setPath("./");
 		forward.setRedirect(true);
 		
 		return forward;

@@ -24,6 +24,7 @@ public class JoinProAction implements Action {
 		memberBean.setMember_email(request.getParameter("member_email1") + request.getParameter("member_email2"));
 		memberBean.setMember_info_gender(request.getParameter("member_info_gender"));
 		memberBean.setMember_info_age(request.getParameter("member_info_age"));
+		memberBean.setMember_info_grade_code(request.getParameter("member_info_grade_code"));
 		memberBean.setMember_info_detail_like_style(request.getParameter("member_info_detail_like_style"));
 		memberBean.setMember_info_detail_like_brand(request.getParameter("member_info_detail_like_brand"));
 		memberBean.setMember_info_detail_like_category(request.getParameter("member_info_detail_like_category"));

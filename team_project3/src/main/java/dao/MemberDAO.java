@@ -26,59 +26,59 @@ public class MemberDAO {
 	}
 
 	public int joinSuccess(MemberBean memberBean) {
-	      System.out.println("joinSuccess - DAO");
-	      int joinCount = 0;
-	      
-	      PreparedStatement pstmt = null, pstmt2 = null, pstmt3 = null, pstmt4 = null, pstmt5 = null;
-	      
-	      try {
-	         String sql = "INSERT INTO member VALUES ((SELECT A.NUM FROM (SELECT IFNULL(MAX(CAST(member_num AS UNSIGNED)), 0) + 1 AS num FROM member) A),REPLACE(UUID(),'-',''),?,?,?,?)";
-	         pstmt = con.prepareStatement(sql);
-	         pstmt.setString(1, memberBean.getMember_nickname());
-	         pstmt.setString(2, memberBean.getMember_id());
-	         pstmt.setString(3, memberBean.getMember_passwd());
-	         pstmt.setString(4, memberBean.getMember_email());
-	         
-//	         System.out.println(memberBean.getMember_info_gender());
-	         sql = "INSERT INTO member_info (member_info_code,member_info_gender, member_info_age) VALUES ((SELECT MAX(member_code) FROM member ORDER BY member_num),?,?)";
-	         pstmt2 = con.prepareStatement(sql);
-	         pstmt2.setString(1, memberBean.getMember_info_gender());
-	         pstmt2.setString(2, memberBean.getMember_info_age());
-	         
-	         sql = "INSERT INTO member_info_detail (member_info_detail_code,member_info_detail_like_style, member_info_detail_like_brand, member_info_detail_like_category) VALUES ((SELECT MAX(member_code) FROM member ORDER BY member_num),?,?,?)";
-	         pstmt3 = con.prepareStatement(sql);
-	         pstmt3.setString(1, memberBean.getMember_info_detail_like_style());
-	         pstmt3.setString(2, memberBean.getMember_info_detail_like_brand());
-	         pstmt3.setString(3, memberBean.getMember_info_detail_like_category());
-	         
-	         sql ="INSERT INTO member_service_log VALUES ((SELECT MAX(member_code) FROM member ORDER BY member_num ), '정상', REPLACE(now(),'-',''), REPLACE(now(),'-',''), REPLACE(now(),'-',''), REPLACE(now(),'-',''), 0)";
-	         pstmt4 = con.prepareStatement(sql);
-	         
-	         System.out.println(memberBean.getAgreement_name());
-	         System.out.println(memberBean.getAgreement_content());
-	         sql = "INSERT INTO agreement VALUES ((SELECT MAX(member_code) FROM member ORDER BY member_num), REPLACE(now(),'-',''),?,?)";
-	         pstmt5 = con.prepareStatement(sql);
-	         pstmt5.setString(1, memberBean.getAgreement_name());
-	         pstmt5.setString(2, memberBean.getAgreement_content());
-	         
-	         
-	         joinCount = pstmt.executeUpdate();
-	         joinCount = pstmt2.executeUpdate();
-	         joinCount = pstmt3.executeUpdate();
-	         joinCount = pstmt4.executeUpdate();
-	         joinCount = pstmt5.executeUpdate();
-	      } catch (SQLException e) {
-	         
-	      } finally {
-	         close(pstmt5);
-	         close(pstmt4);
-	         close(pstmt3);
-	         close(pstmt2);
-	         close(pstmt);
-	      }
-	      
-	      return joinCount;
-	   }
+        System.out.println("joinSuccess - DAO");
+        int joinCount = 0;
+        
+        PreparedStatement pstmt = null, pstmt2 = null, pstmt3 = null, pstmt4 = null, pstmt5 = null;
+        
+        try {
+           String sql = "INSERT INTO member VALUES ((SELECT A.NUM FROM (SELECT IFNULL(MAX(CAST(member_num AS UNSIGNED)), 0) + 1 AS num FROM member) A),REPLACE(UUID(),'-',''),?,?,?,?)";
+           pstmt = con.prepareStatement(sql);
+           pstmt.setString(1, memberBean.getMember_nickname());
+           pstmt.setString(2, memberBean.getMember_id());
+           pstmt.setString(3, memberBean.getMember_passwd());
+           pstmt.setString(4, memberBean.getMember_email());
+           
+//           System.out.println(memberBean.getMember_info_gender());
+           sql = "INSERT INTO member_info (member_info_code,member_info_gender, member_info_age,member_info_grade_code) VALUES ((SELECT member_code FROM member ORDER BY CAST(member_num AS SIGNED) DESC LIMIT 1),?,?,(SELECT grade_code FROM grade WHERE grade_name='Basic'))";
+           pstmt2 = con.prepareStatement(sql);
+           pstmt2.setString(1, memberBean.getMember_info_gender());
+           pstmt2.setString(2, memberBean.getMember_info_age());
+           
+           sql = "INSERT INTO member_info_detail (member_info_detail_code,member_info_detail_like_style, member_info_detail_like_brand, member_info_detail_like_category) VALUES ((SELECT member_code FROM member ORDER BY CAST(member_num AS SIGNED) DESC LIMIT 1),?,?,?)";
+           pstmt3 = con.prepareStatement(sql);
+           pstmt3.setString(1, memberBean.getMember_info_detail_like_style());
+           pstmt3.setString(2, memberBean.getMember_info_detail_like_brand());
+           pstmt3.setString(3, memberBean.getMember_info_detail_like_category());
+           
+           sql ="INSERT INTO member_service_log VALUES ((SELECT member_code FROM member ORDER BY CAST(member_num AS SIGNED) DESC LIMIT 1) ), '정상', REPLACE(now(),'-',''), REPLACE(now(),'-',''), REPLACE(now(),'-',''), REPLACE(now(),'-',''), 0)";
+           pstmt4 = con.prepareStatement(sql);
+           
+//           System.out.println(memberBean.getAgreement_name());
+//           System.out.println(memberBean.getAgreement_content());
+//           sql = "INSERT INTO agreement VALUES ((SELECT MAX(member_code) FROM member ORDER BY member_num), REPLACE(now(),'-',''),?,?)";
+//           pstmt5 = con.prepareStatement(sql);
+//           pstmt5.setString(1, memberBean.getAgreement_name());
+//           pstmt5.setString(2, memberBean.getAgreement_content());
+           
+           
+           joinCount = pstmt.executeUpdate();
+           joinCount = pstmt2.executeUpdate();
+           joinCount = pstmt3.executeUpdate();
+           joinCount = pstmt4.executeUpdate();
+//           joinCount = pstmt5.executeUpdate();
+        } catch (SQLException e) {
+           
+        } finally {
+//           close(pstmt5);
+           close(pstmt4);
+           close(pstmt3);
+           close(pstmt2);
+           close(pstmt);
+        }
+        
+        return joinCount;
+     }
 
 	public MemberBean isLogin(String member_id, String member_passwd) {
 		System.out.println("MemberDAO isLogin");

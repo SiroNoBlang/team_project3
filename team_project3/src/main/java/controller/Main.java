@@ -46,7 +46,7 @@ public class Main extends HttpServlet {
 			} catch (Exception e) {
 				
 			}
-		} else if(command.equals("/adminPage/Logout.ma")) {
+		} else if(command.equals("/Logout.ma")) {
 			action = new LogoutAction();
 			try {
 				forward = action.execute(request, response);

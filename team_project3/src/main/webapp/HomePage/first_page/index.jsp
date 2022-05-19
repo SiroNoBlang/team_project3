@@ -58,6 +58,28 @@
 			passSafe = false;
 		}
 	}
+	
+	function checkPassResult(pass2){
+		var spanElem = document.getElementById("passCheck");
+		var pass = fr.member_passwd.value;
+		
+		if(pass==pass2){
+			spanElem.innerHTML = "패스워드 일치";
+			spanElem.style.color = "GREEN";
+		}else{
+			spanElem.innerHTML = "패스워드 불일치";
+			spanElem.style.color = "RED";
+		}
+	}
+	
+	function checkNickname(){
+		window.open("./HomePage/check_nickname.jsp");
+	}
+	
+	function checkId(){
+		window.open("./HomePage/check_id.jsp");
+	}
+	
 </script>
 </head>
 <body class="is-preload">
@@ -474,22 +496,24 @@
 				<form method="post" action="JoinPro.ma" id="fr">
 					<div class="fields">
 						<div class="field half">
-							<label for="member_nickname">Nickname</label> <input type="text"
-								name="member_nickname" id="member_nickname" />
+							<label for="member_nickname">Nickname</label> 
+							<input type="text"name="member_nickname" id="member_nickname" />
+							<input type="button" value="Nickname 중복체크" onclick="checkNickname()">
 						</div>
 						<div class="field half">
-							<label for="member_id">ID</label><span id="checkId"></span> <input
-								type="text" name="member_id" id="member_id" />
+							<label for="member_id">ID</label><span id="checkId"></span> 
+							<input type="text" name="member_id" id="member_id" />
+							<input type="button" value="ID 중복체크" onclick="checkId()">
 						</div>
 						<div class="field half">
-							<label for="member_passwd">Password</label><span id="passSafe"></span>
-							<input type="password" name="member_passwd" id="member_passwd" />
+							<label for="member_passwd">Password</label>
+							<input type="password" name="member_passwd" id="member_passwd" onkeyup="checkPass(this.value)"/>
+							<span id="passSafe"></span>
 						</div>
 						<div class="field half">
-							<label for="member_passwd_check">Password Check</label><span
-								id="passCheck"></span> <input type="password"
-								name="member_passwd_check" id="member_passwd_check" /> <span
-								id="member_passwd_check_result"></span>
+							<label for="member_passwd_check">Password Check</label> 
+							<input type="password"name="member_passwd_check" id="member_passwd_check" onkeyup="checkPassResult(this.value)"/> 
+								<span id="passCheck"></span>
 						</div>
 						<div class="field half">
 							<label for="member_email1">Email</label> <input type="text"
