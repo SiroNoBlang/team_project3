@@ -57,7 +57,7 @@ public class NoticeSearchAction implements Action {
 		
 		
 		forward = new ActionForward();
-		forward.setPath("./AdminPage/noticeListSearch.jsp");
+		forward.setPath("./AdminPage/notice/noticeListSearch.jsp");
 		forward.setRedirect(false); 
 		
 		return forward;
