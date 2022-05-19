@@ -15,7 +15,7 @@ public class NoticeDetailService {
 
 	public NoticeBean getNoticeArticle(int admin_notice_num) {
 
-		System.out.println("BoardDetailService - getNoticeArticle()");
+//		System.out.println("NoticeDetailService - getNoticeArticle()");
 		
 		NoticeBean noticeArticle = null;
 		

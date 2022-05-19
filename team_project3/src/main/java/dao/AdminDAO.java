@@ -32,7 +32,7 @@ public class AdminDAO {
 	}
 
 	// 공지사항 글쓰기
-	public int insertNoticeArticle(NoticeBean notice, NoticeImgFileBean noticeImg) {
+	public int insertNoticeArticle(NoticeBean notice,  ArrayList<NoticeImgFileBean> noticeImgList) {
 		System.out.println("AdminDAO - insertArticle()");
 
 		int insertCount = 0;
@@ -65,14 +65,16 @@ public class AdminDAO {
 			insertCount = pstmt.executeUpdate();
 			
 			
-			if(noticeImg.getNotice_img_file_name() !=null) {
-				
-				sql = "INSERT INTO notice_img_file VALUES ((SELECT MAX(admin_notice_num) FROM admin_notice),?,?)"; 
-				pstmt = con.prepareStatement(sql); 
-				pstmt.setString(1,noticeImg.getNotice_img_file_name()); 
-				pstmt.setString(2,noticeImg.getNotice_img_file_real_name());
-				
-				pstmt.executeUpdate();
+			if(!noticeImgList.isEmpty()) {
+				for(NoticeImgFileBean noticeImg: noticeImgList) {
+					sql = "INSERT INTO notice_img_file VALUES ((SELECT MAX(admin_notice_num) FROM admin_notice),?,?)"; 
+					pstmt = con.prepareStatement(sql); 
+					
+					pstmt.setString(1,noticeImg.getNotice_img_file_name()); 
+					pstmt.setString(2,noticeImg.getNotice_img_file_real_name());
+					
+					pstmt.executeUpdate();
+				} 
 			}
 			
 
@@ -81,14 +83,13 @@ public class AdminDAO {
 			System.out.println("SQL 구문 오류 발생! - insertNoticeArticle()");
 		} finally {
 			close(pstmt);
-			close(pstmt2);
 			close(rs);
 		}
 		return insertCount;
 	}
 
 	// 이벤트 글쓰기
-	public int insertEventArticle(EventBean event, EventImgFileBean eventImg) {
+	public int insertEventArticle(EventBean event,  ArrayList<EventImgFileBean> eventImgList) {
 		System.out.println("AdminDAO - insertEventArticle()");
 
 		int insertCount = 0;
@@ -120,28 +121,29 @@ public class AdminDAO {
 			
 			insertCount = pstmt.executeUpdate();
 			
-			if(eventImg.getEvent_img_file_name() !=null) {
 			
-			sql = "INSERT INTO event_img_file VALUES ((SELECT MAX(admin_event_num) FROM admin_event),?,?)"; 
-			pstmt = con.prepareStatement(sql); 
-			pstmt.setString(1,eventImg.getEvent_img_file_name()); 
-			pstmt.setString(2,eventImg.getEvent_img_file_real_name());
-			
-			pstmt.executeUpdate();
-			
-			}
+			if(!eventImgList.isEmpty()) {
+				for(EventImgFileBean eventImg: eventImgList) {
+					sql = "INSERT INTO event_img_file VALUES ((SELECT MAX(admin_event_num) FROM admin_event),?,?)"; 
+					
+					pstmt = con.prepareStatement(sql); 
+					pstmt.setString(1,eventImg.getEvent_img_file_name()); 
+					pstmt.setString(2,eventImg.getEvent_img_file_real_name());
+					
+					pstmt.executeUpdate();
+				}
+			} 
+
 
 		} catch (SQLException e) {
 			e.printStackTrace();
 			System.out.println("SQL 구문 오류 발생! - insertEventArticle()");
 		} finally {
 			close(pstmt);
-			close(pstmt2);
 			close(rs);
 		}
 		return insertCount;
 	}
-
 
 	//총 공지사항게시물 수를 조회
 	public int selectListCount(String tableName) {
@@ -153,7 +155,7 @@ public class AdminDAO {
 		ResultSet rs = null;
 		
 		try {
-			String sql = "SELECT COUNT(*) FROM " + tableName;
+			String sql = "SELECT COUNT(*) FROM "+tableName;
 			pstmt = con.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 			
@@ -181,7 +183,7 @@ public class AdminDAO {
 		int startRow = (pageNum - 1) * listLimit;
 		
 		try {
-			String sql = "SELECT * FROM admin_notice LIMIT ?,?";
+			String sql = "SELECT * FROM admin_notice ORDER BY admin_notice_num DESC LIMIT ?,?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, startRow);
 			pstmt.setInt(2, listLimit);
@@ -271,25 +273,30 @@ public class AdminDAO {
 	}
 
 	// 공지사항 첨부파일 조회
-	public NoticeImgFileBean getNoticeImg(int admin_notice_num) {
-		NoticeImgFileBean noticeImgFile =  null;
+	public ArrayList<NoticeImgFileBean>  getNoticeImg(int admin_notice_num) {
+		ArrayList<NoticeImgFileBean> noticeImgFileList = new ArrayList<NoticeImgFileBean>();
 		
+		NoticeImgFileBean noticeImg = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		
 		try {
 			
-			//쿼리확인해야함
-			String sql ="SELECT f.notice_img_file_num, f.notice_img_file_real_name, admin_notice_num FROM admin_notice JOIN notice_img_file f ON f.notice_img_file_num = admin_notice_num WHERE notice_img_file_num = ?";
+			String sql ="SELECT f.notice_img_file_name, f.notice_img_file_real_name, admin_notice_num FROM admin_notice JOIN notice_img_file f ON f.notice_img_file_num = admin_notice_num WHERE notice_img_file_num = ?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, admin_notice_num);
 			rs = pstmt.executeQuery();
 			
-			if(rs.next()) {
-				noticeImgFile = new NoticeImgFileBean();
-				noticeImgFile.setNotice_img_file_name(rs.getString("f.notice_img_file_num"));
-				noticeImgFile.setNotice_img_file_real_name(rs.getString("f.notice_img_file_real_name"));
-			}
+			
+			while(rs.next()) {
+				
+				noticeImg = new NoticeImgFileBean();
+				noticeImg.setNotice_img_file_name(rs.getString("f.notice_img_file_name"));
+				noticeImg.setNotice_img_file_real_name(rs.getString("f.notice_img_file_real_name"));
+				
+				noticeImgFileList.add(noticeImg);
+				
+			} 
 			
 		} catch (SQLException e) {
 			System.out.println("SQL 구문 오류 발생! - getNoticeImg()");
@@ -298,9 +305,94 @@ public class AdminDAO {
 			close(pstmt);
 			close(rs);
 		}
-		return noticeImgFile;
+		return noticeImgFileList;
+	}
+	
+	//검색어에 해당하는 게시물 수 
+	public int selectSearchListCount(String tableName, String search, String searchType) {
+		int listCount =  0;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			con = getConnection();
+			
+			String sql = "SELECT COUNT(admin_notice_num) FROM "+ tableName+ " WHERE " + searchType + " LIKE ?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, "%" + search + "%");
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				listCount = rs.getInt(1);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println("SQL 구문 오류 - selectSearchListCount()");
+		} finally {
+			close(pstmt);
+			close(rs);
+		}
+		return listCount;
 	}
 
+	//검색어에 해당하는 게시물 목록
+	public ArrayList<NoticeBean> selectSearchNoticeList(int pageNum, int listLimit, String search, String searchType) {
+		ArrayList<NoticeBean> noticeSearchList =null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		
+		try {
+			int startRow = (pageNum - 1) * listLimit;
+			
+			String sql = "SELECT * FROM admin_notice "
+					+ "WHERE " + searchType + " LIKE ? "
+					+ "ORDER BY admin_notice_num DESC LIMIT ?,?";
+			
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, "%" + search + "%");
+			pstmt.setInt(2, startRow);
+			pstmt.setInt(3, listLimit);
+			
+			rs = pstmt.executeQuery();
+			
+			noticeSearchList = new ArrayList<NoticeBean>();
+			
+			while(rs.next()) {
+				NoticeBean noticeArticle = new NoticeBean();
+				
+				noticeArticle.setAdmin_notice_num(rs.getInt("admin_notice_num"));
+				noticeArticle.setAdmin_notice_nickname(rs.getString("admin_notice_nickname"));
+				noticeArticle.setAdmin_notice_write_date(rs.getString("admin_notice_write_date").substring(0,8));
+				noticeArticle.setAdmin_notice_title(rs.getString("admin_notice_title"));
+				noticeArticle.setAdmin_notice_content(rs.getString("admin_notice_content"));
+				noticeArticle.setAdmin_notice_readcount(rs.getInt("admin_notice_readcount"));
+			
+				noticeSearchList.add(noticeArticle);
+			}
+			
+				System.out.println(noticeSearchList);
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println("SQL 구문 오류 - selectSearchNoticeList()");
+		} finally {
+			close(pstmt);
+			close(rs);
+		}
+		return noticeSearchList;
+	}
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	public ArrayList<MemberBean> selectMemberManagementList(int pageNum, int listLimit) {
 		ArrayList<MemberBean> memberManagementList = null;
 		

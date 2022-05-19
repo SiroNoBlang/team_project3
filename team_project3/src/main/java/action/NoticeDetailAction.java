@@ -14,7 +14,7 @@ public class NoticeDetailAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		System.out.println("NoticeBoardDetailAction");
+//		System.out.println("NoticeDetailAction");
 		ActionForward forward = null;
 		
 		int admin_notice_num = Integer.parseInt(request.getParameter("admin_notice_num"));
@@ -26,7 +26,7 @@ public class NoticeDetailAction implements Action {
 		
 		
 		if(noticeArticle != null) {
-			System.out.println("조회수 증가");
+//			System.out.println("조회수 증가");
 			service.increaseReadcount(admin_notice_num);
 		}
 		

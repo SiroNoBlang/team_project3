@@ -69,6 +69,10 @@
 								<td>${noticeArticle.getAdmin_notice_title() }</td>
 							</tr>
 							<tr>
+								<th><label for="board_num">실제글번호</label></th>
+								<td>${noticeArticle.getAdmin_notice_num() }</td>
+							</tr>
+							<tr>
 								<th><label for="board_nickname">작성자</label></th>
 								<td><%=sNickname %></td>
 							</tr>
@@ -82,20 +86,12 @@
 							</tr>
 							<tr>
 								<th><label for="board_content">내용</label></th>
-								<td>
-
-								<!-- 구문 확인하기 -->
-									<c:choose> 
-										<c:when test="${not empty noticeImgFileList && noticeImgFileList ne NULL}">
-												${noticeArticle.getAdmin_notice_content() } <br>
-											<c:forEach var="noticeImg" items="${noticeImgFileList }">
-												<img src="./Upload/admin_notice_img/${noticeImg.getNotice_img_file_real_name() }"> <br>
-											</c:forEach>
-										</c:when> 
-									<c:otherwise> 
-											${noticeArticle.getAdmin_notice_content() }
-									</c:otherwise> 
-								</c:choose> 
+								<td>${noticeArticle.getAdmin_notice_content() } <br>
+									<c:if test="${not empty noticeImgFileList && noticeImgFileList ne NULL}">
+										<c:forEach var="noticeImg" items="${noticeImgFileList }">
+											<img src="./Upload/admin_notice_img/${noticeImg.getNotice_img_file_real_name() }"> <br>
+										</c:forEach>
+									</c:if> 
 								</td>
 							</tr>
 							<tr>
@@ -103,7 +99,7 @@
 								<td>
 									<c:forEach var="noticeImg" items="${noticeImgFileList }">
 										<a href="./Upload/admin_notice_img/${noticeImg.getNotice_img_file_real_name() }" download="${noticeImg.getNotice_img_file_name() }"> 
-										${noticeImg.getNotice_img_file_real_name() }</a><br>
+										${noticeImg.getNotice_img_file_name() }</a><br>
 									</c:forEach> 
 								</td>
 							</tr>

@@ -14,8 +14,11 @@ import action.CommunityBoardWriteProAction;
 import action.MemberDetailAction;
 import action.MemberManagementListAction;
 import action.MemberUpdateAction;
-import action.NoticeBoardDetailAction;
-import action.NoticeBoardListAction;
+import action.NoticeDetailAction;
+import action.NoticeListAction;
+import action.NoticeModifyFormAction;
+import action.NoticeModifyProAction;
+import action.NoticeSearchAction;
 import vo.ActionForward;
 
 
@@ -23,12 +26,12 @@ import vo.ActionForward;
 @WebServlet("*.co")
 public class CommunityFrontController extends HttpServlet {
 	protected void doProcess(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("CommunityFrontController");
+//		System.out.println("CommunityFrontController");
 		
 		request.setCharacterEncoding("UTF-8");
 		
 		String command = request.getServletPath();
-		System.out.println("command : " + command);
+//		System.out.println("command : " + command);
 		
 		Action action = null;
 		ActionForward forward = null;
@@ -46,7 +49,7 @@ public class CommunityFrontController extends HttpServlet {
 				e.printStackTrace();
 			}
 		} else if(command.equals("/NoticeList.co")) {//공지사항 리스트(/NoticeList.co) 요청
-			action = new NoticeBoardListAction();			
+			action = new NoticeListAction();			
 			try {
 				forward = action.execute(request, response);
 			} catch (Exception e) {
@@ -54,14 +57,35 @@ public class CommunityFrontController extends HttpServlet {
 			}
 			
 		} else if(command.equals("/NoticeDetail.co")) {//공지사항 상세정보(/NoticeDetail.co) 요청
-			action = new NoticeBoardDetailAction();
+			action = new NoticeDetailAction();
 			
 			try {
 				forward = action.execute(request, response);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		} else if(command.equals("/MemberManagement.co")) { // 가입된 회원 목록
+		} 	else if(command.equals("/NoticeSearch.co")) {//공지사항 검색(/NoticeSearch.co) 요청
+			action = new NoticeSearchAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		} else if (command.equals("/NoticeModifyForm.co")) { // 공지사항 수정하는 상세정보(/NoticeModifyForm.co) 요청
+			action = new NoticeModifyFormAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}else if(command.equals("/NoticeModifyPro.co")) {//공지사항 수정(/NoticeModifyPro.co) 요청
+			action = new NoticeModifyProAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}else if(command.equals("/MemberManagement.co")) { // 가입된 회원 목록
 			action = new MemberManagementListAction();			
 			try {
 				forward = action.execute(request, response);
