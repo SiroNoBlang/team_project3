@@ -34,7 +34,7 @@ public class NoticeDetailAction implements Action {
 		request.setAttribute("noticeImgFileList", noticeImgFileList);
 		
 		forward = new ActionForward();
-		forward.setPath("AdminPage/noticeView.jsp");
+		forward.setPath("AdminPage/notice/noticeView.jsp");
 		forward.setRedirect(false);
 		
 		return forward;
