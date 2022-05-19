@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import action.Action;
 import action.CommunityBoardWriteProAction;
+import action.EventDetailAction;
 import action.EventListAction;
 import action.MemberDetailAction;
 import action.MemberManagementListAction;
@@ -86,16 +87,7 @@ public class CommunityFrontController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		}
-		
-		
-		
-		
-		
-		
-		
-		// =================================이벤트 컨트롤러 수정중 =================================
-		else if(command.equals("/EventList.co")) {//이벤트 리스트(/NoticeList.co) 요청
+		}else if(command.equals("/EventList.co")) {//이벤트 리스트(/EventList.co) 요청
 			action = new EventListAction();			
 			try {
 				forward = action.execute(request, response);
@@ -103,15 +95,16 @@ public class CommunityFrontController extends HttpServlet {
 				e.printStackTrace();
 			}
 			
-		} else if(command.equals("/EventDetail.co")) {//이벤트 상세정보(/NoticeDetail.co) 요청
-			action = new NoticeDetailAction();
+			// =================================이벤트 컨트롤러 수정중 =================================
+		} else if(command.equals("/EventDetail.co")) {//이벤트 상세정보(/EventDetail.co) 요청
+			action = new EventDetailAction();
 			
 			try {
 				forward = action.execute(request, response);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		} 	else if(command.equals("/EventSearch.co")) {//이벤트 검색(/NoticeSearch.co) 요청
+		} 	else if(command.equals("/EventSearch.co")) {//이벤트 검색(/EventSearch.co) 요청
 			action = new NoticeSearchAction();
 			try {
 				forward = action.execute(request, response);

@@ -10,7 +10,7 @@ import vo.NoticeBean;
 public class NoticeListService {
 
 	public int getListCount(String tableName) {
-		System.out.println("NoticeListService - getListCount()");
+//		System.out.println("NoticeListService - getListCount()");
 		
 		int listCount = 0;
 		
@@ -27,7 +27,7 @@ public class NoticeListService {
 	}
 
 	public ArrayList<NoticeBean> getNoticeList(int pageNum, int listLimit) {
-		System.out.println("NoticeListService - getNoticeleList()");
+//		System.out.println("NoticeListService - getNoticeleList()");
 		
 		ArrayList<NoticeBean> noticeList = null;
 		

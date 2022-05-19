@@ -27,7 +27,7 @@ public class NoticeDetailAction implements Action {
 		
 		if(noticeArticle != null) {
 //			System.out.println("조회수 증가");
-			service.increaseReadcount(admin_notice_num);
+			service.increaseNoticeReadcount(admin_notice_num);
 		}
 		
 		request.setAttribute("noticeArticle", noticeArticle);

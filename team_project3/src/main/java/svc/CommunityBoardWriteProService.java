@@ -15,7 +15,7 @@ public class CommunityBoardWriteProService {
 
 	public boolean noticeRegistArticle(NoticeBean notice, ArrayList<NoticeImgFileBean>  noticeImgList) {  //공지사항 게시물 등록
 		System.out.println("CommunityBoardWriteProService - noticeRegistArticle()");
-		boolean isWriteSuccess = false;
+		boolean isNoticeWriteSuccess = false;
 		
 		
 		Connection con = getConnection();
@@ -28,18 +28,18 @@ public class CommunityBoardWriteProService {
 		
 		if(insertCount > 0) {
 			commit(con);
-			isWriteSuccess = true;
+			isNoticeWriteSuccess = true;
 		} else { // 작업 실패 시
 			rollback(con);
 		}
 		close(con);
 		
-		return isWriteSuccess;
+		return isNoticeWriteSuccess;
 	}
 
 	public boolean eventRegistArticle(EventBean event, ArrayList<EventImgFileBean> eventImgList) { //이벤트 게시물 등록
-		System.out.println("CommunityBoardWriteProService - eventRegistArticle()");
-		boolean isWriteSuccess = false;
+//		System.out.println("CommunityBoardWriteProService - eventRegistArticle()");
+		boolean isEventWriteSuccess = false;
 		
 		Connection con = getConnection();
 		AdminDAO adminDAO = AdminDAO.getInstance();
@@ -50,13 +50,13 @@ public class CommunityBoardWriteProService {
 		
 		if(insertCount > 0) {
 			commit(con);
-			isWriteSuccess = true;
+			isEventWriteSuccess = true;
 		} else { // 작업 실패 시
 			rollback(con);
 		}
 		close(con);
 		
-		return isWriteSuccess;
+		return isEventWriteSuccess;
 		
 	}
 

@@ -33,7 +33,7 @@ public class AdminDAO {
 
 	// 공지사항 글쓰기
 	public int insertNoticeArticle(NoticeBean notice,  ArrayList<NoticeImgFileBean> noticeImgList) {
-		System.out.println("AdminDAO - insertArticle()");
+//		System.out.println("AdminDAO - insertArticle()");
 
 		int insertCount = 0;
 
@@ -90,7 +90,7 @@ public class AdminDAO {
 
 	// 이벤트 글쓰기
 	public int insertEventArticle(EventBean event,  ArrayList<EventImgFileBean> eventImgList) {
-		System.out.println("AdminDAO - insertEventArticle()");
+//		System.out.println("AdminDAO - insertEventArticle()");
 
 		int insertCount = 0;
 
@@ -147,7 +147,7 @@ public class AdminDAO {
 
 	//총 공지사항게시물 수를 조회
 	public int selectListCount(String tableName) {
-		System.out.println("AdminDAO - selectListCount()");
+//		System.out.println("AdminDAO - selectListCount()");
 		
 		int listCount = 0;
 		
@@ -256,7 +256,7 @@ public class AdminDAO {
 	}
 
 	//공지사항 조회수 증가
-	public void updateReadcount(int admin_notice_num) {
+	public void updateNoticeReadcount(int admin_notice_num) {
 		PreparedStatement pstmt = null;
 		
 		try {
@@ -265,7 +265,7 @@ public class AdminDAO {
 			pstmt.setInt(1, admin_notice_num);
 			pstmt.executeUpdate();
 		} catch (SQLException e) {
-			System.out.println("SQL 구문 오류 발생! - updateReadcount()");
+			System.out.println("SQL 구문 오류 발생! - updateNoticeReadcount()");
 			e.printStackTrace();
 		} finally {
 			close(pstmt);
@@ -308,7 +308,7 @@ public class AdminDAO {
 		return noticeImgFileList;
 	}
 	
-	//검색어에 해당하는 게시물 수 
+	//검색어에 해당하는 게시물 수 (코드 수정하기)
 	public int selectSearchListCount(String tableName, String search, String searchType) {
 		int listCount =  0;
 		PreparedStatement pstmt = null;
@@ -384,8 +384,6 @@ public class AdminDAO {
 		return noticeSearchList;
 	}
 
-
-
 	//이벤트 글목록 조회
 	public ArrayList<EventBean> selectEventList(int pageNum, int listLimit) {
 		ArrayList<EventBean> eventList = null;
@@ -408,12 +406,12 @@ public class AdminDAO {
 			while(rs.next()) {
 				
 				EventBean event = new EventBean();
-				event.setAadmin_event_num(rs.getInt("admin_event_num"));
+				event.setAdmin_event_num(rs.getInt("admin_event_num"));
 				event.setAdmin_event_nickname(rs.getString("admin_event_nickname"));
 				event.setAdmin_event_write_date(rs.getString("admin_event_write_date").substring(0,8));
 				event.setAdmin_event_title(rs.getString("admin_event_title"));
 				event.setAdmin_event_content(rs.getString("admin_event_content"));
-				event.setAadmin_event_readcount(rs.getInt("admin_event_readcount"));
+				event.setAdmin_event_readcount(rs.getInt("admin_event_readcount"));
 				
 				eventList.add(event);
 			}
@@ -429,12 +427,90 @@ public class AdminDAO {
 		
 	}
 	
+	//이벤트 상세정보 조회
+	public EventBean selectEventArticle(int admin_event_num) {
+		EventBean eventArticle = null;
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			String sql = "SELECT * FROM admin_event WHERE admin_event_num=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, admin_event_num);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				eventArticle = new EventBean();
+				eventArticle.setAdmin_event_num(rs.getInt("admin_event_num"));
+				eventArticle.setAdmin_event_nickname(rs.getString("admin_event_nickname"));
+				eventArticle.setAdmin_event_write_date(rs.getString("admin_event_write_date").substring(0,8));
+				eventArticle.setAdmin_event_title(rs.getString("admin_event_title"));
+				eventArticle.setAdmin_event_content(rs.getString("admin_event_content"));
+				eventArticle.setAdmin_event_readcount(rs.getInt("admin_event_readcount"));
+			}
+			
+		} catch (SQLException e) {
+			System.out.println("SQL 구문 오류 발생! - selectEventArticle()");
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rs);
+		}
+		
+		return eventArticle;
+	}
 
-	
-	
-	
-	
-	
+	//이벤트 첨부파일 조회
+	public ArrayList<EventImgFileBean> getEventImg(int admin_event_num) {
+	ArrayList<EventImgFileBean> eventImgFileList = new ArrayList<EventImgFileBean>();
+		
+		EventImgFileBean eventImg = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			
+			String sql ="SELECT f.event_img_file_name, f.event_img_file_real_name, admin_event_num FROM admin_event JOIN event_img_file f ON f.event_img_file_num = admin_event_num WHERE event_img_file_num = ?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, admin_event_num);
+			rs = pstmt.executeQuery();
+			
+			
+			while(rs.next()) {
+				eventImg = new EventImgFileBean();
+				eventImg.setEvent_img_file_name(rs.getString("f.event_img_file_name"));
+				eventImg.setEvent_img_file_real_name(rs.getString("f.event_img_file_real_name"));
+				
+				eventImgFileList.add(eventImg);
+			} 
+			
+		} catch (SQLException e) {
+			System.out.println("SQL 구문 오류 발생! - getEventImg()");
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rs);
+		}
+		return eventImgFileList;
+	}
+
+	//이벤트 조회수 증가
+	public void updateEventReadcount(int admin_event_num) {
+		PreparedStatement pstmt = null;
+		
+		try {
+			String sql = "UPDATE admin_event SET admin_event_readcount=admin_event_readcount+1 WHERE admin_event_num=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, admin_event_num);
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			System.out.println("SQL 구문 오류 발생! - updateEventReadcount()");
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+	}
+		
 	
 	
 	public ArrayList<MemberBean> selectMemberManagementList(int pageNum, int listLimit) {
@@ -479,6 +555,11 @@ public class AdminDAO {
 		
 		return memberManagementList;
 	}
+
+
+
+
+
 
 }	
 	

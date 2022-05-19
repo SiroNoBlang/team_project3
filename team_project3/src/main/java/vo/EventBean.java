@@ -12,17 +12,19 @@ package vo;
 */
 public class EventBean {
 	
-	private int aadmin_event_num;
+	private int admin_event_num;
 	private String admin_event_nickname;
 	private String admin_event_write_date; 
 	private String admin_event_title;
 	private String admin_event_content;
-	private int aadmin_event_readcount;
-	public int getAadmin_event_num() {
-		return aadmin_event_num;
+	private int admin_event_readcount;
+	
+	
+	public int getAdmin_event_num() {
+		return admin_event_num;
 	}
-	public void setAadmin_event_num(int aadmin_event_num) {
-		this.aadmin_event_num = aadmin_event_num;
+	public void setAdmin_event_num(int admin_event_num) {
+		this.admin_event_num = admin_event_num;
 	}
 	public String getAdmin_event_nickname() {
 		return admin_event_nickname;
@@ -48,19 +50,19 @@ public class EventBean {
 	public void setAdmin_event_content(String admin_event_content) {
 		this.admin_event_content = admin_event_content;
 	}
-	public int getAadmin_event_readcount() {
-		return aadmin_event_readcount;
+	public int getAdmin_event_readcount() {
+		return admin_event_readcount;
 	}
-	public void setAadmin_event_readcount(int aadmin_event_readcount) {
-		this.aadmin_event_readcount = aadmin_event_readcount;
+	public void setAdmin_event_readcount(int admin_event_readcount) {
+		this.admin_event_readcount = admin_event_readcount;
 	}
 	
 	
 	@Override
 	public String toString() {
-		return "EventBean [aadmin_event_num=" + aadmin_event_num + ", admin_event_nickname=" + admin_event_nickname
+		return "EventBean [admin_event_num=" + admin_event_num + ", admin_event_nickname=" + admin_event_nickname
 				+ ", admin_event_write_date=" + admin_event_write_date + ", admin_event_title=" + admin_event_title
-				+ ", admin_event_content=" + admin_event_content + ", aadmin_event_readcount=" + aadmin_event_readcount
+				+ ", admin_event_content=" + admin_event_content + ", admin_event_readcount=" + admin_event_readcount
 				+ "]";
 	}
 	

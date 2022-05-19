@@ -8,7 +8,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>커뮤니티 - 이벤트</title>
+<title>관리자페이지 - 커뮤니티 이벤트</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/css/bootstrap.css'>
 <link rel='stylesheet' href='https://raw.githubusercontent.com/forsigner/magic-check/master/css/magic-check.css'>
@@ -60,7 +60,7 @@
 		<div id="page-container">
 				
 				<div class="card">
-					<div class="title">공지사항</div>
+					<div class="title">이벤트</div>
 					<div id="board-search">
 					        <div class="container">
 					            <div class="search-window">
@@ -92,11 +92,10 @@
 						                	<c:if test="${not empty eventList and pageInfo.getListCount() > 0}">
 											<c:forEach var="event" items="${eventList }" varStatus="status">
 								                <tr>
-							            <%--         <td>${notice.getAdmin_notice_num() }</td>  --%>
 							                    	<td>${listCount -(listCount -((pageNum-1)* listLimit + status.index)-1)} </td> 
 								                    <td>
 														<a href="EventDetail.co?admin_event_num=${event.getAdmin_event_num() }&page=${pageNum}">
-								                    		${event.getAdmin_notice_title() } </a>
+								                    		${event.getAdmin_event_title() } </a>
 								                    </td>
 								                    <td>${event.getAdmin_event_nickname() }</td>
 													<td>${event.getAdmin_event_write_date() }</td>

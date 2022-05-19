@@ -11,7 +11,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>관리자페이지 - 커뮤니티 글쓰기</title>
+<title>관리자페이지 - 커뮤니티 공지사항 상세정보</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/css/bootstrap.css'>
 <link rel='stylesheet' href='https://raw.githubusercontent.com/forsigner/magic-check/master/css/magic-check.css'>
@@ -53,7 +53,7 @@
 		</div>
 		<div id="page-container">
 			<div class="card">
-				<div class="title">글 상세보기</div>
+				<div class="title">공지사항 글 상세보기</div>
 				
 					<form action="./CommunityBoardWritePro.co" name="boardForm" method="post" enctype="multipart/form-data">
 						<table >
@@ -87,7 +87,7 @@
 							<tr>
 								<th><label for="board_content">내용</label></th>
 								<td>${noticeArticle.getAdmin_notice_content() } <br>
-									<c:if test="${not empty noticeImgFileList && noticeImgFileList ne NULL}">
+									<c:if test="${not empty noticeImgFileList}">
 										<c:forEach var="noticeImg" items="${noticeImgFileList }">
 											<img src="./Upload/admin_notice_img/${noticeImg.getNotice_img_file_real_name() }"> <br>
 										</c:forEach>

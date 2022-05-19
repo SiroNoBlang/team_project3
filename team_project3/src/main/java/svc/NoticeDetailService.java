@@ -31,14 +31,14 @@ public class NoticeDetailService {
 		return noticeArticle;
 	}
 
-	public void increaseReadcount(int admin_notice_num) {
+	public void increaseNoticeReadcount(int admin_notice_num) {
 
 		Connection con = getConnection(); 
 		AdminDAO adminDAO = AdminDAO.getInstance();
 		
 		adminDAO.setConnection(con);
 		
-		adminDAO.updateReadcount(admin_notice_num);
+		adminDAO.updateNoticeReadcount(admin_notice_num);
 		
 		commit(con);
 		

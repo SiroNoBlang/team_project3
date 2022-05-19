@@ -11,7 +11,7 @@ import vo.EventBean;
 public class EventListService {
 
 	public int getListCount(String tableName) {
-		System.out.println("EventListService - getListCount()");
+//		System.out.println("EventListService - getListCount()");
 		
 		int listCount = 0;
 		
@@ -29,7 +29,7 @@ public class EventListService {
 	}
 
 	public ArrayList<EventBean> getEventleList(int pageNum, int listLimit) {
-		System.out.println("NoticeListService - getNoticeleList()");
+//		System.out.println("NoticeListService - getNoticeleList()");
 		
 		ArrayList<EventBean> eventList = null;
 		

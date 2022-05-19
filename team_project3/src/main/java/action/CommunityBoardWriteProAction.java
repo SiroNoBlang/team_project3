@@ -45,7 +45,8 @@ public class CommunityBoardWriteProAction implements Action {
 //		System.out.println(communityType); //커뮤니티 카테고리 확인 작업
 		
 		CommunityBoardWriteProService service = new CommunityBoardWriteProService();
-		boolean isWriteSuccess = false;
+		boolean isNoticeWriteSuccess = false;
+		boolean isEventWriteSuccess = false;
 		
 		
 		String fileElement = "";
@@ -121,7 +122,7 @@ public class CommunityBoardWriteProAction implements Action {
 				}
 			}
 			
-			isWriteSuccess = service.noticeRegistArticle(notice, noticeImgList);
+			isNoticeWriteSuccess = service.noticeRegistArticle(notice, noticeImgList);
 			
 		//이벤트 글쓰기	
 		} else if (communityType.equals("event")){
@@ -138,49 +139,57 @@ public class CommunityBoardWriteProAction implements Action {
 				file = multi.getFile(fileElement);
 				
 				if(file != null) {
-				board_real_file = multi.getFilesystemName(fileElement);
-				board_file = multi.getOriginalFileName(fileElement);
-				
-				
-				now = new SimpleDateFormat("yyyyMMddHmsS").format(new Date());  //현재시간
-			    format = board_real_file.lastIndexOf("."); // 파일 확장자 위치
-		        realFileName = now + board_real_file.substring(format,board_real_file.length());  //현재시간과 확장자 합치기
-		        
-		        
-		        oldFile = new File(realPath + board_real_file);
-		        newFile = new File(realPath + realFileName);
-		       
-		        oldFile.renameTo(newFile); // 파일명 변경
-
-		        
-				eventImg = new EventImgFileBean();
-				eventImg.setEvent_img_file_name(board_file);
-				eventImg.setEvent_img_file_real_name(board_real_file);
-				
-				eventImgList.add(eventImg);
-				
-				Path p1 = Paths.get(realPath, board_real_file); 
-				Path p2 = Paths.get(realPath, "admin_event_img", realFileName);
-				Files.move(p1, p2, StandardCopyOption.REPLACE_EXISTING);
-				
+					board_real_file = multi.getFilesystemName(fileElement);
+					board_file = multi.getOriginalFileName(fileElement);
+					
+					
+					now = new SimpleDateFormat("yyyyMMddHmsS").format(new Date());  //현재시간
+				    format = board_real_file.lastIndexOf("."); // 파일 확장자 위치
+			        realFileName = now + board_real_file.substring(format,board_real_file.length());  //현재시간과 확장자 합치기
+			        
+			        
+			        oldFile = new File(realPath + board_real_file);
+			        newFile = new File(realPath + realFileName);
+			       
+			        oldFile.renameTo(newFile); // 파일명 변경
+	
+			        
+					eventImg = new EventImgFileBean();
+					eventImg.setEvent_img_file_name(board_file);
+					eventImg.setEvent_img_file_real_name(board_real_file);
+					
+					eventImgList.add(eventImg);
+					
+					System.out.println(eventImgList);
+					
+					Path p1 = Paths.get(realPath, board_real_file); 
+					Path p2 = Paths.get(realPath, "admin_event_img", realFileName);
+					Files.move(p1, p2, StandardCopyOption.REPLACE_EXISTING);
+					
 				}
 			}
 			
-			isWriteSuccess = service.eventRegistArticle(event, eventImgList);
+			isEventWriteSuccess = service.eventRegistArticle(event, eventImgList);
 		}
 		
-		if (!isWriteSuccess) { // 실패시
+		
+		if (isNoticeWriteSuccess) { 
+			forward = new ActionForward();
+			forward.setPath("NoticeList.co");
+			forward.setRedirect(true);
+		} else if (isEventWriteSuccess) {
+			forward = new ActionForward();
+			forward.setPath("EventList.co");
+			forward.setRedirect(true);
+		} else {// 실패시
 			response.setContentType("text/html; charset=UTF-8");
 			PrintWriter out = response.getWriter();
 			out.println("<script>");
 			out.println("alert('다시 작성해주세요!')");
 			out.println("history.back()");
 			out.println("</script>");
-		} else {
-			forward = new ActionForward();
-			forward.setPath("NoticeList.co");
-			forward.setRedirect(true);
 		}
+		
 		return forward;
 	}
 

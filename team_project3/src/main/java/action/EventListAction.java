@@ -14,7 +14,7 @@ public class EventListAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		System.out.println("EventListAction");
+//		System.out.println("EventListAction");
 		
 		ActionForward forward = null;
 		
