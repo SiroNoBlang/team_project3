@@ -1,12 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
- <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>   
+    
  <%
+
 	//세션 객체에 저장된 세션 닉네임("sNickname") 가져와서 변수에 저장
 	String sNickname = (String)session.getAttribute("sNickname");
+ 	
  %>  
- 
- 
 <!DOCTYPE html>
 <html>
 <head>
@@ -48,72 +48,47 @@
 				<i id="toggle-left-menu" class="ion-android-menu"></i>
 			</div>
 			<div class="header-right float-right">
-				<a href="javascript:void(0)" onclick="confirmLogout()"><i class="icon ion-log-out" ></i></a>
+			<a href="javascript:void(0)" onclick="confirmLogout()"><i class="icon ion-log-out" ></i></a>
 			</div>
 		</div>
 		<div id="page-container">
 			<div class="card">
-				<div class="title">글 상세보기</div>
-				
+				<div class="title">커뮤니티 글쓰기</div>
 					<form action="./CommunityBoardWritePro.co" name="boardForm" method="post" enctype="multipart/form-data">
 						<table >
 							<tr>
 								<th>분류</th>
 								<td>
-									<label><input TYPE='radio' name='communityType' value='notice' checked="checked"/>공지사항</label>
+									<label><input TYPE='radio' name='communityType' value='notice' />공지사항</label>
 									<label><input TYPE='radio' name='communityType' value='event' />이벤트</label>
 								</td>
 							</tr>
 							<tr>
 								<th><label for="board_title">제목</label></th>
-								<td>${noticeArticle.getAdmin_notice_title() }</td>
+								<td><input type="text" name="board_title" required="required"></td>
 							</tr>
 							<tr>
 								<th><label for="board_nickname">작성자</label></th>
-								<td><%=sNickname %></td>
-							</tr>
-							<tr>
-								<th><label for="board_date">작성일</label></th>
-								<td>${noticeArticle.getAdmin_notice_write_date() }</td>
-							</tr>
-							<tr>
-								<th><label for="board_readcount">조회수</label></th>
-								<td>${noticeArticle.getAdmin_notice_readcount() }</td>
+								<td><input type="text" name="board_nickname" value="<%=sNickname %>" readonly="readonly"></td>
 							</tr>
 							<tr>
 								<th><label for="board_content">내용</label></th>
-								<td>
-
-								<!-- 구문 확인하기 -->
-									<c:choose> 
-										<c:when test="${not empty noticeImgFileList && noticeImgFileList ne NULL}">
-												${noticeArticle.getAdmin_notice_content() } <br>
-											<c:forEach var="noticeImg" items="${noticeImgFileList }">
-												<img src="./Upload/admin_notice_img/${noticeImg.getNotice_img_file_real_name() }"> <br>
-											</c:forEach>
-										</c:when> 
-									<c:otherwise> 
-											${noticeArticle.getAdmin_notice_content() }
-									</c:otherwise> 
-								</c:choose> 
-								</td>
+								<td> <textarea id="board_content" name="board_content"  rows="20" cols="100"></textarea> </td>
 							</tr>
 							<tr>
 								<th><label for="board_file">파일 첨부</label></th>
-								<td>
-									<c:forEach var="noticeImg" items="${noticeImgFileList }">
-										<a href="./Upload/admin_notice_img/${noticeImg.getNotice_img_file_real_name() }" download="${noticeImg.getNotice_img_file_name() }"> 
-										${noticeImg.getNotice_img_file_real_name() }</a><br>
-									</c:forEach> 
-								</td>
+								<td><input type="file" id="file1" name="board_file0"></td>
+							</tr>
+							<tr>
+								<th><label for="board_file">파일 첨부</label></th>
+								<td><input type="file" id="file1" name="board_file1"></td>
 							</tr>
 						</table>
 						<br>
 						<section id="commandCell">	
-							<input type="button" value="수정" onclick="location.href='NoticeModifyForm.co?admin_notice_num=${param.admin_notice_num}&page=${param.page}'">
-							<input type="button" value="삭제" onclick="location.href='NoticeDeleteForm.co?admin_notice_num=${param.admin_notice_num}&page=${param.page}'">
-							<input type="button" value="목록" onclick="history.back()">
-<%-- 							<input type="button" value="목록" onclick="location.href='NoticeList.co?page=${param.page}'"> --%>
+							<input type="submit" value="작성완료">&nbsp;&nbsp;
+							<input type="reset" value="다시쓰기">&nbsp;&nbsp;	
+							<input type="button" value="취소" onclick="history.back()">
 						</section>
 					</form>
 				 </div>

@@ -53,9 +53,9 @@
 		</div>
 		<div id="page-container">
 			<div class="card">
-				<div class="title">글 상세보기</div>
+				<div class="title">상세 내용</div>
 				
-					<form action="./CommunityBoardWritePro.co" name="boardForm" method="post" enctype="multipart/form-data">
+					<form action="./NoticeModifyPro.co" name="boardForm" method="post" enctype="multipart/form-data">
 						<table >
 							<tr>
 								<th>분류</th>
@@ -66,54 +66,59 @@
 							</tr>
 							<tr>
 								<th><label for="board_title">제목</label></th>
-								<td>${noticeArticle.getAdmin_notice_title() }</td>
+								<td><input type="text" name="board_title" required="required" value="${noticeArticle.getAdmin_notice_title() }">
+								</td>
 							</tr>
 							<tr>
 								<th><label for="board_nickname">작성자</label></th>
-								<td><%=sNickname %></td>
+								<td><input type="text" name="board_nickname" value="<%=sNickname %>" readonly="readonly"></td>
 							</tr>
 							<tr>
 								<th><label for="board_date">작성일</label></th>
-								<td>${noticeArticle.getAdmin_notice_write_date() }</td>
+								<td><input type="text" name="board_date" readonly="readonly" value="${noticeArticle.getAdmin_notice_write_date() }">
+								</td>
 							</tr>
 							<tr>
 								<th><label for="board_readcount">조회수</label></th>
-								<td>${noticeArticle.getAdmin_notice_readcount() }</td>
+								<td><input type="text" readonly="readonly" value="${noticeArticle.getAdmin_notice_readcount() }"></td>
 							</tr>
 							<tr>
 								<th><label for="board_content">내용</label></th>
-								<td>
 
-								<!-- 구문 확인하기 -->
+
+								<td>
 									<c:choose> 
-										<c:when test="${not empty noticeImgFileList && noticeImgFileList ne NULL}">
+										<c:when test="${not empty noticeImgFileList }">
 												${noticeArticle.getAdmin_notice_content() } <br>
 											<c:forEach var="noticeImg" items="${noticeImgFileList }">
-												<img src="./Upload/admin_notice_img/${noticeImg.getNotice_img_file_real_name() }"> <br>
+												<img src="./upload/${noticeImg.getNotice_img_file_real_name() }"> <br>
 											</c:forEach>
 										</c:when> 
 									<c:otherwise> 
+										<textarea id="board_content" name="board_content"  rows="20" cols="100">
 											${noticeArticle.getAdmin_notice_content() }
+										</textarea>
 									</c:otherwise> 
-								</c:choose> 
+								</c:choose>  
 								</td>
 							</tr>
 							<tr>
 								<th><label for="board_file">파일 첨부</label></th>
-								<td>
+								<td><input type="file" name="board_file" multiple="multiple" >
+	
 									<c:forEach var="noticeImg" items="${noticeImgFileList }">
-										<a href="./Upload/admin_notice_img/${noticeImg.getNotice_img_file_real_name() }" download="${noticeImg.getNotice_img_file_name() }"> 
+										<a href="./upload/${noticeImg.getNotice_img_file_real_name() }" download="${noticeImg.getNotice_img_file_name() }"> 
 										${noticeImg.getNotice_img_file_real_name() }</a><br>
 									</c:forEach> 
+
 								</td>
 							</tr>
 						</table>
 						<br>
 						<section id="commandCell">	
-							<input type="button" value="수정" onclick="location.href='NoticeModifyForm.co?admin_notice_num=${param.admin_notice_num}&page=${param.page}'">
-							<input type="button" value="삭제" onclick="location.href='NoticeDeleteForm.co?admin_notice_num=${param.admin_notice_num}&page=${param.page}'">
-							<input type="button" value="목록" onclick="history.back()">
-<%-- 							<input type="button" value="목록" onclick="location.href='NoticeList.co?page=${param.page}'"> --%>
+							<input type="submit" value="수정">&nbsp;&nbsp;
+							<input type="reset" value="다시쓰기">&nbsp;&nbsp;
+							<input type="button" value="취소" onclick="history.back()">
 						</section>
 					</form>
 				 </div>
