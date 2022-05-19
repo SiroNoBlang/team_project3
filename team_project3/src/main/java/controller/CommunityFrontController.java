@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import action.Action;
 import action.CommunityBoardWriteProAction;
+import action.EventListAction;
 import action.MemberDetailAction;
 import action.MemberManagementListAction;
 import action.MemberUpdateAction;
@@ -85,7 +86,45 @@ public class CommunityFrontController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		}else if(command.equals("/MemberManagement.co")) { // 가입된 회원 목록
+		}
+		
+		
+		
+		
+		
+		
+		
+		// =================================이벤트 컨트롤러 수정중 =================================
+		else if(command.equals("/EventList.co")) {//이벤트 리스트(/NoticeList.co) 요청
+			action = new EventListAction();			
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+		} else if(command.equals("/EventDetail.co")) {//이벤트 상세정보(/NoticeDetail.co) 요청
+			action = new NoticeDetailAction();
+			
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		} 	else if(command.equals("/EventSearch.co")) {//이벤트 검색(/NoticeSearch.co) 요청
+			action = new NoticeSearchAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		// =================================이벤트 컨트롤러 수정중 =================================
+		
+		
+		
+		
+		else if(command.equals("/MemberManagement.co")) { // 가입된 회원 목록
 			action = new MemberManagementListAction();			
 			try {
 				forward = action.execute(request, response);
@@ -106,8 +145,6 @@ public class CommunityFrontController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		} else if(command.equals("/EventList.co")) { // 이벤트 글 목록
-			forward = new ActionForward("AdminPage/eventList.jsp",false);
 		} else if(command.equals("/ProductConfirm.co")) { // 이벤트 글 목록
 			forward = new ActionForward("AdminPage/productConfirm.jsp",false);
 		} else if(command.equals("/QusetionList.co")) { // Q&A 목록

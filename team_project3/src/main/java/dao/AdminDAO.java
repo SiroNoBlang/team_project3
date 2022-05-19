@@ -174,7 +174,7 @@ public class AdminDAO {
 	}
 
 	//공지사항 목록을 조회
-	public ArrayList<NoticeBean> selectNoticeleList(int pageNum, int listLimit) {
+	public ArrayList<NoticeBean> selectNoticeList(int pageNum, int listLimit) {
 	ArrayList<NoticeBean> noticeList = null;
 		
 		PreparedStatement pstmt = null;
@@ -384,8 +384,52 @@ public class AdminDAO {
 		return noticeSearchList;
 	}
 
+
+
+	//이벤트 글목록 조회
+	public ArrayList<EventBean> selectEventList(int pageNum, int listLimit) {
+		ArrayList<EventBean> eventList = null;
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		int startRow = (pageNum - 1) * listLimit;
+		
+		try {
+			String sql = "SELECT * FROM admin_event ORDER BY admin_event_num DESC LIMIT ?,?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, listLimit);
+			
+			rs = pstmt.executeQuery();
+			
+			eventList = new ArrayList<EventBean>();
+			
+			while(rs.next()) {
+				
+				EventBean event = new EventBean();
+				event.setAadmin_event_num(rs.getInt("admin_event_num"));
+				event.setAdmin_event_nickname(rs.getString("admin_event_nickname"));
+				event.setAdmin_event_write_date(rs.getString("admin_event_write_date").substring(0,8));
+				event.setAdmin_event_title(rs.getString("admin_event_title"));
+				event.setAdmin_event_content(rs.getString("admin_event_content"));
+				event.setAadmin_event_readcount(rs.getInt("admin_event_readcount"));
+				
+				eventList.add(event);
+			}
+			
+		} catch (SQLException e) {
+			System.out.println("SQL 구문 오류 발생! - selectEventList()");
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rs);
+		}
+		return eventList;
+		
+	}
 	
-	
+
 	
 	
 	
@@ -435,7 +479,10 @@ public class AdminDAO {
 		
 		return memberManagementList;
 	}
+
+}	
 	
-}
+	
+	
 
 
