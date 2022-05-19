@@ -57,7 +57,7 @@ function findAddr1(){ //배송지 주소 찾기
 </head>
 <body>
 	<h1>dd</h1>
-	<h1>mypage</h1>
+	<h1>mypage 수정함</h1>
 	<form action="Modify_Member.ma" method="post">
 <%-- 		<input type="hidden" name="member_code" id="member_code" value="<%=memberBean.getMember_code() %>"> --%>
 <%-- 		<input type="hidden" name="member_info_code" id="member_info_code" value="<%=memberBean.getMember_info_code() %>"> --%>
