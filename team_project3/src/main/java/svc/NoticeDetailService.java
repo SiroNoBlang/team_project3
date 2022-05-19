@@ -5,6 +5,7 @@ import static db.JdbcUtil.commit;
 import static db.JdbcUtil.getConnection;
 
 import java.sql.Connection;
+import java.util.ArrayList;
 
 import dao.AdminDAO;
 import vo.NoticeBean;
@@ -44,20 +45,20 @@ public class NoticeDetailService {
 		close(con);
 	}
 
-	public NoticeImgFileBean getNoticeImg(int admin_notice_num) {
+	public 	ArrayList<NoticeImgFileBean>  getNoticeImg(int admin_notice_num) {
 		
-		NoticeImgFileBean noticeImgFile = null;
+		ArrayList<NoticeImgFileBean> noticeImgFileList = null;
 		
 		Connection con = getConnection();
 		AdminDAO adminDAO = AdminDAO.getInstance();
 		
 		adminDAO.setConnection(con);
 		
-		noticeImgFile = adminDAO.getNoticeImg(admin_notice_num);
+		noticeImgFileList = adminDAO.getNoticeImg(admin_notice_num);
 		
 		close(con);
 		
-		return noticeImgFile;
+		return noticeImgFileList;
 	}
 	
 }
