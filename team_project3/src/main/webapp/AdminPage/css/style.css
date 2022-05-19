@@ -526,3 +526,10 @@ a:hover {
 		display: none;
 	}
 }
+
+
+
+section#pageList {
+    margin: 0 auto;
+    margin-top: 20px;
+}
