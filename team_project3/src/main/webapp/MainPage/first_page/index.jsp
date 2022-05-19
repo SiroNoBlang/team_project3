@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+String code = (String)session.getAttribute("sCode");
+String nickname = (String)session.getAttribute("sNickname");
+%> 
 <!DOCTYPE html>
 <html lang="en">
 <head>  
@@ -43,6 +47,27 @@
 	<header class="header-v3">
 		<!-- Header desktop -->
 		<div class="container-menu-desktop trans-03">
+			<!-- Topbar -->
+ 			<div class="top-bar">
+				<div class="content-topbar flex-sb-m h-full container">
+					<div class="left-top-bar">
+						Free shipping for standard order over $100
+					</div>
+
+					<div class="right-top-bar flex-w h-full">
+						<a href="#" class="flex-c-m trans-04 p-lr-25">
+							Help & FAQs
+						</a>
+
+						<a href="Mypage.ma?member_code=<%=code %>"   class="flex-c-m trans-04 p-lr-25">
+							<%=nickname %>님 마이페이지
+						</a>
+						<a href="javascript:void(0)" onclick="confirmLogout()" class="flex-c-m trans-04 p-lr-25">
+							로그아웃
+						</a>
+					</div>
+				</div>
+			</div>
 			<div class="wrap-menu-desktop">
 				<nav class="limiter-menu-desktop p-l-45">
 					
@@ -126,10 +151,34 @@
 				</span>
 			</div>
 		</div>
-
+		
+		
 
 		<!-- Menu Mobile -->
 		<div class="menu-mobile">
+			<ul class="topbar-mobile">
+				<li>
+					<div class="left-top-bar">
+						Free shipping for standard order over $100
+					</div>
+				</li>
+
+				<li>
+					<div class="right-top-bar flex-w h-full">
+						<a href="#" class="flex-c-m p-lr-10 trans-04">
+							Help & FAQs
+						</a>
+
+						<a href="Mypage.ma?member_code=<%=code %>"   class="flex-c-m trans-04 p-lr-25">
+							<%=nickname %>님 마이페이지
+						</a>
+
+						<a href="#" class="flex-c-m p-lr-10 trans-04">
+							로그아웃
+						</a>
+					</div>
+				</li>
+			</ul>
 			<ul class="main-menu-m">
 				<li>
 					<a href="index.html">Home</a>
