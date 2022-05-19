@@ -52,7 +52,7 @@ public class MemberManagementListAction implements Action {
 		request.setAttribute("memberManagementList", memberManagementList); // 게시물 목록 객체
 		
 		forward = new ActionForward();
-		forward.setPath("AdminPage/memberManagement.jsp");
+		forward.setPath("AdminPage/member_management/memberManagement.jsp");
 		forward.setRedirect(false); 
 		
 		return forward;

@@ -83,11 +83,11 @@ public class CommunityFrontController extends HttpServlet {
 				e.printStackTrace();
 			}
 		} else if(command.equals("/EventList.co")) { // 이벤트 글 목록
-			forward = new ActionForward("adminPageControl/eventList.jsp",false);
+			forward = new ActionForward("AdminPage/eventList.jsp",false);
 		} else if(command.equals("/ProductConfirm.co")) { // 이벤트 글 목록
-			forward = new ActionForward("adminPageControl/productConfirm.jsp",false);
+			forward = new ActionForward("AdminPage/productConfirm.jsp",false);
 		} else if(command.equals("/QusetionList.co")) { // Q&A 목록
-			forward = new ActionForward("adminPageControl/questionList.jsp",false);
+			forward = new ActionForward("AdminPage/questionList.jsp",false);
 		}
 		
 		

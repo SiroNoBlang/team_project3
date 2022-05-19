@@ -32,7 +32,7 @@ public class NoticeBoardDetailAction implements Action {
 		request.setAttribute("noticeImgFile", noticeImgFile);
 		
 		forward = new ActionForward();
-		forward.setPath("adminPageControl/noticeView.jsp");
+		forward.setPath("AdminPage/noticeView.jsp");
 		forward.setRedirect(false);
 		
 		return forward;

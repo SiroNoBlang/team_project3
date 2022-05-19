@@ -16,7 +16,7 @@ MemberBean member = (MemberBean) request.getAttribute("memberDetail");
 <link rel='stylesheet' href='https://raw.githubusercontent.com/forsigner/magic-check/master/css/magic-check.css'>
 <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Roboto:300,400'>
 <link rel='stylesheet' href='http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css'>
-<link rel="stylesheet" href="adminPageControl/css/style.css">
+<link rel="stylesheet" href="AdminPage/css/style.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css'>
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css'>
@@ -146,23 +146,16 @@ MemberBean member = (MemberBean) request.getAttribute("memberDetail");
 							<th><label for="board_title">관심품목</label>관심품목</th>
 							<td><%=member.getMember_info_detail_like_category()%></td>
 						</tr>
-						<!-- 			<tr>  -->
-						<!-- 				<th>프로필사진</th> -->
-						<!-- 				<td><input type="file" id="member_info_mypage_img_name" name="member_info_mypage_img_name" required="required" > </td> -->
-						<!-- 			</tr> -->
 						<tr>
 							<th><label for="board_title">누적 포인트</label></th>
 							<td><%=member.getMember_info_detail_point()%></td>
 						</tr>
 						<tr>
 							<th><label for="board_title">회원 상태</label></th>
-							<td><select id="member_info_detail_like_category" name="member_info_detail_like_category">
-									<option value="정상"
-										<%if (member.getMember_service_log_status().equals("정상")) {%>selected="selected" <%}%>>정상</option>
-									<option value="정지"
-										<%if (member.getMember_service_log_status().equals("정지")) {%>selected="selected" <%}%>>정지</option>
-									<option value="탈퇴"
-										<%if (member.getMember_service_log_status().equals("탈퇴")) {%>selected="selected" <%}%>>탈퇴</option>
+							<td><select id="member_status" name="member_status">
+									<option value="정상" <%if (member.getMember_service_log_status().equals("정상")) {%>selected="selected" <%}%>>정상</option>
+									<option value="정지" <%if (member.getMember_service_log_status().equals("정지")) {%>selected="selected" <%}%>>정지</option>
+									<option value="탈퇴" <%if (member.getMember_service_log_status().equals("탈퇴")) {%>selected="selected" <%}%>>탈퇴</option>
 							</select></td>
 						</tr>
 						<tr>
@@ -198,6 +191,6 @@ MemberBean member = (MemberBean) request.getAttribute("memberDetail");
 	<!-- partial -->
 	<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js'></script>
 	<script src='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/js/bootstrap.min.js'></script>
-	<script src="adminPageControl/script.js"></script>
+	<script src="AdminPage/script.js"></script>
 </body>
 </html>

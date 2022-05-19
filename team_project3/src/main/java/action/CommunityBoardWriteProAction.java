@@ -1,6 +1,10 @@
 package action;
 
 import java.io.PrintWriter;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.Enumeration;
 
@@ -36,10 +40,11 @@ public class CommunityBoardWriteProAction implements Action {
 				new DefaultFileRenamePolicy());
 
 		Enumeration files = multi.getFileNames();
-		
 		System.out.println("-------------------");
 		while (files.hasMoreElements()) {
 			String fileElement = files.nextElement().toString();
+//			String board_real_file = multi.getFilesystemName(fileElement);
+//			String board_file = multi.getOriginalFileName(fileElement);
 			String board_real_file = multi.getFilesystemName(fileElement);
 			String board_file = multi.getOriginalFileName(fileElement);
 			
@@ -87,6 +92,11 @@ public class CommunityBoardWriteProAction implements Action {
 				System.out.println(fileElement);
 				System.out.println(board_real_file);
 				System.out.println(board_file);
+				
+				Path p1 = Paths.get("Upload", board_real_file);
+				Path p2 = Paths.get("Upload", "admin_notice_img", board_real_file);
+				Files.move(p1, p2, StandardCopyOption.REPLACE_EXISTING);
+				
 			}
 			
 //			System.out.println(noticeImgList);

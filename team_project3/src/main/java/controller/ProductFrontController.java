@@ -32,7 +32,7 @@ public class ProductFrontController extends HttpServlet {
 		
 		if (command.equals("/MainPage.pr")) {// 로그인 후 메인 페이지
 			forward = new ActionForward();
-			forward.setPath("MainPage/index.jsp");
+			forward.setPath("MainPage/first_page/index.jsp");
 			forward.setRedirect(false);
 
 		} else if (command.equals("/adminPage/SellForm.pr")) {// 상품 판매글(FORM.JSP)

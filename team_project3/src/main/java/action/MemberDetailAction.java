@@ -24,7 +24,7 @@ public class MemberDetailAction implements Action {
 		if(memberDetail != null) {
 			request.setAttribute("memberDetail", memberDetail);
 			request.setAttribute("member_code", member_code);
-			forward = new ActionForward("adminPageControl/member_detail.jsp?page=" + pageNum, false);
+			forward = new ActionForward("AdminPage/member_detail.jsp?page=" + pageNum, false);
 			
 		} else {
 			response.setContentType("text/html; charset=UTF-8");
