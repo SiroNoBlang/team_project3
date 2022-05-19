@@ -36,7 +36,7 @@ public class CommunityFrontController extends HttpServlet {
 		// 서블릿 주소 판별
 		// 1. 글쓰기 폼에 대한 요청 판별("/CommunityWriteForm.co")
 		if(command.equals("/CommunityWriteForm.co")) {
-			forward = new ActionForward("adminPageControl/communityWrite.jsp",false);
+			forward = new ActionForward("AdminPage/confirm/communityWrite.jsp",false);
 			
 		} else if (command.equals("/CommunityBoardWritePro.co")) { //작성완료 버튼 클릭시
 			action = new CommunityBoardWriteProAction();
