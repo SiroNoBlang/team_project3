@@ -40,7 +40,7 @@ public class NoticeBoardListService {
 		
 		adminDAO.setConnection(con);
 		
-		noticeList = adminDAO.selectNoticeleList(pageNum, listLimit);
+		noticeList = adminDAO.selectNoticeList(pageNum, listLimit);
 		
 		close(con);
 		

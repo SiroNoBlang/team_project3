@@ -45,7 +45,7 @@ public class NoticeDetailService {
 		close(con);
 	}
 
-	public 	ArrayList<NoticeImgFileBean>  getNoticeImg(int admin_notice_num) {
+	public 	ArrayList<NoticeImgFileBean> getNoticeImg(int admin_notice_num) {
 		
 		ArrayList<NoticeImgFileBean> noticeImgFileList = null;
 		
