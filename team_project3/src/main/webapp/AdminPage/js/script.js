@@ -101,3 +101,13 @@ $('#toggle-left-menu').click(function() {
             $('#logo').removeClass('small-left-menu p-0 pl-1');
         }
     }
+    
+    
+    //관리자 페이지에서 쓸 로그아웃(추후 회원가입/로그인 파트에서 구현한 함수 호출 할 수도 있음.)
+    	function confirmLogout() {
+		if(confirm("로그아웃 하시겠습니까?")) {
+			location.href = "./Logout.ma";
+		}
+	}
+    
+    
