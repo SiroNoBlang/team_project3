@@ -64,10 +64,10 @@
 					<div id="board-search">
 					        <div class="container">
 					            <div class="search-window">
-					                <form action="./NoticeSearch.co" class="formCss">
+					                <form action="./EventSearch.co" class="formCss">
 										<select name="searchType" id="product">
-										    <option value="admin_notice_title">제목</option>
-										    <option value="admin_notice_content">내용</option>
+										    <option value="admin_event_title">제목</option>
+										    <option value="admin_event_content">내용</option>
 										</select>
 					                        <label for="search" class="blind">이벤트 내용 검색</label>
 					                        <input id="search" type="search" name="search">

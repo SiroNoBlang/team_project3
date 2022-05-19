@@ -1,4 +1,3 @@
-<%@page import="vo.NoticeBean"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -66,11 +65,11 @@
 					            <div class="search-window">
 					                <form action="./EventSearch.co" class="formCss">
 										<select name="searchType" id="product">
-										    <option value="admin_notice_title">제목</option>
-										    <option value="admin_notice_content">내용</option>
+										    <option value="admin_event_title">제목</option>
+										    <option value="admin_event_content" <c:if test="${param.searchType eq 'admin_event_content'}"> selected="selected"</c:if>>내용</option>
 										</select>
 					                        <label for="search" class="blind">이벤트 내용 검색</label>
-					                        <input id="search" type="search" name="search">
+					                        <input id="search" type="search" name="search" value="${param.search}">
 					                        <button type="submit" class="btn btn-dark" >검색</button>
 					                </form>
 					            </div>
@@ -89,8 +88,8 @@
 						                </tr>
 						                </thead>
 						                <tbody>
-						                	<c:if test="${not empty eventList and pageInfo.getListCount() > 0}">
-											<c:forEach var="event" items="${eventList }" varStatus="status">
+						                	<c:if test="${not empty eventSearchList and pageInfo.getListCount() > 0}">
+											<c:forEach var="event" items="${eventSearchList }" varStatus="status">
 								                <tr>
 							                    	<td>${listCount -(listCount -((pageNum-1)* listLimit + status.index)-1)} </td> 
 								                    <td>
