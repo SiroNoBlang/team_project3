@@ -53,7 +53,7 @@ public class NoticeListAction implements Action {
 		request.setAttribute("noticeList", noticeList); // 게시물 목록 객체
 		
 		forward = new ActionForward();
-		forward.setPath("./AdminPage/noticeList.jsp");
+		forward.setPath("./AdminPage/notice/noticeList.jsp");
 		forward.setRedirect(false); 
 		
 		return forward;
