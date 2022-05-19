@@ -181,8 +181,10 @@ MemberBean member = (MemberBean) request.getAttribute("memberDetail");
 						</tr>
 					</table>
 					<section id="commandCell">
-						<input type="submit" value="수정"> <input type="button"
-							value="회원탈퇴" onclick="">
+						<input type="submit" value="수정">
+						<%if (member.getMember_service_log_status().equals("탈퇴")) {%>
+						<input type="button" value="회원탈퇴" onclick="">
+						<%} %>
 					</section>
 				</form>
 			</div>
