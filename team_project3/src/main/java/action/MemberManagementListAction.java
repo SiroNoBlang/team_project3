@@ -15,8 +15,6 @@ public class MemberManagementListAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		System.out.println("MemberManagementListAction");
-		
 		ActionForward forward = null;
 		
 		// 페이징 처리를 위한 변수 선언

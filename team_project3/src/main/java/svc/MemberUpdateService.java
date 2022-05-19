@@ -11,7 +11,7 @@ import dao.MemberDAO;
 
 public class MemberUpdateService {
 
-	public boolean getMemberUpdate(String member_code, String grade_name) {
+	public boolean getMemberUpdate(String member_code, String member_status) {
 		boolean isMemberUpdate = false;
 		
 		Connection con = getConnection();
@@ -19,7 +19,7 @@ public class MemberUpdateService {
 		MemberDAO memberDAO = MemberDAO.getInstance();
 		memberDAO.setConnection(con);
 		
-		isMemberUpdate = memberDAO.getMemberUpdate(member_code, grade_name);
+		isMemberUpdate = memberDAO.getMemberUpdate(member_code, member_status);
 		
 		if(isMemberUpdate) {
 			commit(con);

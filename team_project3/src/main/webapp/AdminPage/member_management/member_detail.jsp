@@ -52,7 +52,8 @@ MemberBean member = (MemberBean) request.getAttribute("memberDetail");
 		<div id="page-container">
 			<div class="card">
 				<div class="title">가입자 상세 정보</div>
-				<form action="MemberUpdate.co" name="boardForm" method="post" enctype="multipart/form-data">
+				<form action="MemberUpdate.co" name="boardForm" method="post">
+				<input type="hidden" name="member_code" value="<%=code %>">
 					<table>
 						<tr>
 							<th><label for="board_title">멤버넘버</label></th>
@@ -64,7 +65,7 @@ MemberBean member = (MemberBean) request.getAttribute("memberDetail");
 						</tr>
 						<tr>
 							<th><label for="board_title">멤버코드</label></th>
-							<td><%=member.getMember_code()%></td>
+							<td><%=code %></td>
 						</tr>
 						<tr>
 							<th><label for="board_title">닉네임</label></th>

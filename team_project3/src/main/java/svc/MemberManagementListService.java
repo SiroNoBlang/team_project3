@@ -11,8 +11,6 @@ import vo.MemberBean;
 public class MemberManagementListService {
 
 	public int getListCount() {
-		System.out.println("MemberManagementListService - getListCount()");
-		
 		int listCount = 0;
 		
 		Connection con = getConnection();
@@ -30,8 +28,6 @@ public class MemberManagementListService {
 	}
 
 	public ArrayList<MemberBean> getMemberManagementList(int pageNum, int listLimit) {
-		System.out.println("NoticeBoardListService - getMemberManagementList()");
-		
 		ArrayList<MemberBean> memberManagementList = null;
 		
 		Connection con = getConnection(); 

@@ -183,7 +183,6 @@ public class MemberDAO {
 	}
 
 	public int getUpdateCount(MemberBean memberBean) {
-		System.out.println("getUpdateCount -dao");
 		int updateCount = 0;
 		
 		PreparedStatement pstmt = null;
@@ -307,12 +306,26 @@ public class MemberDAO {
 		return updateCount;
 	}
 
-	public boolean getMemberUpdate(String member_code, String grade_name) {
+	public boolean getMemberUpdate(String member_code, String member_status) {
 		boolean isMemberUpdate = false;
 		
 		PreparedStatement pstmt = null;
 		
-		String sql = "UPDATE member_service_log SET member_service_log_status=? WHERE member_service_log_code=?";
+		try {
+			String sql = "UPDATE member_service_log SET member_service_log_status=? WHERE member_service_log_code=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, member_status);
+			pstmt.setString(2, member_code);
+			int sucess = pstmt.executeUpdate();
+			
+			if(sucess > 0) {
+				isMemberUpdate = true;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
 		
 		return isMemberUpdate;
 	}

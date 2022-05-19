@@ -9,8 +9,6 @@ import vo.MemberBean;
 public class MemberDetailService {
 
 	public MemberBean getMemberDetail(String member_code) {
-		System.out.println("MemberDetailService");
-		
 		MemberBean memberDetail = null;
 		
 		Connection con = getConnection();

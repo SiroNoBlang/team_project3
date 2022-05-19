@@ -2,13 +2,12 @@ package action;
 
 import java.io.PrintWriter;
 
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import svc.MemberDetailService;
 import svc.MemberUpdateService;
 import vo.ActionForward;
-import vo.MemberBean;
 
 public class MemberUpdateAction implements Action {
 
@@ -17,11 +16,13 @@ public class MemberUpdateAction implements Action {
 		ActionForward forward = null;
 
 		String member_code = request.getParameter("member_code");
+		String member_status = request.getParameter("member_status");
 		String pageNum = request.getParameter("page");
-		String grade_name = request.getParameter("member_info_detail_like_category");
+		
+//		System.out.println(member_code + ", " + member_status); // 이미지 파일 있을때도 확인용이므로 잠시 킵해두겠습니다.
 		
 		MemberUpdateService service = new MemberUpdateService();
-		boolean isMemberUpdate = service.getMemberUpdate(member_code, grade_name);
+		boolean isMemberUpdate = service.getMemberUpdate(member_code, member_status);
 		
 		if(isMemberUpdate) {
 			request.setAttribute("member_code", member_code);
