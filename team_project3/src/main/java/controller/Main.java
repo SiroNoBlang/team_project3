@@ -52,13 +52,13 @@ public class Main extends HttpServlet {
 				forward = action.execute(request, response);
 			} catch (Exception e) {
 			}
-		} else if(command.equals("/adminPage/Mypage.ma")) {
+		} else if(command.equals("/Mypage.ma")) {
 			action = new MyPageAction();
 			try {
 				forward = action.execute(request, response);
 			} catch (Exception e) {
 			}
-		} else if(command.equals("/adminPage/Modify_Member.ma")) {
+		} else if(command.equals("/Modify_Member.ma")) {
 			action = new MyPageUpdateAction();
 			try {
 				forward = action.execute(request, response);
