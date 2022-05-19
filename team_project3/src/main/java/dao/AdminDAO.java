@@ -38,7 +38,6 @@ public class AdminDAO {
 		int insertCount = 0;
 
 		PreparedStatement pstmt = null;
-		PreparedStatement pstmt2 = null;
 		ResultSet rs = null;
 
 		int num = 1;
@@ -95,7 +94,6 @@ public class AdminDAO {
 		int insertCount = 0;
 
 		PreparedStatement pstmt = null;
-		PreparedStatement pstmt2 = null;
 		ResultSet rs = null;
 
 		int num = 1;
@@ -308,8 +306,8 @@ public class AdminDAO {
 		return noticeImgFileList;
 	}
 	
-	//검색어에 해당하는 게시물 수 (코드 수정하기)
-	public int selectSearchListCount(String tableName, String search, String searchType) {
+	//공지사항 검색어에 해당하는 게시물 수 (코드 수정하기)
+	public int selectNoticeSearchListCount(String tableName, String search, String searchType) {
 		int listCount =  0;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -328,7 +326,7 @@ public class AdminDAO {
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
-			System.out.println("SQL 구문 오류 - selectSearchListCount()");
+			System.out.println("SQL 구문 오류 - selectNoticeSearchListCount()");
 		} finally {
 			close(pstmt);
 			close(rs);
@@ -336,7 +334,7 @@ public class AdminDAO {
 		return listCount;
 	}
 
-	//검색어에 해당하는 게시물 목록
+	//공지사항 검색어에 해당하는 게시물 목록
 	public ArrayList<NoticeBean> selectSearchNoticeList(int pageNum, int listLimit, String search, String searchType) {
 		ArrayList<NoticeBean> noticeSearchList =null;
 		PreparedStatement pstmt = null;
@@ -372,7 +370,7 @@ public class AdminDAO {
 				noticeSearchList.add(noticeArticle);
 			}
 			
-				System.out.println(noticeSearchList);
+//				System.out.println(noticeSearchList);
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -510,7 +508,87 @@ public class AdminDAO {
 			close(pstmt);
 		}
 	}
+	
+	// 이벤트에 해당하는 게시물 수 (코드 수정하기)
+	public int selectEventSearchListCount(String tableName, String search, String searchType) {
+		int listCount =  0;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
 		
+		try {
+			con = getConnection();
+			
+			String sql = "SELECT COUNT(admin_event_num) FROM "+ tableName+ " WHERE " + searchType + " LIKE ?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, "%" + search + "%");
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				listCount = rs.getInt(1);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println("SQL 구문 오류 - selectEventSearchListCount()");
+		} finally {
+			close(pstmt);
+			close(rs);
+		}
+		return listCount;
+	}
+	
+	//이벤트 검색어에 해당하는 게시물 목록
+	public ArrayList<EventBean> selectSearchEventList(int pageNum, int listLimit, String search, String searchType) {
+		ArrayList<EventBean> eventSearchList =null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		
+		try {
+			int startRow = (pageNum - 1) * listLimit;
+			
+			String sql = "SELECT * FROM admin_event "
+					+ "WHERE " + searchType + " LIKE ? "
+					+ "ORDER BY admin_event_num DESC LIMIT ?,?";
+			
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, "%" + search + "%");
+			pstmt.setInt(2, startRow);
+			pstmt.setInt(3, listLimit);
+			
+			rs = pstmt.executeQuery();
+			
+			eventSearchList = new ArrayList<EventBean>();
+			
+			while(rs.next()) {
+				EventBean eventArticle = new EventBean();
+				
+				eventArticle.setAdmin_event_num(rs.getInt("admin_event_num"));
+				eventArticle.setAdmin_event_nickname(rs.getString("admin_event_nickname"));
+				eventArticle.setAdmin_event_write_date(rs.getString("admin_event_write_date").substring(0,8));
+				eventArticle.setAdmin_event_title(rs.getString("admin_event_title"));
+				eventArticle.setAdmin_event_content(rs.getString("admin_event_content"));
+				eventArticle.setAdmin_event_readcount(rs.getInt("admin_event_readcount"));
+			
+				eventSearchList.add(eventArticle);
+			}
+//				System.out.println(eventSearchList);
+		} catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println("SQL 구문 오류 - selectSearchEventList()");
+		} finally {
+			close(pstmt);
+			close(rs);
+		}
+		return eventSearchList;
+	}
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	public ArrayList<MemberBean> selectMemberManagementList(int pageNum, int listLimit) {
@@ -555,6 +633,10 @@ public class AdminDAO {
 		
 		return memberManagementList;
 	}
+
+	
+
+
 
 
 

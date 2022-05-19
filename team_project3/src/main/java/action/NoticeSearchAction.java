@@ -14,7 +14,7 @@ public class NoticeSearchAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		System.out.println("NoticeSearchAction");
+//		System.out.println("NoticeSearchAction");
 		ActionForward forward = null;
 		
 		request.setCharacterEncoding("UTF-8");
@@ -24,12 +24,12 @@ public class NoticeSearchAction implements Action {
 		
 		String tableName = "admin_notice";
 		
-		System.out.println(search);
-		System.out.println(searchType);
+//		System.out.println(search);
+//		System.out.println(searchType);
 		
 		//검색어에 해당하는 게시물 목록 갯수를 조회
 		NoticeSearchListService service = new NoticeSearchListService();
-		int listCount = service.selectSearchListCount(tableName,search, searchType);
+		int listCount = service.selectNoticeSearchListCount(tableName,search, searchType);
 		
 		//검색어에 해당하는 게시물 목록 담아오기(검색어 페이징)
 		int pageNum = 1; // 현재 페이지 번호
@@ -49,7 +49,7 @@ public class NoticeSearchAction implements Action {
 		}
 		
 		PageInfo pageInfo = new PageInfo(pageNum, maxPage, startPage, endPage, listCount,listLimit);
-		ArrayList<NoticeBean> noticeSearchList = service.selectnoticeSearchList(pageNum, listLimit, search, searchType);
+		ArrayList<NoticeBean> noticeSearchList = service.selectNoticeSearchList(pageNum, listLimit, search, searchType);
 		
 		
 		request.setAttribute("pageInfo", pageInfo);

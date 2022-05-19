@@ -9,8 +9,8 @@ import vo.NoticeBean;
 
 public class NoticeSearchListService {
 
-	public int selectSearchListCount(String tableName,String search, String searchType) {
-		System.out.println("selectSearchListCount");
+	public int selectNoticeSearchListCount(String tableName,String search, String searchType) {
+//		System.out.println("NoticeSearchListService-selectSearchListCount");
 		int listCount =  0;
 		
 		Connection con = getConnection();
@@ -18,15 +18,15 @@ public class NoticeSearchListService {
 		
 		adminDAO.setConnection(con);
 		
-		listCount = adminDAO.selectSearchListCount(tableName,search,searchType);
+		listCount = adminDAO.selectNoticeSearchListCount(tableName,search,searchType);
 		
 		close(con);
 		
 		return listCount;
 	}
 
-	public ArrayList<NoticeBean> selectnoticeSearchList(int pageNum, int listLimit, String search, String searchType) {
-		System.out.println("selectnoticeSearchList");
+	public ArrayList<NoticeBean> selectNoticeSearchList(int pageNum, int listLimit, String search, String searchType) {
+//		System.out.println("selectnoticeSearchList");
 		
 		ArrayList<NoticeBean> noticeSearchList =null;
 		

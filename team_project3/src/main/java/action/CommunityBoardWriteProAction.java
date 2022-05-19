@@ -156,11 +156,10 @@ public class CommunityBoardWriteProAction implements Action {
 			        
 					eventImg = new EventImgFileBean();
 					eventImg.setEvent_img_file_name(board_file);
-					eventImg.setEvent_img_file_real_name(board_real_file);
+					eventImg.setEvent_img_file_real_name(realFileName);
 					
 					eventImgList.add(eventImg);
 					
-					System.out.println(eventImgList);
 					
 					Path p1 = Paths.get(realPath, board_real_file); 
 					Path p2 = Paths.get(realPath, "admin_event_img", realFileName);
