@@ -15,22 +15,17 @@ public class MyPageAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-//		System.out.println("MyPageAction 나오나?");
 		
 		ActionForward forward = null;
 		
-		
-		
 		String member_code = request.getParameter("member_code");
-//		System.out.println("액션쪽 : "+member_id);
-//		System.out.println("액션쪽 : " + member_code);
 		
 		MemberDetailService service = new MemberDetailService();
 		MemberBean memberDetail = service.getMemberDetail(member_code);
 		
 		if(memberDetail != null) {
 			request.setAttribute("memberDetail", memberDetail);
-			forward = new ActionForward("mypage.jsp", false);
+			forward = new ActionForward("MainPage/my_page/about_mypage.jsp", false);
 			
 		} else {
 			response.setContentType("text/html; charset=UTF-8");
