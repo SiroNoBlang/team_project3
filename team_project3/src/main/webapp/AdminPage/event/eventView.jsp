@@ -66,11 +66,11 @@
 							</tr>
 							<tr>
 								<th><label for="board_title">제목</label></th>
-								<td>${eventArticle.getAdmin_event_title() }</td>
+								<td>${eventArticle.getEvent_title() }</td>
 							</tr>
 							<tr>
 								<th><label for="board_num">실제글번호</label></th>
-								<td>${eventArticle.getAdmin_event_num() }</td>
+								<td>${eventArticle.getEvent_num() }</td>
 							</tr>
 							<tr>
 								<th><label for="board_nickname">작성자</label></th>
@@ -78,15 +78,15 @@
 							</tr>
 							<tr>
 								<th><label for="board_date">작성일</label></th>
-								<td>${eventArticle.getAdmin_event_write_date() }</td>
+								<td>${eventArticle.getEvent_write_date() }</td>
 							</tr>
 							<tr>
 								<th><label for="board_readcount">조회수</label></th>
-								<td>${eventArticle.getAdmin_event_readcount() }</td>
+								<td>${eventArticle.getEvent_readcount() }</td>
 							</tr>
 							<tr>
 								<th><label for="board_content">내용</label></th>
-								<td>${eventArticle.getAdmin_event_content() } <br>
+								<td>${eventArticle.getEvent_content() } <br>
 									<c:if test="${not empty eventImgFileList}">
 										<c:forEach var="eventImg" items="${eventImgFileList }">
 											<img src="./Upload/admin_event_img/${eventImg.getEvent_img_file_real_name() }"> <br>
@@ -106,8 +106,8 @@
 						</table>
 						<br>
 						<section id="commandCell">	
-							<input type="button" value="수정" onclick="location.href='EventModifyForm.co?admin_notice_num=${param.admin_event_num}&page=${param.page}'">
-							<input type="button" value="삭제" onclick="location.href='EventDeleteForm.co?admin_notice_num=${param.admin_event_num}&page=${param.page}'">
+							<input type="button" value="수정" onclick="location.href='EventModifyForm.co?event_num=${param.event_num}&page=${param.page}'">
+							<input type="button" value="삭제" onclick="location.href='EventDeleteForm.co?event_num=${param.event_num}&page=${param.page}'">
 							<input type="button" value="목록" onclick="history.back()">
 <%-- 							<input type="button" value="목록" onclick="location.href='NoticeList.co?page=${param.page}'"> --%>
 						</section>

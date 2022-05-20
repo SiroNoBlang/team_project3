@@ -2,7 +2,7 @@ package vo;
 
 
 //CREATE TABLE notice_img_file (
-//		notice_img_file_num INT REFERENCES admin_notice(admin_notice_num),
+//		notice_img_file_num INT REFERENCES admin_notice(notice_num),
 //		notice_img_file_name VARCHAR(50) PRIMARY KEY,
 //		notice_img_file_real_name VARCHAR(50)
 //	);

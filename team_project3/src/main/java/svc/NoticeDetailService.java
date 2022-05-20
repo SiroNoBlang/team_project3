@@ -13,7 +13,7 @@ import vo.NoticeImgFileBean;
 
 public class NoticeDetailService {
 
-	public NoticeBean getNoticeArticle(int admin_notice_num) {
+	public NoticeBean getNoticeArticle(int notice_num) {
 
 //		System.out.println("NoticeDetailService - getNoticeArticle()");
 		
@@ -24,28 +24,28 @@ public class NoticeDetailService {
 		
 		adminDAO.setConnection(con);
 		
-		noticeArticle = adminDAO.selectNoticeArticle(admin_notice_num);
+		noticeArticle = adminDAO.selectNoticeArticle(notice_num);
 		
 		close(con);
 		
 		return noticeArticle;
 	}
 
-	public void increaseNoticeReadcount(int admin_notice_num) {
+	public void increaseNoticeReadcount(int notice_num) {
 
 		Connection con = getConnection(); 
 		AdminDAO adminDAO = AdminDAO.getInstance();
 		
 		adminDAO.setConnection(con);
 		
-		adminDAO.updateNoticeReadcount(admin_notice_num);
+		adminDAO.updateNoticeReadcount(notice_num);
 		
 		commit(con);
 		
 		close(con);
 	}
 
-	public 	ArrayList<NoticeImgFileBean> getNoticeImg(int admin_notice_num) {
+	public 	ArrayList<NoticeImgFileBean> getNoticeImg(int notice_num) {
 		
 		ArrayList<NoticeImgFileBean> noticeImgFileList = null;
 		
@@ -54,7 +54,7 @@ public class NoticeDetailService {
 		
 		adminDAO.setConnection(con);
 		
-		noticeImgFileList = adminDAO.getNoticeImg(admin_notice_num);
+		noticeImgFileList = adminDAO.getNoticeImg(notice_num);
 		
 		close(con);
 		

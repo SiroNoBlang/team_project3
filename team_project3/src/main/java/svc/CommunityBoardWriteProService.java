@@ -14,7 +14,7 @@ import vo.NoticeImgFileBean;
 public class CommunityBoardWriteProService {
 
 	public boolean noticeRegistArticle(NoticeBean notice, ArrayList<NoticeImgFileBean>  noticeImgList) {  //공지사항 게시물 등록
-		System.out.println("CommunityBoardWriteProService - noticeRegistArticle()");
+//		System.out.println("CommunityBoardWriteProService - noticeRegistArticle()");
 		boolean isNoticeWriteSuccess = false;
 		
 		

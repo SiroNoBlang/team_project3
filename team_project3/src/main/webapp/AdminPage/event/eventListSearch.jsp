@@ -66,7 +66,7 @@
 					                <form action="./EventSearch.co" class="formCss">
 										<select name="searchType" id="product">
 										    <option value="event_title">제목</option>
-										    <option value="event_content" <c:if test="${param.searchType eq 'admin_event_content'}"> selected="selected"</c:if>>내용</option>
+										    <option value="event_content" <c:if test="${param.searchType eq 'event_content'}"> selected="selected"</c:if>>내용</option>
 										</select>
 					                        <label for="search" class="blind">이벤트 내용 검색</label>
 					                        <input id="search" type="search" name="search" value="${param.search}">
@@ -93,12 +93,12 @@
 								                <tr>
 							                    	<td>${listCount -(listCount -((pageNum-1)* listLimit + status.index)-1)} </td> 
 								                    <td>
-														<a href="EventDetail.co?admin_event_num=${event.getAdmin_event_num() }&page=${pageNum}">
-								                    		${event.getAdmin_event_title() } </a>
+														<a href="EventDetail.co?Event_num=${event.getEvent_num() }&page=${pageNum}">
+								                    		${event.getEvent_title() } </a>
 								                    </td>
-								                    <td>${event.getAdmin_event_nickname() }</td>
-													<td>${event.getAdmin_event_write_date() }</td>
-													<td>${event.getAdmin_event_readcount() }</td>
+								                    <td>${event.getEvent_nickname() }</td>
+													<td>${event.getEvent_write_date() }</td>
+													<td>${event.getEvent_readcount() }</td>
 								                </tr>
 							              </c:forEach>
 										</c:if>

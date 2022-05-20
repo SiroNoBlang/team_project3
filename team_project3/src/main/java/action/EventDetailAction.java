@@ -20,17 +20,17 @@ public class EventDetailAction implements Action {
 //		System.out.println("EventDetailAction");
 		ActionForward forward = null;
 		
-		int admin_event_num = Integer.parseInt(request.getParameter("admin_event_num"));
+		int event_num = Integer.parseInt(request.getParameter("event_num"));
 		
 		EventDetailService service = new EventDetailService();
-		EventBean eventArticle = service.getEventArticle(admin_event_num);
+		EventBean eventArticle = service.getEventArticle(event_num);
 		
-		ArrayList<EventImgFileBean> eventImgFileList = service.getNoticeImg(admin_event_num);
+		ArrayList<EventImgFileBean> eventImgFileList = service.getNoticeImg(event_num);
 		
 		
 		if(eventArticle != null) {
 //			System.out.println("조회수 증가");
-			service.increaseEventReadcount(admin_event_num);
+			service.increaseEventReadcount(event_num);
 		}
 		
 		request.setAttribute("eventArticle", eventArticle);

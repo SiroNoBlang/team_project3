@@ -92,15 +92,15 @@
 						                	<c:if test="${not empty noticeList and pageInfo.getListCount() > 0}">
 											<c:forEach var="notice" items="${noticeList }" varStatus="status">
 								                <tr>
-							            <%--         <td>${notice.getAdmin_notice_num() }</td>  --%>
+							            <%--         <td>${notice.getNotice_num() }</td>  --%>
 							                    	<td>${listCount -(listCount -((pageNum-1)* listLimit + status.index)-1)} </td> 
 								                    <td>
-														<a href="NoticeDetail.co?admin_notice_num=${notice.getAdmin_notice_num() }&page=${pageNum}">
-								                    		${notice.getAdmin_notice_title() } </a>
+														<a href="NoticeDetail.co?notice_num=${notice.getNotice_num() }&page=${pageNum}">
+								                    		${notice.getNotice_title() } </a>
 								                    </td>
-								                    <td>${notice.getAdmin_notice_nickname() }</td>
-													<td>${notice.getAdmin_notice_write_date() }</td>
-													<td>${notice.getAdmin_notice_readcount() }</td>
+								                    <td>${notice.getNotice_nickname() }</td>
+													<td>${notice.getNotice_write_date() }</td>
+													<td>${notice.getNotice_readcount() }</td>
 								                </tr>
 							              </c:forEach>
 										</c:if>

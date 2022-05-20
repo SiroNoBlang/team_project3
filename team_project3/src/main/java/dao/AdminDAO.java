@@ -31,6 +31,7 @@ public class AdminDAO {
 		this.con = con;
 	}
 
+
 	// 공지사항 글쓰기
 	public int insertNoticeArticle(NoticeBean notice,  ArrayList<NoticeImgFileBean> noticeImgList) {
 //		System.out.println("AdminDAO - insertArticle()");
@@ -56,9 +57,9 @@ public class AdminDAO {
 			sql = "INSERT INTO notice VALUES (?,?,REPLACE(now(),'-',''),?,?,?)";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, num);
-			pstmt.setString(2, notice.getAdmin_notice_nickname());
-			pstmt.setString(3, notice.getAdmin_notice_title());
-			pstmt.setString(4, notice.getAdmin_notice_content());
+			pstmt.setString(2, notice.getNotice_nickname());
+			pstmt.setString(3, notice.getNotice_title());
+			pstmt.setString(4, notice.getNotice_content());
 			pstmt.setInt(5, 0);
 			
 			insertCount = pstmt.executeUpdate();
@@ -112,9 +113,9 @@ public class AdminDAO {
 			sql = "INSERT INTO event VALUES (?,?,REPLACE(now(),'-',''),?,?,?)";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, num);
-			pstmt.setString(2, event.getAdmin_event_nickname());
-			pstmt.setString(3, event.getAdmin_event_title());
-			pstmt.setString(4, event.getAdmin_event_content());
+			pstmt.setString(2, event.getEvent_nickname());
+			pstmt.setString(3, event.getEvent_title());
+			pstmt.setString(4, event.getEvent_content());
 			pstmt.setInt(5, 0);
 			
 			insertCount = pstmt.executeUpdate();
@@ -193,12 +194,12 @@ public class AdminDAO {
 			while(rs.next()) {
 				
 				NoticeBean notice = new NoticeBean();
-				notice.setAdmin_notice_num(rs.getInt("notice_num"));
-				notice.setAdmin_notice_nickname(rs.getString("notice_nickname"));
-				notice.setAdmin_notice_write_date(rs.getString("notice_write_date").substring(0,8));
-				notice.setAdmin_notice_title(rs.getString("notice_title"));
-				notice.setAdmin_notice_content(rs.getString("notice_content"));
-				notice.setAdmin_notice_readcount(rs.getInt("notice_readcount"));
+				notice.setNotice_num(rs.getInt("notice_num"));
+				notice.setNotice_nickname(rs.getString("notice_nickname"));
+				notice.setNotice_write_date(rs.getString("notice_write_date").substring(0,8));
+				notice.setNotice_title(rs.getString("notice_title"));
+				notice.setNotice_content(rs.getString("notice_content"));
+				notice.setNotice_readcount(rs.getInt("notice_readcount"));
 				
 				
 				
@@ -218,7 +219,7 @@ public class AdminDAO {
 	}
 
 	//공지사항 상세정보 조회
-	public NoticeBean selectNoticeArticle(int admin_notice_num) {
+	public NoticeBean selectNoticeArticle(int notice_num) {
 
 		NoticeBean noticeArticle = null;
 		
@@ -227,17 +228,17 @@ public class AdminDAO {
 		try {
 			String sql = "SELECT * FROM notice WHERE notice_num=?";
 			pstmt = con.prepareStatement(sql);
-			pstmt.setInt(1, admin_notice_num);
+			pstmt.setInt(1, notice_num);
 			rs = pstmt.executeQuery();
 			
 			if(rs.next()) {
 				noticeArticle = new NoticeBean();
-				noticeArticle.setAdmin_notice_num(rs.getInt("notice_num"));
-				noticeArticle.setAdmin_notice_nickname(rs.getString("notice_nickname"));
-				noticeArticle.setAdmin_notice_write_date(rs.getString("notice_write_date").substring(0,8));
-				noticeArticle.setAdmin_notice_title(rs.getString("notice_title"));
-				noticeArticle.setAdmin_notice_content(rs.getString("notice_content"));
-				noticeArticle.setAdmin_notice_readcount(rs.getInt("notice_readcount"));
+				noticeArticle.setNotice_num(rs.getInt("notice_num"));
+				noticeArticle.setNotice_nickname(rs.getString("notice_nickname"));
+				noticeArticle.setNotice_write_date(rs.getString("notice_write_date").substring(0,8));
+				noticeArticle.setNotice_title(rs.getString("notice_title"));
+				noticeArticle.setNotice_content(rs.getString("notice_content"));
+				noticeArticle.setNotice_readcount(rs.getInt("notice_readcount"));
 			}
 			
 		} catch (SQLException e) {
@@ -254,13 +255,13 @@ public class AdminDAO {
 	}
 
 	//공지사항 조회수 증가
-	public void updateNoticeReadcount(int admin_notice_num) {
+	public void updateNoticeReadcount(int notice_num) {
 		PreparedStatement pstmt = null;
 		
 		try {
 			String sql = "UPDATE notice SET notice_readcount=notice_readcount+1 WHERE notice_num=?";
 			pstmt = con.prepareStatement(sql);
-			pstmt.setInt(1, admin_notice_num);
+			pstmt.setInt(1, notice_num);
 			pstmt.executeUpdate();
 		} catch (SQLException e) {
 			System.out.println("SQL 구문 오류 발생! - updateNoticeReadcount()");
@@ -271,7 +272,7 @@ public class AdminDAO {
 	}
 
 	// 공지사항 첨부파일 조회
-	public ArrayList<NoticeImgFileBean>  getNoticeImg(int admin_notice_num) {
+	public ArrayList<NoticeImgFileBean>  getNoticeImg(int notice_num) {
 		ArrayList<NoticeImgFileBean> noticeImgFileList = new ArrayList<NoticeImgFileBean>();
 		
 		NoticeImgFileBean noticeImg = null;
@@ -281,7 +282,7 @@ public class AdminDAO {
 			
 			String sql ="SELECT f.notice_img_file_name, f.notice_img_file_real_name, notice_num FROM notice JOIN notice_img_file f ON f.notice_img_file_num = notice_num WHERE notice_img_file_num = ?";
 			pstmt = con.prepareStatement(sql);
-			pstmt.setInt(1, admin_notice_num);
+			pstmt.setInt(1, notice_num);
 			rs = pstmt.executeQuery();
 			
 			
@@ -359,12 +360,12 @@ public class AdminDAO {
 			while(rs.next()) {
 				NoticeBean noticeArticle = new NoticeBean();
 				
-				noticeArticle.setAdmin_notice_num(rs.getInt("notice_num"));
-				noticeArticle.setAdmin_notice_nickname(rs.getString("notice_nickname"));
-				noticeArticle.setAdmin_notice_write_date(rs.getString("notice_write_date").substring(0,8));
-				noticeArticle.setAdmin_notice_title(rs.getString("notice_title"));
-				noticeArticle.setAdmin_notice_content(rs.getString("notice_content"));
-				noticeArticle.setAdmin_notice_readcount(rs.getInt("notice_readcount"));
+				noticeArticle.setNotice_num(rs.getInt("notice_num"));
+				noticeArticle.setNotice_nickname(rs.getString("notice_nickname"));
+				noticeArticle.setNotice_write_date(rs.getString("notice_write_date").substring(0,8));
+				noticeArticle.setNotice_title(rs.getString("notice_title"));
+				noticeArticle.setNotice_content(rs.getString("notice_content"));
+				noticeArticle.setNotice_readcount(rs.getInt("notice_readcount"));
 			
 				noticeSearchList.add(noticeArticle);
 			}
@@ -403,12 +404,12 @@ public class AdminDAO {
 			while(rs.next()) {
 				
 				EventBean event = new EventBean();
-				event.setAdmin_event_num(rs.getInt("event_num"));
-				event.setAdmin_event_nickname(rs.getString("event_nickname"));
-				event.setAdmin_event_write_date(rs.getString("event_write_date").substring(0,8));
-				event.setAdmin_event_title(rs.getString("event_title"));
-				event.setAdmin_event_content(rs.getString("event_content"));
-				event.setAdmin_event_readcount(rs.getInt("event_readcount"));
+				event.setEvent_num(rs.getInt("event_num"));
+				event.setEvent_nickname(rs.getString("event_nickname"));
+				event.setEvent_write_date(rs.getString("event_write_date").substring(0,8));
+				event.setEvent_title(rs.getString("event_title"));
+				event.setEvent_content(rs.getString("event_content"));
+				event.setEvent_readcount(rs.getInt("event_readcount"));
 				
 				eventList.add(event);
 			}
@@ -425,7 +426,7 @@ public class AdminDAO {
 	}
 	
 	//이벤트 상세정보 조회
-	public EventBean selectEventArticle(int admin_event_num) {
+	public EventBean selectEventArticle(int event_num) {
 		EventBean eventArticle = null;
 		
 		PreparedStatement pstmt = null;
@@ -433,17 +434,17 @@ public class AdminDAO {
 		try {
 			String sql = "SELECT * FROM event WHERE event_num=?";
 			pstmt = con.prepareStatement(sql);
-			pstmt.setInt(1, admin_event_num);
+			pstmt.setInt(1, event_num);
 			rs = pstmt.executeQuery();
 			
 			if(rs.next()) {
 				eventArticle = new EventBean();
-				eventArticle.setAdmin_event_num(rs.getInt("event_num"));
-				eventArticle.setAdmin_event_nickname(rs.getString("event_nickname"));
-				eventArticle.setAdmin_event_write_date(rs.getString("event_write_date").substring(0,8));
-				eventArticle.setAdmin_event_title(rs.getString("event_title"));
-				eventArticle.setAdmin_event_content(rs.getString("event_content"));
-				eventArticle.setAdmin_event_readcount(rs.getInt("event_readcount"));
+				eventArticle.setEvent_num(rs.getInt("event_num"));
+				eventArticle.setEvent_nickname(rs.getString("event_nickname"));
+				eventArticle.setEvent_write_date(rs.getString("event_write_date").substring(0,8));
+				eventArticle.setEvent_title(rs.getString("event_title"));
+				eventArticle.setEvent_content(rs.getString("event_content"));
+				eventArticle.setEvent_readcount(rs.getInt("event_readcount"));
 			}
 			
 		} catch (SQLException e) {
@@ -458,7 +459,7 @@ public class AdminDAO {
 	}
 
 	//이벤트 첨부파일 조회
-	public ArrayList<EventImgFileBean> getEventImg(int admin_event_num) {
+	public ArrayList<EventImgFileBean> getEventImg(int event_num) {
 	ArrayList<EventImgFileBean> eventImgFileList = new ArrayList<EventImgFileBean>();
 		
 		EventImgFileBean eventImg = null;
@@ -469,7 +470,7 @@ public class AdminDAO {
 			
 			String sql ="SELECT f.event_img_file_name, f.event_img_file_real_name, event_num FROM event JOIN event_img_file f ON f.event_img_file_num = event_num WHERE event_img_file_num = ?";
 			pstmt = con.prepareStatement(sql);
-			pstmt.setInt(1, admin_event_num);
+			pstmt.setInt(1, event_num);
 			rs = pstmt.executeQuery();
 			
 			
@@ -492,13 +493,13 @@ public class AdminDAO {
 	}
 
 	//이벤트 조회수 증가
-	public void updateEventReadcount(int admin_event_num) {
+	public void updateEventReadcount(int event_num) {
 		PreparedStatement pstmt = null;
 		
 		try {
 			String sql = "UPDATE event SET event_readcount=event_readcount+1 WHERE event_num=?";
 			pstmt = con.prepareStatement(sql);
-			pstmt.setInt(1, admin_event_num);
+			pstmt.setInt(1, event_num);
 			pstmt.executeUpdate();
 		} catch (SQLException e) {
 			System.out.println("SQL 구문 오류 발생! - updateEventReadcount()");
@@ -562,12 +563,12 @@ public class AdminDAO {
 			while(rs.next()) {
 				EventBean eventArticle = new EventBean();
 				
-				eventArticle.setAdmin_event_num(rs.getInt("event_num"));
-				eventArticle.setAdmin_event_nickname(rs.getString("event_nickname"));
-				eventArticle.setAdmin_event_write_date(rs.getString("event_write_date").substring(0,8));
-				eventArticle.setAdmin_event_title(rs.getString("event_title"));
-				eventArticle.setAdmin_event_content(rs.getString("event_content"));
-				eventArticle.setAdmin_event_readcount(rs.getInt("event_readcount"));
+				eventArticle.setEvent_num(rs.getInt("event_num"));
+				eventArticle.setEvent_nickname(rs.getString("event_nickname"));
+				eventArticle.setEvent_write_date(rs.getString("event_write_date").substring(0,8));
+				eventArticle.setEvent_title(rs.getString("event_title"));
+				eventArticle.setEvent_content(rs.getString("event_content"));
+				eventArticle.setEvent_readcount(rs.getInt("event_readcount"));
 			
 				eventSearchList.add(eventArticle);
 			}

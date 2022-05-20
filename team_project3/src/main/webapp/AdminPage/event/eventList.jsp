@@ -94,12 +94,12 @@
 								                <tr>
 							                    	<td>${listCount -(listCount -((pageNum-1)* listLimit + status.index)-1)} </td> 
 								                    <td>
-														<a href="EventDetail.co?admin_event_num=${event.getAdmin_event_num() }&page=${pageNum}">
-								                    		${event.getAdmin_event_title() } </a>
+														<a href="EventDetail.co?event_num=${event.getEvent_num() }&page=${pageNum}">
+								                    		${event.getEvent_title() } </a>
 								                    </td>
-								                    <td>${event.getAdmin_event_nickname() }</td>
-													<td>${event.getAdmin_event_write_date() }</td>
-													<td>${event.getAdmin_event_readcount() }</td>
+								                    <td>${event.getEvent_nickname() }</td>
+													<td>${event.getEvent_write_date() }</td>
+													<td>${event.getEvent_readcount() }</td>
 								                </tr>
 							              </c:forEach>
 										</c:if>

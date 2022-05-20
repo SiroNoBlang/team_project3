@@ -21,7 +21,7 @@ public class NoticeBoardListService {
 		
 		adminDAO.setConnection(con);
 		
-		String tableName = "admin_notice";
+		String tableName = "notice";
 		
 		listCount = adminDAO.selectListCount(tableName);
 		

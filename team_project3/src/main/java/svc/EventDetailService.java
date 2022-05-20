@@ -11,7 +11,7 @@ import vo.EventImgFileBean;
 
 public class EventDetailService {
 
-	public EventBean getEventArticle(int admin_event_num) {
+	public EventBean getEventArticle(int event_num) {
 //		System.out.println("EventDetailService - getNoticeArticle()");
 		
 		EventBean eventArticle = null;
@@ -21,14 +21,14 @@ public class EventDetailService {
 		
 		adminDAO.setConnection(con);
 		
-		eventArticle = adminDAO.selectEventArticle(admin_event_num);
+		eventArticle = adminDAO.selectEventArticle(event_num);
 		
 		close(con);
 		
 		return eventArticle;
 	}
 
-	public ArrayList<EventImgFileBean> getNoticeImg(int admin_event_num) {
+	public ArrayList<EventImgFileBean> getNoticeImg(int event_num) {
 	
 		ArrayList<EventImgFileBean> eventImgFileList = null;
 		
@@ -37,20 +37,20 @@ public class EventDetailService {
 		
 		adminDAO.setConnection(con);
 		
-		eventImgFileList = adminDAO.getEventImg(admin_event_num);
+		eventImgFileList = adminDAO.getEventImg(event_num);
 		
 		close(con);
 		
 		return eventImgFileList;
 	}
 
-	public void increaseEventReadcount(int admin_event_num) {
+	public void increaseEventReadcount(int event_num) {
 		Connection con = getConnection(); 
 		AdminDAO adminDAO = AdminDAO.getInstance();
 		
 		adminDAO.setConnection(con);
 		
-		adminDAO.updateEventReadcount(admin_event_num);
+		adminDAO.updateEventReadcount(event_num);
 		
 		commit(con);
 		

@@ -84,9 +84,9 @@ public class CommunityBoardWriteProAction implements Action {
 			//공지사항 중에 첨부파일을 빼고 담을 NoticeBean
 			notice = new NoticeBean();
 			
-			notice.setAdmin_notice_title(multi.getParameter("board_title"));
-			notice.setAdmin_notice_nickname(multi.getParameter("board_nickname"));
-			notice.setAdmin_notice_content(multi.getParameter("board_content"));
+			notice.setNotice_title(multi.getParameter("board_title"));
+			notice.setNotice_nickname(multi.getParameter("board_nickname"));
+			notice.setNotice_content(multi.getParameter("board_content"));
 
 			
 			// 첨부파일을 담을 noticeImg
@@ -129,9 +129,9 @@ public class CommunityBoardWriteProAction implements Action {
 			//이벤트 테이블 중에 첨부파일을 빼고 담을 NoticeBean
 			event = new EventBean();
 			
-			event.setAdmin_event_title(multi.getParameter("board_title"));
-			event.setAdmin_event_nickname(multi.getParameter("board_nickname"));
-			event.setAdmin_event_content(multi.getParameter("board_content"));
+			event.setEvent_title(multi.getParameter("board_title"));
+			event.setEvent_nickname(multi.getParameter("board_nickname"));
+			event.setEvent_content(multi.getParameter("board_content"));
 			
 			// 첨부파일을 담을 eventImg
 			while (files.hasMoreElements()) {

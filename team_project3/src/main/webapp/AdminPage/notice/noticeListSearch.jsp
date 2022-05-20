@@ -68,7 +68,7 @@
 					                <form action="./NoticeSearch.co" class="formCss">
 										<select name="searchType" id="product">
 										    <option value="notice_title">제목</option>
-										    <option value="notice_content" <c:if test="${param.searchType eq 'admin_notice_content'}"> selected="selected"</c:if>>내용</option>
+										    <option value="notice_content" <c:if test="${param.searchType eq 'Notice_content'}"> selected="selected"</c:if>>내용</option>
 										</select>
 					                        <label for="search" class="blind">공지사항 내용 검색</label>
 					                        <input id="search" type="search" name="search" value="${param.search}">
@@ -95,12 +95,12 @@
 								                <tr>
 							                    	<td>${listCount -(listCount -((pageNum-1)* listLimit + status.index)-1)} </td> 
 								                    <td>
-														<a href="NoticeDetail.co?admin_notice_num=${notice.getAdmin_notice_num() }&page=${pageNum}">
-								                    		${notice.getAdmin_notice_title() } </a>
+														<a href="NoticeDetail.co?Notice_num=${notice.getNotice_num() }&page=${pageNum}">
+								                    		${notice.getNotice_title() } </a>
 								                    </td>
-								                    <td>${notice.getAdmin_notice_nickname() }</td>
-													<td>${notice.getAdmin_notice_write_date() }</td>
-													<td>${notice.getAdmin_notice_readcount() }</td>
+								                    <td>${notice.getNotice_nickname() }</td>
+													<td>${notice.getNotice_write_date() }</td>
+													<td>${notice.getNotice_readcount() }</td>
 								                </tr>
 							              </c:forEach>
 										</c:if>

@@ -2,70 +2,72 @@ package vo;
 
 
 
-/*CREATE TABLE admin_notice (
-		admin_notice_num INT Auto_Increment PRIMARY KEY,
-		admin_notice_nickname VARCHAR(16),
-		admin_notice_write_date VARCHAR(17),
-		admin_notice_title VARCHAR(30),
-		admin_notice_content VARCHAR(2000),
-		admin_notice_readcount INT
+/*CREATE TABLE notice (
+		notice_num INT Auto_Increment PRIMARY KEY,
+		notice_nickname VARCHAR(16),
+		notice_write_date VARCHAR(17),
+		notice_title VARCHAR(30),
+		notice_content VARCHAR(2000),
+		notice_readcount INT
 	);
 */
 
+
 public class NoticeBean {
-	private int admin_notice_num;
-	private String admin_notice_nickname;
-	private String admin_notice_write_date; 
-	private String admin_notice_title;
-	private String admin_notice_content;
-	private int admin_notice_readcount;
-	public int getAdmin_notice_num() {
-		return admin_notice_num;
-	}
-	public void setAdmin_notice_num(int admin_notice_num) {
-		this.admin_notice_num = admin_notice_num;
-	}
-	public String getAdmin_notice_nickname() {
-		return admin_notice_nickname;
-	}
-	public void setAdmin_notice_nickname(String admin_notice_nickname) {
-		this.admin_notice_nickname = admin_notice_nickname;
-	}
-	public String getAdmin_notice_write_date() {
-		return admin_notice_write_date;
-	}
-	public void setAdmin_notice_write_date(String admin_notice_write_date) {
-		this.admin_notice_write_date = admin_notice_write_date;
-	}
-	public String getAdmin_notice_title() {
-		return admin_notice_title;
-	}
-	public void setAdmin_notice_title(String admin_notice_title) {
-		this.admin_notice_title = admin_notice_title;
-	}
-	public String getAdmin_notice_content() {
-		return admin_notice_content;
-	}
-	public void setAdmin_notice_content(String admin_notice_content) {
-		this.admin_notice_content = admin_notice_content;
-	}
-	public int getAdmin_notice_readcount() {
-		return admin_notice_readcount;
-	}
-	public void setAdmin_notice_readcount(int admin_notice_readcount) {
-		this.admin_notice_readcount = admin_notice_readcount;
-	}
+	private int notice_num;
+	private String notice_nickname;
+	private String notice_write_date; 
+	private String notice_title;
+	private String notice_content;
+	private int notice_readcount;
 	
+	
+	
+	public int getNotice_num() {
+		return notice_num;
+	}
+	public void setNotice_num(int notice_num) {
+		this.notice_num = notice_num;
+	}
+	public String getNotice_nickname() {
+		return notice_nickname;
+	}
+	public void setNotice_nickname(String notice_nickname) {
+		this.notice_nickname = notice_nickname;
+	}
+	public String getNotice_write_date() {
+		return notice_write_date;
+	}
+	public void setNotice_write_date(String notice_write_date) {
+		this.notice_write_date = notice_write_date;
+	}
+	public String getNotice_title() {
+		return notice_title;
+	}
+	public void setNotice_title(String notice_title) {
+		this.notice_title = notice_title;
+	}
+	public String getNotice_content() {
+		return notice_content;
+	}
+	public void setNotice_content(String notice_content) {
+		this.notice_content = notice_content;
+	}
+	public int getNotice_readcount() {
+		return notice_readcount;
+	}
+	public void setNotice_readcount(int notice_readcount) {
+		this.notice_readcount = notice_readcount;
+	}
 	
 	
 	@Override
 	public String toString() {
-		return "NoticeBean [admin_notice_num=" + admin_notice_num + ", admin_notice_nickname=" + admin_notice_nickname
-				+ ", admin_notice_write_date=" + admin_notice_write_date + ", admin_notice_title=" + admin_notice_title
-				+ ", admin_notice_content=" + admin_notice_content + ", admin_notice_readcount="
-				+ admin_notice_readcount + "]";
+		return "NoticeBean [notice_num=" + notice_num + ", notice_nickname=" + notice_nickname + ", notice_write_date="
+				+ notice_write_date + ", notice_title=" + notice_title + ", notice_content=" + notice_content
+				+ ", notice_readcount=" + notice_readcount + "]";
 	}
-	
+
 	
 	
 }

@@ -66,7 +66,7 @@
 							</tr>
 							<tr>
 								<th><label for="board_title">제목</label></th>
-								<td><input type="text" name="board_title" required="required" value="${noticeArticle.getAdmin_notice_title() }">
+								<td><input type="text" name="board_title" required="required" value="${noticeArticle.getNotice_title() }">
 								</td>
 							</tr>
 							<tr>
@@ -75,12 +75,12 @@
 							</tr>
 							<tr>
 								<th><label for="board_date">작성일</label></th>
-								<td><input type="text" name="board_date" readonly="readonly" value="${noticeArticle.getAdmin_notice_write_date() }">
+								<td><input type="text" name="board_date" readonly="readonly" value="${noticeArticle.getNotice_write_date() }">
 								</td>
 							</tr>
 							<tr>
 								<th><label for="board_readcount">조회수</label></th>
-								<td><input type="text" readonly="readonly" value="${noticeArticle.getAdmin_notice_readcount() }"></td>
+								<td><input type="text" readonly="readonly" value="${noticeArticle.getNotice_readcount() }"></td>
 							</tr>
 							<tr>
 								<th><label for="board_content">내용</label></th>
@@ -89,14 +89,14 @@
 								<td>
 									<c:choose> 
 										<c:when test="${not empty noticeImgFileList }">
-												${noticeArticle.getAdmin_notice_content() } <br>
+												${noticeArticle.getNotice_content() } <br>
 											<c:forEach var="noticeImg" items="${noticeImgFileList }">
 												<img src="./upload/${noticeImg.getNotice_img_file_real_name() }"> <br>
 											</c:forEach>
 										</c:when> 
 									<c:otherwise> 
 										<textarea id="board_content" name="board_content"  rows="20" cols="100">
-											${noticeArticle.getAdmin_notice_content() }
+											${noticeArticle.getNotice_content() }
 										</textarea>
 									</c:otherwise> 
 								</c:choose>  

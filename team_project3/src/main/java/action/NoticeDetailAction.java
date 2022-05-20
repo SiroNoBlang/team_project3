@@ -17,17 +17,17 @@ public class NoticeDetailAction implements Action {
 //		System.out.println("NoticeDetailAction");
 		ActionForward forward = null;
 		
-		int admin_notice_num = Integer.parseInt(request.getParameter("admin_notice_num"));
+		int notice_num = Integer.parseInt(request.getParameter("notice_num"));
 		
 		NoticeDetailService service = new NoticeDetailService();
-		NoticeBean noticeArticle = service.getNoticeArticle(admin_notice_num);
+		NoticeBean noticeArticle = service.getNoticeArticle(notice_num);
 		
-		ArrayList<NoticeImgFileBean> noticeImgFileList = service.getNoticeImg(admin_notice_num);
+		ArrayList<NoticeImgFileBean> noticeImgFileList = service.getNoticeImg(notice_num);
 		
 		
 		if(noticeArticle != null) {
 //			System.out.println("조회수 증가");
-			service.increaseNoticeReadcount(admin_notice_num);
+			service.increaseNoticeReadcount(notice_num);
 		}
 		
 		request.setAttribute("noticeArticle", noticeArticle);

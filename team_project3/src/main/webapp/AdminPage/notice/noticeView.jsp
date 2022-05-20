@@ -66,11 +66,11 @@
 							</tr>
 							<tr>
 								<th><label for="board_title">제목</label></th>
-								<td>${noticeArticle.getAdmin_notice_title() }</td>
+								<td>${noticeArticle.getNotice_title() }</td>
 							</tr>
 							<tr>
 								<th><label for="board_num">실제글번호</label></th>
-								<td>${noticeArticle.getAdmin_notice_num() }</td>
+								<td>${noticeArticle.getNotice_num() }</td>
 							</tr>
 							<tr>
 								<th><label for="board_nickname">작성자</label></th>
@@ -78,15 +78,15 @@
 							</tr>
 							<tr>
 								<th><label for="board_date">작성일</label></th>
-								<td>${noticeArticle.getAdmin_notice_write_date() }</td>
+								<td>${noticeArticle.getNotice_write_date() }</td>
 							</tr>
 							<tr>
 								<th><label for="board_readcount">조회수</label></th>
-								<td>${noticeArticle.getAdmin_notice_readcount() }</td>
+								<td>${noticeArticle.getNotice_readcount() }</td>
 							</tr>
 							<tr>
 								<th><label for="board_content">내용</label></th>
-								<td>${noticeArticle.getAdmin_notice_content() } <br>
+								<td>${noticeArticle.getNotice_content() } <br>
 									<c:if test="${not empty noticeImgFileList}">
 										<c:forEach var="noticeImg" items="${noticeImgFileList }">
 											<img src="./Upload/admin_notice_img/${noticeImg.getNotice_img_file_real_name() }"> <br>
@@ -106,8 +106,8 @@
 						</table>
 						<br>
 						<section id="commandCell">	
-							<input type="button" value="수정" onclick="location.href='NoticeModifyForm.co?admin_notice_num=${param.admin_notice_num}&page=${param.page}'">
-							<input type="button" value="삭제" onclick="location.href='NoticeDeleteForm.co?admin_notice_num=${param.admin_notice_num}&page=${param.page}'">
+							<input type="button" value="수정" onclick="location.href='NoticeModifyForm.co?notice_num=${param.notice_num}&page=${param.page}'">
+							<input type="button" value="삭제" onclick="location.href='NoticeDeleteForm.co?notice_num=${param.notice_num}&page=${param.page}'">
 							<input type="button" value="목록" onclick="history.back()">
 <%-- 							<input type="button" value="목록" onclick="location.href='NoticeList.co?page=${param.page}'"> --%>
 						</section>
