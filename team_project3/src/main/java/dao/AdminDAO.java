@@ -225,7 +225,7 @@ public class AdminDAO {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		try {
-			String sql = "SELECT * FROM notice WHERE admin_notice_num=?";
+			String sql = "SELECT * FROM notice WHERE notice_num=?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, admin_notice_num);
 			rs = pstmt.executeQuery();
@@ -277,7 +277,6 @@ public class AdminDAO {
 		NoticeImgFileBean noticeImg = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		
 		try {
 			
 			String sql ="SELECT f.notice_img_file_name, f.notice_img_file_real_name, notice_num FROM notice JOIN notice_img_file f ON f.notice_img_file_num = notice_num WHERE notice_img_file_num = ?";
