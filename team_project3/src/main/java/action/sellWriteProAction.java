@@ -22,7 +22,7 @@ public class sellWriteProAction implements Action {
 		ActionForward forward = null;
 		
 
-				String uploadPath = "upload";
+				String uploadPath = "Upload/sell_img";
 				
 				int fileSize = 1024 * 1024 * 10; // byte(1) -> KB(1024Byte) -> MB(1024KB) -> 10MB 단위로 변환
 
@@ -63,12 +63,10 @@ public class sellWriteProAction implements Action {
 				seller.setSell_price(Integer.parseInt(multi.getParameter("sell_price")));
 				seller.setSell_category(multi.getParameter("sell_category"));
 				seller.setSell_category_detail(multi.getParameter("sell_category_detail"));
-				seller.setSell_list_item_status("판매중");
+				seller.setSell_list_item_status("판매중");  //글작업수행 후 검수중으로 바꿔줘야됨. 현재 관리자페이지 관여없어서 강제 판매중.
 				
-				LocalDate date = LocalDate.now();
-				seller.setSell_write_date(multi.getParameter(date.toString().replace("-", " ")));
-				
-				System.out.println(date.toString().replace("-", " "));
+	
+	
 				String fileElement = multi.getFileNames().nextElement().toString();
 				System.out.println("fileElement"+fileElement);
 				
@@ -87,9 +85,11 @@ public class sellWriteProAction implements Action {
 				seller.setSell_img_real_name(sell_img_real_name);
 				//System.out.println(seller);
 				
-				String member_id= request.getParameter("member_id");
+				String sell_member_code = request.getParameter("sell_member_code");
+				System.out.println(sell_member_code);
+				
 				sellerWriteProService service = new sellerWriteProService();
-				boolean isWriteSuccess = service.registArticle(seller, member_id);
+				boolean isWriteSuccess = service.registArticle(seller, sell_member_code);
 				
 				if(!isWriteSuccess) {
 					response.setContentType("text/html; charset=UTF-8");
@@ -100,7 +100,7 @@ public class sellWriteProAction implements Action {
 					out.println("</script>");
 				} else {
 					forward = new ActionForward();
-					forward.setPath("index.jsp");
+					forward.setPath("MainPage.pr");
 					forward.setRedirect(true);
 				}
 				
