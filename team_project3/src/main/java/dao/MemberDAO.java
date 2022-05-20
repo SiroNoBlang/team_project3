@@ -264,6 +264,28 @@ public class MemberDAO {
 		
 		return isMemberUpdate;
 	}
+
+	public MemberBean getMemberStatus() {
+		MemberBean memberBean = null;
+		
+		PreparedStatement pstmt = null;
+		
+		try {
+			String sql = "UPDATE member_service_log SET member_service_log_status=? WHERE member_service_log_code=?";
+			pstmt = con.prepareStatement(sql);
+			int sucess = pstmt.executeUpdate();
+			
+			if(sucess > 0) {
+				
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return memberBean;
+	}
 	
 	
 	

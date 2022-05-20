@@ -27,13 +27,14 @@ public class MemberManagementListAction implements Action {
 			pageNum = Integer.parseInt(request.getParameter("page"));
 		}
 		
-		//공지사항 총 게시물 수 조회
 		MemberManagementListService service = new MemberManagementListService();
 		int listCount = service.getListCount();
 		
 		//게시물 목록 담아오기 
 		ArrayList<MemberBean> memberManagementList = service.getMemberManagementList(pageNum, listLimit);
 		
+		MemberBean bean = new MemberBean();
+		bean = service.getStatusCount();
 		
 		int maxPage = (int)Math.ceil((double)listCount / listLimit);
 		int startPage = ((int)((double)pageNum / pageLimit + 0.9) - 1) * pageLimit + 1;
@@ -44,9 +45,9 @@ public class MemberManagementListAction implements Action {
 		}
 		
 		PageInfo pageInfo = new PageInfo(pageNum, maxPage, startPage, endPage, listCount);
-
-
+		
 		request.setAttribute("pageInfo", pageInfo); // 페이징 처리 정보 객체
+		request.setAttribute("bean", bean);
 		request.setAttribute("memberManagementList", memberManagementList); // 게시물 목록 객체
 		
 		forward = new ActionForward();

@@ -6,6 +6,7 @@ import java.sql.Connection;
 import java.util.ArrayList;
 
 import dao.AdminDAO;
+import dao.MemberDAO;
 import vo.MemberBean;
 
 public class MemberManagementListService {
@@ -30,7 +31,7 @@ public class MemberManagementListService {
 	public ArrayList<MemberBean> getMemberManagementList(int pageNum, int listLimit) {
 		ArrayList<MemberBean> memberManagementList = null;
 		
-		Connection con = getConnection(); 
+		Connection con = getConnection();
 		AdminDAO adminDAO= AdminDAO.getInstance();
 		
 		adminDAO.setConnection(con);
@@ -41,6 +42,21 @@ public class MemberManagementListService {
 		
 		// 7. 조회 결과 리턴
 		return memberManagementList;
+	}
+
+	public MemberBean getStatusCount() {
+		MemberBean bean = null;
+		
+		Connection con = getConnection();
+		MemberDAO dao = MemberDAO.getInstance();
+		
+		dao.setConnection(con);
+		
+		bean = dao.getMemberStatus();
+		
+		close(con);
+		
+		return bean;
 	}
 
 }
