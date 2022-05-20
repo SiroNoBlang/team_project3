@@ -109,7 +109,7 @@ String nickname = (String)session.getAttribute("sNickname");
 							</li>
 
 							<li>
-								<a href="about.html">About</a>
+								<a href="CommunityNotice.ma">About</a>
 							</li>
 
 							<li>
@@ -213,7 +213,7 @@ String nickname = (String)session.getAttribute("sNickname");
 				</li>
 
 				<li>
-					<a href="about.html">About</a>
+					<a href="CommunityNotice.ma">About</a>
 				</li>
 
 				<li>

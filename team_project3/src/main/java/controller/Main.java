@@ -65,6 +65,9 @@ public class Main extends HttpServlet {
 			} catch (Exception e) {
 				
 			}
+		} else if(command.equals("/CommunityNotice.ma")) {
+			forward = new ActionForward("MainPage/community/communityNotice.jsp", false);
+			
 		}
 		
 		
