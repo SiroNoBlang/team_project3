@@ -13,7 +13,7 @@ public class JoinProAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		System.out.println("JoinProAction");
+//		System.out.println("JoinProAction");
 		ActionForward forward = null;
 		
 		
@@ -31,7 +31,7 @@ public class JoinProAction implements Action {
 		memberBean.setAgreement_name(request.getParameter("agree1"));
 		memberBean.setAgreement_content(request.getParameter("agreement_content"));
 		
-		System.out.println(memberBean);
+//		System.out.println(memberBean);
 		
 		JoinProService service = new JoinProService();
 		boolean isJoinsuccess = service.joinSuccess(memberBean);
