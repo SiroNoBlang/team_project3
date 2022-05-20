@@ -1,34 +1,92 @@
+<%@page import="vo.MemberBean"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+String code = (String)session.getAttribute("sCode");
+String nickname = (String)session.getAttribute("sNickname");
+MemberBean member = (MemberBean)request.getAttribute("memberDetail");
+%>     
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>About</title>
+	<title>Mypage</title>
+	<script type="text/javascript">
+	function confirmLogout() {
+	if(confirm("로그아웃 할꺼임?")) {
+		location.href = "./Logout.ma";
+		}
+	} 
+	function findAddr(){ //주소 찾기
+		new daum.Postcode({
+	        oncomplete: function(data) {
+	        	
+	        	console.log(data);
+	        	
+	            var roadAddr = data.roadAddress; // 도로명 주소 변수
+	            var jibunAddr = data.jibunAddress; // 지번 주소 변수
+	            // 우편번호와 주소 정보를 해당 필드에 넣는다.
+	            document.getElementById('member_info_post_code').value = data.zonecode;
+	            if(roadAddr !== ''){
+	                document.getElementById("member_info_address").value = roadAddr;
+	            } 
+	            else if(jibunAddr !== ''){
+	                document.getElementById("member_info_address_detail").value = jibunAddr;
+	            }
+	        }
+	    }).open();
+	}
+
+	function findAddr1(){ //배송지 주소 찾기
+		new daum.Postcode({
+	        oncomplete: function(data) {
+	        	
+	        	console.log(data);
+	        	
+	            var roadAddr = data.roadAddress; // 도로명 주소 변수
+	            var jibunAddr = data.jibunAddress; // 지번 주소 변수
+	            // 우편번호와 주소 정보를 해당 필드에 넣는다.
+	            document.getElementById('member_info_ship_post_code').value = data.zonecode;
+	            if(roadAddr !== ''){
+	                document.getElementById("member_info_ship_address").value = roadAddr;
+	            } 
+	            else if(jibunAddr !== ''){
+	                document.getElementById("member_info_ship_address_detail").value = jibunAddr;
+	            }
+	        }
+	    }).open();
+	}
+
+	function delImg() {  //이미지 삭제
+		$('#image_section').removeAttr('src');
+	// 	$('#image_section').attr('src', '')
+	}
+</script>
+	
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 <!--===============================================================================================-->	
-	<link rel="icon" type="image/png" href="images/icons/favicon.png"/>
+	<link rel="icon" type="image/png" href="MainPage/images/icons/favicon.png"/>
 <!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="MainPage/vendor/bootstrap/css/bootstrap.min.css">
 <!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="MainPage/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
 <!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="fonts/iconic/css/material-design-iconic-font.min.css">
+	<link rel="stylesheet" type="text/css" href="MainPage/fonts/iconic/css/material-design-iconic-font.min.css">
 <!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="fonts/linearicons-v1.0.0/icon-font.min.css">
+	<link rel="stylesheet" type="text/css" href="MainPage/fonts/linearicons-v1.0.0/icon-font.min.css">
 <!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="vendor/animate/animate.css">
+	<link rel="stylesheet" type="text/css" href="MainPage/vendor/animate/animate.css">
 <!--===============================================================================================-->	
-	<link rel="stylesheet" type="text/css" href="vendor/css-hamburgers/hamburgers.min.css">
+	<link rel="stylesheet" type="text/css" href="MainPage/vendor/css-hamburgers/hamburgers.min.css">
 <!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="vendor/animsition/css/animsition.min.css">
+	<link rel="stylesheet" type="text/css" href="MainPage/vendor/animsition/css/animsition.min.css">
 <!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="vendor/select2/select2.min.css">
+	<link rel="stylesheet" type="text/css" href="MainPage/vendor/select2/select2.min.css">
 <!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="vendor/perfect-scrollbar/perfect-scrollbar.css">
+	<link rel="stylesheet" type="text/css" href="MainPage/vendor/perfect-scrollbar/perfect-scrollbar.css">
 <!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="css/util.css">
-	<link rel="stylesheet" type="text/css" href="css/main.css">
+	<link rel="stylesheet" type="text/css" href="MainPage/css/util.css">
+	<link rel="stylesheet" type="text/css" href="MainPage/css/main.css">
 <!--===============================================================================================-->
 </head>
 <body class="animsition">
@@ -37,8 +95,8 @@
 	<header class="header-v4">
 		<!-- Header desktop -->
 		<div class="container-menu-desktop">
-			<!-- Topbar -->
-			<div class="top-bar">
+						<!-- Topbar -->
+ 			<div class="top-bar">
 				<div class="content-topbar flex-sb-m h-full container">
 					<div class="left-top-bar">
 						Free shipping for standard order over $100
@@ -49,16 +107,11 @@
 							Help & FAQs
 						</a>
 
-						<a href="#" class="flex-c-m trans-04 p-lr-25">
-							My Account
+						<a href="Mypage.ma?member_code=<%=code %>"   class="flex-c-m trans-04 p-lr-25">
+							<%=nickname %>님 마이페이지
 						</a>
-
-						<a href="#" class="flex-c-m trans-04 p-lr-25">
-							EN
-						</a>
-
-						<a href="#" class="flex-c-m trans-04 p-lr-25">
-							USD
+						<a href="javascript:void(0)" onclick="confirmLogout()" class="flex-c-m trans-04 p-lr-25">
+							로그아웃
 						</a>
 					</div>
 				</div>
@@ -69,7 +122,7 @@
 					
 					<!-- Logo desktop -->		
 					<a href="#" class="logo">
-						<img src="images/icons/logo-01.png" alt="IMG-LOGO">
+						<img src="MainPage/images/icons/logo-01.png" alt="IMG-LOGO">
 					</a>
 
 					<!-- Menu desktop -->
@@ -128,7 +181,7 @@
 		<div class="wrap-header-mobile">
 			<!-- Logo moblie -->		
 			<div class="logo-mobile">
-				<a href="index.jsp"><img src="images/icons/logo-01.png" alt="IMG-LOGO"></a>
+				<a href="index.jsp"><img src="MainPage/images/icons/logo-01.png" alt="IMG-LOGO"></a>
 			</div>
 
 			<!-- Icon header -->
@@ -224,7 +277,7 @@
 		<div class="modal-search-header flex-c-m trans-04 js-hide-modal-search">
 			<div class="container-search-header">
 				<button class="flex-c-m btn-hide-modal-search trans-04 js-hide-modal-search">
-					<img src="images/icons/icon-close2.png" alt="CLOSE">
+					<img src="MainPage/images/icons/icon-close2.png" alt="CLOSE">
 				</button>
 
 				<form class="wrap-search-header flex-w p-l-15">
@@ -256,7 +309,7 @@
 				<ul class="header-cart-wrapitem w-full">
 					<li class="header-cart-item flex-w flex-t m-b-12">
 						<div class="header-cart-item-img">
-							<img src="images/item-cart-01.jpg" alt="IMG">
+							<img src="MainPage/images/item-cart-01.jpg" alt="IMG">
 						</div>
 
 						<div class="header-cart-item-txt p-t-8">
@@ -272,7 +325,7 @@
 
 					<li class="header-cart-item flex-w flex-t m-b-12">
 						<div class="header-cart-item-img">
-							<img src="images/item-cart-02.jpg" alt="IMG">
+							<img src="MainPage/images/item-cart-02.jpg" alt="IMG">
 						</div>
 
 						<div class="header-cart-item-txt p-t-8">
@@ -288,7 +341,7 @@
 
 					<li class="header-cart-item flex-w flex-t m-b-12">
 						<div class="header-cart-item-img">
-							<img src="images/item-cart-03.jpg" alt="IMG">
+							<img src="MainPage/images/item-cart-03.jpg" alt="IMG">
 						</div>
 
 						<div class="header-cart-item-txt p-t-8">
@@ -324,9 +377,9 @@
 
 
 	<!-- Title page -->
-	<section class="bg-img1 txt-center p-lr-15 p-tb-92" style="background-image: url('images/bg-01.jpg');">
+	<section class="bg-img1 txt-center p-lr-15 p-tb-92" style="background-image: url('MainPage/images/bg-01.jpg');">
 		<h2 class="ltext-105 cl0 txt-center">
-			About
+			MyPage
 		</h2>
 	</section>	
 
@@ -336,66 +389,235 @@
 		<div class="container">
 			<div class="row p-b-148">
 				<div class="col-md-7 col-lg-8">
-					<div class="p-t-7 p-r-85 p-r-15-lg p-r-0-md">
-						<h3 class="mtext-111 cl2 p-b-16">
-							Our Story
-						</h3>
-
-						<p class="stext-113 cl6 p-b-26">
-							Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris consequat consequat enim, non auctor massa ultrices non. Morbi sed odio massa. Quisque at vehicula tellus, sed tincidunt augue. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Maecenas varius egestas diam, eu sodales metus scelerisque congue. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Maecenas gravida justo eu arcu egestas convallis. Nullam eu erat bibendum, tempus ipsum eget, dictum enim. Donec non neque ut enim dapibus tincidunt vitae nec augue. Suspendisse potenti. Proin ut est diam. Donec condimentum euismod tortor, eget facilisis diam faucibus et. Morbi a tempor elit.
-						</p>
-
-						<p class="stext-113 cl6 p-b-26">
-							Donec gravida lorem elit, quis condimentum ex semper sit amet. Fusce eget ligula magna. Aliquam aliquam imperdiet sodales. Ut fringilla turpis in vehicula vehicula. Pellentesque congue ac orci ut gravida. Aliquam erat volutpat. Donec iaculis lectus a arcu facilisis, eu sodales lectus sagittis. Etiam pellentesque, magna vel dictum rutrum, neque justo eleifend elit, vel tincidunt erat arcu ut sem. Sed rutrum, turpis ut commodo efficitur, quam velit convallis ipsum, et maximus enim ligula ac ligula. 
-						</p>
-
-						<p class="stext-113 cl6 p-b-26">
-							Any questions? Let us know in store at 8th floor, 379 Hudson St, New York, NY 10018 or call us on (+1) 96 716 6879
-						</p>
-					</div>
 				</div>
-
+					<form action="Modify_Member.ma" method="post">
+		<table border="1">
+<!-- 			<tr> -->
+<!-- 				<td colspan="2" width="300" height="300"><img src="testimg/1.JPG"></td> -->
+<!-- 			</tr>	 -->
+<!-- 			<tr> -->
+<!-- 				<td><label for="mypage_file">파일 첨부</label></td> -->
+<!-- 				<td><input type="file" name="mypage_file"/></td> -->
+<!-- 			</tr>	 -->
+<!-- 			<tr>  -->
+<!-- 				<th>member_info_grade_code(사라질)</th> -->
+<%-- 				<td><input type="text" name="member_info_grade_code" id="member_info_grade_code" value="<%=member.getMember_info_grade_code()%>" readonly="readonly"></td> --%>
+<!-- 			</tr> -->
+<!-- 			<tr>  -->
+<!-- 				<th>grade_code(사라질)</th> -->
+<%-- 				<td><input type="text" name="grade_code" id="grade_code" value="<%=member.getGrade_code()%>" readonly="readonly"></td> --%>
+<!-- 			</tr> -->
+			<tr> 
+				<th>grade_name(사라질)</th>
+				<td><input type="text" name="grade_name" id="grade_name" value="<%=member.getGrade_name() %>" readonly="readonly"></td>
+			</tr>
+			<tr> 
+				<th>멤버코드(사라질예정)</th>
+				<td><input type="text" name="member_code" id="member_code" value="<%=member.getMember_code() %>" readonly="readonly"></td>
+			</tr>
+<!-- 			<tr>  -->
+<!-- 				<th>멤버넘버(사라질예정)</th> -->
+<%-- 				<td><input type="text" name="member_num" id="member_num" value="<%=member.getMember_num() %>" readonly="readonly"></td> --%>
+<!-- 			</tr> -->
+<!-- 			<tr>  -->
+<!-- 				<th>멤버인포코드(사라질예정)</th> -->
+<%-- 				<td><input type="text" name="member_info_code" id="member_info_code" value="<%=code %>" readonly="readonly"></td> --%>
+<!-- 			</tr> -->
+<!-- 			<tr>  -->
+<!-- 				<th>멤버인포디테일코드(사라질예정)</th> -->
+<%-- 				<td><input type="text" name="member_info_detail_code" id="member_info_detail_code" value="<%=member.getMember_info_detail_code() %>" readonly="readonly"></td> --%>
+<!-- 			</tr> -->
+<!-- 			<tr>  -->
+<!-- 				<th>멤버서비스로그코드(사라질예정)</th> -->
+<%-- 				<td><input type="text" name="member_service_log_code" id="member_service_log_code" value="<%=member.getMember_service_log_code() %>" readonly="readonly"></td> --%>
+<!-- 			</tr> -->
+			<tr> 
+				<th>닉네임</th>
+				<td><input type="text" name="member_nickname" id="member_nickname" value="<%=nickname %>" readonly="readonly"></td>
+			</tr>
+			<tr> 
+				<th>아이디</th>
+				<td><input type="text" name="member_id" id="member_id" value="<%=member.getMember_id() %>" readonly="readonly"></td>
+			</tr>
+			<tr> 
+				<th>패스워드</th>
+				<td><input type="password" name="member_passwd" id="member_passwd">
+					<input type="button" value="패스워드 수정" onclick="">
+				</td>
+			</tr>
+			<tr> 
+				<th>이메일1</th>
+				<td><input type="text" name="member_email1" id="member_email1" value="<%=member.getMember_email() %>"></td>
+			</tr>
+			<tr> 
+				<th>이메일2 나중에 잘라서 수정예정</th>
+				<td><select id="member_email2" name="member_email2">
+<!-- 						<option value="@gmail.com">@gmail.com</option> -->
+<!-- 						<option value="@naver.com">@naver.com</option> -->
+<!-- 						<option value="@nate.com">@nate.com</option> -->
+<!-- 						<option value="@hanmail.net">@hanmail.net</option> -->
+<!-- 						<option value="@daum.net">@daum.net</option> -->
+<!-- 						<option value="@yahoo.com">@yahoo.com</option> -->
+						<option value="@gmail.com" <%if(member.getMember_email().equals("@gmail.com")) {%>selected="selected"<%} %>>
+						gmail.com
+						</option>
+						<option value="@naver.com" <%if(member.getMember_email().equals("@naver.com")) {%>selected="selected"<%} %>>
+						naver.com
+						</option>
+						<option value="@nate.com" <%if(member.getMember_email().equals("@nate.com")) {%>selected="selected"<%} %>>
+						nate.com
+						</option>
+						<option value="@hanmail.net" <%if(member.getMember_email().equals("@hanmail.net")) {%>selected="selected"<%} %>>
+						hanmail.net
+						</option>
+						<option value="@daum.net" <%if(member.getMember_email().equals("@daum.net")) {%>selected="selected"<%} %>>
+						daum.net
+						</option>
+						<option value="@yahoo.com" <%if(member.getMember_email().equals("@yahoo.com")) {%>selected="selected"<%} %>>
+						yahoo.com
+						</option>
+				</select></td>
+			</tr>
+			<tr> 
+				<th>이름</th>
+				<td><input type="text" name="member_info_name" id="member_info_name" value="<%=member.getMember_info_name() %>" ></td>
+			</tr>
+			<tr> 
+				<th>성별</th>
+				<td><select id="member_info_gender" name="member_info_gender">
+<!-- 							<option value="male">남자</option>  -->
+<!-- 							<option value="female">여자</option> -->
+						<option value="male" <%if(member.getMember_info_gender().equals("male")) {%>selected="selected"<%} %>>남자</option>
+						<option value="female" <%if(member.getMember_info_gender().equals("female")) {%>selected="selected"<%} %>>여자</option>
+				</select></td>
+			</tr>
+			<tr> 
+				<th>전화번호</th>
+				<td><input type="text" name="member_info_phone" id="member_info_phone" value="<%=member.getMember_info_phone() %>" ></td>
+			</tr>
+			<tr> 
+				<th>나이대</th>
+				<td><select id="member_info_age" name="member_info_age">
+						<option value="19세이하" <%if(member.getMember_info_age().equals("19세이하")) {%>selected="selected"<%} %>>19세이하</option>
+						<option value="20~29" <%if(member.getMember_info_age().equals("20~29")) {%>selected="selected"<%} %>>20~29</option>
+						<option value="30~39" <%if(member.getMember_info_age().equals("30~39")) {%>selected="selected"<%} %>>30~39</option>
+						<option value="40~49" <%if(member.getMember_info_age().equals("40~49")) {%>selected="selected"<%} %>>40~49</option>
+						<option value="50~59" <%if(member.getMember_info_age().equals("50~59")) {%>selected="selected"<%} %>>50~59</option>
+						<option value="60~69" <%if(member.getMember_info_age().equals("60~69")) {%>selected="selected"<%} %>>60~69</option>
+						<option value="70대이상" <%if(member.getMember_info_age().equals("70대이상")) {%>selected="selected"<%} %>>70세이상</option>
+				</select></td>
+			</tr>
+			<tr> 
+				<th>가입날짜</th>
+				<td><input type="text" name="member_service_log_join_date" id="member_service_log_join_date" value="<%=member.getMember_service_log_join_date() %>" readonly="readonly"></td>
+			</tr>
+			<tr> 
+				<th>패스워드 수정날짜</th>
+				<td><input type="text" name="member_service_log_passwd_change_date" id="member_service_log_passwd_change_date" value="<%=member.getMember_service_log_passwd_change_date() %>" readonly="readonly"></td>
+			</tr>
+			<tr> 
+				<th>우편번호</th>
+				<td><input type="text" name="member_info_post_code" id="member_info_post_code" value="<%=member.getMember_info_post_code() %>" readonly="readonly">
+					<input type="button" onclick="findAddr()" value="우편번호 찾기">
+				</td>
+			</tr>
+			<tr> 
+				<th>주소</th>
+				<td><input type="text" name="member_info_address" id="member_info_address" value="<%=member.getMember_info_address() %>" readonly="readonly"></td>
+			</tr>
+			<tr> 
+				<th>상세주소</th>
+				<td><input type="text" name="member_info_address_detail" id="member_info_address_detail" value="<%=member.getMember_info_address_detail() %>" ></td>
+			</tr>
+			<tr> 
+				<th>배송지우편번호</th>
+				<td><input type="text" name="member_info_ship_post_code" id="member_info_ship_post_code" value="<%=member.getMember_info_ship_post_code() %>" readonly="readonly">
+					<input type="button" onclick="findAddr1()" value="우편번호 찾기">
+				</td>
+			</tr>
+			<tr> 
+				<th>배송지주소</th>
+				<td><input type="text" name="member_info_ship_address" id="member_info_ship_address" value="<%=member.getMember_info_ship_address() %>" readonly="readonly"></td>
+			</tr>
+			<tr> 
+				<th>배송지상세주소</th>
+				<td><input type="text" name="member_info_ship_address_detail" id="member_info_ship_address_detail" value="<%=member.getMember_info_ship_address_detail() %>" ></td>
+			</tr>
+			<tr> 
+				<th>누적금액</th>
+				<td><input type="text" name="member_info_detail_acc_money" id="member_info_detail_acc_money" value="<%=member.getMember_info_detail_acc_money() %>" readonly="readonly"></td>
+			</tr>
+			<tr> 
+				<th>스타일</th>
+				<td><select id="member_info_detail_like_style" name="member_info_detail_like_style">
+						<option value="귀여움" <%if(member.getMember_info_detail_like_style().equals("귀여움")) {%>selected="selected"<%} %>>귀여움</option>
+						<option value="섹시함" <%if(member.getMember_info_detail_like_style().equals("섹시함")) {%>selected="selected"<%} %>>섹시함</option>
+				</select></td>
+			</tr>
+			<tr> 
+				<th>브랜드</th>
+				<td><select id="member_info_detail_like_brand" name="member_info_detail_like_brand">
+						<option value="나이키" <%if(member.getMember_info_detail_like_brand().equals("나이키")) {%>selected="selected"<%} %>>나이키</option>
+						<option value="에르메스" <%if(member.getMember_info_detail_like_brand().equals("에르메스")) {%>selected="selected"<%} %>>에르메스</option>
+				</select></td>
+			</tr>
+			<tr> 
+				<th>관심품목</th>
+				<td><select id="member_info_detail_like_category" name="member_info_detail_like_category">
+						<option value="상의" <%if(member.getMember_info_detail_like_category().equals("상의")) {%>selected="selected"<%} %>>상의</option>
+						<option value="하의" <%if(member.getMember_info_detail_like_category().equals("하의")) {%>selected="selected"<%} %>>하의</option>
+				</select></td>
+			</tr>
+			<tr> 
+				<th>누적 포인트</th>
+				<td><input type="text" name="member_info_detail_point"  id="member_info_detail_point" value="<%=member.getMember_info_detail_point() %>"  readonly="readonly"></td>
+			</tr>
+			<tr> 
+				<th>회원 상태(정상,정지,탈퇴)</th>
+				<td><input type="text" name="member_service_log_status"  id="member_service_log_status" value="<%=member.getMember_service_log_status() %>"  readonly="readonly"></td>
+			</tr>
+			<tr> 
+				<th>회원가입 날짜</th>
+				<td><input type="text" name="member_service_log_join_date"  id="member_service_log_join_date" value="<%=member.getMember_service_log_join_date() %>"  readonly="readonly"></td>
+			</tr>
+			<tr> 
+				<th>비밀번호변경 날짜</th>
+				<td><input type="text" name="member_service_log_passwd_change_date"  id="member_service_log_passwd_change_date" value="<%=member.getMember_service_log_passwd_change_date() %>"  readonly="readonly"></td>
+			</tr>
+			<tr> 
+				<th>등급변화 날짜</th>
+				<td><input type="text" name="member_service_log_grade_change_date"  id="member_service_log_grade_change_date" value="<%=member.getMember_service_log_grade_change_date() %>"  readonly="readonly"></td>
+			</tr>
+			<tr> 
+				<th>로그인 날짜</th>
+				<td><input type="text" name="member_service_log_login_date"  id="member_service_log_login_date" value="<%=member.getMember_service_log_login_date() %>"  readonly="readonly"></td>
+			</tr>
+			<tr> 
+				<th>구매횟수</th>
+				<td><input type="text" name="member_service_log_order_count"  id="member_service_log_order_count" value="<%=member.getMember_service_log_order_count() %>"  readonly="readonly"></td>
+			</tr>
+			<tr> 
+				<td colspan="2">
+					<input type="submit" value="수정">
+					<input type="button" value="회원탈퇴" onclick="">
+				 </td> 
+			</tr>
+			
+		</table>
+	
+	</form>
 				<div class="col-11 col-md-5 col-lg-4 m-lr-auto">
-					<div class="how-bor1 ">
-						<div class="hov-img0">
-							<img src="images/about-01.jpg" alt="IMG">
-						</div>
-					</div>
 				</div>
 			</div>
 			
 			<div class="row">
 				<div class="order-md-2 col-md-7 col-lg-8 p-b-30">
-					<div class="p-t-7 p-l-85 p-l-15-lg p-l-0-md">
-						<h3 class="mtext-111 cl2 p-b-16">
-							Our Mission
-						</h3>
-
-						<p class="stext-113 cl6 p-b-26">
-							Mauris non lacinia magna. Sed nec lobortis dolor. Vestibulum rhoncus dignissim risus, sed consectetur erat. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nullam maximus mauris sit amet odio convallis, in pharetra magna gravida. Praesent sed nunc fermentum mi molestie tempor. Morbi vitae viverra odio. Pellentesque ac velit egestas, luctus arcu non, laoreet mauris. Sed in ipsum tempor, consequat odio in, porttitor ante. Ut mauris ligula, volutpat in sodales in, porta non odio. Pellentesque tempor urna vitae mi vestibulum, nec venenatis nulla lobortis. Proin at gravida ante. Mauris auctor purus at lacus maximus euismod. Pellentesque vulputate massa ut nisl hendrerit, eget elementum libero iaculis.
-						</p>
-
-						<div class="bor16 p-l-29 p-b-9 m-t-22">
-							<p class="stext-114 cl6 p-r-40 p-b-11">
-								Creativity is just connecting things. When you ask creative people how they did something, they feel a little guilty because they didn't really do it, they just saw something. It seemed obvious to them after a while.
-							</p>
-
-							<span class="stext-111 cl8">
-								- Steve Job’s 
-							</span>
-						</div>
 					</div>
 				</div>
 
-				<div class="order-md-1 col-11 col-md-5 col-lg-4 m-lr-auto p-b-30">
-					<div class="how-bor2">
-						<div class="hov-img0">
-							<img src="images/about-02.jpg" alt="IMG">
-						</div>
-					</div>
+				
 				</div>
-			</div>
-		</div>
+			
 	</section>	
 	
 		
@@ -515,23 +737,23 @@
 			<div class="p-t-40">
 				<div class="flex-c-m flex-w p-b-18">
 					<a href="#" class="m-all-1">
-						<img src="images/icons/icon-pay-01.png" alt="ICON-PAY">
+						<img src="MainPage/images/icons/icon-pay-01.png" alt="ICON-PAY">
 					</a>
 
 					<a href="#" class="m-all-1">
-						<img src="images/icons/icon-pay-02.png" alt="ICON-PAY">
+						<img src="MainPage/images/icons/icon-pay-02.png" alt="ICON-PAY">
 					</a>
 
 					<a href="#" class="m-all-1">
-						<img src="images/icons/icon-pay-03.png" alt="ICON-PAY">
+						<img src="MainPage/images/icons/icon-pay-03.png" alt="ICON-PAY">
 					</a>
 
 					<a href="#" class="m-all-1">
-						<img src="images/icons/icon-pay-04.png" alt="ICON-PAY">
+						<img src="MainPage/images/icons/icon-pay-04.png" alt="ICON-PAY">
 					</a>
 
 					<a href="#" class="m-all-1">
-						<img src="images/icons/icon-pay-05.png" alt="ICON-PAY">
+						<img src="MainPage/images/icons/icon-pay-05.png" alt="ICON-PAY">
 					</a>
 				</div>
 
@@ -554,14 +776,14 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 	</div>
 
 <!--===============================================================================================-->	
-	<script src="vendor/jquery/jquery-3.2.1.min.js"></script>
+	<script src="MainPage/vendor/jquery/jquery-3.2.1.min.js"></script>
 <!--===============================================================================================-->
-	<script src="vendor/animsition/js/animsition.min.js"></script>
+	<script src="MainPage/vendor/animsition/js/animsition.min.js"></script>
 <!--===============================================================================================-->
-	<script src="vendor/bootstrap/js/popper.js"></script>
-	<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+	<script src="MainPage/vendor/bootstrap/js/popper.js"></script>
+	<script src="MainPage/vendor/bootstrap/js/bootstrap.min.js"></script>
 <!--===============================================================================================-->
-	<script src="vendor/select2/select2.min.js"></script>
+	<script src="MainPage/vendor/select2/select2.min.js"></script>
 	<script>
 		$(".js-select2").each(function(){
 			$(this).select2({
@@ -571,9 +793,9 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 		})
 	</script>
 <!--===============================================================================================-->
-	<script src="vendor/MagnificPopup/jquery.magnific-popup.min.js"></script>
+	<script src="MainPage/vendor/MagnificPopup/jquery.magnific-popup.min.js"></script>
 <!--===============================================================================================-->
-	<script src="vendor/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+	<script src="MainPage/vendor/perfect-scrollbar/perfect-scrollbar.min.js"></script>
 	<script>
 		$('.js-pscroll').each(function(){
 			$(this).css('position','relative');
@@ -590,7 +812,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 		});
 	</script>
 <!--===============================================================================================-->
-	<script src="js/main.js"></script>
+	<script src="MainPage/js/main.js"></script>
 	
 </body>
 </html>
