@@ -30,10 +30,9 @@ public class EventListAction implements Action {
 		
 		//이벤트 총 게시물 수 조회
 		EventListService service = new EventListService();
-		String tableName = "admin_event";
+		String tableName = "event";
 		
 		int listCount = service.getListCount(tableName);
-		
 		
 		//게시물 목록 담아오기 
 		ArrayList<EventBean> eventList = service.getEventleList(pageNum, listLimit);

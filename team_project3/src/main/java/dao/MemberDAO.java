@@ -86,7 +86,7 @@ public class MemberDAO {
 		ResultSet rs = null;
 		
 		try {
-			String sql = "SELECT a.member_code, c.grade_name, a.member_nickname FROM member AS a JOIN  member_info AS b ON a.member_code=b.member_info_code JOIN grade AS c ON b.member_info_grade_code=c.grade_code WHERE a.member_id=? AND a.member_passwd=?"; 
+			String sql = "SELECT a.member_code, c.grade_name, a.member_nickname FROM member AS a JOIN  member_info_detail AS b ON a.member_code=b.member_info_detail_code JOIN grade AS c ON b.member_info_detail_acc_money BETWEEN c.lowest_acc_money AND c.highest_acc_money WHERE a.member_id=? AND a.member_passwd=?"; 
 			
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, member_id);

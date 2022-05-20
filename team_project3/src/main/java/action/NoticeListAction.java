@@ -30,7 +30,7 @@ public class NoticeListAction implements Action {
 		
 		//공지사항 총 게시물 수 조회
 		NoticeListService service = new NoticeListService();
-		String tableName = "admin_notice";
+		String tableName = "notice";
 		
 		int listCount = service.getListCount(tableName);
 		

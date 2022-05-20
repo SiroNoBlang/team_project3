@@ -43,7 +43,7 @@ public class AdminDAO {
 		int num = 1;
 
 		try {
-			String sql = "SELECT MAX(admin_notice_num) FROM admin_notice";
+			String sql = "SELECT MAX(notice_num) FROM notice";
 			pstmt = con.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 
@@ -53,7 +53,7 @@ public class AdminDAO {
 			}
 			close(pstmt);
 
-			sql = "INSERT INTO admin_notice VALUES (?,?,REPLACE(now(),'-',''),?,?,?)";
+			sql = "INSERT INTO notice VALUES (?,?,REPLACE(now(),'-',''),?,?,?)";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, num);
 			pstmt.setString(2, notice.getAdmin_notice_nickname());
@@ -66,7 +66,7 @@ public class AdminDAO {
 			
 			if(!noticeImgList.isEmpty()) {
 				for(NoticeImgFileBean noticeImg: noticeImgList) {
-					sql = "INSERT INTO notice_img_file VALUES ((SELECT MAX(admin_notice_num) FROM admin_notice),?,?)"; 
+					sql = "INSERT INTO notice_img_file VALUES ((SELECT MAX(notice_num) FROM notice),?,?)"; 
 					pstmt = con.prepareStatement(sql); 
 					
 					pstmt.setString(1,noticeImg.getNotice_img_file_name()); 
@@ -99,7 +99,7 @@ public class AdminDAO {
 		int num = 1;
 
 		try {
-			String sql = "SELECT MAX(admin_event_num) FROM admin_event";
+			String sql = "SELECT MAX(event_num) FROM event";
 			pstmt = con.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 
@@ -109,7 +109,7 @@ public class AdminDAO {
 			}
 			close(pstmt);
 
-			sql = "INSERT INTO admin_event VALUES (?,?,REPLACE(now(),'-',''),?,?,?)";
+			sql = "INSERT INTO event VALUES (?,?,REPLACE(now(),'-',''),?,?,?)";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, num);
 			pstmt.setString(2, event.getAdmin_event_nickname());
@@ -122,7 +122,7 @@ public class AdminDAO {
 			
 			if(!eventImgList.isEmpty()) {
 				for(EventImgFileBean eventImg: eventImgList) {
-					sql = "INSERT INTO event_img_file VALUES ((SELECT MAX(admin_event_num) FROM admin_event),?,?)"; 
+					sql = "INSERT INTO event_img_file VALUES ((SELECT MAX(event_num) FROM event),?,?)"; 
 					
 					pstmt = con.prepareStatement(sql); 
 					pstmt.setString(1,eventImg.getEvent_img_file_name()); 
@@ -181,7 +181,7 @@ public class AdminDAO {
 		int startRow = (pageNum - 1) * listLimit;
 		
 		try {
-			String sql = "SELECT * FROM admin_notice ORDER BY admin_notice_num DESC LIMIT ?,?";
+			String sql = "SELECT * FROM notice ORDER BY notice_num DESC LIMIT ?,?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, startRow);
 			pstmt.setInt(2, listLimit);
@@ -193,12 +193,12 @@ public class AdminDAO {
 			while(rs.next()) {
 				
 				NoticeBean notice = new NoticeBean();
-				notice.setAdmin_notice_num(rs.getInt("admin_notice_num"));
-				notice.setAdmin_notice_nickname(rs.getString("admin_notice_nickname"));
-				notice.setAdmin_notice_write_date(rs.getString("admin_notice_write_date").substring(0,8));
-				notice.setAdmin_notice_title(rs.getString("admin_notice_title"));
-				notice.setAdmin_notice_content(rs.getString("admin_notice_content"));
-				notice.setAdmin_notice_readcount(rs.getInt("admin_notice_readcount"));
+				notice.setAdmin_notice_num(rs.getInt("notice_num"));
+				notice.setAdmin_notice_nickname(rs.getString("notice_nickname"));
+				notice.setAdmin_notice_write_date(rs.getString("notice_write_date").substring(0,8));
+				notice.setAdmin_notice_title(rs.getString("notice_title"));
+				notice.setAdmin_notice_content(rs.getString("notice_content"));
+				notice.setAdmin_notice_readcount(rs.getInt("notice_readcount"));
 				
 				
 				
@@ -225,19 +225,19 @@ public class AdminDAO {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		try {
-			String sql = "SELECT * FROM admin_notice WHERE admin_notice_num=?";
+			String sql = "SELECT * FROM notice WHERE admin_notice_num=?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, admin_notice_num);
 			rs = pstmt.executeQuery();
 			
 			if(rs.next()) {
 				noticeArticle = new NoticeBean();
-				noticeArticle.setAdmin_notice_num(rs.getInt("admin_notice_num"));
-				noticeArticle.setAdmin_notice_nickname(rs.getString("admin_notice_nickname"));
-				noticeArticle.setAdmin_notice_write_date(rs.getString("admin_notice_write_date").substring(0,8));
-				noticeArticle.setAdmin_notice_title(rs.getString("admin_notice_title"));
-				noticeArticle.setAdmin_notice_content(rs.getString("admin_notice_content"));
-				noticeArticle.setAdmin_notice_readcount(rs.getInt("admin_notice_readcount"));
+				noticeArticle.setAdmin_notice_num(rs.getInt("notice_num"));
+				noticeArticle.setAdmin_notice_nickname(rs.getString("notice_nickname"));
+				noticeArticle.setAdmin_notice_write_date(rs.getString("notice_write_date").substring(0,8));
+				noticeArticle.setAdmin_notice_title(rs.getString("notice_title"));
+				noticeArticle.setAdmin_notice_content(rs.getString("notice_content"));
+				noticeArticle.setAdmin_notice_readcount(rs.getInt("notice_readcount"));
 			}
 			
 		} catch (SQLException e) {
@@ -258,7 +258,7 @@ public class AdminDAO {
 		PreparedStatement pstmt = null;
 		
 		try {
-			String sql = "UPDATE admin_notice SET admin_notice_readcount=admin_notice_readcount+1 WHERE admin_notice_num=?";
+			String sql = "UPDATE notice SET notice_readcount=notice_readcount+1 WHERE notice_num=?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, admin_notice_num);
 			pstmt.executeUpdate();
@@ -280,7 +280,7 @@ public class AdminDAO {
 		
 		try {
 			
-			String sql ="SELECT f.notice_img_file_name, f.notice_img_file_real_name, admin_notice_num FROM admin_notice JOIN notice_img_file f ON f.notice_img_file_num = admin_notice_num WHERE notice_img_file_num = ?";
+			String sql ="SELECT f.notice_img_file_name, f.notice_img_file_real_name, notice_num FROM notice JOIN notice_img_file f ON f.notice_img_file_num = notice_num WHERE notice_img_file_num = ?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, admin_notice_num);
 			rs = pstmt.executeQuery();
@@ -315,7 +315,7 @@ public class AdminDAO {
 		try {
 			con = getConnection();
 			
-			String sql = "SELECT COUNT(admin_notice_num) FROM "+ tableName+ " WHERE " + searchType + " LIKE ?";
+			String sql = "SELECT COUNT(notice_num) FROM "+ tableName+ " WHERE " + searchType + " LIKE ?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, "%" + search + "%");
 			rs = pstmt.executeQuery();
@@ -344,9 +344,9 @@ public class AdminDAO {
 		try {
 			int startRow = (pageNum - 1) * listLimit;
 			
-			String sql = "SELECT * FROM admin_notice "
+			String sql = "SELECT * FROM notice "
 					+ "WHERE " + searchType + " LIKE ? "
-					+ "ORDER BY admin_notice_num DESC LIMIT ?,?";
+					+ "ORDER BY notice_num DESC LIMIT ?,?";
 			
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, "%" + search + "%");
@@ -360,12 +360,12 @@ public class AdminDAO {
 			while(rs.next()) {
 				NoticeBean noticeArticle = new NoticeBean();
 				
-				noticeArticle.setAdmin_notice_num(rs.getInt("admin_notice_num"));
-				noticeArticle.setAdmin_notice_nickname(rs.getString("admin_notice_nickname"));
-				noticeArticle.setAdmin_notice_write_date(rs.getString("admin_notice_write_date").substring(0,8));
-				noticeArticle.setAdmin_notice_title(rs.getString("admin_notice_title"));
-				noticeArticle.setAdmin_notice_content(rs.getString("admin_notice_content"));
-				noticeArticle.setAdmin_notice_readcount(rs.getInt("admin_notice_readcount"));
+				noticeArticle.setAdmin_notice_num(rs.getInt("notice_num"));
+				noticeArticle.setAdmin_notice_nickname(rs.getString("notice_nickname"));
+				noticeArticle.setAdmin_notice_write_date(rs.getString("notice_write_date").substring(0,8));
+				noticeArticle.setAdmin_notice_title(rs.getString("notice_title"));
+				noticeArticle.setAdmin_notice_content(rs.getString("notice_content"));
+				noticeArticle.setAdmin_notice_readcount(rs.getInt("notice_readcount"));
 			
 				noticeSearchList.add(noticeArticle);
 			}
@@ -392,7 +392,7 @@ public class AdminDAO {
 		int startRow = (pageNum - 1) * listLimit;
 		
 		try {
-			String sql = "SELECT * FROM admin_event ORDER BY admin_event_num DESC LIMIT ?,?";
+			String sql = "SELECT * FROM event ORDER BY event_num DESC LIMIT ?,?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, startRow);
 			pstmt.setInt(2, listLimit);
@@ -404,12 +404,12 @@ public class AdminDAO {
 			while(rs.next()) {
 				
 				EventBean event = new EventBean();
-				event.setAdmin_event_num(rs.getInt("admin_event_num"));
-				event.setAdmin_event_nickname(rs.getString("admin_event_nickname"));
-				event.setAdmin_event_write_date(rs.getString("admin_event_write_date").substring(0,8));
-				event.setAdmin_event_title(rs.getString("admin_event_title"));
-				event.setAdmin_event_content(rs.getString("admin_event_content"));
-				event.setAdmin_event_readcount(rs.getInt("admin_event_readcount"));
+				event.setAdmin_event_num(rs.getInt("event_num"));
+				event.setAdmin_event_nickname(rs.getString("event_nickname"));
+				event.setAdmin_event_write_date(rs.getString("event_write_date").substring(0,8));
+				event.setAdmin_event_title(rs.getString("event_title"));
+				event.setAdmin_event_content(rs.getString("event_content"));
+				event.setAdmin_event_readcount(rs.getInt("event_readcount"));
 				
 				eventList.add(event);
 			}
@@ -432,19 +432,19 @@ public class AdminDAO {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		try {
-			String sql = "SELECT * FROM admin_event WHERE admin_event_num=?";
+			String sql = "SELECT * FROM event WHERE event_num=?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, admin_event_num);
 			rs = pstmt.executeQuery();
 			
 			if(rs.next()) {
 				eventArticle = new EventBean();
-				eventArticle.setAdmin_event_num(rs.getInt("admin_event_num"));
-				eventArticle.setAdmin_event_nickname(rs.getString("admin_event_nickname"));
-				eventArticle.setAdmin_event_write_date(rs.getString("admin_event_write_date").substring(0,8));
-				eventArticle.setAdmin_event_title(rs.getString("admin_event_title"));
-				eventArticle.setAdmin_event_content(rs.getString("admin_event_content"));
-				eventArticle.setAdmin_event_readcount(rs.getInt("admin_event_readcount"));
+				eventArticle.setAdmin_event_num(rs.getInt("event_num"));
+				eventArticle.setAdmin_event_nickname(rs.getString("event_nickname"));
+				eventArticle.setAdmin_event_write_date(rs.getString("event_write_date").substring(0,8));
+				eventArticle.setAdmin_event_title(rs.getString("event_title"));
+				eventArticle.setAdmin_event_content(rs.getString("event_content"));
+				eventArticle.setAdmin_event_readcount(rs.getInt("event_readcount"));
 			}
 			
 		} catch (SQLException e) {
@@ -468,7 +468,7 @@ public class AdminDAO {
 		
 		try {
 			
-			String sql ="SELECT f.event_img_file_name, f.event_img_file_real_name, admin_event_num FROM admin_event JOIN event_img_file f ON f.event_img_file_num = admin_event_num WHERE event_img_file_num = ?";
+			String sql ="SELECT f.event_img_file_name, f.event_img_file_real_name, event_num FROM event JOIN event_img_file f ON f.event_img_file_num = event_num WHERE event_img_file_num = ?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, admin_event_num);
 			rs = pstmt.executeQuery();
@@ -497,7 +497,7 @@ public class AdminDAO {
 		PreparedStatement pstmt = null;
 		
 		try {
-			String sql = "UPDATE admin_event SET admin_event_readcount=admin_event_readcount+1 WHERE admin_event_num=?";
+			String sql = "UPDATE event SET event_readcount=event_readcount+1 WHERE event_num=?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, admin_event_num);
 			pstmt.executeUpdate();
@@ -518,7 +518,7 @@ public class AdminDAO {
 		try {
 			con = getConnection();
 			
-			String sql = "SELECT COUNT(admin_event_num) FROM "+ tableName+ " WHERE " + searchType + " LIKE ?";
+			String sql = "SELECT COUNT(event_num) FROM "+ tableName+ " WHERE " + searchType + " LIKE ?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, "%" + search + "%");
 			rs = pstmt.executeQuery();
@@ -547,9 +547,9 @@ public class AdminDAO {
 		try {
 			int startRow = (pageNum - 1) * listLimit;
 			
-			String sql = "SELECT * FROM admin_event "
+			String sql = "SELECT * FROM event "
 					+ "WHERE " + searchType + " LIKE ? "
-					+ "ORDER BY admin_event_num DESC LIMIT ?,?";
+					+ "ORDER BY event_num DESC LIMIT ?,?";
 			
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, "%" + search + "%");
@@ -563,12 +563,12 @@ public class AdminDAO {
 			while(rs.next()) {
 				EventBean eventArticle = new EventBean();
 				
-				eventArticle.setAdmin_event_num(rs.getInt("admin_event_num"));
-				eventArticle.setAdmin_event_nickname(rs.getString("admin_event_nickname"));
-				eventArticle.setAdmin_event_write_date(rs.getString("admin_event_write_date").substring(0,8));
-				eventArticle.setAdmin_event_title(rs.getString("admin_event_title"));
-				eventArticle.setAdmin_event_content(rs.getString("admin_event_content"));
-				eventArticle.setAdmin_event_readcount(rs.getInt("admin_event_readcount"));
+				eventArticle.setAdmin_event_num(rs.getInt("event_num"));
+				eventArticle.setAdmin_event_nickname(rs.getString("event_nickname"));
+				eventArticle.setAdmin_event_write_date(rs.getString("event_write_date").substring(0,8));
+				eventArticle.setAdmin_event_title(rs.getString("event_title"));
+				eventArticle.setAdmin_event_content(rs.getString("event_content"));
+				eventArticle.setAdmin_event_readcount(rs.getInt("event_readcount"));
 			
 				eventSearchList.add(eventArticle);
 			}

@@ -24,7 +24,7 @@ public class EventSearchAction implements Action {
 		String search = request.getParameter("search");
 		String searchType = request.getParameter("searchType");
 		
-		String tableName = "admin_event";
+		String tableName = "event";
 		
 //		System.out.println(search);
 //		System.out.println(searchType);

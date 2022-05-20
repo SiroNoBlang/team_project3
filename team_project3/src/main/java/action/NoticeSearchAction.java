@@ -22,7 +22,7 @@ public class NoticeSearchAction implements Action {
 		String search = request.getParameter("search");
 		String searchType = request.getParameter("searchType");
 		
-		String tableName = "admin_notice";
+		String tableName = "notice";
 		
 //		System.out.println(search);
 //		System.out.println(searchType);
