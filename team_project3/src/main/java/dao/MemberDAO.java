@@ -115,19 +115,47 @@ public class MemberDAO {
 		MemberBean memberDetail = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		
+		System.out.println(member_code);
 		try {
-			String sql = "SELECT a.member_code, a.member_num, a.member_nickname, a.member_id, a.member_passwd, a.member_email, b.member_info_name, b.member_info_gender, b.member_info_phone, b.member_info_age, b.member_info_post_code, b.member_info_address, b.member_info_address_detail, b.member_info_ship_post_code, b.member_info_ship_address, b.member_info_ship_address_detail, b. member_info_mypage_img_name, b.member_info_mypage_real_img_name, c.grade_name, d.member_info_detail_like_style, d.member_info_detail_like_brand, d.member_info_detail_like_category, d.member_info_detail_point, d.member_info_detail_acc_money, e.member_service_log_code, e.member_service_log_status, e.member_service_log_join_date, e.member_service_log_passwd_change_date, e.member_service_log_grade_change_date, e.member_service_log_login_date, e.member_service_log_order_count"
-					+ " FROM member AS a"
-					+ " JOIN member_info AS b"
-					+ " ON a.member_code = b.member_info_code"
-					+ " JOIN grade AS c"
-					+ " ON b.member_info_grade_code  = c.grade_code"
-					+ " JOIN member_info_detail AS d"
-					+ " ON b.member_info_code = d.member_info_detail_code"
-					+ " JOIN member_service_log AS e"
-					+ " ON d.member_info_detail_code = e.member_service_log_code"
-					+ " WHERE a.member_code = ?";
+			String sql = "SELECT a.member_code"
+					+ ", a.member_num"
+					+ ", a.member_nickname"
+					+ ", a.member_id"
+					+ ", a.member_passwd"
+					+ ", a.member_email"
+					+ ", b.member_info_name"
+					+ ", b.member_info_gender"
+					+ ", b.member_info_phone"
+					+ ", b.member_info_age"
+					+ ", b.member_info_post_code"
+					+ ", b.member_info_address"
+					+ ", b.member_info_address_detail"
+					+ ", b.member_info_ship_post_code"
+					+ ", b.member_info_ship_address"
+					+ ", b.member_info_ship_address_detail"
+					+ ", b.member_info_mypage_img_name"
+					+ ", b.member_info_mypage_real_img_name"
+					+ ", c.member_info_detail_like_style"
+					+ ", c.member_info_detail_like_brand"
+					+ ", c.member_info_detail_like_category"
+					+ ", c.member_info_detail_point"
+					+ ", c.member_info_detail_acc_money"
+					+ ", d.member_service_log_status"
+					+ ", d.member_service_log_join_date"
+					+ ", d.member_service_log_passwd_change_date"
+					+ ", d.member_service_log_login_date"
+					+ ", d.member_service_log_order_count"
+					+ ", e.grade_name"
+					+ "FROM member AS a "
+					+ "JOIN member_info AS b "
+					+ "ON a.member_code = b.member_info_code "
+					+ "JOIN member_info_detail AS c"
+					+ "ON a.member_code = c.member_info_detail_code "
+					+ "JOIN member_service_log AS d "
+					+ "ON a.member_code = d.member_service_log_code "
+					+ "JOIN grade AS e"
+					+ "ON c.member_info_detail_acc_money BETWEEN e.lowest_acc_money AND e.highest_acc_money "
+					+ "WHERE a.member_code = ?";
 			
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, member_code);
@@ -135,36 +163,36 @@ public class MemberDAO {
 			
 			if(rs.next()) {
 				memberDetail = new MemberBean();
-				memberDetail.setMember_code(rs.getString("member_code"));
-				memberDetail.setMember_num(rs.getString("member_num"));
-				memberDetail.setMember_nickname(rs.getString("member_nickname"));
-				memberDetail.setMember_id(rs.getString("member_id"));
-				memberDetail.setMember_passwd(rs.getString("member_passwd"));
-				memberDetail.setMember_email(rs.getString("member_email"));
-				memberDetail.setMember_info_name(rs.getString("member_info_name"));
-				memberDetail.setMember_info_gender(rs.getString("member_info_gender"));
-				memberDetail.setMember_info_phone(rs.getString("member_info_phone"));
-				memberDetail.setMember_info_age(rs.getString("member_info_age"));
-				memberDetail.setMember_info_post_code(rs.getString("member_info_post_code"));
-				memberDetail.setMember_info_address(rs.getString("member_info_address"));
-				memberDetail.setMember_info_address_detail(rs.getString("member_info_address_detail"));
-				memberDetail.setMember_info_ship_post_code(rs.getString("member_info_ship_post_code"));
-				memberDetail.setMember_info_ship_address(rs.getString("member_info_ship_address"));
-				memberDetail.setMember_info_ship_address_detail(rs.getString("member_info_ship_address_detail"));
-				memberDetail.setMember_info_mypage_img_name(rs.getString("member_info_mypage_img_name"));
-				memberDetail.setMember_info_mypage_real_img_name(rs.getString("member_info_mypage_real_img_name"));
-				memberDetail.setMember_info_detail_like_style(rs.getString("member_info_detail_like_style"));
-				memberDetail.setMember_info_detail_like_brand(rs.getString("member_info_detail_like_brand"));
-				memberDetail.setMember_info_detail_like_category(rs.getString("member_info_detail_like_category"));
-				memberDetail.setMember_info_detail_point(rs.getInt("member_info_detail_point")); 
-				memberDetail.setMember_info_detail_acc_money(rs.getInt("member_info_detail_acc_money")); 
-				memberDetail.setMember_service_log_status(rs.getString("member_service_log_status"));
-				memberDetail.setMember_service_log_join_date(rs.getString("member_service_log_join_date").substring(0,8)); 
-				memberDetail.setMember_service_log_passwd_change_date(rs.getString("member_service_log_passwd_change_date").substring(0,8)); 
-				memberDetail.setMember_service_log_grade_change_date(rs.getString("member_service_log_grade_change_date").substring(0,8));
-				memberDetail.setMember_service_log_login_date(rs.getString("member_service_log_login_date").substring(0,8));
-				memberDetail.setMember_service_log_order_count(rs.getInt("member_service_log_order_count")); 
-				memberDetail.setGrade_name(rs.getString("grade_name"));
+				memberDetail.setMember_code(rs.getString("a.member_code"));
+				memberDetail.setMember_num(rs.getString("a.member_num"));
+				memberDetail.setMember_nickname(rs.getString("a.member_nickname"));
+				memberDetail.setMember_id(rs.getString("a.member_id"));
+				memberDetail.setMember_passwd(rs.getString("a.member_passwd"));
+				memberDetail.setMember_email(rs.getString("a.member_email"));
+				memberDetail.setMember_info_name(rs.getString("b.member_info_name"));
+				memberDetail.setMember_info_gender(rs.getString("b.member_info_gender"));
+				memberDetail.setMember_info_phone(rs.getString("b.member_info_phone"));
+				memberDetail.setMember_info_age(rs.getString("b.member_info_age"));
+				memberDetail.setMember_info_post_code(rs.getString("b.member_info_post_code"));
+				memberDetail.setMember_info_address(rs.getString("b.member_info_address"));
+				memberDetail.setMember_info_address_detail(rs.getString("b.member_info_address_detail"));
+				memberDetail.setMember_info_ship_post_code(rs.getString("b.member_info_ship_post_code"));
+				memberDetail.setMember_info_ship_address(rs.getString("b.member_info_ship_address"));
+				memberDetail.setMember_info_ship_address_detail(rs.getString("b.member_info_ship_address_detail"));
+				memberDetail.setMember_info_mypage_img_name(rs.getString("b.member_info_mypage_img_name"));
+				memberDetail.setMember_info_mypage_real_img_name(rs.getString("b.member_info_mypage_real_img_name"));
+				memberDetail.setMember_info_detail_like_style(rs.getString("c.member_info_detail_like_style"));
+				memberDetail.setMember_info_detail_like_brand(rs.getString("c.member_info_detail_like_brand"));
+				memberDetail.setMember_info_detail_like_category(rs.getString("c.member_info_detail_like_category"));
+				memberDetail.setMember_info_detail_point(rs.getInt("c.member_info_detail_point")); 
+				memberDetail.setMember_info_detail_acc_money(rs.getInt("c.member_info_detail_acc_money")); 
+				memberDetail.setMember_service_log_status(rs.getString("d.member_service_log_status"));
+				memberDetail.setMember_service_log_join_date(rs.getString("d.member_service_log_join_date").substring(0,8)); 
+				memberDetail.setMember_service_log_passwd_change_date(rs.getString("d.member_service_log_passwd_change_date").substring(0,8)); 
+				memberDetail.setMember_service_log_grade_change_date(rs.getString("d.member_service_log_grade_change_date").substring(0,8));
+				memberDetail.setMember_service_log_login_date(rs.getString("d.member_service_log_login_date").substring(0,8));
+				memberDetail.setMember_service_log_order_count(rs.getInt("d.member_service_log_order_count")); 
+				memberDetail.setGrade_name(rs.getString("e.grade_name"));
 			}
 		} catch (SQLException e) {
 			
@@ -245,13 +273,22 @@ public class MemberDAO {
 		boolean isMemberUpdate = false;
 		
 		PreparedStatement pstmt = null;
+		int sucess = 0;
 		
 		try {
-			String sql = "UPDATE member_service_log SET member_service_log_status=? WHERE member_service_log_code=?";
-			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, member_status);
-			pstmt.setString(2, member_code);
-			int sucess = pstmt.executeUpdate();
+			if(member_status.equals("정상")) {
+				String sql = "UPDATE member_service_log SET member_service_log_status=? WHERE member_service_log_code=?";
+				pstmt = con.prepareStatement(sql);
+				pstmt.setString(1, member_status);
+				pstmt.setString(2, member_code);
+				sucess = pstmt.executeUpdate();
+			} else {
+				String sql = "UPDATE member_service_log SET member_service_log_status=?,member_service_log_login_date=REPLACE(now(),'-','') WHERE member_service_log_code=?";
+				pstmt = con.prepareStatement(sql);
+				pstmt.setString(1, member_status);
+				pstmt.setString(2, member_code);
+				sucess = pstmt.executeUpdate();
+			}
 			
 			if(sucess > 0) {
 				isMemberUpdate = true;
@@ -266,27 +303,10 @@ public class MemberDAO {
 	}
 
 	public MemberBean getMemberStatus() {
-		MemberBean memberBean = null;
+		MemberBean bean = null;
 		
-		PreparedStatement pstmt = null;
-		
-		try {
-			String sql = "UPDATE member_service_log SET member_service_log_status=? WHERE member_service_log_code=?";
-			pstmt = con.prepareStatement(sql);
-			int sucess = pstmt.executeUpdate();
-			
-			if(sucess > 0) {
-				
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			close(pstmt);
-		}
-		
-		return memberBean;
+		return bean;
 	}
-	
 	
 	
 }

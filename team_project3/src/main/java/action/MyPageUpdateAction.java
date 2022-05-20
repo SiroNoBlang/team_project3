@@ -54,21 +54,16 @@ public class MyPageUpdateAction implements Action {
 		
 		
 		MemberBean member = new MemberBean();
-		member.setGrade_code(grade_code);
 		member.setGrade_name(grade_name);
 		member.setMember_num(member_num);
 		member.setMember_nickname(member_nickname);
-		member.setMember_info_code(member_info_code);
 		member.setMember_info_gender(member_info_gender);
 		member.setMember_info_age(member_info_age);
-		member.setMember_info_grade_code(member_info_grade_code);
-		member.setMember_info_detail_code(member_info_detail_code);
 		member.setMember_info_detail_like_style(member_info_detail_like_style);
 		member.setMember_info_detail_like_brand(member_info_detail_like_brand);
 		member.setMember_info_detail_like_category(member_info_detail_like_category);
 		member.setMember_info_detail_point(member_info_detail_point);
 		member.setMember_info_detail_acc_money(member_info_detail_acc_money);
-		member.setMember_service_log_code(member_service_log_code);
 		member.setMember_service_log_status(member_service_log_status);
 		member.setMember_service_log_join_date(member_service_log_join_date);
 		member.setMember_service_log_passwd_change_date(member_service_log_passwd_change_date);

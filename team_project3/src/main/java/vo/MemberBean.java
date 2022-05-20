@@ -2,15 +2,15 @@ package vo;
 
 
 public class MemberBean {
-	private String grade_code;
 	private String grade_name;
+	private String reason_num;
+	private String reason_content;
 	private String member_num;
 	private String member_code;
 	private String member_nickname;
 	private String member_id;
 	private String member_passwd;
 	private String member_email;
-	private String member_info_code;
 	private String member_info_name;
 	private String member_info_gender;
 	private String member_info_phone;
@@ -21,38 +21,40 @@ public class MemberBean {
 	private String member_info_ship_post_code;
 	private String member_info_ship_address;
 	private String member_info_ship_address_detail;
-	private String member_info_grade_code;
 	private String member_info_mypage_img_name;
 	private String member_info_mypage_real_img_name;
-	private String member_info_detail_code;
 	private String member_info_detail_like_style;
 	private String member_info_detail_like_brand;
 	private String member_info_detail_like_category;
 	private int member_info_detail_point;
 	private int member_info_detail_acc_money;
-	private String member_service_log_code;
 	private String member_service_log_status;
 	private String member_service_log_join_date;
 	private String member_service_log_passwd_change_date;
 	private String member_service_log_grade_change_date;
 	private String member_service_log_login_date;
 	private int member_service_log_order_count;
-	private String agreement_code;
-	private String agreement_agree_date;
-	private String agreement_name;
-	private String agreement_content;
-	
-	public String getGrade_code() {
-		return grade_code;
-	}
-	public void setGrade_code(String grade_code) {
-		this.grade_code = grade_code;
-	}
+	private int top_level;
+	private int nomal;
+	private int suspension;
+	private int withdrawal;
 	public String getGrade_name() {
 		return grade_name;
 	}
 	public void setGrade_name(String grade_name) {
 		this.grade_name = grade_name;
+	}
+	public String getReason_num() {
+		return reason_num;
+	}
+	public void setReason_num(String reason_num) {
+		this.reason_num = reason_num;
+	}
+	public String getReason_content() {
+		return reason_content;
+	}
+	public void setReason_content(String reason_content) {
+		this.reason_content = reason_content;
 	}
 	public String getMember_num() {
 		return member_num;
@@ -89,12 +91,6 @@ public class MemberBean {
 	}
 	public void setMember_email(String member_email) {
 		this.member_email = member_email;
-	}
-	public String getMember_info_code() {
-		return member_info_code;
-	}
-	public void setMember_info_code(String member_info_code) {
-		this.member_info_code = member_info_code;
 	}
 	public String getMember_info_name() {
 		return member_info_name;
@@ -156,12 +152,6 @@ public class MemberBean {
 	public void setMember_info_ship_address_detail(String member_info_ship_address_detail) {
 		this.member_info_ship_address_detail = member_info_ship_address_detail;
 	}
-	public String getMember_info_grade_code() {
-		return member_info_grade_code;
-	}
-	public void setMember_info_grade_code(String member_info_grade_code) {
-		this.member_info_grade_code = member_info_grade_code;
-	}
 	public String getMember_info_mypage_img_name() {
 		return member_info_mypage_img_name;
 	}
@@ -173,12 +163,6 @@ public class MemberBean {
 	}
 	public void setMember_info_mypage_real_img_name(String member_info_mypage_real_img_name) {
 		this.member_info_mypage_real_img_name = member_info_mypage_real_img_name;
-	}
-	public String getMember_info_detail_code() {
-		return member_info_detail_code;
-	}
-	public void setMember_info_detail_code(String member_info_detail_code) {
-		this.member_info_detail_code = member_info_detail_code;
 	}
 	public String getMember_info_detail_like_style() {
 		return member_info_detail_like_style;
@@ -209,12 +193,6 @@ public class MemberBean {
 	}
 	public void setMember_info_detail_acc_money(int member_info_detail_acc_money) {
 		this.member_info_detail_acc_money = member_info_detail_acc_money;
-	}
-	public String getMember_service_log_code() {
-		return member_service_log_code;
-	}
-	public void setMember_service_log_code(String member_service_log_code) {
-		this.member_service_log_code = member_service_log_code;
 	}
 	public String getMember_service_log_status() {
 		return member_service_log_status;
@@ -252,55 +230,54 @@ public class MemberBean {
 	public void setMember_service_log_order_count(int member_service_log_order_count) {
 		this.member_service_log_order_count = member_service_log_order_count;
 	}
-	public String getAgreement_code() {
-		return agreement_code;
+	public int getTop_level() {
+		return top_level;
 	}
-	public void setAgreement_code(String agreement_code) {
-		this.agreement_code = agreement_code;
+	public void setTop_level(int top_level) {
+		this.top_level = top_level;
 	}
-	public String getAgreement_agree_date() {
-		return agreement_agree_date;
+	public int getNomal() {
+		return nomal;
 	}
-	public void setAgreement_agree_date(String agreement_agree_date) {
-		this.agreement_agree_date = agreement_agree_date;
+	public void setNomal(int nomal) {
+		this.nomal = nomal;
 	}
-	public String getAgreement_name() {
-		return agreement_name;
+	public int getSuspension() {
+		return suspension;
 	}
-	public void setAgreement_name(String agreement_name) {
-		this.agreement_name = agreement_name;
+	public void setSuspension(int suspension) {
+		this.suspension = suspension;
 	}
-	public String getAgreement_content() {
-		return agreement_content;
+	public int getWithdrawal() {
+		return withdrawal;
 	}
-	public void setAgreement_content(String agreement_content) {
-		this.agreement_content = agreement_content;
+	public void setWithdrawal(int withdrawal) {
+		this.withdrawal = withdrawal;
 	}
 	@Override
 	public String toString() {
-		return "MemberBean2 [grade_code=" + grade_code + ", grade_name=" + grade_name + ", member_num=" + member_num
-				+ ", member_code=" + member_code + ", member_nickname=" + member_nickname + ", member_id=" + member_id
-				+ ", member_passwd=" + member_passwd + ", member_email=" + member_email + ", member_info_code="
-				+ member_info_code + ", member_info_name=" + member_info_name + ", member_info_gender="
-				+ member_info_gender + ", member_info_phone=" + member_info_phone + ", member_info_age="
-				+ member_info_age + ", member_info_post_code=" + member_info_post_code + ", member_info_address="
-				+ member_info_address + ", member_info_address_detail=" + member_info_address_detail
-				+ ", member_info_ship_post_code=" + member_info_ship_post_code + ", member_info_ship_address="
-				+ member_info_ship_address + ", member_info_ship_address_detail=" + member_info_ship_address_detail
-				+ ", member_info_grade_code=" + member_info_grade_code + ", member_info_mypage_img_name="
-				+ member_info_mypage_img_name + ", member_info_mypage_real_img_name=" + member_info_mypage_real_img_name
-				+ ", member_info_detail_code=" + member_info_detail_code + ", member_info_detail_like_style="
-				+ member_info_detail_like_style + ", member_info_detail_like_brand=" + member_info_detail_like_brand
+		return "MemberBean [grade_name=" + grade_name + ", reason_num=" + reason_num + ", reason_content="
+				+ reason_content + ", member_num=" + member_num + ", member_code=" + member_code + ", member_nickname="
+				+ member_nickname + ", member_id=" + member_id + ", member_passwd=" + member_passwd + ", member_email="
+				+ member_email + ", member_info_name=" + member_info_name + ", member_info_gender=" + member_info_gender
+				+ ", member_info_phone=" + member_info_phone + ", member_info_age=" + member_info_age
+				+ ", member_info_post_code=" + member_info_post_code + ", member_info_address=" + member_info_address
+				+ ", member_info_address_detail=" + member_info_address_detail + ", member_info_ship_post_code="
+				+ member_info_ship_post_code + ", member_info_ship_address=" + member_info_ship_address
+				+ ", member_info_ship_address_detail=" + member_info_ship_address_detail
+				+ ", member_info_mypage_img_name=" + member_info_mypage_img_name + ", member_info_mypage_real_img_name="
+				+ member_info_mypage_real_img_name + ", member_info_detail_like_style=" + member_info_detail_like_style
+				+ ", member_info_detail_like_brand=" + member_info_detail_like_brand
 				+ ", member_info_detail_like_category=" + member_info_detail_like_category
 				+ ", member_info_detail_point=" + member_info_detail_point + ", member_info_detail_acc_money="
-				+ member_info_detail_acc_money + ", member_service_log_code=" + member_service_log_code
-				+ ", member_service_log_status=" + member_service_log_status + ", member_service_log_join_date="
-				+ member_service_log_join_date + ", member_service_log_passwd_change_date="
-				+ member_service_log_passwd_change_date + ", member_service_log_grade_change_date="
-				+ member_service_log_grade_change_date + ", member_service_log_login_date="
-				+ member_service_log_login_date + ", member_service_log_order_count=" + member_service_log_order_count
-				+ ", agreement_code=" + agreement_code + ", agreement_agree_date=" + agreement_agree_date
-				+ ", agreement_name=" + agreement_name + ", agreement_content=" + agreement_content + "]";
+				+ member_info_detail_acc_money + ", member_service_log_status=" + member_service_log_status
+				+ ", member_service_log_join_date=" + member_service_log_join_date
+				+ ", member_service_log_passwd_change_date=" + member_service_log_passwd_change_date
+				+ ", member_service_log_grade_change_date=" + member_service_log_grade_change_date
+				+ ", member_service_log_login_date=" + member_service_log_login_date
+				+ ", member_service_log_order_count=" + member_service_log_order_count + ", top_level=" + top_level
+				+ ", nomal=" + nomal + ", suspension=" + suspension + ", withdrawal=" + withdrawal + "]";
 	}
+	
 	
 }
