@@ -1,0 +1,106 @@
+#com_container .container {
+	margin-top: 80px;
+}
+
+#com_container .page-link {
+	padding: 1.5rem 5.75rem;
+	margin-bottom: 50px;
+}
+
+#com_containe .demo {
+	background-color: rgb(168, 200, 245);
+}
+
+#com_containe .pagination-outer {
+	text-align: center;
+}
+
+#com_containe .pagination {
+	background-color: #fff;
+	border-radius: 25px !important;
+	overflow: hidden;
+	border: none !important;
+}
+
+#com_containe a:focus, #com_containe  a:active {
+	outline: none !important;
+	box-shadow: none !important;
+}
+
+#com_containe .fa {
+	font-size: 11px;
+	vertical-align: middle !important;
+	color: black;
+}
+
+#com_containe .pagination li.active .fa {
+	color: #fff !important;
+}
+
+#com_containe .pagination li a.page-link {
+	color: #505050;
+	background-color: transparent;
+	font-size: 17px;
+	font-weight: 600;
+	padding: 17px 25px;
+	border: none;
+	transition: all 0.3s ease 0s;
+}
+
+#com_containe .fa-home {
+	transform: scale(1.4, 1.4);
+}
+
+#com_containe .pagination li:last-child a.page-link {
+	border: none;
+}
+
+#com_containe  .pagination li.active a.page-link, #com_containe  .pagination li a.page-link:hover,
+	#com_containe .pagination li.active a.page-link:hover {
+	background-color: transparent;
+}
+
+#com_containe  .pagination li a.page-link:after {
+	content: '';
+	background-color: #42A5F5 !important;
+	height: 100%;
+	width: 100%;
+	transform: scaleY(0);
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	z-index: -1;
+	transition: all 0.3s;
+}
+
+#com_containe  .pagination li.active a.page-link:after, #com_containe   .pagination li a.page-link:hover:after,
+	#com_containe  .pagination li.active a.page-link:hover:after {
+	transform: scaleY(1);
+	border-radius: 25px !important;
+}
+
+@media ( max-width : 767px) {
+	
+	#com_containe  .pagination li a.page-link {
+		padding: 11px 8px !important;
+	}
+	#com_containe   .fa {
+		font-size: 9px !important;
+	}
+	#com_containe  li a {
+		font-size: 12px !important;
+	}
+	#com_containe   .page-item+.page-item {
+		padding-left: 0 !important;
+	}
+}
+
+/*페이징 css*/
+.container nav .pagination {
+	margin-bottom: 80px;
+}
+
+/*검색창 css*/
+.form-group {
+    margin-left: 900px;
+}
