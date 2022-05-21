@@ -5,8 +5,6 @@
 	//세션 객체에 저장된 세션 닉네임("sNickname") 가져와서 변수에 저장
 	String sNickname = (String)session.getAttribute("sNickname");
  %>  
- 
- 
 <!DOCTYPE html>
 <html>
 <head>
@@ -22,6 +20,7 @@
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css'>
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css'>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+<script src="AdminPage/js/jquery-3.6.0.js"></script>
 </head>
 <body>
 	<div id="logo">
@@ -53,7 +52,7 @@
 		</div>
 		<div id="page-container">
 			<div class="card">
-				<div class="title">상세 내용</div>
+				<div class="title">공지사항 글 수정</div>
 				
 					<form action="./NoticeModifyPro.co" name="boardForm" method="post" enctype="multipart/form-data">
 						<table >
@@ -79,40 +78,41 @@
 								</td>
 							</tr>
 							<tr>
-								<th><label for="board_readcount">조회수</label></th>
-								<td><input type="text" readonly="readonly" value="${noticeArticle.getNotice_readcount() }"></td>
-							</tr>
-							<tr>
 								<th><label for="board_content">내용</label></th>
-
-
 								<td>
-									<c:choose> 
-										<c:when test="${not empty noticeImgFileList }">
-												${noticeArticle.getNotice_content() } <br>
-											<c:forEach var="noticeImg" items="${noticeImgFileList }">
-												<img src="./upload/${noticeImg.getNotice_img_file_real_name() }"> <br>
-											</c:forEach>
-										</c:when> 
-									<c:otherwise> 
-										<textarea id="board_content" name="board_content"  rows="20" cols="100">
-											${noticeArticle.getNotice_content() }
-										</textarea>
-									</c:otherwise> 
-								</c:choose>  
+									<textarea id="board_content" name="board_content"  rows="20" cols="100">${noticeArticle.getNotice_content() } </textarea>
 								</td>
 							</tr>
-							<tr>
-								<th><label for="board_file">파일 첨부</label></th>
-								<td><input type="file" name="board_file" multiple="multiple" >
-	
-									<c:forEach var="noticeImg" items="${noticeImgFileList }">
-										<a href="./upload/${noticeImg.getNotice_img_file_real_name() }" download="${noticeImg.getNotice_img_file_name() }"> 
-										${noticeImg.getNotice_img_file_real_name() }</a><br>
-									</c:forEach> 
-
-								</td>
-							</tr>
+						  	<c:choose>
+						  		<c:when test="${not empty noticeImgFileList }"> <!-- 첨부파일이 있을 경우 -->
+								  		<tr>
+											<th><label for="board_file">파일 첨부</label></th>
+											<td><input type="file" id="file1" name="board_file0">
+												<a href="./Upload/admin_notice_img/${noticeImgFileList[0].getNotice_img_file_real_name() }" 
+												download="${noticeImgFileList[0].getNotice_img_file_name()  }"> 
+												${noticeImgFileList[0].getNotice_img_file_name() }</a>
+											</td>
+										</tr>
+								  		<tr>
+											<th><label for="board_file">파일 첨부</label></th>
+											<td><input type="file" id="file1" name="board_file1">
+												<a href="./Upload/admin_notice_img/${noticeImgFileList[1].getNotice_img_file_real_name()  }" 
+												download="${noticeImgFileList[1].getNotice_img_file_name() }"> 
+												${noticeImgFileList[1].getNotice_img_file_name()}</a>
+											</td>
+										</tr>
+						  		</c:when>
+						  		<c:otherwise> <!-- 첨부파일이 없을 경우 -->
+						  			<tr>
+										<th><label for="board_file">파일 첨부</label></th>
+										<td><input type="file" id="file1" name="board_file0"></td>
+									</tr>
+							  		<tr>
+										<th><label for="board_file">파일 첨부</label></th>
+										<td><input type="file" id="file1" name="board_file1"></td>
+									</tr>
+						  		</c:otherwise>
+						  	</c:choose> 
 						</table>
 						<br>
 						<section id="commandCell">	
