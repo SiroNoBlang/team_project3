@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>community - 공지사항</title>
+<title>community - 이벤트</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="icon" type="image/png" href="MainPage/images/icons/favicon.png"/>
 	<link rel="stylesheet" type="text/css" href="MainPage/vendor/bootstrap/css/bootstrap.min.css">
@@ -330,8 +330,8 @@
 		<div id="com_container">
 			<div class=" container d-flex justify-content-center" >     
 		        <ul class="pagination shadow-lg">
-		            <li class="page-item active"><a class="page-link" href="CommunityNotice.ma"><small>공지사항</small></a></li>
-		            <li class="page-item  "><a class="page-link" href="CommunityEvent.ma"><small>이벤트</small></a></li>                        
+		            <li class="page-item "><a class="page-link" href="CommunityNotice.ma"><small>공지사항</small></a></li>
+		            <li class="page-item active"><a class="page-link" href="CommunityEvent.ma"><small>이벤트</small></a></li>                        
 		            <li class="page-item  "><a class="page-link " href="#"><i  class=""></i><small>Q&A</small></a></li>  
 		        </ul> 
 		    </div>
@@ -342,8 +342,8 @@
 		<div class="form-group row justify-content-center">
 			<div class="w100" style="padding-right:10px">
 				<select class="form-control form-control-sm" name="searchType" id="searchType">
-					<option value="notice_title">제목</option>
-					<option value="notice_content">본문</option>
+					<option value="title">제목</option>
+					<option value="Content">본문</option>
 				</select>
 			</div>
 
@@ -351,9 +351,10 @@
 				<input type="text" class="form-control form-control-sm" name="keyword" id="keyword">
 			</div>
 			<div>
-				<button class="btn btn-sm btn-primary" name="btnSearch" id="btnSearch" onclick="location.href='CommunityNoticeSearch.ma?search=${search}&searchType=${searchType}'" >검색</button>
+				<button class="btn btn-sm btn-primary" name="btnSearch" id="btnSearch">검색</button>
 			</div>
 		</div>
+		
 		
 	<!-- 페이징 처리 -->		
 	<c:set var="pageNum" value="${pageInfo.getPageNum() }" /> <!-- 현재 페이지 번호 --> 
@@ -376,18 +377,18 @@
                 </tr>
             </thead>
             <tbody>
-             <c:if test="${not empty noticeList and pageInfo.getListCount() > 0}">
-					<c:forEach var="notice" items="${noticeList }" varStatus="status">
-		                <tr>
-	                    	<td>${listCount -(listCount -((pageNum-1)* listLimit + status.index)-1)} </td> 
-		                    <td>
-								<a href="CommunityNoticeDetail.ma?notice_num=${notice.getNotice_num() }&page=${pageNum}">
-		                    		${notice.getNotice_title() } </a>
-		                    </td>
-		                    <td>${notice.getNotice_nickname() }</td>
-							<td>${notice.getNotice_write_date() }</td>
-							<td>${notice.getNotice_readcount() }</td>
-		                </tr>
+               	<c:if test="${not empty eventList and pageInfo.getListCount() > 0}">
+				<c:forEach var="event" items="${eventList }" varStatus="status">
+	                <tr>
+                    	<td>${listCount -(listCount -((pageNum-1)* listLimit + status.index)-1)} </td> 
+	                    <td>
+							<a href="CommunityEventDetail.ma?event_num=${event.getEvent_num() }&page=${pageNum}">
+	                    		${event.getEvent_title() } </a>
+	                    </td>
+	                    <td>${event.getEvent_nickname() }</td>
+						<td>${event.getEvent_write_date() }</td>
+						<td>${event.getEvent_readcount() }</td>
+	                </tr>
 	              </c:forEach>
 				</c:if>
             </tbody>
@@ -398,7 +399,7 @@
             <ul class="pagination justify-content-center">
 		         <c:choose>
 					<c:when test="${pageNum > 1}">
-		             	 <li class="page-item"><a class="page-link" href="CommunityNotice.ma?page=${pageNum - 1}">이전</a></li>
+		             	 <li class="page-item"><a class="page-link" href="CommunityEvent.ma?page=${pageNum - 1}">이전</a></li>
 					</c:when>
 					<c:otherwise>
 		            	<li class="page-item"><a class="page-link" >이전</a></li>
@@ -411,14 +412,14 @@
 		             		 <li class="page-item"><a class="page-link">${i }</a></li>
 			       		</c:when>
 						<c:otherwise>     
-			              	<li class="page-item"><a href="CommunityNotice.ma?page=${i }" class="page-link">${i }</a></li>
+			              	<li class="page-item"><a href="CommunityEvent.ma?page=${i }" class="page-link">${i }</a></li>
 			           	</c:otherwise>
 					</c:choose>
 				</c:forEach> 
 				
 	      		  <c:choose>
 						<c:when test="${pageNum < maxPage}">    
-			            	<li class="page-item"><a class="page-link" href="CommunityNotice.ma?page=${pageNum + 1}">다음</a></li>
+			            	<li class="page-item"><a class="page-link" href="CommunityEvent.ma?page=${pageNum + 1}">다음</a></li>
 			       	 	</c:when>
 						<c:otherwise>   
 		              		<li class="page-item"><a class="page-link">다음</a></li>

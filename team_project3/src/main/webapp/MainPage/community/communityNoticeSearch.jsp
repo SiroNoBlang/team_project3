@@ -351,7 +351,7 @@
 				<input type="text" class="form-control form-control-sm" name="keyword" id="keyword">
 			</div>
 			<div>
-				<button class="btn btn-sm btn-primary" name="btnSearch" id="btnSearch" onclick="location.href='CommunityNoticeSearch.ma?search=${search}&searchType=${searchType}'" >검색</button>
+				<button class="btn btn-sm btn-primary" name="btnSearch" id="btnSearch" onclick="location.href='NoticeList.co?search=${param.search}&searchType=${param.searchType}" >검색</button>
 			</div>
 		</div>
 		

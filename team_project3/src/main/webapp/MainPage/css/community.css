@@ -104,3 +104,15 @@
 .form-group {
     margin-left: 900px;
 }
+
+.table td, .table th {
+    padding: 0.75rem;
+    vertical-align: top;
+    border: 1px solid #e9ecef;
+    border-right: none;
+    border-left: none;
+}
+
+input.listMargin {
+    margin-bottom: 45px;
+}

@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>community - 공지사항</title>
+<title>community - 이벤트 상세보기</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="icon" type="image/png" href="MainPage/images/icons/favicon.png"/>
 	<link rel="stylesheet" type="text/css" href="MainPage/vendor/bootstrap/css/bootstrap.min.css">
@@ -330,8 +330,8 @@
 		<div id="com_container">
 			<div class=" container d-flex justify-content-center" >     
 		        <ul class="pagination shadow-lg">
-		            <li class="page-item active"><a class="page-link" href="CommunityNotice.ma"><small>공지사항</small></a></li>
-		            <li class="page-item  "><a class="page-link" href="CommunityEvent.ma"><small>이벤트</small></a></li>                        
+		            <li class="page-item "><a class="page-link" href="CommunityNotice.ma"><small>공지사항</small></a></li>
+		            <li class="page-item active"><a class="page-link" href="CommunityEvent.ma"><small>이벤트</small></a></li>                        
 		            <li class="page-item  "><a class="page-link " href="#"><i  class=""></i><small>Q&A</small></a></li>  
 		        </ul> 
 		    </div>
@@ -342,8 +342,9 @@
 		<div class="form-group row justify-content-center">
 			<div class="w100" style="padding-right:10px">
 				<select class="form-control form-control-sm" name="searchType" id="searchType">
-					<option value="notice_title">제목</option>
-					<option value="notice_content">본문</option>
+					<option value="title">제목</option>
+					<option value="Content">본문</option>
+					<option value="reg_id">작성자</option>
 				</select>
 			</div>
 
@@ -351,84 +352,41 @@
 				<input type="text" class="form-control form-control-sm" name="keyword" id="keyword">
 			</div>
 			<div>
-				<button class="btn btn-sm btn-primary" name="btnSearch" id="btnSearch" onclick="location.href='CommunityNoticeSearch.ma?search=${search}&searchType=${searchType}'" >검색</button>
+				<button class="btn btn-sm btn-primary" name="btnSearch" id="btnSearch">검색</button>
 			</div>
 		</div>
 		
-	<!-- 페이징 처리 -->		
-	<c:set var="pageNum" value="${pageInfo.getPageNum() }" /> <!-- 현재 페이지 번호 --> 
-	<c:set var="maxPage" value="${pageInfo.getMaxPage() }" /><!-- 최대 페이지 수 --> 
-	<c:set var="startPage" value="${pageInfo.getStartPage() }" /><!-- 시작 페이지 번호 --> 
-	<c:set var="endPage" value="${pageInfo.getEndPage() }" /><!-- 끝 페이지 번호 --> 
-	<c:set var="listCount" value="${pageInfo.getListCount() }" /><!-- 총 게시물 수 --> 
-	<c:set var="listLimit" value="${pageInfo.getListLimit() }" /><!-- 표시할 페이지 수 --> 
-			
-	<!-- 리스트 테이블 -->
-    <div class="container">
-        <table class="table table-hover">
-            <thead>
-                <tr>
-                    <th>번호</th>
-                    <th>제목</th>
-                    <th>작성자</th>
-                    <th>작성일</th>
-                    <th>조회수</th>
-                </tr>
-            </thead>
-            <tbody>
-             <c:if test="${not empty noticeList and pageInfo.getListCount() > 0}">
-					<c:forEach var="notice" items="${noticeList }" varStatus="status">
-		                <tr>
-	                    	<td>${listCount -(listCount -((pageNum-1)* listLimit + status.index)-1)} </td> 
-		                    <td>
-								<a href="CommunityNoticeDetail.ma?notice_num=${notice.getNotice_num() }&page=${pageNum}">
-		                    		${notice.getNotice_title() } </a>
-		                    </td>
-		                    <td>${notice.getNotice_nickname() }</td>
-							<td>${notice.getNotice_write_date() }</td>
-							<td>${notice.getNotice_readcount() }</td>
-		                </tr>
-	              </c:forEach>
-				</c:if>
-            </tbody>
-        </table>
-
-      
-        <nav>
-            <ul class="pagination justify-content-center">
-		         <c:choose>
-					<c:when test="${pageNum > 1}">
-		             	 <li class="page-item"><a class="page-link" href="CommunityNotice.ma?page=${pageNum - 1}">이전</a></li>
-					</c:when>
-					<c:otherwise>
-		            	<li class="page-item"><a class="page-link" >이전</a></li>
-			        </c:otherwise>
-				</c:choose>
-				
-				<c:forEach var="i" begin="${startPage }" end="${endPage }">
-					<c:choose>
-						<c:when test="${pageNum eq i}">
-		             		 <li class="page-item"><a class="page-link">${i }</a></li>
-			       		</c:when>
-						<c:otherwise>     
-			              	<li class="page-item"><a href="CommunityNotice.ma?page=${i }" class="page-link">${i }</a></li>
-			           	</c:otherwise>
-					</c:choose>
-				</c:forEach> 
-				
-	      		  <c:choose>
-						<c:when test="${pageNum < maxPage}">    
-			            	<li class="page-item"><a class="page-link" href="CommunityNotice.ma?page=${pageNum + 1}">다음</a></li>
-			       	 	</c:when>
-						<c:otherwise>   
-		              		<li class="page-item"><a class="page-link">다음</a></li>
-		       		 	</c:otherwise>
-				</c:choose>
-            </ul>
-        </nav>
-    </div>
-
-
+	<!-- 리스트 뷰 -->
+	    		<div class="container">
+						<table class="table" >
+							<tr>
+								<th><label for="board_title">제목</label></th>
+								<td>${eventArticle.getEvent_title() }</td>
+							</tr>
+							<tr>
+								<th><label for="board_date">작성일</label></th>
+								<td>${eventArticle.getEvent_write_date() }</td>
+							</tr>
+							<tr>
+								<th><label for="board_readcount">조회수</label></th>
+								<td>${eventArticle.getEvent_readcount() }</td>
+							</tr>
+							<tr>
+								<th><label for="board_content">내용</label></th>
+								<td>${eventArticle.getEvent_content() } <br>
+									<c:if test="${not empty eventImgFileList}">
+										<c:forEach var="eventImg" items="${eventImgFileList }">
+											<img src="./Upload/admin_event_img/${eventImg.getEvent_img_file_real_name() }"> <br>
+										</c:forEach>
+									</c:if> 
+								</td>
+							</tr>
+						</table>
+						<br>
+						<section class="pagination justify-content-center" >
+							<input class="page-item page-link listMargin" type="button" value="목록으로" onclick="history.back()">
+						</section>
+  					</div>
 	<!-- Footer -->
 	<footer class="bg3 p-t-75 p-b-32">
 		<div class="container">
