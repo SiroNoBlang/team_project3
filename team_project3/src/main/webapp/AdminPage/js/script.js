@@ -109,5 +109,18 @@ $('#toggle-left-menu').click(function() {
 			location.href = "./Logout.ma";
 		}
 	}
+	
+	
+	//공지사항 수정시 제목에 [수정날짜] 추가
     
+    $(document).ready( function() {
+		let date = new Date();
+		let year = date.getFullYear();
+		let month = date.getMonth() + 1;
+		let day = date.getDate();
+		
+		
+		let title = $('input[name=board_title]').val();
+		$('input[name=board_title]').attr('value',"["+year+""+month+""+day+" 수정] "+title);
+	});
     
