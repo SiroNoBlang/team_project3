@@ -21,6 +21,18 @@
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css'>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
 <script src="AdminPage/js/jquery-3.6.0.js"></script>
+<script type="text/javascript">
+	$(document).ready( function() {
+		let date = new Date();
+		let year = date.getFullYear();
+		let month = date.getMonth() + 1;
+		let day = date.getDate();
+		
+		
+		let title = $('input[name=board_title]').val();
+		$('input[name=board_title]').attr('value',"["+year+""+month+""+day+" 수정] "+title);
+	});
+</script>
 </head>
 <body>
 	<div id="logo">
