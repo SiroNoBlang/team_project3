@@ -10,7 +10,7 @@ import vo.ActionForward;
 import vo.PageInfo;
 import vo.SellerDTO;
 
-public class productListProAction implements Action {
+public class ProductListProAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -67,7 +67,7 @@ public class productListProAction implements Action {
 				// => board 폴더 내의 qna_board_list.jsp 페이지
 				// => request 객체를 유지한 채 포워딩 해야하므로 Dispatcher 방식 포워딩
 				forward = new ActionForward();
-				forward.setPath("./product.jsp");
+				forward.setPath("Product_list.pr");
 				forward.setRedirect(false); // Dispatcher 방식(생략 가능)
 				
 		return forward;

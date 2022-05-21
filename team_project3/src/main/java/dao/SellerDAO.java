@@ -29,7 +29,7 @@ public class SellerDAO {
 		this.con = con;
 	}
 
-	public  int insertArticle(SellerDTO seller,String member_id) {  //판매글 작성
+	public  int insertArticle(SellerDTO seller) {  //판매글 작성
 		
 		
 		
@@ -44,10 +44,11 @@ public class SellerDAO {
 	
 
 		try {
-				String sql = "INSERT INTO sell VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
+			
+				String sql = "INSERT INTO sell VALUES (?,?,?,?,?,?,?,?,?,?,REPLACE(now(),'-',''),?)";
 				pstmt = con.prepareStatement(sql);
 				pstmt.setInt(1, num);
-				pstmt.setInt(2, seller.getSell_member_code());
+				pstmt.setString(2, seller.getSell_member_code());
 				pstmt.setString(3, seller.getSell_title()); // 새 글 번호
 				pstmt.setString(4, seller.getSell_category());
 				pstmt.setString(5, seller.getSell_category_detail());
@@ -56,8 +57,7 @@ public class SellerDAO {
 				pstmt.setString(8, seller.getSell_color());
 				pstmt.setString(9, seller.getSell_size());
 				pstmt.setString(10, seller.getSell_brand());
-				pstmt.setString(11, seller.getSell_write_date());
-				pstmt.setInt(12, 0);
+				pstmt.setInt(11, 0); //조회수 컬럼
 			
 				sql = "INSERT INTO sell_img VALUES ((SELECT MAX(SELL_NUM) FROM sell),?,?)";
 				pstmt2 = con.prepareStatement(sql);
@@ -140,7 +140,7 @@ public class SellerDAO {
 			// => 조회 시작 게시물 번호(startRow) 부터 목록의 게시물 수(listLimit) 만큼 조회
 			try {
 				
-				String sql = "SELECT a.sell_num,a.sell_category,a.sell_category_detail, a.sell_title, a.sell_color, a.sell_brand, a.sell_price, a.sell_readcount, b.sell_img_name, b.sell_img_real_name, c.sell_list_num, c.sell_list_item_status "
+				String sql = "SELECT a.sell_num, a.sell_size , a.sell_category,a.sell_category_detail, a.sell_title, a.sell_color, a.sell_brand, a.sell_price, a.sell_readcount, b.sell_img_name, b.sell_img_real_name, c.sell_list_num, c.sell_list_item_status "
 		                     + "FROM sell AS a JOIN sell_img AS b ON a.sell_num = b.sell_img_num JOIN sell_list AS c ON a.sell_num = c.sell_list_num WHERE sell_list_item_status='판매중' "
 		                     + "ORDER BY a.sell_num DESC "
 		                     + "LIMIT ?,? ";
@@ -167,6 +167,7 @@ public class SellerDAO {
 				while(rs.next()) {
 					SellerDTO article = new SellerDTO();
 					   article.setSell_num(rs.getInt("sell_num"));
+					   article.setSell_size(rs.getString("sell_size"));
 		               article.setSell_title(rs.getString("sell_title"));
 		               article.setSell_price(rs.getInt("sell_price"));
 		               article.setSell_color(rs.getString("sell_color"));
@@ -179,9 +180,6 @@ public class SellerDAO {
 		               article.setSell_category(rs.getString("Sell_category"));
 		               article.setSell_category_detail(rs.getString("Sell_category_detail"));
 		               
-				
-					
-					
 					articleList.add(article);
 					
 				}
@@ -203,7 +201,7 @@ public class SellerDAO {
 		ResultSet rs = null;
 		
 		try {
-			String sql = "SELECT  a.sell_category, a.sell_category_detail, a.sell_title, a.sell_color, a.sell_brand, a.sell_price, a.sell_readcount, b.sell_img_name, b.sell_img_real_name, c.sell_list_num "
+			String sql = "SELECT  a.sell_category, a.sell_category_detail, a.sell_size, a.sell_title, a.sell_color, a.sell_brand, a.sell_price, a.sell_readcount, b.sell_img_name, b.sell_img_real_name, c.sell_list_num ,c.sell_list_item_status, c.sell_list_approve_nickname "
 			        + " FROM sell AS a JOIN sell_img AS b ON a.sell_num = b.sell_img_num JOIN sell_list AS c ON a.sell_num = c.sell_list_num WHERE c.sell_list_num =? ";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, sell_num);
@@ -218,6 +216,7 @@ public class SellerDAO {
 				article = new SellerDTO();
 				
 				article.setSell_category(rs.getString("sell_category"));
+				article.setSell_size(rs.getString("sell_size"));
 				article.setSell_category_detail(rs.getString("sell_category_detail"));
 				article.setSell_title(rs.getString("sell_title"));
 				article.setSell_color(rs.getString("sell_color"));
@@ -227,7 +226,8 @@ public class SellerDAO {
 				article.setSell_img_name(rs.getString("sell_img_name"));
 				article.setSell_img_real_name(rs.getString("sell_img_real_name"));
 				article.setSell_list_num(rs.getInt("sell_list_num"));
-				
+				article.setSell_list_item_status(rs.getString("sell_list_item_status"));
+				article.setSell_list_approve_nickname(rs.getString("sell_list_approve_nickname"));
 				System.out.println(article);
 				
 			}
@@ -253,6 +253,7 @@ public class SellerDAO {
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, sell_num);
 			pstmt.executeUpdate();
+		
 		} catch (SQLException e) {
 			System.out.println("SQL 구문 오류 발생! - updateReadcount()");
 			e.printStackTrace();
@@ -262,4 +263,41 @@ public class SellerDAO {
 		
 	}
 
+	public ArrayList<SellerDTO> selectProductRe(String sell_brand,int sell_num) {
+		ArrayList<SellerDTO> productarr = new ArrayList<SellerDTO>();
+			SellerDTO ProductRe = null;
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+		
+		try {
+			String sql = "SELECT a.sell_num, a.sell_size ,  a.sell_title, a.sell_brand, a.sell_price, b.sell_img_name, b.sell_img_real_name "
+                    + "FROM sell AS a JOIN sell_img AS b ON a.sell_num = b.sell_img_num  WHERE sell_num != "+sell_num+" AND sell_brand Like '%"+sell_brand+"%' ";
+                    
+			pstmt = con.prepareStatement(sql);
+//			pstmt.setString(1, sell_brand);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				ProductRe = new SellerDTO();
+				ProductRe.setSell_num(rs.getInt("sell_num"));
+				ProductRe.setSell_size(rs.getString("sell_size"));
+				ProductRe.setSell_title(rs.getString("sell_title"));
+				ProductRe.setSell_brand(rs.getString("sell_brand"));
+				ProductRe.setSell_price(rs.getInt("sell_price"));
+				ProductRe.setSell_img_name(rs.getString("sell_img_name"));
+				ProductRe.setSell_img_real_name(rs.getString("sell_img_real_name"));
+				
+				productarr.add(ProductRe);
+			}
+		
+		} catch (SQLException e) {
+			System.out.println("SQL 구문 오류 발생! - updateReadcount()");
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rs);
+		}
+		
+		return productarr;
+	}
 }

@@ -42,7 +42,7 @@ CREATE TABLE sell_img (
  * */
 public class SellerDTO {
 	private int sell_num;
-	private int sell_member_code;
+	private String sell_member_code;
 	private String sell_title;
 	private String sell_category;
 	private String sell_category_detail;
@@ -66,7 +66,7 @@ public class SellerDTO {
 	public SellerDTO() {}
 
 
-	public SellerDTO(int sell_num, int sell_member_code, String sell_title, String sell_category,
+	public SellerDTO(int sell_num, String sell_member_code, String sell_title, String sell_category,
 			String sell_category_detail, String sell_content, int sell_price, String sell_color, String sell_size,
 			String sell_brand, String sell_write_date, int sell_readcount, int sell_list_num,
 			String sell_list_item_status, String sell_list_approve_date, String sell_list_approve_nickname,
@@ -106,12 +106,12 @@ public class SellerDTO {
 	}
 
 
-	public int getSell_member_code() {
+	public String getSell_member_code() {
 		return sell_member_code;
 	}
 
 
-	public void setSell_member_code(int sell_member_code) {
+	public void setSell_member_code(String sell_member_code) {
 		this.sell_member_code = sell_member_code;
 	}
 
