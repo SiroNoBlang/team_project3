@@ -11,7 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import action.Action;
 import action.ProductDetailProAction;
-import action.productListProAction;
+import action.ProductListProAction;
+import action.ShopingProAction;
 import action.sellWriteProAction;
 import vo.ActionForward;
 
@@ -35,13 +36,13 @@ public class ProductFrontController extends HttpServlet {
 			forward.setPath("MainPage/first_page/index.jsp");
 			forward.setRedirect(false);
 
-		} else if (command.equals("/adminPage/SellForm.pr")) {// 상품 판매글(FORM.JSP)
+		} else if (command.equals("/SellForm.pr")) {// 상품 판매글(FORM.JSP)
 
 			forward = new ActionForward();
-			forward.setPath("./sellWriteForm.jsp");
+			forward.setPath("MainPage/sell/sell_write.jsp");
 			forward.setRedirect(false);
 
-		} else if (command.equals("/adminPage/sellWritePro.pr")) {// 상품 판매글(비즈니스로직작업요청) 작성
+		} else if (command.equals("/SellWritePro.pr")) {// 상품 판매글(비즈니스로직작업요청) 작성
 
 			action = new sellWriteProAction();
 
@@ -51,8 +52,8 @@ public class ProductFrontController extends HttpServlet {
 				e.printStackTrace();
 			}
 
-		} else if (command.equals("/adminPage/product.pr")) {// 상품 갯수 처리를 위한 페이징처리
-			action = new productListProAction();
+		} else if (command.equals("/Product.pr")) {// 상품 갯수 처리를 위한 페이징처리
+			action = new ProductListProAction();
 
 			try {
 				forward = action.execute(request, response);
@@ -60,15 +61,40 @@ public class ProductFrontController extends HttpServlet {
 				e.printStackTrace();
 			}
 
-		} else if (command.equals("productDetailPro.pr")) {// 상품 상세조회
+		} else if (command.equals("/Product_list.pr")) {// 상품 판매목록(product_list.jsp)
 
+			forward = new ActionForward();
+			forward.setPath("MainPage/sell/product_list.jsp");
+			forward.setRedirect(false);
+		} else if (command.equals("/ProductDetailPro.pr")) {// 상품 상세조회(ProductDetailProAction.java)
+			
 			action = new ProductDetailProAction();
+			
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}else if (command.equals("/ProductDetailForm.pr")) {// 상품 판매목록 상세(product_detail.jsp)
+
+			forward = new ActionForward();
+			forward.setPath("MainPage/sell/product_detail.jsp");
+			forward.setRedirect(false);
+		} else if (command.equals("/ShopingForm.pr")) {// 쇼핑카트 오더(shoping_cart.jsp)
+
+			forward = new ActionForward();
+			forward.setPath("MainPage/sell/shoping_cart.jsp");
+			forward.setRedirect(false);
+		
+		} else if (command.equals("/Shoping.pr")) {// 쇼핑카트 액션
+			action = new ShopingProAction();
 
 			try {
 				forward = action.execute(request, response);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+
 		}
 
 	//----------------------------------------------------------------------------------------------		      

@@ -10,9 +10,9 @@ import java.sql.Connection;
 import dao.SellerDAO;
 import vo.SellerDTO;
 
-public class sellerWriteProService {
+public class SellerWriteProService {
 
-	public boolean registArticle(SellerDTO seller,String member_code) {
+	public boolean registArticle(SellerDTO seller) {
 System.out.println("BoardWriteProService - registArticle()");
 		
 		// 1. 글쓰기 작업 요청 처리 결과를 판별하여 저장할 boolean 타입 변수 선언
@@ -33,7 +33,7 @@ System.out.println("BoardWriteProService - registArticle()");
 		// 5. BoardDAO 객체의 XXX 메서드를 호출하여 요청받은 XXX 작업 수행 및 결과 리턴받기
 		// BoardDAO 객체의 insertArticle() 메서드를 호출하여 글쓰기 작업 수행 후 결과값 리턴받기
 		// => 파라미터 : BoardDTO 객체(board)   리턴타입 : int(insertCount)
-		int insertCount = sellerDAO.insertArticle(seller, member_code);
+		int insertCount = sellerDAO.insertArticle(seller);
 		
 		// 6. 리턴받은 작업 수행 결과를 통해 판별 후 처리 작업 수행(트랜잭션 처리)
 		if(insertCount > 0) { // 작업 성공 시

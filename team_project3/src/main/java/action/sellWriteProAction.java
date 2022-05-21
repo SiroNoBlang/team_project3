@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
-import svc.sellerWriteProService;
+import svc.SellerWriteProService;
 import vo.ActionForward;
 import vo.SellerDTO;
 
@@ -85,11 +85,9 @@ public class sellWriteProAction implements Action {
 				seller.setSell_img_real_name(sell_img_real_name);
 				//System.out.println(seller);
 				
-				String sell_member_code = request.getParameter("sell_member_code");
-				System.out.println(sell_member_code);
 				
-				sellerWriteProService service = new sellerWriteProService();
-				boolean isWriteSuccess = service.registArticle(seller, sell_member_code);
+				SellerWriteProService service = new SellerWriteProService();
+				boolean isWriteSuccess = service.registArticle(seller);
 				
 				if(!isWriteSuccess) {
 					response.setContentType("text/html; charset=UTF-8");
