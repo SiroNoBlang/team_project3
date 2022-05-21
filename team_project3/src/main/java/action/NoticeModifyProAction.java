@@ -42,17 +42,12 @@ public class NoticeModifyProAction implements Action {
 		
 		MultipartRequest multi = new MultipartRequest(request, realPath, fileSize, "UTF-8", new DefaultFileRenamePolicy());
 		
-		
 		int notice_num = Integer.parseInt(multi.getParameter("notice_num"));
 		String notice_title = multi.getParameter("board_title");
-		String notice_nickname = multi.getParameter("board_nickname");
-		String notice_date = multi.getParameter("board_date");
 		String notice_content = multi.getParameter("board_content");
 
 		System.out.println(notice_num);
 		System.out.println(notice_title);
-		System.out.println(notice_nickname);
-		System.out.println(notice_date);
 		System.out.println(notice_content);
 		
 		String communityType = multi.getParameter("communityType");
