@@ -86,7 +86,16 @@ public class MemberDAO {
 		ResultSet rs = null;
 		
 		try {
-			String sql = "SELECT a.member_code, c.grade_name, a.member_nickname FROM member AS a JOIN  member_info_detail AS b ON a.member_code=b.member_info_detail_code JOIN grade AS c ON b.member_info_detail_acc_money BETWEEN c.lowest_acc_money AND c.highest_acc_money WHERE a.member_id=? AND a.member_passwd=?"; 
+			String sql = "SELECT a.member_code"
+					+ ", c.grade_name"
+					+ ", a.member_nickname "
+					+ "FROM member AS a "
+					+ "JOIN member_info_detail AS b "
+					+ "ON a.member_code=b.member_info_detail_code "
+					+ "JOIN grade AS c "
+					+ "ON b.member_info_detail_acc_money "
+					+ "BETWEEN c.lowest_acc_money AND c.highest_acc_money "
+					+ "WHERE a.member_id=? AND a.member_passwd=?"; 
 			
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, member_id);
@@ -113,9 +122,10 @@ public class MemberDAO {
 
 	public MemberBean getMemberArticle(String member_code) {
 		MemberBean memberDetail = null;
+		
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		System.out.println(member_code);
+		
 		try {
 			String sql = "SELECT a.member_code"
 					+ ", a.member_num"
@@ -145,18 +155,17 @@ public class MemberDAO {
 					+ ", d.member_service_log_passwd_change_date"
 					+ ", d.member_service_log_login_date"
 					+ ", d.member_service_log_order_count"
-					+ ", e.grade_name"
+					+ ", e.grade_name "
 					+ "FROM member AS a "
 					+ "JOIN member_info AS b "
 					+ "ON a.member_code = b.member_info_code "
-					+ "JOIN member_info_detail AS c"
+					+ "JOIN member_info_detail AS c "
 					+ "ON a.member_code = c.member_info_detail_code "
 					+ "JOIN member_service_log AS d "
 					+ "ON a.member_code = d.member_service_log_code "
-					+ "JOIN grade AS e"
+					+ "JOIN grade AS e "
 					+ "ON c.member_info_detail_acc_money BETWEEN e.lowest_acc_money AND e.highest_acc_money "
 					+ "WHERE a.member_code = ?";
-			
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, member_code);
 			rs = pstmt.executeQuery();
@@ -200,7 +209,7 @@ public class MemberDAO {
 			close(pstmt);
 			close(rs);
 		}
-		
+		System.out.println("getMemberArticle" + memberDetail);
 		return memberDetail;
 	}
 
@@ -274,7 +283,7 @@ public class MemberDAO {
 		
 		PreparedStatement pstmt = null;
 		int sucess = 0;
-		
+		System.out.println(member_status);
 		try {
 			if(member_status.equals("정상")) {
 				String sql = "UPDATE member_service_log SET member_service_log_status=? WHERE member_service_log_code=?";

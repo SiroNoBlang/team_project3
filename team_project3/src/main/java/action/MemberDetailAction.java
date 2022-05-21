@@ -20,7 +20,6 @@ public class MemberDetailAction implements Action {
 		
 		MemberDetailService service = new MemberDetailService();
 		MemberBean memberDetail = service.getMemberDetail(member_code);
-		
 		if(memberDetail != null) {
 			request.setAttribute("memberDetail", memberDetail);
 			request.setAttribute("member_code", member_code);
