@@ -24,6 +24,7 @@ public class LoginProAction implements Action {
 		
 		LoginProService service = new LoginProService();
 		MemberBean isLogin = service.isLogin(member_id, member_passwd);
+		System.out.println("액션이다" + isLogin);
 		
 		if(isLogin != null) {
 			if(isLogin.getGrade_name().equals("Admin")) {
@@ -34,16 +35,27 @@ public class LoginProAction implements Action {
 				forward = new ActionForward();
 				forward.setPath("MemberManagement.co");
 				forward.setRedirect(true);
-				
-			} else {
+			} else if(isLogin.getMember_service_log_status().equals("정상")) {
 				HttpSession session = request.getSession();
 				session.setAttribute("sCode", isLogin.getMember_code());
 				session.setAttribute("sNickname", isLogin.getMember_nickname());
 				forward = new ActionForward();
 				forward.setPath("MainPage.pr");
 				forward.setRedirect(true);
+				
+			} else if(isLogin.getMember_service_log_status().equals("정지")) {
+				request.setAttribute("sLoginDate", isLogin.getMember_service_log_login_date());
+				request.setAttribute("sReasonContent", isLogin.getReason_content());
+				forward = new ActionForward();
+				forward.setPath("Suspension.ma");
+				forward.setRedirect(false);
+				
+			}else if(isLogin.getMember_service_log_status().equals("탈퇴")) {
+				forward = new ActionForward();
+				forward.setPath("Withdrawal.ma");
+				forward.setRedirect(true);
+				
 			}
-			
 		} else {
 			response.setContentType("text/html; charset=UTF-8");
 			PrintWriter out = response.getWriter();
