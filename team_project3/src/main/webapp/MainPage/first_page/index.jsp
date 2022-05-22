@@ -1,9 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+String code = (String)session.getAttribute("sCode");
+String nickname = (String)session.getAttribute("sNickname");
+%>    
 <!DOCTYPE html>
 <html lang="en">
 <head>  
-	<title>Home 03</title>          
+	<title>Home 03</title>
+	<script type="text/javascript">
+	function confirmLogout() {
+	if(confirm("로그아웃 할꺼임?")) {
+		location.href = "./Logout.ma";
+		}
+	} 
+	</script>           
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 <!--===============================================================================================-->	
@@ -43,6 +54,27 @@
 	<header class="header-v3">
 		<!-- Header desktop -->
 		<div class="container-menu-desktop trans-03">
+		<!-- Topbar -->
+ 			<div class="top-bar">
+				<div class="content-topbar flex-sb-m h-full container">
+					<div class="left-top-bar">
+						Free shipping for standard order over $100
+					</div>
+
+					<div class="right-top-bar flex-w h-full">
+						<a href="#" class="flex-c-m trans-04 p-lr-25">
+							Help & FAQs
+						</a>
+
+						<a href="Mypage.ma?member_code=<%=code %>"   class="flex-c-m trans-04 p-lr-25">
+							<%=nickname %>님 마이페이지
+						</a>
+						<a href="javascript:void(0)" onclick="confirmLogout()" class="flex-c-m trans-04 p-lr-25">
+							로그아웃
+						</a>
+					</div>
+				</div>
+			</div>
 			<div class="wrap-menu-desktop">
 				<nav class="limiter-menu-desktop p-l-45">
 					
