@@ -100,7 +100,7 @@
 			<div id="page-container">
 			<div class="card">
 				<div class="title">QnA 글쓰기</div>
-					<form action="./QnaWritePro.co" name="boardForm" method="post" enctype="multipart/form-data">
+					<form action="./QnaWritePro.co" name="boardForm" method="post">
 						<table >
 							<tr>
 								<th><label for="qna_title">제목</label></th>
