@@ -294,6 +294,12 @@ public class MemberDAO {
 				pstmt.setString(1, member_status);
 				pstmt.setString(2, member_code);
 				sucess = pstmt.executeUpdate();
+			} else if(member_status.equals("정지")) {
+				String sql = "UPDATE member_service_log SET member_service_log_status=?,member_service_log_login_date=REPLACE(now(),'-','') WHERE member_service_log_code=?";
+				pstmt = con.prepareStatement(sql);
+				pstmt.setString(1, member_status);
+				pstmt.setString(2, member_code);
+				sucess = pstmt.executeUpdate();
 			} else {
 				String sql = "UPDATE member_service_log SET member_service_log_status=?,member_service_log_login_date=REPLACE(now(),'-','') WHERE member_service_log_code=?";
 				pstmt = con.prepareStatement(sql);
