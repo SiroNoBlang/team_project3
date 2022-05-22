@@ -16,6 +16,25 @@ public class JoinProAction implements Action {
 //		System.out.println("JoinProAction");
 		ActionForward forward = null;
 		
+		String val = "";
+		String bnd = "";
+		String ctgy = "";
+		
+		String [] style = request.getParameterValues("style");
+		String [] brand = request.getParameterValues("brand");
+		String [] category = request.getParameterValues("category");
+		
+		for(String val3 : style) {
+			val += val3 + ",";
+		}
+		
+		for(String b : brand) {
+			bnd += b + ",";
+		}
+		
+		for(String c : category) {
+			ctgy += c + ",";
+		}
 		
 		MemberBean memberBean = new MemberBean();
 		memberBean.setMember_nickname(request.getParameter("member_nickname"));
@@ -24,11 +43,13 @@ public class JoinProAction implements Action {
 		memberBean.setMember_email(request.getParameter("member_email1") + request.getParameter("member_email2"));
 		memberBean.setMember_info_gender(request.getParameter("member_info_gender"));
 		memberBean.setMember_info_age(request.getParameter("member_info_age"));
-		memberBean.setMember_info_detail_like_style(request.getParameter("member_info_detail_like_style"));
-		memberBean.setMember_info_detail_like_brand(request.getParameter("member_info_detail_like_brand"));
-		memberBean.setMember_info_detail_like_category(request.getParameter("member_info_detail_like_category"));
+		memberBean.setMember_info_detail_like_style(val);
+		memberBean.setMember_info_detail_like_brand(bnd);
+		memberBean.setMember_info_detail_like_category(ctgy);
 		
-//		System.out.println(memberBean);
+		System.out.println(val);
+		System.out.println(bnd);
+		System.out.println(ctgy);
 		
 		JoinProService service = new JoinProService();
 		boolean isJoinsuccess = service.joinSuccess(memberBean);

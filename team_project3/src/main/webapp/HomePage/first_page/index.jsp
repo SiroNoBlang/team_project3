@@ -139,13 +139,46 @@
 		$('#checkSubmit').hide();
 	}
 	
+// 	$(function(){
+// 		$("#member_nickname").on("keyup",function(){
+// 			let sendData = $("#fr").serialize();
+			
+// 			$.ajax({
+// 				type:"GET",
+// 				url:"index_check_nickname_pro.jsp",
+// 				data: sendData,
+// 				dataType:"text",
+// 				success:function(msg){
+// 					$("#nicknameResultArea").html(msg);
+// 				},
+// 				error: function(xhr, textStatus, errorThrown){
+// 					$("#nicknameResultArea").html(
+// 							"xhr = " + xhr + "<br>"
+// 							+ "textStatus = " + textStatus + "<br>"
+// 							+ "errorThrown = " + errorThrown);
+// 				}
+// 			});
+// 		});
+// 	});
+
+// function duplicateNickname(nickname){
+// 	$.ajax({
+			
+// 		type:"past",
+// 		url
+// 	});
+// }
+// $(function(){
+// 		$("#member_nickname").on("keyup",function(){
+	
 	$(function(){
 		$("#member_nickname").on("keyup",function(){
 			let sendData = $("#fr").serialize();
+			let nickname = $("#fr").serialize();
 			
 			$.ajax({
 				type:"GET",
-				url:"index_check_nickname_pro.jsp",
+				url:"./index_check_nickname_pro.jsp",
 				data: sendData,
 				dataType:"text",
 				success:function(msg){
@@ -159,8 +192,8 @@
 				}
 			});
 		});
-	});
-
+	});		
+			
 </script>
 </head>
 <body class="is-preload">
@@ -582,11 +615,11 @@
 			
 			<article id="joinPro">
 				<h2 class="major">Join</h2>
-				<form method="post" action="JoinPro.ma" id="fr">
+				<form method="post" action="JoinPro.ma" id="fr" name="fr">
 					<div class="fields">
 						<div class="field half">
 							<label for="member_nickname">Nickname</label> 
-							<input type="text"name="member_nickname" id="member_nickname" />
+							<input type="text"name="member_nickname" id="member_nickname" onkeyup="duplicateNickname(this.value)" />
 							<div id="nicknameResultArea"></div>
 						</div>
 						<div class="field half">
@@ -639,24 +672,48 @@
 						</div>
 						<div class="field half">
 							<label for="member_info_detail_like_style">Style</label> 
-							<select id="member_info_detail_like_style" name="member_info_detail_like_style">
-								<option value="귀여움">귀여움</option>
-								<option value="섹시함">섹시함</option>
-							</select>
+							<input type="checkbox" name="style" value="귀여움" id="Check16">
+							<label for="Check16">귀여움</label>
+							<input type="checkbox" name="style" value="청순" id="Check17">
+							<label for="Check17">청순</label>
+							<input type="checkbox" name="style" value="캐주얼" id="Check3">
+							<label for="Check3">캐주얼</label>
+							
+							
+<!-- 							<select id="member_info_detail_like_style" name="member_info_detail_like_style"> -->
+<!-- 								<option value="귀여움">귀여움</option> -->
+<!-- 								<option value="섹시함">섹시함</option> -->
+<!-- 							</select> -->
 						</div>
 						<div class="field half">
 							<label for="member_info_detail_like_brand">Brand</label> 
-							<select id="member_info_detail_like_brand" name="member_info_detail_like_brand">
-								<option value="나이키">나이키</option>
-								<option value="에르메스">에르메스</option>
-							</select>
+							<input type="checkbox" name="brand" value="나이키" id="Check6">
+							<label for="Check6">나이키</label>
+							<input type="checkbox" name="brand" value="아디다스" id="Check7">
+							<label for="Check7">아디다스</label>
+							<input type="checkbox" name="brand" value="아페쎄" id="Check8">
+							<label for="Check8">아페쎄</label>
+							<input type="checkbox" name="brand" value="칼하트" id="Check9">
+							<label for="Check9">칼하트</label>
+							<input type="checkbox" name="brand" value="샤넬" id="Check10">
+							<label for="Check10">샤넬</label>
+<!-- 							<select id="member_info_detail_like_brand" name="member_info_detail_like_brand"> -->
+<!-- 								<option value="나이키">나이키</option> -->
+<!-- 								<option value="에르메스">에르메스</option> -->
+<!-- 							</select> -->
 						</div>
 						<div class="field half">
 							<label for="member_info_detail_like_category">Like Item</label> 
-							<select id="member_info_detail_like_category" name="member_info_detail_like_category">
-								<option value="상의">상의</option>
-								<option value="하의">하의</option>
-							</select>
+							<input type="checkbox" name="category" value="상의" id="Check11">
+							<label for="Check11">상의</label>
+							<input type="checkbox" name="category" value="하의" id="Check12">
+							<label for="Check12">하의</label>
+							<input type="checkbox" name="category" value="신발" id="Check13">
+							<label for="Check13">신발</label>
+							<input type="checkbox" name="category" value="잡화" id="Check14">
+							<label for="Check14">잡화</label>
+							<input type="checkbox" name="category" value="상의" id="Check15">
+							<label for="Check15">상의</label>
 						</div>
 					</div>
 					<ul class="actions">
