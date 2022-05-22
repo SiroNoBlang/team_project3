@@ -13,7 +13,7 @@ public class QnadWriteProAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		System.out.println("QnadWriteProAction");
+//		System.out.println("QnadWriteProAction");
 		
 		ActionForward forward = null;
 		request.setCharacterEncoding("UTF-8");
@@ -23,6 +23,9 @@ public class QnadWriteProAction implements Action {
 		qna.setQna_title(request.getParameter("qna_title"));
 		qna.setQna_nickname(request.getParameter("qna_nickname"));
 		qna.setQna_content(request.getParameter("qna_content"));
+		
+//		System.out.println(qna);
+		
 		
 		QnaWriteProService service = new QnaWriteProService();
 		boolean isQnaWriteSuccess = service.registQnaArticle(qna);

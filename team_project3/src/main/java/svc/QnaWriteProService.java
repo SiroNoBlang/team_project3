@@ -10,7 +10,7 @@ import vo.QnaBean;
 public class QnaWriteProService {
 
 	public boolean registQnaArticle(QnaBean qna) {
-		System.out.println("QnaWriteProService - registQnaArticle()");
+//		System.out.println("QnaWriteProService - registQnaArticle()");
 		boolean isQnaWriteSuccess = false;
 		
 		Connection con = getConnection();
