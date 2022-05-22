@@ -39,7 +39,7 @@ public class MemberDAO {
            pstmt.setString(3, memberBean.getMember_passwd());
            pstmt.setString(4, memberBean.getMember_email());
            
-           sql = "INSERT INTO member_info (member_info_code,member_info_gender, member_info_age,member_info_grade_code) VALUES ((SELECT member_code FROM member ORDER BY CAST(member_num AS SIGNED) DESC LIMIT 1),?,?,(SELECT grade_code FROM grade WHERE grade_name='Basic'))";
+           sql = "INSERT INTO member_info (member_info_code,member_info_gender, member_info_age) VALUES ((SELECT member_code FROM member ORDER BY CAST(member_num AS SIGNED) DESC LIMIT 1),?,?)";
            pstmt2 = con.prepareStatement(sql);
            pstmt2.setString(1, memberBean.getMember_info_gender());
            pstmt2.setString(2, memberBean.getMember_info_age());
@@ -50,7 +50,7 @@ public class MemberDAO {
            pstmt3.setString(2, memberBean.getMember_info_detail_like_brand());
            pstmt3.setString(3, memberBean.getMember_info_detail_like_category());
            
-           sql ="INSERT INTO member_service_log VALUES ((SELECT member_code FROM member ORDER BY CAST(member_num AS SIGNED) DESC LIMIT 1), '정상', REPLACE(now(),'-',''), REPLACE(now(),'-',''), REPLACE(now(),'-',''), REPLACE(now(),'-',''), 0)";
+           sql ="INSERT INTO member_service_log VALUES ((SELECT member_code FROM member ORDER BY CAST(member_num AS SIGNED) DESC LIMIT 1), '정상', REPLACE(now(),'-',''), REPLACE(now(),'-',''), REPLACE(now(),'-',''), 0, 0)";
            pstmt4 = con.prepareStatement(sql);
            
 //           System.out.println(memberBean.getAgreement_name());
@@ -79,23 +79,14 @@ public class MemberDAO {
 	public MemberBean isLogin(String member_id, String member_passwd) {
 		System.out.println("MemberDAO isLogin");
 		MemberBean isLogin = null;
-//		System.out.println(member_id);
-//		System.out.println(member_passwd);
+		System.out.println(member_id);
+		System.out.println(member_passwd);
 		
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		
 		try {
-			String sql = "SELECT a.member_code"
-					+ ", c.grade_name"
-					+ ", a.member_nickname "
-					+ "FROM member AS a "
-					+ "JOIN member_info_detail AS b "
-					+ "ON a.member_code=b.member_info_detail_code "
-					+ "JOIN grade AS c "
-					+ "ON b.member_info_detail_acc_money "
-					+ "BETWEEN c.lowest_acc_money AND c.highest_acc_money "
-					+ "WHERE a.member_id=? AND a.member_passwd=?"; 
+			String sql = "SELECT a.member_code, c.grade_name, a.member_nickname, d.member_service_log_status, d.member_service_log_login_date, e.reason_content FROM member AS a JOIN  member_info_detail AS b ON a.member_code=b.member_info_detail_code JOIN member_service_log AS d ON a.member_code = d.member_service_log_code JOIN reason AS e ON d.memner_service_log_status_reason = e.reason_num JOIN grade AS c ON b.member_info_detail_acc_money BETWEEN c.lowest_acc_money AND c.highest_acc_money WHERE a.member_id=? AND a.member_passwd=?"; 
 			
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, member_id);
@@ -108,7 +99,9 @@ public class MemberDAO {
 				isLogin.setMember_code(rs.getString("a.member_code"));
 				isLogin.setGrade_name(rs.getString("c.grade_name"));
 				isLogin.setMember_nickname(rs.getString("a.member_nickname"));
-			
+				isLogin.setMember_service_log_status(rs.getString("d.member_service_log_status"));
+				isLogin.setMember_service_log_login_date(rs.getString("d.member_service_log_login_date"));
+				isLogin.setReason_content(rs.getString("e.reason_content"));
 			}
 		} catch (SQLException e) {
 
@@ -116,9 +109,12 @@ public class MemberDAO {
 			close(pstmt);
 			close(rs);
 		}
-		System.out.println(isLogin);
+		System.out.println("dao다 : " + isLogin);
 		return isLogin;
 	}
+	
+	
+
 
 	public MemberBean getMemberArticle(String member_code) {
 		MemberBean memberDetail = null;
