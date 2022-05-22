@@ -80,6 +80,87 @@
 		window.open("./HomePage/check_id.jsp");
 	}
 	
+	var result ,result2;
+	function is_checked1() {
+		  
+		  // 1. checkbox element를 찾습니다.
+		  const checkbox = document.getElementById('Check1');
+
+		  // 2. checked 속성을 체크합니다.
+		  const is_checked = checkbox.checked;
+		  
+			 result = is_checked;
+			 
+			 if(result==true && result2==true){
+				 $('#checkSubmit').show();
+			 }else{
+				 $('#checkSubmit').hide();
+			 }
+		  
+		}
+	function is_checked2() {
+		  
+		  // 1. checkbox element를 찾습니다.
+		  const checkbox = document.getElementById('Check2');
+
+		  // 2. checked 속성을 체크합니다.
+		  const is_checked = checkbox.checked;
+
+		  result2 = is_checked;
+		  
+		  if(result==true && result2==true){
+				 $('#checkSubmit').show();
+			 }else{
+				 $('#checkSubmit').hide();
+			 }
+		  
+		}
+	function is_checked3() {
+		  
+		  // 1. checkbox element를 찾습니다.
+		  const checkbox = document.getElementById('CheckAll');
+
+		  // 2. checked 속성을 체크합니다.
+		  const is_checked = checkbox.checked;
+
+		  // 3. 결과를 출력합니다.
+			  document.getElementById('Check1').checked = is_checked;
+			  document.getElementById('Check2').checked = is_checked;
+		
+		 if(is_checked){
+			 $('#checkSubmit').show();
+		 }else{
+			 $('#checkSubmit').hide();
+		 }
+		 
+		}
+
+	function submitHide(){
+		$('#checkSubmit').hide();
+	}
+	
+	$(function(){
+		$("#member_nickname").on("keyup",function(){
+			let sendData = $("#fr").serialize();
+			
+			$.ajax({
+				type:"GET",
+				url:"index_check_nickname_pro.jsp",
+				data: sendData,
+				dataType:"text",
+				success:function(msg){
+					$("#nicknameResultArea").html(msg);
+				},
+				error: function(xhr, textStatus, errorThrown){
+					$("#nicknameResultArea").html(
+							"xhr = " + xhr + "<br>"
+							+ "textStatus = " + textStatus + "<br>"
+							+ "errorThrown = " + errorThrown);
+				}
+			});
+		});
+	});
+
 </script>
 </head>
 <body class="is-preload">
@@ -99,7 +180,7 @@
 			<nav>
 				<ul>
 					<li><a href="#contact">Login</a></li>
-					<li><a href="#join">join</a></li>
+					<li><a href="#join" onclick="submitHide()">join</a></li>
 				</ul>
 			</nav>
 		</header>
@@ -431,9 +512,10 @@
 ① “몰”과 이용자 간에 발생한 전자상거래 분쟁에 관한 소송은 제소 당시의 이용자의 주소에 의하고, 주소가 없는 경우에는 거소를 관할하는 지방법원의 전속관할로 합니다. 다만, 제소 당시 이용자의 주소 또는 거소가 분명하지 않거나 외국 거주자의 경우에는 민사소송법상의 관할법원에 제기합니다.
 
 ② “몰”과 이용자 간에 제기된 전자상거래 소송에는 한국법을 적용합니다.</textarea>
-						<br>
-						<input type="checkbox" name="agree" value="01">동의
+						<input type="checkbox" name="agree" value="cb1" id="Check1" onclick="is_checked1()">
+						<label for="Check1">동의</label>
 					</fieldset>
+					<br>
 					<fieldset>
 						<legend>개인정보 수집/이용 동의(필수)</legend>
 						<textarea rows="5" cols="5">
@@ -482,10 +564,17 @@
 		- 행정자치부
 		  · 위탁업무 내용 : 공공 I-PIN, GPKI 인증
 		  · 개인정보 보유 및 이용 기간 : 행정자치부에서는 이미 보유하고 있는 개인정보이기 때문에 별도로 저장하지 않음</textarea>
-						<br>
-						<input type="checkbox" name="agree" value="02">동의
+						<input type="checkbox" name="agree" value="cb2" id="Check2" onclick="is_checked2()">
+						<label for="Check2">동의</label>
 					</fieldset>
-					<button type="submit">제출하기</button>
+					<br>
+					<pre id='result1'></pre>
+					<pre id='result2'></pre>
+					<pre id='result3'></pre>
+					<input type="checkbox" name="agree" value="cb2" id="CheckAll" onclick="is_checked3()">
+					<label for="CheckAll">전체동의</label>					
+					<span id="span"></span>
+					<button type="submit" id="checkSubmit" >제출하기</button>
 				</form>
 			</article>
 			
@@ -498,12 +587,11 @@
 						<div class="field half">
 							<label for="member_nickname">Nickname</label> 
 							<input type="text"name="member_nickname" id="member_nickname" />
-							<input type="button" value="Nickname 중복체크" onclick="checkNickname()">
+							<div id="nicknameResultArea"></div>
 						</div>
 						<div class="field half">
 							<label for="member_id">ID</label><span id="checkId"></span> 
 							<input type="text" name="member_id" id="member_id" />
-							<input type="button" value="ID 중복체크" onclick="checkId()">
 						</div>
 						<div class="field half">
 							<label for="member_passwd">Password</label>
@@ -516,12 +604,12 @@
 								<span id="passCheck"></span>
 						</div>
 						<div class="field half">
-							<label for="member_email1">Email</label> <input type="text"
-								name="member_email1" id="member_email1" />
+							<label for="member_email1">Email</label> 
+							<input type="text" name="member_email1" id="member_email1" />
 						</div>
 						<div class="field half">
-							<label>도메인</label> <select id="member_email2"
-								name="member_email2">
+							<label>도메인</label> 
+							<select id="member_email2" name="member_email2">
 								<option value="@gmail.com" selected="selected">gmail.com</option>
 								<option value="@naver.com">naver.com</option>
 								<option value="@nate.net">nate.net</option>
@@ -531,15 +619,15 @@
 							</select> contains
 						</div>
 						<div class="field half">
-							<label for="member_info_gender">성별</label> <select
-								id="member_info_gender" name="member_info_gender">
+							<label for="member_info_gender">성별</label> 
+							<select id="member_info_gender" name="member_info_gender">
 								<option value="male">남자</option>
 								<option value="female">여자</option>
 							</select>
 						</div>
 						<div class="field half">
-							<label for="member_info_age">나이</label> <select
-								id="member_info_age" name="member_info_age">
+							<label for="member_info_age">나이</label> 
+							<select id="member_info_age" name="member_info_age">
 								<option value="19세이하">19세이하</option>
 								<option value="20~29">20~29</option>
 								<option value="30~39">30~39</option>
@@ -550,25 +638,22 @@
 							</select>
 						</div>
 						<div class="field half">
-							<label for="member_info_detail_like_style">Style</label> <select
-								id="member_info_detail_like_style"
-								name="member_info_detail_like_style">
+							<label for="member_info_detail_like_style">Style</label> 
+							<select id="member_info_detail_like_style" name="member_info_detail_like_style">
 								<option value="귀여움">귀여움</option>
 								<option value="섹시함">섹시함</option>
 							</select>
 						</div>
 						<div class="field half">
-							<label for="member_info_detail_like_brand">Brand</label> <select
-								id="member_info_detail_like_brand"
-								name="member_info_detail_like_brand">
+							<label for="member_info_detail_like_brand">Brand</label> 
+							<select id="member_info_detail_like_brand" name="member_info_detail_like_brand">
 								<option value="나이키">나이키</option>
 								<option value="에르메스">에르메스</option>
 							</select>
 						</div>
 						<div class="field half">
-							<label for="member_info_detail_like_category">Like Item</label> <select
-								id="member_info_detail_like_category"
-								name="member_info_detail_like_category">
+							<label for="member_info_detail_like_category">Like Item</label> 
+							<select id="member_info_detail_like_category" name="member_info_detail_like_category">
 								<option value="상의">상의</option>
 								<option value="하의">하의</option>
 							</select>
@@ -579,14 +664,10 @@
 					</ul>
 				</form>
 				<ul class="icons">
-					<li><a href="#" class="icon brands fa-twitter"><span
-							class="label">Twitter</span></a></li>
-					<li><a href="#" class="icon brands fa-facebook-f"><span
-							class="label">Facebook</span></a></li>
-					<li><a href="#" class="icon brands fa-instagram"><span
-							class="label">Instagram</span></a></li>
-					<li><a href="#" class="icon brands fa-github"><span
-							class="label">GitHub</span></a></li>
+					<li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
+					<li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
+					<li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
+					<li><a href="#" class="icon brands fa-github"><span class="label">GitHub</span></a></li>
 				</ul>
 			</article>
 		</div>
@@ -609,3 +690,5 @@
 
 </body>
 </html>
+
+
