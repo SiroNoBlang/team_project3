@@ -22,6 +22,15 @@
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css'>
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css'>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+
+<script src="AdminPage/js/jquery-3.6.0.js"></script>
+<script type="text/javascript">
+	$(document).ready( function() {
+		$("#qnaTypeId").change(function(){
+			$("#qnaTitleId").val("["+$(this).val()+"] ");
+		});
+	});
+</script>
 </head>
 <body>
 	<div id="logo">
@@ -103,8 +112,21 @@
 					<form action="./QnaWritePro.co" name="boardForm" method="post">
 						<table >
 							<tr>
+								<th><label for="qna_type">문의유형</label></th>
+								<td>
+									<select id="qnaTypeId" name="qna_type">
+									  <option value="상품문의">상품문의</option>
+									  <option value="배송문의">배송문의</option>
+									  <option value="교환및반품문의">교환및반품문의</option>
+									  <option value="주문변경및취소문의">주문변경및취소문의</option>
+									  <option value="입금및결제문의">입금및결제문의</option>
+									  <option value="기타문의">기타문의</option>
+									</select>
+								</td>
+							</tr>
+							<tr>
 								<th><label for="qna_title">제목</label></th>
-								<td><input type="text" name="qna_title" required="required"></td>
+								<td><input type="text" id="qnaTitleId" name="qna_title" required="required"></td>
 							</tr>
 							<tr>
 								<th><label for="qna_nickname">작성자</label></th>

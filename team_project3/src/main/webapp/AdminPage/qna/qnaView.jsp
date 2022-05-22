@@ -84,8 +84,8 @@
 						</table>
 						<br>
 						<section id="commandCell">	
-							<input type="button" value="수정" onclick="location.href='NoticeModifyForm.co?notice_num=${param.notice_num}&page=${param.page}'">
-							<input type="button" value="삭제" onclick="location.href='NoticeDeleteForm.co?notice_num=${param.notice_num}&page=${param.page}'">
+							<input type="button" value="수정" onclick="location.href='QnaModifyForm.co?qna_num=${param.qna_num}&page=${param.page}'">
+							<input type="button" value="삭제" onclick="location.href='NoticeDeleteForm.co?qna_num=${param.qna_num}&page=${param.page}'">
 							<input type="button" value="목록" onclick="history.back()">
 <%-- 							<input type="button" value="목록" onclick="location.href='NoticeList.co?page=${param.page}'"> --%>
 						</section>

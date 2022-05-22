@@ -12,6 +12,7 @@ import vo.EventImgFileBean;
 import vo.MemberBean;
 import vo.NoticeBean;
 import vo.NoticeImgFileBean;
+import vo.QnaBean;
 
 import static db.JdbcUtil.*;
 
@@ -30,6 +31,7 @@ public class AdminDAO {
 	public void setConnection(Connection con) {
 		this.con = con;
 	}
+
 
 
 	// 공지사항 글쓰기
@@ -144,7 +146,7 @@ public class AdminDAO {
 		return insertCount;
 	}
 
-	//총 공지사항게시물 수를 조회
+	//총 게시물 수를 조회
 	public int selectListCount(String tableName) {
 //		System.out.println("AdminDAO - selectListCount()");
 		
@@ -306,7 +308,7 @@ public class AdminDAO {
 		return noticeImgFileList;
 	}
 	
-	//공지사항 검색어에 해당하는 게시물 수 (코드 수정하기)
+	//공지사항 검색어에 해당하는 게시물 수 
 	public int selectNoticeSearchListCount(String tableName, String search, String searchType) {
 		int listCount =  0;
 		PreparedStatement pstmt = null;
@@ -509,7 +511,7 @@ public class AdminDAO {
 		}
 	}
 	
-	// 이벤트에 해당하는 게시물 수 (코드 수정하기)
+	// 이벤트에 해당하는 게시물 수 
 	public int selectEventSearchListCount(String tableName, String search, String searchType) {
 		int listCount =  0;
 		PreparedStatement pstmt = null;
@@ -583,10 +585,235 @@ public class AdminDAO {
 		return eventSearchList;
 	}
 	
+	//QnA 글쓰기
+	public int insertQnaArticle(QnaBean qna) {
+
+		int insertCount = 0;
+
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		int num = 1;
+
+		try {
+			String sql = "SELECT MAX(qna_num) FROM qna";
+			pstmt = con.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+
+			if (rs.next()) {
+				num = rs.getInt(1) + 1;
+			}
+			close(pstmt);
+
+			sql = "INSERT INTO qna VALUES (?,?,REPLACE(now(),'-',''),?,?,?,?,?,?)";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, num);
+			pstmt.setString(2, qna.getQna_nickname());
+			pstmt.setString(3, qna.getQna_title());
+			pstmt.setString(4, qna.getQna_content());
+			pstmt.setInt(5, num); // qna_re_ref
+			pstmt.setInt(6, 0); // qna_re_lev
+			pstmt.setInt(7, 0); // qna_re_seq
+			pstmt.setInt(8, 0); // qna_readcount
+			
+			
+			insertCount = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println("SQL 구문 오류 발생! - insertQnaArticle()");
+		} finally {
+			close(pstmt);
+			close(rs);
+		}
+		return insertCount;
+	}
+
+	//QnA 리스트
+	public ArrayList<QnaBean> selectQnaList(int pageNum, int listLimit) {
+		ArrayList<QnaBean> qnaList = null;
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		int startRow = (pageNum - 1) * listLimit;
+		
+		try {
+			String sql = "SELECT * FROM qna ORDER BY qna_re_ref DESC, qna_re_seq ASC LIMIT ?,?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, listLimit);
+			
+			rs = pstmt.executeQuery();
+			
+			qnaList = new ArrayList<QnaBean>();
+			
+			while(rs.next()) {
+				
+				QnaBean qna = new QnaBean();
+				qna.setQna_num(rs.getInt("qna_num"));
+				qna.setQna_nickname(rs.getString("qna_nickname"));
+				qna.setQna_write_date(rs.getString("qna_write_date").substring(0,8));
+				qna.setQna_title(rs.getString("qna_title"));
+				qna.setQna_content(rs.getString("qna_content"));
+				qna.setQna_re_ref(rs.getInt("qna_re_ref"));
+				qna.setQna_re_lev(rs.getInt("qna_re_lev"));
+				qna.setQna_re_seq(rs.getInt("qna_re_seq"));
+				qna.setQna_readcount(rs.getInt("qna_readcount"));
+				
+				qnaList.add(qna);
+			}
+			
+		} catch (SQLException e) {
+			System.out.println("SQL 구문 오류 발생! - selectQnaList()");
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rs);
+		}
+		
+		return qnaList;
+		
+	}
+
 	
+	//QnA  상세정보 조회
+	public QnaBean selectQnaArticle(int qna_num) {
+
+		QnaBean qnaArticle = null;
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			String sql = "SELECT * FROM qna WHERE qna_num=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, qna_num);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				qnaArticle = new QnaBean();
+				qnaArticle.setQna_num(rs.getInt("qna_num"));
+				qnaArticle.setQna_nickname(rs.getString("qna_nickname"));
+				qnaArticle.setQna_write_date(rs.getString("qna_write_date").substring(0,8));
+				qnaArticle.setQna_title(rs.getString("qna_title"));
+				qnaArticle.setQna_content(rs.getString("qna_content"));
+				qnaArticle.setQna_re_ref(rs.getInt("qna_re_ref"));
+				qnaArticle.setQna_re_lev(rs.getInt("qna_re_lev"));
+				qnaArticle.setQna_re_seq(rs.getInt("qna_re_seq"));
+				qnaArticle.setQna_readcount(rs.getInt("qna_readcount"));
+			}
+			
+		} catch (SQLException e) {
+			System.out.println("SQL 구문 오류 발생! - selectQnaArticle()");
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rs);
+		}
+		
+		return qnaArticle;
+		
+	}
 	
+	//QnA 조회수 증가
+	public void updateQnaReadcount(int qna_num) {
+		PreparedStatement pstmt = null;
+		try {
+			String sql = "UPDATE qna SET qna_readcount=qna_readcount+1 WHERE qna_num=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, qna_num);
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			System.out.println("SQL 구문 오류 발생! - updateQnaReadcount()");
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+	}
+
+
+	//qna 검색어에 해당하는 게시물 수 
+	public int selectQnaSearchListCount(String tableName, String search, String searchType) {
+		int listCount =  0;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			con = getConnection();
+			
+			String sql = "SELECT COUNT(qna_num) FROM "+ tableName+ " WHERE " + searchType + " LIKE ?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, "%" + search + "%");
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				listCount = rs.getInt(1);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println("SQL 구문 오류 - selectQnaSearchListCount()");
+		} finally {
+			close(pstmt);
+			close(rs);
+		}
+		return listCount;
+	}
+
 	
-	
+	//qna 검색어에 해당하는 게시물 목록
+	public ArrayList<QnaBean> selectSearchQnaList(int pageNum, int listLimit, String search, String searchType) {
+		ArrayList<QnaBean> qnaSearchList =null;
+		QnaBean qnaArticle = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		
+		try {
+			int startRow = (pageNum - 1) * listLimit;
+			
+			String sql = "SELECT * FROM qna "
+					+ "WHERE " + searchType + " LIKE ? "
+					+ "ORDER BY qna_num DESC LIMIT ?,?";
+			
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, "%" + search + "%");
+			pstmt.setInt(2, startRow);
+			pstmt.setInt(3, listLimit);
+			
+			rs = pstmt.executeQuery();
+			
+			qnaSearchList = new ArrayList<QnaBean>();
+			
+			while(rs.next()) {
+				
+				qnaArticle = new QnaBean();
+				qnaArticle.setQna_num(rs.getInt("qna_num"));
+				qnaArticle.setQna_nickname(rs.getString("qna_nickname"));
+				qnaArticle.setQna_write_date(rs.getString("qna_write_date").substring(0,8));
+				qnaArticle.setQna_title(rs.getString("qna_title"));
+				qnaArticle.setQna_content(rs.getString("qna_content"));
+				qnaArticle.setQna_re_ref(rs.getInt("qna_re_ref"));
+				qnaArticle.setQna_re_lev(rs.getInt("qna_re_lev"));
+				qnaArticle.setQna_re_seq(rs.getInt("qna_re_seq"));
+				qnaArticle.setQna_readcount(rs.getInt("qna_readcount"));
+				
+				qnaSearchList.add(qnaArticle);
+			}
+			
+//				System.out.println(qnaSearchList);
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println("SQL 구문 오류 - selectSearchQnaList()");
+		} finally {
+			close(pstmt);
+			close(rs);
+		}
+		return qnaSearchList;
+	}
+
 	
 	
 	
