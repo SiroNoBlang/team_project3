@@ -22,7 +22,10 @@ import action.MpNoticeSearchAction;
 import action.MpQnaDeleteAction;
 import action.MpQnaDetailAction;
 import action.MpQnaListAction;
+import action.MpQnaModifyFormAction;
+import action.MpQnaModifyProAction;
 import action.MpQnaSearchAction;
+import action.MpQnaWriteProAction;
 import action.MyPageAction;
 import action.MyPageUpdateAction;
 import vo.ActionForward;
@@ -94,7 +97,7 @@ public class Main extends HttpServlet {
 		
 		
 		//커뮤니티 작업 서블릿 
-		else if(command.equals("/CommunityNotice.ma")) { // 커뮤니티 클릭시 공지사항으로(/CommunityNotice.ma)
+			else if(command.equals("/CommunityNotice.ma")) { // 커뮤니티 클릭시 공지사항으로(/CommunityNotice.ma)
 			action = new MpNoticeListAction();
 			try {
 				forward = action.execute(request, response);
@@ -136,7 +139,7 @@ public class Main extends HttpServlet {
 				forward = action.execute(request, response);
 			} catch (Exception e) {
 			}
-		} else if(command.equals("/CommunityQnaDetail.ma")) { // 커뮤니티 QnA 디테일(/CommunityNoticeDetail.ma)
+		}   else if(command.equals("/CommunityQnaDetail.ma")) { // 커뮤니티 QnA 디테일(/CommunityNoticeDetail.ma)
 			action = new MpQnaDetailAction();
 			try {
 				forward = action.execute(request, response);
@@ -148,16 +151,42 @@ public class Main extends HttpServlet {
 				forward = action.execute(request, response);
 			} catch (Exception e) {
 			}
-		} else if(command.equals("/CommunityQnaDeleteForm.ma")) { // 삭제시 비밀번호 확인(/QnaDeleteForm.co)
+		} else if(command.equals("/CommunityQnaDeleteForm.ma")) { // 삭제시 비밀번호 확인(/CommunityQnaDeleteForm.co)
 			forward = new ActionForward("MainPage/community/communityQnaDelete.jsp",false);
 
-		} else if(command.equals("/CommunityQnaDeletePro.ma")) { // 커뮤니티 Qna 검색(/CommunityQnaDeletePro.ma)
+		} else if(command.equals("/CommunityQnaDeletePro.ma")) { // 커뮤니티 Qna 삭제(/CommunityQnaDeletePro.ma)
 			action = new MpQnaDeleteAction();
 			try {
 				forward = action.execute(request, response);
 			} catch (Exception e) {
 			}
+		} else if(command.equals("/CommunityQnaWriteForm.ma")) { // 커뮤니티 Qna 글쓰기폼(/CommunityQnaWriteForm.ma)
+			forward = new ActionForward("MainPage/community/communityQnaWrite.jsp", false);
+		} else if(command.equals("/CommunityQnaWritePro.ma")) { // 커뮤니티 Qna 글쓰기(/CommunityQnaWritePro.ma)
+			action = new MpQnaWriteProAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+			}
+		} else if(command.equals("/CommunityQnaModifyForm.ma")) { // 커뮤니티 Qna 수정 form(/CommunityQnaModifyForm.ma)
+			action = new MpQnaModifyFormAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+			}
+		} else if(command.equals("/CommunityQnaModifyPro.ma")) { // 커뮤니티 Qna 수정 form(/CommunityQnaModifyForm.ma)
+			action = new MpQnaModifyProAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+			}
 		}
+		
+		
+		
+		
+		
+		
 		
 		
 		

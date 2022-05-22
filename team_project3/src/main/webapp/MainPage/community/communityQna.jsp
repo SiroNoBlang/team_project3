@@ -400,8 +400,9 @@
 				</c:if>
             </tbody>
         </table>
-
-      
+		<section id="buttonArea">
+			<input type="button" class="btn btn-sm btn-primary"  value="글쓰기" onclick="location.href='CommunityQnaWriteForm.ma'" />
+		</section>
         <nav>
             <ul class="pagination justify-content-center">
 		         <c:choose>

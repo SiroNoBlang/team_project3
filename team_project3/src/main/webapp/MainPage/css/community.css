@@ -125,3 +125,9 @@ div#deleteCenter {
     margin: 0 auto;
     margin-bottom: 50px;
     }
+    
+    
+.write textarea#board_content,input#qnaTitleId,input[type="password"] {
+	border: 1px solid #e9ecef;
+}
+
