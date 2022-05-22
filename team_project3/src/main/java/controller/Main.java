@@ -71,6 +71,15 @@ public class Main extends HttpServlet {
 			} catch (Exception e) {
 				
 			}
+		} else if(command.equals("/Suspension.ma")) {
+			forward = new ActionForward("HomePage/guide_page/suspension.jsp", false);
+			
+		} else if(command.equals("/Withdrawal.ma")) {
+			forward = new ActionForward("HomePage/guide_page/withdrawal.jsp", false);
+			
+		} else if(command.equals("/Reason.ma")) {
+			forward = new ActionForward("HomePage/guide_page/reason.jsp", false);
+			
 		}	
 		
 		
