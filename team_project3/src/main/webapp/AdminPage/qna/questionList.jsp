@@ -92,10 +92,13 @@
 						                	<c:if test="${not empty qnaList and pageInfo.getListCount() > 0}">
 											<c:forEach var="qna" items="${qnaList }" varStatus="status">
 								                <tr>
-							            <%--         <td>${notice.getNotice_num() }</td>  --%>
 							                    	<td>${listCount -(listCount -((pageNum-1)* listLimit + status.index)-1)} </td> 
 								                    <td>
 														<a href="QnaDetail.co?qna_num=${qna.getQna_num() }&page=${pageNum}">
+														<!-- 답글에 대한 들여쓰기(공백 추가) 작업 처리 -->
+														<c:forEach var="i" begin="1" end="${qna.getQna_re_lev() }">
+															&nbsp;
+														</c:forEach>
 								                    		${qna.getQna_title() } </a>
 								                    </td>
 								                    <td>${qna.getQna_nickname() }</td>

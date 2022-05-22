@@ -5,8 +5,6 @@
 	//세션 객체에 저장된 세션 닉네임("sNickname") 가져와서 변수에 저장
 	String sNickname = (String)session.getAttribute("sNickname");
  %>  
- 
- 
 <!DOCTYPE html>
 <html>
 <head>
@@ -56,6 +54,8 @@
 				<div class="title">QnA 글 상세보기</div>
 				
 					<form action="./CommunityBoardWritePro.co" name="boardForm" method="post" enctype="multipart/form-data">
+						<input type="hidden" id="qna_num" name="qna_num" value="${param.qna_num}">
+						<input type="hidden" id="page" name="page" value="${param.page}">
 						<table >
 							<tr>
 								<th><label for="qna_title">제목</label></th>
@@ -84,8 +84,9 @@
 						</table>
 						<br>
 						<section id="commandCell">	
+							<input type="button" value="답변" onclick="location.href='QnaReplyForm.co?qna_num=${param.qna_num}&page=${param.page}'">
 							<input type="button" value="수정" onclick="location.href='QnaModifyForm.co?qna_num=${param.qna_num}&page=${param.page}'">
-							<input type="button" value="삭제" onclick="location.href='NoticeDeleteForm.co?qna_num=${param.qna_num}&page=${param.page}'">
+							<input type="button" value="삭제"  onclick="confirmDelete()">
 							<input type="button" value="목록" onclick="history.back()">
 <%-- 							<input type="button" value="목록" onclick="location.href='NoticeList.co?page=${param.page}'"> --%>
 						</section>

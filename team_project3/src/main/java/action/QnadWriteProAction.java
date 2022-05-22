@@ -41,7 +41,7 @@ public class QnadWriteProAction implements Action {
 			out.println("</script>");
 		} else { // 글쓰기 성공
 			forward = new ActionForward();
-			forward.setPath("QnaList.co");
+			forward.setPath("QusetionList.co");
 			forward.setRedirect(true);
 		}
 		

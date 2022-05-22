@@ -22,9 +22,12 @@ import action.NoticeListAction;
 import action.NoticeModifyFormAction;
 import action.NoticeModifyProAction;
 import action.NoticeSearchAction;
+import action.QnaDeleteProAction;
 import action.QnaDetailAction;
 import action.QnaModifyFormAction;
 import action.QnaModifyProAction;
+import action.QnaReplyFormAction;
+import action.QnaReplyProAction;
 import action.QnaSearchAction;
 import action.QnadListAction;
 import action.QnadWriteProAction;
@@ -116,12 +119,7 @@ public class CommunityFrontController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		}
-		
-		
-
-		//qna 작업중
-		else if (command.equals("/QnaWritePro.co")) { // QnA 글쓰기(/QnaWritePro.co) 요청
+		} else if (command.equals("/QnaWritePro.co")) { // QnA 글쓰기(/QnaWritePro.co) 요청
 			action = new QnadWriteProAction();
 			try {
 				forward = action.execute(request, response);
@@ -150,7 +148,7 @@ public class CommunityFrontController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		}  else if(command.equals("/QnaModifyForm.co")) {// QnA 수정form(/QnaModifyForm.co) 요청
+		}else if(command.equals("/QnaModifyForm.co")) {// QnA 수정form(/QnaModifyForm.co) 요청
 			// 비즈니스 로직 처리를 위해 BoardModifyFormAction 클래스의 execute() 메서드 호출
 			action = new QnaModifyFormAction();
 			
@@ -167,36 +165,33 @@ public class CommunityFrontController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		} 
-//		else if(command.equals("/QnaReplyForm.co")) {// QnA 답글 (/QnaReplyForm.co) 요청
-//			action = new QnaReplyFormAction();
-//			
-//			try {
-//				forward = action.execute(request, response);
-//			} catch (Exception e) {
-//				e.printStackTrace();
-//			}
-//		} else if(command.equals("/QnaReplyPro.co")) {// QnA 답글 (/QnaReplyPro.co) 요청
-//			action = new QnaReplyProAction();
-//			
-//			try {
-//				forward = action.execute(request, response);
-//			} catch (Exception e) {
-//				e.printStackTrace();
-//			}
-//		}else if(command.equals("/QnaDeleteForm.co")) { //  QnA 삭제form (/QnaDeleteForm.co) 요청
-//			forward = new ActionForward("AdminPage/qna/qnaDelete.jsp", false);
-//		} else if(command.equals("/QnaDeletePro.co")) { //  QnA 삭제 (/QnaDeletePro.co) 요청
-//			action = new QnaDeleteProAction();
-//			
-//			try {
-//				forward = action.execute(request, response);
-//			} catch (Exception e) {
-//				e.printStackTrace();
-//			}
-//		}
-//		
-//	
+		}else if(command.equals("/QnaReplyForm.co")) {// QnA 답글 (/QnaReplyForm.co) 요청
+			action = new QnaReplyFormAction();
+			
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}else if(command.equals("/QnaReplyPro.co")) {// QnA 답글 (/QnaReplyPro.co) 요청
+			action = new QnaReplyProAction();
+			
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		} else if(command.equals("/QnaDeletePro.co")) { //  QnA 삭제 (/QnaDeletePro.co) 요청
+			action = new QnaDeleteProAction();
+			
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		
+	
 		
 		
 		

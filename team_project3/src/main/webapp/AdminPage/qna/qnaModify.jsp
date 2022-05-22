@@ -9,7 +9,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>관리자페이지 - 커뮤니티 글쓰기</title>
+<title>관리자페이지 - QnA 글 수정</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/css/bootstrap.css'>
 <link rel='stylesheet' href='https://raw.githubusercontent.com/forsigner/magic-check/master/css/magic-check.css'>
@@ -62,7 +62,9 @@
 			<div class="card">
 				<div class="title">QnA 글 수정</div>
 				
-					<form action="./QnaModifyPro.co" name="boardForm" method="post" enctype="multipart/form-data">
+					<form action="./QnaModifyPro.co" name="boardForm" method="post">
+						<input type="hidden" name="qna_num" value="${param.qna_num}">
+						<input type="hidden" name="page" value="${param.page}">
 						<table >
 							<tr>
 								<th><label for="qna_type">문의유형</label></th>

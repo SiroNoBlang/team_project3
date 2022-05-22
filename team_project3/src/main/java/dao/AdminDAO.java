@@ -813,9 +813,106 @@ public class AdminDAO {
 		}
 		return qnaSearchList;
 	}
+	
+	// qna 글 수정
+	public int updateQnaArticle(QnaBean qna) {
+		int updateCount = 0;
+		
+		PreparedStatement pstmt = null;
+		
+		try {
+			String sql = "UPDATE qna "
+					+ "SET qna_nickname=?,qna_title=?,qna_write_date=?,qna_content=? "
+					+ "WHERE qna_num=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, qna.getQna_nickname());
+			pstmt.setString(2, qna.getQna_title());
+			pstmt.setString(3, qna.getQna_write_date());
+			pstmt.setString(4, qna.getQna_content());
+			pstmt.setInt(5, qna.getQna_num());
+			
+			updateCount = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			System.out.println("SQL 구문 오류 발생! - updateQnaArticle()");
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return updateCount;
+	}
 
-	
-	
+	// qna 답글 등록
+	public int insertQnaReplyArticle(QnaBean qnaArticle) {
+		int insertCount = 0;
+		PreparedStatement pstmt = null, pstmt2 = null;
+		ResultSet rs = null;
+		
+		int num = 1; 
+		try {
+			String sql = "SELECT MAX(qna_num) FROM qna";
+			pstmt = con.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				num = rs.getInt(1) + 1;
+			}
+			
+			sql = "UPDATE qna SET qna_re_seq=qna_re_seq+1 "
+					+ "WHERE qna_re_ref=? AND qna_re_seq>?";
+			pstmt2 = con.prepareStatement(sql);
+			pstmt2.setInt(1, qnaArticle.getQna_re_ref()); // 참조글번호
+			pstmt2.setInt(2, qnaArticle.getQna_re_seq()); // 순서번호
+			pstmt2.executeUpdate();
+			
+			close(pstmt2);
+			
+			// 답글(새글) 등록 작업 처리
+			sql = "INSERT INTO qna VALUES (?,?,REPLACE(now(),'-',''),?,?,?,?,?,?)";
+			pstmt2 = con.prepareStatement(sql);
+			pstmt2.setInt(1, num); // 새 글 번호
+			pstmt2.setString(2, qnaArticle.getQna_nickname());
+			pstmt2.setString(3, qnaArticle.getQna_title());
+			pstmt2.setString(4, qnaArticle.getQna_content());
+			pstmt2.setInt(5, qnaArticle.getQna_re_ref());
+			pstmt2.setInt(6, qnaArticle.getQna_re_lev() + 1);
+			pstmt2.setInt(7, qnaArticle.getQna_re_seq() + 1);
+			pstmt2.setInt(8, 0); 
+			
+			insertCount = pstmt2.executeUpdate();
+		} catch (SQLException e) {
+			System.out.println("SQL 구문 오류 발생! - insertQnaReplyArticle()");
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+			close(pstmt2);
+		}
+		
+		return insertCount;
+	}
+
+	// qna 삭제
+	public int deleteQnaArticle(int qna_num) {
+		int deleteCount = 0;
+		
+		PreparedStatement pstmt = null;
+		
+		try {
+			String sql = "DELETE FROM qna WHERE qna_num=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, qna_num);
+			deleteCount = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			System.out.println("SQL 구문 오류 발생! - deleteQnaArticle()");
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return deleteCount;	
+	}
+
 	
 	
 	public ArrayList<MemberBean> selectMemberManagementList(int pageNum, int listLimit) {
@@ -860,12 +957,6 @@ public class AdminDAO {
 		
 		return memberManagementList;
 	}
-
-	
-
-
-
-
 
 
 
