@@ -913,7 +913,37 @@ public class AdminDAO {
 		return deleteCount;	
 	}
 
-	
+
+	// 메인페이지에서 삭제기능을 위한 패스워드 확인
+	public boolean isArticleWriter(int qna_num, String qna_delete) {
+	boolean isArticleWriter = false;
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			String sql = "SELECT qna_num, member_passwd FROM qna JOIN member ON qna_nickname = member_nickname WHERE qna_num =? AND member_passwd=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, qna_num);
+			pstmt.setString(2, qna_delete);
+			
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				isArticleWriter = true;
+			}
+			
+	    } catch (SQLException e) {
+			System.out.println("SQL 구문 오류 발생! - isArticleWriter()");
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rs);
+		}
+		
+		return isArticleWriter;
+	}
+
+
 	
 	public ArrayList<MemberBean> selectMemberManagementList(int pageNum, int listLimit) {
 		ArrayList<MemberBean> memberManagementList = null;

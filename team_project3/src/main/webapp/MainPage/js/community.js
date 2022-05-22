@@ -7,4 +7,6 @@ $(document).ready(function(){
 
 });
 
+	
+document.getElementById('delete').focus();
 

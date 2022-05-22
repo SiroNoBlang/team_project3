@@ -120,3 +120,8 @@ input.listMargin {
 input.page-item.page-link.listMargin {
     cursor: pointer;
 }
+
+div#deleteCenter {
+    margin: 0 auto;
+    margin-bottom: 50px;
+    }

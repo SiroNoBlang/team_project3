@@ -29,4 +29,20 @@ public class QnaDeleteProService {
 		return isDeleteSuccess;
 	}
 
+	public boolean isArticleWriter(int qna_num, String qna_delete) {
+
+		boolean isArticleWriter = false;
+		Connection con = getConnection();
+		
+		AdminDAO adminDAO = AdminDAO.getInstance();
+		
+		adminDAO.setConnection(con);
+		
+		isArticleWriter = adminDAO.isArticleWriter(qna_num, qna_delete);
+		
+		close(con);
+		
+		return isArticleWriter;
+	}
+	
 }
