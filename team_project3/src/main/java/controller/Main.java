@@ -15,6 +15,7 @@ import action.LoginProAction;
 import action.LogoutAction;
 import action.MpEventDetailAction;
 import action.MpEventListAction;
+import action.MpEventSearchAction;
 import action.MpNoticeDetailAction;
 import action.MpNoticeListAction;
 import action.MpNoticeSearchAction;
@@ -77,6 +78,7 @@ public class Main extends HttpServlet {
 		
 		
 		
+		
 		//커뮤니티 작업 서블릿 
 		else if(command.equals("/CommunityNotice.ma")) { // 커뮤니티 클릭시 공지사항으로(/Community.ma)
 			action = new MpNoticeListAction();
@@ -108,9 +110,13 @@ public class Main extends HttpServlet {
 				forward = action.execute(request, response);
 			} catch (Exception e) {
 			}
+		}else if(command.equals("/CommunityEventSearch.ma")) { // 커뮤니티 이벤트 검색기능(/CommunityEventSearch.ma)
+			action = new MpEventSearchAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+			}
 		}
-		
-		
 		
 		
 		
