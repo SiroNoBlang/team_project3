@@ -13,6 +13,11 @@ import action.Action;
 import action.JoinProAction;
 import action.LoginProAction;
 import action.LogoutAction;
+import action.MpEventDetailAction;
+import action.MpEventListAction;
+import action.MpNoticeDetailAction;
+import action.MpNoticeListAction;
+import action.MpNoticeSearchAction;
 import action.MyPageAction;
 import action.MyPageUpdateAction;
 import vo.ActionForward;
@@ -65,10 +70,50 @@ public class Main extends HttpServlet {
 			} catch (Exception e) {
 				
 			}
-		} else if(command.equals("/CommunityNotice.ma")) {
-			forward = new ActionForward("MainPage/community/communityNotice.jsp", false);
-			
+		}	
+		
+		
+		
+		
+		
+		
+		//커뮤니티 작업 서블릿 
+		else if(command.equals("/CommunityNotice.ma")) { // 커뮤니티 클릭시 공지사항으로(/Community.ma)
+			action = new MpNoticeListAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+			}
+		}else if(command.equals("/CommunityNoticeDetail.ma")) { // 커뮤니티 공지사항 디테일(/CommunityNoticeDetail.ma)
+			action = new MpNoticeDetailAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+			}
+		}else if(command.equals("/CommunityNoticeSearch.ma")) { // 커뮤니티 공지사항 검색(/CommunityNoticeSearch.ma)
+			action = new MpNoticeSearchAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+			}
+		}else if(command.equals("/CommunityEvent.ma")) { // 커뮤니티 이벤트 클릭(/CommunityNotice.ma)
+			action = new MpEventListAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+			}
+		}else if(command.equals("/CommunityEventDetail.ma")) { // 커뮤니티 이벤트 디테일(/CommunityEventDetail.ma)
+			action = new MpEventDetailAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+			}
 		}
+		
+		
+		
+		
+		
 		
 		
 		//ActionForward 객체에 저장된 포워딩 정보에 따른 포워딩 작업 수행

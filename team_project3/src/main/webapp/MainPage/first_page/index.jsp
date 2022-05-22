@@ -74,7 +74,7 @@
 								<a href="SellForm.pr">Sell</a>
 							</li>
 							<li>
-								<a href="about.html">About</a>
+								<a href="CommunityNotice.ma">Community</a>
 							</li>
 
 							<li>

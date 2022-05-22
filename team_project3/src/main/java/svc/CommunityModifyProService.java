@@ -24,17 +24,17 @@ public class CommunityModifyProService {
 		
 		adminDAO.setConnection(con);
 		
-				
-		int updateCount = adminDAO.updateNoticeArticle(notice,noticeImgList);
-		
-		if(updateCount > 0) {
-			commit(con);
-			isNoticeModifySuccess = true;
-		} else { // 작업 실패 시
-			rollback(con);
-		}
-		close(con);
-		
+//				
+//		int updateCount = adminDAO.updateNoticeArticle(notice,noticeImgList);
+//		
+//		if(updateCount > 0) {
+//			commit(con);
+//			isNoticeModifySuccess = true;
+//		} else { // 작업 실패 시
+//			rollback(con);
+//		}
+//		close(con);
+//		
 		return isNoticeModifySuccess;
 	}
 
@@ -49,16 +49,16 @@ public class CommunityModifyProService {
 		
 		adminDAO.setConnection(con);
 		
-		int updateCount = adminDAO.updateEventArticle(event,eventImgList);
-		
-		if(updateCount > 0) {
-			commit(con);
-			isEventModifySuccess = true;
-		} else { // 작업 실패 시
-			rollback(con);
-		}
-		close(con);
-		
+//		int updateCount = adminDAO.updateEventArticle(event,eventImgList);
+//		
+//		if(updateCount > 0) {
+//			commit(con);
+//			isEventModifySuccess = true;
+//		} else { // 작업 실패 시
+//			rollback(con);
+//		}
+//		close(con);
+//		
 		return isEventModifySuccess;
 	}
 
