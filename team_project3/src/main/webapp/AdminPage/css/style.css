@@ -432,7 +432,7 @@ a:hover {
 }
 
 #main-content {
-	min-height: calc(100vh - 60px);
+/* 	min-height: calc(100vh - 60px); qna 글쓰기 영향*/ 
 	clear: both;
 }
 
@@ -533,3 +533,8 @@ section#pageList {
     margin: 0 auto;
     margin-top: 20px;
 }
+
+
+
+
+

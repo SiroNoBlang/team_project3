@@ -1,11 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
+ <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>   
  <%
-
 	//세션 객체에 저장된 세션 닉네임("sNickname") 가져와서 변수에 저장
 	String sNickname = (String)session.getAttribute("sNickname");
- 	
  %>  
 <!DOCTYPE html>
 <html>
@@ -22,6 +20,19 @@
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css'>
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css'>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+<script src="AdminPage/js/jquery-3.6.0.js"></script>
+<script type="text/javascript">
+	$(document).ready( function() {
+		let date = new Date();
+		let year = date.getFullYear();
+		let month = date.getMonth() + 1;
+		let day = date.getDate();
+		
+		
+		let title = $('input[name=board_title]').val();
+		$('input[name=board_title]').attr('value',"["+year+""+month+""+day+" 수정] "+title);
+	});
+</script>
 </head>
 <body>
 	<div id="logo">
@@ -48,83 +59,83 @@
 				<i id="toggle-left-menu" class="ion-android-menu"></i>
 			</div>
 			<div class="header-right float-right">
-			<a href="javascript:void(0)" onclick="confirmLogout()"><i class="icon ion-log-out" ></i></a>
+				<a href="javascript:void(0)" onclick="confirmLogout()"><i class="icon ion-log-out" ></i></a>
 			</div>
 		</div>
 		<div id="page-container">
 			<div class="card">
-				<div class="title">커뮤니티 글쓰기</div>
-					<form action="./CommunityBoardWritePro.co" name="boardForm" method="post" enctype="multipart/form-data">
+				<div class="title">공지사항 글 수정</div>
+				
+					<form action="./NoticeModifyPro.co" name="boardForm" method="post" enctype="multipart/form-data">
 						<table >
 							<tr>
 								<th>분류</th>
 								<td>
-									<label><input TYPE='radio' name='communityType' value='notice' />공지사항</label>
+									<label><input TYPE='radio' name='communityType' value='notice' checked="checked"/>공지사항</label>
 									<label><input TYPE='radio' name='communityType' value='event' />이벤트</label>
 								</td>
 							</tr>
 							<tr>
 								<th><label for="board_title">제목</label></th>
-								<td><input type="text" name="board_title" required="required"></td>
+								<td><input type="text" name="board_title" required="required" value="${noticeArticle.getNotice_title() }">
+								</td>
 							</tr>
 							<tr>
 								<th><label for="board_nickname">작성자</label></th>
 								<td><input type="text" name="board_nickname" value="<%=sNickname %>" readonly="readonly"></td>
 							</tr>
 							<tr>
+								<th><label for="board_date">작성일</label></th>
+								<td><input type="text" name="board_date" readonly="readonly" value="${noticeArticle.getNotice_write_date() }">
+								</td>
+							</tr>
+							<tr>
 								<th><label for="board_content">내용</label></th>
-								<td> <textarea id="board_content" name="board_content"  rows="20" cols="100"></textarea> </td>
+								<td>
+									<textarea id="board_content" name="board_content"  rows="20" cols="100">${noticeArticle.getNotice_content() } </textarea>
+								</td>
 							</tr>
-							<tr>
-								<th><label for="board_file">파일 첨부</label></th>
-								<td><input type="file" id="file1" name="board_file0"></td>
-							</tr>
-							<tr>
-								<th><label for="board_file">파일 첨부</label></th>
-								<td><input type="file" id="file1" name="board_file1"></td>
-							</tr>
+						  	<c:choose>
+						  		<c:when test="${not empty noticeImgFileList }"> <!-- 첨부파일이 있을 경우 -->
+								  		<tr>
+											<th><label for="board_file">파일 첨부</label></th>
+											<td><input type="file" id="file1" name="board_file0">
+												<a href="./Upload/admin_notice_img/${noticeImgFileList[0].getNotice_img_file_real_name() }" 
+												download="${noticeImgFileList[0].getNotice_img_file_name()  }"> 
+												${noticeImgFileList[0].getNotice_img_file_name() }</a>
+											</td>
+										</tr>
+								  		<tr>
+											<th><label for="board_file">파일 첨부</label></th>
+											<td><input type="file" id="file1" name="board_file1">
+												<a href="./Upload/admin_notice_img/${noticeImgFileList[1].getNotice_img_file_real_name()  }" 
+												download="${noticeImgFileList[1].getNotice_img_file_name() }"> 
+												${noticeImgFileList[1].getNotice_img_file_name()}</a>
+											</td>
+										</tr>
+						  		</c:when>
+						  		<c:otherwise> <!-- 첨부파일이 없을 경우 -->
+						  			<tr>
+										<th><label for="board_file">파일 첨부</label></th>
+										<td><input type="file" id="file1" name="board_file0"></td>
+									</tr>
+							  		<tr>
+										<th><label for="board_file">파일 첨부</label></th>
+										<td><input type="file" id="file1" name="board_file1"></td>
+									</tr>
+						  		</c:otherwise>
+						  	</c:choose> 
 						</table>
 						<br>
 						<section id="commandCell">	
-							<input type="submit" value="작성완료">&nbsp;&nbsp;
-							<input type="reset" value="다시쓰기">&nbsp;&nbsp;	
+							<input type="submit" value="수정">&nbsp;&nbsp;
+							<input type="reset" value="다시쓰기">&nbsp;&nbsp;
 							<input type="button" value="취소" onclick="history.back()">
 						</section>
 					</form>
 				 </div>
 			</div>
 		</div>
-		
-		
-		
-			<div id="page-container">
-			<div class="card">
-				<div class="title">QnA 글쓰기</div>
-					<form action="./QnaWritePro.co" name="boardForm" method="post" enctype="multipart/form-data">
-						<table >
-							<tr>
-								<th><label for="qna_title">제목</label></th>
-								<td><input type="text" name="qna_title" required="required"></td>
-							</tr>
-							<tr>
-								<th><label for="qna_nickname">작성자</label></th>
-								<td><input type="text" name="qna_nickname" value="<%=sNickname %>" readonly="readonly"></td>
-							</tr>
-							<tr>
-								<th><label for="qna_content">내용</label></th>
-								<td> <textarea id="board_content" name="qna_content"  rows="20" cols="100"></textarea> </td>
-							</tr>
-						</table>
-						<br>
-						<section id="commandCell">	
-							<input type="submit" value="작성완료">&nbsp;&nbsp;
-							<input type="reset" value="다시쓰기">&nbsp;&nbsp;	
-							<input type="button" value="취소" onclick="history.back()">
-						</section>
-					</form>
-				 </div>
-			</div>
-		
 	<span id="show-lable">Hello</span>
 	<!-- partial -->
 	<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js'></script>

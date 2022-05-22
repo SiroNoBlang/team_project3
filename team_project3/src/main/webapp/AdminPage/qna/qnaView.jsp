@@ -1,17 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
+ <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>   
  <%
-
 	//세션 객체에 저장된 세션 닉네임("sNickname") 가져와서 변수에 저장
 	String sNickname = (String)session.getAttribute("sNickname");
- 	
  %>  
+ 
+ 
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>관리자페이지 - 커뮤니티 글쓰기</title>
+<title>관리자페이지 - 커뮤니티 공지사항 상세정보</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/css/bootstrap.css'>
 <link rel='stylesheet' href='https://raw.githubusercontent.com/forsigner/magic-check/master/css/magic-check.css'>
@@ -48,83 +48,73 @@
 				<i id="toggle-left-menu" class="ion-android-menu"></i>
 			</div>
 			<div class="header-right float-right">
-			<a href="javascript:void(0)" onclick="confirmLogout()"><i class="icon ion-log-out" ></i></a>
+				<a href="javascript:void(0)" onclick="confirmLogout()"><i class="icon ion-log-out" ></i></a>
 			</div>
 		</div>
 		<div id="page-container">
 			<div class="card">
-				<div class="title">커뮤니티 글쓰기</div>
+				<div class="title">공지사항 글 상세보기</div>
+				
 					<form action="./CommunityBoardWritePro.co" name="boardForm" method="post" enctype="multipart/form-data">
 						<table >
 							<tr>
 								<th>분류</th>
 								<td>
-									<label><input TYPE='radio' name='communityType' value='notice' />공지사항</label>
+									<label><input TYPE='radio' name='communityType' value='notice' checked="checked"/>공지사항</label>
 									<label><input TYPE='radio' name='communityType' value='event' />이벤트</label>
 								</td>
 							</tr>
 							<tr>
 								<th><label for="board_title">제목</label></th>
-								<td><input type="text" name="board_title" required="required"></td>
+								<td>${noticeArticle.getNotice_title() }</td>
+							</tr>
+							<tr>
+								<th><label for="board_num">실제글번호</label></th>
+								<td>${noticeArticle.getNotice_num() }</td>
 							</tr>
 							<tr>
 								<th><label for="board_nickname">작성자</label></th>
-								<td><input type="text" name="board_nickname" value="<%=sNickname %>" readonly="readonly"></td>
+								<td><%=sNickname %></td>
+							</tr>
+							<tr>
+								<th><label for="board_date">작성일</label></th>
+								<td>${noticeArticle.getNotice_write_date() }</td>
+							</tr>
+							<tr>
+								<th><label for="board_readcount">조회수</label></th>
+								<td>${noticeArticle.getNotice_readcount() }</td>
 							</tr>
 							<tr>
 								<th><label for="board_content">내용</label></th>
-								<td> <textarea id="board_content" name="board_content"  rows="20" cols="100"></textarea> </td>
+								<td>${noticeArticle.getNotice_content() } <br>
+									<c:if test="${not empty noticeImgFileList}">
+										<c:forEach var="noticeImg" items="${noticeImgFileList }">
+											<img src="./Upload/admin_notice_img/${noticeImg.getNotice_img_file_real_name() }"> <br>
+										</c:forEach>
+									</c:if> 
+								</td>
 							</tr>
 							<tr>
 								<th><label for="board_file">파일 첨부</label></th>
-								<td><input type="file" id="file1" name="board_file0"></td>
-							</tr>
-							<tr>
-								<th><label for="board_file">파일 첨부</label></th>
-								<td><input type="file" id="file1" name="board_file1"></td>
+								<td>
+									<c:forEach var="noticeImg" items="${noticeImgFileList }">
+										<a href="./Upload/admin_notice_img/${noticeImg.getNotice_img_file_real_name() }" download="${noticeImg.getNotice_img_file_name() }"> 
+										${noticeImg.getNotice_img_file_name() }</a><br>
+									</c:forEach> 
+								</td>
 							</tr>
 						</table>
 						<br>
 						<section id="commandCell">	
-							<input type="submit" value="작성완료">&nbsp;&nbsp;
-							<input type="reset" value="다시쓰기">&nbsp;&nbsp;	
-							<input type="button" value="취소" onclick="history.back()">
+							<input type="button" value="수정" onclick="location.href='NoticeModifyForm.co?notice_num=${param.notice_num}&page=${param.page}'">
+							<input type="button" value="삭제" onclick="location.href='NoticeDeleteForm.co?notice_num=${param.notice_num}&page=${param.page}'">
+							<input type="button" value="목록" onclick="history.back()">
+<%-- 							<input type="button" value="목록" onclick="location.href='NoticeList.co?page=${param.page}'"> --%>
 						</section>
 					</form>
 				 </div>
 			</div>
 		</div>
-		
-		
-		
-			<div id="page-container">
-			<div class="card">
-				<div class="title">QnA 글쓰기</div>
-					<form action="./QnaWritePro.co" name="boardForm" method="post" enctype="multipart/form-data">
-						<table >
-							<tr>
-								<th><label for="qna_title">제목</label></th>
-								<td><input type="text" name="qna_title" required="required"></td>
-							</tr>
-							<tr>
-								<th><label for="qna_nickname">작성자</label></th>
-								<td><input type="text" name="qna_nickname" value="<%=sNickname %>" readonly="readonly"></td>
-							</tr>
-							<tr>
-								<th><label for="qna_content">내용</label></th>
-								<td> <textarea id="board_content" name="qna_content"  rows="20" cols="100"></textarea> </td>
-							</tr>
-						</table>
-						<br>
-						<section id="commandCell">	
-							<input type="submit" value="작성완료">&nbsp;&nbsp;
-							<input type="reset" value="다시쓰기">&nbsp;&nbsp;	
-							<input type="button" value="취소" onclick="history.back()">
-						</section>
-					</form>
-				 </div>
-			</div>
-		
 	<span id="show-lable">Hello</span>
 	<!-- partial -->
 	<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js'></script>

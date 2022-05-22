@@ -14,10 +14,11 @@
 <link rel='stylesheet' href='https://raw.githubusercontent.com/forsigner/magic-check/master/css/magic-check.css'>
 <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Roboto:300,400'>
 <link rel='stylesheet' href='http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css'>
+<link rel="stylesheet" href="AdminPage/style.css">
 <link rel="stylesheet" href="AdminPage/css/style.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css'>
-<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css'>
+<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css'><link rel="stylesheet" href="./style.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
 
 </head>
@@ -67,10 +68,10 @@
 					                <form action="./NoticeSearch.co" class="formCss">
 										<select name="searchType" id="product">
 										    <option value="notice_title">제목</option>
-										    <option value="notice_content">내용</option>
+										    <option value="notice_content" <c:if test="${param.searchType eq 'notice_content'}"> selected="selected"</c:if>>내용</option>
 										</select>
 					                        <label for="search" class="blind">공지사항 내용 검색</label>
-					                        <input id="search" type="search" name="search">
+					                        <input id="search" type="search" name="search" value="${param.search}">
 					                        <button type="submit" class="btn btn-dark" >검색</button>
 					                </form>
 					            </div>
@@ -89,10 +90,9 @@
 						                </tr>
 						                </thead>
 						                <tbody>
-						                	<c:if test="${not empty noticeList and pageInfo.getListCount() > 0}">
-											<c:forEach var="notice" items="${noticeList }" varStatus="status">
+						                	<c:if test="${not empty noticeSearchList and pageInfo.getListCount() > 0}">
+											<c:forEach var="notice" items="${noticeSearchList }" varStatus="status">
 								                <tr>
-							            <%--         <td>${notice.getNotice_num() }</td>  --%>
 							                    	<td>${listCount -(listCount -((pageNum-1)* listLimit + status.index)-1)} </td> 
 								                    <td>
 														<a href="NoticeDetail.co?notice_num=${notice.getNotice_num() }&page=${pageNum}">
@@ -112,7 +112,7 @@
     						<section id="pageList">
 								<c:choose>
 									<c:when test="${pageNum > 1}">
-										<input type="button" value="이전" onclick="location.href='NoticeList.co?page=${pageNum - 1}'">
+										<input type="button" value="이전" onclick="location.href='NoticeSearch.co?page=${pageNum - 1}&search=${param.search}&searchType=${param.searchType}'">
 									</c:when>
 									<c:otherwise>
 										<input type="button" value="이전">
@@ -125,14 +125,13 @@
 											${i }
 										</c:when>
 										<c:otherwise>
-											<a href="NoticeList.co?page=${i }">${i }</a>
+											<a href="NoticeSearch.co?page=${i }&search=${param.search}&searchType=${param.searchType}">${i }</a>
 										</c:otherwise>
 									</c:choose>
 								</c:forEach>
-						
 								<c:choose>
 									<c:when test="${pageNum < maxPage}">
-										<input type="button" value="다음" onclick="location.href='NoticeList.co?page=${pageNum + 1}'">
+										<input type="button" value="다음" onclick="location.href='NoticeSearch.co?page=${pageNum + 1}&search=${param.search}&searchType=${param.searchType}'">
 									</c:when>
 									<c:otherwise>
 										<input type="button" value="다음">
