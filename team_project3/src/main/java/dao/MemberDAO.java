@@ -50,7 +50,7 @@ public class MemberDAO {
            pstmt3.setString(2, memberBean.getMember_info_detail_like_brand());
            pstmt3.setString(3, memberBean.getMember_info_detail_like_category());
            
-           sql ="INSERT INTO member_service_log VALUES ((SELECT member_code FROM member ORDER BY CAST(member_num AS SIGNED) DESC LIMIT 1), '정상', REPLACE(now(),'-',''), REPLACE(now(),'-',''), REPLACE(now(),'-',''), 0, 0)";
+           sql ="INSERT INTO member_service_log VALUES ((SELECT member_code FROM member ORDER BY CAST(member_num AS SIGNED) DESC LIMIT 1), '정상', REPLACE(now(),'-',''), REPLACE(now(),'-',''), REPLACE(now(),'-',''), 0, '0')";
            pstmt4 = con.prepareStatement(sql);
            
 //           System.out.println(memberBean.getAgreement_name());
@@ -59,6 +59,12 @@ public class MemberDAO {
 //           pstmt5 = con.prepareStatement(sql);
 //           pstmt5.setString(1, memberBean.getAgreement_name());
 //           pstmt5.setString(2, memberBean.getAgreement_content());
+           
+           
+           System.out.println(pstmt);
+           System.out.println(pstmt2);
+           System.out.println(pstmt3);
+           System.out.println(pstmt4);
            
            joinCount = pstmt.executeUpdate();
            joinCount = pstmt2.executeUpdate();
