@@ -350,7 +350,7 @@
 				</div>
 	
 				<div class="w300" style="padding-right:10px">
-					<input type="search"  class="form-control form-control-sm" id="search" name="search">
+					<input type="search"  class="form-control form-control-sm" id="search" name="search"  value="${param.search}">
 				</div>
 				<div>
 					<button type="submit" class="btn btn-sm btn-primary" id="btnSearch" >검색</button>
@@ -385,7 +385,7 @@
 	                <tr>
                     	<td>${listCount -(listCount -((pageNum-1)* listLimit + status.index)-1)} </td> 
 	                    <td>
-							<a href="CommunityQnaDetail.ma?qna_num=${qna.getQna_num() }&page=${pageNum}">
+							<a href="CommunityQnaConfirm.ma?qna_num=${qna.getQna_num() }&page=${pageNum}">
 	                    		${qna.getQna_title() } </a>
 	                    </td>
 	                    <td>${qna.getQna_nickname() }</td>
