@@ -202,6 +202,7 @@ public class MemberDAO {
 				memberDetail.setMember_service_log_login_date(rs.getString("d.member_service_log_login_date").substring(0,8));
 				memberDetail.setMember_service_log_order_count(rs.getInt("d.member_service_log_order_count")); 
 				memberDetail.setGrade_name(rs.getString("e.grade_name"));
+				
 			}
 		} catch (SQLException e) {
 			
@@ -314,6 +315,52 @@ public class MemberDAO {
 	public MemberBean getMemberStatus() {
 		MemberBean bean = null;
 		
+		int top_level = 0;
+		int nomal = 0;
+		int suspension = 0;
+		int withdrawal = 0;
+		String[] status = {"정상", "정지", "탈퇴"};
+		PreparedStatement pstmt = null;
+		ResultSet rs =null;
+		
+		try {
+			for(String str : status) {
+				String sql = "SELECT COUNT(*) FROM member_service_log WHERE member_service_log_status=?";
+				pstmt = con.prepareStatement(sql);
+				pstmt.setString(1, str);
+				rs = pstmt.executeQuery();
+				
+				if(rs.next()) {
+					switch (str) {
+					case "정상":
+						nomal = 10;
+						break;
+					case "정지":
+						suspension = 13;
+						break;
+					case "탈퇴":
+						withdrawal = 2;
+						break;
+					default:
+						break;
+					}
+				}
+				
+			}
+			
+			bean = new MemberBean();
+			bean.setTop_level(top_level);
+			bean.setNomal(nomal);
+			bean.setSuspension(suspension);
+			bean.setWithdrawal(withdrawal);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		
+		System.out.println(bean);
 		return bean;
 	}
 	

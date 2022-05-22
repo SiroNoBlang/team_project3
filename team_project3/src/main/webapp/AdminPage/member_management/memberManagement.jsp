@@ -24,7 +24,7 @@
 <c:set var="startPage" value="${pageInfo.getStartPage() }" /><!-- 시작 페이지 번호 --> 
 <c:set var="endPage" value="${pageInfo.getEndPage() }" /><!-- 끝 페이지 번호 --> 
 <c:set var="listCount" value="${pageInfo.getListCount() }" /><!-- 총 게시물 수 --> 
-<c:set var="listLimit" value="${pageInfo.getListLimit() }" /><!-- 표시할 페이지 수 --> 
+<c:set var="listLimit" value="${pageInfo.getListLimit() }" /><!-- 표시할 페이지 수 -->
 	<div id="logo">
 		<span class="big-logo">Admin</span> <span class="small-logo">&nbsp; A</span>
 	</div>
@@ -60,7 +60,7 @@
 				          <div class="panel panel-info">
 				            <div class="panel-heading">VVVIP</div>
 				            <div class="panel-body">
-				              <h4>123</h4>
+				              <h4>${bean.getTop_level() }</h4>
 				            </div>
 				          </div>
 				        </div>
@@ -68,7 +68,7 @@
 				          <div class="panel panel-success">
 				            <div class="panel-heading">정상</div>
 				            <div class="panel-body">
-				              <h4>123</h4>
+				              <h4>${bean.getNomal() }</h4>
 				            </div>
 				          </div>
 				        </div>
@@ -76,7 +76,7 @@
 				          <div class="panel panel-warning">
 				            <div class="panel-heading">정지</div>
 				            <div class="panel-body">
-				              <h4>123</h4>
+				              <h4>${bean.getSuspension() }</h4>
 				            </div>
 				          </div>
 				        </div>
@@ -84,14 +84,12 @@
 				          <div class="panel panel-danger">
 				            <div class="panel-heading">탈퇴</div>
 				            <div class="panel-body">
-				              <h4>123</h4>
+				              <h4>${bean.getWithdrawal() }</h4>
 				            </div>
 				          </div>
 				        </div>
 				      </section>
-				</div>
-				
-				
+				</div>				
 				
 				
 				<div class="card">
@@ -138,6 +136,7 @@
 								                    </td>
 								                    <td>${memberManagement.getMember_nickname() }</td>
 													<td>${memberManagement.getMember_service_log_join_date() }</td>
+<%-- 													<td>${memberManagement.getMember_service_log_login_date() }</td> --%>
 													<td>${memberManagement.getMember_service_log_status() }</td>
 								                </tr>
 							              </c:forEach>
