@@ -11,7 +11,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>관리자페이지 - 커뮤니티 공지사항 상세정보</title>
+<title>관리자페이지 - 커뮤니티 QnA 상세정보</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/css/bootstrap.css'>
 <link rel='stylesheet' href='https://raw.githubusercontent.com/forsigner/magic-check/master/css/magic-check.css'>
@@ -53,55 +53,33 @@
 		</div>
 		<div id="page-container">
 			<div class="card">
-				<div class="title">공지사항 글 상세보기</div>
+				<div class="title">QnA 글 상세보기</div>
 				
 					<form action="./CommunityBoardWritePro.co" name="boardForm" method="post" enctype="multipart/form-data">
 						<table >
 							<tr>
-								<th>분류</th>
-								<td>
-									<label><input TYPE='radio' name='communityType' value='notice' checked="checked"/>공지사항</label>
-									<label><input TYPE='radio' name='communityType' value='event' />이벤트</label>
-								</td>
+								<th><label for="qna_title">제목</label></th>
+								<td>${qnaArticle.getQna_title() }</td>
 							</tr>
 							<tr>
-								<th><label for="board_title">제목</label></th>
-								<td>${noticeArticle.getNotice_title() }</td>
+								<th><label for="qna_num">실제글번호</label></th>
+								<td>${qnaArticle.getQna_num() }</td>
 							</tr>
 							<tr>
-								<th><label for="board_num">실제글번호</label></th>
-								<td>${noticeArticle.getNotice_num() }</td>
-							</tr>
-							<tr>
-								<th><label for="board_nickname">작성자</label></th>
+								<th><label for="qna_nickname">작성자</label></th>
 								<td><%=sNickname %></td>
 							</tr>
 							<tr>
-								<th><label for="board_date">작성일</label></th>
-								<td>${noticeArticle.getNotice_write_date() }</td>
+								<th><label for="qna_date">작성일</label></th>
+								<td>${qnaArticle.getQna_write_date() }</td>
 							</tr>
 							<tr>
-								<th><label for="board_readcount">조회수</label></th>
-								<td>${noticeArticle.getNotice_readcount() }</td>
+								<th><label for="qna_readcount">조회수</label></th>
+								<td>${qnaArticle.getQna_readcount() }</td>
 							</tr>
 							<tr>
-								<th><label for="board_content">내용</label></th>
-								<td>${noticeArticle.getNotice_content() } <br>
-									<c:if test="${not empty noticeImgFileList}">
-										<c:forEach var="noticeImg" items="${noticeImgFileList }">
-											<img src="./Upload/admin_notice_img/${noticeImg.getNotice_img_file_real_name() }"> <br>
-										</c:forEach>
-									</c:if> 
-								</td>
-							</tr>
-							<tr>
-								<th><label for="board_file">파일 첨부</label></th>
-								<td>
-									<c:forEach var="noticeImg" items="${noticeImgFileList }">
-										<a href="./Upload/admin_notice_img/${noticeImg.getNotice_img_file_real_name() }" download="${noticeImg.getNotice_img_file_name() }"> 
-										${noticeImg.getNotice_img_file_name() }</a><br>
-									</c:forEach> 
-								</td>
+								<th><label for="qna_content">내용</label></th>
+								<td>${qnaArticle.getQna_content() } <br>
 							</tr>
 						</table>
 						<br>
