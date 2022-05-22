@@ -5,8 +5,9 @@ $(document).ready(function(){
         $(this).closest('li').addClass('active');
     });
 
-});
+		$("#delete").focus();
+		$("#confirm").focus();
 
-	
-document.getElementById('delete').focus();
+
+});
 
