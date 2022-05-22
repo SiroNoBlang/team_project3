@@ -88,17 +88,7 @@ public class Main extends HttpServlet {
 		} else if(command.equals("/Reason.ma")) {
 			forward = new ActionForward("HomePage/guide_page/reason.jsp", false);
 			
-		}	
-		
-		
-		
-		
-		
-	
-		
-		
-		//커뮤니티 작업 서블릿 
-			else if(command.equals("/CommunityNotice.ma")) { // 커뮤니티 클릭시 공지사항으로(/CommunityNotice.ma)
+		}else if(command.equals("/CommunityNotice.ma")) { // 커뮤니티 클릭시 공지사항으로(/CommunityNotice.ma)
 			action = new MpNoticeListAction();
 			try {
 				forward = action.execute(request, response);
