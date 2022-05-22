@@ -60,14 +60,14 @@
 		<div id="page-container">
 				
 				<div class="card">
-					<div class="title">공지사항</div>
+					<div class="title">QnA</div>
 					<div id="board-search">
 					        <div class="container">
 					            <div class="search-window">
-					                <form action="./NoticeSearch.co" class="formCss">
+					                <form action="./QnaSearch.co" class="formCss">
 										<select name="searchType" id="product">
-										    <option value="notice_title">제목</option>
-										    <option value="notice_content">내용</option>
+										    <option value="qna_title">제목</option>
+										    <option value="qna_content">내용</option>
 										</select>
 					                        <label for="search" class="blind">공지사항 내용 검색</label>
 					                        <input id="search" type="search" name="search">
@@ -89,18 +89,18 @@
 						                </tr>
 						                </thead>
 						                <tbody>
-						                	<c:if test="${not empty noticeList and pageInfo.getListCount() > 0}">
-											<c:forEach var="notice" items="${noticeList }" varStatus="status">
+						                	<c:if test="${not empty qnaList and pageInfo.getListCount() > 0}">
+											<c:forEach var="qna" items="${qnaList }" varStatus="status">
 								                <tr>
 							            <%--         <td>${notice.getNotice_num() }</td>  --%>
 							                    	<td>${listCount -(listCount -((pageNum-1)* listLimit + status.index)-1)} </td> 
 								                    <td>
-														<a href="NoticeDetail.co?notice_num=${notice.getNotice_num() }&page=${pageNum}">
-								                    		${notice.getNotice_title() } </a>
+														<a href="QnaDetail.co?qna_num=${qna.getQna_num() }&page=${pageNum}">
+								                    		${qna.getQna_title() } </a>
 								                    </td>
-								                    <td>${notice.getNotice_nickname() }</td>
-													<td>${notice.getNotice_write_date() }</td>
-													<td>${notice.getNotice_readcount() }</td>
+								                    <td>${qna.getQna_nickname() }</td>
+													<td>${qna.getQna_write_date() }</td>
+													<td>${qna.getQna_readcount() }</td>
 								                </tr>
 							              </c:forEach>
 										</c:if>
@@ -112,7 +112,7 @@
     						<section id="pageList">
 								<c:choose>
 									<c:when test="${pageNum > 1}">
-										<input type="button" value="이전" onclick="location.href='NoticeList.co?page=${pageNum - 1}'">
+										<input type="button" value="이전" onclick="location.href='QusetionList.co?page=${pageNum - 1}'">
 									</c:when>
 									<c:otherwise>
 										<input type="button" value="이전">
@@ -125,14 +125,14 @@
 											${i }
 										</c:when>
 										<c:otherwise>
-											<a href="NoticeList.co?page=${i }">${i }</a>
+											<a href="QusetionList.co?page=${i }">${i }</a>
 										</c:otherwise>
 									</c:choose>
 								</c:forEach>
 						
 								<c:choose>
 									<c:when test="${pageNum < maxPage}">
-										<input type="button" value="다음" onclick="location.href='NoticeList.co?page=${pageNum + 1}'">
+										<input type="button" value="다음" onclick="location.href='QusetionList.co?page=${pageNum + 1}'">
 									</c:when>
 									<c:otherwise>
 										<input type="button" value="다음">
