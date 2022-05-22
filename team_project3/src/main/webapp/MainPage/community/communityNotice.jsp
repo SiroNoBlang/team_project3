@@ -86,15 +86,16 @@
 								<a href="blog.html">Blog</a>
 							</li>
 
+
 							<li class="active-menu">
 								<a href="CommunityNotice.ma">Community</a>
 									<ul class="sub-menu">
 									<li><a href="CommunityNotice.ma">공지사항</a></li>
 									<li><a href="CommunityEvent.ma">이벤트</a></li>
-									<li><a href="home-03.html">Q&A</a></li>
+									<li><a href="CommunityQna.ma">Q&#38;A</a></li>
 								</ul>
 							</li>
-
+							
 							<li>
 								<a href="contact.html">Contact</a>
 							</li>
@@ -326,13 +327,13 @@
 	</section>	
 
 
-	<!-- Content page -->
+	<!-- Community page -->
 		<div id="com_container">
 			<div class=" container d-flex justify-content-center" >     
 		        <ul class="pagination shadow-lg">
 		            <li class="page-item active"><a class="page-link" href="CommunityNotice.ma"><small>공지사항</small></a></li>
-		            <li class="page-item  "><a class="page-link" href="CommunityEvent.ma"><small>이벤트</small></a></li>                        
-		            <li class="page-item  "><a class="page-link " href="#"><i  class=""></i><small>Q&A</small></a></li>  
+		            <li class="page-item "><a class="page-link" href="CommunityEvent.ma"><small>이벤트</small></a></li>                        
+		            <li class="page-item  "><a class="page-link " href="CommunityQna.ma"><small>Q&#38;A</small></a></li>  
 		        </ul> 
 		    </div>
 	  </div>  
