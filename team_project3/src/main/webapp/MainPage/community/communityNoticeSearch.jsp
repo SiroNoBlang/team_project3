@@ -339,21 +339,23 @@
 	    
 	
 	<!-- 검색창  -->
+	<form action="CommunityNoticeSearch.ma">
 		<div class="form-group row justify-content-center">
 			<div class="w100" style="padding-right:10px">
 				<select class="form-control form-control-sm" name="searchType" id="searchType">
 					<option value="notice_title">제목</option>
-					<option value="notice_content">본문</option>
+					<option value="notice_content" <c:if test="${param.searchType eq 'notice_content'}"> selected="selected"</c:if>>본문</option>
 				</select>
 			</div>
 
 			<div class="w300" style="padding-right:10px">
-				<input type="text" class="form-control form-control-sm" name="keyword" id="keyword">
+				<input type="search"  class="form-control form-control-sm" id="search" name="search" value="${param.search}">
 			</div>
 			<div>
-				<button class="btn btn-sm btn-primary" name="btnSearch" id="btnSearch" onclick="location.href='NoticeList.co?search=${param.search}&searchType=${param.searchType}" >검색</button>
+				<button type="submit" class="btn btn-sm btn-primary" id="btnSearch" >검색</button>
 			</div>
 		</div>
+	</form>	
 		
 	<!-- 페이징 처리 -->		
 	<c:set var="pageNum" value="${pageInfo.getPageNum() }" /> <!-- 현재 페이지 번호 --> 
@@ -376,8 +378,8 @@
                 </tr>
             </thead>
             <tbody>
-             <c:if test="${not empty noticeList and pageInfo.getListCount() > 0}">
-					<c:forEach var="notice" items="${noticeList }" varStatus="status">
+             <c:if test="${not empty noticeSearchList and pageInfo.getListCount() > 0}">
+					<c:forEach var="notice" items="${noticeSearchList }" varStatus="status">
 		                <tr>
 	                    	<td>${listCount -(listCount -((pageNum-1)* listLimit + status.index)-1)} </td> 
 		                    <td>
@@ -398,7 +400,7 @@
             <ul class="pagination justify-content-center">
 		         <c:choose>
 					<c:when test="${pageNum > 1}">
-		             	 <li class="page-item"><a class="page-link" href="CommunityNotice.ma?page=${pageNum - 1}">이전</a></li>
+		             	 <li class="page-item"><a class="page-link" href="CommunityNoticeSearch.ma?page=${pageNum - 1}&search=${param.search}&searchType=${param.searchType}">이전</a></li>
 					</c:when>
 					<c:otherwise>
 		            	<li class="page-item"><a class="page-link" >이전</a></li>
@@ -411,14 +413,14 @@
 		             		 <li class="page-item"><a class="page-link">${i }</a></li>
 			       		</c:when>
 						<c:otherwise>     
-			              	<li class="page-item"><a href="CommunityNotice.ma?page=${i }" class="page-link">${i }</a></li>
+			              	<li class="page-item"><a href="CommunityNoticeSearch.ma?page=${i }&search=${param.search}&searchType=${param.searchType}" class="page-link">${i }</a></li>
 			           	</c:otherwise>
 					</c:choose>
 				</c:forEach> 
 				
 	      		  <c:choose>
 						<c:when test="${pageNum < maxPage}">    
-			            	<li class="page-item"><a class="page-link" href="CommunityNotice.ma?page=${pageNum + 1}">다음</a></li>
+			            	<li class="page-item"><a class="page-link" href="CommunityNoticeSearch.ma?page=${pageNum + 1}&search=${param.search}&searchType=${param.searchType}">다음</a></li>
 			       	 	</c:when>
 						<c:otherwise>   
 		              		<li class="page-item"><a class="page-link">다음</a></li>

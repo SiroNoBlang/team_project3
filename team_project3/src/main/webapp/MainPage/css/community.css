@@ -116,3 +116,7 @@
 input.listMargin {
     margin-bottom: 45px;
 }
+
+input.page-item.page-link.listMargin {
+    cursor: pointer;
+}

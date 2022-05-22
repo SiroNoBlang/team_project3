@@ -339,6 +339,8 @@
 	    
 	
 	<!-- 검색창  -->
+	
+	<form action="CommunityNoticeSearch.ma">
 		<div class="form-group row justify-content-center">
 			<div class="w100" style="padding-right:10px">
 				<select class="form-control form-control-sm" name="searchType" id="searchType">
@@ -348,12 +350,14 @@
 			</div>
 
 			<div class="w300" style="padding-right:10px">
-				<input type="text" class="form-control form-control-sm" name="keyword" id="keyword">
+				<input type="search"  class="form-control form-control-sm" id="search" name="search">
 			</div>
 			<div>
-				<button class="btn btn-sm btn-primary" name="btnSearch" id="btnSearch" onclick="location.href='CommunityNoticeSearch.ma?search=${search}&searchType=${searchType}'" >검색</button>
+				<button type="submit" class="btn btn-sm btn-primary" id="btnSearch" >검색</button>
 			</div>
 		</div>
+	</form>	
+		
 		
 	<!-- 페이징 처리 -->		
 	<c:set var="pageNum" value="${pageInfo.getPageNum() }" /> <!-- 현재 페이지 번호 --> 
