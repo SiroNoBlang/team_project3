@@ -19,6 +19,7 @@ import action.MpEventSearchAction;
 import action.MpNoticeDetailAction;
 import action.MpNoticeListAction;
 import action.MpNoticeSearchAction;
+import action.MpQnaConfirmProAction;
 import action.MpQnaDeleteAction;
 import action.MpQnaDetailAction;
 import action.MpQnaListAction;
@@ -139,7 +140,15 @@ public class Main extends HttpServlet {
 				forward = action.execute(request, response);
 			} catch (Exception e) {
 			}
-		}   else if(command.equals("/CommunityQnaDetail.ma")) { // 커뮤니티 QnA 디테일(/CommunityNoticeDetail.ma)
+		} else if(command.equals("/CommunityQnaConfirm.ma")) { // 커뮤니티 Qna 확인 form(/CommunityQnaConfirm.ma)
+			forward = new ActionForward("MainPage/community/communityQnaConfirm.jsp", false);
+		}else if(command.equals("/CommunityQnaConfirmPro.ma")) { // 커뮤니티 Qna 확인(/CommunityQnaConfirmPro.ma)
+			action = new MpQnaConfirmProAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+			}
+		}else if(command.equals("/CommunityQnaDetail.ma")) { // 커뮤니티 QnA 디테일(/CommunityNoticeDetail.ma)
 			action = new MpQnaDetailAction();
 			try {
 				forward = action.execute(request, response);
@@ -186,8 +195,7 @@ public class Main extends HttpServlet {
 		
 		
 		
-		
-		
+	
 		
 		
 		//ActionForward 객체에 저장된 포워딩 정보에 따른 포워딩 작업 수행

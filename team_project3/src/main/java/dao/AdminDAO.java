@@ -915,7 +915,7 @@ public class AdminDAO {
 
 
 	// 메인페이지에서 삭제기능을 위한 패스워드 확인
-	public boolean isArticleWriter(int qna_num, String qna_delete) {
+	public boolean isArticleWriter(int qna_num, String qna_confirm) {
 	boolean isArticleWriter = false;
 		
 		PreparedStatement pstmt = null;
@@ -925,7 +925,7 @@ public class AdminDAO {
 			String sql = "SELECT qna_num, member_passwd FROM qna JOIN member ON qna_nickname = member_nickname WHERE qna_num =? AND member_passwd=?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, qna_num);
-			pstmt.setString(2, qna_delete);
+			pstmt.setString(2, qna_confirm);
 			
 			rs = pstmt.executeQuery();
 			if(rs.next()) {

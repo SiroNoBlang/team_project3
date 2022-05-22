@@ -8,11 +8,11 @@ import javax.servlet.http.HttpServletResponse;
 import svc.QnaDeleteProService;
 import vo.ActionForward;
 
-public class MpQnaDeleteAction implements Action {
+public class MpQnaConfirmProAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		System.out.println("MpQnaDeleteAction");
+//		System.out.println("MpQnaConfirmProAction");
 		
 		ActionForward forward = null;
 		
@@ -23,31 +23,20 @@ public class MpQnaDeleteAction implements Action {
 		QnaDeleteProService service = new QnaDeleteProService();
 		boolean isArticleWriter = service.isArticleWriter(qna_num, qna_confirm);
 		
-		
 		if(!isArticleWriter) {
 			response.setContentType("text/html; charset=UTF-8");
 			PrintWriter out = response.getWriter();
 			out.println("<script>");
-			out.println("alert('삭제 권한이 없습니다!')");
+			out.println("alert('게시물 확인 권한이 없습니다!')");
 			out.println("history.back()");
 			out.println("</script>");
-		} else { 
-			boolean isDeleteSuccess = service.deleteQnaArticle(qna_num);
-			
-			if(!isDeleteSuccess) {
-				response.setContentType("text/html; charset=UTF-8");
-				PrintWriter out = response.getWriter();
-				out.println("<script>");
-				out.println("alert('삭제 실패!')");
-				out.println("history.back()");
-				out.println("</script>");
-			} else {
-				forward = new ActionForward();
-				forward.setPath("CommunityQna.ma?page=" + pageNum);
-				forward.setRedirect(true);
-			}
+		} else{
+			forward = new ActionForward();
+			forward.setPath("CommunityQnaDetail.ma?page=" + pageNum + "&qna_num="+qna_num);
+			forward.setRedirect(true);
 		}
-		
+	
 		return forward;
 	}
+
 }

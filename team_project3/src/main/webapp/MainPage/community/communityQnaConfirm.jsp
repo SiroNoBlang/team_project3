@@ -9,7 +9,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>community -  QnA 삭제 </title>
+<title>community -  QnA 수정 </title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="icon" type="image/png" href="MainPage/images/icons/favicon.png"/>
 	<link rel="stylesheet" type="text/css" href="MainPage/vendor/bootstrap/css/bootstrap.min.css">
@@ -350,16 +350,16 @@
 	
 	</script>
 	
-		<form action="CommunityQnaDeletePro.ma" method="post"> 
+		<form action="CommunityQnaConfirmPro.ma" method="post"> 
 			<div class="form-group row justify-content-center" id="deleteCenter">
 				<div class="w300" style="padding-right:10px"> 
 					<input type="hidden" name="qna_num" value="${param.qna_num }">
 						<input type="hidden" name="page" value="${param.page }">
 				 <!-- css 수정하면서 비밀번호 입력칸 추가할 예정  _ 임시로 placeholder 사용 -->
-					<input type="password"  class="form-control form-control-sm" id="delete" name="qna_confirm" placeholder="비밀번호를 입력해주세요"  required="required" onclick="confirmPass()"> 
+					<input type="password"  class="form-control form-control-sm" id="confirm" name="qna_confirm" placeholder="비밀번호를 입력해주세요"  required="required" onclick="confirmPass()"> 
 				</div>
 				<div>
-					<button type="submit" class="btn btn-sm btn-primary" id="btndelete" >삭제</button>
+					<button type="submit" class="btn btn-sm btn-primary" id="btndelete" >확인</button>
 				</div>
 			</div>
 		</form>	
