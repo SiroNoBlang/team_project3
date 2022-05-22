@@ -29,7 +29,7 @@ public class MemberDAO {
         System.out.println("joinSuccess - DAO");
         int joinCount = 0;
         
-        PreparedStatement pstmt = null, pstmt2 = null, pstmt3 = null, pstmt4 = null, pstmt5 = null;
+        PreparedStatement pstmt = null, pstmt2 = null, pstmt3 = null, pstmt4 = null, pstmt5 = null , pstmt6 = null;
 
         try {
            String sql = "INSERT INTO member VALUES ((SELECT A.NUM FROM (SELECT IFNULL(MAX(CAST(member_num AS UNSIGNED)), 0) + 1 AS num FROM member) A),REPLACE(UUID(),'-',''),?,?,?,?)";
@@ -44,7 +44,7 @@ public class MemberDAO {
            pstmt2.setString(1, memberBean.getMember_info_gender());
            pstmt2.setString(2, memberBean.getMember_info_age());
            
-           sql = "INSERT INTO member_info_detail (member_info_detail_code,member_info_detail_like_style, member_info_detail_like_brand, member_info_detail_like_category) VALUES ((SELECT member_code FROM member ORDER BY CAST(member_num AS SIGNED) DESC LIMIT 1),?,?,?)";
+           sql = "INSERT INTO member_info_detail (member_info_detail_code,member_info_detail_like_style, member_info_detail_like_brand, member_info_detail_like_category, member_info_detail_point, member_info_detail_acc_money) VALUES ((SELECT member_code FROM member ORDER BY CAST(member_num AS SIGNED) DESC LIMIT 1),?,?,?,0,2000)";
            pstmt3 = con.prepareStatement(sql);
            pstmt3.setString(1, memberBean.getMember_info_detail_like_style());
            pstmt3.setString(2, memberBean.getMember_info_detail_like_brand());
@@ -53,6 +53,8 @@ public class MemberDAO {
            sql ="INSERT INTO member_service_log VALUES ((SELECT member_code FROM member ORDER BY CAST(member_num AS SIGNED) DESC LIMIT 1), '정상', REPLACE(now(),'-',''), REPLACE(now(),'-',''), REPLACE(now(),'-',''), 0, '0')";
            pstmt4 = con.prepareStatement(sql);
            
+           
+          
 //           System.out.println(memberBean.getAgreement_name());
 //           System.out.println(memberBean.getAgreement_content());
 //           sql = "INSERT INTO agreement VALUES ((SELECT MAX(member_code) FROM member ORDER BY member_num), REPLACE(now(),'-',''),?,?)";
@@ -61,10 +63,6 @@ public class MemberDAO {
 //           pstmt5.setString(2, memberBean.getAgreement_content());
            
            
-           System.out.println(pstmt);
-           System.out.println(pstmt2);
-           System.out.println(pstmt3);
-           System.out.println(pstmt4);
            
            joinCount = pstmt.executeUpdate();
            joinCount = pstmt2.executeUpdate();
@@ -290,12 +288,6 @@ public class MemberDAO {
 		try {
 			if(member_status.equals("정상")) {
 				String sql = "UPDATE member_service_log SET member_service_log_status=? WHERE member_service_log_code=?";
-				pstmt = con.prepareStatement(sql);
-				pstmt.setString(1, member_status);
-				pstmt.setString(2, member_code);
-				sucess = pstmt.executeUpdate();
-			} else if(member_status.equals("정지")) {
-				String sql = "UPDATE member_service_log SET member_service_log_status=?,member_service_log_login_date=REPLACE(now(),'-','') WHERE member_service_log_code=?";
 				pstmt = con.prepareStatement(sql);
 				pstmt.setString(1, member_status);
 				pstmt.setString(2, member_code);
