@@ -300,4 +300,9 @@ public class SellerDAO {
 		
 		return productarr;
 	}
+
+	public SellerDTO selectShoping(int sell_list_num) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

@@ -1,28 +1,16 @@
-<%@page import="java.util.ArrayList"%>
-<%@page import="vo.PageInfo"%>
 <%@page import="vo.SellerDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
 String member_nickname =(String)session.getAttribute("sNickname");
 String sell_member_code =(String)session.getAttribute("sCode");
-SellerDTO seller = new SellerDTO();
-SellerDTO sellerdto = (SellerDTO)request.getAttribute("sellerdto");
-PageInfo pageInfo = (PageInfo)request.getAttribute("pageInfo");
-ArrayList<SellerDTO> Relationdto = (ArrayList<SellerDTO>)request.getAttribute("Relationdto");
-
-// int pageNum = pageInfo.getPageNum();     //페이지를 안넘겨줌 처리해야됨.
-// int maxPage = pageInfo.getMaxPage();
-// int startPage = pageInfo.getStartPage();
-// int endPage = pageInfo.getEndPage();
-// int listCount = pageInfo.getListCount();
+SellerDTO sellerDTO = (SellerDTO)request.getAttribute("sellerDTO");
 %>
-
-
+    
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>Product Detail</title>
+	<title>Shoping Cart</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 <!--===============================================================================================-->	
@@ -43,12 +31,6 @@ ArrayList<SellerDTO> Relationdto = (ArrayList<SellerDTO>)request.getAttribute("R
 	<link rel="stylesheet" type="text/css" href="MainPage/vendor/animsition/css/animsition.min.css">
 <!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="MainPage/vendor/select2/select2.min.css">
-<!--===============================================================================================-->	
-	<link rel="stylesheet" type="text/css" href="MainPage/vendor/daterangepicker/daterangepicker.css">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="MainPage/vendor/slick/slick.css">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="MainPage/vendor/MagnificPopup/magnific-popup.css">
 <!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="MainPage/vendor/perfect-scrollbar/perfect-scrollbar.css">
 <!--===============================================================================================-->
@@ -118,7 +100,7 @@ ArrayList<SellerDTO> Relationdto = (ArrayList<SellerDTO>)request.getAttribute("R
 							</li>
 
 							<li>
-								<a href="SellForm.pr">Sell</a>
+								<a href="blog.html">Blog</a>
 							</li>
 
 							<li>
@@ -232,7 +214,7 @@ ArrayList<SellerDTO> Relationdto = (ArrayList<SellerDTO>)request.getAttribute("R
 				</li>
 
 				<li>
-					<a href="#">Sell</a>
+					<a href="blog.html">Blog</a>
 				</li>
 
 				<li>
@@ -281,7 +263,7 @@ ArrayList<SellerDTO> Relationdto = (ArrayList<SellerDTO>)request.getAttribute("R
 				<ul class="header-cart-wrapitem w-full">
 					<li class="header-cart-item flex-w flex-t m-b-12">
 						<div class="header-cart-item-img">
-							<img src="MainPage/images/item-cart-01.jpg" alt="IMG">
+							<img src="images/item-cart-01.jpg" alt="IMG">
 						</div>
 
 						<div class="header-cart-item-txt p-t-8">
@@ -351,212 +333,154 @@ ArrayList<SellerDTO> Relationdto = (ArrayList<SellerDTO>)request.getAttribute("R
 	<!-- breadcrumb -->
 	<div class="container">
 		<div class="bread-crumb flex-w p-l-25 p-r-15 p-t-30 p-lr-0-lg">
-			<a href="MainPage.pr" class="stext-109 cl8 hov-cl1 trans-04">
+			<a href="index.html" class="stext-109 cl8 hov-cl1 trans-04">
 				Home
 				<i class="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i>
 			</a>
 
-			<a href="Product.pr" class="stext-109 cl8 hov-cl1 trans-04">
-				Shop
- 				<i class="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i>
-			</a>
-
 			<span class="stext-109 cl4">
-				category:<%=sellerdto.getSell_category() %>
+				Shoping Cart
 			</span>
 		</div>
 	</div>
 		
 
-	<!-- Product Detail -->
-판매번호:<%=sellerdto.getSell_list_num() %>
-	<section class="sec-product-detail bg0 p-t-65 p-b-60">
+	<!-- Shoping Cart -->
+	<form class="bg0 p-t-75 p-b-85">
 		<div class="container">
 			<div class="row">
-				<div class="col-md-6 col-lg-7 p-b-30">
-					<div class="p-l-25 p-r-30 p-lr-0-lg">
-						<div class="wrap-slick3 flex-sb flex-w">
-							<div class="wrap-slick3-dots"></div>
-							<div class="wrap-slick3-arrows flex-sb-m flex-w"></div>
+				<div class="col-lg-10 col-xl-7 m-lr-auto m-b-50">
+					<div class="m-l-25 m-r--38 m-lr-0-xl">
+						<div class="wrap-table-shopping-cart">
+							<table class="table-shopping-cart">
+								<tr class="table_head">
+									<th class="column-1">Product</th>
+									<th class="column-2">title</th>
+									<th class="column-3">Price</th>
+									
+								</tr>
 
-							<div class="slick3 gallery-lb">
-								<div class="item-slick3" data-thumb="MainPage/images/product-detail-01.jpg">
-									<div class="wrap-pic-w pos-relative">
-										<img src="./Upload/sell_img/<%=sellerdto.getSell_img_real_name() %>" alt="IMG-PRODUCT">
+								<tr class="table_row">
+									<td class="column-1">
+										<div class="how-itemcart1">
+											<img src="./Upload/sell_img/<%=sellerDTO.getSell_img_real_name() %>" alt="IMG">
+										</div>
+									</td>
+									<td class="column-2"><%=sellerDTO.getSell_title() %></td>
+									<td class="column-3">$ <%=sellerDTO.getSell_price() %></td>
+									
+									
+								</tr>
 
-										<a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="./Upload/sell_img/dog.png">
-											<i class="fa fa-expand"></i>
-										</a>
-									</div>
+								
+							</table>
+						</div>
+
+						<div class="flex-w flex-sb-m bor15 p-t-18 p-b-15 p-lr-40 p-lr-15-sm">
+							<div class="flex-w flex-m m-r-20 m-tb-5">
+								<input class="stext-104 cl2 plh4 size-117 bor13 p-lr-20 m-r-10 m-tb-5" type="text" name="coupon" placeholder="Coupon Code">
+									
+								<div class="flex-c-m stext-101 cl2 size-118 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer m-tb-5">
+									Apply coupon
 								</div>
+							</div>
 
-								<div class="item-slick3" data-thumb="MainPage/images/product-detail-02.jpg">
-									<div class="wrap-pic-w pos-relative">
-										<img src="MainPage/images/product-detail-02.jpg" alt="IMG-PRODUCT">
-
-										<a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="MainPage/images/product-detail-02.jpg">
-											<i class="fa fa-expand"></i>
-										</a>
-									</div>
-								</div>
-
-								<div class="item-slick3" data-thumb="MainPage/images/product-detail-03.jpg">
-									<div class="wrap-pic-w pos-relative">
-										<img src="MainPage/images/product-detail-03.jpg" alt="IMG-PRODUCT">
-
-										<a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="MainPage/images/product-detail-03.jpg">
-											<i class="fa fa-expand"></i>
-										</a>
-									</div>
-								</div>
+							<div class="flex-c-m stext-101 cl2 size-119 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer m-tb-10">
+								Update Cart
 							</div>
 						</div>
 					</div>
 				</div>
-					
-				<div class="col-md-6 col-lg-5 p-b-30">
-					<div class="p-r-50 p-t-5 p-lr-0-lg">
-						<h3 class="mtext-105 cl2 js-name-detail p-b-14">
-							제목:<%=sellerdto.getSell_title() %>
-						</h3>
-							<div class="p-r-50 p-t-5 p-lr-0-lg">
-								<span class="size-203 flex-c-m respon6">
-									Brand: <%=sellerdto.getSell_brand() %>
-								</span> 
 
-							
-								<div class="size-203 flex-c-m respon6">
-									Category: <%=sellerdto.getSell_category() %>
-								</div> 
-						
-								<div class="size-203 flex-c-m respon6">
-									detail :<%=sellerdto.getSell_category_detail() %>
-								</div>
+				<div class="col-sm-10 col-lg-7 col-xl-5 m-lr-auto m-b-50">
+					<div class="bor10 p-lr-40 p-t-30 p-b-40 m-l-63 m-r-40 m-lr-0-xl p-lr-15-sm">
+						<h4 class="mtext-109 cl2 p-b-30">
+							Cart Totals
+						</h4>
+
+						<div class="flex-w flex-t bor12 p-b-13">
+							<div class="size-208">
+								<span class="stext-110 cl2">
+									Subtotal:
+								</span>
 							</div>
-							<div >
-								<div class="size-203 flex-c-m respon6">
-									  Size:	<%=sellerdto.getSell_size() %>
-								</div> 
-						
-								<div class="size-203 flex-c-m respon6">
-									 Color:  <%=sellerdto.getSell_color() %>
-								</div>
+
+							<div class="size-209">
+								<span class="mtext-110 cl2">
+									$79.65
+								</span>
 							</div>
-								<div class="size-203 flex-c-m respon6">
-									 Price:  <%=sellerdto.getSell_price() %>
-								</div>
-<!-- 						<div class="p-t-33"> -->
-<!-- 							<div class="flex-w flex-r-m p-b-10"> -->
-<!-- 								<div class="size-203 flex-c-m respon6"> -->
-<!-- 									Size -->
-<!-- 								</div> -->
+						</div>
 
-<!-- 								<div class="size-204 respon6-next"> -->
-<!-- 									<div class="rs1-select2 bor8 bg0"> -->
-<!-- 										<select class="js-select2" name="time"> -->
-<!-- 											<option>Choose an option</option> -->
-<!-- 											<option>Size S</option> -->
-<!-- 											<option>Size M</option> -->
-<!-- 											<option>Size L</option> -->
-<!-- 											<option>Size XL</option> -->
-<!-- 										</select> -->
-<!-- 										<div class="dropDownSelect2"></div> -->
-<!-- 									</div> -->
-<!-- 								</div> -->
-<!-- 							</div> -->
+						<div class="flex-w flex-t bor12 p-t-15 p-b-30">
+							<div class="size-208 w-full-ssm">
+								<span class="stext-110 cl2">
+									Shipping:
+								</span>
+							</div>
 
-<!-- 							<div class="flex-w flex-r-m p-b-10"> -->
-<!-- 								<div class="size-203 flex-c-m respon6"> -->
-<!-- 									Color -->
-<!-- 								</div> -->
+							<div class="size-209 p-r-18 p-r-0-sm w-full-ssm">
+								<p class="stext-111 cl6 p-t-2">
+									There are no shipping methods available. Please double check your address, or contact us if you need any help.
+								</p>
+								
+								<div class="p-t-15">
+									<span class="stext-112 cl8">
+										Calculate Shipping
+									</span>
 
-<!-- 								<div class="size-204 respon6-next"> -->
-<!-- 									<div class="rs1-select2 bor8 bg0"> -->
-<!-- 										<select class="js-select2" name="time"> -->
-<!-- 											<option>Choose an option</option> -->
-<!-- 											<option>Red</option> -->
-<!-- 											<option>Blue</option> -->
-<!-- 											<option>White</option> -->
-<!-- 											<option>Grey</option> -->
-<!-- 										</select> -->
-<!-- 										<div class="dropDownSelect2"></div> -->
-<!-- 									</div> -->
-<!-- 								</div> -->
-<!-- 							</div> -->
-
-							<div class="flex-w flex-r-m p-b-10">
-								<div class="size-204 flex-w flex-m respon6-next">
-									<div class="wrap-num-product flex-w m-r-20 m-tb-10">
-										
-
-										<button class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail">
-										like
-									</button>
-
-									
+									<div class="rs1-select2 rs2-select2 bor8 bg0 m-b-12 m-t-9">
+										<select class="js-select2" name="time">
+											<option>Select a country...</option>
+											<option>USA</option>
+											<option>UK</option>
+										</select>
+										<div class="dropDownSelect2"></div>
 									</div>
-									<input type="button" value="구매" onclick="location.href='ShopingPro.pr?sell_list_num=<%=sellerdto.getSell_list_num()%>&sell_brand=<%=sellerdto.getSell_brand()%>&sell_member_code=<%=sell_member_code%>'">
+
+									<div class="bor8 bg0 m-b-12">
+										<input class="stext-111 cl8 plh3 size-111 p-lr-15" type="text" name="state" placeholder="State /  country">
+									</div>
+
+									<div class="bor8 bg0 m-b-22">
+										<input class="stext-111 cl8 plh3 size-111 p-lr-15" type="text" name="postcode" placeholder="Postcode / Zip">
+									</div>
 									
+									<div class="flex-w">
+										<div class="flex-c-m stext-101 cl2 size-115 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer">
+											Update Totals
+										</div>
+									</div>
+										
 								</div>
-							</div>	
+							</div>
 						</div>
 
-						
-						<div class="flex-w flex-m p-l-100 p-t-40 respon7">
-							<div class="flex-m bor9 p-r-10 m-r-11">
-								<a href="#" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 js-addwish-detail tooltip100" data-tooltip="Add to Wishlist">
-									<i class="zmdi zmdi-favorite"></i>
-								</a>
+						<div class="flex-w flex-t p-t-27 p-b-33">
+							<div class="size-208">
+								<span class="mtext-101 cl2">
+									Total:
+								</span>
 							</div>
 
-							<a href="#" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100" data-tooltip="Facebook">
-								<i class="fa fa-facebook"></i>
-							</a>
-
-							<a href="#" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100" data-tooltip="Twitter">
-								<i class="fa fa-twitter"></i>
-							</a>
-
-							<a href="#" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100" data-tooltip="Google Plus">
-								<i class="fa fa-google-plus"></i>
-							</a>
+							<div class="size-209 p-t-1">
+								<span class="mtext-110 cl2">
+									$79.65
+								</span>
+							</div>
 						</div>
+
+						<button class="flex-c-m stext-101 cl0 size-116 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer">
+							Proceed to Checkout
+						</button>
 					</div>
 				</div>
 			</div>
-			<추천상품>
-			
-			<div class="bor10 m-t-50 p-t-43 p-b-40"><!-- 관련 상품 뿌리기 -->
-				
-					<% for(SellerDTO dto :Relationdto){ %>	
-				 <div style="  float:left;">
-
-										<img src="./Upload/sell_img/<%=dto.getSell_img_real_name() %>" onclick="location.href='ProductDetailPro.pr?sell_list_num=<%=dto.getSell_list_num()%>&sell_brand=<%=dto.getSell_brand()%>'" >
-										<div>[<%=dto.getSell_brand() %>]</div>
-										<div>[<%=dto.getSell_size() %>]</div>
-										<div>[<%=dto.getSell_price() %>]</div>		
-				</div>		
-						<%} %>
-			</div><!-- 관련 상품 뿌리기 -->
-		
-<!-- 		<table> -->
-<!--  		 <tr> -->
-<!--    			 <td></td><td></td><td></td> -->
-<!--   		<tr> -->
-<!-- 		</table> -->
-
-		<div class="bg6 flex-c-m flex-w size-302 m-t-73 p-tb-15">
-			<span class="stext-107 cl6 p-lr-25">
-				SKU: JAK-01
-			</span>
-
-			<span class="stext-107 cl6 p-lr-25">
-				Categories: Jacket, Men
-			</span>
 		</div>
-	</section>
-
-
+	</form>
+		
+	
+		
 
 	<!-- Footer -->
 	<footer class="bg3 p-t-75 p-b-32">
@@ -711,160 +635,6 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 		</span>
 	</div>
 
-	<!-- Modal1 -->
-	<div class="wrap-modal1 js-modal1 p-t-60 p-b-20">
-		<div class="overlay-modal1 js-hide-modal1"></div>
-
-		<div class="container">
-			<div class="bg0 p-t-60 p-b-30 p-lr-15-lg how-pos3-parent">
-				<button class="how-pos3 hov3 trans-04 js-hide-modal1">
-					<img src="MainPage/images/icons/icon-close.png" alt="CLOSE">
-				</button>
-
-				<div class="row">
-					<div class="col-md-6 col-lg-7 p-b-30">
-						<div class="p-l-25 p-r-30 p-lr-0-lg">
-							<div class="wrap-slick3 flex-sb flex-w">
-								<div class="wrap-slick3-dots"></div>
-								<div class="wrap-slick3-arrows flex-sb-m flex-w"></div>
-
-								<div class="slick3 gallery-lb">
-									<div class="item-slick3" data-thumb="MainPage/images/product-detail-01.jpg">
-										<div class="wrap-pic-w pos-relative">
-											<img src="MainPage/images/product-detail-01.jpg" alt="IMG-PRODUCT">
-
-											<a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="MainPage/images/product-detail-01.jpg">
-												<i class="fa fa-expand"></i>
-											</a>
-										</div>
-									</div>
-
-									<div class="item-slick3" data-thumb="MainPage/images/product-detail-02.jpg">
-										<div class="wrap-pic-w pos-relative">
-											<img src="MainPage/images/product-detail-02.jpg" alt="IMG-PRODUCT">
-
-											<a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="MainPage/images/product-detail-02.jpg">
-												<i class="fa fa-expand"></i>
-											</a>
-										</div>
-									</div>
-
-									<div class="item-slick3" data-thumb="MainPage/images/product-detail-03.jpg">
-										<div class="wrap-pic-w pos-relative">
-											<img src="MainPage/images/product-detail-03.jpg" alt="IMG-PRODUCT">
-
-											<a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="MainPage/images/product-detail-03.jpg">
-												<i class="fa fa-expand"></i>
-											</a>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					
-					<div class="col-md-6 col-lg-5 p-b-30">
-						<div class="p-r-50 p-t-5 p-lr-0-lg">
-							<h4 class="mtext-105 cl2 js-name-detail p-b-14">
-								Lightweight Jacket
-							</h4>
-
-							<span class="mtext-106 cl2">
-								$58.79
-							</span>
-
-							<p class="stext-102 cl3 p-t-23">
-								Nulla eget sem vitae eros pharetra viverra. Nam vitae luctus ligula. Mauris consequat ornare feugiat.
-							</p>
-							
-							<!--  -->
-							<div class="p-t-33">
-								<div class="flex-w flex-r-m p-b-10">
-									<div class="size-203 flex-c-m respon6">
-										Size
-									</div>
-
-									<div class="size-204 respon6-next">
-										<div class="rs1-select2 bor8 bg0">
-											<select class="js-select2" name="time">
-												<option>Choose an option</option>
-												<option>Size S</option>
-												<option>Size M</option>
-												<option>Size L</option>
-												<option>Size XL</option>
-											</select>
-											<div class="dropDownSelect2"></div>
-										</div>
-									</div>
-								</div>
-
-								<div class="flex-w flex-r-m p-b-10">
-									<div class="size-203 flex-c-m respon6">
-										Color
-									</div>
-
-									<div class="size-204 respon6-next">
-										<div class="rs1-select2 bor8 bg0">
-											<select class="js-select2" name="time">
-												<option>Choose an option</option>
-												<option>Red</option>
-												<option>Blue</option>
-												<option>White</option>
-												<option>Grey</option>
-											</select>
-											<div class="dropDownSelect2"></div>
-										</div>
-									</div>
-								</div>
-
-								<div class="flex-w flex-r-m p-b-10">
-									<div class="size-204 flex-w flex-m respon6-next">
-										<div class="wrap-num-product flex-w m-r-20 m-tb-10">
-											<div class="btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m">
-												<i class="fs-16 zmdi zmdi-minus"></i>
-											</div>
-
-											<input class="mtext-104 cl3 txt-center num-product" type="number" name="num-product" value="1">
-
-											<div class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m">
-												<i class="fs-16 zmdi zmdi-plus"></i>
-											</div>
-										</div>
-
-										<button class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail">
-											Add to cart
-										</button>
-									</div>
-								</div>	
-							</div>
-
-							<!--  -->
-							<div class="flex-w flex-m p-l-100 p-t-40 respon7">
-								<div class="flex-m bor9 p-r-10 m-r-11">
-									<a href="#" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 js-addwish-detail tooltip100" data-tooltip="Add to Wishlist">
-										<i class="zmdi zmdi-favorite"></i>
-									</a>
-								</div>
-
-								<a href="#" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100" data-tooltip="Facebook">
-									<i class="fa fa-facebook"></i>
-								</a>
-
-								<a href="#" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100" data-tooltip="Twitter">
-									<i class="fa fa-twitter"></i>
-								</a>
-
-								<a href="#" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100" data-tooltip="Google Plus">
-									<i class="fa fa-google-plus"></i>
-								</a>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-
 <!--===============================================================================================-->	
 	<script src="MainPage/vendor/jquery/jquery-3.2.1.min.js"></script>
 <!--===============================================================================================-->
@@ -883,70 +653,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 		})
 	</script>
 <!--===============================================================================================-->
-	<script src="MainPage/vendor/daterangepicker/moment.min.js"></script>
-	<script src="MainPage/vendor/daterangepicker/daterangepicker.js"></script>
-<!--===============================================================================================-->
-	<script src="MainPage/vendor/slick/slick.min.js"></script>
-	<script src="MainPage/js/slick-custom.js"></script>
-<!--===============================================================================================-->
-	<script src="MainPage/vendor/parallax100/parallax100.js"></script>
-	<script>
-        $('.parallax100').parallax100();
-	</script>
-<!--===============================================================================================-->
 	<script src="MainPage/vendor/MagnificPopup/jquery.magnific-popup.min.js"></script>
-	<script>
-		$('.gallery-lb').each(function() { // the containers for all your galleries
-			$(this).magnificPopup({
-		        delegate: 'a', // the selector for gallery item
-		        type: 'image',
-		        gallery: {
-		        	enabled:true
-		        },
-		        mainClass: 'mfp-fade'
-		    });
-		});
-	</script>
-<!--===============================================================================================-->
-	<script src="MainPage/vendor/isotope/isotope.pkgd.min.js"></script>
-<!--===============================================================================================-->
-	<script src="MainPage/vendor/sweetalert/sweetalert.min.js"></script>
-	<script>
-		$('.js-addwish-b2, .js-addwish-detail').on('click', function(e){
-			e.preventDefault();
-		});
-
-		$('.js-addwish-b2').each(function(){
-			var nameProduct = $(this).parent().parent().find('.js-name-b2').html();
-			$(this).on('click', function(){
-				swal(nameProduct, "is added to wishlist !", "success");
-
-				$(this).addClass('js-addedwish-b2');
-				$(this).off('click');
-			});
-		});
-
-		$('.js-addwish-detail').each(function(){
-			var nameProduct = $(this).parent().parent().parent().find('.js-name-detail').html();
-
-			$(this).on('click', function(){
-				swal(nameProduct, "is added to wishlist !", "success");
-
-				$(this).addClass('js-addedwish-detail');
-				$(this).off('click');
-			});
-		});
-
-		/*---------------------------------------------*/
-
-		$('.js-addcart-detail').each(function(){
-			var nameProduct = $(this).parent().parent().parent().parent().find('.js-name-detail').html();
-			$(this).on('click', function(){
-				swal(nameProduct, "is added to cart !", "success");
-			});
-		});
-	
-	</script>
 <!--===============================================================================================-->
 	<script src="MainPage/vendor/perfect-scrollbar/perfect-scrollbar.min.js"></script>
 	<script>
