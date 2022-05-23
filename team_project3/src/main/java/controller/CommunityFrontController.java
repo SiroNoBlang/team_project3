@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import action.Action;
+import action.ClassificationAction;
 import action.CommunityBoardWriteProAction;
 import action.EventDetailAction;
 import action.EventListAction;
@@ -223,6 +224,13 @@ public class CommunityFrontController extends HttpServlet {
 			}
 		} else if (command.equals("/MemberUpdate.co")) { // 회원의 상태 변경
 			action = new MemberUpdateAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		} else if (command.equals("/Classification.co")) { // 가입된 회원 목록
+			action = new ClassificationAction();
 			try {
 				forward = action.execute(request, response);
 			} catch (Exception e) {

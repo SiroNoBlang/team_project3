@@ -64,7 +64,7 @@
 				            </div>
 				          </div>
 				        </div>
-				        <div class="col-6 col-sm-3" onclick="location.href='Classification.co?value=0'">
+				        <div class="col-6 col-sm-3" onclick="location.href='Classification.co?value=1'">
 				          <div class="panel panel-success">
 				            <div class="panel-heading">정상</div>
 				            <div class="panel-body">
@@ -72,7 +72,7 @@
 				            </div>
 				          </div>
 				        </div>
-				        <div class="col-6 col-sm-3" onclick="location.href='Classification.co?value=0'">
+				        <div class="col-6 col-sm-3" onclick="location.href='Classification.co?value=2'">
 				          <div class="panel panel-warning">
 				            <div class="panel-heading">정지</div>
 				            <div class="panel-body">
@@ -80,7 +80,7 @@
 				            </div>
 				          </div>
 				        </div>
-				        <div class="col-6 col-sm-3" onclick="location.href='Classification.co?value=0'">
+				        <div class="col-6 col-sm-3" onclick="location.href='Classification.co?value=3'">
 				          <div class="panel panel-danger">
 				            <div class="panel-heading">탈퇴</div>
 				            <div class="panel-body">
@@ -89,7 +89,7 @@
 				          </div>
 				        </div>
 				      </section>
-				</div>				
+				</div>
 				
 				
 				<div class="card">
@@ -108,33 +108,36 @@
 					        <div class="container">
 					            <table class="board-table">
 					                <thead>
-						                <tr >
+						                <tr>
 						                    <th scope="col" class="th-num"></th>
-						                    <th scope="col" class="th-num">번호</th>
-						                    <th scope="col" class="th-title">이메일</th>
-						                    <th scope="col" class="th-date">닉네임</th>
-						                    <th scope="col" class="th-date">가입날짜</th>
-						                    <th scope="col" class="th-date">현재상태</th>
+						                    <th scope="col" class="th-num">상태</th>
+						                    <th scope="col" class="th-title">닉네임</th>
+						                    <th scope="col" class="th-date">누적금액</th>
+						                    <th scope="col" class="th-date">회원등급</th>
 						                </tr>
-						                </thead>
+									</thead>
 						                <tbody>
-						                <c:if test="${not empty memberManagementList and pageInfo.getListCount() > 0}">
-											<c:forEach var="memberManagement" items="${memberManagementList }" varStatus="status">
+						                <c:if test="${not empty classificationList and pageInfo.getListCount() > 0}">
+											<c:forEach var="classification" items="${classificationList }" varStatus="status">
 								                <tr>
-								                	<td><input type="checkbox" value="${memberManagement.getMember_code() }"></td>
-								                	<td>${memberManagement.getMember_num() }</td>
+								                	<td><input type="checkbox" value="${classification.getMember_code() }"></td>
+								                	<td>${classification.getMember_service_log_status() }</td>
 								                    <td>
-														<a href="MemberDetail.co?member_code=${memberManagement.getMember_code() }&page=${pageNum}">
-								                    		${memberManagement.getMember_email() } </a>
+														<a href="MemberDetail.co?member_code=${classification.getMember_code() }&page=${pageNum}">
+								                    		${classification.getMember_nickname() } </a>
 								                    </td>
-								                    <td>${memberManagement.getMember_nickname() }</td>
-													<td>${memberManagement.getMember_service_log_join_date() }</td>
-													<td>${memberManagement.getMember_service_log_status() }</td>
+													<td>${classification.getMember_info_detail_acc_money() }만원</td>
+													<td>${classification.getGrade_name() }</td>
 								                </tr>
 							              </c:forEach>
 										</c:if>
 							         </tbody>
 					            </table>
+					            <%if(request.getParameter("value").equals("2")) {%>
+					            <button type="button" class="btn btn-primary">일괄 정상 변경 (Update)</button>
+					            <%} else if(request.getParameter("value").equals("3")) {%>
+					            <button type="button" class="btn btn-danger">일괄 탈퇴 승인 (Delete)</button>
+					            <%} %>
 					        </div>
     					</div>
     					<section id="pageList">

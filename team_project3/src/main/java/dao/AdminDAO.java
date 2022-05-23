@@ -966,14 +966,14 @@ public class AdminDAO {
 			
 			while(rs.next()) {
 				
-				MemberBean bean2 = new MemberBean();
-				bean2.setMember_code(rs.getString("a.member_code"));
-				bean2.setMember_num(rs.getString("a.member_num"));
-				bean2.setMember_nickname(rs.getString("a.member_nickname"));
-				bean2.setMember_email(rs.getString("a.member_email"));
-				bean2.setMember_service_log_status(rs.getString("b.member_service_log_status"));
-				bean2.setMember_service_log_join_date(rs.getString("b.member_service_log_join_date").substring(0, 8));
-				memberManagementList.add(bean2);
+				MemberBean bean = new MemberBean();
+				bean.setMember_code(rs.getString("a.member_code"));
+				bean.setMember_num(rs.getString("a.member_num"));
+				bean.setMember_nickname(rs.getString("a.member_nickname"));
+				bean.setMember_email(rs.getString("a.member_email"));
+				bean.setMember_service_log_status(rs.getString("b.member_service_log_status"));
+				bean.setMember_service_log_join_date(rs.getString("b.member_service_log_join_date").substring(0, 8));
+				memberManagementList.add(bean);
 			}
 		} catch (SQLException e) {
 			System.out.println("SQL 구문 오류 발생! - selectMemberManagementList()");
@@ -984,6 +984,127 @@ public class AdminDAO {
 		}
 		
 		return memberManagementList;
+	}
+
+	public ArrayList<MemberBean> selectClassificationList(int pageNum, int listLimit, String value) {
+		ArrayList<MemberBean> classificationList = null;
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		int startRow = (pageNum - 1) * listLimit;
+		
+		try {
+			if(value.equals("0")) {
+				String sql = "SELECT a.member_code, a.member_nickname, b.member_service_log_status, c.member_info_detail_acc_money, d.grade_name FROM member AS a JOIN member_service_log AS b ON a.member_code = b.member_service_log_code JOIN member_info_detail AS c ON a.member_code = c.member_info_detail_code JOIN grade AS d ON c.member_info_detail_acc_money BETWEEN d.lowest_acc_money AND d.highest_acc_money WHERE c.member_info_detail_acc_money >= 100001 AND c.member_info_detail_acc_money <= 999999999 ORDER BY c.member_info_detail_acc_money LIMIT ?,?";
+				pstmt = con.prepareStatement(sql);
+				pstmt.setInt(1, startRow);
+				pstmt.setInt(2, listLimit);
+				
+				rs = pstmt.executeQuery();
+				
+				classificationList = new ArrayList<MemberBean>();
+				
+				while(rs.next()) {
+					MemberBean bean = new MemberBean();
+					bean.setMember_code(rs.getString("a.member_code"));
+					bean.setMember_nickname(rs.getString("a.member_nickname"));
+					bean.setMember_service_log_status(rs.getString("b.member_service_log_status"));
+					bean.setMember_info_detail_acc_money(rs.getInt("c.member_info_detail_acc_money"));
+					bean.setGrade_name(rs.getString("d.grade_name"));
+					classificationList.add(bean);
+				}
+				
+			} else if(value.equals("1")) {
+				String sql = "SELECT a.member_code, a.member_nickname, b.member_service_log_status, c.member_info_detail_acc_money, d.grade_name FROM member AS a JOIN member_service_log AS b ON a.member_code = b.member_service_log_code JOIN member_info_detail AS c ON a.member_code = c.member_info_detail_code JOIN grade AS d ON c.member_info_detail_acc_money BETWEEN d.lowest_acc_money AND d.highest_acc_money WHERE b.member_service_log_status='정상' ORDER BY a.member_num ASC LIMIT ?,?";
+				pstmt = con.prepareStatement(sql);
+				pstmt.setInt(1, startRow);
+				pstmt.setInt(2, listLimit);
+				
+				rs = pstmt.executeQuery();
+				
+				classificationList = new ArrayList<MemberBean>();
+				
+				while(rs.next()) {
+					MemberBean bean = new MemberBean();
+					bean.setMember_code(rs.getString("a.member_code"));
+					bean.setMember_nickname(rs.getString("a.member_nickname"));
+					bean.setMember_service_log_status(rs.getString("b.member_service_log_status"));
+					bean.setMember_info_detail_acc_money(rs.getInt("c.member_info_detail_acc_money"));
+					bean.setGrade_name(rs.getString("d.grade_name"));
+					classificationList.add(bean);
+				}
+				
+			} else if(value.equals("2")) {
+				String sql = "SELECT a.member_code, a.member_nickname, b.member_service_log_status, c.member_info_detail_acc_money, d.grade_name FROM member AS a JOIN member_service_log AS b ON a.member_code = b.member_service_log_code JOIN member_info_detail AS c ON a.member_code = c.member_info_detail_code JOIN grade AS d ON c.member_info_detail_acc_money BETWEEN d.lowest_acc_money AND d.highest_acc_money WHERE b.member_service_log_status='정지' ORDER BY a.member_num ASC LIMIT ?,?";
+				pstmt = con.prepareStatement(sql);
+				pstmt.setInt(1, startRow);
+				pstmt.setInt(2, listLimit);
+				
+				rs = pstmt.executeQuery();
+				
+				classificationList = new ArrayList<MemberBean>();
+				
+				while(rs.next()) {
+					MemberBean bean = new MemberBean();
+					bean.setMember_code(rs.getString("a.member_code"));
+					bean.setMember_nickname(rs.getString("a.member_nickname"));
+					bean.setMember_service_log_status(rs.getString("b.member_service_log_status"));
+					bean.setMember_info_detail_acc_money(rs.getInt("c.member_info_detail_acc_money"));
+					bean.setGrade_name(rs.getString("d.grade_name"));
+					classificationList.add(bean);
+				}
+				
+			} else if(value.equals("3")) {
+				String sql = "SELECT a.member_code, a.member_nickname, b.member_service_log_status, c.member_info_detail_acc_money, d.grade_name FROM member AS a JOIN member_service_log AS b ON a.member_code = b.member_service_log_code JOIN member_info_detail AS c ON a.member_code = c.member_info_detail_code JOIN grade AS d ON c.member_info_detail_acc_money BETWEEN d.lowest_acc_money AND d.highest_acc_money WHERE b.member_service_log_status='탈퇴' ORDER BY a.member_num ASC LIMIT ?,?";
+				pstmt = con.prepareStatement(sql);
+				pstmt.setInt(1, startRow);
+				pstmt.setInt(2, listLimit);
+				
+				rs = pstmt.executeQuery();
+				
+				classificationList = new ArrayList<MemberBean>();
+				
+				while(rs.next()) {
+					MemberBean bean = new MemberBean();
+					bean.setMember_code(rs.getString("a.member_code"));
+					bean.setMember_nickname(rs.getString("a.member_nickname"));
+					bean.setMember_service_log_status(rs.getString("b.member_service_log_status"));
+					bean.setMember_info_detail_acc_money(rs.getInt("c.member_info_detail_acc_money"));
+					bean.setGrade_name(rs.getString("d.grade_name"));
+					classificationList.add(bean);
+				}
+				
+			} else {
+				String sql = "SELECT a.member_code, a.member_nickname, b.member_service_log_status, c.member_info_detail_acc_money, d.grade_name FROM member AS a JOIN member_service_log AS b ON a.member_code = b.member_service_log_code JOIN member_info_detail AS c ON a.member_code = c.member_info_detail_code JOIN grade AS d ON c.member_info_detail_acc_money BETWEEN d.lowest_acc_money AND d.highest_acc_money WHERE a.member_nickname LIKE ? ORDER BY a.member_num ASC LIMIT ?,?";
+				pstmt = con.prepareStatement(sql);
+				pstmt.setString(1, "%" + value + "%");
+				pstmt.setInt(2, startRow);
+				pstmt.setInt(3, listLimit);
+				
+				rs = pstmt.executeQuery();
+				
+				classificationList = new ArrayList<MemberBean>();
+				
+				while(rs.next()) {
+					MemberBean bean = new MemberBean();
+					bean.setMember_code(rs.getString("a.member_code"));
+					bean.setMember_nickname(rs.getString("a.member_nickname"));
+					bean.setMember_service_log_status(rs.getString("b.member_service_log_status"));
+					bean.setMember_info_detail_acc_money(rs.getInt("c.member_info_detail_acc_money"));
+					bean.setGrade_name(rs.getString("d.grade_name"));
+					classificationList.add(bean);
+				}
+			}
+			System.out.println(classificationList);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		
+		return classificationList;
 	}
 
 

@@ -59,4 +59,20 @@ public class MemberManagementListService {
 		return bean;
 	}
 
+	public ArrayList<MemberBean> getClassificationList(int pageNum, int listLimit, String value) {
+		ArrayList<MemberBean> classificationList = null;
+		
+		Connection con = getConnection();
+		AdminDAO adminDAO= AdminDAO.getInstance();
+		
+		adminDAO.setConnection(con);
+		
+		classificationList = adminDAO.selectClassificationList(pageNum, listLimit, value);
+		
+		close(con);
+		
+		// 7. 조회 결과 리턴
+		return classificationList;
+	}
+
 }
