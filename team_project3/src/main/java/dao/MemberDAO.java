@@ -311,6 +311,33 @@ public class MemberDAO {
 		
 		return isMemberUpdate;
 	}
+	
+	public int getUpateImg(MemberBean member) { //이미지 수정
+		System.out.println("DAO getUpateImg()");
+		PreparedStatement pstmt = null;
+		int updateCount = 0;
+		System.out.println(member.getMember_info_mypage_img_name());
+		System.out.println(member.getMember_info_mypage_real_img_name());
+		System.out.println(member.getMember_code());
+		try {
+			String sql = "UPDATE member_info"
+					+ " SET member_info_mypage_img_name=?,member_info_mypage_real_img_name=?"
+					+ " WHERE member_info_code=?";
+			
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, member.getMember_info_mypage_img_name());
+			pstmt.setString(2, member.getMember_info_mypage_real_img_name());
+			pstmt.setString(3, member.getMember_code());
+			
+			updateCount = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return updateCount;
+	}
 
 	public MemberBean getMemberStatus() {
 		MemberBean bean = null;

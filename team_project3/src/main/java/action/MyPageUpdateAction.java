@@ -17,7 +17,7 @@ public class MyPageUpdateAction implements Action {
 		ActionForward forward = null;
 		
 		
-		String grade_code = request.getParameter("grade_code");
+//		String grade_code = request.getParameter("grade_code");
 		String grade_name = request.getParameter("grade_name");
 		String member_num = request.getParameter("member_num");
 		String member_code = request.getParameter("member_code");
@@ -25,7 +25,7 @@ public class MyPageUpdateAction implements Action {
 		String member_id = request.getParameter("member_id");
 		String member_passwd = request.getParameter("member_passwd");
 		String member_email1 = request.getParameter("member_email1");
-		String member_info_code = request.getParameter("member_info_code");
+//		String member_info_code = request.getParameter("member_info_code");
 		String member_info_name = request.getParameter("member_info_name");
 		String member_info_gender = request.getParameter("member_info_gender");
 		String member_info_phone = request.getParameter("member_info_phone");
@@ -36,14 +36,14 @@ public class MyPageUpdateAction implements Action {
 		String member_info_ship_post_code = request.getParameter("member_info_ship_post_code");
 		String member_info_ship_address = request.getParameter("member_info_ship_address");
 		String member_info_ship_address_detail = request.getParameter("member_info_ship_address_detail");
-		String member_info_grade_code = request.getParameter("member_info_grade_code");
-		String member_info_detail_code = request.getParameter("member_info_detail_code");
+//		String member_info_grade_code = request.getParameter("member_info_grade_code");
+//		String member_info_detail_code = request.getParameter("member_info_detail_code");
 		String member_info_detail_like_style = request.getParameter("member_info_detail_like_style");
 		String member_info_detail_like_brand = request.getParameter("member_info_detail_like_brand");
 		String member_info_detail_like_category = request.getParameter("member_info_detail_like_category");
 		int member_info_detail_point = Integer.parseInt(request.getParameter("member_info_detail_point"));
 		int member_info_detail_acc_money = Integer.parseInt(request.getParameter("member_info_detail_acc_money"));
-		String member_service_log_code = request.getParameter("member_service_log_code");
+//		String member_service_log_code = request.getParameter("member_service_log_code");
 		String member_service_log_status = request.getParameter("member_service_log_status");
 		String member_service_log_join_date = request.getParameter("member_service_log_join_date");
 		String member_service_log_passwd_change_date = request.getParameter("member_service_log_passwd_change_date");
@@ -54,16 +54,21 @@ public class MyPageUpdateAction implements Action {
 		
 		
 		MemberBean member = new MemberBean();
+//		member.setGrade_code(grade_code);
 		member.setGrade_name(grade_name);
 		member.setMember_num(member_num);
 		member.setMember_nickname(member_nickname);
+//		member.setMember_info_code(member_info_code);
 		member.setMember_info_gender(member_info_gender);
 		member.setMember_info_age(member_info_age);
+//		member.setMember_info_grade_code(member_info_grade_code);
+//		member.setMember_info_detail_code(member_info_detail_code);
 		member.setMember_info_detail_like_style(member_info_detail_like_style);
 		member.setMember_info_detail_like_brand(member_info_detail_like_brand);
 		member.setMember_info_detail_like_category(member_info_detail_like_category);
 		member.setMember_info_detail_point(member_info_detail_point);
 		member.setMember_info_detail_acc_money(member_info_detail_acc_money);
+//		member.setMember_service_log_code(member_service_log_code);
 		member.setMember_service_log_status(member_service_log_status);
 		member.setMember_service_log_join_date(member_service_log_join_date);
 		member.setMember_service_log_passwd_change_date(member_service_log_passwd_change_date);
@@ -101,7 +106,7 @@ public class MyPageUpdateAction implements Action {
 			
 		} else {
 			forward = new ActionForward();
-			forward.setPath("./index.jsp");
+			forward.setPath("MainPage/my_page/about_mypage.jsp");
 			forward.setRedirect(true);
 		}
 		

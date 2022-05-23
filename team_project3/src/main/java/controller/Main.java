@@ -28,6 +28,7 @@ import action.MpQnaModifyProAction;
 import action.MpQnaSearchAction;
 import action.MpQnaWriteProAction;
 import action.MyPageAction;
+import action.MyPageImgUpdateAction;
 import action.MyPageUpdateAction;
 import vo.ActionForward;
 
@@ -79,7 +80,14 @@ public class Main extends HttpServlet {
 			} catch (Exception e) {
 				
 			}
-		} else if(command.equals("/Suspension.ma")) {
+		} else if(command.equals("/ProfileImgUpdate.ma")) {
+			action = new MyPageImgUpdateAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				
+			}
+		}else if(command.equals("/Suspension.ma")) {
 			forward = new ActionForward("HomePage/guide_page/suspension.jsp", false);
 			
 		} else if(command.equals("/Withdrawal.ma")) {

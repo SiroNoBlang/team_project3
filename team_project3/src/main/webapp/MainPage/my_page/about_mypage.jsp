@@ -390,25 +390,28 @@ MemberBean member = (MemberBean)request.getAttribute("memberDetail");
 			<div class="row p-b-148">
 				<div class="col-md-7 col-lg-8">
 				</div>
+					<form action="ProfileImgUpdate.ma" method="post" enctype="multipart/form-data">
+					<table border="1">
+						<tr> 
+							<th>멤버코드(사라질예정)</th>
+							<td><input type="hidden" name="member_code" id="member_code" value="<%=member.getMember_code() %>"></td>
+						</tr>
+						<tr>
+<%-- 						<td colspan="2" width="300" height="300"><img id="image_section" alt="" src="Upload/mypage_img/<%=member.getMember_info_mypage_img_name()%>"><br> --%>
+						<td colspan="2" width="300" height="300"><img id="image_section" alt="" src="Upload/mypage_img/<%=member.getMember_info_mypage_real_img_name()%>"><br>
+						<input type="file" id="member_info_mypage_img_name" name="member_info_mypage_img_name" value="">업로드
+						</tr>
+						<tr><td>
+						<button type="submit">저장</button>
+						<button onclick="delImg()">제거</button>
+						</td></tr>
+						</table>
+					</form>
+					
 					<form action="Modify_Member.ma" method="post">
-		<table border="1">
-<!-- 			<tr> -->
-<!-- 				<td colspan="2" width="300" height="300"><img src="testimg/1.JPG"></td> -->
-<!-- 			</tr>	 -->
-<!-- 			<tr> -->
-<!-- 				<td><label for="mypage_file">파일 첨부</label></td> -->
-<!-- 				<td><input type="file" name="mypage_file"/></td> -->
-<!-- 			</tr>	 -->
-<!-- 			<tr>  -->
-<!-- 				<th>member_info_grade_code(사라질)</th> -->
-<%-- 				<td><input type="text" name="member_info_grade_code" id="member_info_grade_code" value="<%=member.getMember_info_grade_code()%>" readonly="readonly"></td> --%>
-<!-- 			</tr> -->
-<!-- 			<tr>  -->
-<!-- 				<th>grade_code(사라질)</th> -->
-<%-- 				<td><input type="text" name="grade_code" id="grade_code" value="<%=member.getGrade_code()%>" readonly="readonly"></td> --%>
-<!-- 			</tr> -->
+					<table border="1">
 			<tr> 
-				<th>grade_name(사라질)</th>
+				<th>회원 등급</th>
 				<td><input type="text" name="grade_name" id="grade_name" value="<%=member.getGrade_name() %>" readonly="readonly"></td>
 			</tr>
 			<tr> 
