@@ -31,7 +31,6 @@ public class MemberBean {
 	private String member_service_log_status;
 	private String member_service_log_join_date;
 	private String member_service_log_passwd_change_date;
-	private String member_service_log_grade_change_date;
 	private String member_service_log_login_date;
 	private int member_service_log_order_count;
 	private int top_level;
@@ -212,12 +211,6 @@ public class MemberBean {
 	public void setMember_service_log_passwd_change_date(String member_service_log_passwd_change_date) {
 		this.member_service_log_passwd_change_date = member_service_log_passwd_change_date;
 	}
-	public String getMember_service_log_grade_change_date() {
-		return member_service_log_grade_change_date;
-	}
-	public void setMember_service_log_grade_change_date(String member_service_log_grade_change_date) {
-		this.member_service_log_grade_change_date = member_service_log_grade_change_date;
-	}
 	public String getMember_service_log_login_date() {
 		return member_service_log_login_date;
 	}
@@ -273,7 +266,6 @@ public class MemberBean {
 				+ member_info_detail_acc_money + ", member_service_log_status=" + member_service_log_status
 				+ ", member_service_log_join_date=" + member_service_log_join_date
 				+ ", member_service_log_passwd_change_date=" + member_service_log_passwd_change_date
-				+ ", member_service_log_grade_change_date=" + member_service_log_grade_change_date
 				+ ", member_service_log_login_date=" + member_service_log_login_date
 				+ ", member_service_log_order_count=" + member_service_log_order_count + ", top_level=" + top_level
 				+ ", nomal=" + nomal + ", suspension=" + suspension + ", withdrawal=" + withdrawal + "]";

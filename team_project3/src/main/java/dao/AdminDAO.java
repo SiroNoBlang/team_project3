@@ -955,7 +955,7 @@ public class AdminDAO {
 		
 		try {
 			
-			String sql = "SELECT a.member_code, a.member_num, a.member_nickname, a.member_email, b.member_service_log_status, b.member_service_log_join_date, b.member_service_log_login_date FROM member AS a JOIN member_service_log AS b LIMIT ?,?";
+			String sql = "SELECT a.member_code, a.member_num, a.member_nickname, a.member_email, b.member_service_log_status, b.member_service_log_join_date FROM member AS a JOIN member_service_log AS b ON a.member_code = b.member_service_log_code LIMIT ?,?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, startRow);
 			pstmt.setInt(2, listLimit);
@@ -973,10 +973,9 @@ public class AdminDAO {
 				bean2.setMember_email(rs.getString("a.member_email"));
 				bean2.setMember_service_log_status(rs.getString("b.member_service_log_status"));
 				bean2.setMember_service_log_join_date(rs.getString("b.member_service_log_join_date").substring(0, 8));
-//				bean2.setMember_service_log_login_date(rs.getString("b.member_service_log_login_date").substring(0,8));
 				memberManagementList.add(bean2);
 			}
-			
+			System.out.println(memberManagementList.size());
 		} catch (SQLException e) {
 			System.out.println("SQL 구문 오류 발생! - selectMemberManagementList()");
 			e.printStackTrace();

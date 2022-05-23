@@ -121,6 +121,7 @@ public class MemberDAO {
 
 
 	public MemberBean getMemberArticle(String member_code) {
+		System.out.println("getMemberArticle - mem");
 		MemberBean memberDetail = null;
 		
 		PreparedStatement pstmt = null;
@@ -198,14 +199,15 @@ public class MemberDAO {
 				memberDetail.setMember_service_log_status(rs.getString("d.member_service_log_status"));
 				memberDetail.setMember_service_log_join_date(rs.getString("d.member_service_log_join_date").substring(0,8)); 
 				memberDetail.setMember_service_log_passwd_change_date(rs.getString("d.member_service_log_passwd_change_date").substring(0,8)); 
-				memberDetail.setMember_service_log_grade_change_date(rs.getString("d.member_service_log_grade_change_date").substring(0,8));
 				memberDetail.setMember_service_log_login_date(rs.getString("d.member_service_log_login_date").substring(0,8));
 				memberDetail.setMember_service_log_order_count(rs.getInt("d.member_service_log_order_count")); 
 				memberDetail.setGrade_name(rs.getString("e.grade_name"));
 				
 			}
+			System.out.println(memberDetail.getGrade_name());
+			System.out.println(memberDetail.getMember_service_log_login_date());
 		} catch (SQLException e) {
-			
+			e.printStackTrace();
 		} finally {
 			close(pstmt);
 			close(rs);
@@ -279,7 +281,7 @@ public class MemberDAO {
 		return updateCount;
 	}
 
-	public boolean getMemberUpdate(String member_code, String member_status) {
+	public boolean getMemberUpdate(String member_code, String member_status, int reason) {
 		boolean isMemberUpdate = false;
 		
 		PreparedStatement pstmt = null;
@@ -288,6 +290,12 @@ public class MemberDAO {
 		try {
 			if(member_status.equals("정상")) {
 				String sql = "UPDATE member_service_log SET member_service_log_status=? WHERE member_service_log_code=?";
+				pstmt = con.prepareStatement(sql);
+				pstmt.setString(1, member_status);
+				pstmt.setString(2, member_code);
+				sucess = pstmt.executeUpdate();
+			} else if(member_status.equals("정지")) {
+				String sql = "UPDATE member_service_log SET member_service_log_status=?,member_service_log_login_date=REPLACE(now(),'-','') WHERE member_service_log_code=?";
 				pstmt = con.prepareStatement(sql);
 				pstmt.setString(1, member_status);
 				pstmt.setString(2, member_code);

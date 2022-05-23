@@ -136,7 +136,6 @@
 								                    </td>
 								                    <td>${memberManagement.getMember_nickname() }</td>
 													<td>${memberManagement.getMember_service_log_join_date() }</td>
-<%-- 													<td>${memberManagement.getMember_service_log_login_date() }</td> --%>
 													<td>${memberManagement.getMember_service_log_status() }</td>
 								                </tr>
 							              </c:forEach>

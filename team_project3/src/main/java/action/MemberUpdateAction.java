@@ -17,12 +17,13 @@ public class MemberUpdateAction implements Action {
 
 		String member_code = request.getParameter("member_code");
 		String member_status = request.getParameter("member_status");
+		int reason = Integer.parseInt(request.getParameter("reason"));
 		String pageNum = request.getParameter("page");
 		
 //		System.out.println(member_code + ", " + member_status); // 이미지 파일 있을때도 확인용이므로 잠시 킵해두겠습니다.
 		
 		MemberUpdateService service = new MemberUpdateService();
-		boolean isMemberUpdate = service.getMemberUpdate(member_code, member_status);
+		boolean isMemberUpdate = service.getMemberUpdate(member_code, member_status, reason);
 		
 		if(isMemberUpdate) {
 			request.setAttribute("member_code", member_code);

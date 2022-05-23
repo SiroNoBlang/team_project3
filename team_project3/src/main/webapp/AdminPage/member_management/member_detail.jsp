@@ -153,11 +153,18 @@ MemberBean member = (MemberBean) request.getAttribute("memberDetail");
 						</tr>
 						<tr>
 							<th><label for="board_title">회원 상태</label></th>
-							<td><select id="member_status" name="member_status">
-									<option value="정상" <%if (member.getMember_service_log_status().equals("정상")) {%>selected="selected" <%}%>>정상</option>
-									<option value="정지" <%if (member.getMember_service_log_status().equals("정지")) {%>selected="selected" <%}%>>정지</option>
-									<option value="탈퇴" <%if (member.getMember_service_log_status().equals("탈퇴")) {%>selected="selected" <%}%>>탈퇴</option>
-							</select></td>
+							<td>
+							<select id="member_status" name="member_status">
+								<option value="정상" <%if (member.getMember_service_log_status().equals("정상")) {%>selected="selected" <%}%>>정상</option>
+								<option value="정지" <%if (member.getMember_service_log_status().equals("정지")) {%>selected="selected" <%}%>>정지</option>
+								<option value="탈퇴" <%if (member.getMember_service_log_status().equals("탈퇴")) {%>selected="selected" <%}%>>탈퇴</option>
+							</select>
+							<select id="reason" name="reason">
+								<option value="0" <%if (member.getMember_service_log_status().equals("정상")) {%>selected="selected" <%}%>>정상</option>
+								<option value="1" <%if (member.getMember_service_log_status().equals("정지")) {%>selected="selected" <%}%>>정지 이유 1</option>
+								<option value="2" <%if (member.getMember_service_log_status().equals("탈퇴")) {%>selected="selected" <%}%>>정지 이유 2</option>
+							</select>
+							</td>
 						</tr>
 						<tr>
 							<th><label for="board_title">회원가입 날짜</label></th>

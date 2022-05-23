@@ -47,7 +47,6 @@ public class MyPageUpdateAction implements Action {
 		String member_service_log_status = request.getParameter("member_service_log_status");
 		String member_service_log_join_date = request.getParameter("member_service_log_join_date");
 		String member_service_log_passwd_change_date = request.getParameter("member_service_log_passwd_change_date");
-		String member_service_log_grade_change_date = request.getParameter("member_service_log_grade_change_date");
 		String member_service_log_login_date = request.getParameter("member_service_log_login_date");
 		int member_service_log_order_count = Integer.parseInt(request.getParameter("member_service_log_order_count"));
 		
@@ -72,7 +71,6 @@ public class MyPageUpdateAction implements Action {
 		member.setMember_service_log_status(member_service_log_status);
 		member.setMember_service_log_join_date(member_service_log_join_date);
 		member.setMember_service_log_passwd_change_date(member_service_log_passwd_change_date);
-		member.setMember_service_log_grade_change_date(member_service_log_grade_change_date);
 		member.setMember_service_log_login_date(member_service_log_login_date);
 		member.setMember_service_log_order_count(member_service_log_order_count);
 		member.setMember_code(member_code);
