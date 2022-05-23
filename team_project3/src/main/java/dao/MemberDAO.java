@@ -295,10 +295,11 @@ public class MemberDAO {
 				pstmt.setString(2, member_code);
 				sucess = pstmt.executeUpdate();
 			} else if(member_status.equals("정지")) {
-				String sql = "UPDATE member_service_log SET member_service_log_status=?,member_service_log_login_date=REPLACE(now(),'-','') WHERE member_service_log_code=?";
+				String sql = "UPDATE member_service_log SET member_service_log_status=?,member_service_log_login_date=REPLACE(now(),'-',''),member_service_log_status_reason=? WHERE member_service_log_code=?";
 				pstmt = con.prepareStatement(sql);
 				pstmt.setString(1, member_status);
-				pstmt.setString(2, member_code);
+				pstmt.setString(2, reason);
+				pstmt.setString(3, member_code);
 				sucess = pstmt.executeUpdate();
 			} else {
 				String sql = "UPDATE member_service_log SET member_service_log_status=?,member_service_log_login_date=REPLACE(now(),'-','') WHERE member_service_log_code=?";
@@ -406,5 +407,37 @@ public class MemberDAO {
 		return bean;
 	}
 	
+	
+	public boolean checkNickname(String nickname) {
+		boolean isDuplicate = false;
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			// JdbcUtil 클래스의 getConnection() 메서드를 호출하여 Connection 객체 가져오기
+			// 3단계. SQL 구문 작성 및 전달
+			// id 가 일치하는 레코드 조회
+			String sql = "SELECT * FROM member WHERE member_nickname=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, nickname);
+			
+			// 4단계. SQL 구문 실행 및 결과 처리
+			rs = pstmt.executeQuery();
+			
+			// 레코드(아이디)가 존재할 경우 아이디가 중복이므로 isDuplicate 을 false 로 변경
+			if(rs.next()) {
+				isDuplicate = true;
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		
+		return isDuplicate;
+	}
 	
 }

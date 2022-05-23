@@ -174,11 +174,10 @@
 	$(function(){
 		$("#member_nickname").on("keyup",function(){
 			let sendData = $("#fr").serialize();
-			let nickname = $("#fr").serialize();
 			
 			$.ajax({
 				type:"GET",
-				url:"./index_check_nickname_pro.jsp",
+				url:"HomePage/first_page/check_nickname.jsp",
 				data: sendData,
 				dataType:"text",
 				success:function(msg){
@@ -186,6 +185,28 @@
 				},
 				error: function(xhr, textStatus, errorThrown){
 					$("#nicknameResultArea").html(
+							"xhr = " + xhr + "<br>"
+							+ "textStatus = " + textStatus + "<br>"
+							+ "errorThrown = " + errorThrown);
+				}
+			});
+		});
+	});		
+	
+	$(function(){
+		$("#member_id").on("keyup",function(){
+			let sendData = $("#fr").serialize();
+			
+			$.ajax({
+				type:"GET",
+				url:"HomePage/first_page/check_id.jsp",
+				data: sendData,
+				dataType:"text",
+				success:function(msg){
+					$("#idResultArea").html(msg);
+				},
+				error: function(xhr, textStatus, errorThrown){
+					$("#idResultArea").html(
 							"xhr = " + xhr + "<br>"
 							+ "textStatus = " + textStatus + "<br>"
 							+ "errorThrown = " + errorThrown);
@@ -619,12 +640,13 @@
 					<div class="fields">
 						<div class="field half">
 							<label for="member_nickname">Nickname</label> 
-							<input type="text"name="member_nickname" id="member_nickname" onkeyup="duplicateNickname(this.value)" />
+							<input type="text" name="member_nickname" id="member_nickname" />
 							<div id="nicknameResultArea"></div>
 						</div>
 						<div class="field half">
 							<label for="member_id">ID</label><span id="checkId"></span> 
 							<input type="text" name="member_id" id="member_id" />
+							<div id="idResultArea"></div>
 						</div>
 						<div class="field half">
 							<label for="member_passwd">Password</label>

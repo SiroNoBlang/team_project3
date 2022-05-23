@@ -6,19 +6,17 @@ import java.sql.Connection;
 
 import dao.MemberDAO;
 
-public class MemberUpdateService {
-
-	public boolean getMemberUpdate(String member_code, String member_status, String reason) {
-		boolean isMemberUpdate = false;
+public class CheckNicknameService {
+	public boolean checkNickname(String nickname) {
+		boolean isCheckNickname = false;
 		
 		Connection con = getConnection();
 		
 		MemberDAO memberDAO = MemberDAO.getInstance();
 		memberDAO.setConnection(con);
+		boolean isDuplicate = memberDAO.checkNickname(nickname);
 		
-		isMemberUpdate = memberDAO.getMemberUpdate(member_code, member_status, reason);
-		
-		if(isMemberUpdate) {
+		if(isDuplicate) {
 			commit(con);
 		} else {
 			rollback(con);
@@ -26,7 +24,6 @@ public class MemberUpdateService {
 		
 		close(con);
 		
-		return isMemberUpdate;
+		return isCheckNickname;
 	}
-
 }
