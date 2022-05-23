@@ -436,8 +436,42 @@ public class MemberDAO {
 			close(rs);
 			close(pstmt);
 		}
+		return isDuplicate;
+	}
+	
+	public boolean checkId(String id) {
+		boolean isDuplicate = false;
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			// JdbcUtil 클래스의 getConnection() 메서드를 호출하여 Connection 객체 가져오기
+			
+			// 3단계. SQL 구문 작성 및 전달
+			// id 가 일치하는 레코드 조회
+			String sql = "SELECT * FROM member WHERE member_id=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, id);
+			
+			// 4단계. SQL 구문 실행 및 결과 처리
+			rs = pstmt.executeQuery();
+			
+			// 레코드(아이디)가 존재할 경우 아이디가 중복이므로 isDuplicate 을 false 로 변경
+			if(rs.next()) {
+				isDuplicate = true;
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
 		
 		return isDuplicate;
 	}
+
+
 	
 }

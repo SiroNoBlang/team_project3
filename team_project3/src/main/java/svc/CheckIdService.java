@@ -6,15 +6,15 @@ import java.sql.Connection;
 
 import dao.MemberDAO;
 
-public class CheckNicknameService {
-	public boolean checkNickname(String nickname) {
-		boolean isDuplicate = false;
+public class CheckIdService {
+	public boolean checkId(String id) {
+		boolean isDuplicate=false;
 		
 		Connection con = getConnection();
 		
 		MemberDAO memberDAO = MemberDAO.getInstance();
 		memberDAO.setConnection(con);
-		isDuplicate = memberDAO.checkNickname(nickname);
+		isDuplicate = memberDAO.checkId(id); 
 		
 		if(isDuplicate) {
 			commit(con);
@@ -23,7 +23,7 @@ public class CheckNicknameService {
 		}
 		
 		close(con);
-		System.out.println(isDuplicate);
+		
 		return isDuplicate;
 	}
 }

@@ -18,8 +18,8 @@ public class LoginProAction implements Action {
 		
 		ActionForward forward = null;
 		
-		String member_id = request.getParameter("member_id");
-		String member_passwd = request.getParameter("member_passwd");
+		String member_id = request.getParameter("login_member_id");
+		String member_passwd = request.getParameter("login_member_passwd");
 		
 		
 		LoginProService service = new LoginProService();

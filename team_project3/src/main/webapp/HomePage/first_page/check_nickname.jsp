@@ -12,7 +12,6 @@ String nickname = request.getParameter("member_nickname");
 CheckNicknameService service = new CheckNicknameService();
 boolean isDuplicate = service.checkNickname(nickname);
 
- 
 if(isDuplicate) { // 중복
 	out.println("이미 사용중인 닉네임");
 } else { // 중복 아님

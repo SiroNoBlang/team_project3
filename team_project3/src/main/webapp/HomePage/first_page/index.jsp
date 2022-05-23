@@ -61,7 +61,7 @@
 	
 	function checkPassResult(pass2){
 		var spanElem = document.getElementById("passCheck");
-		var pass = fr.member_passwd.value;
+		var pass = fr.join_member_passwd.value;
 		
 		if(pass==pass2){
 			spanElem.innerHTML = "패스워드 일치";
@@ -72,14 +72,7 @@
 		}
 	}
 	
-	function checkNickname(){
-		window.open("./HomePage/check_nickname.jsp");
-	}
-	
-	function checkId(){
-		window.open("./HomePage/check_id.jsp");
-	}
-	
+
 	var result ,result2;
 	function is_checked1() {
 		  
@@ -138,38 +131,7 @@
 	function submitHide(){
 		$('#checkSubmit').hide();
 	}
-	
-// 	$(function(){
-// 		$("#member_nickname").on("keyup",function(){
-// 			let sendData = $("#fr").serialize();
-			
-// 			$.ajax({
-// 				type:"GET",
-// 				url:"index_check_nickname_pro.jsp",
-// 				data: sendData,
-// 				dataType:"text",
-// 				success:function(msg){
-// 					$("#nicknameResultArea").html(msg);
-// 				},
-// 				error: function(xhr, textStatus, errorThrown){
-// 					$("#nicknameResultArea").html(
-// 							"xhr = " + xhr + "<br>"
-// 							+ "textStatus = " + textStatus + "<br>"
-// 							+ "errorThrown = " + errorThrown);
-// 				}
-// 			});
-// 		});
-// 	});
 
-// function duplicateNickname(nickname){
-// 	$.ajax({
-			
-// 		type:"past",
-// 		url
-// 	});
-// }
-// $(function(){
-// 		$("#member_nickname").on("keyup",function(){
 	
 	$(function(){
 		$("#member_nickname").on("keyup",function(){
@@ -192,9 +154,10 @@
 			});
 		});
 	});		
+
 	
 	$(function(){
-		$("#member_id").on("keyup",function(){
+		$("#join_member_id").on("keyup",function(){
 			let sendData = $("#fr").serialize();
 			
 			$.ajax({
@@ -213,8 +176,7 @@
 				}
 			});
 		});
-	});		
-			
+	});	
 </script>
 </head>
 <body class="is-preload">
@@ -247,11 +209,11 @@
 					<div class="fields">
 						<div class="field half">
 							<label for="member_id">ID</label>
-							<input type="text" name="member_id" id="member_id" />
+							<input type="text" name="login_member_id" id="login_member_id" />
 						</div>
 						<div class="field half">
 							<label for="member_passwd">Password</label>
-							<input type="password" name="member_passwd" id="member_passwd" />
+							<input type="password" name="login_member_passwd" id="login_member_passwd" />
 						</div>
 					</div>
 					<ul class="actions">
@@ -644,18 +606,18 @@
 							<div id="nicknameResultArea"></div>
 						</div>
 						<div class="field half">
-							<label for="member_id">ID</label><span id="checkId"></span> 
-							<input type="text" name="member_id" id="member_id" />
+							<label for="member_id">ID</label>
+							<input type="text" name="join_member_id" id="join_member_id" />
 							<div id="idResultArea"></div>
 						</div>
 						<div class="field half">
 							<label for="member_passwd">Password</label>
-							<input type="password" name="member_passwd" id="member_passwd" onkeyup="checkPass(this.value)"/>
+							<input type="password" name="join_member_passwd" id="join_member_passwd" onkeyup="checkPass(this.value)"/>
 							<span id="passSafe"></span>
 						</div>
 						<div class="field half">
 							<label for="member_passwd_check">Password Check</label> 
-							<input type="password"name="member_passwd_check" id="member_passwd_check" onkeyup="checkPassResult(this.value)"/> 
+							<input type="password"name="join_member_passwd_check" id="join_member_passwd_check" onkeyup="checkPassResult(this.value)"/> 
 								<span id="passCheck"></span>
 						</div>
 						<div class="field half">

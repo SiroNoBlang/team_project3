@@ -38,8 +38,8 @@ public class JoinProAction implements Action {
 		
 		MemberBean memberBean = new MemberBean();
 		memberBean.setMember_nickname(request.getParameter("member_nickname"));
-		memberBean.setMember_id(request.getParameter("member_id"));
-		memberBean.setMember_passwd(request.getParameter("member_passwd"));
+		memberBean.setMember_id(request.getParameter("join_member_id"));
+		memberBean.setMember_passwd(request.getParameter("join_member_passwd"));
 		memberBean.setMember_email(request.getParameter("member_email1") + request.getParameter("member_email2"));
 		memberBean.setMember_info_gender(request.getParameter("member_info_gender"));
 		memberBean.setMember_info_age(request.getParameter("member_info_age"));
