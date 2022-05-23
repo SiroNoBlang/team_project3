@@ -8,7 +8,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import db.JdbcUtil.*;
-
+import vo.MemberBean;
 import vo.SellerDTO;
 
 import static db.JdbcUtil.*;
@@ -194,14 +194,14 @@ public class SellerDAO {
 		return articleList;
 	}
 
-	public  SellerDTO selectArticle(int sell_num) {
+	public  SellerDTO selectArticle(int sell_num) {   //sell_num 값을 이용하여 해당 제품 판매관련정보 가져오기 &(코드 활용)상세글에서 (buy) 구매하기  ->Sellerdto 를 이용하여 상품의 상세정보 가져오기 
 		SellerDTO article = null;
 		
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		
 		try {
-			String sql = "SELECT  a.sell_category, a.sell_category_detail, a.sell_size, a.sell_title, a.sell_color, a.sell_brand, a.sell_price, a.sell_readcount, b.sell_img_name, b.sell_img_real_name, c.sell_list_num ,c.sell_list_item_status, c.sell_list_approve_nickname "
+			String sql = "SELECT  a.sell_num,a.sell_member_code,a.sell_category, a.sell_category_detail, a.sell_size, a.sell_title, a.sell_color, a.sell_brand, a.sell_price, a.sell_readcount, b.sell_img_name, b.sell_img_real_name, c.sell_list_num ,c.sell_list_item_status, c.sell_list_approve_nickname "
 			        + " FROM sell AS a JOIN sell_img AS b ON a.sell_num = b.sell_img_num JOIN sell_list AS c ON a.sell_num = c.sell_list_num WHERE c.sell_list_num =? ";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, sell_num);
@@ -214,7 +214,8 @@ public class SellerDAO {
 
 			if(rs.next()) {
 				article = new SellerDTO();
-				
+				article.setSell_member_code(rs.getString("sell_member_code"));
+				article.setSell_num(rs.getInt("sell_num"));
 				article.setSell_category(rs.getString("sell_category"));
 				article.setSell_size(rs.getString("sell_size"));
 				article.setSell_category_detail(rs.getString("sell_category_detail"));
@@ -301,8 +302,58 @@ public class SellerDAO {
 		return productarr;
 	}
 
-	public SellerDTO selectShoping(int sell_list_num) {
-		// TODO Auto-generated method stub
-		return null;
+	public static MemberBean selectMemberShop(String member_code) {  //상세 글에서 (buy)구매하기->memberBean을 이용해 구매자 정보 가져오기
+		System.out.println("selectMemberShop-구매DAO(member_code)");
+			MemberBean memberbean = null;
+		 /*member_info테이블
+		   * fk=> member_info_code <-> member_code
+		  --------------------------------------------------------------------------
+		    member_info_name,member_info_phone, 
+		    member_info_post_code,member_info_address,member_info_address_detail
+		    member_info_ship_post_code, member_info_ship_address, member_info_ship_address_detail,
+		   
+		   	
+		   ----------------------------------------------------------------------------
+		   member_info_detail 테이블
+		     fk => member_info_detail_code    <-> member_code
+		   -------------------------------------------------------------------------------
+		   member_info_detail_point(포인트 적립금), member_info_detail_acc_money(누적 금액)
+		    ------------------------------------------------------------------------------
+		   	
+		  * */
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			
+			try {	
+				String sql = " SELECT a.member_code, b.member_info_name, b.member_info_phone, b.member_info_post_code, b.member_info_address, b.member_info_address_detail, b.member_info_ship_post_code, b.member_info_ship_address, b.member_info_ship_address_detail,"
+						+ " c.member_info_detail_point, c.member_info_detail_acc_money"
+						+ " FROM member AS a JOIN member_info AS b ON a.member_code = b.member_info_code JOIN member_info_detail AS c ON b.member_info_code = c.member_info_detail_code WHERE a.member_code = ?";
+				pstmt = con.prepareStatement(sql);
+				pstmt.setString(1, member_code);
+				rs = pstmt.executeQuery();
+				
+				if(rs.next()) {
+					memberbean =new MemberBean();
+					memberbean.setMember_code(rs.getString("member_code")); 					
+					memberbean.setMember_info_name(rs.getString("member_info_name"));
+					memberbean.setMember_info_phone(rs.getString("member_info_phone")); 				
+					memberbean.setMember_info_post_code(rs.getString("member_info_post_code"));
+					memberbean.setMember_info_address(rs.getString("member_info_address")); 			
+					memberbean.setMember_info_address_detail(rs.getString("member_info_address_detail"));
+					memberbean.setMember_info_ship_post_code(rs.getString("member_info_ship_post_code")); 		
+					memberbean.setMember_info_ship_address(rs.getString("member_info_ship_address"));
+					memberbean.setMember_info_ship_address_detail(rs.getString("member_info_ship_address_detail")); 
+					memberbean.setMember_info_detail_point(rs.getInt("member_info_detail_point"));
+					memberbean.setMember_info_detail_acc_money(rs.getInt("member_info_detail_acc_money")); 
+					 
+
+					
+				}
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+		return memberbean;
 	}
 }

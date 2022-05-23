@@ -96,16 +96,16 @@ public class ProductFrontController extends HttpServlet {
 			e.printStackTrace();
 		}
 	}
-//		else if (command.equals("/Shoping.pr")) {// 쇼핑카트 액션  <곧 구매 버튼 선택 후 결제하기 들어갑니다.>
-//			action = new ShopingProAction();
-//
-//			try {
-//				forward = action.execute(request, response);
-//			} catch (Exception e) {
-//				e.printStackTrace();
-//			}
-//
-//		}
+		else if (command.equals("/ShopingPro.pr")) {// 쇼핑카트 액션  <곧 구매 버튼 선택 후 결제하기 들어갑니다.>
+			action = new ShopingProAction();
+
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
+		}
 
 	//----------------------------------------------------------------------------------------------		      
 		if (forward != null) {

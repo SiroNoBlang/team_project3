@@ -37,8 +37,6 @@ public class ProductDetailProAction implements Action {
 			// => 파라미터 : 글번호(board_num)
 			service.increaseReadcount(sell_num);
 		}
-		System.out.println("여기에서sellerdto:"+sellerdto);
-		System.out.println("여기에서Relationdto:"+Relationdto);
 		request.setAttribute("sellerdto", sellerdto);
 		request.setAttribute("Relationdto", Relationdto);
 		

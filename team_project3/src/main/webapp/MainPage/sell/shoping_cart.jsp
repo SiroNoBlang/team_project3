@@ -1,10 +1,13 @@
+<%@page import="vo.MemberBean"%>
 <%@page import="vo.SellerDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%
+<%	
+
 String member_nickname =(String)session.getAttribute("sNickname");
 String sell_member_code =(String)session.getAttribute("sCode");
 SellerDTO sellerDTO = (SellerDTO)request.getAttribute("sellerDTO");
+MemberBean memberbean = (MemberBean)request.getAttribute("memberBean");
 %>
     
 <!DOCTYPE html>
@@ -350,32 +353,42 @@ SellerDTO sellerDTO = (SellerDTO)request.getAttribute("sellerDTO");
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-10 col-xl-7 m-lr-auto m-b-50">
+					
 					<div class="m-l-25 m-r--38 m-lr-0-xl">
 						<div class="wrap-table-shopping-cart">
 							<table class="table-shopping-cart">
-								<tr class="table_head">
-									<th class="column-1">Product</th>
-									<th class="column-2">title</th>
-									<th class="column-3">Price</th>
-									
-								</tr>
-
+<!-- 								<tr class="table_head"> -->
+<!-- 									<th class="column-1">Product</th> -->
+<!-- 									<th class="column-2">title</th> -->
+<!-- 									<th class="column-3">Size</th> -->
+<!-- 									<th class="column-3">Price</th> -->
+<!-- 								</tr> -->
+								
 								<tr class="table_row">
 									<td class="column-1">
-										<div class="how-itemcart1">
-											<img src="./Upload/sell_img/<%=sellerDTO.getSell_img_real_name() %>" alt="IMG">
-										</div>
+<!-- 										<div class="how-itemcart1"> -->
+											<img width="120" height="125" src="./Upload/sell_img/<%=sellerDTO.getSell_img_real_name() %>" alt="IMG">
+<!-- 										</div> -->
 									</td>
-									<td class="column-2"><%=sellerDTO.getSell_title() %></td>
-									<td class="column-3">$ <%=sellerDTO.getSell_price() %></td>
-									
-									
+									<td class="column-2"><div><%=sellerDTO.getSell_title() %></div><br><div><%=sellerDTO.getSell_size() %></div><br><div>₩ <%=sellerDTO.getSell_price() %></div>
+									</td>
+								
 								</tr>
 
 								
 							</table>
 						</div>
-
+							<div class="wrap-table-shopping-cart">
+								<table class="table-shopping-cart">
+									<tr>
+										<td>
+											<span class="stext-102 cl3 size-205">배송 주소	</span>
+												<div>ㅎㅇ</div>
+										
+										</td>
+									</tr>
+								</table>
+							</div>	
 						<div class="flex-w flex-sb-m bor15 p-t-18 p-b-15 p-lr-40 p-lr-15-sm">
 							<div class="flex-w flex-m m-r-20 m-tb-5">
 								<input class="stext-104 cl2 plh4 size-117 bor13 p-lr-20 m-r-10 m-tb-5" type="text" name="coupon" placeholder="Coupon Code">
@@ -390,6 +403,7 @@ SellerDTO sellerDTO = (SellerDTO)request.getAttribute("sellerDTO");
 							</div>
 						</div>
 					</div>
+				
 				</div>
 
 				<div class="col-sm-10 col-lg-7 col-xl-5 m-lr-auto m-b-50">

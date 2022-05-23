@@ -5,7 +5,7 @@
     pageEncoding="UTF-8"%>
 <%
 String member_nickname =(String)session.getAttribute("sNickname");
-String sell_member_code =(String)session.getAttribute("sCode");
+String member_code =(String)session.getAttribute("sCode");
 SellerDTO seller = new SellerDTO();
 SellerDTO sellerdto = (SellerDTO)request.getAttribute("sellerdto");
 PageInfo pageInfo = (PageInfo)request.getAttribute("pageInfo");
@@ -369,6 +369,9 @@ ArrayList<SellerDTO> Relationdto = (ArrayList<SellerDTO>)request.getAttribute("R
 		
 
 	<!-- Product Detail -->
+	<input type="button" value="구매" onclick="location.href='ShopingPro.pr?sell_num=<%=sellerdto.getSell_num()%>&member_code=<%=member_code%>'">
+<form border="1" action="ShopingPro.pr">
+<input type="hidden" >
 판매번호:<%=sellerdto.getSell_list_num() %>
 	<section class="sec-product-detail bg0 p-t-65 p-b-60">
 		<div class="container">
@@ -495,13 +498,13 @@ ArrayList<SellerDTO> Relationdto = (ArrayList<SellerDTO>)request.getAttribute("R
 
 									
 									</div>
-									<input type="button" value="구매" onclick="location.href='ShopingPro.pr?sell_list_num=<%=sellerdto.getSell_list_num()%>&sell_brand=<%=sellerdto.getSell_brand()%>&sell_member_code=<%=sell_member_code%>'">
+									<input type="button" value="구매" onclick="location.href='ShopingPro.pr?sell_num=<%=sellerdto.getSell_num()%>&member_code=<%=member_code%>'">
 									
 								</div>
 							</div>	
 						</div>
 
-						
+</form>						
 						<div class="flex-w flex-m p-l-100 p-t-40 respon7">
 							<div class="flex-m bor9 p-r-10 m-r-11">
 								<a href="#" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 js-addwish-detail tooltip100" data-tooltip="Add to Wishlist">
@@ -524,8 +527,8 @@ ArrayList<SellerDTO> Relationdto = (ArrayList<SellerDTO>)request.getAttribute("R
 					</div>
 				</div>
 			</div>
-			<추천상품>
 			
+			<추천상품>
 			<div class="bor10 m-t-50 p-t-43 p-b-40"><!-- 관련 상품 뿌리기 -->
 				
 					<% for(SellerDTO dto :Relationdto){ %>	

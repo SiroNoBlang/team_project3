@@ -53,7 +53,8 @@ public class sellWriteProAction implements Action {
 						new DefaultFileRenamePolicy()); // 5) 중복 파일명에 대한 이름 변경 처리를 담당하는 객체
 
 				SellerDTO seller= new SellerDTO();
-			
+				String sell_member_code = request.getParameter("sell_member_code");
+				seller.setSell_member_code(sell_member_code);
 				seller.setSell_content(multi.getParameter("sell_content"));
 			    seller.setSell_title(multi.getParameter("sell_title"));
 			    seller.setSell_color(multi.getParameter("sell_color"));
