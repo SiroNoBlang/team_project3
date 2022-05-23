@@ -7,7 +7,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import vo.MemberBean;
-import vo.MemberBean;
 
 import static db.JdbcUtil.*;
 public class MemberDAO {

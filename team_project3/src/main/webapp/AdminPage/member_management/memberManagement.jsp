@@ -56,7 +56,7 @@
 			<div class="card">
 				<div class="title">회원현황</div>
 				    <section class="row text-center placeholders">
-				        <div class="col-6 col-sm-3">
+				        <div class="col-6 col-sm-3" onclick="location.href='member_detail.jsp'">
 				          <div class="panel panel-info">
 				            <div class="panel-heading">VVVIP</div>
 				            <div class="panel-body">

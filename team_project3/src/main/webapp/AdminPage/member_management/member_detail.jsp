@@ -10,7 +10,6 @@ MemberBean member = (MemberBean) request.getAttribute("memberDetail");
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script src="js/jquery-3.6.0.js"></script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/css/bootstrap.css'>
 <link rel='stylesheet' href='https://raw.githubusercontent.com/forsigner/magic-check/master/css/magic-check.css'>
@@ -21,6 +20,7 @@ MemberBean member = (MemberBean) request.getAttribute("memberDetail");
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css'>
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css'>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+<script src="AdminPage/js/jquery-3.6.0.js"></script>
 </head>
 <body>
 	<div id="logo">
@@ -159,13 +159,11 @@ MemberBean member = (MemberBean) request.getAttribute("memberDetail");
 								<option value="정지" <%if (member.getMember_service_log_status().equals("정지")) {%>selected="selected" <%}%>>정지</option>
 								<option value="탈퇴" <%if (member.getMember_service_log_status().equals("탈퇴")) {%>selected="selected" <%}%>>탈퇴</option>
 							</select>
-							<div class="reason_content">
-								<select id="reason" name="reason">
-									<option value="0" <%if (member.getReason_num().equals("0")) {%>selected="selected" <%}%>>정상</option>
-									<option value="1" <%if (member.getReason_num().equals("1")) {%>selected="selected" <%}%>>정지 이유 1</option>
-									<option value="2" <%if (member.getReason_num().equals("2")) {%>selected="selected" <%}%>>정지 이유 2</option>
-								</select>
-							</div>
+							<select id="reason" name="reason">
+								<option value="0" <%if (member.getReason_num().equals("0")) {%>selected="selected" <%}%>>정상</option>
+								<option value="1" <%if (member.getReason_num().equals("1")) {%>selected="selected" <%}%>>정지 이유 1</option>
+								<option value="2" <%if (member.getReason_num().equals("2")) {%>selected="selected" <%}%>>정지 이유 2</option>
+							</select>
 							</td>
 						</tr>
 						<tr>
@@ -200,6 +198,5 @@ MemberBean member = (MemberBean) request.getAttribute("memberDetail");
 	<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js'></script>
 	<script src='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/js/bootstrap.min.js'></script>
 	<script src="AdminPage/js/script.js"></script>
-	<script src="AdminPage/js/jquery-3.6.0.js"></script>
 </body>
 </html>
