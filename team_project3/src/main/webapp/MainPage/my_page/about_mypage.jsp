@@ -57,10 +57,16 @@ MemberBean member = (MemberBean)request.getAttribute("memberDetail");
 	    }).open();
 	}
 
-	function delImg() {  //이미지 삭제
-		$('#image_section').removeAttr('src');
-	// 	$('#image_section').attr('src', '')
+	
+	function onPassModify() {
+		var con = document.getElementById("member_passwd");
+		if(con.style.display =='none') {
+			con.style.display = 'block';
+		} else {
+			con.style.display = 'none';
+		}
 	}
+	
 </script>
 	
 	<meta charset="UTF-8">
@@ -391,24 +397,31 @@ MemberBean member = (MemberBean)request.getAttribute("memberDetail");
 			<div class="row p-b-148">
 				<div class="col-md-7 col-lg-8">
 				</div>
-					<form action="ProfileImgUpdate.ma" method="post" enctype="multipart/form-data">
 					<table border="1">
-						<tr> 
-							<td><input type="hidden" name="member_code" id="member_code" value="<%=member.getMember_code() %>"></td>
-						</tr>
-						<tr>
-<%-- 						<td colspan="2" width="300" height="300"><img id="image_section" alt="" src="Upload/mypage_img/<%=member.getMember_info_mypage_img_name()%>"><br> --%>
-						<td colspan="2" width="300" height="300"><img id="image_section" alt="" src="Upload/mypage_img/<%=member.getMember_info_mypage_real_img_name()%>"><br>
-						<td><input type="file" id="member_info_mypage_img_name" name="member_info_mypage_img_name" value="">업로드</td>
-						</tr>
-						<tr><td>
-						<button type="submit">수정</button>
-						</td></tr>
-						</table>
-					</form>
+					<tr>
+						<td><a href="">내가 구매한 목록</a></td>
+						<td><a href="">찜한 목록</a></td>
+						<td><a href="">ㅋㅋ</a></td>
+					</tr>
+					</table>
 					
-					<form action="Modify_Member.ma" method="post">
-					<table border="1">
+				
+			<form action="ProfileImgUpdate.ma" method="post" enctype="multipart/form-data">
+			<table border="1">
+				<tr> 
+					<td><input type="hidden" name="member_code" id="member_code" value="<%=member.getMember_code() %>"></td>
+				</tr>
+				<tr>
+<%-- 						<td colspan="2" width="300" height="300"><img id="image_section" alt="" src="Upload/mypage_img/<%=member.getMember_info_mypage_img_name()%>"><br> --%>
+				<td colspan="2" width="300" height="300"><img id="image_section" alt="" src="Upload/mypage_img/<%=member.getMember_info_mypage_real_img_name()%>"><br>
+				<td><input type="file" id="member_info_mypage_img_name" name="member_info_mypage_img_name" value=""></td>
+				</tr>
+				</table>
+				<button type="submit">수정</button>
+			</form>
+					
+			<form action="Modify_Member.ma" method="post">
+			<table border="1">
 			<tr> 
 				<th>회원 등급</th>
 				<td><input type="text" name="grade_name" id="grade_name" value="<%=member.getGrade_name() %>" readonly="readonly"></td>
@@ -427,8 +440,10 @@ MemberBean member = (MemberBean)request.getAttribute("memberDetail");
 			</tr>
 			<tr> 
 				<th>패스워드</th>
-				<td><input type="password" name="member_passwd" id="member_passwd">
-					<input type="button" value="패스워드 수정" onclick="">
+				<td>
+					<a href="javascript:onPassModify();">패스워드 수정하기</a>
+					<input type="password" name="member_passwd" id="member_passwd" value="<%=member.getMember_passwd() %>" style="display: none;">
+<!-- 					<input type="button" value="패스워드 수정" onclick="onPassModify()"> -->
 				</td>
 			</tr>
 			<tr> 
@@ -438,24 +453,24 @@ MemberBean member = (MemberBean)request.getAttribute("memberDetail");
 			<tr> 
 				<th>이메일2 나중에 잘라서 수정예정</th>
 				<td><select id="member_email2" name="member_email2">
-						<option value="@gmail.com" <%if(member.getMember_email().equals("@gmail.com")) {%>selected="selected"<%} %>>
-						gmail.com
-						</option>
-						<option value="@naver.com" <%if(member.getMember_email().equals("@naver.com")) {%>selected="selected"<%} %>>
-						naver.com
-						</option>
-						<option value="@nate.com" <%if(member.getMember_email().equals("@nate.com")) {%>selected="selected"<%} %>>
-						nate.com
-						</option>
-						<option value="@hanmail.net" <%if(member.getMember_email().equals("@hanmail.net")) {%>selected="selected"<%} %>>
-						hanmail.net
-						</option>
-						<option value="@daum.net" <%if(member.getMember_email().equals("@daum.net")) {%>selected="selected"<%} %>>
-						daum.net
-						</option>
-						<option value="@yahoo.com" <%if(member.getMember_email().equals("@yahoo.com")) {%>selected="selected"<%} %>>
-						yahoo.com
-						</option>
+					<option value="@gmail.com" <%if(member.getMember_email().equals("@gmail.com")) {%>selected="selected"<%} %>>
+					gmail.com
+					</option>
+					<option value="@naver.com" <%if(member.getMember_email().equals("@naver.com")) {%>selected="selected"<%} %>>
+					naver.com
+					</option>
+					<option value="@nate.com" <%if(member.getMember_email().equals("@nate.com")) {%>selected="selected"<%} %>>
+					nate.com
+					</option>
+					<option value="@hanmail.net" <%if(member.getMember_email().equals("@hanmail.net")) {%>selected="selected"<%} %>>
+					hanmail.net
+					</option>
+					<option value="@daum.net" <%if(member.getMember_email().equals("@daum.net")) {%>selected="selected"<%} %>>
+					daum.net
+					</option>
+					<option value="@yahoo.com" <%if(member.getMember_email().equals("@yahoo.com")) {%>selected="selected"<%} %>>
+					yahoo.com
+					</option>
 				</select></td>
 			</tr>
 			<tr> 
@@ -465,10 +480,8 @@ MemberBean member = (MemberBean)request.getAttribute("memberDetail");
 			<tr> 
 				<th>성별</th>
 				<td><select id="member_info_gender" name="member_info_gender">
-<!-- 							<option value="male">남자</option>  -->
-<!-- 							<option value="female">여자</option> -->
-						<option value="male" <%if(member.getMember_info_gender().equals("male")) {%>selected="selected"<%} %>>남자</option>
-						<option value="female" <%if(member.getMember_info_gender().equals("female")) {%>selected="selected"<%} %>>여자</option>
+					<option value="male" <%if(member.getMember_info_gender().equals("male")) {%>selected="selected"<%} %>>남자</option>
+					<option value="female" <%if(member.getMember_info_gender().equals("female")) {%>selected="selected"<%} %>>여자</option>
 				</select></td>
 			</tr>
 			<tr> 
@@ -478,13 +491,13 @@ MemberBean member = (MemberBean)request.getAttribute("memberDetail");
 			<tr> 
 				<th>나이대</th>
 				<td><select id="member_info_age" name="member_info_age">
-						<option value="19세이하" <%if(member.getMember_info_age().equals("19세이하")) {%>selected="selected"<%} %>>19세이하</option>
-						<option value="20~29" <%if(member.getMember_info_age().equals("20~29")) {%>selected="selected"<%} %>>20~29</option>
-						<option value="30~39" <%if(member.getMember_info_age().equals("30~39")) {%>selected="selected"<%} %>>30~39</option>
-						<option value="40~49" <%if(member.getMember_info_age().equals("40~49")) {%>selected="selected"<%} %>>40~49</option>
-						<option value="50~59" <%if(member.getMember_info_age().equals("50~59")) {%>selected="selected"<%} %>>50~59</option>
-						<option value="60~69" <%if(member.getMember_info_age().equals("60~69")) {%>selected="selected"<%} %>>60~69</option>
-						<option value="70대이상" <%if(member.getMember_info_age().equals("70대이상")) {%>selected="selected"<%} %>>70세이상</option>
+					<option value="19세이하" <%if(member.getMember_info_age().equals("19세이하")) {%>selected="selected"<%} %>>19세이하</option>
+					<option value="20~29" <%if(member.getMember_info_age().equals("20~29")) {%>selected="selected"<%} %>>20~29</option>
+					<option value="30~39" <%if(member.getMember_info_age().equals("30~39")) {%>selected="selected"<%} %>>30~39</option>
+					<option value="40~49" <%if(member.getMember_info_age().equals("40~49")) {%>selected="selected"<%} %>>40~49</option>
+					<option value="50~59" <%if(member.getMember_info_age().equals("50~59")) {%>selected="selected"<%} %>>50~59</option>
+					<option value="60~69" <%if(member.getMember_info_age().equals("60~69")) {%>selected="selected"<%} %>>60~69</option>
+					<option value="70대이상" <%if(member.getMember_info_age().equals("70대이상")) {%>selected="selected"<%} %>>70세이상</option>
 				</select></td>
 			</tr>
 			<tr> 
@@ -530,22 +543,22 @@ MemberBean member = (MemberBean)request.getAttribute("memberDetail");
 			<tr> 
 				<th>스타일</th>
 				<td><select id="member_info_detail_like_style" name="member_info_detail_like_style">
-						<option value="귀여움" <%if(member.getMember_info_detail_like_style().equals("귀여움")) {%>selected="selected"<%} %>>귀여움</option>
-						<option value="섹시함" <%if(member.getMember_info_detail_like_style().equals("섹시함")) {%>selected="selected"<%} %>>섹시함</option>
+					<option value="귀여움" <%if(member.getMember_info_detail_like_style().equals("귀여움")) {%>selected="selected"<%} %>>귀여움</option>
+					<option value="섹시함" <%if(member.getMember_info_detail_like_style().equals("섹시함")) {%>selected="selected"<%} %>>섹시함</option>
 				</select></td>
 			</tr>
 			<tr> 
 				<th>브랜드</th>
 				<td><select id="member_info_detail_like_brand" name="member_info_detail_like_brand">
-						<option value="나이키" <%if(member.getMember_info_detail_like_brand().equals("나이키")) {%>selected="selected"<%} %>>나이키</option>
-						<option value="에르메스" <%if(member.getMember_info_detail_like_brand().equals("에르메스")) {%>selected="selected"<%} %>>에르메스</option>
+					<option value="나이키" <%if(member.getMember_info_detail_like_brand().equals("나이키")) {%>selected="selected"<%} %>>나이키</option>
+					<option value="에르메스" <%if(member.getMember_info_detail_like_brand().equals("에르메스")) {%>selected="selected"<%} %>>에르메스</option>
 				</select></td>
 			</tr>
 			<tr> 
 				<th>관심품목</th>
 				<td><select id="member_info_detail_like_category" name="member_info_detail_like_category">
-						<option value="상의" <%if(member.getMember_info_detail_like_category().equals("상의")) {%>selected="selected"<%} %>>상의</option>
-						<option value="하의" <%if(member.getMember_info_detail_like_category().equals("하의")) {%>selected="selected"<%} %>>하의</option>
+					<option value="상의" <%if(member.getMember_info_detail_like_category().equals("상의")) {%>selected="selected"<%} %>>상의</option>
+					<option value="하의" <%if(member.getMember_info_detail_like_category().equals("하의")) {%>selected="selected"<%} %>>하의</option>
 				</select></td>
 			</tr>
 			<tr> 
