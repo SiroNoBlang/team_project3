@@ -159,11 +159,13 @@ MemberBean member = (MemberBean) request.getAttribute("memberDetail");
 								<option value="정지" <%if (member.getMember_service_log_status().equals("정지")) {%>selected="selected" <%}%>>정지</option>
 								<option value="탈퇴" <%if (member.getMember_service_log_status().equals("탈퇴")) {%>selected="selected" <%}%>>탈퇴</option>
 							</select>
-							<select id="reason" name="reason">
-								<option value="0" <%if (member.getMember_service_log_status().equals("정상")) {%>selected="selected" <%}%>>정상</option>
-								<option value="1" <%if (member.getMember_service_log_status().equals("정지")) {%>selected="selected" <%}%>>정지 이유 1</option>
-								<option value="2" <%if (member.getMember_service_log_status().equals("탈퇴")) {%>selected="selected" <%}%>>정지 이유 2</option>
-							</select>
+							<div class="reason_content">
+								<select id="reason" name="reason">
+									<option value="0" <%if (member.getReason_num().equals("0")) {%>selected="selected" <%}%>>정상</option>
+									<option value="1" <%if (member.getReason_num().equals("1")) {%>selected="selected" <%}%>>정지 이유 1</option>
+									<option value="2" <%if (member.getReason_num().equals("2")) {%>selected="selected" <%}%>>정지 이유 2</option>
+								</select>
+							</div>
 							</td>
 						</tr>
 						<tr>

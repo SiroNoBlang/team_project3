@@ -975,7 +975,6 @@ public class AdminDAO {
 				bean2.setMember_service_log_join_date(rs.getString("b.member_service_log_join_date").substring(0, 8));
 				memberManagementList.add(bean2);
 			}
-			System.out.println(memberManagementList.size());
 		} catch (SQLException e) {
 			System.out.println("SQL 구문 오류 발생! - selectMemberManagementList()");
 			e.printStackTrace();

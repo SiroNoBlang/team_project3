@@ -90,7 +90,7 @@ public class MemberDAO {
 		ResultSet rs = null;
 		
 		try {
-			String sql = "SELECT a.member_code, c.grade_name, a.member_nickname, d.member_service_log_status, d.member_service_log_login_date, e.reason_content FROM member AS a JOIN  member_info_detail AS b ON a.member_code=b.member_info_detail_code JOIN member_service_log AS d ON a.member_code = d.member_service_log_code JOIN reason AS e ON d.memner_service_log_status_reason = e.reason_num JOIN grade AS c ON b.member_info_detail_acc_money BETWEEN c.lowest_acc_money AND c.highest_acc_money WHERE a.member_id=? AND a.member_passwd=?"; 
+			String sql = "SELECT a.member_code, c.grade_name, a.member_nickname, d.member_service_log_status, d.member_service_log_login_date, e.reason_content FROM member AS a JOIN  member_info_detail AS b ON a.member_code=b.member_info_detail_code JOIN member_service_log AS d ON a.member_code = d.member_service_log_code JOIN reason AS e ON d.member_service_log_status_reason = e.reason_num JOIN grade AS c ON b.member_info_detail_acc_money BETWEEN c.lowest_acc_money AND c.highest_acc_money WHERE a.member_id=? AND a.member_passwd=?"; 
 			
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, member_id);
@@ -156,6 +156,7 @@ public class MemberDAO {
 					+ ", d.member_service_log_passwd_change_date"
 					+ ", d.member_service_log_login_date"
 					+ ", d.member_service_log_order_count"
+					+ ", d.member_service_log_status_reason"
 					+ ", e.grade_name "
 					+ "FROM member AS a "
 					+ "JOIN member_info AS b "
@@ -200,10 +201,12 @@ public class MemberDAO {
 				memberDetail.setMember_service_log_join_date(rs.getString("d.member_service_log_join_date").substring(0,8)); 
 				memberDetail.setMember_service_log_passwd_change_date(rs.getString("d.member_service_log_passwd_change_date").substring(0,8)); 
 				memberDetail.setMember_service_log_login_date(rs.getString("d.member_service_log_login_date").substring(0,8));
-				memberDetail.setMember_service_log_order_count(rs.getInt("d.member_service_log_order_count")); 
+				memberDetail.setMember_service_log_order_count(rs.getInt("d.member_service_log_order_count"));
+				memberDetail.setReason_num(rs.getString("d.member_service_log_status_reason"));
 				memberDetail.setGrade_name(rs.getString("e.grade_name"));
 				
 			}
+			System.out.println(memberDetail.getReason_num());
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -279,7 +282,7 @@ public class MemberDAO {
 		return updateCount;
 	}
 
-	public boolean getMemberUpdate(String member_code, String member_status, int reason) {
+	public boolean getMemberUpdate(String member_code, String member_status, String reason) {
 		boolean isMemberUpdate = false;
 		
 		PreparedStatement pstmt = null;
