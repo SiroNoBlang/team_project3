@@ -251,9 +251,9 @@ public class MemberDAO {
 //			pstmt .setString(19, memberBean.getMember_info_mypage_img_name());
 //			pstmt .setString(20, memberBean.getMember_info_mypage_real_img_name());
 //			pstmt .setString(21, memberBean.getMember_info_detail_code());
-			pstmt .setString(14, memberBean.getMember_info_detail_like_style());
-			pstmt .setString(15, memberBean.getMember_info_detail_like_brand());
-			pstmt .setString(16, memberBean.getMember_info_detail_like_category());
+			pstmt .setString(13, memberBean.getMember_info_detail_like_style());
+			pstmt .setString(14, memberBean.getMember_info_detail_like_brand());
+			pstmt .setString(15, memberBean.getMember_info_detail_like_category());
 //			pstmt .setInt(25, memberBean.getMember_info_detail_point());
 //			pstmt .setInt(26, memberBean.getMember_info_detail_acc_money());
 //			pstmt .setString(27, memberBean.getMember_service_log_code());
@@ -263,9 +263,9 @@ public class MemberDAO {
 //			pstmt .setString(31, memberBean.getMember_service_log_grade_change_date());
 //			pstmt .setString(32, memberBean.getMember_service_log_login_date());
 //			pstmt .setInt(33, memberBean.getMember_service_log_order_count());
+			pstmt .setString(16, memberBean.getMember_code());
 			pstmt .setString(17, memberBean.getMember_code());
 			pstmt .setString(18, memberBean.getMember_code());
-			pstmt .setString(19, memberBean.getMember_code());
 //			pstmt .setString(20, memberBean.getMember_code());
 			
 			updateCount = pstmt.executeUpdate(); 
