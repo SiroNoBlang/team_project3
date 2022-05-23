@@ -204,8 +204,6 @@ public class MemberDAO {
 				memberDetail.setGrade_name(rs.getString("e.grade_name"));
 				
 			}
-			System.out.println(memberDetail.getGrade_name());
-			System.out.println(memberDetail.getMember_service_log_login_date());
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {

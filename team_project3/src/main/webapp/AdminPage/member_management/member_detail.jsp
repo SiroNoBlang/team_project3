@@ -175,10 +175,6 @@ MemberBean member = (MemberBean) request.getAttribute("memberDetail");
 							<td><%=member.getMember_service_log_passwd_change_date()%></td>
 						</tr>
 						<tr>
-							<th><label for="board_title">등급변화 날짜</label></th>
-							<td><%=member.getMember_service_log_grade_change_date()%></td>
-						</tr>
-						<tr>
 							<th><label for="board_title">로그인 날짜</label></th>
 							<td><%=member.getMember_service_log_login_date()%></td>
 						</tr>
