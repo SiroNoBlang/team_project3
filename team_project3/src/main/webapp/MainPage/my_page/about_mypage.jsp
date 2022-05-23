@@ -10,6 +10,7 @@ MemberBean member = (MemberBean)request.getAttribute("memberDetail");
 <html lang="en">
 <head>
 	<title>Mypage</title>
+	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 	<script type="text/javascript">
 	function confirmLogout() {
 	if(confirm("로그아웃 할꺼임?")) {
@@ -393,17 +394,15 @@ MemberBean member = (MemberBean)request.getAttribute("memberDetail");
 					<form action="ProfileImgUpdate.ma" method="post" enctype="multipart/form-data">
 					<table border="1">
 						<tr> 
-							<th>멤버코드(사라질예정)</th>
 							<td><input type="hidden" name="member_code" id="member_code" value="<%=member.getMember_code() %>"></td>
 						</tr>
 						<tr>
 <%-- 						<td colspan="2" width="300" height="300"><img id="image_section" alt="" src="Upload/mypage_img/<%=member.getMember_info_mypage_img_name()%>"><br> --%>
 						<td colspan="2" width="300" height="300"><img id="image_section" alt="" src="Upload/mypage_img/<%=member.getMember_info_mypage_real_img_name()%>"><br>
-						<input type="file" id="member_info_mypage_img_name" name="member_info_mypage_img_name" value="">업로드
+						<td><input type="file" id="member_info_mypage_img_name" name="member_info_mypage_img_name" value="">업로드</td>
 						</tr>
 						<tr><td>
-						<button type="submit">저장</button>
-						<button onclick="delImg()">제거</button>
+						<button type="submit">수정</button>
 						</td></tr>
 						</table>
 					</form>
@@ -418,22 +417,6 @@ MemberBean member = (MemberBean)request.getAttribute("memberDetail");
 				<th>멤버코드(사라질예정)</th>
 				<td><input type="text" name="member_code" id="member_code" value="<%=member.getMember_code() %>" readonly="readonly"></td>
 			</tr>
-<!-- 			<tr>  -->
-<!-- 				<th>멤버넘버(사라질예정)</th> -->
-<%-- 				<td><input type="text" name="member_num" id="member_num" value="<%=member.getMember_num() %>" readonly="readonly"></td> --%>
-<!-- 			</tr> -->
-<!-- 			<tr>  -->
-<!-- 				<th>멤버인포코드(사라질예정)</th> -->
-<%-- 				<td><input type="text" name="member_info_code" id="member_info_code" value="<%=code %>" readonly="readonly"></td> --%>
-<!-- 			</tr> -->
-<!-- 			<tr>  -->
-<!-- 				<th>멤버인포디테일코드(사라질예정)</th> -->
-<%-- 				<td><input type="text" name="member_info_detail_code" id="member_info_detail_code" value="<%=member.getMember_info_detail_code() %>" readonly="readonly"></td> --%>
-<!-- 			</tr> -->
-<!-- 			<tr>  -->
-<!-- 				<th>멤버서비스로그코드(사라질예정)</th> -->
-<%-- 				<td><input type="text" name="member_service_log_code" id="member_service_log_code" value="<%=member.getMember_service_log_code() %>" readonly="readonly"></td> --%>
-<!-- 			</tr> -->
 			<tr> 
 				<th>닉네임</th>
 				<td><input type="text" name="member_nickname" id="member_nickname" value="<%=nickname %>" readonly="readonly"></td>
@@ -455,12 +438,6 @@ MemberBean member = (MemberBean)request.getAttribute("memberDetail");
 			<tr> 
 				<th>이메일2 나중에 잘라서 수정예정</th>
 				<td><select id="member_email2" name="member_email2">
-<!-- 						<option value="@gmail.com">@gmail.com</option> -->
-<!-- 						<option value="@naver.com">@naver.com</option> -->
-<!-- 						<option value="@nate.com">@nate.com</option> -->
-<!-- 						<option value="@hanmail.net">@hanmail.net</option> -->
-<!-- 						<option value="@daum.net">@daum.net</option> -->
-<!-- 						<option value="@yahoo.com">@yahoo.com</option> -->
 						<option value="@gmail.com" <%if(member.getMember_email().equals("@gmail.com")) {%>selected="selected"<%} %>>
 						gmail.com
 						</option>
@@ -586,10 +563,6 @@ MemberBean member = (MemberBean)request.getAttribute("memberDetail");
 			<tr> 
 				<th>비밀번호변경 날짜</th>
 				<td><input type="text" name="member_service_log_passwd_change_date"  id="member_service_log_passwd_change_date" value="<%=member.getMember_service_log_passwd_change_date() %>"  readonly="readonly"></td>
-			</tr>
-			<tr> 
-				<th>등급변화 날짜</th>
-				<td><input type="text" name="member_service_log_grade_change_date"  id="member_service_log_grade_change_date" value="<%=member.getMember_service_log_grade_change_date() %>"  readonly="readonly"></td>
 			</tr>
 			<tr> 
 				<th>로그인 날짜</th>
