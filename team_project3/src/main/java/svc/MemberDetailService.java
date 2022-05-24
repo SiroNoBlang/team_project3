@@ -18,7 +18,6 @@ public class MemberDetailService {
 		
 		memberDetail = memberDAO.getMemberArticle(member_code);
 		
-		System.out.println("MemberDetailService : " + memberDetail);
 		if(memberDetail != null) {
 			commit(con);
 			

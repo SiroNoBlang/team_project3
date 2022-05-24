@@ -1,10 +1,7 @@
 <%@page import="vo.MemberBean"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%
-String code = request.getAttribute("member_code").toString();
-MemberBean member = (MemberBean) request.getAttribute("memberDetail");
-%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>   
 <!DOCTYPE html>
 <html>
 <head>
@@ -53,141 +50,142 @@ MemberBean member = (MemberBean) request.getAttribute("memberDetail");
 			<div class="card">
 				<div class="title">가입자 상세 정보</div>
 				<form action="MemberUpdate.co" name="boardForm" method="post">
-				<input type="hidden" name="member_code" value="<%=code %>">
+				<input type="hidden" name="member_code" value="${member_code }">
 					<table>
 						<tr>
 							<th><label for="board_title">멤버넘버</label></th>
-							<td><%=member.getMember_num()%></td>
+							<td>${memberDetail.getMember_num() }</td>
 						</tr>
 						<tr>
 							<th><label for="board_title">회원 등급</label></th>
-							<td><%=member.getGrade_name()%></td>
+							<td>${memberDetail.getGrade_name() }</td>
 						</tr>
 						<tr>
 							<th><label for="board_title">멤버코드</label></th>
-							<td><%=code %></td>
+							<td>${member_code }</td>
 						</tr>
 						<tr>
 							<th><label for="board_title">닉네임</label></th>
-							<td><%=member.getMember_nickname()%></td>
+							<td>${memberDetail.getMember_nickname() }</td>
 						</tr>
 						<tr>
 							<th><label for="board_title">아이디</label></th>
-							<td><%=member.getMember_id()%></td>
+							<td>${memberDetail.getMember_id() }</td>
 						</tr>
 						<tr>
 							<th><label for="board_title">패스워드</label></th>
-							<td><%=member.getMember_passwd()%></td>
+							<td>${memberDetail.getMember_passwd() }</td>
 						</tr>
 						<tr>
 							<th><label for="board_title">이메일</label></th>
-							<td><%=member.getMember_email()%></td>
+							<td>${memberDetail.getMember_email() }</td>
 						</tr>
 						<tr>
 							<th><label for="board_title">이름</label></th>
-							<td><%=member.getMember_info_name()%></td>
+							<td>${memberDetail.getMember_info_name() }</td>
 						</tr>
 						<tr>
 							<th><label for="board_title">성별</label></th>
-							<td><%=member.getMember_info_gender()%>
+							<td>${memberDetail.getMember_info_gender() }</td>
 						</tr>
 						<tr>
 							<th><label for="board_title">전화번호</label></th>
-							<td><%=member.getMember_info_phone()%></td>
+							<td>${memberDetail.getMember_info_phone() }</td>
 						</tr>
 						<tr>
 							<th><label for="board_title">나이대</label></th>
-							<td><%=member.getMember_info_age()%></td>
+							<td>${memberDetail.getMember_info_age() }</td>
 						</tr>
 						<tr>
 							<th><label for="board_title">가입날짜</label></th>
-							<td><%=member.getMember_service_log_join_date()%></td>
+							<td>${memberDetail.getMember_service_log_join_date() }</td>
 						</tr>
 						<tr>
 							<th><label for="board_title">패스워드 수정날짜</label></th>
-							<td><%=member.getMember_service_log_passwd_change_date()%></td>
+							<td>${memberDetail.getMember_service_log_passwd_change_date() }</td>
 						</tr>
 						<tr>
 							<th><label for="board_title">우편번호</label></th>
-							<td><%=member.getMember_info_post_code()%></td>
+							<td>${memberDetail.getMember_info_post_code() }</td>
 						</tr>
 						<tr>
 							<th><label for="board_title">주소</label></th>
-							<td><%=member.getMember_info_address()%></td>
+							<td>${memberDetail.getMember_info_address() }</td>
 						</tr>
 						<tr>
 							<th><label for="board_title">상세주소</label></th>
-							<td><%=member.getMember_info_address_detail()%></td>
+							<td>${memberDetail.getMember_info_address_detail() }</td>
 						</tr>
 						<tr>
 							<th><label for="board_title">배송지우편번호</label></th>
-							<td><%=member.getMember_info_ship_post_code()%></td>
+							<td>${memberDetail.getMember_info_ship_post_code() }</td>
 						</tr>
 						<tr>
 							<th><label for="board_title">배송지주소</label></th>
-							<td><%=member.getMember_info_ship_address()%></td>
+							<td>${memberDetail.getMember_info_ship_address() }</td>
 						</tr>
 						<tr>
 							<th><label for="board_title">배송지상세주소</label></th>
-							<td><%=member.getMember_info_ship_address_detail()%></td>
+							<td>${memberDetail.getMember_info_ship_address_detail() }</td>
 						</tr>
 						<tr>
 							<th><label for="board_title">누적금액</label></th>
-							<td><%=member.getMember_info_detail_acc_money()%></td>
+							<td>${memberDetail.getMember_info_detail_acc_money() }</td>
 						</tr>
 						<tr>
 							<th><label for="board_title">스타일</label>스타일</th>
-							<td><%=member.getMember_info_detail_like_style()%></td>
+							<td>${memberDetail.getMember_info_detail_like_style() }</td>
 						</tr>
 						<tr>
 							<th><label for="board_title">브랜드</label>브랜드</th>
-							<td><%=member.getMember_info_detail_like_brand()%></td>
+							<td>${memberDetail.getMember_info_detail_like_brand() }</td>
 						</tr>
 						<tr>
 							<th><label for="board_title">관심품목</label>관심품목</th>
-							<td><%=member.getMember_info_detail_like_category()%></td>
+							<td>${memberDetail.getMember_info_detail_like_category() }</td>
 						</tr>
 						<tr>
 							<th><label for="board_title">누적 포인트</label></th>
-							<td><%=member.getMember_info_detail_point()%></td>
+							<td>${memberDetail.getMember_info_detail_point() }</td>
 						</tr>
 						<tr>
 							<th><label for="board_title">회원 상태</label></th>
 							<td>
 							<select id="member_status" name="member_status">
-								<option value="정상" <%if (member.getMember_service_log_status().equals("정상")) {%>selected="selected" <%}%>>정상</option>
-								<option value="정지" <%if (member.getMember_service_log_status().equals("정지")) {%>selected="selected" <%}%>>정지</option>
-								<option value="탈퇴" <%if (member.getMember_service_log_status().equals("탈퇴")) {%>selected="selected" <%}%>>탈퇴</option>
+							
+								<option value="정상" <c:if test="${memberDetail.getMember_service_log_status() eq '정상'}">selected="selected"</c:if>>정상</option>
+								<option value="정지" <c:if test="${memberDetail.getMember_service_log_status() eq '정지'}">selected="selected"</c:if>>정지</option>
+								<option value="탈퇴" <c:if test="${memberDetail.getMember_service_log_status() eq '탈퇴'}">selected="selected"</c:if>>탈퇴</option>
 							</select>
 							<select id="reason" name="reason">
-								<option value="0" <%if (member.getReason_num().equals("0")) {%>selected="selected" <%}%>>정상</option>
-								<option value="1" <%if (member.getReason_num().equals("1")) {%>selected="selected" <%}%>>정지 이유 1</option>
-								<option value="2" <%if (member.getReason_num().equals("2")) {%>selected="selected" <%}%>>정지 이유 2</option>
+								<option value="0" <c:if test="${memberDetail.getReason_num() eq '0'}">selected="selected"</c:if>>정상</option>
+								<option value="1" <c:if test="${memberDetail.getReason_num() eq '1'}">selected="selected"</c:if>>정지 이유 1</option>
+								<option value="2" <c:if test="${memberDetail.getReason_num() eq '2'}">selected="selected"</c:if>>정지 이유 2</option>
 							</select>
 							</td>
 						</tr>
 						<tr>
 							<th><label for="board_title">회원가입 날짜</label></th>
-							<td><%=member.getMember_service_log_join_date()%></td>
+							<td>${memberDetail.getMember_service_log_join_date() }</td>
 						</tr>
 						<tr>
 							<th><label for="board_title">비밀번호변경 날짜</label></th>
-							<td><%=member.getMember_service_log_passwd_change_date()%></td>
+							<td>${memberDetail.getMember_service_log_passwd_change_date() }</td>
 						</tr>
 						<tr>
 							<th><label for="board_title">로그인 날짜</label></th>
-							<td><%=member.getMember_service_log_login_date()%></td>
+							<td>${memberDetail.getMember_service_log_login_date() }</td>
 						</tr>
 						<tr>
 							<th><label for="board_title">구매횟수</label></th>
-							<td><%=member.getMember_service_log_order_count()%></td>
+							<td>${memberDetail.getMember_service_log_order_count() }</td>
 						</tr>
 					</table>
 					<section id="commandCell">
 						<input type="submit" value="수정">
-						<%if (member.getMember_service_log_status().equals("탈퇴")) {%>
-						<input type="button" value="회원탈퇴" onclick="">
-						<%} %>
+						<c:if test="${memberDetail.getMember_service_log_status() eq '탈퇴'}">
+							<input type="button" value="회원탈퇴" onclick="">
+						</c:if>
 						<input type="button" value="목록" onclick="#">
 					</section>
 				</form>

@@ -286,10 +286,10 @@ public class MemberDAO {
 		
 		PreparedStatement pstmt = null;
 		int sucess = 0;
-		System.out.println(member_status);
+		
 		try {
 			if(member_status.equals("정상")) {
-				String sql = "UPDATE member_service_log SET member_service_log_status=? WHERE member_service_log_code=?";
+				String sql = "UPDATE member_service_log SET member_service_log_status=?,member_service_log_status_reason=0 WHERE member_service_log_code=?";
 				pstmt = con.prepareStatement(sql);
 				pstmt.setString(1, member_status);
 				pstmt.setString(2, member_code);
