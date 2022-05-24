@@ -652,7 +652,7 @@
 					<div class="fields">
 						<div class="field half">
 							<label for="member_nickname">Nickname</label> 
-							<input type="text" name="member_nickname" id="member_nickname" />
+							<input type="text" name="member_nickname" id="member_nickname" required="required"/>
 							<div id="nicknameResultArea"></div>
 						</div>
 						<div class="field half">

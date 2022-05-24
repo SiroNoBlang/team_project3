@@ -55,37 +55,37 @@
 		</div>
 		<div id="page-container">
 			<div class="card">
-				<div class="title">회원현황</div>
+				<div class="title">매출현황</div>
 				    <section class="row text-center placeholders">
-				        <div class="col-6 col-sm-3" onclick="location.href='Classification.co?value=0'">
-				          <div class="panel panel-info">
-				            <div class="panel-heading">VVVIP</div>
-				            <div class="panel-body">
-				              <h4>${bean.getTop_level() }</h4>
-				            </div>
-				          </div>
-				        </div>
-				        <div class="col-6 col-sm-3" onclick="location.href='Classification.co?value=1'">
+				        <div class="col-6 col-sm-3" onclick="location.href='#">
 				          <div class="panel panel-success">
-				            <div class="panel-heading">정상</div>
+				            <div class="panel-heading">매출</div>
 				            <div class="panel-body">
-				              <h4>${bean.getNomal() }</h4>
+				              <h4>123</h4>
 				            </div>
 				          </div>
 				        </div>
-				        <div class="col-6 col-sm-3" onclick="location.href='Classification.co?value=2'">
+				        <div class="col-6 col-sm-3" onclick="location.href='#'">
 				          <div class="panel panel-warning">
-				            <div class="panel-heading">정지</div>
+				            <div class="panel-heading">매출 총이익</div>
 				            <div class="panel-body">
-				              <h4>${bean.getSuspension() }</h4>
+				              <h4>123</h4>
 				            </div>
 				          </div>
 				        </div>
-				        <div class="col-6 col-sm-3" onclick="location.href='Classification.co?value=3'">
-				          <div class="panel panel-danger">
-				            <div class="panel-heading">탈퇴</div>
+				        <div class="col-6 col-sm-3" onclick="location.href='#'">
+				          <div class="panel panel-info">
+				            <div class="panel-heading">순이익</div>
 				            <div class="panel-body">
-				              <h4>${bean.getWithdrawal() }</h4>
+				              <h4>123</h4>
+				            </div>
+				          </div>
+				        </div>
+				        <div class="col-6 col-sm-3" onclick="location.href='#">
+				          <div class="panel panel-danger">
+				            <div class="panel-heading">포괄손익</div>
+				            <div class="panel-body">
+				              <h4>123</h4>
 				            </div>
 				          </div>
 				        </div>
@@ -94,80 +94,8 @@
 				
 				
 				<div class="card">
-					<div class="title">목록</div>
-					<div id="board-search">
-					        <div class="container">
-					            <div class="search-window">
-					                <form action="Classification.co" class="formCss">
-					                        <input id="value" type="search" name="value" placeholder="닉네임만 검색 가능">
-					                        <button type="submit" class="btn btn-dark">검색</button>
-					                </form>
-					            </div>
-					        </div>
-					    </div>
-						 <div id="board-list">
-					        <div class="container">
-					            <table class="board-table">
-					                <thead>
-						                <tr >
-						                    <th scope="col" class="th-num"></th>
-						                    <th scope="col" class="th-num">번호</th>
-						                    <th scope="col" class="th-title">이메일</th>
-						                    <th scope="col" class="th-date">닉네임</th>
-						                    <th scope="col" class="th-date">가입날짜</th>
-						                    <th scope="col" class="th-date">현재상태</th>
-						                </tr>
-						                </thead>
-						                <tbody>
-						                <c:if test="${not empty memberManagementList and pageInfo.getListCount() > 0}">
-											<c:forEach var="memberManagement" items="${memberManagementList }" varStatus="status">
-								                <tr>
-								                	<td><input type="checkbox" value="${memberManagement.getMember_code() }"></td>
-								                	<td>${memberManagement.getMember_num() }</td>
-								                    <td>
-														<a href="MemberDetail.co?member_code=${memberManagement.getMember_code() }&page=${pageNum}">
-								                    		${memberManagement.getMember_email() } </a>
-								                    </td>
-								                    <td>${memberManagement.getMember_nickname() }</td>
-													<td>${memberManagement.getMember_service_log_join_date() }</td>
-													<td>${memberManagement.getMember_service_log_status() }</td>
-								                </tr>
-							              </c:forEach>
-										</c:if>
-							         </tbody>
-					            </table>
-					        </div>
-    					</div>
-    					<section id="pageList">
-							<c:choose>
-								<c:when test="${pageNum > 1}">
-									<input type="button" value="이전" onclick="location.href='MemberManagementList.co?page=${pageNum - 1}'">
-								</c:when>
-								<c:otherwise>
-									<input type="button" value="이전">
-								</c:otherwise>
-							</c:choose>
-								
-							<c:forEach var="i" begin="${startPage }" end="${endPage }">
-								<c:choose>
-									<c:when test="${pageNum eq i}">
-										${i }
-									</c:when>
-									<c:otherwise>
-										<a href="MemberManagementList.co?page=${i }">${i }</a>
-									</c:otherwise>
-								</c:choose>
-							</c:forEach>
-					
-							<c:choose>
-								<c:when test="${pageNum < maxPage}">
-									<input type="button" value="다음" onclick="location.href='MemberManagementList.co?page=${pageNum + 1}'">
-								</c:when>
-								<c:otherwise>
-									<input type="button" value="다음">
-								</c:otherwise>
-							</c:choose>
-						</section>
+					<div class="title">매출 그래프</div>
+						<div></div>
 					</div>
 				</div>
 			</div>
