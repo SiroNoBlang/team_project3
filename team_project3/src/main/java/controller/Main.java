@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import action.Action;
+import action.FindIdAction;
+import action.FindPasswdAction;
 import action.JoinProAction;
 import action.LoginProAction;
 import action.LogoutAction;
@@ -186,6 +188,20 @@ public class Main extends HttpServlet {
 			try {
 				forward = action.execute(request, response);
 			} catch (Exception e) {
+			}
+		} else if(command.equals("/FindId.ma")) { //아이디 찾기 
+			action = new FindIdAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				
+			}
+		} else if(command.equals("/FindPasswd.ma")) { // 비밀번호 찾기
+			action = new FindPasswdAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				
 			}
 		}
 		

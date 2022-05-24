@@ -268,7 +268,7 @@
 					</div>
 					<ul class="actions">
 						<li><input type="submit" value="Login" class="primary" /></li>
-						<li><input type="button" value="Lost ID & PASSWORD" onclick="FindIdPass"></li>
+						<li><input  type="button" value="Lost ID & PASSWORD"  onclick="location.href='#find'"></li>
 					</ul>
 				</form>
 				<ul class="icons">
@@ -278,6 +278,48 @@
 					<li><a href="#" class="icon brands fa-github"><span class="label">GitHub</span></a></li>
 				</ul>
 			</article>
+			
+			<article id="find">
+				<h2 class="major">FIND ID </h2>
+				<form method="post" action="FindId.ma">
+					<div class="fields">
+						<div class="field half">
+							<label for="find_id_member_nickname">NICKNAME</label>
+							<input type="text" name="find_id_member_nickname" id="find_id_member_nickname" />
+						</div>
+						<div class="field half">
+							<label for="find_id_member_email">EMAIL</label>
+							<input type="email" name="find_id_member_email" id="find_id_member_email" />
+						</div>
+					</div>
+					<ul class="actions">
+						<li><input type="submit" value="Find" class="primary" /></li>
+					</ul>
+				</form>
+				<h2 class="major">FIND PASSWORD</h2>
+				<form method="post" action="FindPasswd.ma">
+					<div class="fields">
+						<div class="field half">
+							<label for="find_passwd_member_id">ID</label>
+							<input type="text" name="find_passwd_member_id" id="find_passwd_member_id" />
+						</div>
+						<div class="field half">
+							<label for="find_passwd_member_email">EMAIL</label>
+							<input type="email" name="find_passwd_member_email" id="find_passwd_member_email" />
+						</div>
+					</div>
+					<ul class="actions">
+						<li><input type="submit" value="Find" class="primary" /></li>
+					</ul>
+				</form>
+				<ul class="icons">
+					<li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
+					<li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
+					<li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
+					<li><a href="#" class="icon brands fa-github"><span class="label">GitHub</span></a></li>
+				</ul>
+			</article>
+			
 			<!-- Contact -->
 			<article id="join">
 				<h2 class="major">약관</h2>
@@ -652,7 +694,7 @@
 					<div class="fields">
 						<div class="field half">
 							<label for="member_nickname">Nickname</label> 
-							<input type="text" name="member_nickname" id="member_nickname" required="required"/>
+							<input type="text" name="member_nickname" id="member_nickname" />
 							<div id="nicknameResultArea"></div>
 						</div>
 						<div class="field half">
