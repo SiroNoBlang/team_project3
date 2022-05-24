@@ -13,7 +13,7 @@ import vo.SellerDTO;
 public class SellerWriteProService {
 
 	public boolean registArticle(SellerDTO seller) {
-System.out.println("BoardWriteProService - registArticle()");
+System.out.println("SellerWriteProService - registArticle()");
 		
 		// 1. 글쓰기 작업 요청 처리 결과를 판별하여 저장할 boolean 타입 변수 선언
 		boolean isWriteSuccess = false;

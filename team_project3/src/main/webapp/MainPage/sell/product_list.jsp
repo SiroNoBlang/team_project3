@@ -108,20 +108,20 @@ int listCount = pageInfo.getListCount();
                      </li>
 
                      <li class="active-menu">
-                        <a href="product.html">Shop</a>
-                     </li>
+                      
+							<li>
+								<a href="Product.pr">Shop</a>
+							</li>
 
-                     <li class="label1" data-label1="hot">
-                        <a href="shoping-cart.html">Features</a>
-                     </li>
-
-                     <li>
-                        <a href="blog.html">Blog</a>
-                     </li>
-
-                     <li>
-                        <a href="about.html">About</a>
-                     </li>
+							<li class="label1" data-label1="hot">
+								<a href="shoping-cart.html">Features</a>
+							</li>
+							<li>
+								<a href="SellForm.pr">Sell</a>
+							</li>
+							<li>
+								<a href="CommunityNotice.ma">Community</a>
+							</li>
 
                      <li>
                         <a href="contact.html">Contact</a>

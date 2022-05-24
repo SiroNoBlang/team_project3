@@ -53,7 +53,7 @@ public class productListProService {
 		
 		// 5. BoardDAO 객체의 selectArticleList() 메서드를 호출하여 게시물 목록 조회
 		// => 파라미터 : pageNum, listLimit    리턴타입 : ArrayList<BoardDTO>
-		articleList = SellerDAO.selectArticleList(pageNum, listLimit);
+		articleList = sellerDAO.selectArticleList(pageNum, listLimit);
 		
 		// 6. JdbcUtil 클래스로부터 가져온 Connection 객체를 반환 - 공통
 		close(con);

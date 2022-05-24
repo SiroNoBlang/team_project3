@@ -57,7 +57,7 @@ public class sellWriteProAction implements Action {
 				seller.setSell_member_code(sell_member_code);
 				seller.setSell_content(multi.getParameter("sell_content"));
 			    seller.setSell_title(multi.getParameter("sell_title"));
-			    seller.setSell_color(multi.getParameter("sell_color"));
+			    seller.setSell_color(multi.getParameter("sell_color1")+","+multi.getParameter("sell_color2"));
 				seller.setSell_size(multi.getParameter("sell_size"));
 				seller.setSell_brand(multi.getParameter("sell_brand"));
 				// 주의! 파일 정보는 getParameter() 메서드로 가져올 수 없으며 별도의 추가 작업 필요
@@ -70,7 +70,6 @@ public class sellWriteProAction implements Action {
 	
 				String fileElement = multi.getFileNames().nextElement().toString();
 				System.out.println("fileElement"+fileElement);
-				
 
 			
 			

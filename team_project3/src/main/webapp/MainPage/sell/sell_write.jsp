@@ -37,20 +37,36 @@ function optionChange() {            //대분류 소분류 <select/>
 		o=ja; s=sizeCl;
 	}else if(v=='신발'){
 		o=sh; s=sizeSh;
+	} else if(v=='잡화'){
+		o=ka; s=sizeCl;
 	}
 	else{
 		o=ka;
 	}
+	// s0, s1 , s2
 	$('#s1').empty();
 	$('#s1').append('<option>선택해주세요.</option>');
 	for(var i=0;i<o.length;i++){
 		$('#s1').append('<option>'+o[i]+'</option>');	
 	}
+	$('#s2').empty();
 	$('#s2').append('<option>선택해주세요.</option>');
 	for(var i=0;i<s.length;i++){
 		$('#s2').append('<option>'+s[i]+'</option>');
 	}
+	
+	
 }
+
+function checkPrice(sell_price){
+	var regex = /^[0-9]{4}$/;
+	if(!regex.exec(sell_price)) {
+		alert("전화번호 뒷자리 4자리 숫자 필수!");
+		history.back();
+	} 
+}
+
+
 
 function readURL(obj) {   //사진 5장 뿌리기 
 	
@@ -159,21 +175,21 @@ function readURL(obj) {   //사진 5장 뿌리기
 								</ul>
 							</li>
 
+							
 							<li>
-								<a href="product.html">Shop</a>
+								<a href="Product.pr">Shop</a>
 							</li>
 
 							<li class="label1" data-label1="hot">
 								<a href="shoping-cart.html">Features</a>
 							</li>
-
 							<li>
-								<a href="blog.html">Blog</a>
+								<a href="SellForm.pr">Sell</a>
+							</li>
+							<li>
+								<a href="CommunityNotice.ma">Community</a>
 							</li>
 
-							<li>
-								<a href="about.html">About</a>
-							</li>
 
 							<li>
 								<a href="contact.html">Contact</a>
@@ -471,9 +487,9 @@ function readURL(obj) {   //사진 5장 뿌리기
 						<h4 class="mtext-105 cl2 js-name-detail p-b-14">
 			                <input type="text" name="sell_title" id=""  required="required" placeholder="제목입력칸(413행)">
 						</h4>
-						<span class="mtext-106 cl2">
-							<input type="text" name="sell_price" id="" placeholder="희망하는 금액을 입력하세요." >
-						</span>
+						<div class="mtext-106 cl2">
+							<input type="text" name="sell_price" id="sell_price" placeholder="희망하는 금액을 입력하세요." onblur="checkPrice(this.value);">
+						</div>
 
 						<div class="mtext-106 cl2">
 									<input type="text" name="sell_brand" id=""  required="required" placeholder="브랜드를 입력해주세요."><br>
@@ -540,7 +556,22 @@ function readURL(obj) {   //사진 5장 뿌리기
 
 								<div class="size-204 respon6-next">
 									<div class="rs1-select2 bor8 bg0">
-										<select class="js-select2" name="sell_color">
+										<select class="js-select2" name="sell_color1">
+											<option>선택해주세요.</option>
+											<option>Black</option>
+											<option>White</option>
+											<option>Blue</option>
+											<option>Grey</option>
+											<option>Yellow</option>
+											<option>Red</option>
+											<option>SkyBlue</option>
+										</select>
+										<div class="dropDownSelect2"></div>
+									</div>
+								</div>
+								<div class="size-204 respon6-next">
+									<div class="rs1-select2 bor8 bg0">
+										<select class="js-select2" name="sell_color2">
 											<option>선택해주세요.</option>
 											<option>Black</option>
 											<option>White</option>
@@ -560,7 +591,7 @@ function readURL(obj) {   //사진 5장 뿌리기
 									Content
 								</div>
 								   <div>
-									  <textarea cols="45" rows="10"  name="sell_content"  placeholder="제품을 설명 (50자이하)"></textarea>
+									  <textarea cols="45" rows="10"  name="sell_content"   placeholder="제품을 설명 (50자이하)"></textarea>
 								   </div>	
 								
 							</div>

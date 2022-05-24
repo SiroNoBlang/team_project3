@@ -73,7 +73,7 @@ public class SellerDAO {
 				insertCount =pstmt.executeUpdate();
 				insertCount =pstmt2.executeUpdate();
 				insertCount = pstmt3.executeUpdate();
-				System.out.println("BoardDAO - insertArticle()1");
+				System.out.println("SellerDAO - insertArticle()");
 		} catch (SQLException e) {
 			System.out.println("SQL 구문 오류 발생! - insertArticle()");
 			e.printStackTrace();
@@ -120,7 +120,7 @@ public class SellerDAO {
 		return listCount;
 	}
 
-	public static ArrayList<SellerDTO> selectArticleList(int pageNum, int listLimit) {
+	public ArrayList<SellerDTO> selectArticleList(int pageNum, int listLimit) {
 		System.out.println("selectArticleList()ArrayList 객체 가져오기");
 		
 		ArrayList<SellerDTO> articleList = null;
@@ -302,7 +302,7 @@ public class SellerDAO {
 		return productarr;
 	}
 
-	public static MemberBean selectMemberShop(String member_code) {  //상세 글에서 (buy)구매하기->memberBean을 이용해 구매자 정보 가져오기
+	public MemberBean selectMemberShop(String member_code) {  //상세 글에서 (buy)구매하기->memberBean을 이용해 구매자 정보 가져오기
 		System.out.println("selectMemberShop-구매DAO(member_code)");
 			MemberBean memberbean = null;
 		 /*member_info테이블
@@ -352,6 +352,9 @@ public class SellerDAO {
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
+			} finally {
+				close(pstmt);
+				close(rs);
 			}
 
 		return memberbean;

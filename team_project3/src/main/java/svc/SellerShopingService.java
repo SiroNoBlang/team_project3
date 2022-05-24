@@ -59,7 +59,7 @@ public class SellerShopingService {
 		
 		// 5. BoardDAO 객체의 selectArticle() 메서드를 호출하여 게시물 상세 정보 조회
 		// => 파라미터 : board_num    리턴타입 : BoardDTO(article)
-		MemberShop = SellerDAO.selectMemberShop(member_code);
+		MemberShop = sellerDAO.selectMemberShop(member_code);
 		
 		// 6. JdbcUtil 클래스로부터 가져온 Connection 객체를 반환 - 공통
 		close(con);
