@@ -59,12 +59,12 @@ public class SellerDAO {
 				pstmt.setString(10, seller.getSell_brand());
 				pstmt.setInt(11, 0); //조회수 컬럼
 			
-				sql = "INSERT INTO sell_img VALUES ((SELECT MAX(SELL_NUM) FROM sell),?,?)";
+				sql = "INSERT INTO sell_img VALUES ((SELECT MAX(SELL_NUM) FROM sell),'3',?,?)";
 				pstmt2 = con.prepareStatement(sql);
-//				pstmt2.setInt(1, seller.getSell_img_num()); 
+				pstmt2.setInt(1, seller.getSell_img_num()); 
 //				pstmt2.setInt(2, seller.getSell_img_num_detail()); 
-				pstmt2.setString(1, seller.getSell_img_name()); 
-				pstmt2.setString(2, seller.getSell_img_real_name()); 
+				pstmt2.setString(2, seller.getSell_img_name()); 
+				pstmt2.setString(3, seller.getSell_img_real_name()); 
 				        
 				sql = "INSERT INTO sell_list VALUES ((SELECT MAX(SELL_NUM) FROM sell), '판매중', ?, 'ㅎㅇ')";
 				pstmt3 = con.prepareStatement(sql);
@@ -127,6 +127,9 @@ public class SellerDAO {
 		
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
+		
+		System.out.println(pageNum);
+		System.out.println(listLimit);
 
 		
 		// 조회 시작 게시물 번호(행 번호) 계산
@@ -141,7 +144,7 @@ public class SellerDAO {
 			try {
 				
 				String sql = "SELECT a.sell_num, a.sell_size , a.sell_category,a.sell_category_detail, a.sell_title, a.sell_color, a.sell_brand, a.sell_price, a.sell_readcount, b.sell_img_name, b.sell_img_real_name, c.sell_list_num, c.sell_list_item_status "
-		                     + "FROM sell AS a JOIN sell_img AS b ON a.sell_num = b.sell_img_num JOIN sell_list AS c ON a.sell_num = c.sell_list_num WHERE sell_list_item_status='판매중' "
+		                     + "FROM sell AS a JOIN sell_img AS b ON a.sell_num = b.sell_img_real_num JOIN sell_list AS c ON a.sell_num = c.sell_list_num WHERE sell_list_item_status='판매중' "
 		                     + "ORDER BY a.sell_num DESC "
 		                     + "LIMIT ?,? ";
 				pstmt = con.prepareStatement(sql);
@@ -202,7 +205,7 @@ public class SellerDAO {
 		
 		try {
 			String sql = "SELECT  a.sell_num,a.sell_member_code,a.sell_category, a.sell_category_detail, a.sell_size, a.sell_title, a.sell_color, a.sell_brand, a.sell_price, a.sell_readcount, b.sell_img_name, b.sell_img_real_name, c.sell_list_num ,c.sell_list_item_status, c.sell_list_approve_nickname "
-			        + " FROM sell AS a JOIN sell_img AS b ON a.sell_num = b.sell_img_num JOIN sell_list AS c ON a.sell_num = c.sell_list_num WHERE c.sell_list_num =? ";
+			        + " FROM sell AS a JOIN sell_img AS b ON a.sell_num = b.sell_img_real_num JOIN sell_list AS c ON a.sell_num = c.sell_list_num WHERE c.sell_list_num =? ";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, sell_num);
 			rs = pstmt.executeQuery();
@@ -272,7 +275,7 @@ public class SellerDAO {
 		
 		try {
 			String sql = "SELECT a.sell_num, a.sell_size ,  a.sell_title, a.sell_brand, a.sell_price, b.sell_img_name, b.sell_img_real_name "
-                    + "FROM sell AS a JOIN sell_img AS b ON a.sell_num = b.sell_img_num  WHERE sell_num != "+sell_num+" AND sell_brand Like '%"+sell_brand+"%' ";
+                    + "FROM sell AS a JOIN sell_img AS b ON a.sell_num = b.sell_img_real_num  WHERE sell_num != "+sell_num+" AND sell_brand Like '%"+sell_brand+"%' ";
                     
 			pstmt = con.prepareStatement(sql);
 //			pstmt.setString(1, sell_brand);

@@ -596,7 +596,7 @@ int listCount = pageInfo.getListCount();
             <%for(SellerDTO seller1 :articleList){ %>
                         
          
-      <table    border="1">
+      <table border="1">
             <tr>
                <td colspan="2"><img src="./Upload/sell_img/<%=seller1.getSell_img_real_name() %>" width="350" height="400" alt="IMG-PRODUCT"></td><td></td>   
             </tr>

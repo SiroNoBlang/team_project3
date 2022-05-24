@@ -75,6 +75,7 @@ public class sellWriteProAction implements Action {
 			
 				String sell_img_name = multi.getOriginalFileName(fileElement); 
 				String sell_img_real_name = multi.getFilesystemName(fileElement);
+				
 				//2.sell_sub_image_name / sell_real_sub_image_name
 				
 				//String sell_sub_image_name = multi.getOriginalFileName(fileElement); 

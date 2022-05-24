@@ -58,13 +58,13 @@ function optionChange() {            //대분류 소분류 <select/>
 	
 }
 
-function checkPrice(sell_price){
-	var regex = /^[0-9]{4}$/;
-	if(!regex.exec(sell_price)) {
-		alert("전화번호 뒷자리 4자리 숫자 필수!");
-		history.back();
-	} 
-}
+// function checkPrice(sell_price){
+// 	var regex = /^[0-9]{4}$/;
+// 	if(!regex.exec(sell_price)) {
+// 		alert("전화번호 뒷자리 4자리 숫자 필수!");
+// 		history.back();
+// 	} 
+// }
 
 
 
