@@ -19,15 +19,15 @@ public class MemberUpdateAction implements Action {
 		String member_status = request.getParameter("member_status");
 		String reason = request.getParameter("reason");
 		String pageNum = request.getParameter("page");
-		
+		System.out.println(pageNum);
 //		System.out.println(member_code + ", " + member_status); // 이미지 파일 있을때도 확인용이므로 잠시 킵해두겠습니다.
 		
 		MemberUpdateService service = new MemberUpdateService();
 		boolean isMemberUpdate = service.getMemberUpdate(member_code, member_status, reason);
-		
+		System.out.println(isMemberUpdate);
 		if(isMemberUpdate) {
 			request.setAttribute("member_code", member_code);
-			forward = new ActionForward("MemberDetail.co?page=" + pageNum, false);
+			forward = new ActionForward("MemberDetail.co?member_code=" + member_code +"&page=" + pageNum, true);
 			
 		} else {
 			response.setContentType("text/html; charset=UTF-8");

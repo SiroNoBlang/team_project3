@@ -49,7 +49,7 @@
 		<div id="page-container">
 			<div class="card">
 				<div class="title">가입자 상세 정보</div>
-				<form action="MemberUpdate.co" name="boardForm" method="post">
+				<form action="ClassificationUpdate.co?value=${param.value }&page=${param.page }" name="boardForm" method="post">
 				<input type="hidden" name="member_code" value="${member_code }">
 					<table>
 						<tr>
@@ -186,7 +186,7 @@
 						<c:if test="${memberDetail.getMember_service_log_status() eq '탈퇴'}">
 							<input type="button" value="회원탈퇴" onclick="">
 						</c:if>
-						<input type="button" value="목록" onclick="location.href='Classification.co?page=${param.page }'">
+						<input type="button" value="목록" onclick="location.href='Classification.co?page=${param.page }&value=${param.value }'">
 					</section>
 				</form>
 			</div>

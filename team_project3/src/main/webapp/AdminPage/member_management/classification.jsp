@@ -129,7 +129,7 @@
 										<tr>
 											<td><input type="checkbox" value="${classification.getMember_code() }"></td>
 											<td>${classification.getMember_service_log_status() }</td>
-											<td><a href="ClassificationDetail.co?member_code=${classification.getMember_code() }&page=${pageNum}">
+											<td><a href="ClassificationDetail.co?member_code=${classification.getMember_code() }&page=${pageNum }&value=${param.value }">
 													${classification.getMember_nickname() } </a></td>
 											<td>${classification.getMember_info_detail_acc_money() }만원</td>
 											<td>${classification.getGrade_name() }</td>

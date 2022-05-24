@@ -120,7 +120,6 @@ public class MemberDAO {
 
 
 	public MemberBean getMemberArticle(String member_code) {
-		System.out.println("getMemberArticle - mem");
 		MemberBean memberDetail = null;
 		
 		PreparedStatement pstmt = null;
@@ -205,7 +204,6 @@ public class MemberDAO {
 				memberDetail.setGrade_name(rs.getString("e.grade_name"));
 				
 			}
-			System.out.println(memberDetail.getReason_num());
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {

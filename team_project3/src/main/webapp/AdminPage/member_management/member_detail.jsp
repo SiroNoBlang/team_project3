@@ -49,7 +49,7 @@
 		<div id="page-container">
 			<div class="card">
 				<div class="title">가입자 상세 정보</div>
-				<form action="MemberUpdate.co" name="boardForm" method="post">
+				<form action="MemberUpdate.co?page=${param.page }" name="boardForm" method="post">
 				<input type="hidden" name="member_code" value="${member_code }">
 					<table>
 						<tr>
