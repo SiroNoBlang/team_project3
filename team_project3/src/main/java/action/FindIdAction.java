@@ -1,5 +1,7 @@
 package action;
 
+import java.io.PrintWriter;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -22,10 +24,15 @@ public class FindIdAction implements Action {
 		String isFindId = service.isFindId(nickname, email); 
 		
 		if(isFindId == null || isFindId.equals("")) {
-			//history.back
+			response.setContentType("text/html; charset=UTF-8");
+			PrintWriter out = response.getWriter();
+			out.println("<script>");
+			out.println("alert('아이디가 없습니다!')");
+			out.println("history.back()");
+			out.println("</script>");
 		} else {
 			request.setAttribute("isFindId", isFindId);
-			forward = new ActionForward("", false);
+			forward = new ActionForward("isFindIdResult.ma", false);
 		}
 		
 		return forward;

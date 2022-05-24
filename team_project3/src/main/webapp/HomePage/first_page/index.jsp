@@ -227,6 +227,29 @@
 			return false;
 		}
 	}	
+	
+	$(function(){
+		$("#join_member_id").on("keyup",function(){
+			let sendData = $("#fi").serialize();
+			
+			$.ajax({
+				type:"GET",
+				url:"HomePage/first_page/find_id.jsp",
+				data: sendData,
+				dataType:"text",
+				success:function(msg){
+					$("#findIdResultArea").html(msg);
+				},
+				error: function(xhr, textStatus, errorThrown){
+					$("#findIdResultArea").html(
+							"xhr = " + xhr + "<br>"
+							+ "textStatus = " + textStatus + "<br>"
+							+ "errorThrown = " + errorThrown);
+				}
+			});
+		});
+	});	
+	
 </script>
 </head>
 <body class="is-preload">
@@ -281,7 +304,7 @@
 			
 			<article id="find">
 				<h2 class="major">FIND ID </h2>
-				<form method="post" action="FindId.ma">
+				<form method="post" action="FindId.ma" id="fi" name="fi">
 					<div class="fields">
 						<div class="field half">
 							<label for="find_id_member_nickname">NICKNAME</label>
@@ -293,7 +316,7 @@
 						</div>
 					</div>
 					<ul class="actions">
-						<li><input type="submit" value="Find" class="primary" /></li>
+						<li><input type="submit" value="Find" class="primary" id=""/> <div id="findIdResultArea"></div></li>
 					</ul>
 				</form>
 				<h2 class="major">FIND PASSWORD</h2>

@@ -470,6 +470,65 @@ public class MemberDAO {
 		return isDuplicate;
 	}
 
+	public String isFindId(String nickname, String email) {
+		String isFindId = "";
+		System.out.println("MemberDAO - isFindId");
+		System.out.println(nickname);
+		System.out.println(email);
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			String sql = "SELECT member_id FROM member WHERE member_nickname=? AND member_email=?"; 
+			
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, nickname);
+			pstmt.setString(2, email);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				isFindId += rs.getString("member_id").toString();
+			}
+		} catch (SQLException e) {
 
-	
+		} finally {
+			close(pstmt);
+			close(rs);
+		}
+		return isFindId;
+	}
+
+	public boolean isFindPasswd(String id, String email) {
+		
+		boolean isFindPasswd = false;
+		
+		System.out.println("MemberDAO - isFindPasswd");
+		System.out.println("id : " + id);
+		System.out.println("email : " + email);
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			String sql = "SELECT member_passwd FROM member WHERE member_id=? AND member_email=?"; 
+			
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, id);
+			pstmt.setString(2, email);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				isFindPasswd = true;
+				System.out.println("passwd : " + rs.getString("member_passwd"));
+			}
+		} catch (SQLException e) {
+
+		} finally {
+			close(pstmt);
+			close(rs);
+		}
+		return isFindPasswd;
+	}
+
 }

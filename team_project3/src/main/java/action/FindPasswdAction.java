@@ -1,5 +1,7 @@
 package action;
 
+import java.io.PrintWriter;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -21,6 +23,22 @@ public class FindPasswdAction implements Action {
 		
 		FindPasswdService service = new FindPasswdService();
 		boolean isFindPasswd = service.isFindPasswd(id, email);
+		
+		if(isFindPasswd) {
+			response.setContentType("text/html; charset=UTF-8");
+			PrintWriter out = response.getWriter();
+			out.println("<script>");
+			out.println("alert('이메일로 임시 비밀번호를 전송하였습니다!')");
+			out.println("</script>");
+			forward = new ActionForward("join/login.jsp", false);
+		} else {
+			response.setContentType("text/html; charset=UTF-8");
+			PrintWriter out = response.getWriter();
+			out.println("<script>");
+			out.println("alert('계정이 없습니다!')");
+			out.println("history.back()");
+			out.println("</script>");
+		}
 		
 		return forward;
 	}
