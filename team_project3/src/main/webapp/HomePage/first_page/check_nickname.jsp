@@ -14,7 +14,235 @@ boolean isDuplicate = service.checkNickname(nickname);
 
 if(isDuplicate) { // 중복
 	out.println("이미 사용중인 닉네임");
+	response.setContentType("text/html; charset=UTF-8");
+	out.println("<script>");
+	out.println("var checkNickname = false");
+	out.println("</script>");
 } else { // 중복 아님
-	out.println("사용 가능한 닉네임");
+	if(nickname.length()>=8 && nickname.length()<=16 ){
+		String[] spec = {"!", "@", "#", "$", "%", "^", "&", "*", "(", ")", "-", "_", "+", "="}; 
+		
+// 		for( String s : spec){
+// 			if(nickname.contains(s)){
+// 				out.println(s+" 사용불가");
+// 				response.setContentType("text/html; charset=UTF-8");
+// 				out.println("<script>");
+// 				out.println("var checkNickname = false");
+// 				out.println("</script>");
+// 			}
+// 		}
+		if(nickname.contains("%")){
+			out.println("% 사용불가");
+			response.setContentType("text/html; charset=UTF-8");
+			out.println("<script>");
+			out.println("var checkNickname = false");
+			out.println("</script>");
+		} else if(nickname.contains("!")){
+			out.println("! 사용불가");
+			response.setContentType("text/html; charset=UTF-8");
+			out.println("<script>");
+			out.println("var checkNickname = false");
+			out.println("</script>");
+		} else if(nickname.contains("@")){
+			out.println("@ 사용불가");
+			response.setContentType("text/html; charset=UTF-8");
+			out.println("<script>");
+			out.println("var checkNickname = false");
+			out.println("</script>");
+		} else if(nickname.contains("#")){
+			out.println("# 사용불가");
+			response.setContentType("text/html; charset=UTF-8");
+			out.println("<script>");
+			out.println("var checkNickname = false");
+			out.println("</script>");
+		} else if(nickname.contains("$")){
+			out.println("$ 사용불가");
+			response.setContentType("text/html; charset=UTF-8");
+			out.println("<script>");
+			out.println("var checkNickname = false");
+			out.println("</script>");
+		} else if(nickname.contains("%")){
+			out.println("% 사용불가");
+			response.setContentType("text/html; charset=UTF-8");
+			out.println("<script>");
+			out.println("var checkNickname = false");
+			out.println("</script>");
+		} else if(nickname.contains("^")){
+			out.println("^ 사용불가");
+			response.setContentType("text/html; charset=UTF-8");
+			out.println("<script>");
+			out.println("var checkNickname = false");
+			out.println("</script>");
+		} else if(nickname.contains("&")){
+			out.println("& 사용불가");
+			response.setContentType("text/html; charset=UTF-8");
+			out.println("<script>");
+			out.println("var checkNickname = false");
+			out.println("</script>");
+		} else if(nickname.contains("*")){
+			out.println("* 사용불가");
+			response.setContentType("text/html; charset=UTF-8");
+			out.println("<script>");
+			out.println("var checkNickname = false");
+			out.println("</script>");
+		} else if(nickname.contains("(")){
+			out.println("( 사용불가");
+			response.setContentType("text/html; charset=UTF-8");
+			out.println("<script>");
+			out.println("var checkNickname = false");
+			out.println("</script>");
+		} else if(nickname.contains(")")){
+			out.println(") 사용불가");
+			response.setContentType("text/html; charset=UTF-8");
+			out.println("<script>");
+			out.println("var checkNickname = false");
+			out.println("</script>");
+		} else if(nickname.contains("-")){
+			out.println("- 사용불가");
+			response.setContentType("text/html; charset=UTF-8");
+			out.println("<script>");
+			out.println("var checkNickname = false");
+			out.println("</script>");
+		} else if(nickname.contains("_")){
+			out.println("_ 사용불가");
+			response.setContentType("text/html; charset=UTF-8");
+			out.println("<script>");
+			out.println("var checkNickname = false");
+			out.println("</script>");
+		} else if(nickname.contains("=")){
+			out.println("= 사용불가");
+			response.setContentType("text/html; charset=UTF-8");
+			out.println("<script>");
+			out.println("var checkNickname = false");
+			out.println("</script>");
+		} else if(nickname.contains("+")){
+			out.println("+ 사용불가");
+			response.setContentType("text/html; charset=UTF-8");
+			out.println("<script>");
+			out.println("var checkNickname = false");
+			out.println("</script>");
+		} else if(nickname.contains("`")){
+			out.println("` 사용불가");
+			response.setContentType("text/html; charset=UTF-8");
+			out.println("<script>");
+			out.println("var checkNickname = false");
+			out.println("</script>");
+		} else if(nickname.contains("~")){
+			out.println("~ 사용불가");
+			response.setContentType("text/html; charset=UTF-8");
+			out.println("<script>");
+			out.println("var checkNickname = false");
+			out.println("</script>");
+		} else if(nickname.contains("[")){
+			out.println("[ 사용불가");
+			response.setContentType("text/html; charset=UTF-8");
+			out.println("<script>");
+			out.println("var checkNickname = false");
+			out.println("</script>");
+		} else if(nickname.contains("{")){
+			out.println("{ 사용불가");
+			response.setContentType("text/html; charset=UTF-8");
+			out.println("<script>");
+			out.println("var checkNickname = false");
+			out.println("</script>");
+		} else if(nickname.contains("]")){
+			out.println("] 사용불가");
+			response.setContentType("text/html; charset=UTF-8");
+			out.println("<script>");
+			out.println("var checkNickname = false");
+			out.println("</script>");
+		} else if(nickname.contains("}")){
+			out.println("} 사용불가");
+			response.setContentType("text/html; charset=UTF-8");
+			out.println("<script>");
+			out.println("var checkNickname = false");
+			out.println("</script>");
+		} else if(nickname.contains("\\")){
+			out.println("\\ 사용불가");
+			response.setContentType("text/html; charset=UTF-8");
+			out.println("<script>");
+			out.println("var checkNickname = false");
+			out.println("</script>");
+		} else if(nickname.contains("|")){
+			out.println("| 사용불가");
+			response.setContentType("text/html; charset=UTF-8");
+			out.println("<script>");
+			out.println("var checkNickname = false");
+			out.println("</script>");
+		} else if(nickname.contains(";")){
+			out.println("; 사용불가");
+			response.setContentType("text/html; charset=UTF-8");
+			out.println("<script>");
+			out.println("var checkNickname = false");
+			out.println("</script>");
+		} else if(nickname.contains(":")){
+			out.println(": 사용불가");
+			response.setContentType("text/html; charset=UTF-8");
+			out.println("<script>");
+			out.println("var checkNickname = false");
+			out.println("</script>");
+		} else if(nickname.contains("'")){
+			out.println("' 사용불가");
+			response.setContentType("text/html; charset=UTF-8");
+			out.println("<script>");
+			out.println("var checkNickname = false");
+			out.println("</script>");
+		} else if(nickname.contains("\"")){
+			out.println("\" 사용불가");
+			response.setContentType("text/html; charset=UTF-8");
+			out.println("<script>");
+			out.println("var checkNickname = false");
+			out.println("</script>");
+		} else if(nickname.contains(",")){
+			out.println(", 사용불가");
+			response.setContentType("text/html; charset=UTF-8");
+			out.println("<script>");
+			out.println("var checkNickname = false");
+			out.println("</script>");
+		} else if(nickname.contains("<")){
+			out.println("< 사용불가");
+			response.setContentType("text/html; charset=UTF-8");
+			out.println("<script>");
+			out.println("var checkNickname = false");
+			out.println("</script>");
+		} else if(nickname.contains(".")){
+			out.println(". 사용불가");
+			response.setContentType("text/html; charset=UTF-8");
+			out.println("<script>");
+			out.println("var checkNickname = false");
+			out.println("</script>");
+		} else if(nickname.contains(">")){
+			out.println("> 사용불가");
+			response.setContentType("text/html; charset=UTF-8");
+			out.println("<script>");
+			out.println("var checkNickname = false");
+			out.println("</script>");
+		} else if(nickname.contains("/")){
+			out.println("/ 사용불가");
+			response.setContentType("text/html; charset=UTF-8");
+			out.println("<script>");
+			out.println("var checkNickname = false");
+			out.println("</script>");
+		} else if(nickname.contains("?")){
+			out.println("? 사용불가");
+			response.setContentType("text/html; charset=UTF-8");
+			out.println("<script>");
+			out.println("var checkNickname = false");
+			out.println("</script>");
+		} else {
+			out.println("사용 가능한 닉네임");
+			response.setContentType("text/html; charset=UTF-8");
+			out.println("<script>");
+			out.println("var checkNickname = true");
+			out.println("</script>");
+		}
+		
+	}else{
+		out.println("8자 ~ 16자 닉네임 필수");
+		response.setContentType("text/html; charset=UTF-8");
+		out.println("<script>");
+		out.println("var checkNickname = false");
+		out.println("</script>");
+	}
 }
 %>

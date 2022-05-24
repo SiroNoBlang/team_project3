@@ -11,6 +11,11 @@
 <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 <script src="HomePage/assets/js/jquery-3.6.0.js"></script>
 <script type="text/javascript">
+
+
+// let isCheckConfirmPasswd = false, passSafe = false, isCheckEmail = false;;
+
+
 	function checkPass(pass) {
 		var spanElem = document.getElementById("passSafe");
 		var lengthRegex = /^[A-Za-z0-9-!@#$%]{8,16}$/;
@@ -66,9 +71,11 @@
 		if(pass==pass2){
 			spanElem.innerHTML = "패스워드 일치";
 			spanElem.style.color = "GREEN";
+			isCheckConfirmPasswd = true;
 		}else{
 			spanElem.innerHTML = "패스워드 불일치";
 			spanElem.style.color = "RED";
+			isCheckConfirmPasswd = false; 
 		}
 	}
 	
@@ -177,6 +184,49 @@
 			});
 		});
 	});	
+	
+	
+	function checkEmail(email){
+		var spanElem = document.getElementById("emailCheck");
+		var specRegex = /@/;
+		
+		if (specRegex.exec(email)){
+			spanElem.innerHTML="'@' 사용불가!";
+			isCheckEmail  = false;
+			
+		} else{
+			spanElem.innerHTML="";
+			isCheckEmail = true;
+		}
+	}
+	
+// 	function FindIdPass(){
+// 		window.open{"find_id.jsp", }
+// 	}
+	
+	function checkForm(){
+		if(!checkId){
+			alert("아이디 확인 필수!");
+			document.fr.join_member_id.focus();
+			return false;
+		} else if(!checkNickname){
+			alert("닉네임 확인 필수!");
+			document.fr.join_member_nickname.focus();
+			return false;
+		} else if(!passSafe){
+			alert("패스워드 조건 확인 필수!");
+			document.fr.join_member_passwd.focus();
+			return false;
+		} else if(!isCheckConfirmPasswd){
+			alert("패스워드 확인 필수!");
+			document.fr.join_member_passwd_check.focus();
+			return false;
+		} else if (!isCheckEmail){
+			alert("이메일 확인 필수!");
+			document.fr.member_email1.focus();
+			return false;
+		}
+	}	
 </script>
 </head>
 <body class="is-preload">
@@ -218,7 +268,7 @@
 					</div>
 					<ul class="actions">
 						<li><input type="submit" value="Login" class="primary" /></li>
-						<li><input type="button" value="Lost ID & PASSWORD" onclick=""></li>
+						<li><input type="button" value="Lost ID & PASSWORD" onclick="FindIdPass"></li>
 					</ul>
 				</form>
 				<ul class="icons">
@@ -598,7 +648,7 @@
 			
 			<article id="joinPro">
 				<h2 class="major">Join</h2>
-				<form method="post" action="JoinPro.ma" id="fr" name="fr">
+				<form method="post" action="JoinPro.ma" id="fr" name="fr" onsubmit="return checkForm()">
 					<div class="fields">
 						<div class="field half">
 							<label for="member_nickname">Nickname</label> 
@@ -622,7 +672,8 @@
 						</div>
 						<div class="field half">
 							<label for="member_email1">Email</label> 
-							<input type="text" name="member_email1" id="member_email1" />
+							<input type="text" name="member_email1" id="member_email1" onblur="checkEmail(this.value)" />
+							<span id="emailCheck"></span>
 						</div>
 						<div class="field half">
 							<label>도메인</label> 
@@ -633,7 +684,7 @@
 								<option value="@hanmail.net">hanmail.net</option>
 								<option value="@daum.net">daum.net</option>
 								<option value="@yahoo.com">yahoo.com</option>
-							</select> contains
+							</select> 
 						</div>
 						<div class="field half">
 							<label for="member_info_gender">성별</label> 
