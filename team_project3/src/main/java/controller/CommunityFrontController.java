@@ -252,8 +252,8 @@ public class CommunityFrontController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		} else if (command.equals("/ProductConfirm.co")) { // 이벤트 글 목록
-			forward = new ActionForward("AdminPage/productConfirm.jsp", false);
+		} else if (command.equals("/Sales.co")) { // 이벤트 글 목록
+			forward = new ActionForward("AdminPage/sales/sales_main.jsp", false);
 		} 
 
 		
