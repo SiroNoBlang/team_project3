@@ -64,7 +64,7 @@
 				            </div>
 				          </div>
 				        </div>
-				        <div class="col-6 col-sm-3" onclick="location.href='Classification.co?value=0'">
+				        <div class="col-6 col-sm-3" onclick="location.href='Classification.co?value=1'">
 				          <div class="panel panel-success">
 				            <div class="panel-heading">정상</div>
 				            <div class="panel-body">
@@ -72,7 +72,7 @@
 				            </div>
 				          </div>
 				        </div>
-				        <div class="col-6 col-sm-3" onclick="location.href='Classification.co?value=0'">
+				        <div class="col-6 col-sm-3" onclick="location.href='Classification.co?value=2'">
 				          <div class="panel panel-warning">
 				            <div class="panel-heading">정지</div>
 				            <div class="panel-body">
@@ -80,7 +80,7 @@
 				            </div>
 				          </div>
 				        </div>
-				        <div class="col-6 col-sm-3" onclick="location.href='Classification.co?value=0'">
+				        <div class="col-6 col-sm-3" onclick="location.href='Classification.co?value=3'">
 				          <div class="panel panel-danger">
 				            <div class="panel-heading">탈퇴</div>
 				            <div class="panel-body">

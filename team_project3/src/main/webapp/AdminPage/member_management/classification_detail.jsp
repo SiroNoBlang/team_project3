@@ -186,7 +186,7 @@
 						<c:if test="${memberDetail.getMember_service_log_status() eq '탈퇴'}">
 							<input type="button" value="회원탈퇴" onclick="">
 						</c:if>
-						<input type="button" value="목록" onclick="#">
+						<input type="button" value="목록" onclick="location.href='Classification.co?page=${param.page }'">
 					</section>
 				</form>
 			</div>

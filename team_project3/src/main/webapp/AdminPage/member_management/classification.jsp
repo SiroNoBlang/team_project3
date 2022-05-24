@@ -129,7 +129,7 @@
 										<tr>
 											<td><input type="checkbox" value="${classification.getMember_code() }"></td>
 											<td>${classification.getMember_service_log_status() }</td>
-											<td><a href="MemberDetail.co?member_code=${classification.getMember_code() }&page=${pageNum}">
+											<td><a href="ClassificationDetail.co?member_code=${classification.getMember_code() }&page=${pageNum}">
 													${classification.getMember_nickname() } </a></td>
 											<td>${classification.getMember_info_detail_acc_money() }만원</td>
 											<td>${classification.getGrade_name() }</td>
@@ -141,10 +141,10 @@
 						<c:set var="value" value="${param.value }" />
 						<c:choose>
 							<c:when test="${value eq '2'}">
-								<button type="button" class="btn btn-primary">일괄 정상 변경 (Update)</button>
+								<button type="button" class="btn btn-primary" onclick="#">일괄 정상 변경</button>
 							</c:when>
 							<c:when test="${value eq '3'}">
-								<button type="button" class="btn btn-danger">일괄 탈퇴 승인 (Delete)</button>
+								<button type="button" class="btn btn-danger" onclick="#">일괄 탈퇴 승인</button>
 							</c:when>
 						</c:choose>
 					</div>
