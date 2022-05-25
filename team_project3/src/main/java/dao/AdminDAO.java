@@ -1120,7 +1120,7 @@ public class AdminDAO {
 		
 		int startRow = (pageNum - 1) * listLimit;
 		
-		try {
+		try { //혹시 재 사용할수 있으니 전체적으로 저장
 			String sql = "SELECT  a.sell_num, a.sell_member_code, a.sell_category, a.sell_category_detail, a.sell_size, a.sell_title, a.sell_color, a.sell_brand, a.sell_write_date, "
 					+ "a.sell_price, b.sell_img_name, b.sell_img_real_name,c.sell_list_num,c.sell_list_item_status,c.sell_list_approve_date, c.sell_list_approve_nickname "
 					+ "FROM sell AS a JOIN sell_img AS b ON a.sell_num = b.sell_img_real_num JOIN sell_list AS c ON a.sell_num = c.sell_list_num ORDER BY sell_write_date DESC LIMIT ?,?";
@@ -1149,11 +1149,18 @@ public class AdminDAO {
 				confirm.setSell_img_real_name(rs.getString("sell_img_real_name"));
 				confirm.setSell_list_num(rs.getInt("sell_list_num"));
 				confirm.setSell_list_item_status(rs.getString("sell_list_item_status"));
-				confirm.setSell_list_approve_date(rs.getString("sell_list_approve_date").substring(0,8));
+				
+				if(rs.getString("sell_list_approve_date") !=null) { //값이 없을 때 .substring(0,8)로 인해 오류발생
+					
+					confirm.setSell_list_approve_date(rs.getString("sell_list_approve_date").substring(0,8));
+				}
 				confirm.setSell_list_approve_nickname(rs.getString("sell_list_approve_nickname"));
 				
 				productConfirmList.add(confirm);
+				
 			}
+			
+			System.out.println(productConfirmList);
 			
 		} catch (SQLException e) {
 			System.out.println("SQL 구문 오류 발생! - selectConfirmList()");
@@ -1195,8 +1202,9 @@ public class AdminDAO {
 		}
 		return listCount;
 	}
+	
 
-	//검수현황 카레코리 - 검색어에 해당하는 게시물 
+	//검수현황 카테고리 - 검색어에 해당하는 게시물 
 	public ArrayList<SellerDTO> selectConfirmSearchList(int pageNum, int listLimit, String search, String searchType) {
 		ArrayList<SellerDTO> productConfirmSearch =null;
 		SellerDTO confirm = null;
@@ -1230,7 +1238,9 @@ public class AdminDAO {
 				confirm.setSell_brand(rs.getString("sell_brand"));
 				confirm.setSell_write_date(rs.getString("sell_write_date").substring(0,8));
 				confirm.setSell_list_item_status(rs.getString("sell_list_item_status"));
-				confirm.setSell_list_approve_date(rs.getString("sell_list_approve_date").substring(0,8));
+				if(rs.getString("sell_list_approve_date") !=null) { //값이 없을 때 .substring(0,8)로 인해 오류발생
+					confirm.setSell_list_approve_date(rs.getString("sell_list_approve_date").substring(0,8));
+				}
 				
 				productConfirmSearch.add(confirm);
 			}
@@ -1245,6 +1255,100 @@ public class AdminDAO {
 			close(rs);
 		}
 		return productConfirmSearch;
+	}
+	
+	
+	//검수현황 상세정보 - 글정보
+	public SellerDTO selectProductConfirmDetail(int sell_num) {
+
+		
+		SellerDTO confirm = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			String sql = "SELECT  a.sell_num, a.sell_member_code,a.sell_title, a.sell_category, a.sell_category_detail, "
+					+ "a.sell_content,a.sell_price, a.sell_color, a.sell_size, a.sell_brand, a.sell_write_date,"
+					+ "c.sell_list_item_status,c.sell_list_approve_date, c.sell_list_approve_nickname "
+					+ "FROM sell AS a JOIN sell_list AS c ON a.sell_num = c.sell_list_num "
+					+ "WHERE a.sell_num=?";
+			
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, sell_num);
+			
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				
+				confirm = new SellerDTO();
+				confirm.setSell_num(rs.getInt("sell_num"));
+				confirm.setSell_member_code(rs.getString("sell_member_code"));
+				confirm.setSell_title(rs.getString("sell_title"));
+				confirm.setSell_category(rs.getString("sell_category"));
+				confirm.setSell_category_detail(rs.getString("sell_category_detail"));
+				confirm.setSell_content(rs.getString("sell_content"));
+				confirm.setSell_price(rs.getShort("sell_price"));
+				confirm.setSell_color(rs.getString("sell_color"));
+				confirm.setSell_size(rs.getString("sell_size"));
+				confirm.setSell_brand(rs.getString("sell_brand"));
+				confirm.setSell_write_date(rs.getString("sell_write_date").substring(0,8));
+				confirm.setSell_list_item_status(rs.getString("sell_list_item_status"));
+				if(rs.getString("sell_list_approve_date") !=null) { //값이 없을 때 .substring(0,8)로 인해 오류발생
+					
+					confirm.setSell_list_approve_date(rs.getString("sell_list_approve_date").substring(0,8));
+				}
+				
+				confirm.setSell_list_approve_nickname(rs.getString("sell_list_approve_nickname"));
+			}
+			
+		} catch (SQLException e) {
+			System.out.println("SQL 구문 오류 발생! - selectProductConfirmDetail()");
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rs);
+		}
+		return confirm;
+	}
+
+	
+	
+	//검수현황 상세정보 - 이미지 정보
+	public ArrayList<SellerDTO> getConfirmImg(int sell_num) {
+		ArrayList<SellerDTO> confirmImgFileList = new ArrayList<SellerDTO>();
+		
+		SellerDTO confirmImg = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			
+			String sql ="SELECT b.sell_img_num, b.sell_img_name, b.sell_img_real_name "
+					+ "FROM sell AS a JOIN sell_img AS b ON a.sell_num = b.sell_img_real_num WHERE b.sell_img_real_num=?";
+		
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, sell_num);
+			rs = pstmt.executeQuery();
+			
+			
+			while(rs.next()) {
+				
+				confirmImg = new SellerDTO();
+				confirmImg.setSell_img_name(rs.getString("b.sell_img_name"));
+				confirmImg.setSell_img_real_name(rs.getString("b.sell_img_real_name"));
+				
+				confirmImgFileList.add(confirmImg);
+			} 
+			
+		} catch (SQLException e) {
+			System.out.println("SQL 구문 오류 발생! - getConfirmImg()");
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rs);
+		}
+		return confirmImgFileList;
+		
+		
 	}
 
 }	

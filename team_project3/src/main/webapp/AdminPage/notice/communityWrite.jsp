@@ -45,7 +45,7 @@
 				<i id="toggle-left-menu" class="ion-android-menu"></i>
 			</div>
 			<div class="header-right float-right">
-			<a href="javascript:void(0)" onclick="confirmLogout()"><i class="icon ion-log-out" ></i></a>
+				<a href="javascript:void(0)" onclick="confirmLogout()"><i class="icon ion-log-out" ></i></a>
 			</div>
 		</div>
 		<div id="page-container">
