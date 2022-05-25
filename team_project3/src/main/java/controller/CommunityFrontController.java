@@ -26,6 +26,7 @@ import action.NoticeModifyFormAction;
 import action.NoticeModifyProAction;
 import action.NoticeSearchAction;
 import action.ProductConfirmListAction;
+import action.ProductConfirmSearchAction;
 import action.QnaDeleteProAction;
 import action.QnaDetailAction;
 import action.QnaModifyFormAction;
@@ -275,7 +276,15 @@ public class CommunityFrontController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+		}else if (command.equals("/ProductSearch.co")) { // 검수 검색(/ProductSearch.co) 요청
+			action = new ProductConfirmSearchAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
+		
 		
 		
 		

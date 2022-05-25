@@ -1167,6 +1167,86 @@ public class AdminDAO {
 		
 	}
 
+	
+	//검수현황 카레코리 - 검색어에 해당하는 게시물 수
+	public int selectConfirmSearchListCount(String tableName, String search, String searchType) {
+		int listCount =  0;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			con = getConnection();
+			
+			String sql = "SELECT COUNT(sell_num) FROM "+ tableName+ " WHERE " + searchType + " LIKE ?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, "%" + search + "%");
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				listCount = rs.getInt(1);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println("SQL 구문 오류 - selectConfirmSearchListCount()");
+		} finally {
+			close(pstmt);
+			close(rs);
+		}
+		return listCount;
+	}
+
+	//검수현황 카레코리 - 검색어에 해당하는 게시물 
+	public ArrayList<SellerDTO> selectConfirmSearchList(int pageNum, int listLimit, String search, String searchType) {
+		ArrayList<SellerDTO> productConfirmSearch =null;
+		SellerDTO confirm = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		
+		try {
+			int startRow = (pageNum - 1) * listLimit;
+			
+			String sql = "SELECT  a.sell_num, a.sell_category, a.sell_title, a.sell_brand, a.sell_write_date, c.sell_list_item_status,c.sell_list_approve_date "
+					+ "FROM sell AS a JOIN sell_list AS c ON a.sell_num = c.sell_list_num "
+					+ "WHERE "+ searchType + " LIKE ? "
+					+ "ORDER BY sell_num DESC LIMIT ?,?";
+			
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, "%" + search + "%");
+			pstmt.setInt(2, startRow);
+			pstmt.setInt(3, listLimit);
+			
+			rs = pstmt.executeQuery();
+			
+			productConfirmSearch = new ArrayList<SellerDTO>();
+			
+			while(rs.next()) {
+				confirm = new SellerDTO();
+				
+				confirm.setSell_num(rs.getInt("sell_num"));
+				confirm.setSell_category(rs.getString("sell_category"));
+				confirm.setSell_title(rs.getString("sell_title"));
+				confirm.setSell_brand(rs.getString("sell_brand"));
+				confirm.setSell_write_date(rs.getString("sell_write_date").substring(0,8));
+				confirm.setSell_list_item_status(rs.getString("sell_list_item_status"));
+				confirm.setSell_list_approve_date(rs.getString("sell_list_approve_date").substring(0,8));
+				
+				productConfirmSearch.add(confirm);
+			}
+			
+//				System.out.println(productConfirmSearch);
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println("SQL 구문 오류 - selectConfirmSearchList()");
+		} finally {
+			close(pstmt);
+			close(rs);
+		}
+		return productConfirmSearch;
+	}
+
 }	
 	
 	
