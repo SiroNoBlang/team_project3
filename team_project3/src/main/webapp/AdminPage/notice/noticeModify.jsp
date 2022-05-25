@@ -39,19 +39,7 @@
 		<span class="big-logo">Admin</span> <span class="small-logo">&nbsp; A</span>
 	</div>
 	<div id="left-menu">
-		<ul>
-			<li class="#"><a href="MemberManagement.co"> <i class="ion-ios-person-outline"></i> <span>멤버관리</span></a></li>
-			<li class="#"><a href="ProductConfirm.co"> <i class="icon ion-clipboard"></i> <span>검수현황</span></a></li>
-			<li class="has-sub"><a href="#"> <i class="ion-ios-chatboxes-outline"></i> <span>커뮤니티</span>
-			</a>
-				<ul>
-					<li><a href="NoticeList.co">공지사항</a></li>
-					<li><a href="EventList.co">이벤트</a></li>
-					<li><a href="QusetionList.co">Q&#38;A</a></li>
-					<li><a href="CommunityWriteForm.co">글쓰기</a></li>
-				</ul>
-			</li>
-		</ul>
+		<jsp:include page="/AdminPage/menu/menu.jsp"/>
 	</div>
 	<div id="main-content">
 		<div id="header">
@@ -67,6 +55,8 @@
 				<div class="title">공지사항 글 수정</div>
 				
 					<form action="./NoticeModifyPro.co" name="boardForm" method="post" enctype="multipart/form-data">
+						<input type="hidden" name="notice_num" value="${param.notice_num}">
+						<input type="hidden" name="page" value="${param.page}">
 						<table >
 							<tr>
 								<th>분류</th>
@@ -95,36 +85,14 @@
 									<textarea id="board_content" name="board_content"  rows="20" cols="100">${noticeArticle.getNotice_content() } </textarea>
 								</td>
 							</tr>
-						  	<c:choose>
-						  		<c:when test="${not empty noticeImgFileList }"> <!-- 첨부파일이 있을 경우 -->
-								  		<tr>
-											<th><label for="board_file">파일 첨부</label></th>
-											<td><input type="file" id="file1" name="board_file0">
-												<a href="./Upload/admin_notice_img/${noticeImgFileList[0].getNotice_img_file_real_name() }" 
-												download="${noticeImgFileList[0].getNotice_img_file_name()  }"> 
-												${noticeImgFileList[0].getNotice_img_file_name() }</a>
-											</td>
-										</tr>
-								  		<tr>
-											<th><label for="board_file">파일 첨부</label></th>
-											<td><input type="file" id="file1" name="board_file1">
-												<a href="./Upload/admin_notice_img/${noticeImgFileList[1].getNotice_img_file_real_name()  }" 
-												download="${noticeImgFileList[1].getNotice_img_file_name() }"> 
-												${noticeImgFileList[1].getNotice_img_file_name()}</a>
-											</td>
-										</tr>
-						  		</c:when>
-						  		<c:otherwise> <!-- 첨부파일이 없을 경우 -->
-						  			<tr>
-										<th><label for="board_file">파일 첨부</label></th>
-										<td><input type="file" id="file1" name="board_file0"></td>
-									</tr>
-							  		<tr>
-										<th><label for="board_file">파일 첨부</label></th>
-										<td><input type="file" id="file1" name="board_file1"></td>
-									</tr>
-						  		</c:otherwise>
-						  	</c:choose> 
+					  			<tr>
+									<th><label for="board_file">파일 첨부</label></th>
+									<td><input type="file" id="file1" name="board_file0"></td>
+								</tr>
+						  		<tr>
+									<th><label for="board_file">파일 첨부</label></th>
+									<td><input type="file" id="file1" name="board_file1"></td>
+								</tr>
 						</table>
 						<br>
 						<section id="commandCell">	
