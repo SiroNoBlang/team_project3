@@ -537,4 +537,6 @@ section#pageList {
 
 
 
-
+.col-6.col-sm-3 {
+    cursor: pointer;
+}

@@ -45,7 +45,7 @@
 			<div class="card">
 				<div class="title">검수현황</div>
 				    <section class="row text-center placeholders">
-				        <div class="col-6 col-sm-3">
+				        <div class="col-6 col-sm-3" onclick="location.href='#'">
 				          <div class="panel panel-info">
 				            <div class="panel-heading">검수완료</div>
 				            <div class="panel-body">
@@ -53,7 +53,7 @@
 				            </div>
 				          </div>
 				        </div>
-				        <div class="col-6 col-sm-3">
+				        <div class="col-6 col-sm-3" onclick="location.href='#'">
 				          <div class="panel panel-success">
 				            <div class="panel-heading">검수중</div>
 				            <div class="panel-body">
@@ -61,7 +61,7 @@
 				            </div>
 				          </div>
 				        </div>
-				        <div class="col-6 col-sm-3">
+				        <div class="col-6 col-sm-3" onclick="location.href='#'">
 				          <div class="panel panel-warning">
 				            <div class="panel-heading">검수실패</div>
 				            <div class="panel-body">
@@ -69,7 +69,7 @@
 				            </div>
 				          </div>
 				        </div>
-				        <div class="col-6 col-sm-3">
+				        <div class="col-6 col-sm-3" onclick="location.href='#'">
 				          <div class="panel panel-danger">
 				            <div class="panel-heading">판매완료</div>
 				            <div class="panel-body">
@@ -90,12 +90,12 @@
 					            <div class="search-window">
 					                <form action="ProductSearch.co" class="formCss">
 										<select name="searchType" id="product">
-										    <option value="sell_title">상품명</option>
-										    <option value="sell_brand">브랜드</option>
-										    <option value="sell_category">카테고리</option>
+										    <option value="sell_title" >상품명</option>
+										    <option value="sell_brand" <c:if test="${param.searchType eq 'sell_brand'}"> selected="selected"</c:if>>브랜드</option>
+										    <option value="sell_category" <c:if test="${param.searchType eq 'sell_category'}"> selected="selected"</c:if>>카테고리</option>
 										</select>
 					                        <label for="search" class="blind"></label>
-					                        <input id="search" type="search" name="search">
+					                        <input id="search" type="search" name="search" value="${param.search}">
 					                        <button type="submit" class="btn btn-dark">검색</button>
 					                </form>
 					            </div>
