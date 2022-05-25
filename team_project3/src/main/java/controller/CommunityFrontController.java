@@ -25,6 +25,7 @@ import action.NoticeListAction;
 import action.NoticeModifyFormAction;
 import action.NoticeModifyProAction;
 import action.NoticeSearchAction;
+import action.ProductConfirmListAction;
 import action.QnaDeleteProAction;
 import action.QnaDetailAction;
 import action.QnaModifyFormAction;
@@ -256,6 +257,25 @@ public class CommunityFrontController extends HttpServlet {
 			forward = new ActionForward("AdminPage/sales/sales_main.jsp", false);
 		} 
 
+		
+		
+		
+		
+		
+		
+		
+		
+		//검수
+		
+		
+			else if (command.equals("/ProductConfirm.co")) { // 검수목록(/ProductConfirm.co)
+			action = new ProductConfirmListAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
 		
 		
 		

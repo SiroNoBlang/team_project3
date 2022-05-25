@@ -13,6 +13,7 @@ import vo.MemberBean;
 import vo.NoticeBean;
 import vo.NoticeImgFileBean;
 import vo.QnaBean;
+import vo.SellerDTO;
 
 import static db.JdbcUtil.*;
 
@@ -1107,8 +1108,64 @@ public class AdminDAO {
 		return classificationList;
 	}
 
-
-
+	
+	
+	
+	// 총 검수목록 
+	public ArrayList<SellerDTO> selectConfirmList(int pageNum, int listLimit) {
+		ArrayList<SellerDTO> productConfirmList  = null;
+		SellerDTO confirm = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		int startRow = (pageNum - 1) * listLimit;
+		
+		try {
+			String sql = "SELECT  a.sell_num, a.sell_member_code, a.sell_category, a.sell_category_detail, a.sell_size, a.sell_title, a.sell_color, a.sell_brand, a.sell_write_date, "
+					+ "a.sell_price, b.sell_img_name, b.sell_img_real_name,c.sell_list_num,c.sell_list_item_status,c.sell_list_approve_date, c.sell_list_approve_nickname "
+					+ "FROM sell AS a JOIN sell_img AS b ON a.sell_num = b.sell_img_real_num JOIN sell_list AS c ON a.sell_num = c.sell_list_num ORDER BY sell_write_date DESC LIMIT ?,?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, listLimit);
+			
+			rs = pstmt.executeQuery();
+			
+			productConfirmList = new ArrayList<SellerDTO>();
+			
+			while(rs.next()) {
+				
+				confirm = new SellerDTO();
+				confirm.setSell_num(rs.getInt("sell_num"));
+				confirm.setSell_member_code(rs.getString("sell_member_code"));
+				confirm.setSell_category(rs.getString("sell_category"));
+				confirm.setSell_category_detail(rs.getString("sell_category_detail"));
+				confirm.setSell_size(rs.getString("sell_size"));
+				confirm.setSell_title(rs.getString("sell_title"));
+				confirm.setSell_color(rs.getString("sell_color"));
+				confirm.setSell_brand(rs.getString("sell_brand"));
+				confirm.setSell_write_date(rs.getString("sell_write_date").substring(0,8));
+				confirm.setSell_price(rs.getInt("sell_price"));
+				confirm.setSell_img_name(rs.getString("sell_img_name"));
+				confirm.setSell_img_real_name(rs.getString("sell_img_real_name"));
+				confirm.setSell_list_num(rs.getInt("sell_list_num"));
+				confirm.setSell_list_item_status(rs.getString("sell_list_item_status"));
+				confirm.setSell_list_approve_date(rs.getString("sell_list_approve_date").substring(0,8));
+				confirm.setSell_list_approve_nickname(rs.getString("sell_list_approve_nickname"));
+				
+				productConfirmList.add(confirm);
+			}
+			
+		} catch (SQLException e) {
+			System.out.println("SQL 구문 오류 발생! - selectConfirmList()");
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rs);
+		}
+		
+		return productConfirmList;
+		
+	}
 
 }	
 	

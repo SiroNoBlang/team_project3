@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>   
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,23 +18,19 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
 </head>
 <body>
-	<!-- partial:index.partial.html -->
+<!-- 페이징 처리 -->		
+	<c:set var="pageNum" value="${pageInfo.getPageNum() }" /> <!-- 현재 페이지 번호 --> 
+	<c:set var="maxPage" value="${pageInfo.getMaxPage() }" /><!-- 최대 페이지 수 --> 
+	<c:set var="startPage" value="${pageInfo.getStartPage() }" /><!-- 시작 페이지 번호 --> 
+	<c:set var="endPage" value="${pageInfo.getEndPage() }" /><!-- 끝 페이지 번호 --> 
+	<c:set var="listCount" value="${pageInfo.getListCount() }" /><!-- 총 게시물 수 --> 
+	<c:set var="listLimit" value="${pageInfo.getListLimit() }" /><!-- 표시할 페이지 수 --> 
+
 	<div id="logo">
 		<span class="big-logo">Admin</span> <span class="small-logo">&nbsp; A</span>
 	</div>
 	<div id="left-menu">
-		<ul>
-			<li class="#"><a href="MemberManagement.co"> <i class="ion-ios-person-outline"></i> <span>멤버관리</span></a></li>
-			<li class="#"><a href="ProductConfirm.co"> <i class="icon ion-clipboard"></i> <span>검수현황</span></a></li>
-			<li class="has-sub"><a href="#"> <i class="ion-ios-chatboxes-outline"></i> <span>커뮤니티</span></a>
-				<ul>
-					<li><a href="NoticeList.co">공지사항</a></li>
-					<li><a href="EventList.co">이벤트</a></li>
-					<li><a href="QusetionList.co">Q&#38;A</a></li>
-					<li><a href="CommunityWriteForm.co">글쓰기</a></li>
-				</ul>
-			</li>
-		</ul>
+		<jsp:include page="/AdminPage/menu/menu.jsp"/>
 	</div>
 	<div id="main-content">
 		<div id="header">
@@ -86,7 +83,7 @@
 				
 				
 				<div class="card">
-					<div class="title">목록</div>
+					<div class="title">검수 목록</div>
 					
 					<div id="board-search">
 					        <div class="container">
@@ -95,8 +92,8 @@
 										<select name="product" id="product">
 										    <option value="">분류</option>
 										    <option value="">상품명</option>
-										    <option value="">상품</option>
-										    <option value="">그다음</option>
+										    <option value="">브랜드</option>
+										    <option value="">카테고리</option>
 										</select>
 					                        <label for="search" class="blind">공지사항 내용 검색</label>
 					                        <input id="search" type="search" name="" value="">
@@ -112,42 +109,71 @@
 					            <table class="board-table">
 					                <thead>
 						                <tr>
-						                    <th scope="col" class="th-num"></th>
+						  <!--                   <th scope="col" class="th-num"></th> -->
 						                    <th scope="col" class="th-num">번호</th>
+						                    <th scope="col" class="th-date">카테고리</th>
+						                    <th scope="col" class="th-date">브랜드</th>
 						                    <th scope="col" class="th-title">판매품제목 </th>
-						                    <th scope="col" class="th-date">판매품등록날짜</th>
+						                    <th scope="col" class="th-date">판매등록일</th>
 						                    <th scope="col" class="th-date">승인날짜</th>
 						                    <th scope="col" class="th-date">현재상태</th>
 						                </tr>
 						                </thead>
 						                <tbody>
-						                <tr>
-						                    <td> <input type="checkbox"> </td>
-						                    <td>3</td>
-						                    <th>
-						                      <a href="#!">[공지사항] 개인정보 처리방침 변경안내처리방침</a>
-						                      <p>테스트</p>
-						                    </th>
-						                    <td>2017.07.13</td>
-						                    <td>2017.07.13</td>
-						                    <td>검수중</td>
-						                </tr>
-						
-						                <tr>
-						                	<td> <input type="checkbox"> </td>
-						                    <td>2</td>
-						                    <th><a href="#!">공지사항 안내입니다. 이용해주셔서 감사합니다</a></th>
-						                    <td>2017.06.15</td>
-						                    <td>2017.07.13</td>
-						                    <td>검수완료</td>
-						                </tr>
+						                <c:if test="${not empty productConfirmList and pageInfo.getListCount() > 0}">
+										<c:forEach var="confirm" items="${productConfirmList }" varStatus="status">
+							                <tr>
+			<!-- 				                    <td> <input type="checkbox"> </td> -->
+							                    <td>${listCount -(listCount -((pageNum-1)* listLimit + status.index)-1)} </td> 
+							                    <td>${confirm.getSell_category() } </td>
+							                    <td>${confirm.getSell_brand() } </td>
+							                     <td>
+													<a href="ProductConfirmDetail.co?sell_num=${confirm.getSell_num() }&page=${pageNum}">
+								                    	${confirm.getSell_title() } </a>
+								                    </td>
+							                    <td>${confirm.getSell_write_date() } </td>
+							                    <td>${confirm.getSell_list_approve_date() } </td>
+							                    <td>${confirm.getSell_list_item_status() } </td>
+							                </tr>
+							               </c:forEach>
+										</c:if> 
 					                </tbody>
 					            </table>
-					            <button type="button" class="btn btn-primary">검수완료</button>
+				<!-- 	            <button type="button" class="btn btn-primary">검수완료</button>
 					            <button type="button" class="btn btn-success">검수취소</button>
-					            <button type="button" class="btn btn-danger">여긴뭐하지</button>
+					            <button type="button" class="btn btn-danger">여긴뭐하지</button> -->
 					        </div>
     					</div>
+    					 <section id="pageList">
+								<c:choose>
+									<c:when test="${pageNum > 1}">
+										<input type="button" value="이전" onclick="location.href='ProductConfirm.co?page=${pageNum - 1}'">
+									</c:when>
+									<c:otherwise>
+										<input type="button" value="이전">
+									</c:otherwise>
+								</c:choose>
+									
+								<c:forEach var="i" begin="${startPage }" end="${endPage }">
+									<c:choose>
+										<c:when test="${pageNum eq i}">
+											${i }
+										</c:when>
+										<c:otherwise>
+											<a href="ProductConfirm.co?page=${i }">${i }</a>
+										</c:otherwise>
+									</c:choose>
+								</c:forEach>
+						
+								<c:choose>
+									<c:when test="${pageNum < maxPage}">
+										<input type="button" value="다음" onclick="location.href='ProductConfirm.co?page=${pageNum + 1}'">
+									</c:when>
+									<c:otherwise>
+										<input type="button" value="다음">
+									</c:otherwise>
+								</c:choose>
+							</section>
 					</div>
 				</div>
 			</div>
