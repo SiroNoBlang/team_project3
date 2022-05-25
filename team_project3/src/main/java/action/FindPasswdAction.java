@@ -30,7 +30,7 @@ public class FindPasswdAction implements Action {
 			out.println("<script>");
 			out.println("alert('이메일로 임시 비밀번호를 전송하였습니다!')");
 			out.println("</script>");
-			forward = new ActionForward("join/login.jsp", false);
+			forward = new ActionForward("/HomePage/first_page/mail_pro.jsp", false);
 		} else {
 			response.setContentType("text/html; charset=UTF-8");
 			PrintWriter out = response.getWriter();

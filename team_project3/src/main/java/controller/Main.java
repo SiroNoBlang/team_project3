@@ -196,9 +196,6 @@ public class Main extends HttpServlet {
 			} catch (Exception e) {
 				
 			}
-		} else if(command.equals("/isFindIdResult.ma")) {
-			forward = new ActionForward("HomePage/first_page/find_id.jsp", false);
-			
 		} else if(command.equals("/FindPasswd.ma")) { // 비밀번호 찾기
 			action = new FindPasswdAction();
 			try {

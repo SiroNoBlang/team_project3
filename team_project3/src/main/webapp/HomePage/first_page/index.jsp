@@ -229,9 +229,9 @@
 	}	
 	
 	$(function(){
-		$("#join_member_id").on("keyup",function(){
+		$('#idFind_login').hide();
+		$("#idFind").on("click",function(){
 			let sendData = $("#fi").serialize();
-			
 			$.ajax({
 				type:"GET",
 				url:"HomePage/first_page/find_id.jsp",
@@ -239,6 +239,8 @@
 				dataType:"text",
 				success:function(msg){
 					$("#findIdResultArea").html(msg);
+					$('#idFind').hide(); //idFind_login
+					$('#idFind_login').show();
 				},
 				error: function(xhr, textStatus, errorThrown){
 					$("#findIdResultArea").html(
@@ -249,6 +251,15 @@
 			});
 		});
 	});	
+	
+	$(function(){
+		$("#idFind_login").on("click", function(){
+			location.href="#contact";
+			$('#findIdResultArea').empty();
+			$('#idFind_login').hide();
+			$('#idFind').show();
+		});
+	});
 	
 </script>
 </head>
@@ -304,7 +315,7 @@
 			
 			<article id="find">
 				<h2 class="major">FIND ID </h2>
-				<form method="post" action="FindId.ma" id="fi" name="fi">
+				<form method="post" action="" id="fi" name="fi">
 					<div class="fields">
 						<div class="field half">
 							<label for="find_id_member_nickname">NICKNAME</label>
@@ -316,7 +327,8 @@
 						</div>
 					</div>
 					<ul class="actions">
-						<li><input type="submit" value="Find" class="primary" id=""/> <div id="findIdResultArea"></div></li>
+						<li><input type="button" value="Find" class="primary" id="idFind"/> <div id="findIdResultArea" ></div></li>
+						<li><input type="reset" value="Login" class="primary" id="idFind_login" /> </li>
 					</ul>
 				</form>
 				<h2 class="major">FIND PASSWORD</h2>
@@ -743,7 +755,7 @@
 						<div class="field half">
 							<label>도메인</label> 
 							<select id="member_email2" name="member_email2">
-								<option value="@gmail.com" selected="selected">gmail.com</option>
+								<option value="@gmail.com">gmail.com</option>
 								<option value="@naver.com">naver.com</option>
 								<option value="@nate.net">nate.net</option>
 								<option value="@hanmail.net">hanmail.net</option>

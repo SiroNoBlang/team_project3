@@ -23,7 +23,7 @@ public class FindIdAction implements Action {
 		FindIdService service = new FindIdService();
 		String isFindId = service.isFindId(nickname, email); 
 		
-		if(isFindId == null || isFindId.equals("")) {
+		if(isFindId.equals("")) {
 			response.setContentType("text/html; charset=UTF-8");
 			PrintWriter out = response.getWriter();
 			out.println("<script>");
@@ -32,7 +32,7 @@ public class FindIdAction implements Action {
 			out.println("</script>");
 		} else {
 			request.setAttribute("isFindId", isFindId);
-			forward = new ActionForward("isFindIdResult.ma", false);
+			forward = new ActionForward("HomePage/first_page/index.jsp", false);
 		}
 		
 		return forward;

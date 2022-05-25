@@ -488,10 +488,10 @@ public class MemberDAO {
 			rs = pstmt.executeQuery();
 			
 			if(rs.next()) {
-				isFindId += rs.getString("member_id").toString();
+				isFindId = rs.getString("member_id").toString();
 			}
 		} catch (SQLException e) {
-
+			e.printStackTrace();
 		} finally {
 			close(pstmt);
 			close(rs);

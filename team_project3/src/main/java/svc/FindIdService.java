@@ -19,6 +19,8 @@ public class FindIdService {
 		
 		isFindId = memberDAO.isFindId(nickname, email);
 		
+		System.out.println("service : " + isFindId);
+		
 		close(con);
 		
 		return isFindId;
