@@ -75,7 +75,7 @@
 							<tr>
 								<th><label for="board_content">내용</label></th>
 								<td>${noticeArticle.getNotice_content() } <br>
-									<c:if test="${not empty noticeImgFileList ">
+									<c:if test="${not empty noticeImgFileList }">
 										<c:forEach var="noticeImg" items="${noticeImgFileList }">
 											<img src="./Upload/admin_notice_img/${noticeImg.getNotice_img_file_real_name() }"> <br>
 										</c:forEach>
