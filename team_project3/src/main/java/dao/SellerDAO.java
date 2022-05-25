@@ -59,12 +59,12 @@ public class SellerDAO {
 				pstmt.setString(10, seller.getSell_brand());
 				pstmt.setInt(11, 0); //조회수 컬럼
 			
-				sql = "INSERT INTO sell_img VALUES ((SELECT MAX(SELL_NUM) FROM sell),'3',?,?)";
+				sql = "INSERT INTO sell_img VALUES ((SELECT MAX(SELL_NUM) FROM sell),3,?,?)";
 				pstmt2 = con.prepareStatement(sql);
-				pstmt2.setInt(1, seller.getSell_img_num()); 
+//				pstmt2.setInt(1, seller.getSell_img_num()); 
 //				pstmt2.setInt(2, seller.getSell_img_num_detail()); 
-				pstmt2.setString(2, seller.getSell_img_name()); 
-				pstmt2.setString(3, seller.getSell_img_real_name()); 
+				pstmt2.setString(1, seller.getSell_img_name()); 
+				pstmt2.setString(2, seller.getSell_img_real_name()); 
 				        
 				sql = "INSERT INTO sell_list VALUES ((SELECT MAX(SELL_NUM) FROM sell), '판매중', ?, 'ㅎㅇ')";
 				pstmt3 = con.prepareStatement(sql);
@@ -73,7 +73,7 @@ public class SellerDAO {
 				insertCount =pstmt.executeUpdate();
 				insertCount =pstmt2.executeUpdate();
 				insertCount = pstmt3.executeUpdate();
-				System.out.println("SellerDAO - insertArticle()");
+				System.out.println("BoardDAO - insertArticle()1");
 		} catch (SQLException e) {
 			System.out.println("SQL 구문 오류 발생! - insertArticle()");
 			e.printStackTrace();
@@ -120,16 +120,13 @@ public class SellerDAO {
 		return listCount;
 	}
 
-	public ArrayList<SellerDTO> selectArticleList(int pageNum, int listLimit) {
+	public static ArrayList<SellerDTO> selectArticleList(int pageNum, int listLimit) {
 		System.out.println("selectArticleList()ArrayList 객체 가져오기");
 		
 		ArrayList<SellerDTO> articleList = null;
 		
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		
-		System.out.println(pageNum);
-		System.out.println(listLimit);
 
 		
 		// 조회 시작 게시물 번호(행 번호) 계산
@@ -275,7 +272,7 @@ public class SellerDAO {
 		
 		try {
 			String sql = "SELECT a.sell_num, a.sell_size ,  a.sell_title, a.sell_brand, a.sell_price, b.sell_img_name, b.sell_img_real_name "
-                    + "FROM sell AS a JOIN sell_img AS b ON a.sell_num = b.sell_img_real_num  WHERE sell_num != "+sell_num+" AND sell_brand Like '%"+sell_brand+"%' ";
+                    + "FROM sell AS a JOIN sell_img AS b ON a.sell_num = b.sell_img_num  WHERE sell_num != "+sell_num+" AND sell_brand Like '%"+sell_brand+"%' ";
                     
 			pstmt = con.prepareStatement(sql);
 //			pstmt.setString(1, sell_brand);
@@ -355,9 +352,6 @@ public class SellerDAO {
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-			} finally {
-				close(pstmt);
-				close(rs);
 			}
 
 		return memberbean;
