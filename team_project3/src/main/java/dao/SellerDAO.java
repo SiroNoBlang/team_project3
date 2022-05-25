@@ -188,8 +188,8 @@ public class SellerDAO {
 		               article.setSell_readcount(rs.getInt("sell_readcount"));
 		               article.setSell_list_num(rs.getInt("sell_list_num"));
 		               article.setSell_list_item_status(rs.getString("sell_list_item_status"));
-		               article.setSell_img_name(rs.getString("sell_img_name"));
-		               article.setSell_img_real_name(rs.getString("sell_img_real_name"));
+//		               article.setSell_img_name(rs.getString("sell_img_name"));
+//		               article.setSell_img_real_name(rs.getString("sell_img_real_name"));
 		               article.setSell_category(rs.getString("Sell_category"));
 		               article.setSell_category_detail(rs.getString("Sell_category_detail"));
 		               
@@ -237,8 +237,8 @@ public class SellerDAO {
 				article.setSell_brand(rs.getString("sell_brand"));
 				article.setSell_price(rs.getInt("sell_price"));
 				article.setSell_readcount(rs.getInt("sell_readcount"));
-				article.setSell_img_name(rs.getString("sell_img_name"));
-				article.setSell_img_real_name(rs.getString("sell_img_real_name"));
+//				article.setSell_img_name(rs.getString("sell_img_name"));
+//				article.setSell_img_real_name(rs.getString("sell_img_real_name"));
 				article.setSell_list_num(rs.getInt("sell_list_num"));
 				article.setSell_list_item_status(rs.getString("sell_list_item_status"));
 				article.setSell_list_approve_nickname(rs.getString("sell_list_approve_nickname"));
@@ -298,8 +298,8 @@ public class SellerDAO {
 				ProductRe.setSell_title(rs.getString("sell_title"));
 				ProductRe.setSell_brand(rs.getString("sell_brand"));
 				ProductRe.setSell_price(rs.getInt("sell_price"));
-				ProductRe.setSell_img_name(rs.getString("sell_img_name"));
-				ProductRe.setSell_img_real_name(rs.getString("sell_img_real_name"));
+//				ProductRe.setSell_img_name(rs.getString("sell_img_name"));
+//				ProductRe.setSell_img_real_name(rs.getString("sell_img_real_name"));
 				
 				productarr.add(ProductRe);
 			}

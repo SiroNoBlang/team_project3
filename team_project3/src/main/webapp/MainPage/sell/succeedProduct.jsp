@@ -4,73 +4,21 @@
     pageEncoding="UTF-8"%>
 <%	
 
-String member_nickname =(String)session.getAttribute("sNickname");
-String sell_member_code =(String)session.getAttribute("sCode");
-SellerDTO sellerDTO = (SellerDTO)request.getAttribute("sellerDTO");
-MemberBean memberbean = (MemberBean)request.getAttribute("memberBean");
-int charge = sellerDTO.getSell_price() /10; //검수비 판매가격 /10
-int price = sellerDTO.getSell_price()+charge+3000;     //최종 판매가격
-// int point1 = memberbean.getMember_info_detail_point();
+// String member_nickname =(String)session.getAttribute("sNickname");
+// String sell_member_code =(String)session.getAttribute("sCode");
+// SellerDTO sellerDTO = (SellerDTO)request.getAttribute("sellerDTO");
+// MemberBean memberbean = (MemberBean)request.getAttribute("memberBean");
+// int charge = sellerDTO.getSell_price() /10; //검수비 판매가격 /10
+// int price = sellerDTO.getSell_price()+charge+3000;     //최종 판매가격
+// // int point1 = memberbean.getMember_info_detail_point();
 %>
     
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>Shoping Cart</title>
-<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-	<script type="text/javascript">
-	function AddressDaumPostcode() {			//----도로명주소-----
-        new daum.Postcode({
-            oncomplete: function(data) {	
-                // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+	<title>succeedProduct</title>
 
-                // 각 주소의 노출 규칙에 따라 주소를 조합한다.
-                // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
-                var addr = ''; // 주소 변수
-                var extraAddr = ''; // 참고항목 변수
-
-                //사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
-                if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
-                    addr = data.roadAddress;
-                } else { // 사용자가 지번 주소를 선택했을 경우(J)
-                    addr = data.jibunAddress;
-                }
-
-                // 사용자가 선택한 주소가 도로명 타입일때 참고항목을 조합한다.
-                if(data.userSelectedType === 'R'){
-                    // 법정동명이 있을 경우 추가한다. (법정리는 제외)
-                    // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
-                    if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
-                        extraAddr += data.bname;
-                    }
-                    // 건물명이 있고, 공동주택일 경우 추가한다.
-                    if(data.buildingName !== '' && data.apartment === 'Y'){
-                        extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
-                    }
-                    // 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
-//                     if(extraAddr !== ''){
-//                         extraAddr = ' (' + extraAddr + ')';
-//                     }
-//                     // 조합된 참고항목을 해당 필드에 넣는다.
-//                     document.getElementById("sample6_extraAddress").value = extraAddr;
-                
-//                 } else {
-//                     document.getElementById("sample6_extraAddress").value = '';
-//                 }
-
-                // 우편번호와 주소 정보를 해당 필드에 넣는다.
-                document.getElementById("postcode").value = data.zonecode;
-                document.getElementById("address1").value = addr;
-                // 커서를 상세주소 필드로 이동한다.
-                document.getElementById("address2").focus();
-            }}
-        }).open();
-    }
     
-    
-    
-</script>
-
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 <!--===============================================================================================-->	
@@ -405,201 +353,7 @@ int price = sellerDTO.getSell_price()+charge+3000;     //최종 판매가격
 	</div>
 		
 
-	<!-- Shoping Cart -->
-	<form action="SucceedProduct.pr" class="bg0 p-t-75 p-b-85">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-10 col-xl-7 m-lr-auto m-b-50">
-					
-					<div class="m-l-25 m-r--38 m-lr-0-xl">
-						<div class="wrap-table-shopping-cart">
-							<h4 style="color: lightgrey;">상품 정보</h4>
-							<table class="table-shopping-cart">
-								<tr>
-									
-										<td><img width="200" height="288" src="./Upload/sell_img/<%=sellerDTO.getSell_img_real_name() %>" alt="IMG"></td>
-										
-										
-							
-										<td><%=sellerDTO.getSell_title() %><br>
-										<%=sellerDTO.getSell_size() %><br>
-										₩ <%=sellerDTO.getSell_price() %></td>
-							
-								</tr>
-								
-							</table>
-						</div>
-							<div class="wrap-table-shopping-cart">
-								<table class="table-shopping-cart">
-								<tr style=" border:none;">
-									<td>
-										<h4 style="color: lightgrey;">배송 정보</h4>	
-									</td>
-									<td colspan="2"></td><td></td>
-									<td>
-										<input type="button" onclick="AddressDaumPostcode()" 
-										value="+새 배송지 추가" style="border: none; background: transparent; color: lightgrey;">
-									</td>
-																
-								</tr>
-								<tr style=" border:none;">
-							 		 <td  colspan="2">	
-									  	<input type="text"   name="address1" id="address1"  placeholder="주소" > 	
-									 </td>	
-									 <td></td> 	
-									  <td >		
-									  	<input type="text"  name="postcode" id="postcode"  readonly="readonly"  placeholder="우편번호" >
-							  		</td> 											
-								</tr>
-								<tr style=" border:none;">
-									<td>
-										<input type="text"   name="address2" id="address2" placeholder="상세주소" >
-									</td>
-								</tr>				
-								<tr style=" border:none;">
-									<td>
-										<input type="text" name="name"  placeholder="받는분">
-									</td>
-								</tr>				
-								<tr style=" border:none;">
-									<td>
-										<input type="text" name="phone"  placeholder="전화번호(-제외)">	
-									</td>
-								</tr>
-									
-								
-								</table >
-									
-								
-									<table  class="table-shopping-cart">
-									<tr >
-									<td>
-										<div><h4>배송 방법</h4></div>
-										<img src="./Upload/sell_img/1.jpg" width="75" height="80">
-										
-									</td>
-									<td>
-									<p>일반배송(배송비) 3000원 배송 후 5-7일 도착예정</p>
-									</td>
-									</tr>											  			
-	     
-								</table>
-						</div>
-							
-						<div class="flex-w flex-sb-m bor15 p-t-18 p-b-15 p-lr-40 p-lr-15-sm">
-							<div class="flex-w flex-m m-r-20 m-tb-5">
-								Point:<input class="stext-104 cl2 plh4 size-117 bor13 p-lr-20 m-r-10 m-tb-5" type="text" name="name" id="MemberPoint" value="<%=memberbean.getMember_info_detail_point() %>">
-								<span id="realPoint"></span>
-								<div>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</div>	
-								<input class="flex-c-m stext-101 cl2 size-118 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer m-tb-5" type="button" value="사용하기"  onclick="sub()"><br>
-								<p style="color: lightgrey;">*1000원 단위로 사용가능	</p>						
-							</div>
-						</div>
-					</div>
-				
-				</div>
-
-				<div class="col-sm-10 col-lg-7 col-xl-5 m-lr-auto m-b-50">
-					<div class="bor10 p-lr-40 p-t-30 p-b-40 m-l-63 m-r-40 m-lr-0-xl p-lr-15-sm">
-						<h4 class="mtext-109 cl2 p-b-30">
-							주문 정보
-						</h4>
-
-						<div class="flex-w flex-t bor12 p-b-13">
-							<div class="size-208">
-								<span class="stext-110 cl2">
-									제품 가격
-								</span>
-							</div>
-
-							<div class="size-209">
-								<span class="mtext-110 cl2">
-									₩<%=sellerDTO.getSell_price() %>
-								</span>
-							</div>
-						</div>
-
-						<div class="flex-w flex-t bor12 p-t-15 p-b-30">
-							<div class="size-208 w-full-ssm">
-								<span class="stext-110 cl2">
-									배송비  -3000
-								</span><br>
-								
-								<span class="stext-110 cl2">
-									검수비 - free
-								</span><br>
-								
-								<span class="stext-110 cl2">
-									수수료 - <%=charge %>
-								</span><br> 
-								
-								<span class="stext-110 cl2">
-									포인트 -<input type="text" id="point" style="border: none; background: transparent; "readonly="readonly">
-								</span><br>
-						   </div>
-							
-							
-							<div class="size-209 p-r-18 p-r-0-sm w-full-ssm">
-								<p class="stext-111 cl6 p-t-2">
-									
-								</p>
-								
-							
-								<div class="p-t-15">
-									<span class="stext-112 cl8">
-										
-									</span>
-
-<!-- 									<div class="rs1-select2 rs2-select2 bor8 bg0 m-b-12 m-t-9"> -->
-<!-- 										<select class="js-select2" name="time"> -->
-<!-- 											<option>Select a country...</option> -->
-<!-- 											<option>USA</option> -->
-<!-- 											<option>UK</option> -->
-<!-- 										</select> -->
-<!-- 										<div class="dropDownSelect2"></div> -->
-<!-- 									</div> -->
-
-<!-- 									<div class="bor8 bg0 m-b-12"> -->
-<!-- 										<input class="stext-111 cl8 plh3 size-111 p-lr-15" type="text" name="state" placeholder="State /  country"> -->
-<!-- 									</div> -->
-
-<!-- 									<div class="bor8 bg0 m-b-22"> -->
-<!-- 										<input class="stext-111 cl8 plh3 size-111 p-lr-15" type="text" name="postcode" placeholder="Postcode / Zip"> -->
-<!-- 									</div> -->
-									
-<!-- 									<div class="flex-w"> -->
-<!-- 										<div class="flex-c-m stext-101 cl2 size-115 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer"> -->
-<!-- 											Update Totals -->
-<!-- 										</div> -->
-<!-- 									</div> -->
-										
-								</div>
-							</div>
-						</div>
-
-
-
-
-						<div class="flex-w flex-t p-t-27 p-b-33">
-							<div class="size-208">
-								<span class="mtext-101 cl2">
-									최종 금액
-								</span>
-							</div>
-
-							<div class="size-209 p-t-1">
-								<span class="mtext-110 cl2">
-									₩  <%=price %>
-								</span>
-							</div>
-						</div>
-					  <input type="submit" value="신용카드결제" class="flex-c-m stext-101 cl0 size-116 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer">
-					</div>
-				</div>
-			</div>
-		</div>
-	</form>
-		
+	
 	
 		
 
