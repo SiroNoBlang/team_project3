@@ -131,7 +131,16 @@
 								                    	${confirm.getSell_title() } </a>
 								                    </td>
 							                    <td>${confirm.getSell_write_date() } </td>
-							                    <td>${confirm.getSell_list_approve_date() } </td>
+							                    <td>
+							                    <c:choose>  
+													<c:when test="${empty confirm.getSell_list_approve_date() }"> 
+														미승인
+													</c:when> 
+													<c:otherwise>
+															${confirm.getSell_list_approve_date() } 
+													</c:otherwise> 
+												</c:choose> 
+							                    </td>
 							                    <td>${confirm.getSell_list_item_status() } </td>
 							                </tr>
 							               </c:forEach>
