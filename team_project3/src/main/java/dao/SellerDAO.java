@@ -9,7 +9,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import db.JdbcUtil.*;
 import vo.MemberBean;
+import vo.NoticeImgFileBean;
 import vo.SellerDTO;
+import vo.SellerimgDTO;
 
 import static db.JdbcUtil.*;
 
@@ -29,13 +31,15 @@ public class SellerDAO {
 		this.con = con;
 	}
 
-	public  int insertArticle(SellerDTO seller) {  //판매글 작성
-		
-		
-		
+	public  int insertArticle(SellerDTO seller, ArrayList<SellerimgDTO> sellimglist) {  //판매글 작성
+		System.out.println("====================");
+		System.out.println(seller);
+		System.out.println("====================");
+		System.out.println(sellimglist);
 		// INSERT 작업 결과를 리턴받아 저장할 변수 선언
 		int insertCount = 0;
 		int num =0;
+//		int img_num=0;
 		
 		PreparedStatement pstmt= null;
 		PreparedStatement pstmt2 = null;
@@ -58,14 +62,23 @@ public class SellerDAO {
 				pstmt.setString(9, seller.getSell_size());
 				pstmt.setString(10, seller.getSell_brand());
 				pstmt.setInt(11, 0); //조회수 컬럼
-			
-				sql = "INSERT INTO sell_img VALUES ((SELECT MAX(SELL_NUM) FROM sell),3,?,?)";
-				pstmt2 = con.prepareStatement(sql);
-//				pstmt2.setInt(1, seller.getSell_img_num()); 
-//				pstmt2.setInt(2, seller.getSell_img_num_detail()); 
-				pstmt2.setString(1, seller.getSell_img_name()); 
-				pstmt2.setString(2, seller.getSell_img_real_name()); 
+
+				
+				for(SellerimgDTO sellimg: sellimglist) {
+					sql = "INSERT INTO sell_img VALUES ((SELECT MAX(sell_num) FROM sell),5,?,?)";
+					pstmt2 = con.prepareStatement(sql); 
+//					img_num++;
+//					pstmt.setInt(1, img_num);
+					pstmt2.setString(1,sellimg.getSell_img_name()); 
+					pstmt2.setString(2,sellimg.getSell_img_real_name());
+					
+					
+					pstmt2.executeUpdate();
+				} 
+				
+
 				        
+
 				sql = "INSERT INTO sell_list VALUES ((SELECT MAX(SELL_NUM) FROM sell), '판매중', ?, 'ㅎㅇ')";
 				pstmt3 = con.prepareStatement(sql);
 				pstmt3.setString(1, seller.getSell_list_approve_date());
@@ -355,5 +368,10 @@ public class SellerDAO {
 			}
 
 		return memberbean;
+	}
+
+	public ArrayList<SellerDTO> imgArticleList(String sell_img_name, String sell_img_real_name) {
+		
+		return null;
 	}
 }

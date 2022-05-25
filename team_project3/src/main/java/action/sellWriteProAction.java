@@ -2,6 +2,8 @@ package action;
 
 import java.io.PrintWriter;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Enumeration;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
@@ -12,9 +14,14 @@ import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 import svc.SellerWriteProService;
 import vo.ActionForward;
+import vo.EventImgFileBean;
+import vo.NoticeImgFileBean;
 import vo.SellerDTO;
+import vo.SellerimgDTO;
 
 public class sellWriteProAction implements Action {
+
+	
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -51,9 +58,12 @@ public class sellWriteProAction implements Action {
 						fileSize, // 3) 업로드 파일 크기(10MB 제한)
 						"UTF-8", // 4) 한글 파일명에 대한 인코딩 방식 
 						new DefaultFileRenamePolicy()); // 5) 중복 파일명에 대한 이름 변경 처리를 담당하는 객체
+			  	
+			  	
 
 				SellerDTO seller= new SellerDTO();
 				String sell_member_code = request.getParameter("sell_member_code");
+			
 				seller.setSell_member_code(sell_member_code);
 				seller.setSell_content(multi.getParameter("sell_content"));
 			    seller.setSell_title(multi.getParameter("sell_title"));
@@ -66,29 +76,28 @@ public class sellWriteProAction implements Action {
 				seller.setSell_category_detail(multi.getParameter("sell_category_detail"));
 				seller.setSell_list_item_status("판매중");  //글작업수행 후 검수중으로 바꿔줘야됨. 현재 관리자페이지 관여없어서 강제 판매중.
 				
+				ArrayList<SellerimgDTO> sellimglist = new ArrayList<SellerimgDTO>();
 	
-	
-				String fileElement = multi.getFileNames().nextElement().toString();
-				System.out.println("fileElement"+fileElement);
-
-			
-			
-				String sell_img_name = multi.getOriginalFileName(fileElement); 
-				String sell_img_real_name = multi.getFilesystemName(fileElement);
+				Enumeration fileElements = multi.getFileNames();
 				
-				//2.sell_sub_image_name / sell_real_sub_image_name
-				
-				//String sell_sub_image_name = multi.getOriginalFileName(fileElement); 
-				//3.sell_just_image_name /sell_real_just_image_name  //현재 다중파일 넘기기 불가   -->파일 한개만 넘기고 작업 수행 합니다.
-				//System.out.println("원본 파일명 : " + seller_file + ", 실제 파일명 : " + seller_real_file);
-	
-				seller.setSell_img_name(sell_img_name);
-				seller.setSell_img_real_name(sell_img_real_name);
-				//System.out.println(seller);
+				while(fileElements.hasMoreElements()) {
+					String fileElement = (String)fileElements.nextElement();
+					String sell_img_name = multi.getOriginalFileName(fileElement);
+					String sell_img_real_name = multi.getFilesystemName(fileElement);
+						
+					SellerimgDTO sellimg = new SellerimgDTO();
+					sellimg.setSell_img_name(sell_img_name);
+					sellimg.setSell_img_real_name(sell_img_real_name);
+					
+					sellimglist.add(sellimg);
+					
+					
+				}
 				
 				
 				SellerWriteProService service = new SellerWriteProService();
-				boolean isWriteSuccess = service.registArticle(seller);
+				boolean isWriteSuccess = service.registArticle(seller,sellimglist);
+//				ArrayList<SellerDTO> SellimgList1 = service.imgArticle(sell_img_name,sell_img_real_name);
 				
 				if(!isWriteSuccess) {
 					response.setContentType("text/html; charset=UTF-8");

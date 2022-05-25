@@ -6,13 +6,15 @@ import static db.JdbcUtil.getConnection;
 import static db.JdbcUtil.rollback;
 
 import java.sql.Connection;
+import java.util.ArrayList;
 
 import dao.SellerDAO;
 import vo.SellerDTO;
+import vo.SellerimgDTO;
 
 public class SellerWriteProService {
 
-	public boolean registArticle(SellerDTO seller) {
+	public boolean registArticle(SellerDTO seller, ArrayList<SellerimgDTO> sellimglist) {
 System.out.println("SellerWriteProService - registArticle()");
 		
 		// 1. 글쓰기 작업 요청 처리 결과를 판별하여 저장할 boolean 타입 변수 선언
@@ -33,7 +35,7 @@ System.out.println("SellerWriteProService - registArticle()");
 		// 5. BoardDAO 객체의 XXX 메서드를 호출하여 요청받은 XXX 작업 수행 및 결과 리턴받기
 		// BoardDAO 객체의 insertArticle() 메서드를 호출하여 글쓰기 작업 수행 후 결과값 리턴받기
 		// => 파라미터 : BoardDTO 객체(board)   리턴타입 : int(insertCount)
-		int insertCount = sellerDAO.insertArticle(seller);
+		int insertCount = sellerDAO.insertArticle(seller,sellimglist);
 		
 		// 6. 리턴받은 작업 수행 결과를 통해 판별 후 처리 작업 수행(트랜잭션 처리)
 		if(insertCount > 0) { // 작업 성공 시
@@ -52,6 +54,32 @@ System.out.println("SellerWriteProService - registArticle()");
 		close(con);
 		
 		return isWriteSuccess;
+	}
+
+	public ArrayList<SellerDTO> imgArticle(String sell_img_name, String sell_img_real_name) {
+			System.out.println("SellerWriteProService - imgArticle()");
+		
+		// 1. 리턴할 데이터를 저장할 변수 선언
+		ArrayList<SellerDTO> imgArticle = null;
+		
+		// 2. JdbcUtil 클래스로부터 Connection Pool 에 저장된 Connection 객체 가져오기 - 공통
+		Connection con = getConnection(); // static import 적용되어 있을 경우
+		
+		// 3. BoardDAO 클래스로부터 BoardDAO 인스턴스 가져오기 - 공통
+		SellerDAO sellerDAO = SellerDAO.getInstance();
+		
+		// 4. BoardDAO 객체에 Connection 객체 전달하기 - 공통
+		sellerDAO.setConnection(con);
+		
+		// 5. BoardDAO 객체의 selectArticleList() 메서드를 호출하여 게시물 목록 조회
+		// => 파라미터 : pageNum, listLimit    리턴타입 : ArrayList<BoardDTO>
+		imgArticle = sellerDAO.imgArticleList(sell_img_name, sell_img_real_name);
+		
+		// 6. JdbcUtil 클래스로부터 가져온 Connection 객체를 반환 - 공통
+		close(con);
+		
+		// 7. 조회 결과 리턴
+		return imgArticle;
 	}
 
 }
