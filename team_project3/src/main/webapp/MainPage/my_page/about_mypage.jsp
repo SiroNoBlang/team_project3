@@ -1,6 +1,8 @@
+<%@page import="java.io.File"%>
 <%@page import="vo.MemberBean"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <%
 String code = (String)session.getAttribute("sCode");
 String nickname = (String)session.getAttribute("sNickname");
@@ -58,7 +60,7 @@ MemberBean member = (MemberBean)request.getAttribute("memberDetail");
 	}
 
 	
-	function onPassModify() {
+	function onPassModify() { //비밀번호 수정하기 기능 활성화
 		var con = document.getElementById("member_passwd");
 		if(con.style.display =='none') {
 			con.style.display = 'block';
@@ -66,6 +68,22 @@ MemberBean member = (MemberBean)request.getAttribute("memberDetail");
 			con.style.display = 'none';
 		}
 	}
+	
+	function changeImg(obj) {
+		 let reader = new FileReader();
+		    if(!obj.files.length) {
+		        return;
+		    }
+		    for(let i=0;i<obj.files.length;i++){
+		    reader.readAsDataURL(obj.files[i]);
+		    reader.onload = function (e) {
+		        let img = $('<img  width=418,height=517 />');
+		        $(img).attr('src', e.target.result);
+		        $('#previewDiv').append(img);
+		    }
+			}
+	}
+	
 	
 </script>
 	
@@ -114,8 +132,8 @@ MemberBean member = (MemberBean)request.getAttribute("memberDetail");
 							Help & FAQs
 						</a>
 
-						<a href="Mypage.ma?member_code=<%=code %>"   class="flex-c-m trans-04 p-lr-25">
-							<%=nickname %>님 마이페이지
+						<a href="Mypage.ma?member_code=${memberDetail.member_code }"   class="flex-c-m trans-04 p-lr-25">
+							${memberDetail.member_nickname }님 마이페이지
 						</a>
 						<a href="javascript:void(0)" onclick="confirmLogout()" class="flex-c-m trans-04 p-lr-25">
 							로그아웃
@@ -409,12 +427,16 @@ MemberBean member = (MemberBean)request.getAttribute("memberDetail");
 			<form action="ProfileImgUpdate.ma" method="post" enctype="multipart/form-data">
 			<table border="1">
 				<tr> 
-					<td><input type="hidden" name="member_code" id="member_code" value="<%=member.getMember_code() %>"></td>
+					<td><input type="hidden" name="member_code" id="member_code" value="${memberDetail.member_code }"></td>
 				</tr>
 				<tr>
-<%-- 						<td colspan="2" width="300" height="300"><img id="image_section" alt="" src="Upload/mypage_img/<%=member.getMember_info_mypage_img_name()%>"><br> --%>
-				<td colspan="2" width="300" height="300"><img id="image_section" alt="" src="Upload/mypage_img/<%=member.getMember_info_mypage_real_img_name()%>"><br>
-				<td><input type="file" id="member_info_mypage_img_name" name="member_info_mypage_img_name" value=""></td>
+				<input type="file" id="member_info_mypage_img_name" name="member_info_mypage_img_name" value="" onchange="changeImg(this)">
+<%-- 				<%if() { %> --%>
+				<div id="previewDiv" ></div>
+				
+<%-- 				<%}else{ %> --%>
+				<img id="image_section" alt="" width="300" height="300" src="Upload/mypage_img/${memberDetail.member_info_mypage_real_img_name }">
+<%-- 				<%} %> --%>
 				</tr>
 				</table>
 				<button type="submit">수정</button>
@@ -424,31 +446,31 @@ MemberBean member = (MemberBean)request.getAttribute("memberDetail");
 			<table border="1">
 			<tr> 
 				<th>회원 등급</th>
-				<td><input type="text" name="grade_name" id="grade_name" value="<%=member.getGrade_name() %>" readonly="readonly"></td>
+				<td><input type="text" name="grade_name" id="grade_name" value="${memberDetail.grade_name }" readonly="readonly"></td>
 			</tr>
 			<tr> 
 				<th>멤버코드(사라질예정)</th>
-				<td><input type="text" name="member_code" id="member_code" value="<%=member.getMember_code() %>" readonly="readonly"></td>
+				<td><input type="text" name="member_code" id="member_code" value="${memberDetail.member_code }" readonly="readonly"></td>
 			</tr>
 			<tr> 
 				<th>닉네임</th>
-				<td><input type="text" name="member_nickname" id="member_nickname" value="<%=nickname %>" readonly="readonly"></td>
+				<td><input type="text" name="member_nickname" id="member_nickname" value="${memberDetail.member_nickname }" readonly="readonly"></td>
 			</tr>
 			<tr> 
 				<th>아이디</th>
-				<td><input type="text" name="member_id" id="member_id" value="<%=member.getMember_id() %>" readonly="readonly"></td>
+				<td><input type="text" name="member_id" id="member_id" value="${memberDetail.member_id }" readonly="readonly"></td>
 			</tr>
 			<tr> 
 				<th>패스워드</th>
 				<td>
 					<a href="javascript:onPassModify();">패스워드 수정하기</a>
-					<input type="password" name="member_passwd" id="member_passwd" value="<%=member.getMember_passwd() %>" style="display: none;">
+					<input type="password" name="member_passwd" id="member_passwd" value="${memberDetail.member_passwd }" style="display: none;">
 <!-- 					<input type="button" value="패스워드 수정" onclick="onPassModify()"> -->
 				</td>
 			</tr>
 			<tr> 
 				<th>이메일1</th>
-				<td><input type="text" name="member_email1" id="member_email1" value="<%=member.getMember_email() %>"></td>
+				<td><input type="text" name="member_email1" id="member_email1" value="${memberDetail.member_email }"></td>
 			</tr>
 			<tr> 
 				<th>이메일2 나중에 잘라서 수정예정</th>
@@ -475,7 +497,7 @@ MemberBean member = (MemberBean)request.getAttribute("memberDetail");
 			</tr>
 			<tr> 
 				<th>이름</th>
-				<td><input type="text" name="member_info_name" id="member_info_name" value="<%=member.getMember_info_name() %>" ></td>
+				<td><input type="text" name="member_info_name" id="member_info_name" value="${memberDetail.member_info_name }" ></td>
 			</tr>
 			<tr> 
 				<th>성별</th>
@@ -486,7 +508,7 @@ MemberBean member = (MemberBean)request.getAttribute("memberDetail");
 			</tr>
 			<tr> 
 				<th>전화번호</th>
-				<td><input type="text" name="member_info_phone" id="member_info_phone" value="<%=member.getMember_info_phone() %>" ></td>
+				<td><input type="text" name="member_info_phone" id="member_info_phone" value="${memberDetail.member_info_phone }" ></td>
 			</tr>
 			<tr> 
 				<th>나이대</th>
@@ -502,43 +524,43 @@ MemberBean member = (MemberBean)request.getAttribute("memberDetail");
 			</tr>
 			<tr> 
 				<th>가입날짜</th>
-				<td><input type="text" name="member_service_log_join_date" id="member_service_log_join_date" value="<%=member.getMember_service_log_join_date() %>" readonly="readonly"></td>
+				<td><input type="text" name="member_service_log_join_date" id="member_service_log_join_date" value="${memberDetail.member_service_log_join_date }" readonly="readonly"></td>
 			</tr>
 			<tr> 
 				<th>패스워드 수정날짜</th>
-				<td><input type="text" name="member_service_log_passwd_change_date" id="member_service_log_passwd_change_date" value="<%=member.getMember_service_log_passwd_change_date() %>" readonly="readonly"></td>
+				<td><input type="text" name="member_service_log_passwd_change_date" id="member_service_log_passwd_change_date" value="${memberDetail.member_service_log_passwd_change_date }" readonly="readonly"></td>
 			</tr>
 			<tr> 
 				<th>우편번호</th>
-				<td><input type="text" name="member_info_post_code" id="member_info_post_code" value="<%=member.getMember_info_post_code() %>" readonly="readonly">
+				<td><input type="text" name="member_info_post_code" id="member_info_post_code" value="${memberDetail.member_info_post_code }" readonly="readonly">
 					<input type="button" onclick="findAddr()" value="우편번호 찾기">
 				</td>
 			</tr>
 			<tr> 
 				<th>주소</th>
-				<td><input type="text" name="member_info_address" id="member_info_address" value="<%=member.getMember_info_address() %>" readonly="readonly"></td>
+				<td><input type="text" name="member_info_address" id="member_info_address" value="${memberDetail.member_info_address }" readonly="readonly"></td>
 			</tr>
 			<tr> 
 				<th>상세주소</th>
-				<td><input type="text" name="member_info_address_detail" id="member_info_address_detail" value="<%=member.getMember_info_address_detail() %>" ></td>
+				<td><input type="text" name="member_info_address_detail" id="member_info_address_detail" value="${memberDetail.member_info_address_detail }" ></td>
 			</tr>
 			<tr> 
 				<th>배송지우편번호</th>
-				<td><input type="text" name="member_info_ship_post_code" id="member_info_ship_post_code" value="<%=member.getMember_info_ship_post_code() %>" readonly="readonly">
+				<td><input type="text" name="member_info_ship_post_code" id="member_info_ship_post_code" value="${memberDetail.member_info_ship_post_code }" readonly="readonly">
 					<input type="button" onclick="findAddr1()" value="우편번호 찾기">
 				</td>
 			</tr>
 			<tr> 
 				<th>배송지주소</th>
-				<td><input type="text" name="member_info_ship_address" id="member_info_ship_address" value="<%=member.getMember_info_ship_address() %>" readonly="readonly"></td>
+				<td><input type="text" name="member_info_ship_address" id="member_info_ship_address" value="${memberDetail.member_info_ship_address }" readonly="readonly"></td>
 			</tr>
 			<tr> 
 				<th>배송지상세주소</th>
-				<td><input type="text" name="member_info_ship_address_detail" id="member_info_ship_address_detail" value="<%=member.getMember_info_ship_address_detail() %>" ></td>
+				<td><input type="text" name="member_info_ship_address_detail" id="member_info_ship_address_detail" value="${memberDetail.member_info_ship_address_detail }" ></td>
 			</tr>
 			<tr> 
 				<th>누적금액</th>
-				<td><input type="text" name="member_info_detail_acc_money" id="member_info_detail_acc_money" value="<%=member.getMember_info_detail_acc_money() %>" readonly="readonly"></td>
+				<td><input type="text" name="member_info_detail_acc_money" id="member_info_detail_acc_money" value="${memberDetail.member_info_detail_acc_money }" readonly="readonly"></td>
 			</tr>
 			<tr> 
 				<th>스타일</th>
@@ -563,27 +585,27 @@ MemberBean member = (MemberBean)request.getAttribute("memberDetail");
 			</tr>
 			<tr> 
 				<th>누적 포인트</th>
-				<td><input type="text" name="member_info_detail_point"  id="member_info_detail_point" value="<%=member.getMember_info_detail_point() %>"  readonly="readonly"></td>
+				<td><input type="text" name="member_info_detail_point"  id="member_info_detail_point" value="${memberDetail.member_info_detail_point }"  readonly="readonly"></td>
 			</tr>
 			<tr> 
 				<th>회원 상태(정상,정지,탈퇴)</th>
-				<td><input type="text" name="member_service_log_status"  id="member_service_log_status" value="<%=member.getMember_service_log_status() %>"  readonly="readonly"></td>
+				<td><input type="text" name="member_service_log_status"  id="member_service_log_status" value="${memberDetail.member_service_log_status }"  readonly="readonly"></td>
 			</tr>
 			<tr> 
 				<th>회원가입 날짜</th>
-				<td><input type="text" name="member_service_log_join_date"  id="member_service_log_join_date" value="<%=member.getMember_service_log_join_date() %>"  readonly="readonly"></td>
+				<td><input type="text" name="member_service_log_join_date"  id="member_service_log_join_date" value="${memberDetail.member_service_log_join_date }"  readonly="readonly"></td>
 			</tr>
 			<tr> 
 				<th>비밀번호변경 날짜</th>
-				<td><input type="text" name="member_service_log_passwd_change_date"  id="member_service_log_passwd_change_date" value="<%=member.getMember_service_log_passwd_change_date() %>"  readonly="readonly"></td>
+				<td><input type="text" name="member_service_log_passwd_change_date"  id="member_service_log_passwd_change_date" value="${memberDetail.member_service_log_passwd_change_date }"  readonly="readonly"></td>
 			</tr>
 			<tr> 
 				<th>로그인 날짜</th>
-				<td><input type="text" name="member_service_log_login_date"  id="member_service_log_login_date" value="<%=member.getMember_service_log_login_date() %>"  readonly="readonly"></td>
+				<td><input type="text" name="member_service_log_login_date"  id="member_service_log_login_date" value="${memberDetail.member_service_log_login_date }"  readonly="readonly"></td>
 			</tr>
 			<tr> 
 				<th>구매횟수</th>
-				<td><input type="text" name="member_service_log_order_count"  id="member_service_log_order_count" value="<%=member.getMember_service_log_order_count() %>"  readonly="readonly"></td>
+				<td><input type="text" name="member_service_log_order_count"  id="member_service_log_order_count" value="${memberDetail.member_service_log_order_count }"  readonly="readonly"></td>
 			</tr>
 			<tr> 
 				<td colspan="2">
