@@ -32,6 +32,7 @@ import action.MpQnaWriteProAction;
 import action.MyPageAction;
 import action.MyPageImgUpdateAction;
 import action.MyPageUpdateAction;
+import action.SendEmailAction;
 import vo.ActionForward;
 
 @WebServlet("*.ma")
@@ -198,6 +199,13 @@ public class Main extends HttpServlet {
 			}
 		} else if(command.equals("/FindPasswd.ma")) { // 비밀번호 찾기
 			action = new FindPasswdAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				
+			}
+		}else if(command.equals("/SendEmail.ma")) { // 회원가입시 인증 이메일 보내기
+			action = new SendEmailAction();
 			try {
 				forward = action.execute(request, response);
 			} catch (Exception e) {

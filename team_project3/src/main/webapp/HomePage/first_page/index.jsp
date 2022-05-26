@@ -11,7 +11,7 @@
 <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 <script src="HomePage/assets/js/jquery-3.6.0.js"></script>
 <script type="text/javascript">
-
+	var checkNickname = false, checkId = false;
 
 // let isCheckConfirmPasswd = false, passSafe = false, isCheckEmail = false;;
 
@@ -200,18 +200,11 @@
 		}
 	}
 	
-// 	function FindIdPass(){
-// 		window.open{"find_id.jsp", }
-// 	}
-	
+
 	function checkForm(){
-		if(!checkId){
+		 if(!checkId){
 			alert("아이디 확인 필수!");
 			document.fr.join_member_id.focus();
-			return false;
-		} else if(!checkNickname){
-			alert("닉네임 확인 필수!");
-			document.fr.join_member_nickname.focus();
 			return false;
 		} else if(!passSafe){
 			alert("패스워드 조건 확인 필수!");
@@ -258,6 +251,16 @@
 			$('#findIdResultArea').empty();
 			$('#idFind_login').hide();
 			$('#idFind').show();
+		});
+	});
+	
+	
+	$(function(){
+		$("#member_email2").on("change", function(){
+			var email1 = fr.member_email1.value;
+			var email2 = fr.member_email2.value;
+			
+			location.href="/team_project3/HomePage/first_page/mail_pro.jsp?email="+email1 + email2;
 		});
 	});
 	
@@ -754,7 +757,8 @@
 						</div>
 						<div class="field half">
 							<label>도메인</label> 
-							<select id="member_email2" name="member_email2">
+							<select id="member_email2" name="member_email2" >
+								<option value="">선택하세요</option>
 								<option value="@gmail.com">gmail.com</option>
 								<option value="@naver.com">naver.com</option>
 								<option value="@nate.net">nate.net</option>
@@ -762,6 +766,7 @@
 								<option value="@daum.net">daum.net</option>
 								<option value="@yahoo.com">yahoo.com</option>
 							</select> 
+							<input type="text" id="checkEmail" placeholder="인증번호 입력"> <span id="emailCheck"></span>
 						</div>
 						<div class="field half">
 							<label for="member_info_gender">성별</label> 

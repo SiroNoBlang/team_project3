@@ -1,3 +1,5 @@
+<%@page import="dao.MemberDAO"%>
+<%@page import="org.apache.ibatis.reflection.SystemMetaObject"%>
 <%@page import="googleSMTPAuthenticator.GenerateAuthenticationCode"%>
 <%@page import="googleSMTPAuthenticator.GoogleSMTPAuthenticator"%>
 <%@page import="javax.mail.Transport"%>
@@ -27,8 +29,8 @@ if(request.getParameter("find_passwd_member_id") != null ){
 	receiver = request.getParameter("find_passwd_member_email");
 	title = request.getParameter("find_passwd_member_id") + "님의 임시 비밀번호입니다.";
 } else {
-	content = "<h3>인증하려면 아래 링크를 클릭하세요 </h3><a href='http://localhost:8080/StudyJSP/jsp11_board/member/member_authentication.jsp?code="+code+"'>인증하기</a>";
-	receiver = request.getParameter("member_email1") + request.getParameter("member_email2");
+	content = "<h3>인증하려면 아래 링크를 클릭하세요 </h3><a href='http://localhost:8080/team_project3/HomePage/first_page/mail_pro.jsp?code="+code+"'>인증하기</a>";
+	receiver = request.getParameter("email");
 	title = "본인인증입니다.";
 }
 
@@ -94,6 +96,12 @@ try{
 	// javax.mail.Transport 클래스의 static 메서드 send() 메서드 호출
 	Transport.send(mailMessage);
 	out.println("<h3>메일이 정상적으로 전송되었습니다!</h3>");
+	
+	//==========================================================================
+	if(request.getParameter("email") != null){		
+		MemberDAO memberDAO = MemberDAO.getInstance();
+		memberDAO.insertAuthInfo(request.getParameter("email"),code);
+	}
 }catch(Exception e){
 	e.printStackTrace();
 	out.println("<h3>SMTP 서버 설정 또는 서비스 문제 발생!</h3>");
