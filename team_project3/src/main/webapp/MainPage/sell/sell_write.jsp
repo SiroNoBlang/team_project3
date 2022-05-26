@@ -452,6 +452,8 @@ function readURL(obj) {   //사진 5장 뿌리기
 									<div class="wrap-pic-w pos-relative">
 										 
 										 <input type="file" id="imgInput" name="sell_img_name1" onchange="readURL(this)">
+										 <input type="file" id="imgInput" name="sell_img_name2" onchange="readURL(this)">
+										 <input type="file" id="imgInput" name="sell_img_name3" onchange="readURL(this)">
 										
 										
 

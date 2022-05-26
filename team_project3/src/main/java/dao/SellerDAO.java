@@ -131,7 +131,7 @@ public class SellerDAO {
 		return listCount;
 	}
 
-	public static ArrayList<SellerProductDTO> selectArticleList(int pageNum, int listLimit) {
+	public ArrayList<SellerProductDTO> selectArticleList(int pageNum, int listLimit) {
 		System.out.println("selectArticleList()ArrayList 객체 가져오기");
 
 		ArrayList<SellerProductDTO> articleList = null;
@@ -294,14 +294,12 @@ public class SellerDAO {
 				ProductRe.setSell_title(rs.getString("sell_title"));
 				ProductRe.setSell_brand(rs.getString("sell_brand"));
 				ProductRe.setSell_price(rs.getInt("sell_price"));
-//				ProductRe.setSell_img_name(rs.getString("sell_img_name"));
-//				ProductRe.setSell_img_real_name(rs.getString("sell_img_real_name"));
 
 				productarr.add(ProductRe);
 			}
 
 		} catch (SQLException e) {
-			System.out.println("SQL 구문 오류 발생! - updateReadcount()");
+			System.out.println("SQL 구문 오류 발생! - selectProductRe()");
 			e.printStackTrace();
 		} finally {
 			close(pstmt);
@@ -363,6 +361,45 @@ public class SellerDAO {
 		}
 
 		return memberbean;
+	}
+
+	public ArrayList<SellerimgDTO> selectProductimg(int sell_num) {
+		ArrayList<SellerimgDTO> productimg = new ArrayList<SellerimgDTO>();
+		SellerimgDTO Sellerdetailimg = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+			String sql = "SELECT sell_img_real_num, sell_img_name, sell_img_real_name "
+					+ "FROM sell_img  WHERE sell_img_real_num=? ORDER BY sell_img_num DESC ";
+
+	
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, sell_num);
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				Sellerdetailimg = new SellerimgDTO();
+				Sellerdetailimg.setSell_img_real_num(rs.getInt("sell_img_real_num"));
+				Sellerdetailimg.setSell_img_name(rs.getString("sell_img_name"));
+				Sellerdetailimg.setSell_img_real_name(rs.getString("sell_img_real_name"));
+//				ProductRe.setSell_img_name(rs.getString("sell_img_name"));
+//				ProductRe.setSell_img_real_name(rs.getString("sell_img_real_name"));
+
+				productimg.add(Sellerdetailimg);
+			}
+			
+			System.out.println(productimg);
+
+		} catch (SQLException e) {
+			System.out.println("SQL 구문 오류 발생! - updateReadcount()");
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rs);
+		}
+
+		return productimg;
 	}
 
 }

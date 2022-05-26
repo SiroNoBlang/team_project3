@@ -417,7 +417,7 @@ int price = sellerDTO.getSell_price()+charge+3000;     //최종 판매가격
 							<table class="table-shopping-cart">
 								<tr>
 									
-										<td><img width="200" height="288" src="./Upload/sell_img/<%=sellerDTO.getSell_img_real_name() %>" alt="IMG"></td>
+<%-- 										<td><img width="200" height="288" src="./Upload/sell_img/<%=sellerDTO.getSell_img_real_name() %>" alt="IMG"></td> --%>
 										
 										
 							

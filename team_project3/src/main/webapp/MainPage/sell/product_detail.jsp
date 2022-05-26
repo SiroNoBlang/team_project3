@@ -1,3 +1,4 @@
+<%@page import="vo.SellerimgDTO"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="vo.PageInfo"%>
 <%@page import="vo.SellerDTO"%>
@@ -10,6 +11,7 @@ SellerDTO seller = new SellerDTO();
 SellerDTO sellerdto = (SellerDTO)request.getAttribute("sellerdto");
 PageInfo pageInfo = (PageInfo)request.getAttribute("pageInfo");
 ArrayList<SellerDTO> Relationdto = (ArrayList<SellerDTO>)request.getAttribute("Relationdto");
+ArrayList<SellerimgDTO> Sellerdetailimg = (ArrayList<SellerimgDTO>)request.getAttribute("Sellerdetailimg");
 
 // int pageNum = pageInfo.getPageNum();     //페이지를 안넘겨줌 처리해야됨.
 // int maxPage = pageInfo.getMaxPage();
@@ -383,17 +385,20 @@ ArrayList<SellerDTO> Relationdto = (ArrayList<SellerDTO>)request.getAttribute("R
 							<div class="slick3 gallery-lb">
 								<div class="item-slick3" data-thumb="MainPage/images/product-detail-01.jpg">
 									<div class="wrap-pic-w pos-relative">
-										<img src="./Upload/sell_img/<%=sellerdto.getSell_img_real_name() %>" alt="IMG-PRODUCT">
+<!-- 									ArrayList<SellerimgDTO> Sellerdetailimg = (ArrayList<SellerimgDTO>)request.getAttribute("Sellerdetailimg"); -->
+									  <%for(SellerimgDTO sellerimg :Sellerdetailimg){ %>
+										<img src ="./Upload/sell_img/<%=sellerimg.getSell_img_real_name() %>" width="79.06" height="97.84" alt="IMG-PRODUCT">
 
 										<a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="./Upload/sell_img/dog.png">
 											<i class="fa fa-expand"></i>
 										</a>
 									</div>
 								</div>
+								<% } %>
 
 								<div class="item-slick3" data-thumb="MainPage/images/product-detail-02.jpg">
 									<div class="wrap-pic-w pos-relative">
-										<img src="MainPage/images/product-detail-02.jpg" alt="IMG-PRODUCT">
+<%-- 										<img src="./Upload/sell_img/<%=sellerimg.getSell_img_real_name() %>" width="79.06" height="97.84" alt="IMG-PRODUCT"> --%>
 
 										<a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="MainPage/images/product-detail-02.jpg">
 											<i class="fa fa-expand"></i>
@@ -403,11 +408,12 @@ ArrayList<SellerDTO> Relationdto = (ArrayList<SellerDTO>)request.getAttribute("R
 
 								<div class="item-slick3" data-thumb="MainPage/images/product-detail-03.jpg">
 									<div class="wrap-pic-w pos-relative">
-										<img src="MainPage/images/product-detail-03.jpg" alt="IMG-PRODUCT">
+<%-- 										<img src="./Upload/sell_img/<%=sellerimg.getSell_img_real_name() %>" width="79.06" height="97.84" alt="IMG-PRODUCT"> --%>
 
 										<a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="MainPage/images/product-detail-03.jpg">
 											<i class="fa fa-expand"></i>
 										</a>
+										
 									</div>
 								</div>
 							</div>
@@ -532,7 +538,7 @@ ArrayList<SellerDTO> Relationdto = (ArrayList<SellerDTO>)request.getAttribute("R
 					<% for(SellerDTO dto :Relationdto){ %>	
 				 <div style="  float:left;">
 
-										<img src="./Upload/sell_img/<%=dto.getSell_img_real_name() %>" onclick="location.href='ProductDetailPro.pr?sell_list_num=<%=dto.getSell_list_num()%>&sell_brand=<%=dto.getSell_brand()%>'" >
+<%-- 										<img src="./Upload/sell_img/<%=dto.getSell_img_real_name() %>" onclick="location.href='ProductDetailPro.pr?sell_list_num=<%=dto.getSell_list_num()%>&sell_brand=<%=dto.getSell_brand()%>'" > --%>
 										<div>[<%=dto.getSell_brand() %>]</div>
 										<div>[<%=dto.getSell_size() %>]</div>
 										<div>[<%=dto.getSell_price() %>]</div>		
