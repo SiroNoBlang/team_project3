@@ -14,6 +14,7 @@ import vo.NoticeBean;
 import vo.NoticeImgFileBean;
 import vo.QnaBean;
 import vo.SellerDTO;
+import vo.SellerimgDTO;
 
 import static db.JdbcUtil.*;
 
@@ -33,8 +34,6 @@ public class AdminDAO {
 		this.con = con;
 	}
 
-
-
 	// 공지사항 글쓰기
 	public int insertNoticeArticle(NoticeBean notice,  ArrayList<NoticeImgFileBean> noticeImgList) {
 //		System.out.println("AdminDAO - insertArticle()");
@@ -43,7 +42,6 @@ public class AdminDAO {
 
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-
 		int num = 1;
 
 		try {
@@ -56,6 +54,8 @@ public class AdminDAO {
 				num = rs.getInt(1) + 1;
 			}
 			close(pstmt);
+			close(rs);
+
 
 			sql = "INSERT INTO notice VALUES (?,?,REPLACE(now(),'-',''),?,?,?)";
 			pstmt = con.prepareStatement(sql);
@@ -69,77 +69,32 @@ public class AdminDAO {
 			
 			
 			if(!noticeImgList.isEmpty()) {
-				for(NoticeImgFileBean noticeImg: noticeImgList) {
-					sql = "INSERT INTO notice_img_file VALUES ((SELECT MAX(notice_num) FROM notice),?,?)"; 
-					pstmt = con.prepareStatement(sql); 
-					
-					pstmt.setString(1,noticeImg.getNotice_img_file_name()); 
-					pstmt.setString(2,noticeImg.getNotice_img_file_real_name());
-					
-					pstmt.executeUpdate();
-				} 
-			}
-			
+				sql = "SELECT MAX(notice_img_file_real_num) FROM notice_img_file";
+				pstmt = con.prepareStatement(sql);
+				rs = pstmt.executeQuery();
 
+				if (rs.next()) {
+					// 조회된 레코드 중 Auto_increment 컬럼 값을 num 에 저장
+					num = rs.getInt(1) + 1;
+					
+					for(NoticeImgFileBean noticeImg: noticeImgList) {
+						sql = "INSERT INTO notice_img_file VALUES (?,(SELECT MAX(notice_num) FROM notice),?,?)"; 
+						pstmt = con.prepareStatement(sql); 
+						
+						pstmt.setInt(1,num); 
+						pstmt.setString(2,noticeImg.getNotice_img_file_name()); 
+						pstmt.setString(3,noticeImg.getNotice_img_file_real_name());
+					
+						pstmt.executeUpdate();
+						
+						num++;
+						
+					} 
+				}
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 			System.out.println("SQL 구문 오류 발생! - insertNoticeArticle()");
-		} finally {
-			close(pstmt);
-			close(rs);
-		}
-		return insertCount;
-	}
-
-	// 이벤트 글쓰기
-	public int insertEventArticle(EventBean event,  ArrayList<EventImgFileBean> eventImgList) {
-//		System.out.println("AdminDAO - insertEventArticle()");
-
-		int insertCount = 0;
-
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-
-		int num = 1;
-
-		try {
-			String sql = "SELECT MAX(event_num) FROM event";
-			pstmt = con.prepareStatement(sql);
-			rs = pstmt.executeQuery();
-
-			if (rs.next()) {
-				// 조회된 레코드 중 Auto_increment 컬럼 값을 num 에 저장
-				num = rs.getInt(1) + 1;
-			}
-			close(pstmt);
-
-			sql = "INSERT INTO event VALUES (?,?,REPLACE(now(),'-',''),?,?,?)";
-			pstmt = con.prepareStatement(sql);
-			pstmt.setInt(1, num);
-			pstmt.setString(2, event.getEvent_nickname());
-			pstmt.setString(3, event.getEvent_title());
-			pstmt.setString(4, event.getEvent_content());
-			pstmt.setInt(5, 0);
-			
-			insertCount = pstmt.executeUpdate();
-			
-			
-			if(!eventImgList.isEmpty()) {
-				for(EventImgFileBean eventImg: eventImgList) {
-					sql = "INSERT INTO event_img_file VALUES ((SELECT MAX(event_num) FROM event),?,?)"; 
-					
-					pstmt = con.prepareStatement(sql); 
-					pstmt.setString(1,eventImg.getEvent_img_file_name()); 
-					pstmt.setString(2,eventImg.getEvent_img_file_real_name());
-					
-					pstmt.executeUpdate();
-				}
-			} 
-
-
-		} catch (SQLException e) {
-			e.printStackTrace();
-			System.out.println("SQL 구문 오류 발생! - insertEventArticle()");
 		} finally {
 			close(pstmt);
 			close(rs);
@@ -203,8 +158,6 @@ public class AdminDAO {
 				notice.setNotice_title(rs.getString("notice_title"));
 				notice.setNotice_content(rs.getString("notice_content"));
 				notice.setNotice_readcount(rs.getInt("notice_readcount"));
-				
-				
 				
 				noticeList.add(notice);
 			}
@@ -384,6 +337,177 @@ public class AdminDAO {
 		}
 		return noticeSearchList;
 	}
+
+	// 공지사항 등록된 사진이 있는지 확인
+	public ArrayList<NoticeImgFileBean> selectImgExist(int notice_num) {
+		ArrayList<NoticeImgFileBean> isNoticeImgExist = null;
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		
+		try {
+			String sql = "SELECT f.notice_img_file_name, f.notice_img_file_real_name "
+					+ "FROM notice "
+					+ "JOIN notice_img_file f "
+					+ "on f.notice_img_file_num = notice_num "
+					+ "WHERE notice_img_file_num =?";
+			
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, notice_num);
+	
+			rs = pstmt.executeQuery();
+			
+			isNoticeImgExist = new ArrayList<NoticeImgFileBean>();
+			
+			while(rs.next()) {
+				NoticeImgFileBean noticeImg = new NoticeImgFileBean();
+				noticeImg.setNotice_img_file_name(rs.getString("f.notice_img_file_name"));
+				noticeImg.setNotice_img_file_real_name(rs.getString("f.notice_img_file_real_name"));
+				
+				isNoticeImgExist.add(noticeImg);
+			}
+			
+		} catch (SQLException e) {
+			System.out.println("SQL 구문 오류 발생! - selectImgExist()");
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rs);
+		}
+		return isNoticeImgExist;
+	}
+	
+	// 공지사항 수정
+	public int updateNoticeArticle(int notice_num, NoticeBean notice, ArrayList<NoticeImgFileBean> noticeImgList) {
+//		System.out.println("AdminDAO - updateNoticeArticle()");
+		int isNoticeModifySuccess = 0;
+
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try { //공지사항 글부분 
+			String sql = "UPDATE notice SET notice_title=?, notice_content = ? WHERE notice_num=?";
+			
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, notice.getNotice_title());
+			pstmt.setString(2, notice.getNotice_content());
+			pstmt.setInt(3, notice_num);
+			
+			isNoticeModifySuccess = pstmt.executeUpdate();
+			
+			close(pstmt);
+			
+			sql = "DELETE FROM notice_img_file WHERE notice_img_file_num = ?"; // 첨부파일 삭제
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, notice_num);
+			
+			pstmt.executeUpdate();
+			
+			
+			if(!noticeImgList.isEmpty()) { // 첨부파일 리스트가 비어있지 않으면
+				
+				int num = 0;
+				sql = "SELECT MAX(notice_img_file_real_num) FROM notice_img_file";
+				pstmt = con.prepareStatement(sql);
+				rs = pstmt.executeQuery();
+
+				if (rs.next()) {
+					num = rs.getInt(1) + 1;
+					
+					for(NoticeImgFileBean noticeImg: noticeImgList) { 
+						
+						sql = "INSERT INTO notice_img_file VALUES (?,?,?,?)"; 
+						pstmt = con.prepareStatement(sql); 
+						
+						pstmt.setInt(1,num); 
+						pstmt.setInt(2,notice_num); 
+						pstmt.setString(3,noticeImg.getNotice_img_file_name()); 
+						pstmt.setString(4,noticeImg.getNotice_img_file_real_name());
+						
+						pstmt.executeUpdate();
+						
+						num++;
+						
+					} 
+				}
+			} // if문 끝_!noticeImgList.isEmpty()
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println("SQL 구문 오류 발생! - updateNoticeArticle()");
+		} finally {
+			close(pstmt);
+		}
+		return isNoticeModifySuccess;
+	}
+	
+	// 이벤트 글쓰기
+	public int insertEventArticle(EventBean event,  ArrayList<EventImgFileBean> eventImgList) {
+//			System.out.println("AdminDAO - insertEventArticle()");
+
+			int insertCount = 0;
+
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+
+			int num = 1;
+
+			try {
+				String sql = "SELECT MAX(event_num) FROM event";
+				pstmt = con.prepareStatement(sql);
+				rs = pstmt.executeQuery();
+
+				if (rs.next()) {
+					// 조회된 레코드 중 Auto_increment 컬럼 값을 num 에 저장
+					num = rs.getInt(1) + 1;
+				}
+				close(pstmt);
+				close(rs);
+
+				sql = "INSERT INTO event VALUES (?,?,REPLACE(now(),'-',''),?,?,?)";
+				pstmt = con.prepareStatement(sql);
+				pstmt.setInt(1, num);
+				pstmt.setString(2, event.getEvent_nickname());
+				pstmt.setString(3, event.getEvent_title());
+				pstmt.setString(4, event.getEvent_content());
+				pstmt.setInt(5, 0);
+				
+				insertCount = pstmt.executeUpdate();
+				
+				
+				if(!eventImgList.isEmpty()) {
+					sql = "SELECT MAX(event_img_file_real_num) FROM event_img_file";
+					pstmt = con.prepareStatement(sql);
+					rs = pstmt.executeQuery();
+					
+					if (rs.next()) {
+						// 조회된 레코드 중 Auto_increment 컬럼 값을 num 에 저장
+						num = rs.getInt(1) + 1;
+						
+						for(EventImgFileBean eventImg: eventImgList) {
+							sql = "INSERT INTO event_img_file VALUES (?,(SELECT MAX(event_num) FROM event),?,?)"; 
+							
+							pstmt = con.prepareStatement(sql); 
+							pstmt.setInt(1,num); 
+							pstmt.setString(2,eventImg.getEvent_img_file_name()); 
+							pstmt.setString(3,eventImg.getEvent_img_file_real_name());
+							
+							pstmt.executeUpdate();
+							
+							num++;
+						}// for문 끝
+					} 
+				} //if문 끝_!eventImgList.isEmpty()
+			} catch (SQLException e) {
+				e.printStackTrace();
+				System.out.println("SQL 구문 오류 발생! - insertEventArticle()");
+			} finally {
+				close(pstmt);
+				close(rs);
+			}
+			return insertCount;
+		}
 
 	//이벤트 글목록 조회
 	public ArrayList<EventBean> selectEventList(int pageNum, int listLimit) {
@@ -677,7 +801,6 @@ public class AdminDAO {
 		
 	}
 
-	
 	//QnA  상세정보 조회
 	public QnaBean selectQnaArticle(int qna_num) {
 
@@ -733,7 +856,6 @@ public class AdminDAO {
 		
 	}
 
-
 	//qna 검색어에 해당하는 게시물 수 
 	public int selectQnaSearchListCount(String tableName, String search, String searchType) {
 		int listCount =  0;
@@ -762,7 +884,6 @@ public class AdminDAO {
 		return listCount;
 	}
 
-	
 	//qna 검색어에 해당하는 게시물 목록
 	public ArrayList<QnaBean> selectSearchQnaList(int pageNum, int listLimit, String search, String searchType) {
 		ArrayList<QnaBean> qnaSearchList =null;
@@ -944,7 +1065,6 @@ public class AdminDAO {
 		return isArticleWriter;
 	}
 
-
 	
 	public ArrayList<MemberBean> selectMemberManagementList(int pageNum, int listLimit) {
 		ArrayList<MemberBean> memberManagementList = null;
@@ -1120,10 +1240,12 @@ public class AdminDAO {
 		
 		int startRow = (pageNum - 1) * listLimit;
 		
-		try { //혹시 재 사용할수 있으니 전체적으로 저장
-			String sql = "SELECT  a.sell_num, a.sell_member_code, a.sell_category, a.sell_category_detail, a.sell_size, a.sell_title, a.sell_color, a.sell_brand, a.sell_write_date, "
-					+ "a.sell_price, b.sell_img_name, b.sell_img_real_name,c.sell_list_num,c.sell_list_item_status,c.sell_list_approve_date, c.sell_list_approve_nickname "
-					+ "FROM sell AS a JOIN sell_img AS b ON a.sell_num = b.sell_img_real_num JOIN sell_list AS c ON a.sell_num = c.sell_list_num ORDER BY sell_write_date DESC LIMIT ?,?";
+		try { // 목록 카테고리에 필요한 값만 저장
+			String sql = "SELECT  a.sell_num, a.sell_category,  a.sell_title, a.sell_brand, a.sell_write_date,"
+					+ "c.sell_list_item_status,c.sell_list_approve_date "
+					+ "FROM sell AS a JOIN sell_list AS c ON a.sell_num = c.sell_list_num "
+					+ "ORDER BY a.sell_write_date DESC LIMIT ?,?";
+			
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, startRow);
 			pstmt.setInt(2, listLimit);
@@ -1136,27 +1258,16 @@ public class AdminDAO {
 				
 				confirm = new SellerDTO();
 				confirm.setSell_num(rs.getInt("sell_num"));
-				confirm.setSell_member_code(rs.getString("sell_member_code"));
 				confirm.setSell_category(rs.getString("sell_category"));
-				confirm.setSell_category_detail(rs.getString("sell_category_detail"));
-				confirm.setSell_size(rs.getString("sell_size"));
 				confirm.setSell_title(rs.getString("sell_title"));
-				confirm.setSell_color(rs.getString("sell_color"));
 				confirm.setSell_brand(rs.getString("sell_brand"));
 				confirm.setSell_write_date(rs.getString("sell_write_date").substring(0,8));
-				confirm.setSell_price(rs.getInt("sell_price"));
-				/*
-				 * confirm.setSell_img_name(rs.getString("sell_img_name"));
-				 * confirm.setSell_img_real_name(rs.getString("sell_img_real_name"));
-				 */
-				confirm.setSell_list_num(rs.getInt("sell_list_num"));
 				confirm.setSell_list_item_status(rs.getString("sell_list_item_status"));
 				
 				if(rs.getString("sell_list_approve_date") !=null) { //값이 없을 때 .substring(0,8)로 인해 오류발생
 					
 					confirm.setSell_list_approve_date(rs.getString("sell_list_approve_date").substring(0,8));
 				}
-				confirm.setSell_list_approve_nickname(rs.getString("sell_list_approve_nickname"));
 				
 				productConfirmList.add(confirm);
 				
@@ -1175,7 +1286,6 @@ public class AdminDAO {
 		return productConfirmList;
 		
 	}
-
 	
 	//검수현황 카레코리 - 검색어에 해당하는 게시물 수
 	public int selectConfirmSearchListCount(String tableName, String search, String searchType) {
@@ -1204,7 +1314,6 @@ public class AdminDAO {
 		}
 		return listCount;
 	}
-	
 
 	//검수현황 카테고리 - 검색어에 해당하는 게시물 
 	public ArrayList<SellerDTO> selectConfirmSearchList(int pageNum, int listLimit, String search, String searchType) {
@@ -1259,11 +1368,9 @@ public class AdminDAO {
 		return productConfirmSearch;
 	}
 	
-	
 	//검수현황 상세정보 - 글정보
 	public SellerDTO selectProductConfirmDetail(int sell_num) {
 
-		
 		SellerDTO confirm = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -1316,15 +1423,18 @@ public class AdminDAO {
 	
 	
 	//검수현황 상세정보 - 이미지 정보
-	public ArrayList<SellerDTO> getConfirmImg(int sell_num) {
-		ArrayList<SellerDTO> confirmImgFileList = new ArrayList<SellerDTO>();
+	public ArrayList<SellerimgDTO> getConfirmImg(int sell_num) {
+		ArrayList<SellerimgDTO> confirmImgFileList = new ArrayList<SellerimgDTO>();
 		
-		SellerDTO confirmImg = null;
+		SellerimgDTO confirmImg = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		try {
 			
-			String sql ="SELECT b.sell_img_num, b.sell_img_name, b.sell_img_real_name "
+			
+			
+			
+			String sql ="SELECT b.sell_img_name, b.sell_img_real_name "
 					+ "FROM sell AS a JOIN sell_img AS b ON a.sell_num = b.sell_img_real_num WHERE b.sell_img_real_num=?";
 		
 			pstmt = con.prepareStatement(sql);
@@ -1334,11 +1444,9 @@ public class AdminDAO {
 			
 			while(rs.next()) {
 				
-				confirmImg = new SellerDTO();
-				/*
-				 * confirmImg.setSell_img_name(rs.getString("b.sell_img_name"));
-				 * confirmImg.setSell_img_real_name(rs.getString("b.sell_img_real_name"));
-				 */
+				confirmImg = new SellerimgDTO();
+				confirmImg.setSell_img_name(rs.getString("b.sell_img_name"));
+				confirmImg.setSell_img_real_name(rs.getString("b.sell_img_real_name"));
 				
 				confirmImgFileList.add(confirmImg);
 			} 

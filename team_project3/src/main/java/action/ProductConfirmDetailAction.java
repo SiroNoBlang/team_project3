@@ -11,6 +11,7 @@ import vo.ActionForward;
 import vo.NoticeBean;
 import vo.NoticeImgFileBean;
 import vo.SellerDTO;
+import vo.SellerimgDTO;
 
 public class ProductConfirmDetailAction implements Action {
 
@@ -24,7 +25,7 @@ public class ProductConfirmDetailAction implements Action {
 		ProductConfirmDetailService service = new ProductConfirmDetailService();
 		SellerDTO confirmArticle = service.getProductConfirmArticle(sell_num);
 		
-		ArrayList<SellerDTO> confirmImgFileList = service.getProductConfirmImg(sell_num);
+		ArrayList<SellerimgDTO> confirmImgFileList = service.getProductConfirmImg(sell_num);
 		
 		
 		request.setAttribute("confirmArticle", confirmArticle);

@@ -1,25 +1,29 @@
 package vo;
 
 
-/*
- * 
- * CREATE TABLE event_img_file (
-	event_img_file_num INT REFERENCES 관리자공지사항(글번호),
-	event_img_file_name VARCHAR(50) PRIMARY KEY,
-	event_img_file_real_name VARCHAR(50)
-);
-
-*/
+//CREATE TABLE event_img_file (
+//		event_img_file_real_num INT Auto_Increment PRIMARY KEY,
+//		event_img_file_num INT REFERENCES notice(notice_num) ON DELETE CASCADE,
+//		event_img_file_name VARCHAR(400),
+//		event_img_file_real_name VARCHAR(400)
+//	);
 
 
 
 public class EventImgFileBean {
+	private int event_img_file_real_num ;
 	private int event_img_file_num;
 	private String event_img_file_name;
 	private String event_img_file_real_name;
 	
 	
 	
+	public int getEvent_img_file_real_num() {
+		return event_img_file_real_num;
+	}
+	public void setEvent_img_file_real_num(int event_img_file_real_num) {
+		this.event_img_file_real_num = event_img_file_real_num;
+	}
 	public int getEvent_img_file_num() {
 		return event_img_file_num;
 	}
@@ -43,9 +47,11 @@ public class EventImgFileBean {
 	
 	@Override
 	public String toString() {
-		return "EventImgFileBean [event_img_file_num=" + event_img_file_num + ", event_img_file_name="
-				+ event_img_file_name + ", event_img_file_real_name=" + event_img_file_real_name + "]";
+		return "EventImgFileBean [event_img_file_real_num=" + event_img_file_real_num + ", event_img_file_num="
+				+ event_img_file_num + ", event_img_file_name=" + event_img_file_name + ", event_img_file_real_name="
+				+ event_img_file_real_name + "]";
 	}
+	
 	
 	
 }

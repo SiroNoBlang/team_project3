@@ -1,12 +1,14 @@
 package svc;
 
-import static db.JdbcUtil.*;
+import static db.JdbcUtil.close;
+import static db.JdbcUtil.getConnection;
 
 import java.sql.Connection;
 import java.util.ArrayList;
 
 import dao.AdminDAO;
 import vo.SellerDTO;
+import vo.SellerimgDTO;
 
 public class ProductConfirmDetailService {
 
@@ -27,8 +29,8 @@ public class ProductConfirmDetailService {
 		
 	}
 
-	public ArrayList<SellerDTO> getProductConfirmImg(int sell_num) {
-		ArrayList<SellerDTO> confirmImgFileList = null;
+	public ArrayList<SellerimgDTO> getProductConfirmImg(int sell_num) {
+		ArrayList<SellerimgDTO> confirmImgFileList = null;
 		Connection con = getConnection();
 		
 		AdminDAO adminDAO = AdminDAO.getInstance();

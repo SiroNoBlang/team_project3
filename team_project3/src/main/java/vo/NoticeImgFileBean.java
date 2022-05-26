@@ -2,15 +2,27 @@ package vo;
 
 
 //CREATE TABLE notice_img_file (
-//		notice_img_file_num INT REFERENCES admin_notice(notice_num),
-//		notice_img_file_name VARCHAR(50) PRIMARY KEY,
-//		notice_img_file_real_name VARCHAR(50)
+//notice_img_file_real_num INT Auto_Increment PRIMARY KEY,
+//notice_img_file_num INT REFERENCES notice(notice_num) ON DELETE CASCADE,
+//notice_img_file_name VARCHAR(400),
+//notice_img_file_real_name VARCHAR(400)
 //	);
 
 public class NoticeImgFileBean {
+	
+	private int notice_img_file_real_num;
 	private int notice_img_file_num;
 	private String notice_img_file_name;
 	private String notice_img_file_real_name;
+	
+	
+	
+	public int getNotice_img_file_real_num() {
+		return notice_img_file_real_num;
+	}
+	public void setNotice_img_file_real_num(int notice_img_file_real_num) {
+		this.notice_img_file_real_num = notice_img_file_real_num;
+	}
 	public int getNotice_img_file_num() {
 		return notice_img_file_num;
 	}
@@ -31,11 +43,15 @@ public class NoticeImgFileBean {
 	}
 	
 	
+	
+	
 	@Override
 	public String toString() {
-		return "NoticeImgBean [notice_img_file_num=" + notice_img_file_num + ", notice_img_file_name="
-				+ notice_img_file_name + ", notice_img_file_real_name=" + notice_img_file_real_name + "]";
+		return "NoticeImgFileBean [notice_img_file_real_num=" + notice_img_file_real_num + ", notice_img_file_num="
+				+ notice_img_file_num + ", notice_img_file_name=" + notice_img_file_name
+				+ ", notice_img_file_real_name=" + notice_img_file_real_name + "]";
 	}
+	
 	
 	
 	
