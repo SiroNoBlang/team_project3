@@ -79,18 +79,21 @@ public class sellWriteProAction implements Action {
 				ArrayList<SellerimgDTO> sellimglist = new ArrayList<SellerimgDTO>();
 	
 				Enumeration fileElements = multi.getFileNames();
+				int i=1;
 				
 				while(fileElements.hasMoreElements()) {
+					
 					String fileElement = (String)fileElements.nextElement();
 					String sell_img_name = multi.getOriginalFileName(fileElement);
 					String sell_img_real_name = multi.getFilesystemName(fileElement);
 						
 					SellerimgDTO sellimg = new SellerimgDTO();
+					sellimg.setSell_img_num(i);
 					sellimg.setSell_img_name(sell_img_name);
 					sellimg.setSell_img_real_name(sell_img_real_name);
 					
 					sellimglist.add(sellimg);
-					
+					i++;
 					
 				}
 				

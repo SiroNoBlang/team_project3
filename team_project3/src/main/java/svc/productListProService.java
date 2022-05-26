@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 import dao.SellerDAO;
 import vo.SellerDTO;
+import vo.SellerimgDTO;
 
 public class productListProService {
 
@@ -60,5 +61,11 @@ public class productListProService {
 		
 		// 7. 조회 결과 리턴
 		return articleList;
+	}
+
+	public ArrayList<SellerimgDTO> getArticleImgList() {
+		System.out.println("productListProService - getArticleImgList-사진객체 들고오기");
+		 ArrayList<SellerimgDTO> articleImgList = null;
+		return null;
 	}
 }

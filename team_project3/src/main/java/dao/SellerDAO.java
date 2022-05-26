@@ -62,31 +62,36 @@ public class SellerDAO {
 				pstmt.setString(9, seller.getSell_size());
 				pstmt.setString(10, seller.getSell_brand());
 				pstmt.setInt(11, 0); //조회수 컬럼
-
 				
+				pstmt.executeUpdate();
+				System.out.println("INSERT -SELL");
 				for(SellerimgDTO sellimg: sellimglist) {
-					sql = "INSERT INTO sell_img VALUES ((SELECT MAX(sell_num) FROM sell),5,?,?)";
+					sql = "INSERT INTO sell_img VALUES ((SELECT MAX(sell_num) FROM sell),?,?,?)";
 					pstmt2 = con.prepareStatement(sql); 
-//					img_num++;
-//					pstmt.setInt(1, img_num);
-					pstmt2.setString(1,sellimg.getSell_img_name()); 
-					pstmt2.setString(2,sellimg.getSell_img_real_name());
-					
+		//			int sell_img_num =;
+					pstmt2.setInt(1,sellimg.getSell_img_num());
+					pstmt2.setString(2,sellimg.getSell_img_name()); 
+					pstmt2.setString(3,sellimg.getSell_img_real_name());
 					
 					pstmt2.executeUpdate();
+//					close(pstmt);
+					System.out.println("INSERT -SELL_IMG");
 				} 
 				
+				
 
-				        
+				      
 
-				sql = "INSERT INTO sell_list VALUES ((SELECT MAX(SELL_NUM) FROM sell), '판매중', ?, 'ㅎㅇ')";
+				sql = "INSERT INTO sell_list VALUES ((SELECT MAX(SELL_NUM) FROM sell), '판매중', ?, '관리자 작업필요')";//검수자 승인날짜,닉네임 업데이트작업필요
 				pstmt3 = con.prepareStatement(sql);
 				pstmt3.setString(1, seller.getSell_list_approve_date());
-			
-				insertCount =pstmt.executeUpdate();
-				insertCount =pstmt2.executeUpdate();
-				insertCount = pstmt3.executeUpdate();
-				System.out.println("BoardDAO - insertArticle()1");
+					insertCount =pstmt3.executeUpdate();
+					System.out.println("INSERT -SELL_LIST");
+	
+					
+					
+					
+				System.out.println("SellerDAO - insertArticle()");
 		} catch (SQLException e) {
 			System.out.println("SQL 구문 오류 발생! - insertArticle()");
 			e.printStackTrace();

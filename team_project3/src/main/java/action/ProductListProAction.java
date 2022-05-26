@@ -9,6 +9,7 @@ import svc.productListProService;
 import vo.ActionForward;
 import vo.PageInfo;
 import vo.SellerDTO;
+import vo.SellerimgDTO;
 
 public class ProductListProAction implements Action {
 
@@ -32,7 +33,7 @@ public class ProductListProAction implements Action {
 				int listCount = service.getListCount();
 				
 				ArrayList<SellerDTO> articleList = service.getArticleList(pageNum, listLimit);
-				
+				ArrayList<SellerimgDTO> articleImgList = service.getArticleImgList();
 				//-----------------------------------------------------------------------------
 				// 페이징 처리를 위한 계산 작업
 				// 1. 현재 페이지에서 표시할 전체 페이지 수 계산
