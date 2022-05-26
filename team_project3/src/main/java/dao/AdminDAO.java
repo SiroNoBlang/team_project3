@@ -1145,8 +1145,10 @@ public class AdminDAO {
 				confirm.setSell_brand(rs.getString("sell_brand"));
 				confirm.setSell_write_date(rs.getString("sell_write_date").substring(0,8));
 				confirm.setSell_price(rs.getInt("sell_price"));
-				confirm.setSell_img_name(rs.getString("sell_img_name"));
-				confirm.setSell_img_real_name(rs.getString("sell_img_real_name"));
+				/*
+				 * confirm.setSell_img_name(rs.getString("sell_img_name"));
+				 * confirm.setSell_img_real_name(rs.getString("sell_img_real_name"));
+				 */
 				confirm.setSell_list_num(rs.getInt("sell_list_num"));
 				confirm.setSell_list_item_status(rs.getString("sell_list_item_status"));
 				
@@ -1333,8 +1335,10 @@ public class AdminDAO {
 			while(rs.next()) {
 				
 				confirmImg = new SellerDTO();
-				confirmImg.setSell_img_name(rs.getString("b.sell_img_name"));
-				confirmImg.setSell_img_real_name(rs.getString("b.sell_img_real_name"));
+				/*
+				 * confirmImg.setSell_img_name(rs.getString("b.sell_img_name"));
+				 * confirmImg.setSell_img_real_name(rs.getString("b.sell_img_real_name"));
+				 */
 				
 				confirmImgFileList.add(confirmImg);
 			} 
