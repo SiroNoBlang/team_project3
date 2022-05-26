@@ -7,8 +7,7 @@ import java.sql.Connection;
 import java.util.ArrayList;
 
 import dao.SellerDAO;
-import vo.SellerDTO;
-import vo.SellerimgDTO;
+import vo.SellerProductDTO;
 
 public class productListProService {
 
@@ -37,11 +36,11 @@ public class productListProService {
 		return listCount;
 	}
 
-	public ArrayList<SellerDTO> getArticleList(int pageNum, int listLimit) {
+	public ArrayList<SellerProductDTO> getArticleList(int pageNum, int listLimit) {
 		System.out.println("productListProService - getArticleList()");
 		
 		// 1. 리턴할 데이터를 저장할 변수 선언
-		ArrayList<SellerDTO> articleList = null;
+		ArrayList<SellerProductDTO> articleList = null;
 		
 		// 2. JdbcUtil 클래스로부터 Connection Pool 에 저장된 Connection 객체 가져오기 - 공통
 		Connection con = getConnection(); // static import 적용되어 있을 경우
@@ -63,9 +62,23 @@ public class productListProService {
 		return articleList;
 	}
 
-	public ArrayList<SellerimgDTO> getArticleImgList() {
-		System.out.println("productListProService - getArticleImgList-사진객체 들고오기");
-		 ArrayList<SellerimgDTO> articleImgList = null;
-		return null;
-	}
+//	public ArrayList<SellerimgDTO> getArticleImgList(int pageNum,int listLimit ) {
+//		System.out.println("productListProService - getArticleImgList-사진객체 들고오기");
+//		 	ArrayList<SellerimgDTO> articleImgList = null;
+//		 
+//			Connection con = getConnection(); // static import 적용되어 있을 경우
+//			
+//			SellerDAO sellerDAO = SellerDAO.getInstance();
+//			
+//			sellerDAO.setConnection(con);
+//			
+//			
+//			
+//			articleImgList = sellerDAO.selectArticleList(pageNum, listLimit);
+//			
+//			
+//			close(con);
+//
+//		return articleImgList;
+//	}
 }

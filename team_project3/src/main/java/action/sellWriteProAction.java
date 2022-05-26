@@ -74,7 +74,7 @@ public class sellWriteProAction implements Action {
 				seller.setSell_price(Integer.parseInt(multi.getParameter("sell_price")));
 				seller.setSell_category(multi.getParameter("sell_category"));
 				seller.setSell_category_detail(multi.getParameter("sell_category_detail"));
-				seller.setSell_list_item_status("판매중");  //글작업수행 후 검수중으로 바꿔줘야됨. 현재 관리자페이지 관여없어서 강제 판매중.
+				seller.setSell_list_item_status("검수중");  //글작업수행 후 검수중으로 바꿔줘야됨. 현재 관리자페이지 관여없어서 강제 판매중.
 				
 				ArrayList<SellerimgDTO> sellimglist = new ArrayList<SellerimgDTO>();
 	

@@ -450,9 +450,9 @@ function readURL(obj) {   //사진 5장 뿌리기
 								<!--사진 -->
 								<div class="item-slick3" data-thumb=""> <div id="previewDiv" ></div>
 									<div class="wrap-pic-w pos-relative">
+										 
 										 <input type="file" id="imgInput" name="sell_img_name1" onchange="readURL(this)">
-										 <input type="file" id="imgInput" name="sell_img_name2" onchange="readURL(this)">
-										 <input type="file" id="imgInput" name="sell_img_name3" onchange="readURL(this)">
+										
 										
 
 										<a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="MainPage/images/product-detail-01.jpg">

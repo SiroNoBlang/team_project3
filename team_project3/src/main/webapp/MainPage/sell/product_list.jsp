@@ -1,3 +1,4 @@
+<%@page import="vo.SellerProductDTO"%>
 <%@page import="vo.PageInfo"%>
 <%@page import="vo.SellerDTO"%>
 <%@page import="java.util.ArrayList"%>
@@ -6,8 +7,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>     
 <%
 String member_id =(String)session.getAttribute("sId");  //아이디 값 세션
-SellerDTO seller = new SellerDTO();
-ArrayList<SellerDTO> articleList = (ArrayList<SellerDTO>)request.getAttribute("articleList");
+SellerProductDTO seller = new SellerProductDTO();
+ArrayList<SellerProductDTO> articleList = (ArrayList<SellerProductDTO>)request.getAttribute("articleList");
 PageInfo pageInfo = (PageInfo)request.getAttribute("pageInfo");
 int pageNum = pageInfo.getPageNum();
 int maxPage = pageInfo.getMaxPage();
@@ -593,7 +594,7 @@ int listCount = pageInfo.getListCount();
          
          <!-- 여기서부터 사진 상세보기로 서블릿만들기 -->
          
-            <%for(SellerDTO seller1 :articleList){ %>
+            <%for(SellerProductDTO seller1 :articleList){ %>
                         
          
       <table border="1">
