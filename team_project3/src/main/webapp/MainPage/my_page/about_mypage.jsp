@@ -501,8 +501,10 @@ MemberBean member = (MemberBean)request.getAttribute("memberDetail");
 			<tr> 
 				<th>성별</th>
 				<td><select id="member_info_gender" name="member_info_gender">
-					<option value="male" <%if(member.getMember_info_gender().equals("male")) {%>selected="selected"<%} %>>남자</option>
-					<option value="female" <%if(member.getMember_info_gender().equals("female")) {%>selected="selected"<%} %>>여자</option>
+					<option value="male" <c:if test="${memberDetail.member_info_gender eq 'male' }" >selected</c:if>>남자</option>
+					<option value="female" <c:if test="${memberDetail.member_info_gender eq 'female' }">selected</c:if>>여자</option>  
+<%-- 					<option value="male" <%if(member.getMember_info_gender().equals("male")) {%>selected="selected"<%} %>>남자</option> --%>
+<%-- 					<option value="female" <%if(member.getMember_info_gender().equals("female")) {%>selected="selected"<%} %>>여자</option> --%>
 				</select></td>
 			</tr>
 			<tr> 
@@ -512,13 +514,20 @@ MemberBean member = (MemberBean)request.getAttribute("memberDetail");
 			<tr> 
 				<th>나이대</th>
 				<td><select id="member_info_age" name="member_info_age">
-					<option value="19세이하" <%if(member.getMember_info_age().equals("19세이하")) {%>selected="selected"<%} %>>19세이하</option>
-					<option value="20~29" <%if(member.getMember_info_age().equals("20~29")) {%>selected="selected"<%} %>>20~29</option>
-					<option value="30~39" <%if(member.getMember_info_age().equals("30~39")) {%>selected="selected"<%} %>>30~39</option>
-					<option value="40~49" <%if(member.getMember_info_age().equals("40~49")) {%>selected="selected"<%} %>>40~49</option>
-					<option value="50~59" <%if(member.getMember_info_age().equals("50~59")) {%>selected="selected"<%} %>>50~59</option>
-					<option value="60~69" <%if(member.getMember_info_age().equals("60~69")) {%>selected="selected"<%} %>>60~69</option>
-					<option value="70대이상" <%if(member.getMember_info_age().equals("70대이상")) {%>selected="selected"<%} %>>70세이상</option>
+					<option value="19세이하" <c:if test="${memberDetail.member_info_age eq '19세이하' }" >selected</c:if>>19세이하</option>
+					<option value="20~29" <c:if test="${memberDetail.member_info_age eq '20~29' }" >selected</c:if>>20~29</option>
+					<option value="30~39" <c:if test="${memberDetail.member_info_age eq '30~39' }" >selected</c:if>>30~39</option>
+					<option value="40~49" <c:if test="${memberDetail.member_info_age eq '40~49' }" >selected</c:if>>40~49</option>
+					<option value="50~59" <c:if test="${memberDetail.member_info_age eq '50~59' }" >selected</c:if>>50~59</option>
+					<option value="60~69" <c:if test="${memberDetail.member_info_age eq '60~69' }" >selected</c:if>>60~69</option>
+					<option value="70대이상" <c:if test="${memberDetail.member_info_age eq '70대이상' }" >selected</c:if>>70대이상</option>
+<%-- 					<option value="19세이하" <%if(member.getMember_info_age().equals("19세이하")) {%>selected="selected"<%} %>>19세이하</option> --%>
+<%-- 					<option value="20~29" <%if(member.getMember_info_age().equals("20~29")) {%>selected="selected"<%} %>>20~29</option> --%>
+<%-- 					<option value="30~39" <%if(member.getMember_info_age().equals("30~39")) {%>selected="selected"<%} %>>30~39</option> --%>
+<%-- 					<option value="40~49" <%if(member.getMember_info_age().equals("40~49")) {%>selected="selected"<%} %>>40~49</option> --%>
+<%-- 					<option value="50~59" <%if(member.getMember_info_age().equals("50~59")) {%>selected="selected"<%} %>>50~59</option> --%>
+<%-- 					<option value="60~69" <%if(member.getMember_info_age().equals("60~69")) {%>selected="selected"<%} %>>60~69</option> --%>
+<%-- 					<option value="70대이상" <%if(member.getMember_info_age().equals("70대이상")) {%>selected="selected"<%} %>>70세이상</option> --%>
 				</select></td>
 			</tr>
 			<tr> 
@@ -563,24 +572,34 @@ MemberBean member = (MemberBean)request.getAttribute("memberDetail");
 			</tr>
 			<tr> 
 				<th>스타일</th>
-				<td><select id="member_info_detail_like_style" name="member_info_detail_like_style">
-					<option value="귀여움" <%if(member.getMember_info_detail_like_style().equals("귀여움")) {%>selected="selected"<%} %>>귀여움</option>
-					<option value="섹시함" <%if(member.getMember_info_detail_like_style().equals("섹시함")) {%>selected="selected"<%} %>>섹시함</option>
-				</select></td>
+				<td>
+					<label for="member_info_detail_like_style"></label> 
+					<input type="checkbox" name="style" value="귀여움" <%if(member.getMember_info_detail_like_style().contains("귀여움")) {%>checked="checked"<%} %>>귀여움
+					<input type="checkbox" name="style" value="청순" <%if(member.getMember_info_detail_like_style().contains("청순")) {%>checked="checked"<%} %>>청순
+					<input type="checkbox" name="style" value="캐주얼" <%if(member.getMember_info_detail_like_style().contains("캐주얼")) {%>checked="checked"<%} %>>캐주얼
+				</td>
 			</tr>
 			<tr> 
 				<th>브랜드</th>
-				<td><select id="member_info_detail_like_brand" name="member_info_detail_like_brand">
-					<option value="나이키" <%if(member.getMember_info_detail_like_brand().equals("나이키")) {%>selected="selected"<%} %>>나이키</option>
-					<option value="에르메스" <%if(member.getMember_info_detail_like_brand().equals("에르메스")) {%>selected="selected"<%} %>>에르메스</option>
-				</select></td>
+				<td>
+					<label for="member_info_detail_like_brand" id="member_info_detail_like_brand" name="member_info_detail_like_brand"></label>
+					<input type="checkbox" name="brand" value="나이키" <%if(member.getMember_info_detail_like_brand().contains("나이키")) {%>checked="checked"<%} %>>나이키
+					<input type="checkbox" name="brand" value="아디다스" <%if(member.getMember_info_detail_like_brand().contains("아디다스")) {%>checked="checked"<%} %>>아디다스 
+					<input type="checkbox" name="brand" value="아페쎄"  <%if(member.getMember_info_detail_like_brand().contains("아페쎄")) {%>checked="checked"<%} %>>아페쎄 
+					<input type="checkbox" name="brand" value="칼하트" <%if(member.getMember_info_detail_like_brand().contains("칼하트")) {%>checked="checked"<%} %>>칼하트 
+					<input type="checkbox" name="brand" value="샤넬" <%if(member.getMember_info_detail_like_brand().contains("샤넬")) {%>checked="checked"<%} %>>샤넬 
+				</td>
 			</tr>
 			<tr> 
 				<th>관심품목</th>
-				<td><select id="member_info_detail_like_category" name="member_info_detail_like_category">
-					<option value="상의" <%if(member.getMember_info_detail_like_category().equals("상의")) {%>selected="selected"<%} %>>상의</option>
-					<option value="하의" <%if(member.getMember_info_detail_like_category().equals("하의")) {%>selected="selected"<%} %>>하의</option>
-				</select></td>
+				<td>
+					<label for="member_info_detail_like_category"></label>
+					<input type="checkbox" name="category" value="상의" <%if(member.getMember_info_detail_like_category().contains("상의")) {%>checked="checked"<%} %>>상의
+					<input type="checkbox" name="category" value="하의" <%if(member.getMember_info_detail_like_category().contains("하의")) {%>checked="checked"<%} %>>하의
+					<input type="checkbox" name="category" value="신발" <%if(member.getMember_info_detail_like_category().contains("신발")) {%>checked="checked"<%} %>>신발
+					<input type="checkbox" name="category" value="잡화" <%if(member.getMember_info_detail_like_category().contains("잡화")) {%>checked="checked"<%} %>>잡화
+					<input type="checkbox" name="category" value="상의" <%if(member.getMember_info_detail_like_category().contains("상의")) {%>checked="checked"<%} %>>상의
+				</td>
 			</tr>
 			<tr> 
 				<th>누적 포인트</th>
