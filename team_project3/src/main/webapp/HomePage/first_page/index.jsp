@@ -766,7 +766,6 @@
 								<option value="@daum.net">daum.net</option>
 								<option value="@yahoo.com">yahoo.com</option>
 							</select> 
-							<input type="text" id="checkEmail" placeholder="인증번호 입력"> <span id="emailCheck"></span>
 						</div>
 						<div class="field half">
 							<label for="member_info_gender">성별</label> 

@@ -17,7 +17,6 @@ public class SendEmailService {
 		MemberDAO memberDAO = MemberDAO.getInstance();
 		memberDAO.setConnection(con);
 		
-		isSendEmail = memberDAO.isSendEmail(email);
 		
 		close(con);
 		

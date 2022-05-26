@@ -531,22 +531,14 @@ public class MemberDAO {
 		return isFindPasswd;
 	}
 
-	public boolean insertAuthInfo(String email, String code) {
+	public void insertAuthInfo(String email, String code) {
 		System.out.println("MemberDAO - isSendEmail");
-		
 		System.out.println(email + "/ " + code);
-		
-		boolean isSendEmail = false;
-		
 		PreparedStatement pstmt = null, pstmt2 = null;
 		ResultSet rs = null;
-		
+		System.out.println("insert 시작");
 		try {
-			// 1단계 & 2단계
-			// JdbcUtil 객체의 getConnection() 메서드를 호출하여 DB 연결 객체 가져오기
 			
-			// 3단계. SQL 구문 작성 및 전달
-			// => member 테이블의 id 컬럼 조회(단, id 와 auth_status 가 일치하는 레코드 조회)
 			String sql = "SELECT auth_code FROM auth WHERE email=? ";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, email);
@@ -555,18 +547,21 @@ public class MemberDAO {
 			rs = pstmt.executeQuery();
 			// 조회 결과가 존재할 경우(= rs.next() 가 true 일 경우)
 			// isAuthenticatedMember 변수값을 true 로 변경
-			if(rs.next() ) {
-				sql = "UPDATE auth SET auth_code=? WHERE email =?";
+			System.out.println("select 확인 완료");
+			if(rs.next()) {
+				sql = "UPDATE auth SET auth_code=? WHERE email=?";
 				pstmt2 = con.prepareStatement(sql);
 				pstmt2.setString(1, code);
 				pstmt2.setString(2, email);
 				pstmt2.executeUpdate();
+				System.out.println("UPDATE 완료");
 			}else {
 				sql = "INSERT INTO auth VALUES(?,?)";
 				pstmt2 = con.prepareStatement(sql);
 				pstmt2.setString(1, email);
 				pstmt2.setString(2, code);
 				pstmt2.executeUpdate();	
+				System.out.println("INSERT 완료");
 			}
 			
 		} catch (SQLException e) {
@@ -579,7 +574,6 @@ public class MemberDAO {
 			close(pstmt2);
 		}
 		
-		return isSendEmail;
 	}
 
 }
