@@ -43,7 +43,9 @@
 			<div class="card">
 				<div class="title">공지사항 글 상세보기</div>
 				
-					<form action="./CommunityBoardWritePro.co" name="boardForm" method="post" enctype="multipart/form-data">
+					<form action="#" name="boardForm" method="post" enctype="multipart/form-data">
+						<input type="hidden" id="notice_num" name="notice_num" value="${param.notice_num}">
+						<input type="hidden" id="page" name="page" value="${param.page}">
 						<table >
 							<tr>
 								<th>분류</th>
@@ -95,7 +97,8 @@
 						<br>
 						<section id="commandCell">	
 							<input type="button" value="수정" onclick="location.href='NoticeModifyForm.co?notice_num=${param.notice_num}&page=${param.page}'">
-							<input type="button" value="삭제" onclick="location.href='NoticeDeleteForm.co?notice_num=${param.notice_num}&page=${param.page}'">
+							<input type="button" value="삭제" onclick="confirmDelete()">
+<%-- 							<input type="button" value="삭제" onclick="location.href='NoticeDelete.co?notice_num=${param.notice_num}&page=${param.page}'"> --%>
 							<input type="button" value="목록" onclick="history.back()">
 <%-- 							<input type="button" value="목록" onclick="location.href='NoticeList.co?page=${param.page}'"> --%>
 						</section>

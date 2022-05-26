@@ -21,6 +21,7 @@ import action.EventSearchAction;
 import action.MemberDetailAction;
 import action.MemberManagementListAction;
 import action.MemberUpdateAction;
+import action.NoticeDeleteAction;
 import action.NoticeDetailAction;
 import action.NoticeListAction;
 import action.NoticeModifyFormAction;
@@ -104,7 +105,14 @@ public class CommunityFrontController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		} else if (command.equals("/EventList.co")) {// 이벤트 리스트(/EventList.co) 요청
+		} else if (command.equals("/NoticeDelete.co")) {// 공지사항 삭제(/NoticeDelete.co) 요청
+			action = new NoticeDeleteAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}else if (command.equals("/EventList.co")) {// 이벤트 리스트(/EventList.co) 요청
 			action = new EventListAction();
 			try {
 				forward = action.execute(request, response);

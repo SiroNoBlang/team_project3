@@ -113,13 +113,18 @@ $('#toggle-left-menu').click(function() {
 	
 	//삭제 확인하기
 		function confirmDelete(){
-			let qna_num = document.getElementById("qna_num"). value;
-			let page = document.getElementById("page"). value;
+			let qna_num = document.getElementById("qna_num").value;
+			let page = document.getElementById("page").value;
+			let notice_num = document.getElementById("notice_num").value;
 			
-			if(confirm("삭제 하시겠습니까?")) {
-			location.href = "./QnaDeletePro.co?qna_num=" + qna_num+"&page="+page;
+			
+			if(document.getElementById("notice_num")){
+				if(confirm("삭제 하시겠습니까?")) {
+				location.href = "./QnaDeletePro.co?qna_num=" + qna_num+"&page="+page;
+				
+			}
+			
 		}
 	}
-
 
 

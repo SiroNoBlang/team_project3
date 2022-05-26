@@ -442,6 +442,31 @@ public class AdminDAO {
 		return isNoticeModifySuccess;
 	}
 	
+	
+
+	//공지사항 삭제
+	public int deleteNoticeArticle(int notice_num) {
+		int deleteCount = 0;
+		
+		PreparedStatement pstmt = null;
+		
+		try {
+			String sql = "DELETE FROM notice WHERE notice_num=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, notice_num);
+			deleteCount = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			System.out.println("SQL 구문 오류 발생! - deleteNoticeArticle()");
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return deleteCount;	
+	}
+	
+	
+	
+	
 	// 이벤트 글쓰기
 	public int insertEventArticle(EventBean event,  ArrayList<EventImgFileBean> eventImgList) {
 //			System.out.println("AdminDAO - insertEventArticle()");
@@ -1564,6 +1589,8 @@ public class AdminDAO {
 		
 		
 	}
+
+	
 
 }	
 	

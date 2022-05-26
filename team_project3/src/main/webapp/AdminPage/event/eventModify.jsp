@@ -57,7 +57,7 @@
 				<div class="title">이벤트 글 수정</div>
 				
 					<form action="./NoticeModifyPro.co" name="boardForm" method="post" enctype="multipart/form-data">
-						<input type="hidden" name="notice_num" value="${param.event_num}">
+						<input type="hidden" name="event_num" value="${param.event_num}">
 						<input type="hidden" name="page" value="${param.page}">
 						<table >
 							<tr>

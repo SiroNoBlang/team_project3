@@ -41,7 +41,7 @@
 			<div class="card">
 				<div class="title">QnA 글 상세보기</div>
 				
-					<form action="./CommunityBoardWritePro.co" name="boardForm" method="post" enctype="multipart/form-data">
+					<form action="#" name="boardForm" method="post" enctype="multipart/form-data">
 						<input type="hidden" id="qna_num" name="qna_num" value="${param.qna_num}">
 						<input type="hidden" id="page" name="page" value="${param.page}">
 						<table >

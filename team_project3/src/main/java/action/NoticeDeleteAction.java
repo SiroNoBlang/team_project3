@@ -5,22 +5,22 @@ import java.io.PrintWriter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import svc.QnaDeleteProService;
+import svc.NoticeDeleteService;
 import vo.ActionForward;
 
-public class QnaDeleteProAction implements Action {
+public class NoticeDeleteAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-//		System.out.println("QnaDeleteProAction");
+//		System.out.println("NoticeDeleteAction");
 		
 		ActionForward forward = null;
 		
-		int qna_num = Integer.parseInt(request.getParameter("qna_num"));
+		int notice_num = Integer.parseInt(request.getParameter("notice_num"));
 		String pageNum = request.getParameter("page");
 		
-		QnaDeleteProService service = new QnaDeleteProService();
-		boolean isDeleteSuccess = service.deleteQnaArticle(qna_num);
+		NoticeDeleteService service = new NoticeDeleteService();
+		boolean isDeleteSuccess = service.deleteNoticeArticle(notice_num);
 			
 		
 		if(!isDeleteSuccess) {
@@ -32,11 +32,16 @@ public class QnaDeleteProAction implements Action {
 				out.println("</script>");
 			} else {
 				forward = new ActionForward();
-				forward.setPath("QusetionList.co?page=" + pageNum);
+				forward.setPath("NoticeList.co?page=" + pageNum);
 				forward.setRedirect(true);
 			}
 		
 		return forward;
+
+	
+	
+	
+	
 	}
 
 }
