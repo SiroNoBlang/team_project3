@@ -17,7 +17,6 @@ import action.CommunityBoardWriteProAction;
 import action.EventDetailAction;
 import action.EventListAction;
 import action.EventModifyFormAction;
-import action.EventModifyProAction;
 import action.EventSearchAction;
 import action.MemberDetailAction;
 import action.MemberManagementListAction;
@@ -27,9 +26,9 @@ import action.NoticeListAction;
 import action.NoticeModifyFormAction;
 import action.NoticeModifyProAction;
 import action.NoticeSearchAction;
+import action.ProductConfirmDetailAction;
 import action.ProductConfirmListAction;
 import action.ProductConfirmSearchAction;
-import action.ProductConfirmDetailAction;
 import action.QnaDeleteProAction;
 import action.QnaDetailAction;
 import action.QnaModifyFormAction;
@@ -98,7 +97,7 @@ public class CommunityFrontController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		} else if (command.equals("/NoticeModifyPro.co")) {// 공지사항 수정(/NoticeModifyPro.co) 요청
+		} else if (command.equals("/NoticeModifyPro.co")) {// 공지사항 및 이벤트 수정(/NoticeModifyPro.co) 요청
 			action = new NoticeModifyProAction();
 			try {
 				forward = action.execute(request, response);
@@ -127,14 +126,7 @@ public class CommunityFrontController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		} else if (command.equals("/EventModifyPro.co")) {// 이벤트 수정(/EventModifyPro.co) 요청
-			action = new EventModifyProAction();
-			try {
-				forward = action.execute(request, response);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		} else if (command.equals("/EventSearch.co")) {// 이벤트 검색(/EventSearch.co) 요청
+		}  else if (command.equals("/EventSearch.co")) {// 이벤트 검색(/EventSearch.co) 요청
 			action = new EventSearchAction();
 			try {
 				forward = action.execute(request, response);

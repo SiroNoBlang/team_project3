@@ -1,7 +1,6 @@
 package svc;
 
 import static db.JdbcUtil.*;
-
 import java.sql.Connection;
 import java.util.ArrayList;
 
@@ -39,7 +38,7 @@ public class CommunityModifyProService {
 	}
 
 	// 이벤트 수정 작업을 요청하는 eventModifyArticle() 메서드 정의
-	public boolean eventModifyArticle(EventBean event, ArrayList<EventImgFileBean> eventImgList) {
+	public boolean eventModifyArticle(int event_num,EventBean event, ArrayList<EventImgFileBean> eventImgList) {
 //		System.out.println("CommunityModifyProService - eventModifyArticle");
 
 		boolean isEventModifySuccess = false;
@@ -49,16 +48,16 @@ public class CommunityModifyProService {
 		
 		adminDAO.setConnection(con);
 		
-//		int updateCount = adminDAO.updateEventArticle(event,eventImgList);
-//		
-//		if(updateCount > 0) {
-//			commit(con);
-//			isEventModifySuccess = true;
-//		} else { // 작업 실패 시
-//			rollback(con);
-//		}
-//		close(con);
-//		
+		int updateCount = adminDAO.updateEventArticle(event_num,event,eventImgList);
+		
+		if(updateCount > 0) {
+			commit(con);
+			isEventModifySuccess = true;
+		} else { // 작업 실패 시
+			rollback(con);
+		}
+		close(con);
+		
 		return isEventModifySuccess;
 	}
 
@@ -77,5 +76,22 @@ public class CommunityModifyProService {
 		return isNoticeImgExist;
 
 	}
+
+	//이벤트 등록된 사진 확인 작업
+	public ArrayList<EventImgFileBean> isEventImgExist(int event_num) {
+		ArrayList<EventImgFileBean> isEventImgExist = null;
+		Connection con = getConnection(); 
+		AdminDAO adminDAO= AdminDAO.getInstance();
+		
+		adminDAO.setConnection(con);
+		
+		isEventImgExist = adminDAO.selectEventImgExist(event_num);
+		
+		close(con);
+		
+		return isEventImgExist;
+	}
+
+
 
 }

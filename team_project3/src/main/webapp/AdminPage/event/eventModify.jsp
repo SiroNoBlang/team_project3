@@ -56,7 +56,9 @@
 			<div class="card">
 				<div class="title">이벤트 글 수정</div>
 				
-					<form action="./EventModifyPro.co" name="boardForm" method="post" enctype="multipart/form-data">
+					<form action="./NoticeModifyPro.co" name="boardForm" method="post" enctype="multipart/form-data">
+						<input type="hidden" name="notice_num" value="${param.event_num}">
+						<input type="hidden" name="page" value="${param.page}">
 						<table >
 							<tr>
 								<th>분류</th>

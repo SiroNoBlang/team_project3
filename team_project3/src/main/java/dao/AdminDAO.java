@@ -710,6 +710,110 @@ public class AdminDAO {
 		return eventSearchList;
 	}
 	
+	//이벤트에 등록된 사진 가져오기
+	public ArrayList<EventImgFileBean> selectEventImgExist(int event_num) {
+		ArrayList<EventImgFileBean> isEventImgExist = null;
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		
+		try {
+			String sql = "SELECT f.event_img_file_name, f.event_img_file_real_name "
+					+ "FROM event "
+					+ "JOIN event_img_file f "
+					+ "on f.event_img_file_num = event_num "
+					+ "WHERE event_img_file_num =?";
+			
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, event_num);
+	
+			rs = pstmt.executeQuery();
+			
+			isEventImgExist = new ArrayList<EventImgFileBean>();
+			
+			while(rs.next()) {
+				EventImgFileBean eventImg = new EventImgFileBean();
+				eventImg.setEvent_img_file_name(rs.getString("f.event_img_file_name"));
+				eventImg.setEvent_img_file_real_name(rs.getString("f.event_img_file_real_name"));
+				
+				isEventImgExist.add(eventImg);
+			}
+			
+		} catch (SQLException e) {
+			System.out.println("SQL 구문 오류 발생! - selectEventImgExist()");
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rs);
+		}
+		return isEventImgExist;
+	}
+	
+	//이벤트 수정
+	public int updateEventArticle(int event_num,EventBean event, ArrayList<EventImgFileBean> eventImgList) {
+//		System.out.println("AdminDAO - updateEventArticle()");
+		int isEventModifySuccess = 0;
+
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try { //공지사항 글부분 
+			String sql = "UPDATE event SET event_title=?, event_content = ? WHERE event_num=?";
+			
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, event.getEvent_title());
+			pstmt.setString(2, event.getEvent_content());
+			pstmt.setInt(3, event_num);
+			
+			isEventModifySuccess = pstmt.executeUpdate();
+			
+			close(pstmt);
+			
+			sql = "DELETE FROM event_img_file WHERE event_img_file_num = ?"; // 첨부파일 삭제
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, event_num);
+			
+			pstmt.executeUpdate();
+			
+			
+			if(!eventImgList.isEmpty()) { // 첨부파일 리스트가 비어있지 않으면
+				
+				int num = 0;
+				sql = "SELECT MAX(event_img_file_real_num) FROM event_img_file";
+				pstmt = con.prepareStatement(sql);
+				rs = pstmt.executeQuery();
+
+				if (rs.next()) {
+					num = rs.getInt(1) + 1;
+					
+					for(EventImgFileBean eventImg: eventImgList) { 
+						
+						sql = "INSERT INTO event_img_file VALUES (?,?,?,?)"; 
+						pstmt = con.prepareStatement(sql); 
+						
+						pstmt.setInt(1,num); 
+						pstmt.setInt(2,event_num); 
+						pstmt.setString(3,eventImg.getEvent_img_file_name()); 
+						pstmt.setString(4,eventImg.getEvent_img_file_real_name());
+						
+						pstmt.executeUpdate();
+						
+						num++;
+						
+					} 
+				}
+			} // if문 끝_!eventImgList.isEmpty()
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println("SQL 구문 오류 발생! - updateEventArticle()");
+		} finally {
+			close(pstmt);
+		}
+		return isEventModifySuccess;
+	}
+	
 	//QnA 글쓰기
 	public int insertQnaArticle(QnaBean qna) {
 
@@ -1420,8 +1524,6 @@ public class AdminDAO {
 		return confirm;
 	}
 
-	
-	
 	//검수현황 상세정보 - 이미지 정보
 	public ArrayList<SellerimgDTO> getConfirmImg(int sell_num) {
 		ArrayList<SellerimgDTO> confirmImgFileList = new ArrayList<SellerimgDTO>();

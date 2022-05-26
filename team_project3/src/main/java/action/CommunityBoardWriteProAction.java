@@ -61,11 +61,7 @@ public class CommunityBoardWriteProAction implements Action {
         
         System.out.println(realFileName);
         
-        File oldFile = new File(realPath + board_real_file);
-        File newFile = new File(realPath + realFileName);
-       
-        oldFile.renameTo(newFile); // 파일명 변경
-        
+         
 		
 		
 		NoticeBean notice = null;
@@ -105,8 +101,8 @@ public class CommunityBoardWriteProAction implements Action {
 			        realFileName = now + board_real_file.substring(format,board_real_file.length());  //현재시간과 확장자 합치기
 			        
 			        
-			        oldFile = new File(realPath + board_real_file);
-			        newFile = new File(realPath + realFileName);
+			        File oldFile = new File(realPath + board_real_file);
+			        File newFile = new File(realPath + realFileName);
 			       
 			        oldFile.renameTo(newFile); // 파일명 변경
 			        
@@ -148,8 +144,8 @@ public class CommunityBoardWriteProAction implements Action {
 			        realFileName = now + board_real_file.substring(format,board_real_file.length());  //현재시간과 확장자 합치기
 			        
 			        
-			        oldFile = new File(realPath + board_real_file);
-			        newFile = new File(realPath + realFileName);
+			        File oldFile = new File(realPath + board_real_file);
+			        File newFile = new File(realPath + realFileName);
 			       
 			        oldFile.renameTo(newFile); // 파일명 변경
 	

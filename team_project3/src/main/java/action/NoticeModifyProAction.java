@@ -42,9 +42,10 @@ public class NoticeModifyProAction implements Action {
 		MultipartRequest multi = new MultipartRequest(request, realPath, fileSize, "UTF-8", new DefaultFileRenamePolicy());
 		
 		int notice_num = Integer.parseInt(multi.getParameter("notice_num"));
+		int event_num = Integer.parseInt(multi.getParameter("notice_num"));
 
 		String communityType = multi.getParameter("communityType");
-//		System.out.println(communityType); //커뮤니티 카테고리 확인 작업
+		System.out.println(communityType); //커뮤니티 카테고리 확인 작업
 		
 		CommunityModifyProService service = new CommunityModifyProService();
 		boolean isNoticeModifySuccess = false;
@@ -77,6 +78,7 @@ public class NoticeModifyProAction implements Action {
 		EventBean event = null;
 		EventImgFileBean eventImg =  null;
 		ArrayList<EventImgFileBean> eventImgList = new ArrayList<EventImgFileBean>();
+		ArrayList<EventImgFileBean> isEventImgExist =  new ArrayList<EventImgFileBean>();
 		
 		Enumeration files = multi.getFileNames();
 		
@@ -146,14 +148,36 @@ public class NoticeModifyProAction implements Action {
 			
 			isNoticeModifySuccess = service.noticeModifyArticle(notice_num,notice, noticeImgList);
 			
-		//이벤트 글쓰기	
+		//이벤트 수정	
 		} else if (communityType.equals("event")){
 			//이벤트 테이블 중에 첨부파일을 빼고 담을 NoticeBean
 			event = new EventBean();
 			
 			event.setEvent_title(multi.getParameter("board_title"));
-			event.setEvent_nickname(multi.getParameter("board_nickname"));
 			event.setEvent_content(multi.getParameter("board_content"));
+			
+			
+			// 업로된 사진이 있는 지 확인
+			isEventImgExist = service.isEventImgExist(event_num);
+//			System.out.println("이건 리턴값이요"+isEventImgExist);
+			
+			
+			if(!isEventImgExist.isEmpty()) {
+				for(EventImgFileBean beforeImg:isEventImgExist) {
+					
+					// 삭제될 실제 사진을 가져오기
+					String deleteImgName = realPath +"\\admin_event_img\\" + beforeImg.getEvent_img_file_real_name();
+//					System.out.println(deleteImgName);
+					File deleteImg = new File (deleteImgName);
+					
+					//경로에 업로드된 사진이 있다면 삭제
+			    	if (deleteImg.exists() && deleteImg.isFile()){
+			    	    deleteImg.delete();// 사진 삭제
+//			    	    System.out.println("삭제된 사진 : "+deleteImgName);
+				    } 
+				}
+			} //if문 끝
+			
 			
 			// 첨부파일을 담을 eventImg
 			while (files.hasMoreElements()) {
@@ -190,7 +214,7 @@ public class NoticeModifyProAction implements Action {
 				}
 			}
 			
-			isEventModifySuccess = service.eventModifyArticle(event, eventImgList);
+			isEventModifySuccess = service.eventModifyArticle(event_num, event, eventImgList);
 		}
 		
 		
