@@ -11,7 +11,7 @@ public class QnaReplyFormAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		System.out.println("BoardReplyFormAction");
+//		System.out.println("QnaReplyFormAction");
 		
 		ActionForward forward = null;
 		

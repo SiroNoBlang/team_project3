@@ -23,7 +23,7 @@ public class MpEventDetailAction implements Action {
 			EventDetailService service = new EventDetailService();
 			EventBean eventArticle = service.getEventArticle(event_num);
 			
-			ArrayList<EventImgFileBean> eventImgFileList = service.getNoticeImg(event_num);
+			ArrayList<EventImgFileBean> eventImgFileList = service.getEventImg(event_num);
 			
 			
 			if(eventArticle != null) {

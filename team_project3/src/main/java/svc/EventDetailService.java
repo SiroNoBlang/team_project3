@@ -12,7 +12,7 @@ import vo.EventImgFileBean;
 public class EventDetailService {
 
 	public EventBean getEventArticle(int event_num) {
-//		System.out.println("EventDetailService - getNoticeArticle()");
+//		System.out.println("EventDetailService - getEventArticle()");
 		
 		EventBean eventArticle = null;
 		
@@ -28,7 +28,7 @@ public class EventDetailService {
 		return eventArticle;
 	}
 
-	public ArrayList<EventImgFileBean> getNoticeImg(int event_num) {
+	public ArrayList<EventImgFileBean> getEventImg(int event_num) {
 	
 		ArrayList<EventImgFileBean> eventImgFileList = null;
 		

@@ -16,6 +16,8 @@ import action.ClassificationUpdateAction;
 import action.CommunityBoardWriteProAction;
 import action.EventDetailAction;
 import action.EventListAction;
+import action.EventModifyFormAction;
+import action.EventModifyProAction;
 import action.EventSearchAction;
 import action.MemberDetailAction;
 import action.MemberManagementListAction;
@@ -113,6 +115,20 @@ public class CommunityFrontController extends HttpServlet {
 		} else if (command.equals("/EventDetail.co")) {// 이벤트 상세정보(/EventDetail.co) 요청
 			action = new EventDetailAction();
 
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		} else if (command.equals("/EventModifyForm.co")) { // 이벤트 수정하는 상세정보(/EventModifyForm.co) 요청
+			action = new EventModifyFormAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		} else if (command.equals("/EventModifyPro.co")) {// 이벤트 수정(/EventModifyPro.co) 요청
+			action = new EventModifyProAction();
 			try {
 				forward = action.execute(request, response);
 			} catch (Exception e) {

@@ -13,7 +13,7 @@ public class QnaReplyProAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		System.out.println("QnaReplyProAction");
+//		System.out.println("QnaReplyProAction");
 		
 		ActionForward forward = null;
 		
