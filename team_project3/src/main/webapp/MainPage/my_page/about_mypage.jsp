@@ -423,7 +423,6 @@ MemberBean member = (MemberBean)request.getAttribute("memberDetail");
 					</tr>
 					</table>
 					
-				
 			<form action="ProfileImgUpdate.ma" method="post" enctype="multipart/form-data">
 			<table border="1">
 				<tr> 
