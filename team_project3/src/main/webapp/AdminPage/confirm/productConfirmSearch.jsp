@@ -63,7 +63,7 @@
 				        </div>
 				        <div class="col-6 col-sm-3">
 				          <div class="panel panel-warning">
-				            <div class="panel-heading">검수실패</div>
+				            <div class="panel-heading">검수반려</div>
 				            <div class="panel-body">
 				              <h4>123</h4>
 				            </div>
