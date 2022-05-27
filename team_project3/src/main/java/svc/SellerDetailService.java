@@ -9,15 +9,16 @@ import java.util.ArrayList;
 
 import dao.SellerDAO;
 import vo.SellerDTO;
+import vo.SellerProductDTO;
 import vo.SellerimgDTO;
 
 public class SellerDetailService {
 
-	public SellerDTO getArticle(int sell_num) {
+	public SellerProductDTO getArticle(int sell_num) {
 		System.out.println("BoardDetailService - getArticle()");
 		
 		// 1. 리턴할 데이터를 저장할 변수 선언
-		SellerDTO article = null;
+		SellerProductDTO article = null;
 		
 		// 2. JdbcUtil 클래스로부터 Connection Pool 에 저장된 Connection 객체 가져오기 - 공통
 		Connection con = getConnection(); // static import 적용되어 있을 경우

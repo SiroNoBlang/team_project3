@@ -203,9 +203,9 @@ public class SellerDAO {
 		return articleList;
 	}
 
-	public SellerDTO selectArticle(int sell_num) { // sell_num 값을 이용하여 해당 제품 판매관련정보 가져오기 &(코드 활용)상세글에서 (buy) 구매하기
+	public SellerProductDTO selectArticle(int sell_num) { // sell_num 값을 이용하여 해당 제품 판매관련정보 가져오기 &(코드 활용)상세글에서 (buy) 구매하기
 													// ->Sellerdto 를 이용하여 상품의 상세정보 가져오기
-		SellerDTO article = null;
+		SellerProductDTO article = null;
 
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -222,7 +222,7 @@ public class SellerDAO {
 //			b.sell_img_name, b.sell_img_real_name, c.sell_list_num
 
 			if (rs.next()) {
-				article = new SellerDTO();
+				article = new SellerProductDTO();
 				article.setSell_member_code(rs.getString("sell_member_code"));
 				article.setSell_num(rs.getInt("sell_num"));
 				article.setSell_category(rs.getString("sell_category"));
@@ -233,8 +233,8 @@ public class SellerDAO {
 				article.setSell_brand(rs.getString("sell_brand"));
 				article.setSell_price(rs.getInt("sell_price"));
 				article.setSell_readcount(rs.getInt("sell_readcount"));
-//				article.setSell_img_name(rs.getString("sell_img_name"));
-//				article.setSell_img_real_name(rs.getString("sell_img_real_name"));
+				article.setSell_img_name(rs.getString("sell_img_name"));
+				article.setSell_img_real_name(rs.getString("sell_img_real_name"));
 				article.setSell_list_num(rs.getInt("sell_list_num"));
 				article.setSell_list_item_status(rs.getString("sell_list_item_status"));
 				article.setSell_list_approve_nickname(rs.getString("sell_list_approve_nickname"));

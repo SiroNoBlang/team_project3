@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import svc.SellerDetailService;
 import vo.ActionForward;
 import vo.SellerDTO;
+import vo.SellerProductDTO;
 import vo.SellerimgDTO;
 
 public class ProductDetailProAction implements Action {
@@ -25,7 +26,7 @@ public class ProductDetailProAction implements Action {
 		System.out.println(sell_brand);
 		
 		SellerDetailService service = new SellerDetailService();
-		SellerDTO sellerdto = new SellerDTO(); 
+		SellerProductDTO sellerdto = new SellerProductDTO(); 
 		
 		sellerdto = service.getArticle(sell_num);   //상세정보를 위한 sellerdto 객체 꺼내오기     <request.getparameter sell_list_num 꺼내지는지 확인하기>
 		

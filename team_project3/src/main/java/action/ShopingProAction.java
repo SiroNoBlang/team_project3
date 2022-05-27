@@ -7,6 +7,7 @@ import svc.SellerShopingService;
 import vo.ActionForward;
 import vo.MemberBean;
 import vo.SellerDTO;
+import vo.SellerProductDTO;
 
 public class ShopingProAction implements Action {
 
@@ -21,7 +22,7 @@ public class ShopingProAction implements Action {
 		
 		
 		SellerShopingService service = new SellerShopingService();
-		SellerDTO sellerDTO = new SellerDTO();
+		SellerProductDTO sellerDTO = new SellerProductDTO();
 		MemberBean memberBean = new MemberBean();
 		
 		

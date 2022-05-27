@@ -1,3 +1,4 @@
+<%@page import="vo.SellerProductDTO"%>
 <%@page import="vo.SellerimgDTO"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="vo.PageInfo"%>
@@ -8,7 +9,7 @@
 String member_nickname =(String)session.getAttribute("sNickname");
 String member_code =(String)session.getAttribute("sCode");
 SellerDTO seller = new SellerDTO();
-SellerDTO sellerdto = (SellerDTO)request.getAttribute("sellerdto");
+SellerProductDTO sellerdto = (SellerProductDTO)request.getAttribute("sellerdto");
 PageInfo pageInfo = (PageInfo)request.getAttribute("pageInfo");
 ArrayList<SellerDTO> Relationdto = (ArrayList<SellerDTO>)request.getAttribute("Relationdto");
 ArrayList<SellerimgDTO> Sellerdetailimg = (ArrayList<SellerimgDTO>)request.getAttribute("Sellerdetailimg");
@@ -369,10 +370,10 @@ ArrayList<SellerimgDTO> Sellerdetailimg = (ArrayList<SellerimgDTO>)request.getAt
 		
 
 	<!-- Product Detail -->
-	<input type="button" value="구매" onclick="location.href='ShopingPro.pr?sell_num=<%=sellerdto.getSell_num()%>&member_code=<%=member_code%>'">
+	<input type="button" name="구매" onclick="location.href='ShopingPro.pr?sell_num=<%=sellerdto.getSell_num()%>&member_code=<%=member_code%>'">
 <form border="1" action="ShopingPro.pr">
 <input type="hidden" >
-판매번호:<%=sellerdto.getSell_list_num() %>
+<%-- 판매번호:<%=sellerdto.getSell_list_num() %> --%>
 	<section class="sec-product-detail bg0 p-t-65 p-b-60">
 		<div class="container">
 			<div class="row">
@@ -385,20 +386,17 @@ ArrayList<SellerimgDTO> Sellerdetailimg = (ArrayList<SellerimgDTO>)request.getAt
 							<div class="slick3 gallery-lb">
 								<div class="item-slick3" data-thumb="MainPage/images/product-detail-01.jpg">
 									<div class="wrap-pic-w pos-relative">
-<!-- 									ArrayList<SellerimgDTO> Sellerdetailimg = (ArrayList<SellerimgDTO>)request.getAttribute("Sellerdetailimg"); -->
-									  <%for(SellerimgDTO sellerimg :Sellerdetailimg){ %>
-										<img src ="./Upload/sell_img/<%=sellerimg.getSell_img_real_name() %>" width="79.06" height="97.84" alt="IMG-PRODUCT">
+										<img src="./Upload/sell_img/<%=sellerdto.getSell_img_real_name() %>" alt="IMG-PRODUCT">
 
 										<a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="./Upload/sell_img/dog.png">
 											<i class="fa fa-expand"></i>
 										</a>
 									</div>
 								</div>
-								<% } %>
 
 								<div class="item-slick3" data-thumb="MainPage/images/product-detail-02.jpg">
 									<div class="wrap-pic-w pos-relative">
-<%-- 										<img src="./Upload/sell_img/<%=sellerimg.getSell_img_real_name() %>" width="79.06" height="97.84" alt="IMG-PRODUCT"> --%>
+										<img src="MainPage/images/product-detail-02.jpg" alt="IMG-PRODUCT">
 
 										<a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="MainPage/images/product-detail-02.jpg">
 											<i class="fa fa-expand"></i>
@@ -408,12 +406,11 @@ ArrayList<SellerimgDTO> Sellerdetailimg = (ArrayList<SellerimgDTO>)request.getAt
 
 								<div class="item-slick3" data-thumb="MainPage/images/product-detail-03.jpg">
 									<div class="wrap-pic-w pos-relative">
-<%-- 										<img src="./Upload/sell_img/<%=sellerimg.getSell_img_real_name() %>" width="79.06" height="97.84" alt="IMG-PRODUCT"> --%>
+										<img src="MainPage/images/product-detail-03.jpg" alt="IMG-PRODUCT">
 
 										<a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="MainPage/images/product-detail-03.jpg">
 											<i class="fa fa-expand"></i>
 										</a>
-										
 									</div>
 								</div>
 							</div>
@@ -423,35 +420,23 @@ ArrayList<SellerimgDTO> Sellerdetailimg = (ArrayList<SellerimgDTO>)request.getAt
 					
 				<div class="col-md-6 col-lg-5 p-b-30">
 					<div class="p-r-50 p-t-5 p-lr-0-lg">
-						<h3 class="mtext-105 cl2 js-name-detail p-b-14">
+						<h2 class="mtext-105 cl2 js-name-detail p-b-14">
 							제목:<%=sellerdto.getSell_title() %>
-						</h3>
-							<div class="p-r-50 p-t-5 p-lr-0-lg">
-								<span class="size-203 flex-c-m respon6">
-									Brand: <%=sellerdto.getSell_brand() %>
-								</span> 
-
-							
-								<div class="size-203 flex-c-m respon6">
-									Category: <%=sellerdto.getSell_category() %>
-								</div> 
-						
-								<div class="size-203 flex-c-m respon6">
-									detail :<%=sellerdto.getSell_category_detail() %>
-								</div>
-							</div>
-							<div >
-								<div class="size-203 flex-c-m respon6">
-									  Size:	<%=sellerdto.getSell_size() %>
-								</div> 
-						
-								<div class="size-203 flex-c-m respon6">
-									 Color:  <%=sellerdto.getSell_color() %>
-								</div>
-							</div>
-								<div class="size-203 flex-c-m respon6">
-									 Price:  <%=sellerdto.getSell_price() %>
-								</div>
+						</h2>
+								<table>
+									<tr><td>Brand: <%=sellerdto.getSell_brand() %></td></tr>
+									<tr><td>Category: <%=sellerdto.getSell_category() %></td></tr>
+										
+									<tr><td>detail :<%=sellerdto.getSell_category_detail() %></td></tr>
+								    	
+								    <tr><td> Size:	<%=sellerdto.getSell_size() %></td></tr>
+										
+									<tr><td>Color:  <%=sellerdto.getSell_color() %></td></tr>
+										
+									<tr><td> Price:  <%=sellerdto.getSell_price() %></td></tr>
+										
+									 </table>
+								
 <!-- 						<div class="p-t-33"> -->
 <!-- 							<div class="flex-w flex-r-m p-b-10"> -->
 <!-- 								<div class="size-203 flex-c-m respon6"> -->

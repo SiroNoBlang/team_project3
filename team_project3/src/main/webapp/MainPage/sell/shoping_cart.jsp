@@ -1,3 +1,4 @@
+<%@page import="vo.SellerProductDTO"%>
 <%@page import="vo.MemberBean"%>
 <%@page import="vo.SellerDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -6,7 +7,7 @@
 
 String member_nickname =(String)session.getAttribute("sNickname");
 String sell_member_code =(String)session.getAttribute("sCode");
-SellerDTO sellerDTO = (SellerDTO)request.getAttribute("sellerDTO");
+SellerProductDTO sellerDTO = (SellerProductDTO)request.getAttribute("sellerDTO");
 MemberBean memberbean = (MemberBean)request.getAttribute("memberBean");
 int charge = sellerDTO.getSell_price() /10; //검수비 판매가격 /10
 int price = sellerDTO.getSell_price()+charge+3000;     //최종 판매가격
@@ -417,7 +418,7 @@ int price = sellerDTO.getSell_price()+charge+3000;     //최종 판매가격
 							<table class="table-shopping-cart">
 								<tr>
 									
-<%-- 										<td><img width="200" height="288" src="./Upload/sell_img/<%=sellerDTO.getSell_img_real_name() %>" alt="IMG"></td> --%>
+										<td><img width="200" height="288" src="./Upload/sell_img/<%=sellerDTO.getSell_img_real_name() %>" alt="IMG"></td>
 										
 										
 							

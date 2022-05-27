@@ -5,8 +5,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>     
-<%
-String member_id =(String)session.getAttribute("sId");  //아이디 값 세션
+<% 
+String member_id =(String)session.getAttribute("sId") ;  //아이디 값 세션
 SellerProductDTO seller = new SellerProductDTO();
 ArrayList<SellerProductDTO> articleList = (ArrayList<SellerProductDTO>)request.getAttribute("articleList");
 PageInfo pageInfo = (PageInfo)request.getAttribute("pageInfo");
