@@ -5,22 +5,23 @@ import java.io.PrintWriter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import svc.EventDeleteService;
 import svc.NoticeDeleteService;
 import vo.ActionForward;
 
-public class NoticeDeleteAction implements Action {
+public class EventDeleteAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-//		System.out.println("NoticeDeleteAction");
+//		System.out.println("EventDeleteAction");
 		
 		ActionForward forward = null;
 		
-		int notice_num = Integer.parseInt(request.getParameter("notice_num"));
+		int event_num = Integer.parseInt(request.getParameter("event_num"));
 		String pageNum = request.getParameter("page");
 		
-		NoticeDeleteService service = new NoticeDeleteService();
-		boolean isDeleteSuccess = service.deleteNoticeArticle(notice_num);
+		EventDeleteService service = new EventDeleteService();
+		boolean isDeleteSuccess = service.deleteEventArticle(event_num);
 			
 		
 		if(!isDeleteSuccess) {
@@ -32,12 +33,11 @@ public class NoticeDeleteAction implements Action {
 				out.println("</script>");
 			} else {
 				forward = new ActionForward();
-				forward.setPath("NoticeList.co?page=" + pageNum);
+				forward.setPath("EventList.co?page=" + pageNum);
 				forward.setRedirect(true);
 			}
 		
 		return forward;
-	
 	}
 
 }

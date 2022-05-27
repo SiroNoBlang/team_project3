@@ -839,6 +839,31 @@ public class AdminDAO {
 		return isEventModifySuccess;
 	}
 	
+	
+	
+	
+	//이벤트 삭제
+	public int deleteEventArticle(int event_num) {
+		int deleteCount = 0;
+		
+		PreparedStatement pstmt = null;
+		
+		try {
+			String sql = "DELETE FROM event WHERE event_num=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, event_num);
+			deleteCount = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			System.out.println("SQL 구문 오류 발생! - deleteEventArticle()");
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return deleteCount;	
+	}
+	
+	
+	
 	//QnA 글쓰기
 	public int insertQnaArticle(QnaBean qna) {
 
@@ -1589,7 +1614,7 @@ public class AdminDAO {
 		
 		
 	}
-
+	
 	
 
 }	

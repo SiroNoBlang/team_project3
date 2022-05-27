@@ -111,14 +111,12 @@ $('#toggle-left-menu').click(function() {
 	}
 	
 	
-	//삭제 확인하기
+	//qna 삭제 확인하기 (코드 수정 : 같은 구문으로 합치는 방법 확인하기)
 		function confirmDelete(){
 			let qna_num = document.getElementById("qna_num").value;
 			let page = document.getElementById("page").value;
-			let notice_num = document.getElementById("notice_num").value;
 			
-			
-			if(document.getElementById("notice_num")){
+			if(document.getElementById("qna_num")){
 				if(confirm("삭제 하시겠습니까?")) {
 				location.href = "./QnaDeletePro.co?qna_num=" + qna_num+"&page="+page;
 				
@@ -126,5 +124,37 @@ $('#toggle-left-menu').click(function() {
 			
 		}
 	}
+
+
+	
+	//공지사항 삭제 확인하기
+		function noticeDelete(){
+			let notice_num = document.getElementById("notice_num").value;
+			let page = document.getElementById("page").value;
+			
+			if(document.getElementById("notice_num")){
+				if(confirm("공지사항 게시물을 삭제 하시겠습니까?")) {
+				location.href = "./NoticeDelete.co?notice_num=" + notice_num+"&page="+page;
+				
+			}
+			
+		}
+	}
+
+	//이벤트 삭제 확인하기
+		function eventDelete(){
+			let event_num = document.getElementById("event_num").value;
+			let page = document.getElementById("page").value;
+			
+			if(document.getElementById("event_num")){
+				if(confirm("이벤트 게시물을 삭제 하시겠습니까?")) {
+				location.href = "./EventDelete.co?event_num=" + event_num+"&page="+page;
+				
+			}
+			
+		}
+	}
+
+
 
 

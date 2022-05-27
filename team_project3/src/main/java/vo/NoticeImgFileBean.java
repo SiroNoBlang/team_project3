@@ -2,11 +2,13 @@ package vo;
 
 
 //CREATE TABLE notice_img_file (
-//notice_img_file_real_num INT Auto_Increment PRIMARY KEY,
-//notice_img_file_num INT REFERENCES notice(notice_num) ON DELETE CASCADE,
-//notice_img_file_name VARCHAR(400),
-//notice_img_file_real_name VARCHAR(400)
+//		notice_img_file_real_num INT,
+//		notice_img_file_num INT,
+//		notice_img_file_name VARCHAR(400),
+//		notice_img_file_real_name VARCHAR(400),
+//		foreign key(notice_img_file_num ) REFERENCES notice(notice_num) ON DELETE CASCADE
 //	);
+
 
 public class NoticeImgFileBean {
 	

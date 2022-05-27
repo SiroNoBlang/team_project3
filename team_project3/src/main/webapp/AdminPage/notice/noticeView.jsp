@@ -97,8 +97,8 @@
 						<br>
 						<section id="commandCell">	
 							<input type="button" value="수정" onclick="location.href='NoticeModifyForm.co?notice_num=${param.notice_num}&page=${param.page}'">
-							<input type="button" value="삭제" onclick="confirmDelete()">
-<%-- 							<input type="button" value="삭제" onclick="location.href='NoticeDelete.co?notice_num=${param.notice_num}&page=${param.page}'"> --%>
+							<input type="button" value="삭제" onclick="noticeDelete()"> 
+<%-- 							<input type="button" value="삭제" onclick="location.href='NoticeDelete.co?notice_num=${param.notice_num}&page=${param.page}'">  --%>
 							<input type="button" value="목록" onclick="history.back()">
 <%-- 							<input type="button" value="목록" onclick="location.href='NoticeList.co?page=${param.page}'"> --%>
 						</section>

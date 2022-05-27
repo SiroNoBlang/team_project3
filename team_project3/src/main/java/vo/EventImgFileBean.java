@@ -2,10 +2,11 @@ package vo;
 
 
 //CREATE TABLE event_img_file (
-//		event_img_file_real_num INT Auto_Increment PRIMARY KEY,
-//		event_img_file_num INT REFERENCES notice(notice_num) ON DELETE CASCADE,
+//		event_img_file_real_num INT,
+//		event_img_file_num INT,
 //		event_img_file_name VARCHAR(400),
-//		event_img_file_real_name VARCHAR(400)
+//		event_img_file_real_name VARCHAR(400),
+//		foreign key(event_img_file_num) REFERENCES event(event_num) ON DELETE CASCADE
 //	);
 
 

@@ -14,6 +14,7 @@ import action.ClassificationAction;
 import action.ClassificationDetailAction;
 import action.ClassificationUpdateAction;
 import action.CommunityBoardWriteProAction;
+import action.EventDeleteAction;
 import action.EventDetailAction;
 import action.EventListAction;
 import action.EventModifyFormAction;
@@ -141,7 +142,14 @@ public class CommunityFrontController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		} else if (command.equals("/QnaWritePro.co")) { // QnA 글쓰기(/QnaWritePro.co) 요청
+		} else if (command.equals("/EventDelete.co")) {// 이벤트 삭제(/EventDelete.co) 요청
+			action = new EventDeleteAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}else if (command.equals("/QnaWritePro.co")) { // QnA 글쓰기(/QnaWritePro.co) 요청
 			action = new QnadWriteProAction();
 			try {
 				forward = action.execute(request, response);
