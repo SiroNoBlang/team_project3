@@ -19,6 +19,7 @@ public class JoinProAction implements Action {
 		String val = "";
 		String bnd = "";
 		String ctgy = "";
+		String email = request.getParameter("member_email1") + request.getParameter("member_email2");
 		
 		String [] style = request.getParameterValues("style");
 		String [] brand = request.getParameterValues("brand");

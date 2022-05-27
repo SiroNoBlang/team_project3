@@ -25,13 +25,14 @@ String sender = "qhrud200265@gmail.com";
 String title = "";
 String receiver = "";
 String content = "";
+String email = request.getParameter("email");
 
 if(request.getParameter("find_passwd_member_id") != null ){
  	content = "임시비밀번호는 " + code + "입니다";
 	receiver = request.getParameter("find_passwd_member_email");
 	title = request.getParameter("find_passwd_member_id") + "님의 임시 비밀번호입니다.";
 } else {
-	content = "<h3>인증하려면 아래 링크를 클릭하세요 </h3><a href='http://localhost:8080/team_project3/HomePage/first_page/mail_pro.jsp?code="+code+"'>인증하기</a>";
+	content = "<h3>인증하려면 아래 링크를 클릭하세요 </h3><a href='http://localhost:8080/team_project3/HomePage/first_page/member_authentication.jsp?email="+email+"&code="+code+"'>인증하기</a>";
 	receiver = request.getParameter("email");
 	title = "본인인증입니다.";
 	Connection con = getConnection();

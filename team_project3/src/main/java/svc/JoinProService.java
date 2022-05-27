@@ -23,7 +23,6 @@ public class JoinProService {
 		if(joinCount > 0) {
 			commit(con);
 			isJoinSuccess = true;
-			
 		} else {
 			rollback(con);
 		}

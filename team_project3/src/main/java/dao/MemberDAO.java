@@ -531,15 +531,18 @@ public class MemberDAO {
 		return isFindPasswd;
 	}
 
-	public void insertAuthInfo(String email, String code) {
+	public boolean insertAuthInfo(String receiver, String code) {
 		System.out.println("MemberDAO - insertAuthInfo");
+		
+		boolean isSendEmail = false;
+		
 		PreparedStatement pstmt = null, pstmt2 = null;
-		ResultSet rs = null;
+		ResultSet rs = null; 
 		try {
 			
 			String sql = "SELECT auth_code FROM auth WHERE email=? ";
 			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, email);
+			pstmt.setString(1, receiver);
 			
 			// 4단계. SQL 구문 실행 및 결과 처리
 			rs = pstmt.executeQuery();
@@ -549,16 +552,17 @@ public class MemberDAO {
 				sql = "UPDATE auth SET auth_code=? WHERE email=?";
 				pstmt2 = con.prepareStatement(sql);
 				pstmt2.setString(1, code);
-				pstmt2.setString(2, email);
+				pstmt2.setString(2, receiver);
 				pstmt2.executeUpdate();
+				isSendEmail =true;
 			}else {
 				sql = "INSERT INTO auth VALUES(?,?)";
 				pstmt2 = con.prepareStatement(sql);
-				pstmt2.setString(1, email);
+				pstmt2.setString(1, receiver);
 				pstmt2.setString(2, code);
 				pstmt2.executeUpdate();	
+				isSendEmail =true;
 			}
-			
 		} catch (SQLException e) {
 			e.printStackTrace();
 			System.out.println("SQL 구문 오류 - insertAuthInfo()");
@@ -567,6 +571,73 @@ public class MemberDAO {
 			close(rs);
 			close(pstmt);
 			close(pstmt2);
+		}
+		return isSendEmail;
+	}
+	
+	public int selectAuthInfo(String email, String code) {
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		System.out.println(email + "/" + code);
+		
+		try {
+			// 1단계 & 2단계
+			// JdbcUtil 객체의 getConnection() 메서드를 호출하여 DB 연결 객체 가져오기
+			
+			// 3단계. SQL 구문 작성 및 전달
+			// => member 테이블의 id 컬럼 조회(단, id 와 auth_status 가 일치하는 레코드 조회)
+			String sql = "SELECT auth_code FROM auth WHERE email=? ";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, email);
+			
+			// 4단계. SQL 구문 실행 및 결과 처리
+			rs = pstmt.executeQuery();
+			// 조회 결과가 존재할 경우(= rs.next() 가 true 일 경우)
+			// isAuthenticatedMember 변수값을 true 로 변경
+			if(rs.next() ) {
+				if(code.equals(rs.getString("auth_code"))) {
+					result = 1;
+				}
+			}else {
+				result = -1;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println("SQL 구문 오류 - selectAuthInfo()");
+		} finally {
+			// 자원 반환
+			close(rs);
+			close(pstmt);
+		}
+		
+		
+		return result;
+	}
+	
+	public void changeAuthStatus(String email) {
+		PreparedStatement pstmt = null;
+		
+		System.out.println("changeAuthStatus" + email);
+		
+		try {
+			// 1단계 & 2단계
+			// JdbcUtil 객체의 getConnection() 메서드를 호출하여 DB 연결 객체 가져오기
+			// 3단계. SQL 구문 작성 및 전달
+			// => MemberDTO 객체에 저장된 아이디, 패스워드 이름, 이메일, 전화번호를 추가하고
+			//    가입일(date)의 경우 데이터베이스에서 제공되는 now() 함수 사용하여 자동 생성
+			String sql = "DELETE FROM auth WHERE email =?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, email);
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println("SQL 구문 오류 발생! - changeAuthStatus()");
+		} finally {
+			// DB 자원 반환
+			close(pstmt);
 		}
 		
 	}

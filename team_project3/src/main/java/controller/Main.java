@@ -204,7 +204,7 @@ public class Main extends HttpServlet {
 			} catch (Exception e) {
 				
 			}
-		}else if(command.equals("/SendEmail.ma")) { // 회원가입시 인증 이메일 보내기
+		} else if(command.equals("/SendEmail.ma")) { // 회원가입시 인증 이메일 보내기
 			action = new SendEmailAction();
 			try {
 				forward = action.execute(request, response);

@@ -11,7 +11,7 @@
 <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 <script src="HomePage/assets/js/jquery-3.6.0.js"></script>
 <script type="text/javascript">
-	var checkNickname = false, checkId = false;
+// 	var checkNickname = false, checkId = false;
 
 // let isCheckConfirmPasswd = false, passSafe = false, isCheckEmail = false;;
 
@@ -201,25 +201,25 @@
 	}
 	
 
-	function checkForm(){
-		 if(!checkId){
-			alert("아이디 확인 필수!");
-			document.fr.join_member_id.focus();
-			return false;
-		} else if(!passSafe){
-			alert("패스워드 조건 확인 필수!");
-			document.fr.join_member_passwd.focus();
-			return false;
-		} else if(!isCheckConfirmPasswd){
-			alert("패스워드 확인 필수!");
-			document.fr.join_member_passwd_check.focus();
-			return false;
-		} else if (!isCheckEmail){
-			alert("이메일 확인 필수!");
-			document.fr.member_email1.focus();
-			return false;
-		}
-	}	
+// 	function checkForm(){
+// 		 if(!checkId){
+// 			alert("아이디 확인 필수!");
+// 			document.fr.join_member_id.focus();
+// 			return false;
+// 		} else if(!passSafe){
+// 			alert("패스워드 조건 확인 필수!");
+// 			document.fr.join_member_passwd.focus();
+// 			return false;
+// 		} else if(!isCheckConfirmPasswd){
+// 			alert("패스워드 확인 필수!");
+// 			document.fr.join_member_passwd_check.focus();
+// 			return false;
+// 		} else if (!isCheckEmail){
+// 			alert("이메일 확인 필수!");
+// 			document.fr.member_email1.focus();
+// 			return false;
+// 		}
+// 	}	
 	
 	$(function(){
 		$('#idFind_login').hide();
@@ -251,16 +251,6 @@
 			$('#findIdResultArea').empty();
 			$('#idFind_login').hide();
 			$('#idFind').show();
-		});
-	});
-	
-	
-	$(function(){
-		$("#member_email2").on("change", function(){
-			var email1 = fr.member_email1.value;
-			var email2 = fr.member_email2.value;
-			
-			location.href="/team_project3/HomePage/first_page/mail_pro.jsp?email="+email1 + email2;
 		});
 	});
 	
@@ -728,7 +718,7 @@
 			
 			<article id="joinPro">
 				<h2 class="major">Join</h2>
-				<form method="post" action="JoinPro.ma" id="fr" name="fr" onsubmit="return checkForm()">
+				<form method="post" action="SendEmail.ma" id="fr" name="fr" onsubmit="return checkForm()">
 					<div class="fields">
 						<div class="field half">
 							<label for="member_nickname">Nickname</label> 

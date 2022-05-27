@@ -18,20 +18,21 @@ public class SendEmailAction implements Action {
 		ActionForward forward = null;
 		
 		
-		String email = request.getParameter("email");
+		String email = request.getParameter("member_email1") + request.getParameter("member_email2") ;
 		
 		System.out.println(email);
 		
 		SendEmailService service = new SendEmailService();
-		boolean isSendEmail = service.isSendEmail(email);
+		boolean isSendEmail = service.isSendEmail(email, request);
 		
 		if(isSendEmail) {
 			response.setContentType("text/html; charset=UTF-8");
 			PrintWriter out = response.getWriter();
 			out.println("<script>");
-			out.println("alert('전송된 이메일을 통해 인증을 완료해주세요')");
+			out.println("alert('메일이 정상적으로 전송되었습니다!')");
+			System.out.println("왔냐?");
 			out.println("</script>");
-			forward = new ActionForward("/HomePage/first_page/mail_pro.jsp", false);
+			forward = new ActionForward("/JoinPro.ma", false);
 		} else {
 			response.setContentType("text/html; charset=UTF-8");
 			PrintWriter out = response.getWriter();
