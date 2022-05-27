@@ -40,6 +40,7 @@ import action.QnaReplyProAction;
 import action.QnaSearchAction;
 import action.QnadListAction;
 import action.QnadWriteProAction;
+import action.UpdateProductConfirmAction;
 import vo.ActionForward;
 
 // 커뮤니티 게시판 Controller
@@ -219,25 +220,7 @@ public class CommunityFrontController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		}
-		
-	
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-
-		else if (command.equals("/MemberManagement.co")) { // 가입된 회원 목록
+		}else if (command.equals("/MemberManagement.co")) { // 가입된 회원 목록
 			action = new MemberManagementListAction();
 			try {
 				forward = action.execute(request, response);
@@ -279,22 +262,9 @@ public class CommunityFrontController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		} else if (command.equals("/Sales.co")) { // 이벤트 글 목록
+		} else if (command.equals("/Sales.co")) { // 매출관리
 			forward = new ActionForward("AdminPage/sales/sales_main.jsp", false);
-		} 
-
-		
-		
-		
-		
-		
-		
-		
-		
-		//검수
-		
-		
-			else if (command.equals("/ProductConfirm.co")) { // 검수목록(/ProductConfirm.co)
+		} else if (command.equals("/ProductConfirm.co")) { // 검수목록(/ProductConfirm.co)
 			action = new ProductConfirmListAction();
 			try {
 				forward = action.execute(request, response);
@@ -315,7 +285,18 @@ public class CommunityFrontController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+		}else if (command.equals("/UpdateProductConfirm.co")) { // 검수 업데이트(/UpdateProductConfirm.co) 요청
+			action = new UpdateProductConfirmAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
+		
+		
+		
+		
 		
 		
 		
