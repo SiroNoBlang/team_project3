@@ -213,7 +213,7 @@ ArrayList<SellerimgDTO> Sellerdetailimg = (ArrayList<SellerimgDTO>)request.getAt
 
 			<ul class="main-menu-m">
 				<li>
-					<a href="index.html">Home</a>
+					<a href="MainPage.pr">Home</a>
 					<ul class="sub-menu-m">
 						<li><a href="index.html">Homepage 1</a></li>
 						<li><a href="home-02.html">Homepage 2</a></li>
@@ -380,39 +380,9 @@ ArrayList<SellerimgDTO> Sellerdetailimg = (ArrayList<SellerimgDTO>)request.getAt
 				<div class="col-md-6 col-lg-7 p-b-30">
 					<div class="p-l-25 p-r-30 p-lr-0-lg">
 						<div class="wrap-slick3 flex-sb flex-w">
-							<div class="wrap-slick3-dots"></div>
 							<div class="wrap-slick3-arrows flex-sb-m flex-w"></div>
-
-							<div class="slick3 gallery-lb">
-								<div class="item-slick3" data-thumb="MainPage/images/product-detail-01.jpg">
-									<div class="wrap-pic-w pos-relative">
-										<img src="./Upload/sell_img/<%=sellerdto.getSell_img_real_name() %>" alt="IMG-PRODUCT">
-
-										<a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="./Upload/sell_img/dog.png">
-											<i class="fa fa-expand"></i>
-										</a>
-									</div>
-								</div>
-
-								<div class="item-slick3" data-thumb="MainPage/images/product-detail-02.jpg">
-									<div class="wrap-pic-w pos-relative">
-										<img src="MainPage/images/product-detail-02.jpg" alt="IMG-PRODUCT">
-
-										<a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="MainPage/images/product-detail-02.jpg">
-											<i class="fa fa-expand"></i>
-										</a>
-									</div>
-								</div>
-
-								<div class="item-slick3" data-thumb="MainPage/images/product-detail-03.jpg">
-									<div class="wrap-pic-w pos-relative">
-										<img src="MainPage/images/product-detail-03.jpg" alt="IMG-PRODUCT">
-
-										<a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="MainPage/images/product-detail-03.jpg">
-											<i class="fa fa-expand"></i>
-										</a>
-									</div>
-								</div>
+								<div class="slick3 gallery-lb">
+									<img src="./Upload/sell_img/<%=sellerdto.getSell_img_real_name() %>" alt="IMG-PRODUCT">
 							</div>
 						</div>
 					</div>
@@ -434,8 +404,15 @@ ArrayList<SellerimgDTO> Sellerdetailimg = (ArrayList<SellerimgDTO>)request.getAt
 									<tr><td>Color:  <%=sellerdto.getSell_color() %></td></tr>
 										
 									<tr><td> Price:  <%=sellerdto.getSell_price() %></td></tr>
+									<tr><td>  </td></tr>
+									<tr><td><input class="cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail" type="button" value="장바구니" onclick="location.href='ShopingPro.pr?sell_num=<%=sellerdto.getSell_num()%>&member_code=<%=member_code%>'"></td>
+								
+										<td><input class="cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail" type="button" value="구매" onclick="location.href='ShopingPro.pr?sell_num=<%=sellerdto.getSell_num()%>&member_code=<%=member_code%>'">
+									</td></tr>
 										
 									 </table>
+									 
+									
 								
 <!-- 						<div class="p-t-33"> -->
 <!-- 							<div class="flex-w flex-r-m p-b-10"> -->
@@ -476,22 +453,7 @@ ArrayList<SellerimgDTO> Sellerdetailimg = (ArrayList<SellerimgDTO>)request.getAt
 <!-- 								</div> -->
 <!-- 							</div> -->
 
-							<div class="flex-w flex-r-m p-b-10">
-								<div class="size-204 flex-w flex-m respon6-next">
-									<div class="wrap-num-product flex-w m-r-20 m-tb-10">
-										
-
-										<button class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail">
-										like
-									</button>
-
-									
-									</div>
-									<input type="button" value="구매" onclick="location.href='ShopingPro.pr?sell_num=<%=sellerdto.getSell_num()%>&member_code=<%=member_code%>'">
-									
-								</div>
-							</div>	
-						</div>
+							
 
 </form>						
 						<div class="flex-w flex-m p-l-100 p-t-40 respon7">
@@ -514,7 +476,23 @@ ArrayList<SellerimgDTO> Sellerdetailimg = (ArrayList<SellerimgDTO>)request.getAt
 							</a>
 						</div>
 					</div>
+									<table>
+									<br>
+									<br>
+									 <tr>
+									 
+									<%  for(SellerimgDTO sellerimg : Sellerdetailimg) {%>
+									
+									 <td><img src="./Upload/sell_img/<%=sellerimg.getSell_img_real_name() %>" width="150" height="150">	&nbsp;</td>&nbsp;	
+									 <% } %>
+									 
+									 </tr>
+									 
+									 </table>
+					
+						
 				</div>
+									 
 			</div>
 			
 			<추천상품>

@@ -61,6 +61,7 @@ public class ProductListProAction implements Action {
 
 				// 뷰페이지(jsp)로 객체 전달을 위해 request 객체의 setAttribute() 메서드를 호출하여 객체 저장
 				request.setAttribute("pageInfo", pageInfo); // 페이징 처리 정보 객체
+				
 				request.setAttribute("articleList", articleList); // 게시물 목록 객체
 				
 				// ActionForward 객체를 생성하여 포워딩 정보 저장
