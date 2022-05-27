@@ -131,7 +131,7 @@ public class SellerDAO {
 		return listCount;
 	}
 
-	public ArrayList<SellerProductDTO> selectArticleList(int pageNum, int listLimit) {
+	public static ArrayList<SellerProductDTO> selectArticleList(int pageNum, int listLimit) {
 		System.out.println("selectArticleList()ArrayList 객체 가져오기");
 
 		ArrayList<SellerProductDTO> articleList = null;
@@ -150,10 +150,11 @@ public class SellerDAO {
 		try {
 
 			String sql = "SELECT a.sell_num, a.sell_size , a.sell_category,a.sell_category_detail, a.sell_title, a.sell_color, a.sell_brand, a.sell_price, a.sell_readcount,"
-					+ " b.sell_img_name, b.sell_img_real_name ,b.sell_img_real_num ,b.sell_img_num,b.sell_img_name,b.sell_img_real_name, c.sell_list_num, c.sell_list_item_status "
-					+ " FROM sell AS a JOIN sell_img AS b ON a.sell_num = b.sell_img_real_num JOIN sell_list AS c ON a.sell_num = c.sell_list_num"
-					+ " WHERE sell_list_item_status='판매중' AND  sell_img_num = 3"
-					+ " ORDER BY a.sell_num DESC LIMIT ?,? ";
+						 +" b.sell_img_name, b.sell_img_real_name ,b.sell_img_real_num ,b.sell_img_num,b.sell_img_name,b.sell_img_real_name, c.sell_list_num, c.sell_list_item_status"
+						 +" FROM sell AS a JOIN sell_img AS b ON a.sell_num = b.sell_img_real_num JOIN sell_list AS c ON a.sell_num = c.sell_list_num"
+						+ " WHERE sell_list_item_status='판매중' AND" 
+						+ "(sell_img_real_num,sell_img_num)  in (SELECT  sell_img_real_num, MAX(sell_img_num)  FROM sell_img    GROUP BY sell_img_real_num  ORDER BY sell_img_real_num ,sell_img_num DESC  )"
+						+" ORDER BY a.sell_num DESC LIMIT ?,?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, startRow);
 			pstmt.setInt(2, listLimit);
@@ -203,9 +204,9 @@ public class SellerDAO {
 		return articleList;
 	}
 
-	public SellerProductDTO selectArticle(int sell_num) { // sell_num 값을 이용하여 해당 제품 판매관련정보 가져오기 &(코드 활용)상세글에서 (buy) 구매하기
+	public SellerDTO selectArticle(int sell_num) { // sell_num 값을 이용하여 해당 제품 판매관련정보 가져오기 &(코드 활용)상세글에서 (buy) 구매하기
 													// ->Sellerdto 를 이용하여 상품의 상세정보 가져오기
-		SellerProductDTO article = null;
+		SellerDTO article = null;
 
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -222,7 +223,7 @@ public class SellerDAO {
 //			b.sell_img_name, b.sell_img_real_name, c.sell_list_num
 
 			if (rs.next()) {
-				article = new SellerProductDTO();
+				article = new SellerDTO();
 				article.setSell_member_code(rs.getString("sell_member_code"));
 				article.setSell_num(rs.getInt("sell_num"));
 				article.setSell_category(rs.getString("sell_category"));
@@ -233,8 +234,8 @@ public class SellerDAO {
 				article.setSell_brand(rs.getString("sell_brand"));
 				article.setSell_price(rs.getInt("sell_price"));
 				article.setSell_readcount(rs.getInt("sell_readcount"));
-				article.setSell_img_name(rs.getString("sell_img_name"));
-				article.setSell_img_real_name(rs.getString("sell_img_real_name"));
+//				article.setSell_img_name(rs.getString("sell_img_name"));
+//				article.setSell_img_real_name(rs.getString("sell_img_real_name"));
 				article.setSell_list_num(rs.getInt("sell_list_num"));
 				article.setSell_list_item_status(rs.getString("sell_list_item_status"));
 				article.setSell_list_approve_nickname(rs.getString("sell_list_approve_nickname"));
@@ -294,12 +295,14 @@ public class SellerDAO {
 				ProductRe.setSell_title(rs.getString("sell_title"));
 				ProductRe.setSell_brand(rs.getString("sell_brand"));
 				ProductRe.setSell_price(rs.getInt("sell_price"));
+//				ProductRe.setSell_img_name(rs.getString("sell_img_name"));
+//				ProductRe.setSell_img_real_name(rs.getString("sell_img_real_name"));
 
 				productarr.add(ProductRe);
 			}
 
 		} catch (SQLException e) {
-			System.out.println("SQL 구문 오류 발생! - selectProductRe()");
+			System.out.println("SQL 구문 오류 발생! - updateReadcount()");
 			e.printStackTrace();
 		} finally {
 			close(pstmt);
@@ -361,45 +364,6 @@ public class SellerDAO {
 		}
 
 		return memberbean;
-	}
-
-	public ArrayList<SellerimgDTO> selectProductimg(int sell_num) {
-		ArrayList<SellerimgDTO> productimg = new ArrayList<SellerimgDTO>();
-		SellerimgDTO Sellerdetailimg = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-
-		try {
-			String sql = "SELECT sell_img_real_num, sell_img_name, sell_img_real_name "
-					+ "FROM sell_img  WHERE sell_img_real_num=? ORDER BY sell_img_num DESC ";
-
-	
-			pstmt = con.prepareStatement(sql);
-			pstmt.setInt(1, sell_num);
-			rs = pstmt.executeQuery();
-
-			while (rs.next()) {
-				Sellerdetailimg = new SellerimgDTO();
-				Sellerdetailimg.setSell_img_real_num(rs.getInt("sell_img_real_num"));
-				Sellerdetailimg.setSell_img_name(rs.getString("sell_img_name"));
-				Sellerdetailimg.setSell_img_real_name(rs.getString("sell_img_real_name"));
-//				ProductRe.setSell_img_name(rs.getString("sell_img_name"));
-//				ProductRe.setSell_img_real_name(rs.getString("sell_img_real_name"));
-
-				productimg.add(Sellerdetailimg);
-			}
-			
-			System.out.println(productimg);
-
-		} catch (SQLException e) {
-			System.out.println("SQL 구문 오류 발생! - updateReadcount()");
-			e.printStackTrace();
-		} finally {
-			close(pstmt);
-			close(rs);
-		}
-
-		return productimg;
 	}
 
 }
