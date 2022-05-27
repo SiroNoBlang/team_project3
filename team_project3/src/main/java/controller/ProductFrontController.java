@@ -86,7 +86,7 @@ public class ProductFrontController extends HttpServlet {
 			forward.setPath("MainPage/sell/shoping_cart.jsp");
 			forward.setRedirect(false);
 		
-		} else if (command.equals("/ShopingPro.pr")) {// 상품 상세조회(ProductDetailProAction.java)
+		} else if (command.equals("/ProductDetailPro.pr")) {// 상품 상세조회(ProductDetailProAction.java)
 		
 		action = new ShopingProAction();
 		
@@ -97,6 +97,7 @@ public class ProductFrontController extends HttpServlet {
 		}
 	}
 		else if (command.equals("/ShopingPro.pr")) {// 쇼핑카트 액션  <곧 구매 버튼 선택 후 결제하기 들어갑니다.>
+			
 			action = new ShopingProAction();
 
 			try {

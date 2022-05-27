@@ -15,7 +15,7 @@ import vo.SellerimgDTO;
 public class SellerDetailService {
 
 	public SellerProductDTO getArticle(int sell_num) {
-		System.out.println("BoardDetailService - getArticle()");
+		System.out.println("SellerProductDTO - getArticle()");
 		
 		// 1. 리턴할 데이터를 저장할 변수 선언
 		SellerProductDTO article = null;
