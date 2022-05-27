@@ -38,7 +38,9 @@ if(request.getParameter("find_passwd_member_id") != null ){
 	MemberDAO memberDAO = MemberDAO.getInstance();
 	memberDAO.setConnection(con);
 	memberDAO.insertAuthInfo(receiver,code);
+	commit(con);
 	close(con);
+	
 
 }
 
@@ -103,7 +105,11 @@ try{
 	// 4.메일 전송
 	// javax.mail.Transport 클래스의 static 메서드 send() 메서드 호출
 	Transport.send(mailMessage);
-	out.println("<h3>메일이 정상적으로 전송되었습니다!</h3>");
+// 	out.println("<h3>메일이 정상적으로 전송되었습니다!</h3>");
+	out.println("<script>");
+	out.println("alert('메일이 정상적으로 전송되었습니다!')");
+	out.println("history.back()");
+	out.println("</script>");
 	
 }catch(Exception e){
 	e.printStackTrace();

@@ -532,11 +532,9 @@ public class MemberDAO {
 	}
 
 	public void insertAuthInfo(String email, String code) {
-		System.out.println("MemberDAO - isSendEmail");
-		System.out.println(email + "/ " + code);
+		System.out.println("MemberDAO - insertAuthInfo");
 		PreparedStatement pstmt = null, pstmt2 = null;
 		ResultSet rs = null;
-		System.out.println("insert 시작");
 		try {
 			
 			String sql = "SELECT auth_code FROM auth WHERE email=? ";
@@ -547,21 +545,18 @@ public class MemberDAO {
 			rs = pstmt.executeQuery();
 			// 조회 결과가 존재할 경우(= rs.next() 가 true 일 경우)
 			// isAuthenticatedMember 변수값을 true 로 변경
-			System.out.println("select 확인 완료");
 			if(rs.next()) {
 				sql = "UPDATE auth SET auth_code=? WHERE email=?";
 				pstmt2 = con.prepareStatement(sql);
 				pstmt2.setString(1, code);
 				pstmt2.setString(2, email);
 				pstmt2.executeUpdate();
-				System.out.println("UPDATE 완료");
 			}else {
 				sql = "INSERT INTO auth VALUES(?,?)";
 				pstmt2 = con.prepareStatement(sql);
 				pstmt2.setString(1, email);
 				pstmt2.setString(2, code);
 				pstmt2.executeUpdate();	
-				System.out.println("INSERT 완료");
 			}
 			
 		} catch (SQLException e) {
