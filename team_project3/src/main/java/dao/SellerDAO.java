@@ -38,7 +38,7 @@ public class SellerDAO {
 		// INSERT 작업 결과를 리턴받아 저장할 변수 선언
 		int insertCount = 0;
 		int num = 0;
-//		int img_num=0;
+//      int img_num=0;
 
 		PreparedStatement pstmt = null;
 		PreparedStatement pstmt2 = null;
@@ -71,13 +71,13 @@ public class SellerDAO {
 				pstmt2.setString(3, sellimg.getSell_img_real_name());
 
 				pstmt2.executeUpdate();
-//					close(pstmt);
+//               close(pstmt);
 				System.out.println("INSERT -SELL_IMG");
 			}
 
 			sql = "INSERT INTO sell_list VALUES ((SELECT MAX(SELL_NUM) FROM sell), '판매중', ?, '관리자 작업필요')";// 검수자
-																											// 승인날짜,닉네임
-																											// 업데이트작업필요
+			// 승인날짜,닉네임
+			// 업데이트작업필요
 			pstmt3 = con.prepareStatement(sql);
 			pstmt3.setString(1, seller.getSell_list_approve_date());
 			insertCount = pstmt3.executeUpdate();
@@ -110,9 +110,9 @@ public class SellerDAO {
 
 		try {
 			String sql = "SELECT COUNT(sell_list_num) FROM sell_list" + " WHERE sell_list_item_status ='판매중' "; // 나중엔
-																												// sell_list_item_status
-																												// ='판매중'로
-																												// 바꿔야됨
+			// sell_list_item_status
+			// ='판매중'로
+			// 바꿔야됨
 			pstmt = con.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 			if (rs.next()) {
@@ -131,7 +131,7 @@ public class SellerDAO {
 		return listCount;
 	}
 
-	public static ArrayList<SellerProductDTO> selectArticleList(int pageNum, int listLimit) {
+	public ArrayList<SellerProductDTO> selectArticleList(int pageNum, int listLimit) {
 		System.out.println("selectArticleList()ArrayList 객체 가져오기");
 
 		ArrayList<SellerProductDTO> articleList = null;
@@ -148,22 +148,21 @@ public class SellerDAO {
 		// 순서번호(board_re_seq) 기준 오름차순 정렬
 		// => 조회 시작 게시물 번호(startRow) 부터 목록의 게시물 수(listLimit) 만큼 조회
 		try {
-
 			String sql = "SELECT a.sell_num, a.sell_size , a.sell_category,a.sell_category_detail, a.sell_title, a.sell_color, a.sell_brand, a.sell_price, a.sell_readcount,"
-						 +" b.sell_img_name, b.sell_img_real_name ,b.sell_img_real_num ,b.sell_img_num,b.sell_img_name,b.sell_img_real_name, c.sell_list_num, c.sell_list_item_status"
-						 +" FROM sell AS a JOIN sell_img AS b ON a.sell_num = b.sell_img_real_num JOIN sell_list AS c ON a.sell_num = c.sell_list_num"
-						+ " WHERE sell_list_item_status='판매중' AND" 
-						+ "(sell_img_real_num,sell_img_num)  in (SELECT  sell_img_real_num, MAX(sell_img_num)  FROM sell_img    GROUP BY sell_img_real_num  ORDER BY sell_img_real_num ,sell_img_num DESC  )"
-						+" ORDER BY a.sell_num DESC LIMIT ?,?";
+					+ " b.sell_img_name, b.sell_img_real_name ,b.sell_img_real_num ,b.sell_img_num,b.sell_img_name,b.sell_img_real_name, c.sell_list_num, c.sell_list_item_status"
+					+ " FROM sell AS a JOIN sell_img AS b ON a.sell_num = b.sell_img_real_num JOIN sell_list AS c ON a.sell_num = c.sell_list_num"
+					+ " WHERE sell_list_item_status='판매중' AND"
+					+ "(sell_img_real_num,sell_img_num)  in (SELECT  sell_img_real_num, MAX(sell_img_num)  FROM sell_img    GROUP BY sell_img_real_num  ORDER BY sell_img_real_num ,sell_img_num DESC  )"
+					+ " ORDER BY a.sell_num DESC LIMIT ?,?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, startRow);
 			pstmt.setInt(2, listLimit);
 
 			rs = pstmt.executeQuery();
 
-//				sql = "SELECT a.sell_title, a.sell_brand, a.sell_price, a.sell_color, a.sell_readcount, b.sell_img_name, c.sell_list_num, c.sell_list_item_status, b.sell_img_real_name"
-//							+ "FROM sell AS a JOIN sell_img AS b ON a.sell_num = b.sell_img_num JOIN sell_list AS c ON a.sell_num = c.sell_list_num "
-//							+ "WHERE sell_list_item_status='판매중'";
+//            sql = "SELECT a.sell_title, a.sell_brand, a.sell_price, a.sell_color, a.sell_readcount, b.sell_img_name, c.sell_list_num, c.sell_list_item_status, b.sell_img_real_name"
+//                     + "FROM sell AS a JOIN sell_img AS b ON a.sell_num = b.sell_img_num JOIN sell_list AS c ON a.sell_num = c.sell_list_num "
+//                     + "WHERE sell_list_item_status='판매중'";
 			// join을 사용하자
 			// sell -> 조회수, 타이틀,브랜드
 			// sell_list ->
@@ -204,9 +203,9 @@ public class SellerDAO {
 		return articleList;
 	}
 
-	public SellerDTO selectArticle(int sell_num) { // sell_num 값을 이용하여 해당 제품 판매관련정보 가져오기 &(코드 활용)상세글에서 (buy) 구매하기
-													// ->Sellerdto 를 이용하여 상품의 상세정보 가져오기
-		SellerDTO article = null;
+	public SellerProductDTO selectArticle(int sell_num) { // sell_num 값을 이용하여 해당 제품 판매관련정보 가져오기 &(코드 활용)상세글에서 (buy) 구매하기
+		// ->Sellerdto 를 이용하여 상품의 상세정보 가져오기
+		SellerProductDTO article = null;
 
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -218,12 +217,12 @@ public class SellerDAO {
 			pstmt.setInt(1, sell_num);
 			rs = pstmt.executeQuery();
 
-//			SELECT a.sell_num, a.sell_category, a.sell_category_detail, a.sell_title, a.sell_color, 
-//			a.sell_brand, a.sell_price, a.sell_readcount, 
-//			b.sell_img_name, b.sell_img_real_name, c.sell_list_num
+//         SELECT a.sell_num, a.sell_category, a.sell_category_detail, a.sell_title, a.sell_color, 
+//         a.sell_brand, a.sell_price, a.sell_readcount, 
+//         b.sell_img_name, b.sell_img_real_name, c.sell_list_num
 
 			if (rs.next()) {
-				article = new SellerDTO();
+				article = new SellerProductDTO();
 				article.setSell_member_code(rs.getString("sell_member_code"));
 				article.setSell_num(rs.getInt("sell_num"));
 				article.setSell_category(rs.getString("sell_category"));
@@ -234,8 +233,8 @@ public class SellerDAO {
 				article.setSell_brand(rs.getString("sell_brand"));
 				article.setSell_price(rs.getInt("sell_price"));
 				article.setSell_readcount(rs.getInt("sell_readcount"));
-//				article.setSell_img_name(rs.getString("sell_img_name"));
-//				article.setSell_img_real_name(rs.getString("sell_img_real_name"));
+				article.setSell_img_name(rs.getString("sell_img_name"));
+				article.setSell_img_real_name(rs.getString("sell_img_real_name"));
 				article.setSell_list_num(rs.getInt("sell_list_num"));
 				article.setSell_list_item_status(rs.getString("sell_list_item_status"));
 				article.setSell_list_approve_nickname(rs.getString("sell_list_approve_nickname"));
@@ -285,7 +284,7 @@ public class SellerDAO {
 					+ " AND sell_brand Like '%" + sell_brand + "%' ";
 
 			pstmt = con.prepareStatement(sql);
-//			pstmt.setString(1, sell_brand);
+//         pstmt.setString(1, sell_brand);
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
@@ -295,14 +294,12 @@ public class SellerDAO {
 				ProductRe.setSell_title(rs.getString("sell_title"));
 				ProductRe.setSell_brand(rs.getString("sell_brand"));
 				ProductRe.setSell_price(rs.getInt("sell_price"));
-//				ProductRe.setSell_img_name(rs.getString("sell_img_name"));
-//				ProductRe.setSell_img_real_name(rs.getString("sell_img_real_name"));
 
 				productarr.add(ProductRe);
 			}
 
 		} catch (SQLException e) {
-			System.out.println("SQL 구문 오류 발생! - updateReadcount()");
+			System.out.println("SQL 구문 오류 발생! - selectProductRe()");
 			e.printStackTrace();
 		} finally {
 			close(pstmt);
@@ -364,6 +361,44 @@ public class SellerDAO {
 		}
 
 		return memberbean;
+	}
+
+	public ArrayList<SellerimgDTO> selectProductimg(int sell_num) {
+		ArrayList<SellerimgDTO> productimg = new ArrayList<SellerimgDTO>();
+		SellerimgDTO Sellerdetailimg = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+			String sql = "SELECT sell_img_real_num, sell_img_name, sell_img_real_name "
+					+ "FROM sell_img  WHERE sell_img_real_num=? ORDER BY sell_img_num DESC ";
+
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, sell_num);
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				Sellerdetailimg = new SellerimgDTO();
+				Sellerdetailimg.setSell_img_real_num(rs.getInt("sell_img_real_num"));
+				Sellerdetailimg.setSell_img_name(rs.getString("sell_img_name"));
+				Sellerdetailimg.setSell_img_real_name(rs.getString("sell_img_real_name"));
+//            ProductRe.setSell_img_name(rs.getString("sell_img_name"));
+//            ProductRe.setSell_img_real_name(rs.getString("sell_img_real_name"));
+
+				productimg.add(Sellerdetailimg);
+			}
+
+			System.out.println(productimg);
+
+		} catch (SQLException e) {
+			System.out.println("SQL 구문 오류 발생! - updateReadcount()");
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rs);
+		}
+
+		return productimg;
 	}
 
 }
