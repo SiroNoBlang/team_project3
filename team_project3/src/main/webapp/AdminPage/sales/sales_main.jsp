@@ -16,6 +16,30 @@
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css'>
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css'>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript">
+	google.charts.load('current', {'packages':['corechart']});
+	google.charts.setOnLoadCallback(drawVisualization);
+		function drawVisualization() {
+			var data = google.visualization.arrayToDataTable([
+				['Month', '판매된 총액', '판매 수수료', '구매한 총액', '구매 수수료', '판매관리비', '순수익'],
+				['2004/05', 165, 1235, 522, 998, 450, 614.6],
+				['2004/06', 135, 1120, 599, 1268, 288, 682],
+				['2004/07', 157, 1167, 807, 807, 397, 623],
+				['2004/08', 139, 1110, 615, 968, 215, 609.4],
+				['2004/09', 136, 691, 629, 1026, 366, 569.6]
+			]);
+			var options = {
+				title: '매출 관련 현황',
+				vAxis: {title: '천'},
+				hAxis: {title: '월별'},
+				seriesType: 'bars',
+				series: {5: {type:'line'}}
+			};
+			var chart = new google.visualization.ComboChart(document.getElementById('salesChart'));
+			chart.draw(data, options);
+		};
+</script>
 </head>
 <body>
 <!-- 페이징 처리 -->		
@@ -82,7 +106,9 @@
 				
 				<div class="card">
 					<div class="title">매출 그래프</div>
-						<div></div>
+						<div class="container">
+							<div id="salesChart" style="width: 900px; height: 500px;"></div>
+						</div>
 					</div>
 				</div>
 			</div>
