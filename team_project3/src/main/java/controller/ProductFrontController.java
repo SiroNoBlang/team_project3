@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import action.Action;
 import action.ProductDetailProAction;
 import action.ProductListProAction;
+import action.ProductSearchProAction;
 import action.ShopingProAction;
 import action.sellWriteProAction;
 import vo.ActionForward;
@@ -75,6 +76,16 @@ public class ProductFrontController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+		} else if (command.equals("/ProductSearchPro.pr")) {// 상품 상세조회(ProductDetailProAction.java)
+			
+			action = new ProductSearchProAction();
+			
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}	
+		
 		}else if (command.equals("/ProductDetailForm.pr")) {// 상품 판매목록 상세(product_detail.jsp)
 
 			forward = new ActionForward();

@@ -357,15 +357,19 @@ int listCount = pageInfo.getListCount();
                </button>
 
                <button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".women">
-                  Women(의류)
+                  상의
                </button>
 
                <button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".men">
-                  Men(신발)
+                  하의
                </button>
 
                <button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".bag">
-                  Bag(잡화)
+                  신발
+               </button>
+               
+               <button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".etc">
+                  잡화
                </button>
 
 <!--                <button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".shoes"> -->
@@ -393,14 +397,23 @@ int listCount = pageInfo.getListCount();
             
             <!-- Search product -->
             <div class="dis-none panel-search w-full p-t-10 p-b-15">
-               <div class="bor8 dis-flex p-l-15">
-                  <button class="size-113 flex-c-m fs-16 cl2 hov-cl1 trans-04">
-                     <i class="zmdi zmdi-search"></i>
-                  </button>
-
-                  <input class="mtext-107 cl2 size-114 plh2 p-r-15" type="text" name="search-product" placeholder="Search">
-               </div>   
-            </div>
+              	<form action="ProductSearchPro.pr">
+              	<table>
+              	<tr>
+              	<td>
+            	  <input type="text" placeholder="상품을 입력해주세요." name="ProductSearch">
+            	  </td>
+            	  <td>
+                  <input  type="submit" value="검색" placeholder="Search">
+                  </td>
+                  </tr>
+                  </table>
+           		 </form>
+             </div>
+            
+            
+         
+           
  
             <!-- Filter -->필터
             <div class="dis-none panel-filter w-full p-t-10">
@@ -449,51 +462,9 @@ int listCount = pageInfo.getListCount();
                      </ul>
                   </div>
 
+                 
+
                   <div class="filter-col2 p-r-15 p-b-27">
-                     <div class="mtext-102 cl2 p-b-15">
-                        Price
-                     </div>
-
-                     <ul>
-                        <li class="p-b-6">
-                           <a href="#" class="filter-link stext-106 trans-04 filter-link-active">
-                              All
-                           </a>
-                        </li>
-
-                        <li class="p-b-6">
-                           <a href="#" class="filter-link stext-106 trans-04">
-                              $0.00 - $50.00
-                           </a>
-                        </li>
-
-                        <li class="p-b-6">
-                           <a href="#" class="filter-link stext-106 trans-04">
-                              $50.00 - $100.00
-                           </a>
-                        </li>
-
-                        <li class="p-b-6">
-                           <a href="#" class="filter-link stext-106 trans-04">
-                              $100.00 - $150.00
-                           </a>
-                        </li>
-
-                        <li class="p-b-6">
-                           <a href="#" class="filter-link stext-106 trans-04">
-                              $150.00 - $200.00
-                           </a>
-                        </li>
-
-                        <li class="p-b-6">
-                           <a href="#" class="filter-link stext-106 trans-04">
-                              $200.00+
-                           </a>
-                        </li>
-                     </ul>
-                  </div>
-
-                  <div class="filter-col3 p-r-15 p-b-27">
                      <div class="mtext-102 cl2 p-b-15">
                         Color
                      </div>
@@ -597,16 +568,19 @@ int listCount = pageInfo.getListCount();
             <%for(SellerProductDTO seller1 :articleList){ %>
                         
          
-      <table border="1">
+      <table border="1" style="border: none; background:white;">
             <tr>
                <td colspan="2"><img src="./Upload/sell_img/<%=seller1.getSell_img_real_name() %>" width="350" height="400" alt="IMG-PRODUCT"></td><td></td>   
             </tr>
             <tr>
-               <td>제목:<%=seller1.getSell_title()%></td><td>조회수:<%=seller1.getSell_readcount() %></td>
+               <td>Title:<%=seller1.getSell_title()%></td><td>ReadCount:<%=seller1.getSell_readcount() %></td>
             </tr>
             <tr>
-               <td>브랜드:<%=seller1.getSell_brand()%></td>
-               <td><a href="ProductDetailPro.pr?sell_num=<%=seller1.getSell_num()%>&sell_brand=<%=seller1.getSell_brand()%>">상세보기</a></td>
+               <td>Brand:<%=seller1.getSell_brand()%></td>
+               <td><a href="ProductDetailPro.pr?sell_num=<%=seller1.getSell_num()%>&sell_brand=<%=seller1.getSell_brand()%>">Detail</a></td>
+            </tr>
+            <tr>
+            	<td colspan="2"> Price:<%=seller1.getSell_price() %></td>
             </tr>
                      
       </table>      

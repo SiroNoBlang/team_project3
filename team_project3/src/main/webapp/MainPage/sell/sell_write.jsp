@@ -64,8 +64,6 @@ function optionChange() {            //대분류 소분류 <select/>
 // 		alert("전화번호 뒷자리 4자리 숫자 필수!");
 // 		history.back();
 // 	} 
-// }
-
 
 
 function readURL(obj) {   //사진 5장 뿌리기 
@@ -85,6 +83,39 @@ function readURL(obj) {   //사진 5장 뿌리기
     
 }
 
+var maxAppend = 1;
+
+$('.__add ._add').on('click',function(){ 
+   if(maxAppend >= 3){
+      alert("파일 업로드 최대 개수는 3개 입니다.");
+      return;
+   }else{
+       $('.__add').append('<li><input type="file"name="file_path" class="files"> <button type="button" class="_add" onclick="addDel(this);">삭제</button></li>'); 
+       maxAppend ++;
+   }
+   
+ });
+ 
+$(document).ready(function(){
+    // 옵션추가 버튼 클릭시
+    $("#addItemBtn").click(function(){
+        //파일 선택란을 보여준다.
+        $("tr#item1").show();
+        // tr태그의 마지막 번째를 구해 id="item"의 형태로 만들어 lastItemNo에 대입
+        var lastItemNo = $("#example tr:last").attr("id").replace("item", "");
+        //새로 추가 할 경우 두번째 tr 값을 복사하여 newitem변수에 대입
+        var newitem = $("#example tr:eq(1)").clone();
+        //아이템 추가시 id="item" 값에 넘버를 추가해 준다.               
+        newitem.attr("name","item"+(parseInt(lastItemNo)+1));
+        
+        if(lastItemNo==4){
+        //그리고 해당 아이템은 4개 이상 생성할수 없도록 제한
+            alert("4개 이상 파일 추가 하실 수 없습니다.");
+        }else{
+        $("#example").append(newitem);
+        }
+    });
+});  
 
 
 
@@ -434,58 +465,49 @@ function readURL(obj) {   //사진 5장 뿌리기
 	</div>
 		
 
-<h4 class="mtext-105 cl2 js-name-detail p-b-14">&nbsp;&nbsp;&nbsp;&nbsp; <%=member_nickname %>님의 판매글 작성</h4>
+
 	<!-- Product Detail -->
 <form action="SellWritePro.pr?sell_member_code=<%=sell_member_code %>" name="sellForm" method="post" enctype="multipart/form-data">	
 	<section class="sec-product-detail bg0 p-t-65 p-b-60">
 		<div class="container">
+			<h3 >&nbsp;&nbsp;&nbsp;&nbsp; <%=member_nickname %>님의 판매글 작성</h3>
 			<div class="row">
 				<div class="col-md-6 col-lg-7 p-b-30">
 					<div class="p-l-25 p-r-30 p-lr-0-lg">
 						<div class="wrap-slick3 flex-sb flex-w">
-							<div class="wrap-slick3-dots"></div>
-							<div class="wrap-slick3-arrows flex-sb-m flex-w"></div>
-
 							<div class="slick3 gallery-lb">
 								<!--사진 -->
 								<div class="item-slick3" data-thumb=""> <div id="previewDiv" ></div>
 									<div class="wrap-pic-w pos-relative">
-										 
-										 <input type="file" id="imgInput" name="sell_img_name1" onchange="readURL(this)">
-										 <input type="file" id="imgInput" name="sell_img_name2" onchange="readURL(this)">
-										 <input type="file" id="imgInput" name="sell_img_name3" onchange="readURL(this)">
+										 <!--  파일추가  -->
+										   
+<!-- 											 -->
+<!-- 										 <input type="file" id="imgInput" name="sell_img_name3" onchange="readURL(this)"> -->
+											</div>
+										</div>
 										
-										
-
-										<a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="MainPage/images/product-detail-01.jpg">
-											<i class="fa fa-expand"></i>
-										</a>
-									</div>
+										<div class="flex-w flex-m m-r-20 m-tb-5">
+<%--                        					 Point:<input class="stext-104 cl2 plh4 size-117 bor13 p-lr-20 m-r-10 m-tb-5" type="text" name="Point" id="MemberPoint" value="<%=memberbean.getMember_info_detail_point() %>"> --%>
+                       					 <span id="realPoint"></span>
+                       					 </div>
 								</div>
-
-								<div class="item-slick3" data-thumb="images/product-detail-02.jpg">
-									<div class="wrap-pic-w pos-relative">
-										<img src="MainPage/images/product-detail-02.jpg" alt="IMG-PRODUCT">
-
-										<a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="MainPage/images/product-detail-02.jpg">
-											<i class="fa fa-expand"></i>
-										</a>
-									</div>
-								</div>
-
-								<div class="item-slick3" data-thumb="images/product-detail-03.jpg">
-									<div class="wrap-pic-w pos-relative">
-										<img src="MainPage/images/product-detail-03.jpg" alt="IMG-PRODUCT">
-
-										<a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="MainPage/images/product-detail-03.jpg">
-											<i class="fa fa-expand"></i>
-										</a>
-									</div>
-								</div>
-							</div>
 						</div>
-					</div>
-				</div>
+				</div>				
+											<table id="example">
+										<tr>
+										<td>
+										<button id="addItemBtn">파일업로드</button>
+										</td>
+										</tr>
+										        <tr id="item1" style="display: none">
+										            <td><input type="file" id="imgInput" name="sell_img_name1" onchange="readURL(this)" ></td>
+										        </tr>
+											</table>
+										 
+											
+
+											
+								</div>
 					
 				<div class="col-md-6 col-lg-5 p-b-30">
 					<div class="p-r-50 p-t-5 p-lr-0-lg">
