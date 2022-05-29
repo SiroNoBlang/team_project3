@@ -157,4 +157,12 @@ $('#toggle-left-menu').click(function() {
 
 
 
+	//검수상태 파라미터로 보내기
+		function confirm(status,sell_num,sNickname) {
+			let cmStatus = status;
+			let sellNum = sell_num;
+			let sNname = sNickname;
+			
+			location.href = "./UpdateProductConfirm.co?cmStatus=" + cmStatus+"&sell_num="+sellNum+"&sNname="+sNname;
+		}
 

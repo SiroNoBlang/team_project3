@@ -14,6 +14,7 @@ import vo.NoticeBean;
 import vo.NoticeImgFileBean;
 import vo.QnaBean;
 import vo.SellerDTO;
+import vo.SellerProductDTO;
 import vo.SellerimgDTO;
 
 import static db.JdbcUtil.*;
@@ -1419,15 +1420,13 @@ public class AdminDAO {
 				confirm.setSell_list_item_status(rs.getString("sell_list_item_status"));
 				
 				if(rs.getString("sell_list_approve_date") !=null) { //값이 없을 때 .substring(0,8)로 인해 오류발생
-					
 					confirm.setSell_list_approve_date(rs.getString("sell_list_approve_date").substring(0,8));
 				}
-				
 				productConfirmList.add(confirm);
 				
 			}
 			
-			System.out.println(productConfirmList);
+//			System.out.println(productConfirmList);
 			
 		} catch (SQLException e) {
 			System.out.println("SQL 구문 오류 발생! - selectConfirmList()");
@@ -1612,6 +1611,47 @@ public class AdminDAO {
 		}
 		return confirmImgFileList;
 		
+		
+	}
+
+	
+	//검수상태 변경하기
+	public int updateConfirm(SellerProductDTO confirm) {
+	
+		int updateCount = 0;
+		
+		PreparedStatement pstmt = null;
+		
+		try {
+			
+			String status = confirm.getSell_list_item_status();
+			String sql = "";
+			
+			if(status.equals("검수완료")) {
+				 sql="UPDATE sell_list SET sell_list_item_status = '판매중' ";
+			} else {
+				 sql="UPDATE sell_list SET sell_list_item_status = '검수반려' ";
+			}
+			
+				sql += ", sell_list_approve_date = REPLACE(now(),'-',''),"
+					  + " sell_list_approve_nickname = ?"
+					  + " WHERE sell_list_num = (SELECT sell_num FROM sell WHERE sell_num = ?)"; 
+			
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, confirm.getSell_list_approve_nickname());
+			pstmt.setInt(2, confirm.getSell_num());
+			
+//			System.out.println(sql);
+			
+			updateCount = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			System.out.println("SQL 구문 오류 발생! - updateConfirm()");
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return updateCount;
 		
 	}
 	

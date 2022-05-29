@@ -114,7 +114,7 @@
 						                    <th scope="col" class="th-date">브랜드</th>
 						                    <th scope="col" class="th-title">판매품제목 </th>
 						                    <th scope="col" class="th-date">판매등록일</th>
-						                    <th scope="col" class="th-date">승인날짜</th>
+						                    <th scope="col" class="th-date">반려/승인날짜</th>
 						                    <th scope="col" class="th-date">현재상태</th>
 						                </tr>
 						                </thead>

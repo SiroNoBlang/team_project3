@@ -2,6 +2,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>   
+<%
+//세션 객체에 저장된 세션 닉네임("sNickname") 가져와서 변수에 저장
+String sNickname = (String)session.getAttribute("sNickname");
+	
+%>  
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,6 +23,8 @@
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css'>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
 <script src="AdminPage/js/jquery-3.6.0.js"></script>
+<script type="text/javascript">
+</script>
 </head>
 <body>
 	<div id="logo">
@@ -39,6 +46,8 @@
 			<div class="card">
 				<div class="title">상품 상세정보</div>
 				<form action="#" name="boardForm" method="post">
+					<input type="hidden" name="sell_num" id ="sell_num" value="${confirmArticle.getSell_num()}">
+					<input type="hidden" name="sNickname" id = "sNickname" value="${sNickname}">
 					<table>
 						<tr>
 							<th><label for="board_title">판매넘버</label></th>
@@ -104,7 +113,7 @@
 							<td>${confirmArticle.getSell_list_item_status() }</td>
 						</tr>
 						<tr>
-							<th><label for="board_title">승인날짜</label></th>
+							<th><label for="board_title">반려/승인날짜</label></th>
 							<td>${confirmArticle.getSell_list_approve_date() }</td>
 						</tr>
 						<tr>
@@ -139,14 +148,14 @@
 					<section id="commandCell">
 							<c:choose>  
 								<c:when test="${confirmArticle.getSell_list_item_status() eq '검수중' }"> 
-									<input type="button" value="검수완료" onclick="">
-									<input type="button" value="검수반려" onclick="">
+									<input type="button" value="검수완료" onclick="confirm(this.value,sell_num.value,sNickname.value)">
+									<input type="button" value="검수반려" onclick="confirm(this.value,sell_num.value,sNickname.value)">
 								</c:when> 
 								<c:when test="${confirmArticle.getSell_list_item_status() eq '검수반려' }"> 
-									<input type="button" value="검수완료" onclick="">
+									<input type="button" value="검수완료" onclick="confirm(this.value,sell_num.value,sNickname.value)">
 								</c:when> 
 								<c:when test="${confirmArticle.getSell_list_item_status() eq '판매중' }"> 
-										<input type="button" value="검수반려" onclick="">
+										<input type="button" value="검수반려" onclick="confirm(this.value,sell_num.value,sNickname.value)">
 								</c:when> 
 							</c:choose> 
 						<input type="button" value="목록" onclick="history.back()">
