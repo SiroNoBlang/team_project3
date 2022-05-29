@@ -26,12 +26,7 @@ public class SendEmailAction implements Action {
 		boolean isSendEmail = service.isSendEmail(email, request);
 		
 		if(isSendEmail) {
-			response.setContentType("text/html; charset=UTF-8");
-			PrintWriter out = response.getWriter();
-			out.println("<script>");
-			out.println("alert('메일이 정상적으로 전송되었습니다!')");
-			System.out.println("왔냐?");
-			out.println("</script>");
+			
 			forward = new ActionForward("/JoinPro.ma", false);
 		} else {
 			response.setContentType("text/html; charset=UTF-8");

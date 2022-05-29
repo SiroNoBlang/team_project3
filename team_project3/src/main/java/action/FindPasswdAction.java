@@ -22,15 +22,16 @@ public class FindPasswdAction implements Action {
 		String email = request.getParameter("find_passwd_member_email");
 		
 		FindPasswdService service = new FindPasswdService();
-		boolean isFindPasswd = service.isFindPasswd(id, email);
+		boolean isFindPasswd = service.isFindPasswd(id, email, request);
 		
 		if(isFindPasswd) {
 			response.setContentType("text/html; charset=UTF-8");
 			PrintWriter out = response.getWriter();
 			out.println("<script>");
 			out.println("alert('이메일로 임시 비밀번호를 전송하였습니다!')");
+			out.println("history.back()");
 			out.println("</script>");
-			forward = new ActionForward("/HomePage/first_page/mail_pro.jsp", false);
+//			forward = new ActionForward("/HomePage/first_page/mail_pro.jsp", false);
 		} else {
 			response.setContentType("text/html; charset=UTF-8");
 			PrintWriter out = response.getWriter();

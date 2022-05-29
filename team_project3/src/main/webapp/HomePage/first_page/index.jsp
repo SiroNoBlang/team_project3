@@ -186,6 +186,8 @@
 	});	
 	
 	
+	
+	
 	function checkEmail(email){
 		var spanElem = document.getElementById("emailCheck");
 		var specRegex = /@/;

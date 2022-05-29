@@ -53,16 +53,6 @@ public class MemberDAO {
            pstmt4 = con.prepareStatement(sql);
            
            
-          
-//           System.out.println(memberBean.getAgreement_name());
-//           System.out.println(memberBean.getAgreement_content());
-//           sql = "INSERT INTO agreement VALUES ((SELECT MAX(member_code) FROM member ORDER BY member_num), REPLACE(now(),'-',''),?,?)";
-//           pstmt5 = con.prepareStatement(sql);
-//           pstmt5.setString(1, memberBean.getAgreement_name());
-//           pstmt5.setString(2, memberBean.getAgreement_content());
-           
-           
-           
            joinCount = pstmt.executeUpdate();
            joinCount = pstmt2.executeUpdate();
            joinCount = pstmt3.executeUpdate();
@@ -82,8 +72,6 @@ public class MemberDAO {
 	public MemberBean isLogin(String member_id, String member_passwd) {
 		System.out.println("MemberDAO isLogin");
 		MemberBean isLogin = null;
-		System.out.println(member_id);
-		System.out.println(member_passwd);
 		
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -489,6 +477,7 @@ public class MemberDAO {
 			
 			if(rs.next()) {
 				isFindId = rs.getString("member_id").toString();
+//				String decryptedText = rsaCipher.decrypt(isFindId);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -499,7 +488,7 @@ public class MemberDAO {
 		return isFindId;
 	}
 
-	public boolean isFindPasswd(String id, String email) {
+	public boolean isFindPasswd(String id, String email, String code) {
 		
 		boolean isFindPasswd = false;
 		
@@ -507,7 +496,7 @@ public class MemberDAO {
 		System.out.println("id : " + id);
 		System.out.println("email : " + email);
 		
-		PreparedStatement pstmt = null;
+		PreparedStatement pstmt = null, pstmt2 = null;
 		ResultSet rs = null;
 		
 		try {
@@ -518,18 +507,31 @@ public class MemberDAO {
 			pstmt.setString(2, email);
 			rs = pstmt.executeQuery();
 			
+			System.out.println("비밀번호찾기");
+			
 			if(rs.next()) {
+//				System.out.println("passwd : " + rs.getString("member_passwd"));
+				sql = "UPDATE member SET member_passwd=? WHERE member_id=? AND member_email=?";
+				pstmt2 = con.prepareStatement(sql);
+				pstmt2.setString(1, code);
+				pstmt2.setString(2, id);
+				pstmt2.setString(3, email);
+				isFindPasswd=pstmt2.execute();
 				isFindPasswd = true;
-				System.out.println("passwd : " + rs.getString("member_passwd"));
+				
 			}
 		} catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println("SQL 구문 오류 - insertAuthInfo()");
 
 		} finally {
+			close(pstmt2);
 			close(pstmt);
 			close(rs);
 		}
 		return isFindPasswd;
 	}
+	
 
 	public boolean insertAuthInfo(String receiver, String code) {
 		System.out.println("MemberDAO - insertAuthInfo");
@@ -576,12 +578,13 @@ public class MemberDAO {
 	}
 	
 	public int selectAuthInfo(String email, String code) {
+		System.out.println("MemberDAO - selectAuthInfo");
+		
 		int result = 0;
 		
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		
-		System.out.println(email + "/" + code);
 		
 		try {
 			// 1단계 & 2단계
@@ -618,9 +621,11 @@ public class MemberDAO {
 	}
 	
 	public void changeAuthStatus(String email) {
+		System.out.println("MemberDAO - changeAuthStatus");
+		
 		PreparedStatement pstmt = null;
 		
-		System.out.println("changeAuthStatus" + email);
+//		System.out.println("changeAuthStatus" + email + "삭제되었다");
 		
 		try {
 			// 1단계 & 2단계
@@ -628,7 +633,7 @@ public class MemberDAO {
 			// 3단계. SQL 구문 작성 및 전달
 			// => MemberDTO 객체에 저장된 아이디, 패스워드 이름, 이메일, 전화번호를 추가하고
 			//    가입일(date)의 경우 데이터베이스에서 제공되는 now() 함수 사용하여 자동 생성
-			String sql = "DELETE FROM auth WHERE email =?";
+			String sql = "DELETE FROM auth WHERE email=?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, email);
 			pstmt.executeUpdate();

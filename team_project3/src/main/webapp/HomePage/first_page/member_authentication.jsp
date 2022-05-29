@@ -25,7 +25,8 @@ if(result == 0){ //인증실패 (잘못된 인증코드)
 	msg = "인증성공";
 
 dao.changeAuthStatus(email);
-	
+commit(con);
+close(con);	
 
 
 }
@@ -34,5 +35,5 @@ dao.changeAuthStatus(email);
 
 	<script >
 	alert("<%=msg%>");
-	location.href ="./";
+	window.close();
 	</script>
