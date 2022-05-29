@@ -157,7 +157,7 @@ $('#toggle-left-menu').click(function() {
 
 
 
-	//검수상태 파라미터로 보내기
+	//검수디테일에서 검수상태변경 파라미터로 보내기
 		function confirm(status,sell_num,sNickname) {
 			let cmStatus = status;
 			let sellNum = sell_num;
@@ -166,3 +166,32 @@ $('#toggle-left-menu').click(function() {
 			location.href = "./UpdateProductConfirm.co?cmStatus=" + cmStatus+"&sell_num="+sellNum+"&sNname="+sNname;
 		}
 
+
+
+	//검수상태에 따른 목록 
+		
+		function confirmType(clicked_id){
+			let cmStatus=clicked_id;
+			if(cmStatus=="progress"){
+				cmStatus ="검수중";
+				location.href = "./productConfirmType.co?cmStatus=" + cmStatus;
+			} else if(cmStatus=="cancel"){
+				cmStatus ="검수반려";
+				location.href = "./productConfirmType.co?cmStatus=" + cmStatus;
+			} else if(cmStatus=="sale"){
+				cmStatus ="판매완료";
+				location.href = "./productConfirmType.co?cmStatus=" + cmStatus;
+			} else {
+				cmStatus ="검수완료";
+				location.href = "./productConfirmType.co?cmStatus=" + cmStatus;
+			}
+		}
+		
+		
+		
+		
+		
+		
+		
+		
+		

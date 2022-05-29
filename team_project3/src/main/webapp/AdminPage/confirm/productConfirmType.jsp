@@ -41,7 +41,7 @@
 				<a href="javascript:void(0)" onclick="confirmLogout()"><i class="icon ion-log-out" ></i></a>
 			</div>
 		</div>
-				<div id="page-container">
+		<div id="page-container">
 			<div class="card">
 				<div class="title">검수현황</div>
 				    <section class="row text-center placeholders">
@@ -80,6 +80,8 @@
 				      </section>
 				</div>
 				
+				
+				
 				<div class="card">
 					<div class="title">검수 목록</div>
 					
@@ -112,13 +114,13 @@
 						                    <th scope="col" class="th-date">브랜드</th>
 						                    <th scope="col" class="th-title">판매품제목 </th>
 						                    <th scope="col" class="th-date">판매등록일</th>
-						                    <th scope="col" class="th-date">승인날짜</th>
+						                    <th scope="col" class="th-date">반려/승인날짜</th>
 						                    <th scope="col" class="th-date">현재상태</th>
 						                </tr>
 						                </thead>
 						                <tbody>
-						                <c:if test="${not empty productConfirmSearch and pageInfo.getListCount() > 0}">
-										<c:forEach var="confirm" items="${productConfirmSearch }" varStatus="status">
+						                <c:if test="${not empty productConfirmList and pageInfo.getListCount() > 0}">
+										<c:forEach var="confirm" items="${productConfirmList }" varStatus="status">
 							                <tr>
 			<!-- 				                    <td> <input type="checkbox"> </td> -->
 							                    <td>${listCount -(listCount -((pageNum-1)* listLimit + status.index)-1)} </td> 
@@ -129,22 +131,31 @@
 								                    	${confirm.getSell_title() } </a>
 								                    </td>
 							                    <td>${confirm.getSell_write_date() } </td>
-							                    <td>${confirm.getSell_list_approve_date() } </td>
+							                    <td>
+							                    <c:choose>  
+													<c:when test="${empty confirm.getSell_list_approve_date() }"> 
+														미승인
+													</c:when> 
+													<c:otherwise>
+															${confirm.getSell_list_approve_date() } 
+													</c:otherwise> 
+												</c:choose> 
+							                    </td>
 							                    <td>${confirm.getSell_list_item_status() } </td>
 							                </tr>
 							               </c:forEach>
 										</c:if> 
 					                </tbody>
 					            </table>
-								<button type="button" class="btn btn-primary" onclick="location.href='ProductConfirm.co'">총 검수목록 보기</button>
-					          <!--    <button type="button" class="btn btn-success">검수취소</button>
-					            <button type="button" class="btn btn-danger">여긴뭐하지</button> -->
+				           	 <button type="button" class="btn btn-primary" onclick="location.href='ProductConfirm.co'">총 검수목록 보기</button>
+					     <!--        <button type="button" class="btn btn-success">검수취소</button>
+					            <button type="button" class="btn btn-danger">여긴뭐하지</button>  -->
 					        </div>
     					</div>
     					 <section id="pageList">
 								<c:choose>
 									<c:when test="${pageNum > 1}">
-										<input type="button" value="이전" onclick="location.href='ProductSearch.co?page=${pageNum - 1}'">
+										<input type="button" value="이전" onclick="location.href='ProductConfirm.co?page=${pageNum - 1}'">
 									</c:when>
 									<c:otherwise>
 										<input type="button" value="이전">
@@ -157,14 +168,14 @@
 											${i }
 										</c:when>
 										<c:otherwise>
-											<a href="ProductSearch.co?page=${i }">${i }</a>
+											<a href="ProductConfirm.co?page=${i }">${i }</a>
 										</c:otherwise>
 									</c:choose>
 								</c:forEach>
 						
 								<c:choose>
 									<c:when test="${pageNum < maxPage}">
-										<input type="button" value="다음" onclick="location.href='ProductSearch.co?page=${pageNum + 1}'">
+										<input type="button" value="다음" onclick="location.href='ProductConfirm.co?page=${pageNum + 1}'">
 									</c:when>
 									<c:otherwise>
 										<input type="button" value="다음">

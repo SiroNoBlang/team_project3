@@ -5,18 +5,17 @@ import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import svc.NoticeListService;
 import svc.ProductConfirmListService;
+import svc.productConfirmTypeService;
 import vo.ActionForward;
-import vo.NoticeBean;
 import vo.PageInfo;
 import vo.SellerDTO;
 
-public class ProductConfirmListAction implements Action {
+public class productConfirmTypeAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-//		System.out.println("ProductConfirmListAction");
+//		System.out.println("productConfirmTypeAction");
 		
 		ActionForward forward = null;
 		
@@ -30,16 +29,19 @@ public class ProductConfirmListAction implements Action {
 			pageNum = Integer.parseInt(request.getParameter("page"));
 		}
 		
-		//총 게시물 수 조회
-		ProductConfirmListService service = new ProductConfirmListService();
-		String tableName = "sell_list";
 		
+		//총 게시물 수 조회
+		productConfirmTypeService service = new productConfirmTypeService();
+		String tableName = "sell_list";
+		String column =request.getParameter("cmStatus");
 		int listCount = service.getListCount(tableName);
+		SellerDTO CountType = service.getListCountType();
 		
 		
 		//상품게시물 목록 담아오기 
-		ArrayList<SellerDTO> productConfirmList = service.getConfirmList(pageNum, listLimit);
-		SellerDTO CountType = service.getListCountType();
+		System.out.println(column);
+		
+		ArrayList<SellerDTO> productConfirmList = service.getConfirmType(pageNum, listLimit,column);
 		
 		
 		int maxPage = (int)Math.ceil((double)listCount / listLimit);
@@ -51,13 +53,13 @@ public class ProductConfirmListAction implements Action {
 		}
 		
 		PageInfo pageInfo = new PageInfo(pageNum, maxPage, startPage, endPage, listCount,listLimit);
-
+		
 		request.setAttribute("CountType", CountType); 
-		request.setAttribute("pageInfo", pageInfo); 
-		request.setAttribute("productConfirmList", productConfirmList); 
+		request.setAttribute("pageInfo", pageInfo); // 페이징 처리 정보 객체
+		request.setAttribute("productConfirmList", productConfirmList); // 게시물 목록 객체
 		
 		forward = new ActionForward();
-		forward.setPath("./AdminPage/confirm/productConfirm.jsp");
+		forward.setPath("./AdminPage/confirm/productConfirmType.jsp");
 		forward.setRedirect(false); 
 		
 		return forward;

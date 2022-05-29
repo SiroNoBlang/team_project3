@@ -41,6 +41,7 @@ import action.QnaSearchAction;
 import action.QnadListAction;
 import action.QnadWriteProAction;
 import action.UpdateProductConfirmAction;
+import action.productConfirmTypeAction;
 import vo.ActionForward;
 
 // 커뮤니티 게시판 Controller
@@ -292,18 +293,14 @@ public class CommunityFrontController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+		}else if (command.equals("/productConfirmType.co")) { // 검수현황 리스트 (/productConfirmType.co) 요청
+			action = new productConfirmTypeAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
 		
 		
 		// ActionForward 객체에 저장된 포워딩 정보에 따른 포워딩 작업 수행

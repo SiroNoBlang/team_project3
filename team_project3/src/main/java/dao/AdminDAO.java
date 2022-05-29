@@ -1655,6 +1655,105 @@ public class AdminDAO {
 		
 	}
 	
+	// 검수현황 타입별로 게시물 가져오기
+	public ArrayList<SellerDTO> selectConfirmType(int pageNum, int listLimit, String column) {
+		ArrayList<SellerDTO> productConfirmList  = null;
+		SellerDTO confirm = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		int startRow = (pageNum - 1) * listLimit;
+		
+		try { // 목록 카테고리에 필요한 값만 저장
+			String sql = "SELECT  a.sell_num, a.sell_category,  a.sell_title, a.sell_brand, a.sell_write_date,"
+					+ "c.sell_list_item_status,c.sell_list_approve_date "
+					+ "FROM sell AS a JOIN sell_list AS c ON a.sell_num = c.sell_list_num "
+					+ "WHERE sell_list_item_status=?"
+					+ "ORDER BY a.sell_write_date DESC LIMIT ?,?";
+			
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, column);
+			pstmt.setInt(2, startRow);
+			pstmt.setInt(3, listLimit);
+			
+			rs = pstmt.executeQuery();
+			
+			productConfirmList = new ArrayList<SellerDTO>();
+			
+			while(rs.next()) {
+				confirm = new SellerDTO();
+				confirm.setSell_num(rs.getInt("sell_num"));
+				confirm.setSell_category(rs.getString("sell_category"));
+				confirm.setSell_title(rs.getString("sell_title"));
+				confirm.setSell_brand(rs.getString("sell_brand"));
+				confirm.setSell_write_date(rs.getString("sell_write_date").substring(0,8));
+				confirm.setSell_list_item_status(rs.getString("sell_list_item_status"));
+				
+				if(rs.getString("sell_list_approve_date") !=null) { //값이 없을 때 .substring(0,8)로 인해 오류발생
+					confirm.setSell_list_approve_date(rs.getString("sell_list_approve_date").substring(0,8));
+				}
+				productConfirmList.add(confirm);
+			}
+			System.out.println(productConfirmList);
+			
+		} catch (SQLException e) {
+			System.out.println("SQL 구문 오류 발생! - selectConfirmType()");
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rs);
+		}
+		
+		return productConfirmList;
+	}
+
+	//검수현황 타입별 게시물 수 
+	public SellerDTO getListCountType() {
+		
+		SellerDTO CountType = new SellerDTO();
+		String[] types = {"검수중", "검수완료", "검수반려","판매완료"};
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		
+		try {
+			for(String type : types) {
+			String sql = "SELECT COUNT(*) FROM sell_list WHERE sell_list_item_status=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, type);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				switch (type) {
+				case "검수반려":
+					CountType.setCancel(rs.getInt(1));
+					break;
+				case "검수완료":
+					CountType.setCompletion(rs.getInt(1));
+					break;
+				case "검수중":
+					CountType.setProgress(rs.getInt(1));
+					break;
+				case "판매완료":
+					CountType.setSale(rs.getInt(1));
+					break;
+				default:
+					break;
+					}
+				}
+			
+			}//for문 끝
+		} catch (SQLException e) {
+			System.out.println("SQL 구문 오류 발생! - getListCountType()");
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rs);
+		}
+		
+		return CountType;
+	}
+	
 	
 
 }	

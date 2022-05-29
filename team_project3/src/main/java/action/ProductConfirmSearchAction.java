@@ -30,6 +30,7 @@ public class ProductConfirmSearchAction implements Action {
 		//검색어에 해당하는 게시물 목록 갯수를 조회
 		ProductConfirmSearchService service = new ProductConfirmSearchService();
 		int listCount = service.selectConfirmSearchListCount(tableName,search, searchType);
+		SellerDTO CountType = service.getListCountType();
 		
 		//검색어에 해당하는 게시물 목록 담아오기(검색어 페이징)
 		int pageNum = 1; // 현재 페이지 번호
@@ -51,7 +52,7 @@ public class ProductConfirmSearchAction implements Action {
 		PageInfo pageInfo = new PageInfo(pageNum, maxPage, startPage, endPage, listCount,listLimit);
 		ArrayList<SellerDTO> productConfirmSearch = service.selectConfirmSearchList(pageNum, listLimit, search, searchType);
 		
-		
+		request.setAttribute("CountType", CountType); 
 		request.setAttribute("pageInfo", pageInfo);
 		request.setAttribute("productConfirmSearch", productConfirmSearch); 
 		

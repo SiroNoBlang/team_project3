@@ -44,4 +44,18 @@ public class ProductConfirmSearchService {
 		return productConfirmSearch;
 	}
 
+	public SellerDTO getListCountType() {
+		SellerDTO CountType = null;
+		
+		Connection con = getConnection();
+		AdminDAO adminDAO= AdminDAO.getInstance();
+		
+		adminDAO.setConnection(con);
+		
+		CountType = adminDAO.getListCountType();
+		
+		close(con);
+		return CountType;
+	}
+
 }

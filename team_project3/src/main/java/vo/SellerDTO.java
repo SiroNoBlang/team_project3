@@ -58,6 +58,11 @@ public class SellerDTO {
 	private String sell_list_approve_date;
 	private String sell_list_approve_nickname;
 
+	//검수상태저장할 컬럼
+	private int progress;
+	private int cancel;
+	private int sale;
+	private int completion;
 	
 
 	public SellerDTO() {}
@@ -85,6 +90,56 @@ public class SellerDTO {
 		this.sell_list_item_status = sell_list_item_status;
 		this.sell_list_approve_date = sell_list_approve_date;
 		this.sell_list_approve_nickname = sell_list_approve_nickname;
+	}
+
+
+	
+	
+
+	public int getProgress() {
+		return progress;
+	}
+
+
+
+	public void setProgress(int progress) {
+		this.progress = progress;
+	}
+
+
+
+	public int getCancel() {
+		return cancel;
+	}
+
+
+
+	public void setCancel(int cancel) {
+		this.cancel = cancel;
+	}
+
+
+
+	public int getSale() {
+		return sale;
+	}
+
+
+
+	public void setSale(int sale) {
+		this.sale = sale;
+	}
+
+
+
+	public int getCompletion() {
+		return completion;
+	}
+
+
+
+	public void setCompletion(int completion) {
+		this.completion = completion;
 	}
 
 

@@ -41,47 +41,44 @@
 				<a href="javascript:void(0)" onclick="confirmLogout()"><i class="icon ion-log-out" ></i></a>
 			</div>
 		</div>
-		<div id="page-container">
+				<div id="page-container">
 			<div class="card">
 				<div class="title">검수현황</div>
 				    <section class="row text-center placeholders">
-				        <div class="col-6 col-sm-3" onclick="location.href='#'">
+				        <div class="col-6 col-sm-3" id="completion" onclick="confirmType(this.id)">
 				          <div class="panel panel-info">
 				            <div class="panel-heading">검수완료</div>
 				            <div class="panel-body">
-				              <h4>123</h4>
+				              <h4>${CountType.getCompletion() } </h4>
 				            </div>
 				          </div>
 				        </div>
-				        <div class="col-6 col-sm-3" onclick="location.href='#'">
+				        <div class="col-6 col-sm-3" id="progress" onclick="confirmType(this.id)">
 				          <div class="panel panel-success">
 				            <div class="panel-heading">검수중</div>
 				            <div class="panel-body">
-				              <h4>123</h4>
+				              <h4>${CountType.getProgress() }</h4>
 				            </div>
 				          </div>
 				        </div>
-				        <div class="col-6 col-sm-3" onclick="location.href='#'">
+				        <div class="col-6 col-sm-3" id="cancel" onclick="confirmType(this.id)">
 				          <div class="panel panel-warning">
 				            <div class="panel-heading">검수반려</div>
 				            <div class="panel-body">
-				              <h4>123</h4>
+				              <h4>${CountType.getCancel() }</h4>
 				            </div>
 				          </div>
 				        </div>
-				        <div class="col-6 col-sm-3" onclick="location.href='#'">
+				        <div class="col-6 col-sm-3" id ="sale" onclick="confirmType(this.id)">
 				          <div class="panel panel-danger">
 				            <div class="panel-heading">판매완료</div>
 				            <div class="panel-body">
-				              <h4>123</h4>
+				              <h4>${CountType.getSale() }</h4>
 				            </div>
 				          </div>
 				        </div>
 				      </section>
 				</div>
-				
-				
-				
 				<div class="card">
 					<div class="title">검수 목록</div>
 					
