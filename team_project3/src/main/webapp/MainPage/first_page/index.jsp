@@ -241,7 +241,7 @@ String nickname = (String)session.getAttribute("sNickname");
 					</li>
 
 					<li class="p-b-13">
-						<a href="#" class="stext-102 cl2 hov-cl1 trans-04">
+						<a href="BuyList.ma?member_code=<%=code %>" class="stext-102 cl2 hov-cl1 trans-04">
 							My Account
 						</a>
 					</li>

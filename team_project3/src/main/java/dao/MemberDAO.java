@@ -7,8 +7,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import vo.BuyDTO;
 import vo.LikeListBean;
 import vo.MemberBean;
+import vo.SellerProductDTO;
 
 import static db.JdbcUtil.*;
 public class MemberDAO {
@@ -723,5 +725,74 @@ public class MemberDAO {
 		return articleList;
 	}
 
+	//구매목록 조회
+	public BuyDTO selectBuyList(String code) {
+		System.out.println("MemberDAO - selectBuyList");
+		BuyDTO buyList = null;
+		
+		System.out.println("MemberDAO - selectBuyList" + code);
+		
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			String sql = "SELECT * FROM buy WHERE buy_member_code=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, code);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				buyList = new BuyDTO();
+				buyList.setBuy_item_num(rs.getInt("buy_item_num"));
+				buyList.setBuy_price(rs.getInt("buy_price"));
+				buyList.setBuy_point(rs.getInt("buy_point"));
+				buyList.setBuy_sell_item_date(rs.getString("buy_sell_item_date").substring(0,8));
+				buyList.setBuy_item_status(rs.getString("buy_item_status"));
+			}
+			
+		} catch (SQLException e) {
+			System.out.println("SQL 구문 오류 발생! - selectEventArticle()");
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rs);
+		}
+		
+		return buyList;
+	}
+
+	//구매목록 첨부파일 조회
+	public ArrayList<SellerProductDTO> getBuyListImg(String code) {
+	ArrayList<SellerProductDTO> buyImgFileList = new ArrayList<SellerProductDTO>();
+		
+	SellerProductDTO buyListImg = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			
+			String sql ="SELECT  s.sell_img_name, s.sell_img_real_name, sell_num FROM sell JOIN sell_img s ON s.sell_img_real_num = sell_num WHERE sell_member_code =?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, code);
+			rs = pstmt.executeQuery();
+			
+			
+			while(rs.next()) {
+				buyListImg = new SellerProductDTO();
+				buyListImg.setSell_img_name(rs.getString("s.sell_img_name"));
+				buyListImg.setSell_img_real_name(rs.getString("s.sell_img_real_name"));
+				
+				buyImgFileList.add(buyListImg);
+			} 
+			
+		} catch (SQLException e) {
+			System.out.println("SQL 구문 오류 발생! - getEventImg()");
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rs);
+		}
+		return buyImgFileList;
+	}
 
 }

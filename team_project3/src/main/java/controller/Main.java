@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import action.Action;
+import action.BuyListAction;
 import action.FindIdAction;
 import action.FindPasswdAction;
 import action.JoinProAction;
@@ -219,6 +220,14 @@ public class Main extends HttpServlet {
 				forward = action.execute(request, response);
 			} catch (Exception e) {
 				
+			}
+		} else if (command.equals("/BuyList.ma")) { // 구매목록 버튼 클릭
+			System.out.println("구매목록 - BuyList.pr");
+			action = new BuyListAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
 			}
 		}
 		
