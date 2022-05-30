@@ -83,39 +83,34 @@ function readURL(obj) {   //사진 5장 뿌리기
     
 }
 
-var maxAppend = 1;
 
-$('.__add ._add').on('click',function(){ 
-   if(maxAppend >= 3){
-      alert("파일 업로드 최대 개수는 3개 입니다.");
-      return;
-   }else{
-       $('.__add').append('<li><input type="file"name="file_path" class="files"> <button type="button" class="_add" onclick="addDel(this);">삭제</button></li>'); 
-       maxAppend ++;
-   }
-   
- });
  
-$(document).ready(function(){
-    // 옵션추가 버튼 클릭시
-    $("#addItemBtn").click(function(){
-        //파일 선택란을 보여준다.
-        $("tr#item1").show();
-        // tr태그의 마지막 번째를 구해 id="item"의 형태로 만들어 lastItemNo에 대입
-        var lastItemNo = $("#example tr:last").attr("id").replace("item", "");
-        //새로 추가 할 경우 두번째 tr 값을 복사하여 newitem변수에 대입
-        var newitem = $("#example tr:eq(1)").clone();
-        //아이템 추가시 id="item" 값에 넘버를 추가해 준다.               
-        newitem.attr("name","item"+(parseInt(lastItemNo)+1));
+// $(document).ready(function(){
+//     // 옵션추가 버튼 클릭시
+//     $("#addItemBtn").click(function(){
+//         //파일 선택란을 보여준다.
+//         $("td#imgInput").show();
+//         // tr태그의 마지막 번째를 구해 id="item"의 형태로 만들어 lastItemNo에 대입
+//         var lastItemNo = $("#example td:last").attr("name").replace("sell_img_name", "");
+//         //새로 추가 할 경우 두번째 tr 값을 복사하여 newitem변수에 대입
+//         var newitem = $("#example td:eq(1)").clone();
+//         //아이템 추가시 id="item" 값에 넘버를 추가해 준다.               
+//         newitem.attr("name","sell_img_name"+(parseInt(lastItemNo)+1));
         
-        if(lastItemNo==4){
-        //그리고 해당 아이템은 4개 이상 생성할수 없도록 제한
-            alert("4개 이상 파일 추가 하실 수 없습니다.");
-        }else{
-        $("#example").append(newitem);
-        }
-    });
-});  
+//         if(lastItemNo==4){
+//         //그리고 해당 아이템은 4개 이상 생성할수 없도록 제한
+//             alert("4개 이상 파일 추가 하실 수 없습니다.");
+//         }else{
+//         $("#example").append(newitem);
+//         }
+//     });
+// });
+
+
+
+
+
+
 
 
 
@@ -482,7 +477,9 @@ $(document).ready(function(){
 										 <!--  파일추가  -->
 										   
 <!-- 											 -->
-<!-- 										 <input type="file" id="imgInput" name="sell_img_name3" onchange="readURL(this)"> -->
+										 <input type="file" id="imgInput" name="sell_img_name1" onchange="readURL(this)">
+										 <input type="file" id="imgInput" name="sell_img_name2" onchange="readURL(this)">
+										 <input type="file" id="imgInput" name="sell_img_name3" onchange="readURL(this)">
 											</div>
 										</div>
 										
@@ -493,19 +490,6 @@ $(document).ready(function(){
 								</div>
 						</div>
 				</div>				
-											<table id="example">
-										<tr>
-										<td>
-										<button id="addItemBtn">파일업로드</button>
-										</td>
-										</tr>
-										        <tr id="item1" style="display: none">
-										            <td><input type="file" id="imgInput" name="sell_img_name1" onchange="readURL(this)" ></td>
-										        </tr>
-											</table>
-										 
-											
-
 											
 								</div>
 					

@@ -563,30 +563,59 @@ int listCount = pageInfo.getListCount();
             </div>
          </div>
          
+         
+         
          <!-- 여기서부터 사진 상세보기로 서블릿만들기 -->
-         
-            <%for(SellerProductDTO seller1 :articleList){ %>
-                        
-         
-      <table border="1" style="border: none; background:white;">
+          <table border="1" style="border: none; background:white;">
+           
+                  
             <tr>
-               <td colspan="2"><img src="./Upload/sell_img/<%=seller1.getSell_img_real_name() %>" width="350" height="400" alt="IMG-PRODUCT"></td><td></td>   
-            </tr>
-            <tr>
-               <td>Title:<%=seller1.getSell_title()%></td><td>ReadCount:<%=seller1.getSell_readcount() %></td>
-            </tr>
-            <tr>
-               <td>Brand:<%=seller1.getSell_brand()%></td>
-               <td><a href="ProductDetailPro.pr?sell_num=<%=seller1.getSell_num()%>&sell_brand=<%=seller1.getSell_brand()%>">Detail</a></td>
-            </tr>
-            <tr>
-            	<td colspan="2"> Price:<%=seller1.getSell_price() %></td>
-            </tr>
-                     
-      </table>      
-   <%}%>
+             	 <% 
+             		
+//              		for(int j=0; j<4 ; j++) {  
+             		for(int i=0; i< articleList.size(); i++){
+             		%>
+             		 
+               <td colspan=1>
+               <img src="./Upload/sell_img/<%=articleList.get(i).getSell_img_real_name() %>" width="300" height="300" alt="IMG-PRODUCT">
+           		 Title:<%=articleList.get(i).getSell_title()%>ReadCount:<%=articleList.get(i).getSell_readcount() %>
+          		 Brand:<%=articleList.get(i).getSell_brand()%>
+               	<a href="ProductDetailPro.pr?sell_num=<%=articleList.get(i).getSell_num()%>&sell_brand=<%=articleList.get(i).getSell_brand()%>">Detail</a>
+   				  Price:<%=articleList.get(i).getSell_price() %>
+          		</td>
+          		 <td colspan=1>
+               <img src="./Upload/sell_img/<%=articleList.get(1).getSell_img_real_name() %>" width="300" height="300" alt="IMG-PRODUCT">
+           		 Title:<%=articleList.get(1).getSell_title()%>ReadCount:<%=articleList.get(1).getSell_readcount() %>
+          		 Brand:<%=articleList.get(1).getSell_brand()%>
+               	<a href="ProductDetailPro.pr?sell_num=<%=articleList.get(1).getSell_num()%>&sell_brand=<%=articleList.get(1).getSell_brand()%>">Detail</a>
+          		  Price:<%=articleList.get(1).getSell_price() %>
+          		</td>
+          		 <td colspan=1>
+          		 <img src="./Upload/sell_img/<%=articleList.get(2).getSell_img_real_name() %>" width="300" height="300" alt="IMG-PRODUCT">
+           		 Title:<%=articleList.get(2).getSell_title()%>ReadCount:<%=articleList.get(i).getSell_readcount() %>
+          		 Brand:<%=articleList.get(2).getSell_brand()%>
+               	<a href="ProductDetailPro.pr?sell_num=<%=articleList.get(2).getSell_num()%>&sell_brand=<%=articleList.get(2).getSell_brand()%>">Detail</a>
+          		  Price:<%=articleList.get(2).getSell_price() %>
+          		</td>
+               
+          		 <td colspan=1>
+               <img src="./Upload/sell_img/<%=articleList.get(3).getSell_img_real_name() %>" width="300" height="300" alt="IMG-PRODUCT">
+           		 Title:<%=articleList.get(3).getSell_title()%>ReadCount:<%=articleList.get(3).getSell_readcount() %>
+          		 Brand:<%=articleList.get(3).getSell_brand()%>
+               	<a href="ProductDetailPro.pr?sell_num=<%=articleList.get(i).getSell_num()%>&sell_brand=<%=articleList.get(3).getSell_brand()%>">Detail</a>
+          		  Price:<%=articleList.get(3).getSell_price() %>
+          		</td>
+          			
+          	</tr>
+<%--            			 <%} %> --%>
+             <%} %>
+           
+
+         	
+  			
+    </table>    
       
-         
+
 <!--          <div class="row isotope-grid"> -->
          
    <!--    첫번째 사진은 여기 -->            
@@ -1119,7 +1148,7 @@ int listCount = pageInfo.getListCount();
          </div>
       </div>
    </div>
-      
+    
 
    <!-- Footer -->
    <footer class="bg3 p-t-75 p-b-32">
