@@ -32,7 +32,7 @@ public class FindIdAction implements Action {
 			out.println("</script>");
 		} else {
 			request.setAttribute("isFindId", isFindId);
-			forward = new ActionForward("HomePage/first_page/index.jsp", false);
+			forward = new ActionForward("./", true);
 		}
 		
 		return forward;
