@@ -17,7 +17,7 @@
 	<c:set var="endPage" value="${pageInfo.getEndPage() }" />
 	<c:set var="listCount" value="${pageInfo.getListCount() }" />
 	
-	<h2>좋아요 글 목록</h2>
+	<h2>찜 목록</h2>
 	<table border="1">
 		<tr>
 			<td>번호</td>

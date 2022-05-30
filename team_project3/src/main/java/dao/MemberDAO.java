@@ -715,7 +715,7 @@ public class MemberDAO {
 				article.setLike_list_img_name(rs.getString("like_list_img_name"));
 				
 				articleList.add(article);
-				System.out.println("DAO에서 articleList - " + articleList);
+//				System.out.println("DAO에서 articleList - " + articleList);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

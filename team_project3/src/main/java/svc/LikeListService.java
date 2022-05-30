@@ -28,7 +28,7 @@ public class LikeListService {
 
 	public ArrayList<LikeListBean> getArticleList(int pageNum, int listLimit, String member_code) {
 		System.out.println("ArrayList - service");
-		System.out.println("ArrayList-서비스에서 :" + member_code);
+//		System.out.println("ArrayList-서비스에서 :" + member_code);
 		ArrayList<LikeListBean> articleList = null;
 		Connection con = getConnection();
 		MemberDAO memberDAO = MemberDAO.getInstance();

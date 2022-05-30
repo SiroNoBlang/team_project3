@@ -212,7 +212,7 @@ public class Main extends HttpServlet {
 			} catch (Exception e) {
 				
 			}
-		} else if(command.equals("/LikeList.ma")) { //찜리스트 확인
+		} else if(command.equals("/LikeList.ma")) { // 찜리스트 확인
 			System.out.println("서블릿 들어왔니??");
 			action = new LikeListAction();
 			try {

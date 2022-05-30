@@ -50,7 +50,7 @@ public class LikeListAction implements Action {
 		
 		PageInfo pageInfo = new PageInfo(pageNum, maxPage, startPage, endPage, listCount);
 //
-		HttpSession session = request.getSession(); // articleList 객체 생성
+		HttpSession session = request.getSession(); // articleList 객체 생성 
 		session.setAttribute("articleList", articleList);
 		
 		System.out.println("액션에서 pageINfo : " + pageInfo);

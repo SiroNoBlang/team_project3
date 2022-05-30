@@ -5,7 +5,7 @@ package vo;
 like_list_count int,
 like_list_title VARCHAR(100),
 like_list_img_name VARCHAR(100)
-);
+); 
  * */
 
 public class LikeListBean {

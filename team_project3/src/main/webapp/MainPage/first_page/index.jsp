@@ -82,7 +82,6 @@ String nickname = (String)session.getAttribute("sNickname");
 					<a href="#" class="logo">
 						<img src="MainPage/images/icons/logo-02.png" alt="IMG-LOGO">
 					</a>
-
 					<!-- Menu desktop -->
 					<div class="menu-desktop">
 						<ul class="main-menu">

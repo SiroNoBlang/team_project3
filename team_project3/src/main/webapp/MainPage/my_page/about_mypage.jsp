@@ -17,7 +17,7 @@ MemberBean member = (MemberBean) request.getAttribute("memberDetail");
 	src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script type="text/javascript">
 	function confirmLogout() {
-		if (confirm("로그아웃 할꺼임?")) {
+		if (confirm("로그아웃 하시겠습니까?")) {
 			location.href = "./Logout.ma";
 		}
 	}
