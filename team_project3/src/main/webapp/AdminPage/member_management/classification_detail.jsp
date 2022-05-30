@@ -18,6 +18,18 @@
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css'>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
 <script src="AdminPage/js/jquery-3.6.0.js"></script>
+<script type="text/javascript">
+	$(document).ready(function() {
+		$('#member_status').change(function() {
+			var result = $('#member_status option:selected').val();
+			if (result == '정지') {
+				$('#reason').show();
+			} else {
+				$('#reason').hide();
+			}
+		}); 
+	}); 
+</script>
 </head>
 <body>
 	<div id="logo">
