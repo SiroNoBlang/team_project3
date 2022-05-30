@@ -6,7 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import svc.ProductConfirmListService;
-import svc.productConfirmTypeService;
+import svc.ProductConfirmTypeService;
 import vo.ActionForward;
 import vo.PageInfo;
 import vo.SellerDTO;
@@ -31,17 +31,16 @@ public class ProductConfirmTypeAction implements Action {
 		
 		
 		//총 게시물 수 조회
-		productConfirmTypeService service = new productConfirmTypeService();
+		ProductConfirmTypeService service = new ProductConfirmTypeService();
 		String tableName = "sell_list";
 		String column =request.getParameter("cmStatus");
-		int listCount = service.getListCount(tableName);
+		int listCount = service.getListCount(tableName,column);
 		SellerDTO CountType = service.getListCountType();
 		
 		
 		//상품게시물 목록 담아오기 
 //		System.out.println(column);
-		
-		ArrayList<SellerDTO> productConfirmList = service.getConfirmType(pageNum, listLimit,column);
+		ArrayList<SellerDTO> productConfirmList = service.getConfirmType(pageNum, listLimit, column);
 		
 		
 		int maxPage = (int)Math.ceil((double)listCount / listLimit);

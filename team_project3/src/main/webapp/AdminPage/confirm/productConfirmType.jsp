@@ -80,8 +80,6 @@
 				      </section>
 				</div>
 				
-				
-				
 				<div class="card">
 					<div class="title">검수 목록</div>
 					
@@ -155,7 +153,7 @@
     					 <section id="pageList">
 								<c:choose>
 									<c:when test="${pageNum > 1}">
-										<input type="button" value="이전" onclick="location.href='ProductConfirmType.co?page=${pageNum - 1}'">
+										<input type="button" value="이전" onclick="location.href='ProductConfirmType.co?page=${pageNum - 1}&cmStatus=${param.cmStatus}'">
 									</c:when>
 									<c:otherwise>
 										<input type="button" value="이전">
@@ -168,14 +166,14 @@
 											${i }
 										</c:when>
 										<c:otherwise>
-											<a href="ProductConfirmType.co?page=${i }">${i }</a>
+											<a href="ProductConfirmType.co?page=${i }&cmStatus=${param.cmStatus}">${i }</a>
 										</c:otherwise>
 									</c:choose>
 								</c:forEach>
 						
 								<c:choose>
 									<c:when test="${pageNum < maxPage}">
-										<input type="button" value="다음" onclick="location.href='ProductConfirmType.co?page=${pageNum + 1}'">
+										<input type="button" value="다음" onclick="location.href='ProductConfirmType.co?page=${pageNum + 1}&cmStatus=${param.cmStatus}'">
 									</c:when>
 									<c:otherwise>
 										<input type="button" value="다음">
