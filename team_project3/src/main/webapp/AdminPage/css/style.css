@@ -92,7 +92,7 @@ th {
 }
 
 .board-table .th-date {
-	width: 70px;
+	width: 110px;
 }
 
 .board-table th, .board-table td {
@@ -216,7 +216,7 @@ input, textarea, select {
 }
 
 th, td {
-	padding: 9px 9px 7px;
+	padding: 9px 9px 7px !important;
 	border: 1px solid #d9dadc;
 }
 
@@ -566,4 +566,7 @@ section#pageList {
 input[type="button"] {
     margin-top: 12px;
     }
+    
+    
+
     
