@@ -75,7 +75,7 @@
 				<div class="card">
 					<div class="title">매출 그래프</div>
 						<div class="container">
-							<%@ include file="/AdminPage/sales/NewFile.jsp" %>
+							<%@ include file="/AdminPage/sales/sales_data.jsp" %>
 						</div>
 					</div>
 				</div>
