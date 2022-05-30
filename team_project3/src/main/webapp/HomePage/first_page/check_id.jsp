@@ -40,6 +40,10 @@ if(isDuplicate) { // 중복
 		out.println("var checkId = false");
 		out.println("</script>");
 	}
+	response.setContentType("text/html; charset=UTF-8");
+	out.println("<script>");
+	out.println("var checkId = true");
+	out.println("</script>");
 }
 %>
 

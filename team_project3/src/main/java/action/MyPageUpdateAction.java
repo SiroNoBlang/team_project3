@@ -5,6 +5,7 @@ import java.io.PrintWriter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import googleSMTPAuthenticator.MyMessageDigest;
 import svc.ModifyUpdateService;
 import vo.ActionForward;
 import vo.MemberBean;
@@ -25,7 +26,7 @@ public class MyPageUpdateAction implements Action {
 		String member_code = request.getParameter("member_code");
 		String member_nickname = request.getParameter("member_nickname");
 		String member_id = request.getParameter("member_id");
-		String member_passwd = request.getParameter("member_passwd");
+//		String member_passwd = request.getParameter("member_passwd");
 		String member_email1 = request.getParameter("member_email1");
 //		String member_info_code = request.getParameter("member_info_code");
 		String member_info_name = request.getParameter("member_info_name");
@@ -67,6 +68,20 @@ public class MyPageUpdateAction implements Action {
 			ctgy += c + "/";
 		}
 		
+		//============================================================================================================
+		//비밀번호 암호화
+			String algorithm = "SHA-256";
+			
+			String strPlainText = request.getParameter("member_passwd"); // 평문 암호
+			
+			
+			// MyMessageDigest 객체 생성 시 생성자에 암호알고리즘명과 평문암호 전달하여 암호화 수행
+			MyMessageDigest mmd = new MyMessageDigest(algorithm, strPlainText);
+			
+			// MyMessageDigest 객체의 getHashedData() 메서드를 호출하여 암호화 된 암호문을 리턴받아 출력
+			String result = mmd.getHashedData();
+			System.out.println("비밀번호 암호화 결과 : " + result);
+		//============================================================================================================
 		
 		MemberBean member = new MemberBean();
 //		member.setGrade_code(grade_code);
@@ -91,7 +106,7 @@ public class MyPageUpdateAction implements Action {
 		member.setMember_service_log_order_count(member_service_log_order_count);
 		member.setMember_code(member_code);
 		member.setMember_id(member_id);
-		member.setMember_passwd(member_passwd);
+		member.setMember_passwd(result); // 암호화된 비밀번호 값
 		member.setMember_email(member_email1);
 		member.setMember_info_name(member_info_name);
 		member.setMember_info_phone(member_info_phone);

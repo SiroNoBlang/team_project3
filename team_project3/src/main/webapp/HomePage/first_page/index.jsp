@@ -11,9 +11,9 @@
 <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 <script src="HomePage/assets/js/jquery-3.6.0.js"></script>
 <script type="text/javascript">
-// 	var checkNickname = false, checkId = false;
-
-// let isCheckConfirmPasswd = false, passSafe = false, isCheckEmail = false;;
+//==================================================================================제약조건
+// var isCheckConfirmPasswd = false, passSafe = false, isCheckEmail = false, checkNickname = false, checkId = false;
+//==================================================================================제약조건
 
 
 	function checkPass(pass) {
@@ -149,6 +149,7 @@
 				url:"HomePage/first_page/check_nickname.jsp",
 				data: sendData,
 				dataType:"text",
+				async : false,
 				success:function(msg){
 					$("#nicknameResultArea").html(msg);
 				},
@@ -172,6 +173,7 @@
 				url:"HomePage/first_page/check_id.jsp",
 				data: sendData,
 				dataType:"text",
+				async : false,
 				success:function(msg){
 					$("#idResultArea").html(msg);
 				},
@@ -202,9 +204,14 @@
 		}
 	}
 	
-
+//==================================================================================제약조건
 // 	function checkForm(){
-// 		 if(!checkId){
+// 		//($('.username_input').attr("check_result") == "fail")
+// 		if(!checkNickname){
+// 			alert("닉네임 확인 필수!");
+// 			document.fr.member_nickname.focus();
+// 			return false;
+// 		} else if(!checkId){
 // 			alert("아이디 확인 필수!");
 // 			document.fr.join_member_id.focus();
 // 			return false;
@@ -222,6 +229,7 @@
 // 			return false;
 // 		}
 // 	}	
+//==================================================================================제약조건
 	
 	$(function(){
 		$('#idFind_login').hide();
@@ -744,7 +752,7 @@
 						</div>
 						<div class="field half">
 							<label for="member_email1">Email</label> 
-							<input type="text" name="member_email1" id="member_email1" onblur="checkEmail(this.value)" />
+							<input type="text" name="member_email1" id="member_email1" onkeyup="checkEmail(this.value)" />
 							<span id="emailCheck"></span>
 						</div>
 						<div class="field half">
