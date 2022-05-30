@@ -92,8 +92,7 @@
 					<div class="container">
 						<div class="search-window">
 							<form action="Classification.co" class="formCss">
-								<input id="value" type="search" name="value"
-									placeholder="닉네임만 검색 가능">
+								<input id="value" type="search" name="value" placeholder="닉네임만 검색 가능">
 								<button type="submit" class="btn btn-dark">검색</button>
 							</form>
 						</div>
@@ -112,8 +111,7 @@
 								</tr>
 							</thead>
 							<tbody>
-								<c:if
-									test="${not empty classificationList and pageInfo.getListCount() > 0}">
+								<c:if test="${not empty classificationList and pageInfo.getListCount() > 0}">
 									<c:forEach var="classification" items="${classificationList }" varStatus="status">
 										<tr>
 											<td><input type="checkbox" value="${classification.getMember_code() }"></td>
