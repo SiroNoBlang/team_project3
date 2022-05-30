@@ -105,9 +105,10 @@ $('#toggle-left-menu').click(function() {
     
     //관리자 페이지에서 쓸 로그아웃(추후 회원가입/로그인 파트에서 구현한 함수 호출 할 수도 있음.)
     	function confirmLogout() {
-		if(confirm("로그아웃 하시겠습니까?")) {
-			location.href = "./Logout.ma";
-		}
+			//alert("함수확인");
+			if(confirm("로그아웃 하시겠습니까?")) {
+					location.href = "./Logout.ma";
+				}
 	}
 	
 	
@@ -158,7 +159,7 @@ $('#toggle-left-menu').click(function() {
 
 
 	//검수디테일에서 검수상태변경 파라미터로 보내기
-		function confirm(status,sell_num,sNickname) {
+		function confirmStatus(status,sell_num,sNickname) {
 			let cmStatus = status;
 			let sellNum = sell_num;
 			let sNname = sNickname;
@@ -181,7 +182,7 @@ $('#toggle-left-menu').click(function() {
 			} else {
 				cmStatus ="검수완료";
 			}
-				location.href = "./productConfirmType.co?cmStatus=" + cmStatus;
+				location.href = "./ProductConfirmType.co?cmStatus=" + cmStatus;
 		}
 		
 		

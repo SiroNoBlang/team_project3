@@ -41,7 +41,7 @@ import action.QnaSearchAction;
 import action.QnadListAction;
 import action.QnadWriteProAction;
 import action.UpdateProductConfirmAction;
-import action.productConfirmTypeAction;
+import action.ProductConfirmTypeAction;
 import vo.ActionForward;
 
 // 커뮤니티 게시판 Controller
@@ -293,8 +293,8 @@ public class CommunityFrontController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		}else if (command.equals("/productConfirmType.co")) { // 검수현황 리스트 (/productConfirmType.co) 요청
-			action = new productConfirmTypeAction();
+		}else if (command.equals("/ProductConfirmType.co")) { // 검수현황 리스트 (/ProductConfirmType.co) 요청
+			action = new ProductConfirmTypeAction();
 			try {
 				forward = action.execute(request, response);
 			} catch (Exception e) {

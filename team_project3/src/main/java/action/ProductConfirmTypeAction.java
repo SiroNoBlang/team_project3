@@ -11,7 +11,7 @@ import vo.ActionForward;
 import vo.PageInfo;
 import vo.SellerDTO;
 
-public class productConfirmTypeAction implements Action {
+public class ProductConfirmTypeAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {

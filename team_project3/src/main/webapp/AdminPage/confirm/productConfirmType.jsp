@@ -155,7 +155,7 @@
     					 <section id="pageList">
 								<c:choose>
 									<c:when test="${pageNum > 1}">
-										<input type="button" value="이전" onclick="location.href='ProductConfirm.co?page=${pageNum - 1}'">
+										<input type="button" value="이전" onclick="location.href='ProductConfirmType.co?page=${pageNum - 1}'">
 									</c:when>
 									<c:otherwise>
 										<input type="button" value="이전">
@@ -168,14 +168,14 @@
 											${i }
 										</c:when>
 										<c:otherwise>
-											<a href="ProductConfirm.co?page=${i }">${i }</a>
+											<a href="ProductConfirmType.co?page=${i }">${i }</a>
 										</c:otherwise>
 									</c:choose>
 								</c:forEach>
 						
 								<c:choose>
 									<c:when test="${pageNum < maxPage}">
-										<input type="button" value="다음" onclick="location.href='ProductConfirm.co?page=${pageNum + 1}'">
+										<input type="button" value="다음" onclick="location.href='ProductConfirmType.co?page=${pageNum + 1}'">
 									</c:when>
 									<c:otherwise>
 										<input type="button" value="다음">

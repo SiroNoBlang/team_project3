@@ -148,14 +148,14 @@ String sNickname = (String)session.getAttribute("sNickname");
 					<section id="commandCell">
 							<c:choose>  
 								<c:when test="${confirmArticle.getSell_list_item_status() eq '검수중' }"> 
-									<input type="button" value="검수완료" onclick="confirm(this.value,sell_num.value,sNickname.value)">
-									<input type="button" value="검수반려" onclick="confirm(this.value,sell_num.value,sNickname.value)">
+									<input type="button" value="검수완료" onclick="confirmStatus(this.value,sell_num.value,sNickname.value)">
+									<input type="button" value="검수반려" onclick="confirmStatus(this.value,sell_num.value,sNickname.value)">
 								</c:when> 
 								<c:when test="${confirmArticle.getSell_list_item_status() eq '검수반려' }"> 
-									<input type="button" value="검수완료" onclick="confirm(this.value,sell_num.value,sNickname.value)">
+									<input type="button" value="검수완료" onclick="confirmStatus(this.value,sell_num.value,sNickname.value)">
 								</c:when> 
 								<c:when test="${confirmArticle.getSell_list_item_status() eq '판매중' }"> 
-										<input type="button" value="검수반려" onclick="confirm(this.value,sell_num.value,sNickname.value)">
+										<input type="button" value="검수반려" onclick="confirmStatus(this.value,sell_num.value,sNickname.value)">
 								</c:when> 
 							</c:choose> 
 						<input type="button" value="목록" onclick="history.back()">
