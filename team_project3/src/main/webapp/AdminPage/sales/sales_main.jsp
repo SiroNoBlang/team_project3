@@ -29,7 +29,7 @@
 				<i id="toggle-left-menu" class="ion-android-menu"></i>
 			</div>
 			<div class="header-right float-right">
-				<i class="icon ion-log-out"></i>
+				<jsp:include page="/AdminPage/menu/topMenu.jsp"/>
 			</div>
 		</div>
 		<div id="page-container">
