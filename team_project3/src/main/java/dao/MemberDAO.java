@@ -5,7 +5,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
+import vo.LikeListBean;
 import vo.MemberBean;
 
 import static db.JdbcUtil.*;
@@ -646,5 +648,80 @@ public class MemberDAO {
 		}
 		
 	}
+	
+	public int selectListCount(String member_code) { //좋아료 리스트
+		System.out.println("DAO에서 멤버코드 : " + member_code);
+		int listCount = 0;
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			String sql = "SELECT count(distinct like_list_item_num), a.sell_title, c.sell_img_real_name"
+					+ " FROM like_list AS b"
+					+ " JOIN sell AS a"
+					+ " ON a.sell_num = b.like_list_item_num"
+					+ " JOIN sell_img AS c"
+					+ " ON c.sell_img_num = a.sell_num"
+					+ " WHERE b.like_list_member_code=?";
+			
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, member_code);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				listCount = rs.getInt(1);
+				System.out.println("DAO rs.getINT" +rs.getInt(1));
+			}
+		} catch (SQLException e) {
+			System.out.println("SQL 구문 오류 발생");
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rs);
+		}
+		
+		return listCount;
+	}
+	
+	public ArrayList<LikeListBean> selectArticleList(int pageNum, int listLimit, String member_code) {
+		System.out.println("selectArticleList - DAO");
+		ArrayList<LikeListBean> articleList = null;
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		int startRow = (pageNum - 1) * listLimit;
+		
+		try {
+			String sql = "SELECT a.like_list_num,a.like_list_count,a.like_list_title,a.like_list_img_name,b.sell_num,b.sell_title"
+					+ " FROM mypage_like_list AS a"
+					+ " JOIN sell AS b"
+					+ " ON a.like_list_num = b.sell_num"
+					+ " WHERE b.sell_member_code=?"
+					+ " ORDER BY like_list_count LIMIT ?,?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, member_code);
+			pstmt.setInt(2, startRow);
+			pstmt.setInt(3, listLimit);
+			
+			rs = pstmt.executeQuery();
+			articleList = new ArrayList<LikeListBean>();
+			
+			while(rs.next()) {
+				LikeListBean article = new LikeListBean();
+				article.setLike_list_count(rs.getInt("like_list_count"));
+				article.setLike_list_title(rs.getString("like_list_title"));
+				article.setLike_list_img_name(rs.getString("like_list_img_name"));
+				
+				articleList.add(article);
+				System.out.println("DAO에서 articleList - " + articleList);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return articleList;
+	}
+
 
 }

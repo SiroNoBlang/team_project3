@@ -13,6 +13,7 @@ import action.Action;
 import action.FindIdAction;
 import action.FindPasswdAction;
 import action.JoinProAction;
+import action.LikeListAction;
 import action.LoginProAction;
 import action.LogoutAction;
 import action.MpEventDetailAction;
@@ -206,6 +207,14 @@ public class Main extends HttpServlet {
 			}
 		} else if(command.equals("/SendEmail.ma")) { // 회원가입시 인증 이메일 보내기
 			action = new SendEmailAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				
+			}
+		} else if(command.equals("/LikeList.ma")) { //찜리스트 확인
+			System.out.println("서블릿 들어왔니??");
+			action = new LikeListAction();
 			try {
 				forward = action.execute(request, response);
 			} catch (Exception e) {

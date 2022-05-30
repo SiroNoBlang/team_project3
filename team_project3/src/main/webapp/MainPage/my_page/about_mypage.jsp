@@ -385,7 +385,7 @@ MemberBean member = (MemberBean) request.getAttribute("memberDetail");
 				<table border="1">
 					<tr>
 						<td><a href="">내가 구매한 목록</a></td>
-						<td><a href="">찜한 목록</a></td>
+						<td><a href="LikeList.ma?member_code=${memberDetail.member_code }">찜한 목록</a></td>
 						<td><a href="">ㅋㅋ</a></td>
 					</tr>
 				</table>
