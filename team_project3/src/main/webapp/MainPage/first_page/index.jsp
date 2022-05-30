@@ -480,7 +480,7 @@ String nickname = (String)session.getAttribute("sNickname");
 	<section class="section-slide">
 		<div class="wrap-slick1 rs2-slick1">
 			<div class="slick1">
-				<div class="item-slick1 bg-overlay1" style="background-image: url(images/slide-05.jpg);" data-thumb="images/thumb-01.jpg" data-caption="Women’s Wear">
+				<div class="item-slick1 bg-overlay1" style="background-image: url(MainPage/mages/slide-05.jpg);" data-thumb="MainPage/images/thumb-01.jpg" data-caption="Women’s Wear">
 					<div class="container h-full">
 						<div class="flex-col-c-m h-full p-t-100 p-b-60 respon5">
 							<div class="layer-slick1 animated visible-false" data-appear="fadeInDown" data-delay="0">
@@ -504,7 +504,7 @@ String nickname = (String)session.getAttribute("sNickname");
 					</div>
 				</div>
 
-				<div class="item-slick1 bg-overlay1" style="background-image: url(images/slide-06.jpg);" data-thumb="images/thumb-02.jpg" data-caption="Men’s Wear">
+				<div class="item-slick1 bg-overlay1" style="background-image: url(MainPage/images/slide-06.jpg);" data-thumb="MainPage/images/thumb-02.jpg" data-caption="Men’s Wear">
 					<div class="container h-full">
 						<div class="flex-col-c-m h-full p-t-100 p-b-60 respon5">
 							<div class="layer-slick1 animated visible-false" data-appear="rollIn" data-delay="0">
@@ -528,7 +528,7 @@ String nickname = (String)session.getAttribute("sNickname");
 					</div>
 				</div>
 
-				<div class="item-slick1 bg-overlay1" style="background-image: url(images/slide-07.jpg);" data-thumb="images/thumb-03.jpg" data-caption="Men’s Wear">
+				<div class="item-slick1 bg-overlay1" style="background-image: url(MainPage/images/slide-07.jpg);" data-thumb="MainPage/images/thumb-03.jpg" data-caption="Men’s Wear">
 					<div class="container h-full">
 						<div class="flex-col-c-m h-full p-t-100 p-b-60 respon5">
 							<div class="layer-slick1 animated visible-false" data-appear="rotateInDownLeft" data-delay="0">
@@ -968,7 +968,7 @@ String nickname = (String)session.getAttribute("sNickname");
 							<div class="block2-txt-child2 flex-r p-t-3">
 								<a href="#" class="btn-addwish-b2 dis-block pos-relative js-addwish-b2">
 									<img class="icon-heart1 dis-block trans-04" src="MainPage/images/icons/icon-heart-01.png" alt="ICON">
-									<img class="icon-heart2 dis-block trans-04 ab-t-l" src="images/icons/icon-heart-02.png" alt="ICON">
+									<img class="icon-heart2 dis-block trans-04 ab-t-l" src="MainPage/images/icons/icon-heart-02.png" alt="ICON">
 								</a>
 							</div>
 						</div>
@@ -1063,7 +1063,7 @@ String nickname = (String)session.getAttribute("sNickname");
 
 							<div class="block2-txt-child2 flex-r p-t-3">
 								<a href="#" class="btn-addwish-b2 dis-block pos-relative js-addwish-b2">
-									<img class="icon-heart1 dis-block trans-04" src="images/icons/icon-heart-01.png" alt="ICON">
+									<img class="icon-heart1 dis-block trans-04" src="MainPage/images/icons/icon-heart-01.png" alt="ICON">
 									<img class="icon-heart2 dis-block trans-04 ab-t-l" src="MainPage/images/icons/icon-heart-02.png" alt="ICON">
 								</a>
 							</div>
@@ -1643,7 +1643,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 								<div class="slick3 gallery-lb">
 									<div class="item-slick3" data-thumb="images/product-detail-01.jpg">
 										<div class="wrap-pic-w pos-relative">
-											<img src="images/product-detail-01.jpg" alt="IMG-PRODUCT">
+											<img src="MainPage/images/product-detail-01.jpg" alt="IMG-PRODUCT">
 
 											<a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="MainPage/images/product-detail-01.jpg">
 												<i class="fa fa-expand"></i>
@@ -1651,7 +1651,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 										</div>
 									</div>
 
-									<div class="item-slick3" data-thumb="images/product-detail-02.jpg">
+									<div class="item-slick3" data-thumb="MainPage/images/product-detail-02.jpg">
 										<div class="wrap-pic-w pos-relative">
 											<img src="MainPage/images/product-detail-02.jpg" alt="IMG-PRODUCT">
 
@@ -1661,7 +1661,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 										</div>
 									</div>
 
-									<div class="item-slick3" data-thumb="images/product-detail-03.jpg">
+									<div class="item-slick3" data-thumb="MainPage/images/product-detail-03.jpg">
 										<div class="wrap-pic-w pos-relative">
 											<img src="MainPage/images/product-detail-03.jpg" alt="IMG-PRODUCT">
 
