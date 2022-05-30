@@ -19,16 +19,17 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
 <script src="AdminPage/js/jquery-3.6.0.js"></script>
 <script type="text/javascript">
-	$(document).ready(function() {
-		$('#member_status').change(function() {
-			var result = $('#member_status option:selected').val();
-			if (result == '정지') {
-				$('#reason').show();
-			} else {
-				$('#reason').hide();
-			}
-		}); 
+$(document).ready(function() {
+	<c:if test="${memberDetail.getMember_service_log_status() != '정지'}">$('#reason').hide();</c:if>
+	$('#member_status').change(function() {
+		var result = $('#member_status option:selected').val();
+		if (result == '정지') {
+			$('#reason').show();
+		} else {
+			$('#reason').hide();
+		}
 	}); 
+}); 
 </script>
 </head>
 <body>
@@ -152,8 +153,15 @@
 							</select>
 							<select id="reason" name="reason">
 								<option value="0" <c:if test="${memberDetail.getReason_num() eq '0'}">selected="selected"</c:if>>정상</option>
-								<option value="1" <c:if test="${memberDetail.getReason_num() eq '1'}">selected="selected"</c:if>>정지 이유 1</option>
-								<option value="2" <c:if test="${memberDetail.getReason_num() eq '2'}">selected="selected"</c:if>>정지 이유 2</option>
+								<option value="1" <c:if test="${memberDetail.getReason_num() eq '1'}">selected="selected"</c:if>>정지 3일</option>
+								<option value="2" <c:if test="${memberDetail.getReason_num() eq '2'}">selected="selected"</c:if>>정지 7일</option>
+								<option value="3" <c:if test="${memberDetail.getReason_num() eq '1'}">selected="selected"</c:if>>정지 15일</option>
+								<option value="4" <c:if test="${memberDetail.getReason_num() eq '2'}">selected="selected"</c:if>>정지 30일</option>
+								<option value="5" <c:if test="${memberDetail.getReason_num() eq '1'}">selected="selected"</c:if>>정지 45일</option>
+								<option value="6" <c:if test="${memberDetail.getReason_num() eq '2'}">selected="selected"</c:if>>정지 60일</option>
+								<option value="7" <c:if test="${memberDetail.getReason_num() eq '1'}">selected="selected"</c:if>>정지 180일</option>
+								<option value="8" <c:if test="${memberDetail.getReason_num() eq '2'}">selected="selected"</c:if>>정지 365일</option>
+								<option value="9" <c:if test="${memberDetail.getReason_num() eq '1'}">selected="selected"</c:if>>영구 정지</option>
 							</select>
 							</td>
 						</tr>
