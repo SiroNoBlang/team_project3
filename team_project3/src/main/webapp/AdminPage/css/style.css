@@ -580,4 +580,8 @@ input[type="radio"] {
 button.btn.btn-primary,button.btn.btn-danger{
     margin-top: 10px;
 }
+
+i.icon.ion-ios-home {
+    margin-right: 10px;
+}
     
