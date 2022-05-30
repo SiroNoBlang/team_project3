@@ -40,6 +40,7 @@ import action.QnaReplyProAction;
 import action.QnaSearchAction;
 import action.QnadListAction;
 import action.QnadWriteProAction;
+import action.SalesAction;
 import action.UpdateProductConfirmAction;
 import action.ProductConfirmTypeAction;
 import vo.ActionForward;
@@ -264,7 +265,12 @@ public class CommunityFrontController extends HttpServlet {
 				e.printStackTrace();
 			}
 		} else if (command.equals("/Sales.co")) { // 매출관리
-			forward = new ActionForward("AdminPage/sales/sales_main.jsp", false);
+			action = new SalesAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		} else if (command.equals("/ProductConfirm.co")) { // 검수목록(/ProductConfirm.co)
 			action = new ProductConfirmListAction();
 			try {
