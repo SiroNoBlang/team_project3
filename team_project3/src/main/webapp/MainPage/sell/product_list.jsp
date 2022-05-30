@@ -569,52 +569,77 @@ int listCount = pageInfo.getListCount();
           <table border="1" style="border: none; background:white;">
            
                   
-            <tr>
-             	 <% 
+<!--             <tr> -->
+<%--              	 <%  --%>
              		
-//              		for(int j=0; j<4 ; j++) {  
-             		for(int i=0; i< articleList.size(); i++){
-             		%>
+<!-- // //              		for(int j=0; j<4 ; j++) {   -->
+<!-- //              		for(int i=0; i< articleList.size(); i++){ -->
+<%--              		%> --%>
              		 
-               <td colspan=1>
-               <img src="./Upload/sell_img/<%=articleList.get(i).getSell_img_real_name() %>" width="300" height="300" alt="IMG-PRODUCT">
-           		 Title:<%=articleList.get(i).getSell_title()%>ReadCount:<%=articleList.get(i).getSell_readcount() %>
-          		 Brand:<%=articleList.get(i).getSell_brand()%>
-               	<a href="ProductDetailPro.pr?sell_num=<%=articleList.get(i).getSell_num()%>&sell_brand=<%=articleList.get(i).getSell_brand()%>">Detail</a>
-   				  Price:<%=articleList.get(i).getSell_price() %>
-          		</td>
-          		 <td colspan=1>
-               <img src="./Upload/sell_img/<%=articleList.get(1).getSell_img_real_name() %>" width="300" height="300" alt="IMG-PRODUCT">
-           		 Title:<%=articleList.get(1).getSell_title()%>ReadCount:<%=articleList.get(1).getSell_readcount() %>
-          		 Brand:<%=articleList.get(1).getSell_brand()%>
-               	<a href="ProductDetailPro.pr?sell_num=<%=articleList.get(1).getSell_num()%>&sell_brand=<%=articleList.get(1).getSell_brand()%>">Detail</a>
-          		  Price:<%=articleList.get(1).getSell_price() %>
-          		</td>
-          		 <td colspan=1>
-          		 <img src="./Upload/sell_img/<%=articleList.get(2).getSell_img_real_name() %>" width="300" height="300" alt="IMG-PRODUCT">
-           		 Title:<%=articleList.get(2).getSell_title()%>ReadCount:<%=articleList.get(i).getSell_readcount() %>
-          		 Brand:<%=articleList.get(2).getSell_brand()%>
-               	<a href="ProductDetailPro.pr?sell_num=<%=articleList.get(2).getSell_num()%>&sell_brand=<%=articleList.get(2).getSell_brand()%>">Detail</a>
-          		  Price:<%=articleList.get(2).getSell_price() %>
-          		</td>
+<!--                <td colspan=1> -->
+<%--                <img src="./Upload/sell_img/<%=articleList.get(i).getSell_img_real_name() %>" width="300" height="300" alt="IMG-PRODUCT"> --%>
+<%--            		 Title:<%=articleList.get(i).getSell_title()%><br>ReadCount:<%=articleList.get(i).getSell_readcount() %><br> --%>
+<%--           		 Brand:<%=articleList.get(i).getSell_brand()%> --%>
+<%--                	<a href="ProductDetailPro.pr?sell_num=<%=articleList.get(i).getSell_num()%>&sell_brand=<%=articleList.get(i).getSell_brand()%>">Detail</a><br> --%>
+<%--    				  Price:<%=articleList.get(i).getSell_price() %><br> --%>
+<!--           		</td> -->
+<!--           		 <td colspan=1> -->
+<%--                <img src="./Upload/sell_img/<%=articleList.get(1).getSell_img_real_name() %>" width="300" height="300" alt="IMG-PRODUCT"> --%>
+<%--            		 Title:<%=articleList.get(1).getSell_title()%><br>ReadCount:<%=articleList.get(1).getSell_readcount() %><br> --%>
+<%--           		 Brand:<%=articleList.get(1).getSell_brand()%> --%>
+<%--                	<a href="ProductDetailPro.pr?sell_num=<%=articleList.get(1).getSell_num()%>&sell_brand=<%=articleList.get(1).getSell_brand()%>">Detail</a><br> --%>
+<%--           		  Price:<%=articleList.get(1).getSell_price() %><br> --%>
+<!--           		</td> -->
+<!--           		 <td colspan=1> -->
+<%--           		 <img src="./Upload/sell_img/<%=articleList.get(2).getSell_img_real_name() %>" width="300" height="300" alt="IMG-PRODUCT"> --%>
+<%--            		 Title:<%=articleList.get(2).getSell_title()%><br>ReadCount:<%=articleList.get(i).getSell_readcount() %><br> --%>
+<%--           		 Brand:<%=articleList.get(2).getSell_brand()%> --%>
+<%--                	<a href="ProductDetailPro.pr?sell_num=<%=articleList.get(2).getSell_num()%>&sell_brand=<%=articleList.get(2).getSell_brand()%>">Detail</a><br> --%>
+<%--           		  Price:<%=articleList.get(2).getSell_price() %><br> --%>
+<!--           		</td> -->
                
-          		 <td colspan=1>
-               <img src="./Upload/sell_img/<%=articleList.get(3).getSell_img_real_name() %>" width="300" height="300" alt="IMG-PRODUCT">
-           		 Title:<%=articleList.get(3).getSell_title()%>ReadCount:<%=articleList.get(3).getSell_readcount() %>
-          		 Brand:<%=articleList.get(3).getSell_brand()%>
-               	<a href="ProductDetailPro.pr?sell_num=<%=articleList.get(i).getSell_num()%>&sell_brand=<%=articleList.get(3).getSell_brand()%>">Detail</a>
-          		  Price:<%=articleList.get(3).getSell_price() %>
-          		</td>
+<!--           		 <td colspan=1> -->
+<%--                <img src="./Upload/sell_img/<%=articleList.get(3).getSell_img_real_name() %>" width="300" height="300" alt="IMG-PRODUCT"> --%>
+<%--            		 Title:<%=articleList.get(3).getSell_title()%><br>ReadCount:<%=articleList.get(3).getSell_readcount() %><br> --%>
+<%--           		 Brand:<%=articleList.get(3).getSell_brand()%> --%>
+<%--                	<a href="ProductDetailPro.pr?sell_num=<%=articleList.get(i).getSell_num()%>&sell_brand=<%=articleList.get(3).getSell_brand()%>">Detail</a><br> --%>
+<%--           		  Price:<%=articleList.get(3).getSell_price() %><br> --%>
+<!--           		</td> -->
           			
-          	</tr>
-<%--            			 <%} %> --%>
-             <%} %>
-           
+<!--           	</tr> -->
+<%-- <%--            			 <%} %> --%>
+<%--              <%} %> --%>
+            
 
          	
   			
-    </table>    
+<!--     </table>     -->
+     	<div class="container">
+            <div class="row multi-columns-row">
       
+     		 	<form>
+            <c:forEach items="${articleList}" var="articleList">
+              <div class="col-sm-6 col-md-3 col-lg-3 ">
+              
+                <div class="shop-item">
+                <a href="ProductDetailPro.pr?sell_num=${articleList.sell_num}">
+                
+                 <img src="./Upload/sell_img/${articleList.sell_img_real_name}" alt="Accessories Pack"/>
+                  <h4>${articleList.sell_img_real_name}</h4>
+                  </a>
+                   <h5>${articleList.sell_title }</h5>
+                   <h5>${articleList.sell_brand }</h5>
+                   <h5>${articleList.sell_readcount }</h5>
+                </div>
+                 
+              </div>
+              </c:forEach>
+              </form>
+              </div>
+              
+              </div>
+              </table>
+    
 
 <!--          <div class="row isotope-grid"> -->
          
@@ -1130,16 +1155,10 @@ int listCount = pageInfo.getListCount();
 <!--                   </div> -->
 <!--                </div> -->
 <!--             </div> -->
-         </div>
+<!--          </div> -->
 
          <!-- Load more -->
-         <div class="flex-c-m flex-w w-full p-t-45">
-            <a href="#" class="flex-c-m stext-101 cl5 size-103 bg2 bor1 hov-btn1 p-lr-15 trans-04">
-               Load More
-            </a>
-         </div>
-      </div>
-   </div>
+        
          <!-- Load more -->
          <div class="flex-c-m flex-w w-full p-t-45">
             <a href="#" class="flex-c-m stext-101 cl5 size-103 bg2 bor1 hov-btn1 p-lr-15 trans-04">
