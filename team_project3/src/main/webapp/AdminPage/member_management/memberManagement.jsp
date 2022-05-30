@@ -44,7 +44,7 @@
 			<div class="card">
 				<div class="title">회원현황</div>
 				    <section class="row text-center placeholders">
-				        <div class="col-6 col-sm-3" onclick="location.href='Classification.co?value=0'">
+				        <div class="col-6 col-sm-3" onclick="location.href='Classification.co?value=1'">
 				          <div class="panel panel-info">
 				            <div class="panel-heading">VVVIP</div>
 				            <div class="panel-body">
@@ -52,7 +52,7 @@
 				            </div>
 				          </div>
 				        </div>
-				        <div class="col-6 col-sm-3" onclick="location.href='Classification.co?value=1'">
+				        <div class="col-6 col-sm-3" onclick="location.href='Classification.co?value=2'">
 				          <div class="panel panel-success">
 				            <div class="panel-heading">정상</div>
 				            <div class="panel-body">
@@ -60,7 +60,7 @@
 				            </div>
 				          </div>
 				        </div>
-				        <div class="col-6 col-sm-3" onclick="location.href='Classification.co?value=2'">
+				        <div class="col-6 col-sm-3" onclick="location.href='Classification.co?value=3'">
 				          <div class="panel panel-warning">
 				            <div class="panel-heading">정지</div>
 				            <div class="panel-body">
@@ -68,7 +68,7 @@
 				            </div>
 				          </div>
 				        </div>
-				        <div class="col-6 col-sm-3" onclick="location.href='Classification.co?value=3'">
+				        <div class="col-6 col-sm-3" onclick="location.href='Classification.co?value=4'">
 				          <div class="panel panel-danger">
 				            <div class="panel-heading">탈퇴</div>
 				            <div class="panel-body">
@@ -86,8 +86,8 @@
 					        <div class="container">
 					            <div class="search-window">
 					                <form action="Classification.co" class="formCss">
-					                        <input id="value" type="search" name="value" placeholder="닉네임만 검색 가능">
-					                        <button type="submit" class="btn btn-dark">검색</button>
+										<input id="search" type="search" name="search" placeholder="닉네임만 검색 가능">
+										<button type="submit" class="btn btn-dark">검색</button>
 					                </form>
 					            </div>
 					        </div>
