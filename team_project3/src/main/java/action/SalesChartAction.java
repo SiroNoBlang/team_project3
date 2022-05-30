@@ -5,12 +5,15 @@ import javax.servlet.http.HttpServletResponse;
 
 import vo.ActionForward;
 
-public class SalesAction implements Action {
+public class SalesChartAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		ActionForward forward = null;
 		
-		return new ActionForward("AdminPage/sales/sales_main.jsp", false);
+		
+		
+		return forward;
 	}
 
 }
