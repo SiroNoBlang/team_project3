@@ -56,8 +56,8 @@
 							<tr>
 								<th>분류</th>
 								<td>
-									<label><input TYPE='radio' name='communityType' value='notice' />공지사항</label>
-									<label><input TYPE='radio' name='communityType' value='event' />이벤트</label>
+									<label><input type='radio' name='communityType' value='notice' />공지사항</label>
+									<label><input type='radio' name='communityType' value='event' />이벤트</label>
 								</td>
 							</tr>
 							<tr>
