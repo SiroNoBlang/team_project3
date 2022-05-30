@@ -561,3 +561,9 @@ section#pageList {
 .panel-body:hover:before {
     width: 79%;
 }
+
+
+input[type="button"] {
+    margin-top: 12px;
+    }
+    

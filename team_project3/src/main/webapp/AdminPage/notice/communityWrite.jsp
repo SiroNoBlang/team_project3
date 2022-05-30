@@ -81,7 +81,6 @@
 								<td><input type="file" id="file1" name="board_file1"></td>
 							</tr>
 						</table>
-						<br>
 						<section id="commandCell">	
 							<input type="submit" value="작성완료">&nbsp;&nbsp;
 							<input type="reset" value="다시쓰기">&nbsp;&nbsp;	
@@ -125,7 +124,6 @@
 								<td> <textarea id="board_content" name="qna_content"  rows="20" cols="100"></textarea> </td>
 							</tr>
 						</table>
-						<br>
 						<section id="commandCell">	
 							<input type="submit" value="작성완료">&nbsp;&nbsp;
 							<input type="reset" value="다시쓰기">&nbsp;&nbsp;	

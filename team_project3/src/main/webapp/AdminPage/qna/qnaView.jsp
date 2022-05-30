@@ -70,7 +70,6 @@
 								<td>${qnaArticle.getQna_content() } <br>
 							</tr>
 						</table>
-						<br>
 						<section id="commandCell">	
 							<input type="button" value="답변" onclick="location.href='QnaReplyForm.co?qna_num=${param.qna_num}&page=${param.page}'">
 							<input type="button" value="수정" onclick="location.href='QnaModifyForm.co?qna_num=${param.qna_num}&page=${param.page}'">

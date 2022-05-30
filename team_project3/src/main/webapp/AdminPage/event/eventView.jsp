@@ -93,7 +93,6 @@
 								</td>
 							</tr>
 						</table>
-						<br>
 						<section id="commandCell">	
 							<input type="button" value="수정" onclick="location.href='EventModifyForm.co?event_num=${param.event_num}&page=${param.page}'">
 							<input type="button" value="삭제" onclick="eventDelete()">
