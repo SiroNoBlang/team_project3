@@ -86,8 +86,8 @@
 					        <div class="container">
 					            <div class="search-window">
 					                <form action="Classification.co" class="formCss">
-					                        <input id="value" type="search" name="value" placeholder="닉네임만 검색 가능">
-					                        <button type="submit" class="btn btn-dark">검색</button>
+										<input id="value" type="search" name="value" placeholder="닉네임만 검색 가능">
+										<button type="submit" class="btn btn-dark">검색</button>
 					                </form>
 					            </div>
 					        </div>

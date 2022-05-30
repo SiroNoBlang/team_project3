@@ -92,7 +92,7 @@ th {
 }
 
 .board-table .th-date {
-	width: 70px;
+	width: 110px;
 }
 
 .board-table th, .board-table td {
@@ -216,7 +216,7 @@ input, textarea, select {
 }
 
 th, td {
-	padding: 9px 9px 7px;
+	padding: 9px 9px 7px !important;
 	border: 1px solid #d9dadc;
 }
 
@@ -250,9 +250,7 @@ input {
 	height: 30px;
 }
 
-input#search {
-	height: 23px;
-}
+
 
 .form-control:disabled, .form-control[readonly] {
 	background-color: #f6f7fb;
@@ -261,6 +259,7 @@ input#search {
 button.btn {
 	border-radius: 2px !important;
 	box-shadow: none !important;
+	margin-bottom: 6px;
 }
 
 button.btn.btn-primary {
@@ -540,3 +539,34 @@ section#pageList {
 .col-6.col-sm-3 {
     cursor: pointer;
 }
+
+
+.formCss select,input#search ,input#value{
+	height:35px;
+	
+}
+
+
+.panel-body:before {
+    content: '';
+    position: absolute;
+    background-color: #b9b9b9;
+    height: 3px;
+    width: 0;
+    bottom: 0;
+    transition: 0.7s;
+    left: 50%;
+    transform: translateX(-50%);
+}
+.panel-body:hover:before {
+    width: 79%;
+}
+
+
+input[type="button"] {
+    margin-top: 12px;
+    }
+    
+    
+
+    

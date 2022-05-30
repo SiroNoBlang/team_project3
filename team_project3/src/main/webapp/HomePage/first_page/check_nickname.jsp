@@ -8,7 +8,6 @@
 // => 파라미터 : 아이디(id)     리턴타입 : boolean(isDuplicate)
 String nickname = request.getParameter("member_nickname");
 
-
 CheckNicknameService service = new CheckNicknameService();
 boolean isDuplicate = service.checkNickname(nickname);
 
@@ -41,5 +40,9 @@ if(isDuplicate) { // 중복
 		out.println("var checkNickname = false");
 		out.println("</script>");
 	}
+	response.setContentType("text/html; charset=UTF-8");
+	out.println("<script>");
+	out.println("var checkNickname = true");
+	out.println("</script>");
 }
 %>

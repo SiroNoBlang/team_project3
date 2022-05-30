@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import dao.AdminDAO;
 import vo.SellerDTO;
 
-public class productConfirmTypeService {
+public class ProductConfirmTypeService {
 
 	public SellerDTO getListCountType() {
 		SellerDTO CountType = null;
@@ -40,7 +40,7 @@ public class productConfirmTypeService {
 
 	
 	
-	public int getListCount(String tableName) {
+	public int getListCount(String tableName,String column) {
 		int listCount = 0;
 		
 		Connection con = getConnection();
@@ -48,7 +48,7 @@ public class productConfirmTypeService {
 		
 		adminDAO.setConnection(con);
 		
-		listCount = adminDAO.selectListCount(tableName);
+		listCount = adminDAO.selectListTypeCount(tableName,column);
 		
 		close(con);
 		

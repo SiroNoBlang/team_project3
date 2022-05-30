@@ -46,7 +46,7 @@
 				<div class="title">검수현황</div>
 				    <section class="row text-center placeholders">
 				        <div class="col-6 col-sm-3" id="completion" onclick="confirmType(this.id)">
-				          <div class="panel panel-info">
+				          <div class="panel panel-default">
 				            <div class="panel-heading">검수완료</div>
 				            <div class="panel-body">
 				              <h4>${CountType.getCompletion() } </h4>
@@ -54,7 +54,7 @@
 				          </div>
 				        </div>
 				        <div class="col-6 col-sm-3" id="progress" onclick="confirmType(this.id)">
-				          <div class="panel panel-success">
+				          <div class="panel panel-warning">
 				            <div class="panel-heading">검수중</div>
 				            <div class="panel-body">
 				              <h4>${CountType.getProgress() }</h4>
@@ -62,7 +62,7 @@
 				          </div>
 				        </div>
 				        <div class="col-6 col-sm-3" id="cancel" onclick="confirmType(this.id)">
-				          <div class="panel panel-warning">
+				          <div class="panel panel-success">
 				            <div class="panel-heading">검수반려</div>
 				            <div class="panel-body">
 				              <h4>${CountType.getCancel() }</h4>
@@ -79,9 +79,6 @@
 				        </div>
 				      </section>
 				</div>
-				
-				
-				
 				<div class="card">
 					<div class="title">검수 목록</div>
 					
@@ -155,7 +152,7 @@
     					 <section id="pageList">
 								<c:choose>
 									<c:when test="${pageNum > 1}">
-										<input type="button" value="이전" onclick="location.href='ProductConfirm.co?page=${pageNum - 1}'">
+										<input type="button" value="이전" onclick="location.href='ProductConfirmType.co?page=${pageNum - 1}&cmStatus=${param.cmStatus}'">
 									</c:when>
 									<c:otherwise>
 										<input type="button" value="이전">
@@ -168,14 +165,14 @@
 											${i }
 										</c:when>
 										<c:otherwise>
-											<a href="ProductConfirm.co?page=${i }">${i }</a>
+											<a href="ProductConfirmType.co?page=${i }&cmStatus=${param.cmStatus}">${i }</a>
 										</c:otherwise>
 									</c:choose>
 								</c:forEach>
 						
 								<c:choose>
 									<c:when test="${pageNum < maxPage}">
-										<input type="button" value="다음" onclick="location.href='ProductConfirm.co?page=${pageNum + 1}'">
+										<input type="button" value="다음" onclick="location.href='ProductConfirmType.co?page=${pageNum + 1}&cmStatus=${param.cmStatus}'">
 									</c:when>
 									<c:otherwise>
 										<input type="button" value="다음">

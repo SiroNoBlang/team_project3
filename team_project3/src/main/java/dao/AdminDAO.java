@@ -1694,7 +1694,7 @@ public class AdminDAO {
 				}
 				productConfirmList.add(confirm);
 			}
-			System.out.println(productConfirmList);
+//			System.out.println(productConfirmList);
 			
 		} catch (SQLException e) {
 			System.out.println("SQL 구문 오류 발생! - selectConfirmType()");
@@ -1753,9 +1753,34 @@ public class AdminDAO {
 		
 		return CountType;
 	}
-	
-	
 
+	
+	//검수현황 페이징처리
+	public int selectListTypeCount(String tableName, String column) {
+//		System.out.println("AdminDAO - selectListTypeCount()");
+		int listCount = 0;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			String sql = "SELECT COUNT(sell_list_item_status) FROM "+tableName + " WHERE sell_list_item_status=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, column);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				listCount = rs.getInt(1);
+			}
+		} catch (SQLException e) {
+			System.out.println("SQL 구문 오류 발생! - selectListTypeCount()");
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rs);
+		}
+		
+		return listCount;
+	}
 }	
 	
 	

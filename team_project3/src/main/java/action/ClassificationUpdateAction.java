@@ -27,6 +27,7 @@ public class ClassificationUpdateAction implements Action {
 		
 		if(isMemberUpdate) {
 			request.setAttribute("member_code", member_code);
+			value = java.net.URLEncoder.encode(value, "UTF-8");
 			forward = new ActionForward("ClassificationDetail.co?member_code=" + member_code + "&page=" + pageNum + "&value=" + value, true);
 			
 		} else {

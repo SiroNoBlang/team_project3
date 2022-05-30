@@ -35,18 +35,7 @@
 		<span class="big-logo">Admin</span> <span class="small-logo">&nbsp; A</span>
 	</div>
 	<div id="left-menu">
-		<ul>
-			<li class="#"><a href="MemberManagement.co"> <i class="ion-ios-person-outline"></i> <span>멤버관리</span></a></li>
-			<li class="#"><a href="ProductConfirm.co"> <i class="icon ion-clipboard"></i> <span>검수현황</span></a></li>
-			<li class="has-sub"><a href="#"> <i class="ion-ios-chatboxes-outline"></i> <span>커뮤니티</span>
-			</a>
-				<ul>
-					<li><a href="NoticeList.co">공지사항</a></li>
-					<li><a href="EventList.co">이벤트</a></li>
-					<li><a href="QusetionList.co">Q&#38;A</a></li>
-					<li><a href="CommunityWriteForm.co">글쓰기</a></li>
-				</ul></li>
-		</ul>
+		<%@ include file="/AdminPage/menu/menu.jsp" %>
 	</div>
 	<div id="main-content">
 		<div id="header">
@@ -103,8 +92,7 @@
 					<div class="container">
 						<div class="search-window">
 							<form action="Classification.co" class="formCss">
-								<input id="value" type="search" name="value"
-									placeholder="닉네임만 검색 가능">
+								<input id="value" type="search" name="value" placeholder="닉네임만 검색 가능">
 								<button type="submit" class="btn btn-dark">검색</button>
 							</form>
 						</div>
@@ -118,20 +106,19 @@
 									<th scope="col" class="th-num"></th>
 									<th scope="col" class="th-num">상태</th>
 									<th scope="col" class="th-title">닉네임</th>
-									<th scope="col" class="th-date">누적금액</th>
+									<th scope="col" class="th-date">누적금액 (만원)</th>
 									<th scope="col" class="th-date">회원등급</th>
 								</tr>
 							</thead>
 							<tbody>
-								<c:if
-									test="${not empty classificationList and pageInfo.getListCount() > 0}">
+								<c:if test="${not empty classificationList and pageInfo.getListCount() > 0}">
 									<c:forEach var="classification" items="${classificationList }" varStatus="status">
 										<tr>
 											<td><input type="checkbox" value="${classification.getMember_code() }"></td>
 											<td>${classification.getMember_service_log_status() }</td>
 											<td><a href="ClassificationDetail.co?member_code=${classification.getMember_code() }&page=${pageNum }&value=${param.value }">
 													${classification.getMember_nickname() } </a></td>
-											<td>${classification.getMember_info_detail_acc_money() }만원</td>
+											<td>${classification.getMember_info_detail_acc_money() }</td>
 											<td>${classification.getGrade_name() }</td>
 										</tr>
 									</c:forEach>

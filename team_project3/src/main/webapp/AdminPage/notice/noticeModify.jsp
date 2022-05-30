@@ -94,7 +94,6 @@
 									<td><input type="file" id="file1" name="board_file1"></td>
 								</tr>
 						</table>
-						<br>
 						<section id="commandCell">	
 							<input type="submit" value="수정">&nbsp;&nbsp;
 							<input type="reset" value="다시쓰기">&nbsp;&nbsp;
