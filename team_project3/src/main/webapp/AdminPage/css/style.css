@@ -19,7 +19,7 @@ section.notice {
 }
 
 #board-search .search-window {
-	padding: 15px 0;
+	padding: 5px 0;
 /* 	background-color: #f9f7f9; */
 }
 
@@ -218,6 +218,8 @@ input, textarea, select {
 th, td {
 	padding: 9px 9px 7px !important;
 	border: 1px solid #d9dadc;
+    height: 53px;
+	
 }
 
 a, p, span, div, li, td {
@@ -530,7 +532,7 @@ a:hover {
 
 section#pageList {
     margin: 0 auto;
-    margin-top: 20px;
+    margin-top: 10px;
 }
 
 
@@ -566,7 +568,16 @@ section#pageList {
 input[type="button"] {
     margin-top: 12px;
     }
-    
-    
+   
+input[type="radio"] {
+    display: inline-block;
+    width: 20px;
+    height: 12px;
+    cursor: pointer;
+}
 
+    
+button.btn.btn-primary,button.btn.btn-danger{
+    margin-top: 10px;
+}
     
