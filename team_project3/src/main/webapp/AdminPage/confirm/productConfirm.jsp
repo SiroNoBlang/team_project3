@@ -38,8 +38,7 @@
 				<i id="toggle-left-menu" class="ion-android-menu"></i>
 			</div>
 			<div class="header-right float-right">
-				<a href="MainPage.pr"><i class="icon ion-ios-home" ></i></a>
-				<a href="javascript:void(0)" onclick="confirmLogout()"><i class="icon ion-log-out" ></i></a>
+				<jsp:include page="/AdminPage/menu/topMenu.jsp"/>
 			</div>
 		</div>
 		<div id="page-container">

@@ -45,7 +45,7 @@
 				<i id="toggle-left-menu" class="ion-android-menu"></i>
 			</div>
 			<div class="header-right float-right">
-				<a href="javascript:void(0)" onclick="confirmLogout()"><i class="icon ion-log-out" ></i></a>
+				<jsp:include page="/AdminPage/menu/topMenu.jsp"/>
 			</div>
 		</div>
 		<div id="page-container">
