@@ -1694,7 +1694,7 @@ public class AdminDAO {
 				}
 				productConfirmList.add(confirm);
 			}
-			System.out.println(productConfirmList);
+//			System.out.println(productConfirmList);
 			
 		} catch (SQLException e) {
 			System.out.println("SQL 구문 오류 발생! - selectConfirmType()");

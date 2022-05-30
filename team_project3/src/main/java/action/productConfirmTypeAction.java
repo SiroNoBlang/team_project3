@@ -39,7 +39,7 @@ public class productConfirmTypeAction implements Action {
 		
 		
 		//상품게시물 목록 담아오기 
-		System.out.println(column);
+//		System.out.println(column);
 		
 		ArrayList<SellerDTO> productConfirmList = service.getConfirmType(pageNum, listLimit,column);
 		
