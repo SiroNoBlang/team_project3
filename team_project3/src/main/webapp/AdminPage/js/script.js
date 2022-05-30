@@ -174,17 +174,14 @@ $('#toggle-left-menu').click(function() {
 			let cmStatus=clicked_id;
 			if(cmStatus=="progress"){
 				cmStatus ="검수중";
-				location.href = "./productConfirmType.co?cmStatus=" + cmStatus;
 			} else if(cmStatus=="cancel"){
 				cmStatus ="검수반려";
-				location.href = "./productConfirmType.co?cmStatus=" + cmStatus;
 			} else if(cmStatus=="sale"){
 				cmStatus ="판매완료";
-				location.href = "./productConfirmType.co?cmStatus=" + cmStatus;
 			} else {
 				cmStatus ="검수완료";
-				location.href = "./productConfirmType.co?cmStatus=" + cmStatus;
 			}
+				location.href = "./productConfirmType.co?cmStatus=" + cmStatus;
 		}
 		
 		
