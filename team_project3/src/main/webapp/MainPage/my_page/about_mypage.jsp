@@ -541,7 +541,7 @@ MemberBean member = (MemberBean) request.getAttribute("memberDetail");
 								readonly="readonly"></td>
 						</tr>
 						<tr>
-							<td colspan="3"><input type="submit" value="수정"></td>
+							<td colspan="3"></td>
 						</tr>
 
 					</table>
@@ -585,8 +585,8 @@ MemberBean member = (MemberBean) request.getAttribute("memberDetail");
 								<c:if test="${fn:contains(memberDetail.member_info_detail_like_category, '잡화')}" >checked</c:if>>잡화
 							</td>
 						</tr>
-					
 					</table>
+						<input type="submit" value="수정">
 
 				</form>
 
