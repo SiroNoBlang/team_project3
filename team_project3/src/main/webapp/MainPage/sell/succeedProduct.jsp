@@ -6,13 +6,14 @@
 
 // String member_nickname =(String)session.getAttribute("sNickname");
 // String sell_member_code =(String)session.getAttribute("sCode");
+
 // SellerDTO sellerDTO = (SellerDTO)request.getAttribute("sellerDTO");
 // MemberBean memberbean = (MemberBean)request.getAttribute("memberBean");
 // int charge = sellerDTO.getSell_price() /10; //검수비 판매가격 /10
 // int price = sellerDTO.getSell_price()+charge+3000;     //최종 판매가격
 // // int point1 = memberbean.getMember_info_detail_point();
 %>
-    
+   
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -160,7 +161,7 @@
 					<i class="zmdi zmdi-favorite-outline"></i>
 				</a>
 			</div>
-
+	
 			<!-- Button show menu -->
 			<div class="btn-show-menu-mobile hamburger hamburger--squeeze">
 				<span class="hamburger-box">
@@ -200,39 +201,35 @@
 				</li>
 			</ul>
 
-			<ul class="main-menu-m">
-				<li>
-					<a href="index.html">Home</a>
-					<ul class="sub-menu-m">
-						<li><a href="index.html">Homepage 1</a></li>
-						<li><a href="home-02.html">Homepage 2</a></li>
-						<li><a href="home-03.html">Homepage 3</a></li>
-					</ul>
-					<span class="arrow-main-menu-m">
-						<i class="fa fa-angle-right" aria-hidden="true"></i>
-					</span>
-				</li>
+			
+				<ul class="main-menu">
+					<li>
+						<a href="MainPage.pr">Home</a>
+<!-- 						<ul class="sub-menu"> -->
+<!-- 							<li><a href="index.html">Homepage 1</a></li> -->
+<!-- 							<li><a href="home-02.html">Homepage 2</a></li> -->
+<!-- 							<li><a href="home-03.html">Homepage 3</a></li> -->
+<!-- 						</ul> -->
+					</li>
 
-				<li>
-					<a href="product.html">Shop</a>
-				</li>
+					<li>
+						<a href="Product.pr">Shop</a>
+					</li>
 
-				<li>
-					<a href="shoping-cart.html" class="label1 rs1" data-label1="hot">Features</a>
-				</li>
+					<li class="label1" data-label1="hot">
+						<a href="shoping-cart.html">Features</a>
+					</li>
+					<li>
+						<a href="SellForm.pr">Sell</a>
+					</li>
+					<li>
+						<a href="CommunityNotice.ma">Community</a>
+					</li>
 
-				<li>
-					<a href="blog.html">Blog</a>
-				</li>
-
-				<li>
-					<a href="about.html">About</a>
-				</li>
-
-				<li>
-					<a href="contact.html">Contact</a>
-				</li>
-			</ul>
+					<li>
+						<a href="contact.html">Contact</a>
+					</li>
+				</ul>
 		</div>
 
 		<!-- Modal Search -->
@@ -337,7 +334,7 @@
 		</div>
 	</div>
 
-
+		
 	<!-- breadcrumb -->
 	<div class="container">
 		<div class="bread-crumb flex-w p-l-25 p-r-15 p-t-30 p-lr-0-lg">
@@ -351,10 +348,240 @@
 			</span>
 		</div>
 	</div>
+	
+	<center>
+		<h2>결제 완료! </h2>
+	</center>
+<!-- 	<form action="SucceedProduct.pr" class="bg0 p-t-75 p-b-85"> -->
+		<div class="container" >
+			<div class="row" >
+				
+				<div class="col-sm-10 col-lg-7 col-xl-5 m-lr-auto m-b-50">
+					<div class="bor10 p-lr-40 p-t-30 p-b-40 m-l-63 m-r-40 m-lr-0-xl p-lr-15-sm">
+						<h5 class="mtext-109 cl2 p-b-30">
+							주문 정보
+						</h5>
+						<div class="flex-w flex-t bor12 p-b-13">
+							<div class="size-208">
+								<span class="stext-110 cl2">
+									제품 가격
+								</span>
+							</div>
+							<div class="size-209">
+								<span class="mtext-110 cl2">
+								qqqqqqq
+								</span>
+							</div>
+						</div>
+						<div class="flex-w flex-t bor12 p-t-15 p-b-30">
+							<div class="size-208 w-full-ssm">
+								<span class="stext-110 cl2">
+								qqqqqqq
+								</span><br>
+								<span class="stext-110 cl2">
+									v
+								</span><br>
+								<span class="stext-110 cl2">
+									qqqqqqq
+								</span><br> 
+								<span class="stext-190 cl2">
+<!-- 									포인트 - <span id="point" style="border: none; background: transparent;"></span> -->
+									qqqqqqq
+								</span><br>
+						   </div>
+							
+							<div class="size-209 p-r-18 p-r-0-sm w-full-ssm">
+								<p class="stext-111 cl6 p-t-2"> </p>
+								
+							
+								<div class="p-t-15">
+									<span class="stext-112 cl8">
+										qqqqqqq
+									</span>
+
+									
+								</div>
+							</div>
+						</div>
+
+						<div class="flex-w flex-t p-t-27 p-b-33">
+							<div class="size-208">
+								<span class="mtext-101 cl2">
+									qqqqqqqqqqqqqqqqq
+								</span>
+							</div>
+
+							<div class="size-209 p-t-1">
+								<span class="mtext-110 cl2">
+									qqqqqqqqqqqqqqqqq
+								</span>
+							</div>
+						</div>
+					  <input type="button" value="홈으로" onclick="location.href='MainPage.pr'"  class="flex-c-m stext-101 cl0 size-116 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer"> 
+					  <input type="button" value="마이페이지" onclick="location.href='MainPage.pr'"  class="flex-c-m stext-101 cl0 size-116 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer"> 
+					</div>
+				</div>
+			</div>
+		</div>
+<!-- 	</form> -->
+
+	
+	
 		
 
-	<!-- Footer영역과 상단 이동 버튼-->
-	<jsp:include page="/MainPage/menu/footer.jsp"/>
+	<!-- Footer -->
+	<footer class="bg3 p-t-75 p-b-32">
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-6 col-lg-3 p-b-50">
+					<h4 class="stext-301 cl0 p-b-30">
+						Categories
+					</h4>
+
+					<ul>
+						<li class="p-b-10">
+							<a href="#" class="stext-107 cl7 hov-cl1 trans-04">
+								Women
+							</a>
+						</li>
+
+						<li class="p-b-10">
+							<a href="#" class="stext-107 cl7 hov-cl1 trans-04">
+								Men
+							</a>
+						</li>
+
+						<li class="p-b-10">
+							<a href="#" class="stext-107 cl7 hov-cl1 trans-04">
+								Shoes
+							</a>
+						</li>
+
+						<li class="p-b-10">
+							<a href="#" class="stext-107 cl7 hov-cl1 trans-04">
+								Watches
+							</a>
+						</li>
+					</ul>
+				</div>
+
+				<div class="col-sm-6 col-lg-3 p-b-50">
+					<h4 class="stext-301 cl0 p-b-30">
+						Help
+					</h4>
+
+					<ul>
+						<li class="p-b-10">
+							<a href="#" class="stext-107 cl7 hov-cl1 trans-04">
+								Track Order
+							</a>
+						</li>
+
+						<li class="p-b-10">
+							<a href="#" class="stext-107 cl7 hov-cl1 trans-04">
+								Returns 
+							</a>
+						</li>
+
+						<li class="p-b-10">
+							<a href="#" class="stext-107 cl7 hov-cl1 trans-04">
+								Shipping
+							</a>
+						</li>
+
+						<li class="p-b-10">
+							<a href="#" class="stext-107 cl7 hov-cl1 trans-04">
+								FAQs
+							</a>
+						</li>
+					</ul>
+				</div>
+
+				<div class="col-sm-6 col-lg-3 p-b-50">
+					<h4 class="stext-301 cl0 p-b-30">
+						GET IN TOUCH
+					</h4>
+
+					<p class="stext-107 cl7 size-201">
+						Any questions? Let us know in store at 8th floor, 379 Hudson St, New York, NY 10018 or call us on (+1) 96 716 6879
+					</p>
+
+					<div class="p-t-27">
+						<a href="#" class="fs-18 cl7 hov-cl1 trans-04 m-r-16">
+							<i class="fa fa-facebook"></i>
+						</a>
+
+						<a href="#" class="fs-18 cl7 hov-cl1 trans-04 m-r-16">
+							<i class="fa fa-instagram"></i>
+						</a>
+
+						<a href="#" class="fs-18 cl7 hov-cl1 trans-04 m-r-16">
+							<i class="fa fa-pinterest-p"></i>
+						</a>
+					</div>
+				</div>
+
+				<div class="col-sm-6 col-lg-3 p-b-50">
+					<h4 class="stext-301 cl0 p-b-30">
+						Newsletter
+					</h4>
+
+					<form>
+						<div class="wrap-input1 w-full p-b-4">
+							<input class="input1 bg-none plh1 stext-107 cl7" type="text" name="email" placeholder="email@example.com">
+							<div class="focus-input1 trans-04"></div>
+						</div>
+
+						<div class="p-t-18">
+							<button class="flex-c-m stext-101 cl0 size-103 bg1 bor1 hov-btn2 p-lr-15 trans-04">
+								Subscribe
+							</button>
+						</div>
+					</form>
+				</div>
+			</div>
+
+			<div class="p-t-40">
+				<div class="flex-c-m flex-w p-b-18">
+					<a href="#" class="m-all-1">
+						<img src="MainPage/images/icons/icon-pay-01.png" alt="ICON-PAY">
+					</a>
+
+					<a href="#" class="m-all-1">
+						<img src="MainPage/images/icons/icon-pay-02.png" alt="ICON-PAY">
+					</a>
+
+					<a href="#" class="m-all-1">
+						<img src="MainPage/images/icons/icon-pay-03.png" alt="ICON-PAY">
+					</a>
+
+					<a href="#" class="m-all-1">
+						<img src="MainPage/images/icons/icon-pay-04.png" alt="ICON-PAY">
+					</a>
+
+					<a href="#" class="m-all-1">
+						<img src="MainPage/images/icons/icon-pay-05.png" alt="ICON-PAY">
+					</a>
+				</div>
+
+				<p class="stext-107 cl6 txt-center">
+					<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | Made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a> &amp; distributed by <a href="https://themewagon.com" target="_blank">ThemeWagon</a>
+<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+
+				</p>
+			</div>
+		</div>
+	</footer>
+
+
+	<!-- Back to top -->
+	<div class="btn-back-to-top" id="myBtn">
+		<span class="symbol-btn-back-to-top">
+			<i class="zmdi zmdi-chevron-up"></i>
+		</span>
+	</div>
+
 <!--===============================================================================================-->	
 	<script src="MainPage/vendor/jquery/jquery-3.2.1.min.js"></script>
 <!--===============================================================================================-->

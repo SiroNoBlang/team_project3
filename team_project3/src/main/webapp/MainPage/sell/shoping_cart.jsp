@@ -4,7 +4,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%	
-
 String member_nickname =(String)session.getAttribute("sNickname");
 String sell_member_code =(String)session.getAttribute("sCode");
 SellerProductDTO sellerDTO = (SellerProductDTO)request.getAttribute("sellerDTO");
@@ -13,7 +12,7 @@ int charge = sellerDTO.getSell_price() /10; //검수비 판매가격 /10
 int price = sellerDTO.getSell_price()+charge+3000;     //최종 판매가격
 // int point1 = memberbean.getMember_info_detail_point();
 %>
-    
+   
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -24,19 +23,16 @@ int price = sellerDTO.getSell_price()+charge+3000;     //최종 판매가격
         new daum.Postcode({
             oncomplete: function(data) {	
                 // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
-
                 // 각 주소의 노출 규칙에 따라 주소를 조합한다.
                 // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
                 var addr = ''; // 주소 변수
                 var extraAddr = ''; // 참고항목 변수
-
                 //사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
                 if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
                     addr = data.roadAddress;
                 } else { // 사용자가 지번 주소를 선택했을 경우(J)
                     addr = data.jibunAddress;
                 }
-
                 // 사용자가 선택한 주소가 도로명 타입일때 참고항목을 조합한다.
                 if(data.userSelectedType === 'R'){
                     // 법정동명이 있을 경우 추가한다. (법정리는 제외)
@@ -58,7 +54,6 @@ int price = sellerDTO.getSell_price()+charge+3000;     //최종 판매가격
 //                 } else {
 //                     document.getElementById("sample6_extraAddress").value = '';
 //                 }
-
                 // 우편번호와 주소 정보를 해당 필드에 넣는다.
                 document.getElementById("postcode").value = data.zonecode;
                 document.getElementById("address1").value = addr;
@@ -252,41 +247,35 @@ int price = sellerDTO.getSell_price()+charge+3000;     //최종 판매가격
 					</div>
 				</li>
 			</ul>
+				<ul class="main-menu">
+					<li>
+						<a href="MainPage.pr">Home</a>
+<!-- 						<ul class="sub-menu"> -->
+<!-- 							<li><a href="index.html">Homepage 1</a></li> -->
+<!-- 							<li><a href="home-02.html">Homepage 2</a></li> -->
+<!-- 							<li><a href="home-03.html">Homepage 3</a></li> -->
+<!-- 						</ul> -->
+					</li>
 
-			<ul class="main-menu-m">
-				<li>
-					<a href="index.html">Home</a>
-					<ul class="sub-menu-m">
-						<li><a href="index.html">Homepage 1</a></li>
-						<li><a href="home-02.html">Homepage 2</a></li>
-						<li><a href="home-03.html">Homepage 3</a></li>
-					</ul>
-					<span class="arrow-main-menu-m">
-						<i class="fa fa-angle-right" aria-hidden="true"></i>
-					</span>
-				</li>
+					<li>
+						<a href="Product.pr">Shop</a>
+					</li>
 
-				<li>
-					<a href="product.html">Shop</a>
-				</li>
+					<li class="label1" data-label1="hot">
+						<a href="shoping-cart.html">Features</a>
+					</li>
+					<li>
+						<a href="SellForm.pr">Sell</a>
+					</li>
+					<li>
+						<a href="CommunityNotice.ma">Community</a>
+					</li>
 
-				<li>
-					<a href="shoping-cart.html" class="label1 rs1" data-label1="hot">Features</a>
-				</li>
-
-				<li>
-					<a href="blog.html">Blog</a>
-				</li>
-
-				<li>
-					<a href="about.html">About</a>
-				</li>
-
-				<li>
-					<a href="contact.html">Contact</a>
-				</li>
-			</ul>
-		</div>
+					<li>
+						<a href="contact.html">Contact</a>
+					</li>
+				</ul>
+		 </div>
 
 		<!-- Modal Search -->
 		<div class="modal-search-header flex-c-m trans-04 js-hide-modal-search">
@@ -407,7 +396,13 @@ int price = sellerDTO.getSell_price()+charge+3000;     //최종 판매가격
 		
 
 	<!-- Shoping Cart -->
-	<form action="SucceedProduct.pr" class="bg0 p-t-75 p-b-85">
+	<form action="SucceedProductAction.pr" class="bg0 p-t-75 p-b-85">
+
+	<input type="hidden" value="member_nickname" name="member_nickname">
+	<input type="hidden" value="<%=sellerDTO.getSell_num() %>" name="sell_num">
+	<input type="hidden" value="<%=memberbean.getMember_info_detail_acc_money() %>" name="member_info_detail_acc_money" >
+	<input type="hidden" value="<%=sell_member_code %>" name="member_code">
+	<input type="hidden" value="<%=sellerDTO.getSell_price() %>" name="sell_price">
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-10 col-xl-7 m-lr-auto m-b-50">
@@ -431,6 +426,7 @@ int price = sellerDTO.getSell_price()+charge+3000;     //최종 판매가격
 							</table>
 						</div>
 							<div class="wrap-table-shopping-cart">
+<%-- 								<%if(memberbean.getMember_info_address().equals("")||memberbean.getMember_info_address_detail().equals("")||memberbean.getMember_info_postcode.equals("")){ %> --%>
 								<table class="table-shopping-cart">
 								<tr style=" border:none;">
 									<td>
@@ -467,11 +463,46 @@ int price = sellerDTO.getSell_price()+charge+3000;     //최종 판매가격
 										<input type="text" name="phone"  placeholder="전화번호(-제외)">	
 									</td>
 								</tr>
-									
-								
-								</table >
-									
-								
+							</table >
+<%-- 								<%} else{ %>	 --%>
+<!-- 									<table class="table-shopping-cart"> -->
+<!-- 								<tr style=" border:none;"> -->
+<!-- 									<td> -->
+<!-- 										<h4 style="color: lightgrey;">배송 정보</h4>	 -->
+<!-- 									</td> -->
+<!-- 									<td colspan="2"></td><td></td> -->
+<!-- 									<td> -->
+<!-- 										<input type="button" onclick="AddressDaumPostcode()"  -->
+<!-- 										value="+새 배송지 추가" style="border: none; background: transparent; color: lightgrey;"> -->
+<!-- 									</td> -->
+																
+<!-- 								</tr> -->
+<!-- 								<tr style=" border:none;"> -->
+<!-- 							 		 <td  colspan="2">	 -->
+<!-- 									  	<input type="text"   name="address1" id="address1"  placeholder="주소" > 	 -->
+<!-- 									 </td>	 -->
+<!-- 									 <td></td> 	 -->
+<!-- 									  <td >		 -->
+<!-- 									  	<input type="text"  name="postcode" id="postcode"  readonly="readonly"  placeholder="우편번호" > -->
+<!-- 							  		</td> 											 -->
+<!-- 								</tr> -->
+<!-- 								<tr style=" border:none;"> -->
+<!-- 									<td> -->
+<!-- 										<input type="text"   name="address2" id="address2" placeholder="상세주소" > -->
+<!-- 									</td> -->
+<!-- 								</tr>				 -->
+<!-- 								<tr style=" border:none;"> -->
+<!-- 									<td> -->
+<!-- 										<input type="text" name="name"  placeholder="받는분"> -->
+<!-- 									</td> -->
+<!-- 								</tr>				 -->
+<!-- 								<tr style=" border:none;"> -->
+<!-- 									<td> -->
+<!-- 										<input type="text" name="phone"  placeholder="전화번호(-제외)">	 -->
+<!-- 									</td> -->
+<!-- 								</tr> -->
+<!-- 							</table > -->
+<%-- 						<%} %> --%>
 									<table  class="table-shopping-cart">
 									<tr >
 									<td>
@@ -489,7 +520,7 @@ int price = sellerDTO.getSell_price()+charge+3000;     //최종 판매가격
 							
 						<div class="flex-w flex-sb-m bor15 p-t-18 p-b-15 p-lr-40 p-lr-15-sm">
 							<div class="flex-w flex-m m-r-20 m-tb-5">
-								Point:<input class="stext-104 cl2 plh4 size-117 bor13 p-lr-20 m-r-10 m-tb-5" type="text" name="name" id="MemberPoint" value="<%=memberbean.getMember_info_detail_point() %>">
+								Point:<input class="stext-104 cl2 plh4 size-117 bor13 p-lr-20 m-r-10 m-tb-5" type="text" name="point" id="MemberPoint" value="<%=memberbean.getMember_info_detail_point() %>">
 								<span id="realPoint"></span>
 								<div>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</div>	
 								<input class="flex-c-m stext-101 cl2 size-118 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer m-tb-5" type="button" value="사용하기"  onclick="sub()"><br>
@@ -602,8 +633,160 @@ int price = sellerDTO.getSell_price()+charge+3000;     //최종 판매가격
 	</form>
 		
 	
-	<!-- Footer영역과 상단 이동 버튼-->
-	<jsp:include page="/MainPage/menu/footer.jsp"/>
+		
+
+	<!-- Footer -->
+	<footer class="bg3 p-t-75 p-b-32">
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-6 col-lg-3 p-b-50">
+					<h4 class="stext-301 cl0 p-b-30">
+						Categories
+					</h4>
+
+					<ul>
+						<li class="p-b-10">
+							<a href="#" class="stext-107 cl7 hov-cl1 trans-04">
+								Women
+							</a>
+						</li>
+
+						<li class="p-b-10">
+							<a href="#" class="stext-107 cl7 hov-cl1 trans-04">
+								Men
+							</a>
+						</li>
+
+						<li class="p-b-10">
+							<a href="#" class="stext-107 cl7 hov-cl1 trans-04">
+								Shoes
+							</a>
+						</li>
+
+						<li class="p-b-10">
+							<a href="#" class="stext-107 cl7 hov-cl1 trans-04">
+								Watches
+							</a>
+						</li>
+					</ul>
+				</div>
+
+				<div class="col-sm-6 col-lg-3 p-b-50">
+					<h4 class="stext-301 cl0 p-b-30">
+						Help
+					</h4>
+
+					<ul>
+						<li class="p-b-10">
+							<a href="#" class="stext-107 cl7 hov-cl1 trans-04">
+								Track Order
+							</a>
+						</li>
+
+						<li class="p-b-10">
+							<a href="#" class="stext-107 cl7 hov-cl1 trans-04">
+								Returns 
+							</a>
+						</li>
+
+						<li class="p-b-10">
+							<a href="#" class="stext-107 cl7 hov-cl1 trans-04">
+								Shipping
+							</a>
+						</li>
+
+						<li class="p-b-10">
+							<a href="#" class="stext-107 cl7 hov-cl1 trans-04">
+								FAQs
+							</a>
+						</li>
+					</ul>
+				</div>
+
+				<div class="col-sm-6 col-lg-3 p-b-50">
+					<h4 class="stext-301 cl0 p-b-30">
+						GET IN TOUCH
+					</h4>
+
+					<p class="stext-107 cl7 size-201">
+						Any questions? Let us know in store at 8th floor, 379 Hudson St, New York, NY 10018 or call us on (+1) 96 716 6879
+					</p>
+
+					<div class="p-t-27">
+						<a href="#" class="fs-18 cl7 hov-cl1 trans-04 m-r-16">
+							<i class="fa fa-facebook"></i>
+						</a>
+
+						<a href="#" class="fs-18 cl7 hov-cl1 trans-04 m-r-16">
+							<i class="fa fa-instagram"></i>
+						</a>
+
+						<a href="#" class="fs-18 cl7 hov-cl1 trans-04 m-r-16">
+							<i class="fa fa-pinterest-p"></i>
+						</a>
+					</div>
+				</div>
+
+				<div class="col-sm-6 col-lg-3 p-b-50">
+					<h4 class="stext-301 cl0 p-b-30">
+						Newsletter
+					</h4>
+
+					<form>
+						<div class="wrap-input1 w-full p-b-4">
+							<input class="input1 bg-none plh1 stext-107 cl7" type="text" name="email" placeholder="email@example.com">
+							<div class="focus-input1 trans-04"></div>
+						</div>
+
+						<div class="p-t-18">
+							<button class="flex-c-m stext-101 cl0 size-103 bg1 bor1 hov-btn2 p-lr-15 trans-04">
+								Subscribe
+							</button>
+						</div>
+					</form>
+				</div>
+			</div>
+
+			<div class="p-t-40">
+				<div class="flex-c-m flex-w p-b-18">
+					<a href="#" class="m-all-1">
+						<img src="MainPage/images/icons/icon-pay-01.png" alt="ICON-PAY">
+					</a>
+
+					<a href="#" class="m-all-1">
+						<img src="MainPage/images/icons/icon-pay-02.png" alt="ICON-PAY">
+					</a>
+
+					<a href="#" class="m-all-1">
+						<img src="MainPage/images/icons/icon-pay-03.png" alt="ICON-PAY">
+					</a>
+
+					<a href="#" class="m-all-1">
+						<img src="MainPage/images/icons/icon-pay-04.png" alt="ICON-PAY">
+					</a>
+
+					<a href="#" class="m-all-1">
+						<img src="MainPage/images/icons/icon-pay-05.png" alt="ICON-PAY">
+					</a>
+				</div>
+
+				<p class="stext-107 cl6 txt-center">
+					<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | Made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a> &amp; distributed by <a href="https://themewagon.com" target="_blank">ThemeWagon</a>
+<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+
+				</p>
+			</div>
+		</div>
+	</footer>
+
+
+	<!-- Back to top -->
+	<div class="btn-back-to-top" id="myBtn">
+		<span class="symbol-btn-back-to-top">
+			<i class="zmdi zmdi-chevron-up"></i>
+		</span>
+	</div>
 
 <!--===============================================================================================-->	
 	<script src="MainPage/vendor/jquery/jquery-3.2.1.min.js"></script>
@@ -615,9 +798,9 @@ int price = sellerDTO.getSell_price()+charge+3000;     //최종 판매가격
 <!--===============================================================================================-->
 	<script src="MainPage/vendor/select2/select2.min.js"></script>
 <!--=========================488<포인트차감>==========================================================-->	
-	<script>
+<script>
 		function sub() {
-			var prePoint  = 6400;
+			var prePoint  = 30000;
 			var subPoint  = document.getElementById("MemberPoint").value;//사용 할 포인트
 			document.getElementById("realPoint").value =	prePoint - subPoint ;//차감후 남은 포인트
 			document.getElementById("point").value = subPoint;//최종 결제창에 띄울 포인트(사용할 포인트)
@@ -648,7 +831,6 @@ int price = sellerDTO.getSell_price()+charge+3000;     //최종 판매가격
 				scrollingThreshold: 1000,
 				wheelPropagation: false,
 			});
-
 			$(window).on('resize', function(){
 				ps.update();
 			})

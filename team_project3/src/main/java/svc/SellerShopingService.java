@@ -5,12 +5,10 @@ import static db.JdbcUtil.getConnection;
 
 import java.sql.Connection;
 
-import dao.MemberDAO;
 import dao.SellerDAO;
+import db.JdbcUtil;
 import vo.MemberBean;
-import vo.SellerDTO;
 import vo.SellerProductDTO;
-
 public class SellerShopingService {
 	
 	public SellerProductDTO getShoping(int sell_num) {
@@ -68,5 +66,9 @@ public class SellerShopingService {
 		// 7. 조회 결과 리턴
 		return MemberShop;
 	}
+
+	
+
+
 
 }

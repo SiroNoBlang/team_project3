@@ -15,6 +15,7 @@ import action.ProductDetailProAction;
 import action.ProductListProAction;
 import action.ProductSearchProAction;
 import action.ShopingProAction;
+import action.ShoppoingSucceedAction;
 import action.sellWriteProAction;
 import vo.ActionForward;
 
@@ -126,6 +127,22 @@ public class ProductFrontController extends HttpServlet {
 				e.printStackTrace();
 			}
 
+		}else if (command.equals("/SucceedProduct.pr")) {// 쇼핑 결제 완료 페이지
+
+			forward = new ActionForward();
+			forward.setPath("MainPage/sell/succeedProduct.jsp");
+			forward.setRedirect(false);
+		
+		} else if (command.equals("/SucceedProductAction.pr")) {// 쇼핑 결제 완료 페이지(Action에서 UPDATE 작업 진행 후 .JSP(file)로 값 가져옴)
+
+			action = new ShoppoingSucceedAction();
+
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+					
 		}else if (command.equals("/SucceedProduct.pr")) {// 쇼핑 결제 완료 페이지
 
 			forward = new ActionForward();

@@ -481,5 +481,117 @@ public class SellerDAO {
 		}
 		return productList;
 	}
+	//결제 완료 후 MemberBean 객체를 member_codo를 이용하여 action에서 받아온 MemberBean memberBeanIm 정보를 MemberBean 객체에 Update 해주기
+		public int updateMemberInfo ( MemberBean memberBeanIm) {
+			System.out.println("sellDAO(406행)-updateMemberInfo()");
+			
+			PreparedStatement pstmt = null;
+			int updateCount =0;
+			
+			try {
+				String sql ="UPDATE  member_info AS a"
+					 +  " JOIN member_info_detail AS b ON a.member_info_code = b.member_info_detail_code"
+					 +  " SET a.member_info_name=?, a.member_info_phone=?, a.member_info_post_code=?, a.member_info_address=?, a.member_info_address_detail=?,"
+					 +  " b.member_info_detail_point= b.member_info_detail_point - ?,b.member_info_detail_acc_money= b.member_info_detail_acc_money + ?"
+					 +  " WHERE member_info_code=?" ;
+				
+				pstmt=con.prepareStatement(sql);
+				pstmt.setString(1, memberBeanIm.getMember_info_name());
+				pstmt.setString(2, memberBeanIm.getMember_info_phone());
+				pstmt.setString(3, memberBeanIm.getMember_info_post_code());
+				pstmt.setString(4, memberBeanIm.getMember_info_address());
+				pstmt.setString(5, memberBeanIm.getMember_info_address_detail());
+				pstmt.setInt(6, memberBeanIm.getMember_info_detail_point());
+				pstmt.setInt(7, memberBeanIm.getMember_info_detail_acc_money());
+				pstmt.setString(8, memberBeanIm.getMember_code());
+				
+				updateCount = pstmt.executeUpdate();
+			
+				sql=" UPDATE member_info_detail"				//price ,acc_money 업데이트해야됨.
+						+ "	SET  member_info_detail_point=(SELECT member_info_detail_point"
+						+ "					FROM member_info_detail"
+						+ "						WHERE member_info_detail_code ='fb44a7c4dca011ec9fb70a0027000011' ),"
+						+ "      member_info_detail_acc_money=(SELECT member_info_detail_acc_money"
+						+ "					FROM member_info_detail"
+						+ "						WHERE member_info_detail_code ='fb44a7c4dca011ec9fb70a0027000011')"
+						+ "	WHERE member_info_detail_code='fb44a7c4dca011ec9fb70a0027000011'"; 
+				
+			} catch (Exception e) {
+				System.out.println("SQL구문 오류 발생! -updateMemberInfo()");
+				e.printStackTrace();
+			} finally {
+				close(pstmt); 
+				
+			}
+			
 
+			return updateCount;
+		}
+	//구매자 정보 저장용 DAO  -(구매시 구매자 정보 저장 )
+		public int insertMemberInfo(SellerProductDTO sellerDTO) {  
+			System.out.println("sellDAO(406행)-updateMemberInfo()");
+			int insertCount =0;
+			PreparedStatement pstmt = null;
+			
+			
+			
+			try {
+				
+				String sql ="INSERT INTO buy_list VALUES(?,?,?,?,REPLACE(now(),'-',''),'배송중');";
+				 pstmt = con.prepareStatement(sql);
+				 pstmt.setString(1, sellerDTO.getBuy_member_code());
+				 pstmt.setInt(2, sellerDTO.getBuy_item_num());
+				 pstmt.setInt(3, sellerDTO.getBuy_price());
+				 pstmt.setInt(4, sellerDTO.getBuy_point());
+				 
+				 insertCount = pstmt.executeUpdate();
+				
+				
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}finally {
+				close(pstmt);
+			}
+
+			return insertCount;
+		}
+
+		public MemberBean selectMemberInfo(String member_code) { //update 완료 후 update된 내용 가져오기
+			MemberBean member = null;
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			System.out.println(member_code);
+			try {
+				String sql ="SELECT a.member_info_name, a.member_info_phone, a.member_info_post_code, a.member_info_address, a.member_info_address_detail,"
+						 +  "b.member_info_detail_point, b.member_info_detail_acc_money "
+						 +  "FROM member_info AS a JOIN member_info_detail AS b ON a.member_info_code=b.member_info_detail_code WHERE member_info_code=?";
+						
+				pstmt =con.prepareStatement(sql);
+				pstmt.setString(1, member_code);
+				rs = pstmt.executeQuery();
+				if(rs.next()) {
+					member = new MemberBean();
+					member.setMember_info_name(rs.getString("member_info_name"));		
+					member.setMember_info_phone(rs.getString("member_info_phone"));
+					member.setMember_info_post_code(rs.getString("member_info_post_code"));
+					member.setMember_info_address(rs.getString("member_info_address"));
+					member.setMember_info_address_detail(rs.getString("member_info_address_detail"));
+					member.setMember_info_detail_point(rs.getInt("member_info_detail_point"));
+					member.setMember_info_detail_acc_money(rs.getInt("member_info_detail_acc_money"));
+					
+				System.out.println("(memberDAO)"+member);
+				}
+				
+				
+				
+			} catch (Exception e) {
+				System.out.println("구문오류");
+				e.printStackTrace();
+			}
+			
+			
+			
+			return member;
+		}
 }
