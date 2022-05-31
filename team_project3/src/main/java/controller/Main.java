@@ -225,15 +225,7 @@ public class Main extends HttpServlet {
 			} catch (Exception e) {
 				
 			}
-		} else if (command.equals("/BuyList.ma")) { // 구매목록 버튼 클릭
-			System.out.println("구매목록 - BuyList.pr");
-			action = new BuyListAction();
-			try {
-				forward = action.execute(request, response);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		} else if(command.equals("/SellList.ma")) { // 판매리스트 확인
+		}  else if(command.equals("/SellList.ma")) { // 판매리스트 확인
 			System.out.println("서블릿 들어왔니??");
 			action = new SellListAction();
 			try {
@@ -241,7 +233,15 @@ public class Main extends HttpServlet {
 			} catch (Exception e) {
 				
 			}
+		} else if (command.equals("/BuyList.ma")) { // 구매목록 조회
+			action = new BuyListAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
+		
 		
 		
 		
