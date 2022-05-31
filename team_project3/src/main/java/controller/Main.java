@@ -34,6 +34,7 @@ import action.MpQnaWriteProAction;
 import action.MyPageAction;
 import action.MyPageImgUpdateAction;
 import action.MyPageUpdateAction;
+import action.SellListAction;
 import action.SendEmailAction;
 import vo.ActionForward;
 
@@ -228,6 +229,14 @@ public class Main extends HttpServlet {
 				forward = action.execute(request, response);
 			} catch (Exception e) {
 				e.printStackTrace();
+			}
+		} else if(command.equals("/SellList.ma")) { // 판매리스트 확인
+			System.out.println("서블릿 들어왔니??");
+			action = new SellListAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				
 			}
 		}
 		

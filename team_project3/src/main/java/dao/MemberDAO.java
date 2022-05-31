@@ -794,5 +794,17 @@ public class MemberDAO {
 		}
 		return buyImgFileList;
 	}
+	
+	public int selectSellListCount(String member_code) { //판매리스트 카운트
+		
+		
+		return 0;
+	}
+
+	public ArrayList<LikeListBean> selectSellArticleList(int pageNum, int listLimit, String member_code) { //판매리스트 조회
+		
+		
+		return null;
+	}
 
 }
