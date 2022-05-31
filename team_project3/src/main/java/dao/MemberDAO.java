@@ -804,5 +804,75 @@ public class MemberDAO {
 		
 		return buyList;
 	}
+	
+	public int selectSellListCount(String member_code) { //판매리스트 카운트
+		System.out.println("DAO에서 멤버코드 : " + member_code);
+		int listCount = 0;
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			String sql = "SELECT COUNT(*) FROM sell WHERE sell_member_code=?";
+			
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, member_code);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				listCount = rs.getInt(1);
+				System.out.println("DAO rs.getINT" +rs.getInt(1));
+			}
+		} catch (SQLException e) {
+			System.out.println("SQL 구문 오류 발생");
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rs);
+		}
+		
+		return listCount;
+	}
+
+	public ArrayList<SellerDTO> selectSellArticleList(int pageNum, int listLimit, String member_code) { //판매리스트 조회
+		System.out.println("selectArticleList - DAO");
+		ArrayList<SellerDTO> sellarticleList = null;
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		int startRow = (pageNum - 1) * listLimit;
+		
+		try {
+			String sql = "SELECT sell_num, sell_member_code, sell_title, sell_category, sell_price, sell_write_date"
+					+ " FROM sell"
+					+ " WHERE sell_member_code=?"
+					+ " ORDER BY sell_num LIMIT ?,?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, member_code);
+			pstmt.setInt(2, startRow);
+			pstmt.setInt(3, listLimit);
+			
+			rs = pstmt.executeQuery();
+			sellarticleList = new ArrayList<SellerDTO>();
+			
+			while(rs.next()) {
+				SellerDTO article = new SellerDTO();
+				article.setSell_num(rs.getInt("sell_num"));
+				article.setSell_member_code(rs.getString("sell_member_code"));
+				article.setSell_title(rs.getString("sell_title"));
+				article.setSell_category(rs.getString("sell_category"));
+				article.setSell_price(rs.getInt("sell_price"));
+				article.setSell_write_date(rs.getString("sell_write_date"));
+				
+				sellarticleList.add(article);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return sellarticleList;
+		
+	}
 
 }

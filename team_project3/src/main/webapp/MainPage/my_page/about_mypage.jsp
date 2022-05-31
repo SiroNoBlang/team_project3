@@ -94,44 +94,16 @@ MemberBean member = (MemberBean) request.getAttribute("memberDetail");
 </script>
 
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<!--===============================================================================================-->
-<link rel="icon" type="image/png"
-	href="MainPage/images/icons/favicon.png" />
-<!--===============================================================================================-->
 <link rel="stylesheet" type="text/css"
 	href="MainPage/vendor/bootstrap/css/bootstrap.min.css">
 <!--===============================================================================================-->
 <link rel="stylesheet" type="text/css"
-	href="MainPage/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
-<!--===============================================================================================-->
-<link rel="stylesheet" type="text/css"
-	href="MainPage/fonts/iconic/css/material-design-iconic-font.min.css">
-<!--===============================================================================================-->
-<link rel="stylesheet" type="text/css"
 	href="MainPage/fonts/linearicons-v1.0.0/icon-font.min.css">
-<!--===============================================================================================-->
-<link rel="stylesheet" type="text/css"
-	href="MainPage/vendor/animate/animate.css">
-<!--===============================================================================================-->
-<link rel="stylesheet" type="text/css"
-	href="MainPage/vendor/css-hamburgers/hamburgers.min.css">
-<!--===============================================================================================-->
-<link rel="stylesheet" type="text/css"
-	href="MainPage/vendor/animsition/css/animsition.min.css">
-<!--===============================================================================================-->
-<link rel="stylesheet" type="text/css"
-	href="MainPage/vendor/select2/select2.min.css">
-<!--===============================================================================================-->
-<link rel="stylesheet" type="text/css"
-	href="MainPage/vendor/perfect-scrollbar/perfect-scrollbar.css">
 <!--===============================================================================================-->
 <link rel="stylesheet" type="text/css" href="MainPage/css/util.css">
 <link rel="stylesheet" type="text/css" href="MainPage/css/main.css">
 <!--===============================================================================================-->
 </head>
-<body class="animsition">
-
 	<!-- Header -->
 	<header class="header-v4">
 		<!-- Header desktop -->
@@ -378,15 +350,11 @@ MemberBean member = (MemberBean) request.getAttribute("memberDetail");
 	</section>
 
 	<!-- Content page -->
-	<section class="bg0 p-t-75 p-b-120">
-		<div class="container">
-			<div class="row p-b-148">
-				<div class="col-md-7 col-lg-8"></div>
 				<table border="1">
 					<tr>
 						<td><a href="">내가 구매한 목록</a></td>
 						<td><a href="LikeList.ma?member_code=${memberDetail.member_code }">찜한 목록</a></td>
-						<td><a href="">ㅋㅋ</a></td>
+						<td><a href="SellList.ma?member_code=${memberDetail.member_code }">판매 목록</a></td>
 					</tr>
 				</table>
 
@@ -415,15 +383,13 @@ MemberBean member = (MemberBean) request.getAttribute("memberDetail");
 				<form action="Modify_Member.ma" method="post">
 					<table border="1">
 						<tr>
+							<td><input type="hidden" name="member_code" id="member_code"
+								value="${memberDetail.member_code }"></td>
+						</tr>
+						<tr>
 							<th>회원 등급</th>
 							<td colspan="2"><input type="text" name="grade_name"
 								id="grade_name" value="${memberDetail.grade_name }"
-								readonly="readonly"></td>
-						</tr>
-						<tr>
-							<th>멤버코드(사라질예정)</th>
-							<td colspan="2"><input type="text" name="member_code"
-								id="member_code" value="${memberDetail.member_code }"
 								readonly="readonly"></td>
 						</tr>
 						<tr>
@@ -446,33 +412,9 @@ MemberBean member = (MemberBean) request.getAttribute("memberDetail");
 								style="display: none;"></td>
 						</tr>
 						<tr>
-							<th>이메일1</th>
+							<th>이메일</th>
 							<td colspan="2"><input type="text" name="member_email1"
 								id="member_email1" value="${memberDetail.member_email }"></td>
-						</tr>
-						<tr>
-							<th>이메일2 나중에 잘라서 수정예정</th>
-							<td colspan="2"><select id="member_email2"
-								name="member_email2">
-									<option value="@gmail.com"
-										<%if (member.getMember_email().equals("@gmail.com")) {%>
-										selected="selected" <%}%>>gmail.com</option>
-									<option value="@naver.com"
-										<%if (member.getMember_email().equals("@naver.com")) {%>
-										selected="selected" <%}%>>naver.com</option>
-									<option value="@nate.com"
-										<%if (member.getMember_email().equals("@nate.com")) {%>
-										selected="selected" <%}%>>nate.com</option>
-									<option value="@hanmail.net"
-										<%if (member.getMember_email().equals("@hanmail.net")) {%>
-										selected="selected" <%}%>>hanmail.net</option>
-									<option value="@daum.net"
-										<%if (member.getMember_email().equals("@daum.net")) {%>
-										selected="selected" <%}%>>daum.net</option>
-									<option value="@yahoo.com"
-										<%if (member.getMember_email().equals("@yahoo.com")) {%>
-										selected="selected" <%}%>>yahoo.com</option>
-							</select></td>
 						</tr>
 						<tr>
 							<th>이름</th>
@@ -514,22 +456,6 @@ MemberBean member = (MemberBean) request.getAttribute("memberDetail");
 									<option value="70대이상"
 										<c:if test="${memberDetail.member_info_age eq '70대이상' }" >selected</c:if>>70대이상</option>
 							</select></td>
-						</tr>
-						<tr>
-							<th>가입날짜</th>
-							<td colspan="2"><input type="text"
-								name="member_service_log_join_date"
-								id="member_service_log_join_date"
-								value="${memberDetail.member_service_log_join_date }"
-								readonly="readonly"></td>
-						</tr>
-						<tr>
-							<th>패스워드 수정날짜</th>
-							<td colspan="2"><input type="text"
-								name="member_service_log_passwd_change_date"
-								id="member_service_log_passwd_change_date"
-								value="${memberDetail.member_service_log_passwd_change_date }"
-								readonly="readonly"></td>
 						</tr>
 						<tr>
 							<th>우편번호</th>
@@ -583,6 +509,43 @@ MemberBean member = (MemberBean) request.getAttribute("memberDetail");
 								value="${memberDetail.member_info_detail_acc_money }"
 								readonly="readonly"></td>
 						</tr>
+						
+						<tr>
+							<th>누적 포인트</th>
+							<td colspan="2"><input type="text"
+								name="member_info_detail_point" id="member_info_detail_point"
+								value="${memberDetail.member_info_detail_point }"
+								readonly="readonly"></td>
+						</tr>
+						<tr>
+							<th>회원 상태(정상,정지,탈퇴)</th>
+							<td colspan="2"><input type="text"
+								name="member_service_log_status" id="member_service_log_status"
+								value="${memberDetail.member_service_log_status }"
+								readonly="readonly"></td>
+						</tr>
+						<tr>
+							<th>회원가입 날짜</th>
+							<td colspan="2"><input type="text"
+								name="member_service_log_join_date"
+								id="member_service_log_join_date"
+								value="${memberDetail.member_service_log_join_date }"
+								readonly="readonly"></td>
+						</tr>
+						<tr>
+							<th>구매횟수</th>
+							<td colspan="2"><input type="text"
+								name="member_service_log_order_count"
+								id="member_service_log_order_count"
+								value="${memberDetail.member_service_log_order_count }"
+								readonly="readonly"></td>
+						</tr>
+						<tr>
+							<td colspan="3"><input type="submit" value="수정"></td>
+						</tr>
+
+					</table>
+					<table border="1">
 						<tr>
 							<th>스타일</th>
 							<td><label for="member_info_detail_like_style"></label> <input
@@ -622,73 +585,10 @@ MemberBean member = (MemberBean) request.getAttribute("memberDetail");
 								<c:if test="${fn:contains(memberDetail.member_info_detail_like_category, '잡화')}" >checked</c:if>>잡화
 							</td>
 						</tr>
-						<tr>
-							<th>누적 포인트</th>
-							<td colspan="2"><input type="text"
-								name="member_info_detail_point" id="member_info_detail_point"
-								value="${memberDetail.member_info_detail_point }"
-								readonly="readonly"></td>
-						</tr>
-						<tr>
-							<th>회원 상태(정상,정지,탈퇴)</th>
-							<td colspan="2"><input type="text"
-								name="member_service_log_status" id="member_service_log_status"
-								value="${memberDetail.member_service_log_status }"
-								readonly="readonly"></td>
-						</tr>
-						<tr>
-							<th>회원가입 날짜</th>
-							<td colspan="2"><input type="text"
-								name="member_service_log_join_date"
-								id="member_service_log_join_date"
-								value="${memberDetail.member_service_log_join_date }"
-								readonly="readonly"></td>
-						</tr>
-						<tr>
-							<th>비밀번호변경 날짜</th>
-							<td colspan="2"><input type="text"
-								name="member_service_log_passwd_change_date"
-								id="member_service_log_passwd_change_date"
-								value="${memberDetail.member_service_log_passwd_change_date }"
-								readonly="readonly"></td>
-						</tr>
-						<tr>
-							<th>로그인 날짜</th>
-							<td colspan="2"><input type="text"
-								name="member_service_log_login_date"
-								id="member_service_log_login_date"
-								value="${memberDetail.member_service_log_login_date }"
-								readonly="readonly"></td>
-						</tr>
-						<tr>
-							<th>구매횟수</th>
-							<td colspan="2"><input type="text"
-								name="member_service_log_order_count"
-								id="member_service_log_order_count"
-								value="${memberDetail.member_service_log_order_count }"
-								readonly="readonly"></td>
-						</tr>
-						<tr>
-							<td colspan="3"><input type="submit" value="수정"> <input
-								type="button" value="회원탈퇴" onclick=""></td>
-						</tr>
-
+					
 					</table>
 
 				</form>
-				<div class="col-11 col-md-5 col-lg-4 m-lr-auto"></div>
-			</div>
-
-			<div class="row">
-				<div class="order-md-2 col-md-7 col-lg-8 p-b-30"></div>
-			</div>
-
-
-		</div>
-
-	</section>
-
-
 
 	<!-- Footer -->
 	<footer class="bg3 p-t-75 p-b-32">

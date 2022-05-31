@@ -23,7 +23,6 @@ public class MyPageImgUpdateAction implements Action {
 		
 		ActionForward forward = null;
 		String saveDirectory = request.getServletContext().getRealPath("Upload/mypage_img");
-//		System.out.println(saveDirectory);
 		File saveDir = new File(saveDirectory);
 		if(!saveDir.exists())
 			saveDir.mkdirs();
@@ -43,13 +42,8 @@ public class MyPageImgUpdateAction implements Action {
 		member.setMember_info_mypage_img_name(member_info_mypage_img_name);
 		member.setMember_info_mypage_real_img_name(member_info_mypage_real_img_name);
 		
-//		System.out.println("======이미지액션=====");
-//		System.out.println(member_info_mypage_img_name);
-//		System.out.println(member_info_mypage_real_img_name);
-		
 		MyPageUpdateImgService service = new MyPageUpdateImgService();
 		boolean isImgUpdate = service.imgUpdate(member);
-		
 		
 		if(!isImgUpdate) {
 			response.setContentType("text/html; charset=UTF-8");
@@ -60,10 +54,9 @@ public class MyPageImgUpdateAction implements Action {
 			out.println("</script>");
 		} else {
 			forward = new ActionForward();
-			forward.setPath("MainPage/first_page/index.jsp");
+			forward.setPath("MainPage/my_page/about_mypage.jsp");
 			forward.setRedirect(true);
 		}
-		
 		
 		return forward;
 	}
