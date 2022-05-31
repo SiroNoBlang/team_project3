@@ -1785,7 +1785,6 @@ public class AdminDAO {
 
 	public ArrayList<SalesList> selectSalesChartList(String[] month) {
 		ArrayList<SalesList> salesChartList = null;
-		SalesList salesList = new SalesList();
 		
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -1795,170 +1794,214 @@ public class AdminDAO {
 					+ " FROM ("
 					+ "	SELECT IFNULL(SUM(sell_price)*10, 0) AS sell_price"
 					+ ", IFNULL(ROUND((SUM(sell_price)*10)*(2/10)), 0) AS sell_fee"
-					+ ", '01' AS num"
+					+ ", ? AS num"
 					+ "	FROM sell"
-					+ "	WHERE SUBSTRING(sell_write_date, 5, 2) = '01'"
+					+ "	WHERE SUBSTRING(sell_write_date, 5, 2) = ?"
 					+ " UNION ALL"
 					+ "	SELECT IFNULL(SUM(sell_price)*10, 0) AS sell_price"
 					+ ", IFNULL(ROUND((SUM(sell_price)*10)*(2/10)), 0) AS sell_fee"
-					+ ", '02' AS num"
+					+ ", ? AS num"
 					+ "	FROM sell"
-					+ " WHERE SUBSTRING(sell_write_date, 5, 2) = '02'"
+					+ " WHERE SUBSTRING(sell_write_date, 5, 2) = ?"
 					+ " UNION ALL"
 					+ "	SELECT IFNULL(SUM(sell_price)*10, 0) AS sell_price"
 					+ ", IFNULL(ROUND((SUM(sell_price)*10)*(2/10)), 0) AS sell_fee"
-					+ ", '03' AS num"
+					+ ", ? AS num"
 					+ "	FROM sell"
-					+ " WHERE SUBSTRING(sell_write_date, 5, 2) = '03'"
-					+ " UNION ALL\r\n"
-					+ " SELECT IFNULL(SUM(sell_price)*10, 0) AS sell_price"
-					+ ", IFNULL(ROUND((SUM(sell_price)*10)*(2/10)), 0) AS sell_fee"
-					+ ", '04' AS num"
-					+ "	FROM sell"
-					+ "	WHERE SUBSTRING(sell_write_date, 5, 2) = '04'"
+					+ " WHERE SUBSTRING(sell_write_date, 5, 2) = ?"
 					+ " UNION ALL"
 					+ " SELECT IFNULL(SUM(sell_price)*10, 0) AS sell_price"
 					+ ", IFNULL(ROUND((SUM(sell_price)*10)*(2/10)), 0) AS sell_fee"
-					+ ", '05' AS num"
-					+ " FROM sell"
-					+ " WHERE SUBSTRING(sell_write_date, 5, 2) = '05'"
-					+ " UNION ALL\r\n"
+					+ ", ? AS num"
+					+ "	FROM sell"
+					+ "	WHERE SUBSTRING(sell_write_date, 5, 2) = ?"
+					+ " UNION ALL"
 					+ " SELECT IFNULL(SUM(sell_price)*10, 0) AS sell_price"
 					+ ", IFNULL(ROUND((SUM(sell_price)*10)*(2/10)), 0) AS sell_fee"
-					+ ", '06' AS num"
+					+ ", ? AS num"
 					+ " FROM sell"
-					+ "	WHERE SUBSTRING(sell_write_date, 5, 2) = '06'"
+					+ " WHERE SUBSTRING(sell_write_date, 5, 2) = ?"
+					+ " UNION ALL"
+					+ " SELECT IFNULL(SUM(sell_price)*10, 0) AS sell_price"
+					+ ", IFNULL(ROUND((SUM(sell_price)*10)*(2/10)), 0) AS sell_fee"
+					+ ", ? AS num"
+					+ " FROM sell"
+					+ "	WHERE SUBSTRING(sell_write_date, 5, 2) = ?"
 					+ " UNION ALL"
 					+ "	SELECT IFNULL(SUM(sell_price)*10, 0) AS sell_price"
 					+ ", IFNULL(ROUND((SUM(sell_price)*10)*(2/10)), 0) AS sell_fee"
-					+ ", '07' AS num"
+					+ ", ? AS num"
 					+ " FROM sell"
-					+ "	WHERE SUBSTRING(sell_write_date, 5, 2) = '07'"
+					+ "	WHERE SUBSTRING(sell_write_date, 5, 2) = ?"
 					+ " UNION ALL"
 					+ "	SELECT IFNULL(SUM(sell_price)*10, 0) AS sell_price"
 					+ ", IFNULL(ROUND((SUM(sell_price)*10)*(2/10)), 0) AS sell_fee"
-					+ ", '08' AS num"
+					+ ", ? AS num"
 					+ "	FROM sell"
-					+ " WHERE SUBSTRING(sell_write_date, 5, 2) = '08'"
+					+ " WHERE SUBSTRING(sell_write_date, 5, 2) = ?"
 					+ "	UNION ALL"
 					+ "	SELECT IFNULL(SUM(sell_price)*10, 0) AS sell_price"
 					+ ", IFNULL(ROUND((SUM(sell_price)*10)*(2/10)), 0) AS sell_fee"
-					+ ", '09' AS num"
+					+ ", ? AS num"
 					+ " FROM sell"
-					+ " WHERE SUBSTRING(sell_write_date, 5, 2) = '09'"
+					+ " WHERE SUBSTRING(sell_write_date, 5, 2) = ?"
 					+ " UNION ALL"
 					+ "	SELECT IFNULL(SUM(sell_price)*10, 0) AS sell_price"
 					+ ", IFNULL(ROUND((SUM(sell_price)*10)*(2/10)), 0) AS sell_fee"
-					+ ", '10' AS num"
+					+ ", ? AS num"
 					+ " FROM sell"
-					+ " WHERE SUBSTRING(sell_write_date, 5, 2) = '10'"
+					+ " WHERE SUBSTRING(sell_write_date, 5, 2) = ?"
 					+ " UNION ALL"
 					+ "	SELECT IFNULL(SUM(sell_price)*10, 0) AS sell_price"
 					+ ", IFNULL(ROUND((SUM(sell_price)*10)*(2/10)), 0) AS sell_fee"
-					+ ", '11' AS num"
+					+ ", ? AS num"
 					+ " FROM sell"
-					+ " WHERE SUBSTRING(sell_write_date, 5, 2) = '11'"
-					+ " UNION ALL\r\n"
+					+ " WHERE SUBSTRING(sell_write_date, 5, 2) = ?"
+					+ " UNION ALL"
 					+ "	SELECT IFNULL(SUM(sell_price)*10, 0) AS sell_price"
 					+ ", IFNULL(ROUND((SUM(sell_price)*10)*(2/10)), 0) AS sell_fee"
-					+ ", '12' AS num"
+					+ ", ? AS num"
 					+ " FROM sell"
-					+ " WHERE SUBSTRING(sell_write_date, 5, 2) = '12'"
+					+ " WHERE SUBSTRING(sell_write_date, 5, 2) = ?"
 					+ ") A, ("
 					+ "	SELECT IFNULL(ROUND(SUM(buy_price)/1000), 0) AS buy_price"
 					+ ", IFNULL(ROUND((ROUND(SUM(buy_price)/1000))*(2/10)), 0) AS buy_fee"
-					+ ", '01' AS num"
+					+ ", ? AS num"
 					+ " FROM buy"
-					+ " WHERE SUBSTRING(buy_sell_item_date, 5, 2) = '01'"
-					+ " UNION ALL\r\n"
-					+ "	SELECT IFNULL(ROUND(SUM(buy_price)/1000), 0) AS buy_price"
-					+ ", IFNULL(ROUND((ROUND(SUM(buy_price)/1000))*(2/10)), 0) AS buy_fee"
-					+ ", '02' AS num"
-					+ " FROM buy"
-					+ " WHERE SUBSTRING(buy_sell_item_date, 5, 2) = '02'"
+					+ " WHERE SUBSTRING(buy_sell_item_date, 5, 2) = ?"
 					+ " UNION ALL"
 					+ "	SELECT IFNULL(ROUND(SUM(buy_price)/1000), 0) AS buy_price"
 					+ ", IFNULL(ROUND((ROUND(SUM(buy_price)/1000))*(2/10)), 0) AS buy_fee"
-					+ ", '03' AS num"
+					+ ", ? AS num"
 					+ " FROM buy"
-					+ " WHERE SUBSTRING(buy_sell_item_date, 5, 2) = '03'"
-					+ " UNION ALL\r\n"
+					+ " WHERE SUBSTRING(buy_sell_item_date, 5, 2) = ?"
+					+ " UNION ALL"
 					+ "	SELECT IFNULL(ROUND(SUM(buy_price)/1000), 0) AS buy_price"
 					+ ", IFNULL(ROUND((ROUND(SUM(buy_price)/1000))*(2/10)), 0) AS buy_fee"
-					+ ", '04' AS num"
+					+ ", ? AS num"
 					+ " FROM buy"
-					+ " WHERE SUBSTRING(buy_sell_item_date, 5, 2) = '04'"
-					+ " UNION ALL\r\n"
+					+ " WHERE SUBSTRING(buy_sell_item_date, 5, 2) = ?"
+					+ " UNION ALL"
 					+ "	SELECT IFNULL(ROUND(SUM(buy_price)/1000), 0) AS buy_price"
 					+ ", IFNULL(ROUND((ROUND(SUM(buy_price)/1000))*(2/10)), 0) AS buy_fee"
-					+ ", '05' AS num"
+					+ ", ? AS num"
 					+ " FROM buy"
-					+ " WHERE SUBSTRING(buy_sell_item_date, 5, 2) = '05'"
-					+ " UNION ALL\r\n"
+					+ " WHERE SUBSTRING(buy_sell_item_date, 5, 2) = ?"
+					+ " UNION ALL"
 					+ "	SELECT IFNULL(ROUND(SUM(buy_price)/1000), 0) AS buy_price"
 					+ ", IFNULL(ROUND((ROUND(SUM(buy_price)/1000))*(2/10)), 0) AS buy_fee"
-					+ ", '06' AS num"
+					+ ", ? AS num"
 					+ " FROM buy"
-					+ " WHERE SUBSTRING(buy_sell_item_date, 5, 2) = '06'"
-					+ " UNION ALL\r\n"
+					+ " WHERE SUBSTRING(buy_sell_item_date, 5, 2) = ?"
+					+ " UNION ALL"
 					+ "	SELECT IFNULL(ROUND(SUM(buy_price)/1000), 0) AS buy_price"
 					+ ", IFNULL(ROUND((ROUND(SUM(buy_price)/1000))*(2/10)), 0) AS buy_fee"
-					+ ", '07' AS num"
+					+ ", ? AS num"
 					+ " FROM buy"
-					+ " WHERE SUBSTRING(buy_sell_item_date, 5, 2) = '07'"
-					+ " UNION ALL\r\n"
+					+ " WHERE SUBSTRING(buy_sell_item_date, 5, 2) = ?"
+					+ " UNION ALL"
 					+ "	SELECT IFNULL(ROUND(SUM(buy_price)/1000), 0) AS buy_price"
 					+ ", IFNULL(ROUND((ROUND(SUM(buy_price)/1000))*(2/10)), 0) AS buy_fee"
-					+ ", '08' AS num"
+					+ ", ? AS num"
 					+ " FROM buy"
-					+ " WHERE SUBSTRING(buy_sell_item_date, 5, 2) = '08'"
+					+ " WHERE SUBSTRING(buy_sell_item_date, 5, 2) = ?"
+					+ " UNION ALL"
+					+ "	SELECT IFNULL(ROUND(SUM(buy_price)/1000), 0) AS buy_price"
+					+ ", IFNULL(ROUND((ROUND(SUM(buy_price)/1000))*(2/10)), 0) AS buy_fee"
+					+ ", ? AS num"
+					+ " FROM buy"
+					+ " WHERE SUBSTRING(buy_sell_item_date, 5, 2) = ?"
 					+ " UNION ALL"
 					+ " SELECT IFNULL(ROUND(SUM(buy_price)/1000), 0) AS buy_price"
 					+ ", IFNULL(ROUND((ROUND(SUM(buy_price)/1000))*(2/10)), 0) AS buy_fee"
-					+ ", '09' AS num"
+					+ ", ? AS num"
 					+ " FROM buy"
-					+ " WHERE SUBSTRING(buy_sell_item_date, 5, 2) = '09'"
-					+ " UNION ALL\r\n"
-					+ "	SELECT IFNULL(ROUND(SUM(buy_price)/1000), 0) AS buy_price"
-					+ ", IFNULL(ROUND((ROUND(SUM(buy_price)/1000))*(2/10)), 0) AS buy_fee"
-					+ ", '10' AS num"
-					+ " FROM buy"
-					+ "	WHERE SUBSTRING(buy_sell_item_date, 5, 2) = '10'"
+					+ " WHERE SUBSTRING(buy_sell_item_date, 5, 2) = ?"
 					+ " UNION ALL"
 					+ "	SELECT IFNULL(ROUND(SUM(buy_price)/1000), 0) AS buy_price"
 					+ ", IFNULL(ROUND((ROUND(SUM(buy_price)/1000))*(2/10)), 0) AS buy_fee"
-					+ ", '11' AS num"
+					+ ", ? AS num"
 					+ " FROM buy"
-					+ "	WHERE SUBSTRING(buy_sell_item_date, 5, 2) = '11'"
+					+ "	WHERE SUBSTRING(buy_sell_item_date, 5, 2) = ?"
 					+ " UNION ALL"
 					+ "	SELECT IFNULL(ROUND(SUM(buy_price)/1000), 0) AS buy_price"
 					+ ", IFNULL(ROUND((ROUND(SUM(buy_price)/1000))*(2/10)), 0) AS buy_fee"
-					+ ", '12' AS num"
-					+ " FROM buy \r\n"
-					+ " WHERE SUBSTRING(buy_sell_item_date, 5, 2) = '12'"
+					+ ", ? AS num"
+					+ " FROM buy"
+					+ "	WHERE SUBSTRING(buy_sell_item_date, 5, 2) = ?"
+					+ " UNION ALL"
+					+ "	SELECT IFNULL(ROUND(SUM(buy_price)/1000), 0) AS buy_price"
+					+ ", IFNULL(ROUND((ROUND(SUM(buy_price)/1000))*(2/10)), 0) AS buy_fee"
+					+ ", ? AS num"
+					+ " FROM buy"
+					+ " WHERE SUBSTRING(buy_sell_item_date, 5, 2) = ?"
 					+ ") B"
 					+ " WHERE A.num = B.num";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, month[0]);
-			pstmt.setString(2, month[1]);
-			pstmt.setString(3, month[2]);
-			pstmt.setString(4, month[3]);
-			pstmt.setString(5, month[4]);
-			pstmt.setString(6, month[5]);
-			pstmt.setString(7, month[6]);
-			pstmt.setString(8, month[7]);
-			pstmt.setString(9, month[8]);
-			pstmt.setString(10, month[9]);
-			pstmt.setString(11, month[10]);
-			pstmt.setString(12, month[11]);
+			pstmt.setString(2, month[0]);
+			pstmt.setString(3, month[1]);
+			pstmt.setString(4, month[1]);
+			pstmt.setString(5, month[2]);
+			pstmt.setString(6, month[2]);
+			pstmt.setString(7, month[3]);
+			pstmt.setString(8, month[3]);
+			pstmt.setString(9, month[4]);
+			pstmt.setString(10, month[4]);
+			pstmt.setString(11, month[5]);
+			pstmt.setString(12, month[5]);
+			pstmt.setString(13, month[6]);
+			pstmt.setString(14, month[6]);
+			pstmt.setString(15, month[7]);
+			pstmt.setString(16, month[7]);
+			pstmt.setString(17, month[8]);
+			pstmt.setString(18, month[8]);
+			pstmt.setString(19, month[9]);
+			pstmt.setString(20, month[9]);
+			pstmt.setString(21, month[10]);
+			pstmt.setString(22, month[10]);
+			pstmt.setString(23, month[11]);
+			pstmt.setString(24, month[11]);
+			pstmt.setString(25, month[0]);
+			pstmt.setString(26, month[0]);
+			pstmt.setString(27, month[1]);
+			pstmt.setString(28, month[1]);
+			pstmt.setString(29, month[2]);
+			pstmt.setString(30, month[2]);
+			pstmt.setString(31, month[3]);
+			pstmt.setString(32, month[3]);
+			pstmt.setString(33, month[4]);
+			pstmt.setString(34, month[4]);
+			pstmt.setString(35, month[5]);
+			pstmt.setString(36, month[5]);
+			pstmt.setString(37, month[6]);
+			pstmt.setString(38, month[6]);
+			pstmt.setString(39, month[7]);
+			pstmt.setString(40, month[7]);
+			pstmt.setString(41, month[8]);
+			pstmt.setString(42, month[8]);
+			pstmt.setString(43, month[9]);
+			pstmt.setString(44, month[9]);
+			pstmt.setString(45, month[10]);
+			pstmt.setString(46, month[10]);
+			pstmt.setString(47, month[11]);
+			pstmt.setString(48, month[11]);
 			
 			rs = pstmt.executeQuery();
 			
 			while(rs.next()) {
-				salesList.setSell_total_money(rs.getInt(1));
+				int i = 0;
+				SalesList salesList = new SalesList();
+				salesList.setMonth(month[i]);
+				salesList.setSell_total_money(rs.getInt("sell_price"));
+				salesList.setSell_fee(rs.getInt("sell_fee"));
+				salesList.setBuy_total_money(rs.getInt("buy_price"));
+				salesList.setBuy_fee(rs.getInt("buy_fee"));
+				i++;
+				System.out.println(salesList);
+//				salesChartList.add(salesList);
 			}
-			
-			System.out.println(salesList);
+			System.out.println(salesChartList);
 			
 		} catch (SQLException e) {
 			e.printStackTrace();

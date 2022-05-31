@@ -34,52 +34,13 @@
 		</div>
 		<div id="page-container">
 			<div class="card">
-				<div class="title">매출현황</div>
-				    <section class="row text-center placeholders">
-				        <div class="col-6 col-sm-3">
-				          <div class="panel panel-success">
-				            <div class="panel-heading">매출</div>
-				            <div class="panel-body">
-				              <h4>123</h4>
-				            </div>
-				          </div>
-				        </div>
-				        <div class="col-6 col-sm-3">
-				          <div class="panel panel-warning">
-				            <div class="panel-heading">매출 총이익</div>
-				            <div class="panel-body">
-				              <h4>123</h4>
-				            </div>
-				          </div>
-				        </div>
-				        <div class="col-6 col-sm-3">
-				          <div class="panel panel-info">
-				            <div class="panel-heading">순이익</div>
-				            <div class="panel-body">
-				              <h4>123</h4>
-				            </div>
-				          </div>
-				        </div>
-				        <div class="col-6 col-sm-3">
-				          <div class="panel panel-danger">
-				            <div class="panel-heading">포괄손익</div>
-				            <div class="panel-body">
-				              <h4>123</h4>
-				            </div>
-				          </div>
-				        </div>
-				      </section>
-				</div>				
-				
-				
-				<div class="card">
-					<div class="title">매출 그래프</div>
-						<div class="container">
-							<%@ include file="/AdminPage/sales/sales_data.jsp" %>
-						</div>
+				<div class="title">매출 그래프</div>
+					<div class="container">
+						<%@ include file="/AdminPage/sales/sales_data.jsp" %>
 					</div>
 				</div>
 			</div>
+		</div>
 	<span id="show-lable">Hello</span>
 	<!-- partial -->
 	<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js'></script>

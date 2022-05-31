@@ -1,18 +1,29 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.8.0/chart.min.js"></script>
-	<script src="AdminPage/js/jquery-3.6.0.js"></script>
+<script src="AdminPage/js/jquery-3.6.0.js"></script>
 <div class="chart-container" style="position: relative; height: 200px; width: 60vw">
 	<canvas id="myChart"></canvas>
 </div>
-
+ <c:if test="${not empty salesChartList and not empty month}">
+	<c:forEach var="salesChartList" items="${salesChartList }" varStatus="status">
+		<tr>
+			<td>${salesChartList.month }</td>
+			<td>${salesChartList.sell_total_money }</td>
+			<td>${salesChartList.sell_fee }</td>
+			<td>${salesChartList.buy_total_money }</td>
+			<td>${salesChartList.buy_fee }</td>
+		</tr>
+	</c:forEach>
+</c:if>
 <script>
 	var ctx = document.getElementById('myChart');
     
 	$(function(){
 		$.ajax({
 	        url: "SalesChart.co", 
-	        type: 'get',
+	        type: 'post',
 	        dataType: 'json',
 	        success: function (data) {
 	        	drawChart(data);

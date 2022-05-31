@@ -37,5 +37,10 @@ public class SalesList {
 	public void setBuy_fee(int buy_fee) {
 		this.buy_fee = buy_fee;
 	}
+	@Override
+	public String toString() {
+		return "SalesList [month=" + month + ", sell_total_money=" + sell_total_money + ", sell_fee=" + sell_fee
+				+ ", buy_total_money=" + buy_total_money + ", buy_fee=" + buy_fee + "]";
+	}
 	
 }
