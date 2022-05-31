@@ -57,7 +57,10 @@ public class Main extends HttpServlet {
 			} catch (Exception e) {
 				
 			}
-		} else if(command.equals("/Login.ma")) {
+		} else if(command.equals("/MainPage.ma")) { // home 버튼 클릭시 메인페이지로 이동
+			forward = new ActionForward("MainPage/first_page/index.jsp", false);
+			
+		}else if(command.equals("/Login.ma")) {
 			forward = new ActionForward("join/login.jsp", false);
 			
 		} else if(command.equals("/LoginPro.ma")) {
