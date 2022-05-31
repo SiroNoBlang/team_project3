@@ -29,8 +29,8 @@ public class FindPasswdAction implements Action {
 			PrintWriter out = response.getWriter();
 			out.println("<script>");
 			out.println("alert('이메일로 임시 비밀번호를 전송하였습니다!')");
-			forward = new ActionForward("./", true);
-//			out.println("request.sendRedirect('./')");
+//			forward = new ActionForward("./", true);
+			out.println("location.href='./'");
 			out.println("</script>");
 		} else {
 			response.setContentType("text/html; charset=UTF-8");
