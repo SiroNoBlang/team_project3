@@ -211,7 +211,7 @@ public class SellerDAO {
 		ResultSet rs = null;
 
 		try {
-			String sql = "SELECT a.sell_num, a.sell_size , a.sell_category, a.sell_category_detail, a.sell_title, a.sell_color, a.sell_brand, a.sell_price, a.sell_readcount,"
+			String sql = "SELECT a.sell_num,a.sell_member_code, a.sell_size , a.sell_category, a.sell_category_detail, a.sell_title, a.sell_color, a.sell_brand, a.sell_price, a.sell_readcount,"
 					+" b.sell_img_name, b.sell_img_real_name ,b.sell_img_real_num ,b.sell_img_num,b.sell_img_name,b.sell_img_real_name, c.sell_list_num, c.sell_list_item_status"
 					+" FROM sell AS a JOIN sell_img AS b ON a.sell_num = b.sell_img_real_num JOIN sell_list AS c ON a.sell_num = c.sell_list_num"
 					+" WHERE sell_list_num= ? AND"
@@ -227,6 +227,7 @@ public class SellerDAO {
 			if (rs.next()) {
 				article = new SellerProductDTO();
 				article.setSell_num(rs.getInt("sell_num"));
+				article.setSell_member_code(rs.getString("sell_member_code"));
 				article.setSell_category(rs.getString("sell_category"));
 				article.setSell_size(rs.getString("sell_size"));
 				article.setSell_category_detail(rs.getString("sell_category_detail"));
@@ -507,14 +508,14 @@ public class SellerDAO {
 				
 				updateCount = pstmt.executeUpdate();
 			
-				sql=" UPDATE member_info_detail"				//price ,acc_money 업데이트해야됨.
-						+ "	SET  member_info_detail_point=(SELECT member_info_detail_point"
-						+ "					FROM member_info_detail"
-						+ "						WHERE member_info_detail_code ='fb44a7c4dca011ec9fb70a0027000011' ),"
-						+ "      member_info_detail_acc_money=(SELECT member_info_detail_acc_money"
-						+ "					FROM member_info_detail"
-						+ "						WHERE member_info_detail_code ='fb44a7c4dca011ec9fb70a0027000011')"
-						+ "	WHERE member_info_detail_code='fb44a7c4dca011ec9fb70a0027000011'"; 
+//				sql=" UPDATE member_info_detail"				//price ,acc_money 업데이트해야됨.
+//						+ "	SET  member_info_detail_point=(SELECT member_info_detail_point"
+//						+ "					FROM member_info_detail"
+//						+ "						WHERE member_info_detail_code ='fb44a7c4dca011ec9fb70a0027000011' ),"
+//						+ "      member_info_detail_acc_money=(SELECT member_info_detail_acc_money"
+//						+ "					FROM member_info_detail"
+//						+ "						WHERE member_info_detail_code ='fb44a7c4dca011ec9fb70a0027000011')"
+//						+ "	WHERE member_info_detail_code='fb44a7c4dca011ec9fb70a0027000011'"; 
 				
 			} catch (Exception e) {
 				System.out.println("SQL구문 오류 발생! -updateMemberInfo()");
@@ -529,15 +530,14 @@ public class SellerDAO {
 		}
 	//구매자 정보 저장용 DAO  -(구매시 구매자 정보 저장 )
 		public int insertMemberInfo(SellerProductDTO sellerDTO) {  
-			System.out.println("sellDAO(406행)-updateMemberInfo()");
+			System.out.println("sellDAO-updateMemberInfo()");
 			int insertCount =0;
 			PreparedStatement pstmt = null;
 			
-			
-			
+			System.out.println("dao에서"+sellerDTO);
 			try {
-				
-				String sql ="INSERT INTO buy_list VALUES(?,?,?,?,REPLACE(now(),'-',''),'배송중');";
+							//현재 service와 dao에서 값이 안넘어옴
+				String sql ="INSERT INTO buy VALUES(?,?,?,?,REPLACE(now(),'-',''),'배송중');";
 				 pstmt = con.prepareStatement(sql);
 				 pstmt.setString(1, sellerDTO.getBuy_member_code());
 				 pstmt.setInt(2, sellerDTO.getBuy_item_num());
@@ -594,4 +594,25 @@ public class SellerDAO {
 			
 			return member;
 		}
+		//sell_num을 이용하여 update해주기 sell_list테이블의 sell_list_status: 판매중 ->판매완료
+		public void sellUpdate(int sell_num) {
+			PreparedStatement pstmt = null;
+			
+			try {
+				String sql="UPDATE sell_list"
+						+ " SET sell_list_item_status ='판매완료' "
+						+ " WHERE sell_list_num =?";
+				pstmt =con.prepareStatement(sql);
+				pstmt.setInt(1, sell_num);
+			} catch (SQLException e) {
+				System.out.println("SQL 구문오류!");
+				e.printStackTrace();
+			}
+			
+		} 
+		
+		
+		
+
+		
 }

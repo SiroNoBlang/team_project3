@@ -136,27 +136,27 @@ int price = sellerDTO.getSell_price()+charge+3000;     //최종 판매가격
 					</a>
 
 					<!-- Menu desktop -->
-					<div class="menu-desktop">
+				<div class="menu-desktop">
 						<ul class="main-menu">
 							<li>
-								<a href="index.html">Home</a>
-								<ul class="sub-menu">
-									<li><a href="index.html">Homepage 1</a></li>
-									<li><a href="home-02.html">Homepage 2</a></li>
-									<li><a href="home-03.html">Homepage 3</a></li>
-								</ul>
+								<a href="MainPage.pr">Home</a>
+<!-- 								<ul class="sub-menu"> -->
+<!-- 									<li><a href="index.html">Homepage 1</a></li> -->
+<!-- 									<li><a href="home-02.html">Homepage 2</a></li> -->
+<!-- 									<li><a href="home-03.html">Homepage 3</a></li> -->
+<!-- 								</ul> -->
 							</li>
 
 							<li>
-								<a href="product.html">Shop</a>
+								<a href="Product.pr">Shop</a>
 							</li>
 
-							<li class="label1" data-label1="hot">
-								<a href="shoping-cart.html">Features</a>
-							</li>
+<!-- 							<li class="label1" data-label1="hot"> -->
+<!-- 								<a href="shoping-cart.html">Features</a> -->
+<!-- 							</li> -->
 
 							<li>
-								<a href="blog.html">Blog</a>
+								<a href="SellForm.pr">Sell</a>
 							</li>
 
 							<li>
@@ -167,7 +167,7 @@ int price = sellerDTO.getSell_price()+charge+3000;     //최종 판매가격
 								<a href="contact.html">Contact</a>
 							</li>
 						</ul>
-					</div>	
+					</div>
 
 					<!-- Icon header -->
 					<div class="wrap-icon-header flex-w flex-r-m">

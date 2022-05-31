@@ -11,32 +11,31 @@ import dao.SellerDAO;
 import vo.MemberBean;
 import vo.SellerProductDTO;
 
-public class SellerUpdateService {
+public class SellerBuyInsert {
 
 	public SellerProductDTO getShoping(int sell_num) {
 		System.out.println("SellerUpdateService - SellerProductDTO()");
 		
-		// 1. 리턴할 데이터를 저장할 변수 선언
+		
 		SellerProductDTO shoping = null;
 		
-		// 2. JdbcUtil 클래스로부터 Connection Pool 에 저장된 Connection 객체 가져오기 - 공통
-		Connection con = getConnection(); // static import 적용되어 있을 경우
 		
-		// 3. BoardDAO 클래스로부터 BoardDAO 인스턴스 가져오기 - 공통
+		Connection con = getConnection();
+		
+		
 		SellerDAO sellerDAO = SellerDAO.getInstance();
 		
 
-		// 4. BoardDAO 객체에 Connection 객체 전달하기 - 공통
+		
 		sellerDAO.setConnection(con);
 		
-		// 5. BoardDAO 객체의 selectArticle() 메서드를 호출하여 게시물 상세 정보 조회
-		// => 파라미터 : board_num    리턴타입 : BoardDTO(article)
+		
 		shoping = sellerDAO.selectArticle(sell_num);    //SellerDAO 에서   <190행selectArticle(int sell_num)매서드 활용>
 		
-		// 6. JdbcUtil 클래스로부터 가져온 Connection 객체를 반환 - 공통
+		
 		close(con);
 		
-		// 7. 조회 결과 리턴
+		
 		return shoping;
 	
 	}
@@ -45,17 +44,16 @@ public class SellerUpdateService {
 		System.out.println("SellerUpdateService - updateMemberInfo()");
 		
 		int updateCount=0;
-		Connection con = getConnection(); // static import 적용되어 있을 경우
+		Connection con = getConnection(); 
 		
-		// 3. BoardDAO 클래스로부터 BoardDAO 인스턴스 가져오기 - 공통
+		
 		SellerDAO sellerDAO = SellerDAO.getInstance();
 		
 
-		// 4. BoardDAO 객체에 Connection 객체 전달하기 - 공통
+		
 		sellerDAO.setConnection(con);
 		
-		// 5. BoardDAO 객체의 selectArticle() 메서드를 호출하여 게시물 상세 정보 조회
-		// => 파라미터 : board_num    리턴타입 : BoardDTO(article)
+	
 		updateCount = sellerDAO.updateMemberInfo(memberBeanIm);   
 	
 		 System.out.println("dao 작업 수행 후 service로 리턴 ->(insertUpdate:)"+updateCount);
@@ -69,8 +67,6 @@ public class SellerUpdateService {
 		}
 		
 	
-
-		// 6. JdbcUtil 클래스로부터 가져온 Connection 객체를 반환 - 공통
 		close(con);
 		
 		
@@ -83,20 +79,19 @@ public class SellerUpdateService {
 		
 		
 		
-		Connection con = getConnection(); // static import 적용되어 있을 경우
+		Connection con = getConnection(); 
 		
-		// 3. BoardDAO 클래스로부터 BoardDAO 인스턴스 가져오기 - 공통
+		
 		SellerDAO sellerDAO = SellerDAO.getInstance();
 		
 
-		// 4. BoardDAO 객체에 Connection 객체 전달하기 - 공통
+		
 		sellerDAO.setConnection(con);
 		
-		// 5. BoardDAO 객체의 selectArticle() 메서드를 호출하여 게시물 상세 정보 조회
-		// => 파라미터 : board_num    리턴타입 : BoardDTO(article)
+		System.out.println("service 에서"+sellerDTO);
 		insertCount = sellerDAO.insertMemberInfo(sellerDTO);   
 	
-		 System.out.println("(insertUpdate:)"+insertCount);
+		
 		
 		 if(insertCount>0) {  //update(dao) 작업 성공여부 결과
 			commit(con); 
@@ -126,6 +121,22 @@ public class SellerUpdateService {
 		
 		
 		return bean;
+	}
+
+	public void sellUpdate(int sell_num) { //받을값 없음  ->구매시 sell_list ->status 값 판매중 -> 판매완료로 변경
+		
+		Connection con = getConnection();
+		
+		SellerDAO sellerDAO = SellerDAO.getInstance();
+
+		sellerDAO.setConnection(con);
+		
+		
+		 sellerDAO.sellUpdate(sell_num);    //sell_num을 이용하여 update해주기 sell_list테이블의 sell_list_status: 판매중 ->판매완료
+	
+		close(con);
+		
+		
 	}
 
 }

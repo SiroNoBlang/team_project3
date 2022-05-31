@@ -4,7 +4,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import svc.SellerShopingService;
-import svc.SellerUpdateService;
+import svc.SellerBuyInsert;
 import vo.ActionForward;
 import vo.MemberBean;
 import vo.SellerProductDTO;
@@ -25,6 +25,7 @@ public class ShoppoingSucceedAction implements Action {
 		int sell_num = Integer.parseInt(request.getParameter("sell_num"));
 		int sell_price =Integer.parseInt(request.getParameter("sell_price"));
 		
+		
 		String address1= request.getParameter("address1");	//구매자 정보
 		String postcode=request.getParameter("postcode");	//구매자 정보	
 		String address2 =request.getParameter("address2");	//구매자 정보
@@ -37,22 +38,21 @@ public class ShoppoingSucceedAction implements Action {
 		int member_info_detail_acc_money=Integer.parseInt(request.getParameter("member_info_detail_acc_money")) ;
 		
 	//	address1&postcode&address2&name&phone&name=4800
-		System.out.println("address1" +address1);
-		System.out.println("postcode" +postcode);
-		System.out.println("address2" +address2);
-		System.out.println("name" +name);
-		System.out.println("phone" +phone);
-		System.out.println("savePoint" +usePoint);          //원래 가격 -usePoint 해야됨.
-//		System.err.println("member_code:"+member_code);
-		System.out.println("member_info_detail_acc_money" +member_info_detail_acc_money);  //sell_price 값 += 추가해야됨.
+//		System.out.println("address1" +address1);
+//		System.out.println("postcode" +postcode);
+//		System.out.println("address2" +address2);
+//		System.out.println("name" +name);
+//		System.out.println("phone" +phone);
+//		System.out.println("savePoint" +usePoint);          //원래 가격 -usePoint 해야됨.
+////		System.err.println("member_code:"+member_code);
+//		System.out.println("member_info_detail_acc_money" +member_info_detail_acc_money);  //sell_price 값 += 추가해야됨.
 		
 		
 		MemberBean memberBean = new MemberBean(); //값 담기(구매 회원 정보)	
 		//articleList 
 		
-		SellerUpdateService service = new SellerUpdateService();
-		SellerProductDTO sellerDTO = new SellerProductDTO();    //구매자가 구매한 판매제품 상세하게 뿌리기 (jsp file 로 가져감)
-		
+		SellerBuyInsert service = new SellerBuyInsert();
+	
 		memberBean.setMember_info_address(address1);	//업데이트 할 컬럼들
 		memberBean.setMember_info_phone(phone);
 		memberBean.setMember_info_post_code(postcode);
@@ -63,22 +63,26 @@ public class ShoppoingSucceedAction implements Action {
 		memberBean.setMember_code(member_code);
 		//------------------------------------ Buy_list
 		
-		
+		SellerProductDTO sellerDTO = new SellerProductDTO();    //구매자가 구매한 판매제품 상세하게 뿌리기 (jsp file 로 가져감)
 		sellerDTO.setBuy_member_code(member_code);
 		sellerDTO.setBuy_item_num(sell_num);
 		sellerDTO.setBuy_price(sell_price);
 		int addpoint= (int) (sell_price*0.05);// point => 판매가격의 0.05퍼 추가
 		sellerDTO.setBuy_point(addpoint);
-		
+		System.out.println("action에서"+sellerDTO);
 		//------------------------------------
+		
 		sellerDTO = service.getShoping(sell_num);  		//판매제품 가져오는 곳
 		updateCount = service.updateMemberInfo(memberBean);  //멤버정보값들 update 해주는 곳 
-		
 		insertCount = service.insertBuyMember(sellerDTO);		//구매회원정보 insert 해줄 곳
-		MemberBean memberBean1 = new MemberBean();
-		System.out.println("값 가져오기");
-		memberBean1 = service.getArticleMemberInfo(member_code);
+		service.sellUpdate(sell_num);   //받을값 없음  ->구매시 sell_list ->status 값 판매중 -> 판매완료로 변경
 		
+		MemberBean memberBean1 = new MemberBean();
+		
+		
+		memberBean1 = service.getArticleMemberInfo(member_code);
+//		System.out.println("ㅂㅈㄷㄱㄱㅈㄷ"+memberBean1);
+//		System.out.println("ㅂㅈㄷㄱㄱㅈㄷ"+sellerDTO);
 		request.setAttribute("memberBean", memberBean1);    //업데이트한 구매자 데이터
 		request.setAttribute("sellerDTO", sellerDTO);		//판매제품 데이터
 		

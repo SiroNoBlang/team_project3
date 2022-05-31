@@ -1,19 +1,21 @@
+<%@page import="vo.SellerProductDTO"%>
 <%@page import="vo.MemberBean"%>
 <%@page import="vo.SellerDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%	
 
-// String member_nickname =(String)session.getAttribute("sNickname");
-// String sell_member_code =(String)session.getAttribute("sCode");
+String member_nickname =(String)session.getAttribute("sNickname");
+String sell_member_code =(String)session.getAttribute("sCode");
 
-// SellerDTO sellerDTO = (SellerDTO)request.getAttribute("sellerDTO");
-// MemberBean memberbean = (MemberBean)request.getAttribute("memberBean");
-// int charge = sellerDTO.getSell_price() /10; //검수비 판매가격 /10
-// int price = sellerDTO.getSell_price()+charge+3000;     //최종 판매가격
-// // int point1 = memberbean.getMember_info_detail_point();
+
+SellerProductDTO sellerDTO = (SellerProductDTO)request.getAttribute("sellerDTO");
+MemberBean memberbean = (MemberBean)request.getAttribute("memberBean");
+int charge = sellerDTO.getSell_price() /10; //검수비 판매가격 /10
+int price = sellerDTO.getSell_price()+charge+3000;     //최종 판매가격
+// int point1 = memberbean.getMember_info_detail_point();
 %>
-   
+ 
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -92,24 +94,24 @@
 					<div class="menu-desktop">
 						<ul class="main-menu">
 							<li>
-								<a href="index.html">Home</a>
-								<ul class="sub-menu">
-									<li><a href="index.html">Homepage 1</a></li>
-									<li><a href="home-02.html">Homepage 2</a></li>
-									<li><a href="home-03.html">Homepage 3</a></li>
-								</ul>
+								<a href="MainPage.pr">Home</a>
+<!-- 								<ul class="sub-menu"> -->
+<!-- 									<li><a href="index.html">Homepage 1</a></li> -->
+<!-- 									<li><a href="home-02.html">Homepage 2</a></li> -->
+<!-- 									<li><a href="home-03.html">Homepage 3</a></li> -->
+<!-- 								</ul> -->
 							</li>
 
 							<li>
-								<a href="product.html">Shop</a>
+								<a href="Product.pr">Shop</a>
 							</li>
 
-							<li class="label1" data-label1="hot">
-								<a href="shoping-cart.html">Features</a>
-							</li>
+<!-- 							<li class="label1" data-label1="hot"> -->
+<!-- 								<a href="shoping-cart.html">Features</a> -->
+<!-- 							</li> -->
 
 							<li>
-								<a href="blog.html">Blog</a>
+								<a href="SellForm.pr">Sell</a>
 							</li>
 
 							<li>
@@ -359,36 +361,71 @@
 				<div class="col-sm-10 col-lg-7 col-xl-5 m-lr-auto m-b-50">
 					<div class="bor10 p-lr-40 p-t-30 p-b-40 m-l-63 m-r-40 m-lr-0-xl p-lr-15-sm">
 						<h5 class="mtext-109 cl2 p-b-30">
-							주문 정보
+							제품정보
 						</h5>
 						<div class="flex-w flex-t bor12 p-b-13">
 							<div class="size-208">
 								<span class="stext-110 cl2">
-									제품 가격
+									<img src="./Upload/sell_img/<%=sellerDTO.getSell_img_name() %>" width="150" height="150">	
+						
 								</span>
 							</div>
 							<div class="size-209">
-								<span class="mtext-110 cl2">
-								qqqqqqq
-								</span>
+								
+								title:<%=sellerDTO.getSell_title() %><br>
+								brand:<%=sellerDTO.getSell_brand() %><br>
+								size:<%=sellerDTO.getSell_size() %><br>
+								price:<%=sellerDTO.getSell_price() %><br>
+							
 							</div>
+							
 						</div>
 						<div class="flex-w flex-t bor12 p-t-15 p-b-30">
+						<h5 class="mtext-109 cl2 p-b-30">
+							배송정보
+						</h5>
 							<div class="size-208 w-full-ssm">
 								<span class="stext-110 cl2">
-								qqqqqqq
 								</span><br>
 								<span class="stext-110 cl2">
-									v
+									address:<%=memberbean.getMember_info_address() %>
 								</span><br>
 								<span class="stext-110 cl2">
-									qqqqqqq
+									address:<%=memberbean.getMember_info_address_detail() %>	
+								</span><br>
+								<span class="stext-110 cl2">
+									post:<%=memberbean.getMember_info_post_code() %>	
 								</span><br> 
 								<span class="stext-190 cl2">
-<!-- 									포인트 - <span id="point" style="border: none; background: transparent;"></span> -->
-									qqqqqqq
+ 									name:<%=memberbean.getMember_info_name() %>
+								</span><br>	
+								<span class="stext-190 cl2">
+ 									phone:<%=memberbean.getMember_info_phone() %>
+								</span><br>	
+  					   		</div>
+							<div class="flex-w flex-t bor12 p-t-15 p-b-30">
+						<h5 class="mtext-109 cl2 p-b-30">
+							구매정보
+						</h5>
+							<div class="size-208 w-full-ssm">
+								<span class="stext-110 cl2">
 								</span><br>
-						   </div>
+								<span class="stext-110 cl2">
+									point:<%=memberbean.getMember_info_detail_point() %>
+								</span><br>
+								<span class="stext-110 cl2">
+									acc_money:<%=memberbean.getMember_info_detail_acc_money()%>	
+								</span><br>
+								<span class="stext-110 cl2">
+									회원등급 :<%=memberbean.getMember_info_post_code() %>	
+								</span><br> 
+								<span class="stext-190 cl2">
+ 									최종금액:<%=price%>
+								</span><br>	
+								
+<!--  									<P>우리 COZA_STORE에서는 택배비+검수 수수료 합산하여 결제 됨을 알려드립니다.</P> -->
+									
+  					   		</div>
 							
 							<div class="size-209 p-r-18 p-r-0-sm w-full-ssm">
 								<p class="stext-111 cl6 p-t-2"> </p>
@@ -396,7 +433,7 @@
 							
 								<div class="p-t-15">
 									<span class="stext-112 cl8">
-										qqqqqqq
+										
 									</span>
 
 									
@@ -407,17 +444,18 @@
 						<div class="flex-w flex-t p-t-27 p-b-33">
 							<div class="size-208">
 								<span class="mtext-101 cl2">
-									qqqqqqqqqqqqqqqqq
+									
 								</span>
 							</div>
 
 							<div class="size-209 p-t-1">
 								<span class="mtext-110 cl2">
-									qqqqqqqqqqqqqqqqq
+									
 								</span>
 							</div>
 						</div>
 					  <input type="button" value="홈으로" onclick="location.href='MainPage.pr'"  class="flex-c-m stext-101 cl0 size-116 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer"> 
+					 
 					  <input type="button" value="마이페이지" onclick="location.href='MainPage.pr'"  class="flex-c-m stext-101 cl0 size-116 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer"> 
 					</div>
 				</div>
