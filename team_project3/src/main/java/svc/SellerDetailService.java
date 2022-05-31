@@ -63,11 +63,11 @@ public class SellerDetailService {
 		
 	}
 	
-	public ArrayList<SellerDTO> getProductRe(String sell_brand,int sell_num) {
-		System.out.println("SellerProductReService - get()");
+	public ArrayList<SellerProductDTO> getProductRe(String sell_brand,int sell_num) {
+		System.out.println("SellerProductReService - getProductRe()");
 		
 		// 1. 리턴할 데이터를 저장할 변수 선언
-		ArrayList<SellerDTO> ProductRe = null;
+		ArrayList<SellerProductDTO> ProductRe = null;
 		
 		// 2. JdbcUtil 클래스로부터 Connection Pool 에 저장된 Connection 객체 가져오기 - 공통
 		Connection con = getConnection(); // static import 적용되어 있을 경우
@@ -92,7 +92,7 @@ public class SellerDetailService {
 	}
 
 	public ArrayList<SellerimgDTO> getimgArticle(int sell_num) {
-System.out.println("SellerProductReService - get()");
+System.out.println("SellerProducimgService - getimgArticle()");
 		
 		// 1. 리턴할 데이터를 저장할 변수 선언
 		ArrayList<SellerimgDTO> Sellerdetailimg = null;

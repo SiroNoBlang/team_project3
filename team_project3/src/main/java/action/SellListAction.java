@@ -22,8 +22,8 @@ public class SellListAction implements Action {
 		System.out.println("액션에서 멤버 코드" + member_code);
 		// 페이징 처리를 위한 변수 선언
 		int pageNum = 1; //현재 페이지 번호
-		int listLimit = 10; //한 페이지 당 표시할 게시물 목록 갯수
-		int pageLimit = 10;
+		int listLimit = 12; //한 페이지 당 표시할 게시물 목록 갯수
+		int pageLimit = 12;
 		
 		if(request.getParameter("page") != null) {
 			pageNum = Integer.parseInt(request.getParameter("page"));

@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import action.Action;
+import action.ProductCategoryProAction;
 import action.ProductDetailProAction;
 import action.ProductListProAction;
 import action.ProductSearchProAction;
@@ -52,9 +53,17 @@ public class ProductFrontController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-
+			
 		} else if (command.equals("/Product.pr")) {// 상품 갯수 처리를 위한 페이징처리
 			action = new ProductListProAction();
+
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		} else if (command.equals("/ProductCategoryPro.pr")) { // 상품 카테고리 분류 처리
+			action = new ProductCategoryProAction();
 
 			try {
 				forward = action.execute(request, response);

@@ -11,7 +11,7 @@ String member_code =(String)session.getAttribute("sCode");
 SellerDTO seller = new SellerDTO();
 SellerProductDTO sellerdto = (SellerProductDTO)request.getAttribute("sellerdto");
 PageInfo pageInfo = (PageInfo)request.getAttribute("pageInfo");
-ArrayList<SellerDTO> Relationdto = (ArrayList<SellerDTO>)request.getAttribute("Relationdto");
+ArrayList<SellerProductDTO> Relationdto = (ArrayList<SellerProductDTO>)request.getAttribute("Relationdto");
 ArrayList<SellerimgDTO> Sellerdetailimg = (ArrayList<SellerimgDTO>)request.getAttribute("Sellerdetailimg");
 
 // int pageNum = pageInfo.getPageNum();     //페이지를 안넘겨줌 처리해야됨.
@@ -374,7 +374,7 @@ ArrayList<SellerimgDTO> Sellerdetailimg = (ArrayList<SellerimgDTO>)request.getAt
 <form border="1" action="ShopingPro.pr">
 <input type="hidden" >
 <%-- 판매번호:<%=sellerdto.getSell_list_num() %> --%>
-	<section class="sec-product-detail bg0 p-t-65 p-b-60">
+	
 		<div class="container">
 			<div class="row">
 				<div class="col-md-6 col-lg-7 p-b-30">
@@ -385,6 +385,7 @@ ArrayList<SellerimgDTO> Sellerdetailimg = (ArrayList<SellerimgDTO>)request.getAt
 									<img src="./Upload/sell_img/<%=sellerdto.getSell_img_real_name() %>" alt="IMG-PRODUCT">
 							</div>
 						</div>
+						
 					</div>
 				</div>
 					
@@ -411,51 +412,8 @@ ArrayList<SellerimgDTO> Sellerdetailimg = (ArrayList<SellerimgDTO>)request.getAt
 									</td></tr>
 										
 									 </table>
-									 
-									
-								
-<!-- 						<div class="p-t-33"> -->
-<!-- 							<div class="flex-w flex-r-m p-b-10"> -->
-<!-- 								<div class="size-203 flex-c-m respon6"> -->
-<!-- 									Size -->
-<!-- 								</div> -->
-
-<!-- 								<div class="size-204 respon6-next"> -->
-<!-- 									<div class="rs1-select2 bor8 bg0"> -->
-<!-- 										<select class="js-select2" name="time"> -->
-<!-- 											<option>Choose an option</option> -->
-<!-- 											<option>Size S</option> -->
-<!-- 											<option>Size M</option> -->
-<!-- 											<option>Size L</option> -->
-<!-- 											<option>Size XL</option> -->
-<!-- 										</select> -->
-<!-- 										<div class="dropDownSelect2"></div> -->
-<!-- 									</div> -->
-<!-- 								</div> -->
-<!-- 							</div> -->
-
-<!-- 							<div class="flex-w flex-r-m p-b-10"> -->
-<!-- 								<div class="size-203 flex-c-m respon6"> -->
-<!-- 									Color -->
-<!-- 								</div> -->
-
-<!-- 								<div class="size-204 respon6-next"> -->
-<!-- 									<div class="rs1-select2 bor8 bg0"> -->
-<!-- 										<select class="js-select2" name="time"> -->
-<!-- 											<option>Choose an option</option> -->
-<!-- 											<option>Red</option> -->
-<!-- 											<option>Blue</option> -->
-<!-- 											<option>White</option> -->
-<!-- 											<option>Grey</option> -->
-<!-- 										</select> -->
-<!-- 										<div class="dropDownSelect2"></div> -->
-<!-- 									</div> -->
-<!-- 								</div> -->
-<!-- 							</div> -->
-
-							
-
-</form>						
+	
+					</form>						
 						<div class="flex-w flex-m p-l-100 p-t-40 respon7">
 							<div class="flex-m bor9 p-r-10 m-r-11">
 								<a href="#" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 js-addwish-detail tooltip100" data-tooltip="Add to Wishlist">
@@ -483,38 +441,20 @@ ArrayList<SellerimgDTO> Sellerdetailimg = (ArrayList<SellerimgDTO>)request.getAt
 									 
 									<%  for(SellerimgDTO sellerimg : Sellerdetailimg) {%>
 									
-									 <td><img src="./Upload/sell_img/<%=sellerimg.getSell_img_real_name() %>" width="150" height="150">	&nbsp;</td>&nbsp;	
+									 <td><img src="./Upload/sell_img/<%=sellerimg.getSell_img_real_name() %>" width="150" height="150">	&nbsp;</td>
 									 <% } %>
 									 
 									 </tr>
 									 
 									 </table>
 					
-						
-				</div>
+					  			
+				
+					</div>
 									 
 			</div>
-			
-			<추천상품>
-			<div class="bor10 m-t-50 p-t-43 p-b-40"><!-- 관련 상품 뿌리기 -->
-				
-					<% for(SellerDTO dto :Relationdto){ %>	
-				 <div style="  float:left;">
-
-<%-- 										<img src="./Upload/sell_img/<%=dto.getSell_img_real_name() %>" onclick="location.href='ProductDetailPro.pr?sell_list_num=<%=dto.getSell_list_num()%>&sell_brand=<%=dto.getSell_brand()%>'" > --%>
-										<div>[<%=dto.getSell_brand() %>]</div>
-										<div>[<%=dto.getSell_size() %>]</div>
-										<div>[<%=dto.getSell_price() %>]</div>		
-				</div>		
-						<%} %>
-			</div><!-- 관련 상품 뿌리기 -->
 		
-<!-- 		<table> -->
-<!--  		 <tr> -->
-<!--    			 <td></td><td></td><td></td> -->
-<!--   		<tr> -->
-<!-- 		</table> -->
-
+			</div>
 		<div class="bg6 flex-c-m flex-w size-302 m-t-73 p-tb-15">
 			<span class="stext-107 cl6 p-lr-25">
 				SKU: JAK-01
@@ -524,7 +464,7 @@ ArrayList<SellerimgDTO> Sellerdetailimg = (ArrayList<SellerimgDTO>)request.getAt
 				Categories: Jacket, Men
 			</span>
 		</div>
-	</section>
+	
 
 
 

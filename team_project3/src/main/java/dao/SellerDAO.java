@@ -273,31 +273,38 @@ public class SellerDAO {
 
 	}
 
-	public ArrayList<SellerDTO> selectProductRe(String sell_brand, int sell_num) {
-		ArrayList<SellerDTO> productarr = new ArrayList<SellerDTO>();
-		SellerDTO ProductRe = null;
+	public ArrayList<SellerProductDTO> selectProductRe(String sell_brand, int sell_num) {
+		ArrayList<SellerProductDTO> productarr = new ArrayList<SellerProductDTO>();
+		SellerProductDTO ProductRe = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
+		System.out.println(sell_brand);
+		System.out.println(sell_num);
 
 		try {
-			String sql = "SELECT a.sell_num, a.sell_size ,  a.sell_title, a.sell_brand, a.sell_price, b.sell_img_name, b.sell_img_real_name "
-					+ "FROM sell AS a JOIN sell_img AS b ON a.sell_num = b.sell_img_num  WHERE sell_num != " + sell_num
+			String sql = "SELECT a.sell_num, a.sell_size , a.sell_title, a.sell_brand, a.sell_price, b.sell_img_name, b.sell_img_real_name "
+					+ "FROM sell AS a JOIN sell_img AS b ON a.sell_num = b.sell_img_real_num WHERE sell_num !=? "
 					+ " AND sell_brand Like '%" + sell_brand + "%' ";
 
 			pstmt = con.prepareStatement(sql);
-//         pstmt.setString(1, sell_brand);
+			pstmt.setInt(1, sell_num);
 			rs = pstmt.executeQuery();
-
+			
 			while (rs.next()) {
-				ProductRe = new SellerDTO();
+				ProductRe = new SellerProductDTO();
 				ProductRe.setSell_num(rs.getInt("sell_num"));
 				ProductRe.setSell_size(rs.getString("sell_size"));
 				ProductRe.setSell_title(rs.getString("sell_title"));
 				ProductRe.setSell_brand(rs.getString("sell_brand"));
 				ProductRe.setSell_price(rs.getInt("sell_price"));
-
+				ProductRe.setSell_img_name(rs.getString("sell_img_name"));
+				ProductRe.setSell_img_real_name(rs.getString("sell_img_real_name"));
+				
+				
 				productarr.add(ProductRe);
+				
 			}
+			System.out.println(productarr);
 
 		} catch (SQLException e) {
 			System.out.println("SQL 구문 오류 발생! - selectProductRe()");

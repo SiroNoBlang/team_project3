@@ -30,7 +30,7 @@ public class ProductDetailProAction implements Action {
 		
 		sellerdto = service.getArticle(sell_num);   //상세정보를 위한 sellerdto 객체 꺼내오기     <request.getparameter sell_list_num 꺼내지는지 확인하기>
 		
-		ArrayList<SellerDTO> Relationdto = service.getProductRe(sell_brand,sell_num);
+		ArrayList<SellerProductDTO> Relationdto = service.getProductRe(sell_brand,sell_num);
 		ArrayList<SellerimgDTO>  Sellerdetailimg = service.getimgArticle(sell_num);
 		// 조회수 증가 작업 요청(단, 게시물 조회 성공 시에만 수행)
 		
