@@ -24,7 +24,7 @@ public class SellerDAO {
 		return instance;
 	};
 
-	static Connection con;
+	private Connection con;
 
 	public void setConnection(Connection con) {
 		this.con = con;
@@ -609,6 +609,32 @@ public class SellerDAO {
 				e.printStackTrace();
 			}
 			
+		}
+
+		public String getEmail(String code) {
+			String email = "";
+			
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			
+			try {
+				String sql ="SELECT member_email FROM member WHERE member_code=?";
+				pstmt = con.prepareStatement(sql);
+				pstmt.setString(1, code);
+				
+				rs = pstmt.executeQuery();
+				
+				if(rs.next()) {
+					email = rs.getString(1);
+				}
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				close(pstmt);
+			}
+			
+			return email;
 		} 
 		
 		
