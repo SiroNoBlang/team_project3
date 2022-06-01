@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import action.Action;
+import action.ContactAction;
 import action.ProductCategoryProAction;
 import action.ProductDetailProAction;
 import action.ProductListProAction;
@@ -151,9 +152,13 @@ public class ProductFrontController extends HttpServlet {
 		
 		} else if (command.equals("/Contact.pr")) {// 쇼핑 결제 완료 페이지
 
-			forward = new ActionForward();
-			forward.setPath("MainPage/community/contact.jsp");
-			forward.setRedirect(false);
+			action = new ContactAction();
+
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		
 		} 
 
