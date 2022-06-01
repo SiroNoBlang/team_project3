@@ -12,6 +12,11 @@ public class SendAdminAction implements Action {
 		System.out.println("SendAdmin.pr");
 		ActionForward forward = null;
 		
+		String email = request.getParameter("email");
+		String msg = request.getParameter("msg");
+		
+		
+		
 		return forward;
 	}
 

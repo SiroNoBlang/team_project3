@@ -17,6 +17,7 @@ public class ContactAction implements Action {
 		ContactService service = new ContactService();
 		String email = service.getContactEmail(code);
 		
+		request.setAttribute("code", code);
 		request.setAttribute("email", email);
 		forward = new ActionForward("MainPage/community/contact.jsp", false);
 		
