@@ -1989,6 +1989,8 @@ public class AdminDAO {
 			
 			rs = pstmt.executeQuery();
 			
+			salesChartList = new ArrayList<SalesList>();
+			
 			while(rs.next()) {
 				int i = 0;
 				SalesList salesList = new SalesList();
@@ -1998,8 +2000,7 @@ public class AdminDAO {
 				salesList.setBuy_total_money(rs.getInt("buy_price"));
 				salesList.setBuy_fee(rs.getInt("buy_fee"));
 				i++;
-				System.out.println(salesList);
-//				salesChartList.add(salesList);
+				salesChartList.add(salesList);
 			}
 			System.out.println(salesChartList);
 			

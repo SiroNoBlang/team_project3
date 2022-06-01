@@ -13,6 +13,7 @@ public class SalesChartAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		System.out.println("SalesChartAction");
 		ActionForward forward = null;
 		
 		String[] month = {"01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"};
