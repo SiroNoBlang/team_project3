@@ -40,10 +40,25 @@
 				data : {
 					labels : [ // Date Objects
 					'data1', 'data2', 'data3', 'data4', 'data5', 'data6', 'data7' ],
-				 //  01 02 03 04  05  06 ... 12 
+				 //  01 02 03 04  05  06 ... 12 month
 					datasets : [
 							{
 								label : 'My First dataset',
+								// sell_total_money
+								backgroundColor : 'rgba(75, 192, 192, 0.1)',
+								borderColor : 'rgba(75, 192, 192, 0.1)',
+								fill : false,
+								data : [ Math.floor(Math.random() * 50),
+										Math.floor(Math.random() * 50),
+										Math.floor(Math.random() * 50),
+										Math.floor(Math.random() * 50),
+										Math.floor(Math.random() * 50),
+										Math.floor(Math.random() * 50),
+										Math.floor(Math.random() * 50) ],
+							},
+							{
+								label : 'My Second dataset',
+								// sell_fee
 								backgroundColor : 'rgba(75, 192, 192, 1)',
 								borderColor : 'rgba(75, 192, 192, 1)',
 								fill : false,
@@ -57,6 +72,21 @@
 							},
 							{
 								label : 'My Second dataset',
+								// buy_total_money
+								backgroundColor : 'rgba(255, 99, 132, 0.1)',
+								borderColor : 'rgba(255, 99, 132, 0.1)',
+								fill : false,
+								data : [ Math.floor(Math.random() * 50),
+										Math.floor(Math.random() * 50),
+										Math.floor(Math.random() * 50),
+										Math.floor(Math.random() * 50),
+										Math.floor(Math.random() * 50),
+										Math.floor(Math.random() * 50),
+										Math.floor(Math.random() * 50) ],
+							},
+							{
+								label : 'My Second dataset',
+								// buy_fee
 								backgroundColor : 'rgba(255, 99, 132, 1)',
 								borderColor : 'rgba(255, 99, 132, 1)',
 								fill : false,
