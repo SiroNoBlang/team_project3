@@ -15,6 +15,7 @@ import action.ProductCategoryProAction;
 import action.ProductDetailProAction;
 import action.ProductListProAction;
 import action.ProductSearchProAction;
+import action.SendAdminAction;
 import action.ShopingProAction;
 import action.ShoppoingSucceedAction;
 import action.sellWriteProAction;
@@ -153,6 +154,16 @@ public class ProductFrontController extends HttpServlet {
 		} else if (command.equals("/Contact.pr")) {// 쇼핑 결제 완료 페이지
 
 			action = new ContactAction();
+
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		
+		} else if (command.equals("/SendAdmin.pr")) {// 쇼핑 결제 완료 페이지
+
+			action = new SendAdminAction();
 
 			try {
 				forward = action.execute(request, response);
