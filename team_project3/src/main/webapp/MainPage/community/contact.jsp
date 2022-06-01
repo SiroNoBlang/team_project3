@@ -365,7 +365,20 @@
 
 				<div class="size-210 bor10 flex-w flex-col-m p-lr-93 p-tb-30 p-lr-15-lg w-full-md">
 					<div class="flex-w w-full p-b-42">
+						<div id="daumRoughmapContainer1649291103479" class="root_daum_roughmap root_daum_roughmap_landing"></div>
 						<span class="fs-18 cl5 txt-center size-211">
+							<!-- 위치 정보를 지도로 가져와서 입력해둔 코드 -->
+							
+							<script charset="UTF-8" class="daum_roughmap_loader_script" src="https://ssl.daumcdn.net/dmaps/map_js_init/roughmapLoader.js"></script>
+							
+							<script charset="UTF-8">
+								new daum.roughmap.Lander({
+									"timestamp" : "1649291103479",
+									"key" : "29r27",
+									"mapWidth" : "650",
+									"mapHeight" : "240"
+								}).render();
+							</script>
 							<span class="lnr lnr-map-marker"></span>
 						</span>
 
@@ -375,7 +388,7 @@
 							</span>
 
 							<p class="stext-115 cl6 size-213 p-t-18">
-								Coza Store Center 8th floor, 379 Hudson St, New York, NY 10018 US
+								삼한 골든 게이트 빌딩 7층 - 아이티윌 부산교육센터
 							</p>
 						</div>
 					</div>
@@ -391,7 +404,7 @@
 							</span>
 
 							<p class="stext-115 cl1 size-213 p-t-18">
-								+1 800 1236879
+								+82 0101236879
 							</p>
 						</div>
 					</div>
@@ -407,7 +420,7 @@
 							</span>
 
 							<p class="stext-115 cl1 size-213 p-t-18">
-								contact@example.com
+								contact@admin.com
 							</p>
 						</div>
 					</div>
@@ -415,14 +428,6 @@
 			</div>
 		</div>
 	</section>	
-	
-	
-	<!-- Map -->
-	<div class="map">
-		<div class="size-303" id="google_map" data-map-x="40.691446" data-map-y="-73.886787" data-pin="MainPage/images/icons/pin.png" data-scrollwhell="0" data-draggable="1" data-zoom="11"></div>
-	</div>
-
-
 
 	<!-- Footer -->
 	<footer class="bg3 p-t-75 p-b-32">
