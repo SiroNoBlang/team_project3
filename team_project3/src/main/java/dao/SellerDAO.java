@@ -611,21 +611,24 @@ public class SellerDAO {
 			
 		}
 
-		public String getEmail(String code) {
-			String email = "";
+		public MemberBean getEmail(String code) {
+			MemberBean member = null;
 			
 			PreparedStatement pstmt = null;
 			ResultSet rs = null;
 			
 			try {
-				String sql ="SELECT member_email FROM member WHERE member_code=?";
+				String sql ="SELECT member_code, member_email, member_nickname FROM member WHERE member_code=?";
 				pstmt = con.prepareStatement(sql);
 				pstmt.setString(1, code);
 				
 				rs = pstmt.executeQuery();
 				
 				if(rs.next()) {
-					email = rs.getString(1);
+					member = new MemberBean();
+					member.setMember_code(rs.getString(1));
+					member.setMember_email(rs.getString(2));
+					member.setMember_nickname(rs.getString(3));
 				}
 				
 			} catch (SQLException e) {
@@ -634,7 +637,7 @@ public class SellerDAO {
 				close(pstmt);
 			}
 			
-			return email;
+			return member;
 		} 
 		
 		

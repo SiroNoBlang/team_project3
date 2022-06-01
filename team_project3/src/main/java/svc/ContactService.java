@@ -5,11 +5,12 @@ import static db.JdbcUtil.*;
 import java.sql.Connection;
 
 import dao.SellerDAO;
+import vo.MemberBean;
 
 public class ContactService {
 
-	public String getContactEmail(String code) {
-		String email = "";
+	public MemberBean getContactEmail(String code) {
+		MemberBean member = null;
 		
 		Connection con = getConnection();
 		
@@ -17,11 +18,11 @@ public class ContactService {
 		
 		sellerDAO.setConnection(con);
 		
-		email = sellerDAO.getEmail(code);
+		member = sellerDAO.getEmail(code);
 		
 		close(con);
 		
-		return email;
+		return member;
 	}
 
 }

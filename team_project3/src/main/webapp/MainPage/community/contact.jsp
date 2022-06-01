@@ -346,9 +346,10 @@
 						<h4 class="mtext-105 cl2 txt-center p-b-30">
 							Send Us A Message
 						</h4>
-
+						<input type="hidden" name="member_code" value="${member.member_code }">
+						<input type="hidden" name="member_nickname" value="${member.member_nickname }">
 						<div class="bor8 m-b-20 how-pos4-parent">
-							<input class="stext-111 cl2 plh3 size-116 p-l-62 p-r-30" type="text" name="email" placeholder="Your Email Address">
+							<input class="stext-111 cl2 plh3 size-116 p-l-62 p-r-30" type="text" name="email" value="${member.member_email }">
 							<img class="how-pos4 pointer-none" src="MainPage/images/icons/icon-email.png" alt="ICON">
 						</div>
 

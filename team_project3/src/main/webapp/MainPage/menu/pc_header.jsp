@@ -1,7 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-	
-	
 			<div class="wrap-menu-desktop">
 				<nav class="limiter-menu-desktop p-l-45">
 					
@@ -37,7 +35,7 @@
 							</li>
 
 							<li>
-								<a href="Contact.pr">Contact</a>
+								<a href="Contact.pr?member_code=${sCode }">Contact</a>
 							</li>
 						</ul>
 					</div>	
