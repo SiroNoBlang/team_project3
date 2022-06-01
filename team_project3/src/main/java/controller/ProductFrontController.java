@@ -143,10 +143,16 @@ public class ProductFrontController extends HttpServlet {
 				e.printStackTrace();
 			}
 					
-		}else if (command.equals("/SucceedProduct.pr")) {// 쇼핑 결제 완료 페이지
+		} else if (command.equals("/SucceedProduct.pr")) {// 쇼핑 결제 완료 페이지
 
 			forward = new ActionForward();
 			forward.setPath("MainPage/sell/succeedProduct.jsp");
+			forward.setRedirect(false);
+		
+		} else if (command.equals("/Contact.pr")) {// 쇼핑 결제 완료 페이지
+
+			forward = new ActionForward();
+			forward.setPath("MainPage/community/contact.jsp");
 			forward.setRedirect(false);
 		
 		} 

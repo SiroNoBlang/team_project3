@@ -97,7 +97,7 @@
 							</li>
 							
 							<li>
-								<a href="contact.html">Contact</a>
+								<a href="Contact.pr">Contact</a>
 							</li>
 						</ul>
 					</div>	
