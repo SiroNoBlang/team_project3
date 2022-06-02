@@ -6,6 +6,7 @@ public class SalesList {
 	private int sell_fee;
 	private int buy_total_money;
 	private int buy_fee;
+	private int net_income;
 	
 	public String getMonth() {
 		return month;
@@ -37,10 +38,18 @@ public class SalesList {
 	public void setBuy_fee(int buy_fee) {
 		this.buy_fee = buy_fee;
 	}
+	public int getNet_income() {
+		return net_income;
+	}
+	public void setNet_income(int net_income) {
+		this.net_income = net_income;
+	}
 	@Override
 	public String toString() {
 		return "SalesList [month=" + month + ", sell_total_money=" + sell_total_money + ", sell_fee=" + sell_fee
-				+ ", buy_total_money=" + buy_total_money + ", buy_fee=" + buy_fee + "]";
+				+ ", buy_total_money=" + buy_total_money + ", buy_fee=" + buy_fee + ", net_income=" + net_income + "]";
 	}
+	
+	
 	
 }

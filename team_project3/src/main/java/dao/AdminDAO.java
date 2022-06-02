@@ -1790,7 +1790,7 @@ public class AdminDAO {
 		ResultSet rs = null;
 		
 		try {
-			String sql = "SELECT sell_price, sell_fee, buy_price, buy_fee"
+			String sql = "SELECT sell_price, sell_fee, buy_price, buy_fee, ROUND((sell_fee + buy_fee)*3/5) AS net_income"
 					+ " FROM ("
 					+ "	SELECT IFNULL(SUM(sell_price)*10, 0) AS sell_price"
 					+ ", IFNULL(ROUND((SUM(sell_price)*10)*(2/10)), 0) AS sell_fee"
@@ -1991,18 +1991,18 @@ public class AdminDAO {
 			
 			salesChartList = new ArrayList<SalesList>();
 			
+			int i = 0;
 			while(rs.next()) {
-				int i = 0;
 				SalesList salesList = new SalesList();
 				salesList.setMonth(month[i]);
 				salesList.setSell_total_money(rs.getInt("sell_price"));
 				salesList.setSell_fee(rs.getInt("sell_fee"));
 				salesList.setBuy_total_money(rs.getInt("buy_price"));
 				salesList.setBuy_fee(rs.getInt("buy_fee"));
+				salesList.setNet_income(rs.getInt("net_income"));
 				i++;
 				salesChartList.add(salesList);
 			}
-			System.out.println(salesChartList);
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
