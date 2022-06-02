@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 					
 <!-- Logo desktop -->		
-<a href="#" class="logo">
+<a href="MainPage.ma" class="logo">
 	<img src="MainPage//images/icons/logo-01.png" alt="IMG-LOGO">
 </a>
 
