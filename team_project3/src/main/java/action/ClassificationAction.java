@@ -34,7 +34,6 @@ public class ClassificationAction implements Action {
 		//게시물 목록 담아오기 
 		ArrayList<MemberBean> classificationList = service.getClassificationList(pageNum, listLimit, value);
 		
-		System.out.println(classificationList);
 		MemberBean bean = new MemberBean();
 		bean = service.getStatusCount();
 		

@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import svc.MemberDetailService;
+import svc.MemberManagementDetailService;
 import vo.ActionForward;
 import vo.MemberBean;
 
@@ -18,7 +19,7 @@ public class MemberDetailAction implements Action {
 		String member_code = request.getParameter("member_code");
 		String pageNum = request.getParameter("page");
 		
-		MemberDetailService service = new MemberDetailService();
+		MemberManagementDetailService service = new MemberManagementDetailService();
 		MemberBean memberDetail = service.getMemberDetail(member_code);
 		if(memberDetail != null) {
 			request.setAttribute("memberDetail", memberDetail);

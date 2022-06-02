@@ -20,8 +20,6 @@ public class SalesChartService {
 		
 		salesChartList = adminDAO.selectSalesChartList(month);
 		
-		System.out.println("SERVICE" + salesChartList);
-		
 		close(con);
 		
 		return salesChartList;

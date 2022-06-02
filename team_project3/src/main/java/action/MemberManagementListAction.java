@@ -17,8 +17,6 @@ public class MemberManagementListAction implements Action {
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		ActionForward forward = null;
 		
-		System.out.println(request.getParameter("value"));
-		
 		// 페이징 처리를 위한 변수 선언
 		int pageNum = 1; // 현재 페이지 번호
 		int listLimit = 10; // 한 페이지 당 표시할 게시물 목록 갯수

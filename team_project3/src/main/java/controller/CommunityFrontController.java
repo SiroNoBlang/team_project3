@@ -40,7 +40,6 @@ import action.QnaReplyProAction;
 import action.QnaSearchAction;
 import action.QnadListAction;
 import action.QnadWriteProAction;
-import action.SalesAction;
 import action.SalesChartAction;
 import action.UpdateProductConfirmAction;
 import action.ProductConfirmTypeAction;
@@ -265,14 +264,9 @@ public class CommunityFrontController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		} else if (command.equals("/Sales.co")) { // 매출관리
-			action = new SalesAction();
-			try {
-				forward = action.execute(request, response);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		} else if (command.equals("/SalesChart.co")) { // 매출관리를 위한 AJAX 작업
+		} else if (command.equals("/Sales.co")) { // 매출관리 페이지
+			forward =  new ActionForward("AdminPage/sales/sales_main.jsp", false);
+		} else if (command.equals("/SalesChart.co")) { // 매출그래프를 위한 AJAX 작업용
 			action = new SalesChartAction();
 			try {
 				forward = action.execute(request, response);

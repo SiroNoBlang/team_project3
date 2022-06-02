@@ -1221,7 +1221,7 @@ public class AdminDAO {
 		return isArticleWriter;
 	}
 
-	
+	// MemberManagement 페이지 리스트 출력
 	public ArrayList<MemberBean> selectMemberManagementList(int pageNum, int listLimit) {
 		ArrayList<MemberBean> memberManagementList = null;
 		
@@ -1263,6 +1263,7 @@ public class AdminDAO {
 		return memberManagementList;
 	}
 
+	// 정상, 정지, 탈퇴, 검색 기능으로 이동할 페이지 리스트 출력
 	public ArrayList<MemberBean> selectClassificationList(int pageNum, int listLimit, String value) {
 		ArrayList<MemberBean> classificationList = null;
 		
@@ -1373,7 +1374,6 @@ public class AdminDAO {
 					classificationList.add(bean);
 				}
 			}
-			System.out.println(classificationList);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -1783,6 +1783,7 @@ public class AdminDAO {
 		return listCount;
 	}
 
+	// 차트 그리기 위한 select 구문
 	public ArrayList<SalesList> selectSalesChartList(String[] month) {
 		ArrayList<SalesList> salesChartList = null;
 		
@@ -2012,6 +2013,140 @@ public class AdminDAO {
 		}
 		
 		return salesChartList;
+	}
+
+	// Member 상세정보를 위한 select 구문
+	public MemberBean getMemberArticle(String member_code) {
+		MemberBean memberDetail = null;
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			String sql = "SELECT a.member_code"
+					+ ", a.member_num"
+					+ ", a.member_nickname"
+					+ ", a.member_id"
+					+ ", a.member_email"
+					+ ", b.member_info_name"
+					+ ", b.member_info_gender"
+					+ ", b.member_info_phone"
+					+ ", b.member_info_age"
+					+ ", b.member_info_post_code"
+					+ ", b.member_info_address"
+					+ ", b.member_info_address_detail"
+					+ ", b.member_info_ship_post_code"
+					+ ", b.member_info_ship_address"
+					+ ", b.member_info_ship_address_detail"
+					+ ", b.member_info_mypage_img_name"
+					+ ", b.member_info_mypage_real_img_name"
+					+ ", c.member_info_detail_like_style"
+					+ ", c.member_info_detail_like_brand"
+					+ ", c.member_info_detail_like_category"
+					+ ", c.member_info_detail_point"
+					+ ", c.member_info_detail_acc_money"
+					+ ", d.member_service_log_status"
+					+ ", d.member_service_log_join_date"
+					+ ", d.member_service_log_passwd_change_date"
+					+ ", d.member_service_log_login_date"
+					+ ", d.member_service_log_order_count"
+					+ ", d.member_service_log_status_reason"
+					+ ", e.grade_name "
+					+ "FROM member AS a "
+					+ "JOIN member_info AS b "
+					+ "ON a.member_code = b.member_info_code "
+					+ "JOIN member_info_detail AS c "
+					+ "ON a.member_code = c.member_info_detail_code "
+					+ "JOIN member_service_log AS d "
+					+ "ON a.member_code = d.member_service_log_code "
+					+ "JOIN grade AS e "
+					+ "ON c.member_info_detail_acc_money BETWEEN e.lowest_acc_money AND e.highest_acc_money "
+					+ "WHERE a.member_code = ?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, member_code);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				memberDetail = new MemberBean();
+				memberDetail.setMember_code(rs.getString("a.member_code"));
+				memberDetail.setMember_num(rs.getString("a.member_num"));
+				memberDetail.setMember_nickname(rs.getString("a.member_nickname"));
+				memberDetail.setMember_id(rs.getString("a.member_id"));
+				memberDetail.setMember_email(rs.getString("a.member_email"));
+				memberDetail.setMember_info_name(rs.getString("b.member_info_name"));
+				memberDetail.setMember_info_gender(rs.getString("b.member_info_gender"));
+				memberDetail.setMember_info_phone(rs.getString("b.member_info_phone"));
+				memberDetail.setMember_info_age(rs.getString("b.member_info_age"));
+				memberDetail.setMember_info_post_code(rs.getString("b.member_info_post_code"));
+				memberDetail.setMember_info_address(rs.getString("b.member_info_address"));
+				memberDetail.setMember_info_address_detail(rs.getString("b.member_info_address_detail"));
+				memberDetail.setMember_info_ship_post_code(rs.getString("b.member_info_ship_post_code"));
+				memberDetail.setMember_info_ship_address(rs.getString("b.member_info_ship_address"));
+				memberDetail.setMember_info_ship_address_detail(rs.getString("b.member_info_ship_address_detail"));
+				memberDetail.setMember_info_mypage_img_name(rs.getString("b.member_info_mypage_img_name"));
+				memberDetail.setMember_info_mypage_real_img_name(rs.getString("b.member_info_mypage_real_img_name"));
+				memberDetail.setMember_info_detail_like_style(rs.getString("c.member_info_detail_like_style"));
+				memberDetail.setMember_info_detail_like_brand(rs.getString("c.member_info_detail_like_brand"));
+				memberDetail.setMember_info_detail_like_category(rs.getString("c.member_info_detail_like_category"));
+				memberDetail.setMember_info_detail_point(rs.getInt("c.member_info_detail_point")); 
+				memberDetail.setMember_info_detail_acc_money(rs.getInt("c.member_info_detail_acc_money")); 
+				memberDetail.setMember_service_log_status(rs.getString("d.member_service_log_status"));
+				memberDetail.setMember_service_log_join_date(rs.getString("d.member_service_log_join_date").substring(0,8)); 
+				memberDetail.setMember_service_log_passwd_change_date(rs.getString("d.member_service_log_passwd_change_date").substring(0,8)); 
+				memberDetail.setMember_service_log_login_date(rs.getString("d.member_service_log_login_date").substring(0,8));
+				memberDetail.setMember_service_log_order_count(rs.getInt("d.member_service_log_order_count"));
+				memberDetail.setReason_num(rs.getString("d.member_service_log_status_reason"));
+				memberDetail.setGrade_name(rs.getString("e.grade_name"));
+				
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rs);
+		}
+		
+		return memberDetail;
+	}
+
+	public boolean getMemberUpdate(String member_code, String member_status, String reason) {
+		boolean isMemberUpdate = false;
+		
+		PreparedStatement pstmt = null;
+		int sucess = 0;
+		
+		try {
+			if(member_status.equals("정상")) {
+				String sql = "UPDATE member_service_log SET member_service_log_status=?,member_service_log_status_reason=0 WHERE member_service_log_code=?";
+				pstmt = con.prepareStatement(sql);
+				pstmt.setString(1, member_status);
+				pstmt.setString(2, member_code);
+				sucess = pstmt.executeUpdate();
+			} else if(member_status.equals("정지")) {
+				String sql = "UPDATE member_service_log SET member_service_log_status=?,member_service_log_login_date=REPLACE(now(),'-',''),member_service_log_status_reason=? WHERE member_service_log_code=?";
+				pstmt = con.prepareStatement(sql);
+				pstmt.setString(1, member_status);
+				pstmt.setString(2, reason);
+				pstmt.setString(3, member_code);
+				sucess = pstmt.executeUpdate();
+			} else {
+				String sql = "UPDATE member_service_log SET member_service_log_status=?,member_service_log_login_date=REPLACE(now(),'-','') WHERE member_service_log_code=?";
+				pstmt = con.prepareStatement(sql);
+				pstmt.setString(1, member_status);
+				pstmt.setString(2, member_code);
+				sucess = pstmt.executeUpdate();
+			}
+			
+			if(sucess > 0) {
+				isMemberUpdate = true;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return isMemberUpdate;
 	}
 }	
 	
