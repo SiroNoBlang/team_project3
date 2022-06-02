@@ -78,20 +78,6 @@
 								fill : false,
 								data : net_income,
 							} ]
-				},
-				options : {
-					maintainAspectRatio : false,
-					title : {
-						text : 'Chart.js Time Scale'
-					},
-					scales : {
-						yAxes : [ {
-							scaleLabel : {
-								display : true,
-								labelString : '천원'
-							}
-						} ]
-					}
 				}
 			};
 

@@ -35,7 +35,7 @@
 		<div id="page-container">
 			<div class="card">
 				<div class="title">매출 그래프</div>
-					<div class="container">
+					<div class="container" style="height: 600px">
 						<%@ include file="/AdminPage/sales/sales_data.jsp" %>
 					</div>
 				</div>
