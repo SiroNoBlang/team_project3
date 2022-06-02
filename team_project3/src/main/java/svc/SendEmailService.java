@@ -25,7 +25,7 @@ public class SendEmailService {
 
 	public boolean isSendEmail(String email, HttpServletRequest request) {
 		System.out.println(" SendEmailService -  isSendEmail ");
-		System.out.println(request);
+//		System.out.println(request);
 		boolean isSendEmail = false;
 		
 		GenerateAuthenticationCode genCode = new GenerateAuthenticationCode();

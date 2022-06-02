@@ -50,31 +50,11 @@
 		<div id="page-container">
 				<div class="card">
 					<div class="title">구매 목록</div>
-					
-					<div id="board-search">
-					        <div class="container">
-					            <div class="search-window">
-					                <form action="ProductSearch.co" class="formCss">
-										<select name="searchType" id="product">
-										    <option value="sell_title" >상품명</option>
-										    <option value="sell_brand" <c:if test="${param.searchType eq 'sell_brand'}"> selected="selected"</c:if>>브랜드</option>
-										    <option value="sell_category" <c:if test="${param.searchType eq 'sell_category'}"> selected="selected"</c:if>>카테고리</option>
-										</select>
-					                        <label for="search" class="blind"></label>
-					                        <input id="search" type="search" name="search" value="${param.search}">
-					                        <button type="submit" class="btn btn-dark">검색</button>
-					                </form>
-					            </div>
-					        </div>
-					    </div>
 						 <div id="board-list">
 					        <div class="container">
-					        
-					        
 					            <table class="board-table">
 					                <thead>
 						                <tr>
-						  <!--                   <th scope="col" class="th-num"></th> -->
 						                    <th scope="col" class="th-num">번호</th>
 						                    <th scope="col" class="th-date">사진</th>
 						                    <th scope="col" class="th-title">판매품제목 </th>
@@ -87,7 +67,6 @@
 						                <c:if test="${not empty buyList and pageInfo.getListCount() > 0}">
 										<c:forEach var="buy" items="${buyList }" varStatus="status">
 							                <tr>
-			<!-- 				                    <td> <input type="checkbox"> </td> -->
 							                    <td>${listCount -(listCount -((pageNum-1)* listLimit + status.index)-1)} </td> 
 							                    <td><img src="./Upload/sell_img/${buy.getSell_img_real_name() }"></td>
 							                    <td>${buy.getSell_title() } </td>
@@ -99,9 +78,6 @@
 										</c:if> 
 					                </tbody>
 					            </table>
-				<!-- 	            <button type="button" class="btn btn-primary">검수완료</button>
-					            <button type="button" class="btn btn-success">검수취소</button>
-					            <button type="button" class="btn btn-danger">여긴뭐하지</button> -->
 					        </div>
     					</div>
     					 <section id="pageList">

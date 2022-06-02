@@ -89,7 +89,7 @@ public class JoinProAction implements Action {
 			response.setContentType("text/html; charset=UTF-8");
 			PrintWriter out = response.getWriter();
 			out.println("<script>");
-			out.println("alert('메일이 정상적으로 전송되었습니다!<br> 인증을 완료해주세요')");
+			out.println("alert('메일이 정상적으로 전송되었습니다! 인증을 완료해주세요')");
 			out.println("location.href='./'");
 			out.println("</script>");
 		} else {

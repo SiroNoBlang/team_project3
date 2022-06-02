@@ -16,6 +16,11 @@ int result = dao.selectAuthInfo(email,code);
 
 
 String msg = "";
+boolean AuthStatusResult = dao.changeAuthStatus(email);
+if(!AuthStatusResult){
+	msg = "인증을 완료해주세요!";
+	
+}
 if(result == 0){ //인증실패 (잘못된 인증코드)
 	msg = "인증실패 (잘못된 인증코드)";
 	
@@ -24,7 +29,6 @@ if(result == 0){ //인증실패 (잘못된 인증코드)
 }else{ // 인증성공
 	msg = "인증성공";
 
-dao.changeAuthStatus(email);
 commit(con);
 close(con);	
 

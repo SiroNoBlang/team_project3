@@ -78,30 +78,38 @@ public class MemberDAO {
 		System.out.println("MemberDAO isLogin");
 		MemberBean isLogin = null;
 		
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
+		PreparedStatement pstmt = null, pstmt2 = null;
+		ResultSet rs = null, rs2 = null;
 		
 		try {
-			String sql = "SELECT a.member_code, c.grade_name, a.member_nickname, d.member_service_log_status, d.member_service_log_login_date, e.reason_content FROM member AS a JOIN  member_info_detail AS b ON a.member_code=b.member_info_detail_code JOIN member_service_log AS d ON a.member_code = d.member_service_log_code JOIN reason AS e ON d.member_service_log_status_reason = e.reason_num JOIN grade AS c ON b.member_info_detail_acc_money BETWEEN c.lowest_acc_money AND c.highest_acc_money WHERE a.member_id=? AND a.member_passwd=?"; 
-			
+			String sql = "SELECT a.auth_code, a.email FROM auth a JOIN member m ON a.email = m.member_email WHERE m.member_id=?"; //인증여부확인
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, member_id);
-			pstmt.setString(2, member_passwd);
-			rs = pstmt.executeQuery();
-			
-			System.out.println(pstmt); 
-			if(rs.next()) {
-				isLogin = new MemberBean();
-				isLogin.setMember_code(rs.getString("a.member_code"));
-				isLogin.setGrade_name(rs.getString("c.grade_name"));
-				isLogin.setMember_nickname(rs.getString("a.member_nickname"));
-				isLogin.setMember_service_log_status(rs.getString("d.member_service_log_status"));
-				isLogin.setMember_service_log_login_date(rs.getString("d.member_service_log_login_date"));
-				isLogin.setReason_content(rs.getString("e.reason_content"));
+			rs=pstmt.executeQuery();
+			if(!rs.next()) { //인증코드가 없을시 로그인 가능
+				sql = "SELECT a.member_code, c.grade_name, a.member_nickname, d.member_service_log_status, d.member_service_log_login_date, e.reason_content FROM member AS a JOIN  member_info_detail AS b ON a.member_code=b.member_info_detail_code JOIN member_service_log AS d ON a.member_code = d.member_service_log_code JOIN reason AS e ON d.member_service_log_status_reason = e.reason_num JOIN grade AS c ON b.member_info_detail_acc_money BETWEEN c.lowest_acc_money AND c.highest_acc_money WHERE a.member_id=? AND a.member_passwd=?"; 
+				
+				pstmt2 = con.prepareStatement(sql);
+				pstmt2.setString(1, member_id);
+				pstmt2.setString(2, member_passwd);
+				rs2 = pstmt2.executeQuery();
+				
+				System.out.println(pstmt2); 
+				if(rs2.next()) {
+					isLogin = new MemberBean();
+					isLogin.setMember_code(rs2.getString("a.member_code"));
+					isLogin.setGrade_name(rs2.getString("c.grade_name"));
+					isLogin.setMember_nickname(rs2.getString("a.member_nickname"));
+					isLogin.setMember_service_log_status(rs2.getString("d.member_service_log_status"));
+					isLogin.setMember_service_log_login_date(rs2.getString("d.member_service_log_login_date"));
+					isLogin.setReason_content(rs2.getString("e.reason_content"));
+				}
 			}
 		} catch (SQLException e) {
 
 		} finally {
+			close(pstmt2);
+			close(rs2);
 			close(pstmt);
 			close(rs);
 		}
@@ -535,7 +543,7 @@ public class MemberDAO {
 		return isFindPasswd;
 	}
 	
-
+	//회원가입시 인증코드 보내기
 	public boolean insertAuthInfo(String receiver, String code) {
 		System.out.println("MemberDAO - insertAuthInfo");
 		
@@ -580,6 +588,7 @@ public class MemberDAO {
 		return isSendEmail;
 	}
 	
+	//회원가입시 인증
 	public int selectAuthInfo(String email, String code) {
 		System.out.println("MemberDAO - selectAuthInfo");
 		
@@ -618,13 +627,14 @@ public class MemberDAO {
 			close(rs);
 			close(pstmt);
 		}
-		
-		
 		return result;
 	}
 	
-	public void changeAuthStatus(String email) {
+	//인증하기 완료시 auth 테이블에서 값 delete
+	public boolean changeAuthStatus(String email) {
 		System.out.println("MemberDAO - changeAuthStatus");
+		
+		boolean AuthStatusResult = false;
 		
 		PreparedStatement pstmt = null;
 		
@@ -640,6 +650,7 @@ public class MemberDAO {
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, email);
 			pstmt.executeUpdate();
+			AuthStatusResult = true;
 		} catch (SQLException e) {
 			e.printStackTrace();
 			System.out.println("SQL 구문 오류 발생! - changeAuthStatus()");
@@ -647,7 +658,7 @@ public class MemberDAO {
 			// DB 자원 반환
 			close(pstmt);
 		}
-		
+		return AuthStatusResult;
 	}
 	
 	public int selectListCount(String member_code) { //좋아료 리스트
