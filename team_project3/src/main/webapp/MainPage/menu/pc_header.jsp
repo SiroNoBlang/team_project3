@@ -32,6 +32,11 @@
 							</li>
 							<li>
 								<a href="CommunityNotice.ma">Community</a>
+								<ul class="sub-menu">
+									<li><a href="CommunityNotice.ma">공지사항</a></li>
+									<li><a href="CommunityEvent.ma">이벤트</a></li>
+									<li><a href="CommunityQna.ma">Q&#38;A</a></li>
+								</ul>
 							</li>
 
 							<li>
