@@ -132,7 +132,7 @@ String nickname = (String)session.getAttribute("sNickname");
 	<section class="section-slide">
 		<div class="wrap-slick1 rs2-slick1">
 			<div class="slick1">
-				<div class="item-slick1 bg-overlay1" style="background-image: url(MainPage/mages/slide-05.jpg);" data-thumb="MainPage/images/thumb-01.jpg" data-caption="Women’s Wear">
+				<div class="item-slick1 bg-overlay1" style="background-image: url(MainPage/images/slide-05.jpg);" data-thumb="MainPage/images/thumb-01.jpg" data-caption="Women’s Wear">
 					<div class="container h-full">
 						<div class="flex-col-c-m h-full p-t-100 p-b-60 respon5">
 							<div class="layer-slick1 animated visible-false" data-appear="fadeInDown" data-delay="0">
@@ -1145,7 +1145,7 @@ String nickname = (String)session.getAttribute("sNickname");
 								<div class="wrap-slick3-arrows flex-sb-m flex-w"></div>
 
 								<div class="slick3 gallery-lb">
-									<div class="item-slick3" data-thumb="images/product-detail-01.jpg">
+									<div class="item-slick3" data-thumb="MainPage/images/product-detail-01.jpg">
 										<div class="wrap-pic-w pos-relative">
 											<img src="MainPage/images/product-detail-01.jpg" alt="IMG-PRODUCT">
 
