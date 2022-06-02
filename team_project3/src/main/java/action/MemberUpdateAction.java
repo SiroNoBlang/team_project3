@@ -26,7 +26,6 @@ public class MemberUpdateAction implements Action {
 		if(isMemberUpdate) {
 			request.setAttribute("member_code", member_code);
 			forward = new ActionForward("MemberDetail.co?member_code=" + member_code +"&page=" + pageNum, true);
-			
 		} else {
 			response.setContentType("text/html; charset=UTF-8");
 			PrintWriter out = response.getWriter();

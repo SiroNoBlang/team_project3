@@ -8,7 +8,6 @@
 <title>매출관리</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/css/bootstrap.css'>
-<!-- <link rel='stylesheet' href='https://raw.githubusercontent.com/forsigner/magic-check/master/css/magic-check.css'> -->
 <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Roboto:300,400'>
 <link rel='stylesheet' href='http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css'>
 <link rel="stylesheet" href="AdminPage/css/style.css">

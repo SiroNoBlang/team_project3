@@ -155,13 +155,13 @@ $(document).ready(function() {
 								<option value="0" <c:if test="${memberDetail.getReason_num() eq '0'}">selected="selected"</c:if>>정상</option>
 								<option value="1" <c:if test="${memberDetail.getReason_num() eq '1'}">selected="selected"</c:if>>정지 3일</option>
 								<option value="2" <c:if test="${memberDetail.getReason_num() eq '2'}">selected="selected"</c:if>>정지 7일</option>
-								<option value="3" <c:if test="${memberDetail.getReason_num() eq '1'}">selected="selected"</c:if>>정지 15일</option>
-								<option value="4" <c:if test="${memberDetail.getReason_num() eq '2'}">selected="selected"</c:if>>정지 30일</option>
-								<option value="5" <c:if test="${memberDetail.getReason_num() eq '1'}">selected="selected"</c:if>>정지 45일</option>
-								<option value="6" <c:if test="${memberDetail.getReason_num() eq '2'}">selected="selected"</c:if>>정지 60일</option>
-								<option value="7" <c:if test="${memberDetail.getReason_num() eq '1'}">selected="selected"</c:if>>정지 180일</option>
-								<option value="8" <c:if test="${memberDetail.getReason_num() eq '2'}">selected="selected"</c:if>>정지 365일</option>
-								<option value="9" <c:if test="${memberDetail.getReason_num() eq '1'}">selected="selected"</c:if>>영구 정지</option>
+								<option value="3" <c:if test="${memberDetail.getReason_num() eq '3'}">selected="selected"</c:if>>정지 15일</option>
+								<option value="4" <c:if test="${memberDetail.getReason_num() eq '4'}">selected="selected"</c:if>>정지 30일</option>
+								<option value="5" <c:if test="${memberDetail.getReason_num() eq '5'}">selected="selected"</c:if>>정지 45일</option>
+								<option value="6" <c:if test="${memberDetail.getReason_num() eq '6'}">selected="selected"</c:if>>정지 60일</option>
+								<option value="7" <c:if test="${memberDetail.getReason_num() eq '7'}">selected="selected"</c:if>>정지 180일</option>
+								<option value="8" <c:if test="${memberDetail.getReason_num() eq '8'}">selected="selected"</c:if>>정지 365일</option>
+								<option value="9" <c:if test="${memberDetail.getReason_num() eq '9'}">selected="selected"</c:if>>영구 정지</option>
 							</select>
 							</td>
 						</tr>
