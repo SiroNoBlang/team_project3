@@ -1712,7 +1712,7 @@ public class AdminDAO {
 	public SellerDTO getListCountType() {
 		
 		SellerDTO CountType = new SellerDTO();
-		String[] types = {"검수중", "검수완료", "검수반려","판매완료"};
+		String[] types = {"검수중", "판매중", "검수반려","판매완료"};
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		
@@ -1729,7 +1729,7 @@ public class AdminDAO {
 				case "검수반려":
 					CountType.setCancel(rs.getInt(1));
 					break;
-				case "검수완료":
+				case "판매중":
 					CountType.setCompletion(rs.getInt(1));
 					break;
 				case "검수중":
