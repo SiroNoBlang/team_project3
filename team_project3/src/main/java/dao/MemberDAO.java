@@ -481,37 +481,44 @@ public class MemberDAO {
 		
 		boolean isSendEmail = false;
 		
-		PreparedStatement pstmt = null, pstmt2 = null;
-		ResultSet rs = null; 
+		PreparedStatement pstmt = null, pstmt2 = null, pstmt3=null;
+		ResultSet rs = null, rs2=null; 
 		try {
-			
-			String sql = "SELECT auth_code FROM auth WHERE email=? ";
+			String sql = "SELECT member_email FROM member WHERE member_email=?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, receiver);
-			
-			rs = pstmt.executeQuery();
-			if(rs.next()) {
-				sql = "UPDATE auth SET auth_code=? WHERE email=?";
-				pstmt2 = con.prepareStatement(sql);
-				pstmt2.setString(1, code);
-				pstmt2.setString(2, receiver);
-				pstmt2.executeUpdate();
-				isSendEmail =true;
-			}else {
-				sql = "INSERT INTO auth VALUES(?,?)";
+			rs= pstmt.executeQuery();
+			if(!rs.next()) {
+				sql = "SELECT auth_code FROM auth WHERE email=? ";
 				pstmt2 = con.prepareStatement(sql);
 				pstmt2.setString(1, receiver);
-				pstmt2.setString(2, code);
-				pstmt2.executeUpdate();	
-				isSendEmail =true;
-			}
+				
+				rs2 = pstmt2.executeQuery();
+				if(rs2.next()) {
+					sql = "UPDATE auth SET auth_code=? WHERE email=?";
+					pstmt3 = con.prepareStatement(sql);
+					pstmt3.setString(1, code);
+					pstmt3.setString(2, receiver);
+					pstmt3.executeUpdate();
+					isSendEmail =true;
+				}else {
+					sql = "INSERT INTO auth VALUES(?,?)";
+					pstmt3 = con.prepareStatement(sql);
+					pstmt3.setString(1, receiver);
+					pstmt3.setString(2, code);
+					pstmt3.executeUpdate();	
+					isSendEmail =true;
+				}
+			}	
 		} catch (SQLException e) {
 			e.printStackTrace();
 			System.out.println("SQL 구문 오류 - insertAuthInfo()");
 		} finally {
+			close(rs2);
 			close(rs);
-			close(pstmt);
+			close(pstmt3);
 			close(pstmt2);
+			close(pstmt);
 		}
 		return isSendEmail;
 	}

@@ -32,7 +32,7 @@ public class SendEmailAction implements Action {
 			response.setContentType("text/html; charset=UTF-8");
 			PrintWriter out = response.getWriter();
 			out.println("<script>");
-			out.println("alert('계정이 없습니다!')");
+			out.println("alert('중복된 이메일입니다!')");
 			out.println("history.back()");
 			out.println("</script>");
 		}
