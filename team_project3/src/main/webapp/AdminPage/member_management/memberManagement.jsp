@@ -97,7 +97,6 @@
 					            <table class="board-table">
 					                <thead>
 						                <tr >
-						                    <th scope="col" class="th-num"></th>
 						                    <th scope="col" class="th-num">번호</th>
 						                    <th scope="col" class="th-title">이메일</th>
 						                    <th scope="col" class="th-date">닉네임</th>
@@ -109,7 +108,6 @@
 						                <c:if test="${not empty memberManagementList and pageInfo.getListCount() > 0}">
 											<c:forEach var="memberManagement" items="${memberManagementList }" varStatus="status">
 								                <tr>
-								                	<td><input type="checkbox" value="${memberManagement.getMember_code() }"></td>
 								                	<td>${memberManagement.getMember_num() }</td>
 								                    <td>
 														<a href="MemberDetail.co?member_code=${memberManagement.getMember_code() }&page=${pageNum}">
