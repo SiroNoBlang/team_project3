@@ -75,6 +75,7 @@ public class MemberDAO {
         return joinCount;
      }
 
+	//로그인
 	public MemberBean isLogin(String member_id, String member_passwd) {
 		System.out.println("MemberDAO isLogin");
 		MemberBean isLogin = null;
@@ -87,7 +88,7 @@ public class MemberDAO {
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, member_id);
 			rs=pstmt.executeQuery();
-			if(!rs.next()) { //인증코드가 없을시 로그인 가능
+			if(!rs.next()) { //auth 테이블에 인증코드가 없어야 로그인 가능
 				sql = "SELECT a.member_code, c.grade_name, a.member_nickname, d.member_service_log_status, d.member_service_log_login_date, e.reason_content FROM member AS a JOIN  member_info_detail AS b ON a.member_code=b.member_info_detail_code JOIN member_service_log AS d ON a.member_code = d.member_service_log_code JOIN reason AS e ON d.member_service_log_status_reason = e.reason_num JOIN grade AS c ON b.member_info_detail_acc_money BETWEEN c.lowest_acc_money AND c.highest_acc_money WHERE a.member_id=? AND a.member_passwd=?"; 
 				
 				pstmt2 = con.prepareStatement(sql);
@@ -118,8 +119,6 @@ public class MemberDAO {
 		return isLogin;
 	}
 	
-	
-
 
 	public MemberBean getMemberArticle(String member_code) {
 		MemberBean memberDetail = null;
@@ -348,6 +347,7 @@ public class MemberDAO {
 		return updateCount;
 	}
 	
+	//닉네임 중복체크
 	public boolean checkNickname(String nickname) {
 		boolean isDuplicate = false;
 		
@@ -355,17 +355,12 @@ public class MemberDAO {
 		ResultSet rs = null;
 		
 		try {
-			// JdbcUtil 클래스의 getConnection() 메서드를 호출하여 Connection 객체 가져오기
-			// 3단계. SQL 구문 작성 및 전달
-			// id 가 일치하는 레코드 조회
 			String sql = "SELECT * FROM member WHERE member_nickname=?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, nickname);
 			
-			// 4단계. SQL 구문 실행 및 결과 처리
 			rs = pstmt.executeQuery();
 			
-			// 레코드(아이디)가 존재할 경우 아이디가 중복이므로 isDuplicate 을 false 로 변경
 			if(rs.next()) {
 				isDuplicate = true;
 			}
@@ -379,6 +374,7 @@ public class MemberDAO {
 		return isDuplicate;
 	}
 	
+	//아이디 중복 체크
 	public boolean checkId(String id) {
 		boolean isDuplicate = false;
 		
@@ -386,18 +382,12 @@ public class MemberDAO {
 		ResultSet rs = null;
 		
 		try {
-			// JdbcUtil 클래스의 getConnection() 메서드를 호출하여 Connection 객체 가져오기
-			
-			// 3단계. SQL 구문 작성 및 전달
-			// id 가 일치하는 레코드 조회
 			String sql = "SELECT * FROM member WHERE member_id=?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, id);
 			
-			// 4단계. SQL 구문 실행 및 결과 처리
 			rs = pstmt.executeQuery();
 			
-			// 레코드(아이디)가 존재할 경우 아이디가 중복이므로 isDuplicate 을 false 로 변경
 			if(rs.next()) {
 				isDuplicate = true;
 			}
@@ -412,11 +402,12 @@ public class MemberDAO {
 		return isDuplicate;
 	}
 
+	//아이디 찾기
 	public String isFindId(String nickname, String email) {
 		String isFindId = "";
 		System.out.println("MemberDAO - isFindId");
-		System.out.println(nickname);
-		System.out.println(email);
+//		System.out.println(nickname);
+//		System.out.println(email);
 		
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -431,7 +422,6 @@ public class MemberDAO {
 			
 			if(rs.next()) {
 				isFindId = rs.getString("member_id").toString();
-//				String decryptedText = rsaCipher.decrypt(isFindId);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -442,13 +432,14 @@ public class MemberDAO {
 		return isFindId;
 	}
 
+	//비밀번호 찾기
 	public boolean isFindPasswd(String id, String email, String code) {
 		
 		boolean isFindPasswd = false;
 		
 		System.out.println("MemberDAO - isFindPasswd");
-		System.out.println("id : " + id);
-		System.out.println("email : " + email);
+//		System.out.println("id : " + id);
+//		System.out.println("email : " + email);
 		
 		PreparedStatement pstmt = null, pstmt2 = null;
 		ResultSet rs = null;
@@ -498,10 +489,7 @@ public class MemberDAO {
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, receiver);
 			
-			// 4단계. SQL 구문 실행 및 결과 처리
 			rs = pstmt.executeQuery();
-			// 조회 결과가 존재할 경우(= rs.next() 가 true 일 경우)
-			// isAuthenticatedMember 변수값을 true 로 변경
 			if(rs.next()) {
 				sql = "UPDATE auth SET auth_code=? WHERE email=?";
 				pstmt2 = con.prepareStatement(sql);
@@ -521,7 +509,6 @@ public class MemberDAO {
 			e.printStackTrace();
 			System.out.println("SQL 구문 오류 - insertAuthInfo()");
 		} finally {
-			// 자원 반환
 			close(rs);
 			close(pstmt);
 			close(pstmt2);
@@ -529,7 +516,7 @@ public class MemberDAO {
 		return isSendEmail;
 	}
 	
-	//회원가입시 인증
+	//회원가입시 인증과정
 	public int selectAuthInfo(String email, String code) {
 		System.out.println("MemberDAO - selectAuthInfo");
 		
@@ -540,19 +527,11 @@ public class MemberDAO {
 		
 		
 		try {
-			// 1단계 & 2단계
-			// JdbcUtil 객체의 getConnection() 메서드를 호출하여 DB 연결 객체 가져오기
-			
-			// 3단계. SQL 구문 작성 및 전달
-			// => member 테이블의 id 컬럼 조회(단, id 와 auth_status 가 일치하는 레코드 조회)
 			String sql = "SELECT auth_code FROM auth WHERE email=? ";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, email);
 			
-			// 4단계. SQL 구문 실행 및 결과 처리
 			rs = pstmt.executeQuery();
-			// 조회 결과가 존재할 경우(= rs.next() 가 true 일 경우)
-			// isAuthenticatedMember 변수값을 true 로 변경
 			if(rs.next() ) {
 				if(code.equals(rs.getString("auth_code"))) {
 					result = 1;
@@ -564,14 +543,13 @@ public class MemberDAO {
 			e.printStackTrace();
 			System.out.println("SQL 구문 오류 - selectAuthInfo()");
 		} finally {
-			// 자원 반환
 			close(rs);
 			close(pstmt);
 		}
 		return result;
 	}
 	
-	//인증하기 완료시 auth 테이블에서 값 delete
+	//인증하기 완료시 auth 테이블에서 auth_code 지우기
 	public boolean changeAuthStatus(String email) {
 		System.out.println("MemberDAO - changeAuthStatus");
 		
@@ -582,11 +560,6 @@ public class MemberDAO {
 //		System.out.println("changeAuthStatus" + email + "삭제되었다");
 		
 		try {
-			// 1단계 & 2단계
-			// JdbcUtil 객체의 getConnection() 메서드를 호출하여 DB 연결 객체 가져오기
-			// 3단계. SQL 구문 작성 및 전달
-			// => MemberDTO 객체에 저장된 아이디, 패스워드 이름, 이메일, 전화번호를 추가하고
-			//    가입일(date)의 경우 데이터베이스에서 제공되는 now() 함수 사용하여 자동 생성
 			String sql = "DELETE FROM auth WHERE email=?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, email);
@@ -596,7 +569,6 @@ public class MemberDAO {
 			e.printStackTrace();
 			System.out.println("SQL 구문 오류 발생! - changeAuthStatus()");
 		} finally {
-			// DB 자원 반환
 			close(pstmt);
 		}
 		return AuthStatusResult;
@@ -705,7 +677,7 @@ public class MemberDAO {
 		return listCount;
 	}
 
-	//구매리스트 목록 담아오기
+	//구매목록 담아오기
 	public ArrayList<SellerProductDTO> selectBuyList(int pageNum, int listLimit, String code) {
 		ArrayList<SellerProductDTO> buyList = null;
 		SellerProductDTO buy = null;
@@ -737,15 +709,9 @@ public class MemberDAO {
 				buy.setSell_img_real_name(rs.getString("si.sell_img_real_name"));
 				buy.setSell_num(rs.getInt("s.sell_num"));
 				
-//				if(rs.getString("sell_list_approve_date") !=null) { //값이 없을 때 .substring(0,8)로 인해 오류발생
-//					confirm.setSell_list_approve_date(rs.getString("sell_list_approve_date").substring(0,8));
-//				}
 				buyList.add(buy);
-				
 			}
-			
 //			System.out.println(productConfirmList);
-			
 		} catch (SQLException e) {
 			System.out.println("SQL 구문 오류 발생! - selectBuyList()");
 			e.printStackTrace();
@@ -753,7 +719,6 @@ public class MemberDAO {
 			close(pstmt);
 			close(rs);
 		}
-		
 		return buyList;
 	}
 	
