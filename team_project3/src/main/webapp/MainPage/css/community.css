@@ -111,6 +111,7 @@
     border: 1px solid #e9ecef;
     border-right: none;
     border-left: none;
+    text-align: center;
 }
 
 input.listMargin {
