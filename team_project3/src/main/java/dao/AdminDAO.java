@@ -1712,7 +1712,7 @@ public class AdminDAO {
 	public SellerDTO getListCountType() {
 		
 		SellerDTO CountType = new SellerDTO();
-		String[] types = {"검수중", "판매중", "검수반려","판매완료"};
+		String[] types = {"검수중", "검수완료", "검수반려","판매완료"};
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		
@@ -1729,7 +1729,7 @@ public class AdminDAO {
 				case "검수반려":
 					CountType.setCancel(rs.getInt(1));
 					break;
-				case "판매중":
+				case "검수완료":
 					CountType.setCompletion(rs.getInt(1));
 					break;
 				case "검수중":
@@ -2206,6 +2206,26 @@ public class AdminDAO {
 		}
 		
 		return bean;
+	}
+
+	// 탈퇴한 회원 삭제
+	public int deleteMemberArticle(String member_code) {
+		int deleteCount = 0;
+		
+		PreparedStatement pstmt = null;
+		
+		try {
+			String sql = "DELETE FROM member WHERE member_code=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, member_code);
+			deleteCount = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			System.out.println("SQL 구문 오류 발생! - deleteNoticeArticle()");
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return deleteCount;	
 	}
 }	
 	

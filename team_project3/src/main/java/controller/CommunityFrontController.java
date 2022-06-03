@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import action.Action;
 import action.ClassificationAction;
+import action.ClassificationDeleteAction;
 import action.ClassificationDetailAction;
 import action.ClassificationUpdateAction;
 import action.CommunityBoardWriteProAction;
@@ -116,7 +117,7 @@ public class CommunityFrontController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		}else if (command.equals("/EventList.co")) {// 이벤트 리스트(/EventList.co) 요청
+		} else if (command.equals("/EventList.co")) {// 이벤트 리스트(/EventList.co) 요청
 			action = new EventListAction();
 			try {
 				forward = action.execute(request, response);
@@ -259,6 +260,13 @@ public class CommunityFrontController extends HttpServlet {
 			}
 		} else if (command.equals("/ClassificationUpdate.co")) { // 회원의 상태 변경
 			action = new ClassificationUpdateAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		} else if (command.equals("/ClassificationDelete.co")) {// 공지사항 삭제(/NoticeDelete.co) 요청
+			action = new ClassificationDeleteAction();
 			try {
 				forward = action.execute(request, response);
 			} catch (Exception e) {

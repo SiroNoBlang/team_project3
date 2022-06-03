@@ -185,7 +185,7 @@ $(document).ready(function() {
 					<section id="commandCell">
 						<input type="submit" value="수정">
 						<c:if test="${memberDetail.getMember_service_log_status() eq '탈퇴'}">
-							<input type="button" value="회원탈퇴" onclick="">
+							<input type="button" value="회원탈퇴" onclick="location.href='ClassificationDelete.co?page=${param.page }&member_code=${member_code }&value=${param.value }'">
 						</c:if>
 						<input type="button" value="목록" onclick="location.href='Classification.co?page=${param.page }&value=${param.value }'">
 					</section>
