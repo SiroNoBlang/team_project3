@@ -132,3 +132,7 @@ div#deleteCenter {
 	border: 1px solid #e9ecef;
 }
 
+small {
+    font-weight: bold;
+    font-size: 98%;
+}
