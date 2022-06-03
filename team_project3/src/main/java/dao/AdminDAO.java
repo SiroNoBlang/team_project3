@@ -114,10 +114,10 @@ public class AdminDAO {
 		ResultSet rs = null;
 		
 		try {
-			String sql = "SELECT COUNT(*) FROM "+tableName;
+			String sql = "SELECT COUNT(*) FROM " + tableName;
 			pstmt = con.prepareStatement(sql);
 			rs = pstmt.executeQuery();
-			
+				
 			if(rs.next()) {
 				listCount = rs.getInt(1);
 			}
@@ -273,7 +273,7 @@ public class AdminDAO {
 		try {
 			con = getConnection();
 			
-			String sql = "SELECT COUNT(notice_num) FROM "+ tableName+ " WHERE " + searchType + " LIKE ?";
+			String sql = "SELECT COUNT(notice_num) FROM "+ tableName + " WHERE " + searchType + " LIKE ?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, "%" + search + "%");
 			rs = pstmt.executeQuery();
@@ -1232,7 +1232,7 @@ public class AdminDAO {
 		
 		try {
 			
-			String sql = "SELECT a.member_code, a.member_num, a.member_nickname, a.member_email, b.member_service_log_status, b.member_service_log_join_date FROM member AS a JOIN member_service_log AS b ON a.member_code = b.member_service_log_code LIMIT ?,?";
+			String sql = "SELECT a.member_code, a.member_num, a.member_nickname, a.member_email, b.member_service_log_status, b.member_service_log_join_date FROM member AS a JOIN member_service_log AS b ON a.member_code = b.member_service_log_code ORDER BY CAST(a.member_num AS SIGNED) ASC LIMIT ?,?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, startRow);
 			pstmt.setInt(2, listLimit);
@@ -1274,7 +1274,7 @@ public class AdminDAO {
 		
 		try {
 			if(value.equals("0")) {
-				String sql = "SELECT a.member_code, a.member_nickname, b.member_service_log_status, c.member_info_detail_acc_money, d.grade_name FROM member AS a JOIN member_service_log AS b ON a.member_code = b.member_service_log_code JOIN member_info_detail AS c ON a.member_code = c.member_info_detail_code JOIN grade AS d ON c.member_info_detail_acc_money BETWEEN d.lowest_acc_money AND d.highest_acc_money WHERE c.member_info_detail_acc_money >= 100001 AND c.member_info_detail_acc_money <= 999999999 ORDER BY c.member_info_detail_acc_money LIMIT ?,?";
+				String sql = "SELECT DISTINCT a.member_code, a.member_nickname, b.member_service_log_status, c.member_info_detail_acc_money, d.grade_name FROM member AS a JOIN member_service_log AS b ON a.member_code = b.member_service_log_code JOIN member_info_detail AS c ON a.member_code = c.member_info_detail_code JOIN grade AS d ON c.member_info_detail_acc_money BETWEEN d.lowest_acc_money AND d.highest_acc_money WHERE c.member_info_detail_acc_money >= 100001 AND c.member_info_detail_acc_money <= 999999999 ORDER BY c.member_info_detail_acc_money LIMIT ?,?";
 				pstmt = con.prepareStatement(sql);
 				pstmt.setInt(1, startRow);
 				pstmt.setInt(2, listLimit);
@@ -2147,6 +2147,65 @@ public class AdminDAO {
 		}
 		
 		return isMemberUpdate;
+	}
+
+	public MemberBean getMemberStatus() {
+		MemberBean bean = null;
+		
+		int top_level = 0;
+		int nomal = 0;
+		int suspension = 0;
+		int withdrawal = 0;
+		String[] status = {"정상", "정지", "탈퇴"};
+		PreparedStatement pstmt = null, pstmt2 = null;
+		ResultSet rs = null, rs2 = null;
+		
+		try {
+			for(String str : status) {
+				String sql = "SELECT COUNT(*) FROM member_service_log WHERE member_service_log_status=?";
+				pstmt = con.prepareStatement(sql);
+				pstmt.setString(1, str);
+				rs = pstmt.executeQuery();
+				
+				if(rs.next()) {
+					switch (str) {
+					case "정상":
+						nomal = rs.getInt(1);
+						break;
+					case "정지":
+						suspension = rs.getInt(1);
+						break;
+					case "탈퇴":
+						withdrawal = rs.getInt(1);
+						break;
+					default:
+						break;
+					}
+				}
+			}
+			
+			String sql = "SELECT COUNT(*) FROM member_info_detail WHERE member_info_detail_acc_money >= 100001 AND member_info_detail_acc_money <= 999999999";
+			pstmt2 = con.prepareStatement(sql);
+			rs2 = pstmt2.executeQuery();
+			if(rs2.next()) {
+				top_level = rs2.getInt(1);
+			}
+			
+			bean = new MemberBean();
+			bean.setTop_level(top_level);
+			bean.setNomal(nomal);
+			bean.setSuspension(suspension);
+			bean.setWithdrawal(withdrawal);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(rs2);
+			close(pstmt);
+			close(pstmt2);
+		}
+		
+		return bean;
 	}
 }	
 	

@@ -346,66 +346,6 @@ public class MemberDAO {
 		
 		return updateCount;
 	}
-
-	public MemberBean getMemberStatus() {
-		MemberBean bean = null;
-		
-		int top_level = 0;
-		int nomal = 0;
-		int suspension = 0;
-		int withdrawal = 0;
-		String[] status = {"정상", "정지", "탈퇴"};
-		PreparedStatement pstmt = null, pstmt2 = null;
-		ResultSet rs = null, rs2 = null;
-		
-		try {
-			for(String str : status) {
-				String sql = "SELECT COUNT(*) FROM member_service_log WHERE member_service_log_status=?";
-				pstmt = con.prepareStatement(sql);
-				pstmt.setString(1, str);
-				rs = pstmt.executeQuery();
-				
-				if(rs.next()) {
-					switch (str) {
-					case "정상":
-						nomal = rs.getInt(1);
-						break;
-					case "정지":
-						suspension = rs.getInt(1);
-						break;
-					case "탈퇴":
-						withdrawal = rs.getInt(1);
-						break;
-					default:
-						break;
-					}
-				}
-			}
-			
-			String sql = "SELECT COUNT(*) FROM member_info_detail WHERE member_info_detail_acc_money >= 100001 AND member_info_detail_acc_money <= 999999999";
-			pstmt2 = con.prepareStatement(sql);
-			rs2 = pstmt2.executeQuery();
-			if(rs2.next()) {
-				top_level = rs2.getInt(1);
-			}
-			
-			bean = new MemberBean();
-			bean.setTop_level(top_level);
-			bean.setNomal(nomal);
-			bean.setSuspension(suspension);
-			bean.setWithdrawal(withdrawal);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			close(rs);
-			close(rs2);
-			close(pstmt);
-			close(pstmt2);
-		}
-		
-		return bean;
-	}
-	
 	
 	public boolean checkNickname(String nickname) {
 		boolean isDuplicate = false;

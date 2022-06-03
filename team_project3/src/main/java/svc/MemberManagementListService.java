@@ -40,7 +40,6 @@ public class MemberManagementListService {
 		
 		close(con);
 		
-		// 7. 조회 결과 리턴
 		return memberManagementList;
 	}
 
@@ -48,7 +47,7 @@ public class MemberManagementListService {
 		MemberBean bean = null;
 		
 		Connection con = getConnection();
-		MemberDAO dao = MemberDAO.getInstance();
+		AdminDAO dao = AdminDAO.getInstance();
 		
 		dao.setConnection(con);
 		
@@ -71,7 +70,6 @@ public class MemberManagementListService {
 		
 		close(con);
 		
-		// 7. 조회 결과 리턴
 		return classificationList;
 	}
 
