@@ -180,7 +180,7 @@ $('#toggle-left-menu').click(function() {
 			} else if(cmStatus=="sale"){
 				cmStatus ="판매완료";
 			} else {
-				cmStatus ="검수완료";
+				cmStatus ="판매중";
 			}
 				location.href = "./ProductConfirmType.co?cmStatus=" + cmStatus;
 		}
