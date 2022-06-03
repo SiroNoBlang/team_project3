@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>구매목록</title>
+<title>구매 내역</title>
 <style type="text/css">
 	img {
 		width: 100px;
@@ -55,12 +55,12 @@
 					            <table class="board-table">
 					                <thead>
 						                <tr>
-						                    <th scope="col" class="th-num">번호</th>
-						                    <th scope="col" class="th-date">사진</th>
-						                    <th scope="col" class="th-title">판매품제목 </th>
+						                    <th scope="col" class="th-num"></th>
+						                    <th scope="col" class="th-date"></th>
+						                    <th scope="col" class="th-title">제품명 </th>
 						                    <th scope="col" class="th-date">사이즈</th>
-						                    <th scope="col" class="th-date">구매 날짜</th>
-						                    <th scope="col" class="th-date">배송 현황</th>
+						                    <th scope="col" class="th-date">구매일</th>
+						                    <th scope="col" class="th-date">상태</th>
 						                </tr>
 						                </thead>
 						                <tbody>
