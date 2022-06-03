@@ -88,16 +88,65 @@ int listCount = pageInfo.getListCount();
             </div>
          </div>
 
-    		<!-- pc_sub_header -->
-			<div class="wrap-menu-desktop how-shadow1">
-				<nav class="limiter-menu-desktop container">
-					<jsp:include page="/MainPage/menu/pc_sub_header.jsp"/>
-				</nav>
-			</div>	
-		</div>
+         <div class="wrap-menu-desktop how-shadow1">
+            <nav class="limiter-menu-desktop container">
+               
+               <!-- Logo desktop -->      
+               <a href="#" class="logo">
+                  <img src="MainPage/images/icons/logo-01.png" alt="IMG-LOGO">
+               </a>
 
-		<!-- PC_menu_Sidebar -->
-		<jsp:include page="/MainPage/menu/pc_menu.jsp"/>
+               <!-- Menu desktop -->
+               <div class="menu-desktop">
+						<ul class="main-menu">
+							<li>
+								<a href="MainPage.pr">Home</a>
+<!-- 								<ul class="sub-menu"> -->
+<!-- 									<li><a href="index.html">Homepage 1</a></li> -->
+<!-- 									<li><a href="home-02.html">Homepage 2</a></li> -->
+<!-- 									<li><a href="home-03.html">Homepage 3</a></li> -->
+<!-- 								</ul> -->
+							</li>
+
+							<li>
+								<a href="Product.pr">Shop</a>
+							</li>
+
+<!-- 							<li class="label1" data-label1="hot"> -->
+<!-- 								<a href="shoping-cart.html">Features</a> -->
+<!-- 							</li> -->
+
+							<li>
+								<a href="SellForm.pr">Sell</a>
+							</li>
+
+							<li>
+								<a href="about.html">About</a>
+							</li>
+
+							<li>
+								<a href="contact.html">Contact</a>
+							</li>
+						</ul>
+					</div>
+
+               <!-- Icon header -->
+               <div class="wrap-icon-header flex-w flex-r-m">
+                  <div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 js-show-modal-search">
+                     <i class="zmdi zmdi-search"></i>
+                  </div>
+
+                  <div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti js-show-cart" data-notify="2">
+                     <i class="zmdi zmdi-shopping-cart"></i>
+                  </div>
+
+                  <a href="#" class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti" data-notify="0">
+                     <i class="zmdi zmdi-favorite-outline"></i>
+                  </a>
+               </div>
+            </nav>
+         </div>   
+      </div>
 
       <!-- Header Mobile -->
       <div class="wrap-header-mobile">
@@ -212,52 +261,130 @@ int listCount = pageInfo.getListCount();
       </div>
    </header>
 <!-- 여기까지 헤더 -->
- 
- 
- 
-<!-- Cart -->
-<jsp:include page="/MainPage/menu/pc_shopping cart.jsp"/>
-	
-	
+   <!-- Cart -->
+   <div class="wrap-header-cart js-panel-cart">
+      <div class="s-full js-hide-cart"></div>
+
+      <div class="header-cart flex-col-l p-l-65 p-r-25">
+         <div class="header-cart-title flex-w flex-sb-m p-b-8">
+            <span class="mtext-103 cl2">
+               Your Cart
+            </span>
+
+            <div class="fs-35 lh-10 cl2 p-lr-5 pointer hov-cl1 trans-04 js-hide-cart">
+               <i class="zmdi zmdi-close"></i>
+            </div>
+         </div>
+         
+         <div class="header-cart-content flex-w js-pscroll">
+            <ul class="header-cart-wrapitem w-full">
+               <li class="header-cart-item flex-w flex-t m-b-12">
+                  <div class="header-cart-item-img">
+                     <img src="images/item-cart-01.jpg" alt="IMG">
+                  </div>
+
+                  <div class="header-cart-item-txt p-t-8">
+                     <a href="#" class="header-cart-item-name m-b-18 hov-cl1 trans-04">
+                        White Shirt Pleat
+                     </a>
+
+                     <span class="header-cart-item-info">
+                        1 x $19.00
+                     </span>
+                  </div>
+               </li>
+
+               <li class="header-cart-item flex-w flex-t m-b-12">
+                  <div class="header-cart-item-img">
+                     <img src="MainPage/images/item-cart-02.jpg" alt="IMG">
+                  </div>
+
+                  <div class="header-cart-item-txt p-t-8">
+                     <a href="#" class="header-cart-item-name m-b-18 hov-cl1 trans-04">
+                        Converse All Star
+                     </a>
+
+                     <span class="header-cart-item-info">
+                        1 x $39.00
+                     </span>
+                  </div>
+               </li>
+
+               <li class="header-cart-item flex-w flex-t m-b-12">
+                  <div class="header-cart-item-img">
+                     <img src="MainPage/images/item-cart-03.jpg" alt="IMG">
+                  </div>
+
+                  <div class="header-cart-item-txt p-t-8">
+                     <a href="#" class="header-cart-item-name m-b-18 hov-cl1 trans-04">
+                        Nixon Porter Leather
+                     </a>
+
+                     <span class="header-cart-item-info">
+                        1 x $17.00
+                     </span>
+                  </div>
+               </li>
+            </ul>
+            
+            <div class="w-full">
+               <div class="header-cart-total w-full p-tb-40">
+                  Total: $75.00
+               </div>
+
+               <div class="header-cart-buttons flex-w w-full">
+                  <a href="shoping-cart.html" class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-r-8 m-b-10">
+                     View Cart
+                  </a>
+
+                  <a href="shoping-cart.html" class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-b-10">
+                     Check Out
+                  </a>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+
 <!--     우리가 필터링으로 구분해줘야될 곳 -->
    <!-- Product -->
    <div class="bg0 m-t-23 p-b-140">
       <div class="container">
          <div class="flex-w flex-sb-m p-b-52">
             <div class="flex-w flex-l-m filter-tope-group m-tb-10">
-            	<form>
-               <button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5 how-active1" data-filter="*" onclick="location.href='ProductCategoryPro.pr?Category=all'">
-                  All Products
-               </button>
+            	<form action="ProductCategoryPro.pr">
+               <a href="Product.pr" style="color:black"> All Products </a>&nbsp;&nbsp;
+              <a href="ProductCategoryPro.pr?sell_category='상의'" style="color:black"> All Products>
+                  상의 </a>&nbsp;&nbsp;&nbsp;
+               <a href="ProductCategoryPro.pr?sell_category='하의'" style="color:black"> All Products>
+                  하의 </a>&nbsp;&nbsp;&nbsp;
+                <a href="ProductCategoryPro.pr?sell_category='신발'" style="color:black"> All Products>
+                  신발 </a>&nbsp;&nbsp;&nbsp;
+                 <a href="ProductCategoryPro.pr?sell_category='잡화'" style="color:black"> All Products>
+                  잡화 </a>&nbsp;&nbsp;&nbsp;
+                   
 				
-               <button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".women" onclick="location.href='ProductCategoryPro.pr?Category=상의'">
-                  All Products>
-                  상의
-               </button>
+<!--                <button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".women" name="상의"> -->
+<!--                   All Products> -->
+<!--                   상의 -->
+<!--                </button> -->
 
-               <button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".men" onclick="location.href='ProductCategoryPro.pr?Category=하의'">
-                  All Products>
-                  하의
-               </button>
-
-               <button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".bag" onclick="location.href='ProductCategoryPro.pr?Category=신발'">
-                  All Products>
-                  신발
-               </button>
-               																							
-               <button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".etc" onclick="location.href='ProductCategoryPro.pr?Category=잡화'">
-                  All Products>
-                  잡화
-               </button>
+<!--                <button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".men" name="하의"> -->
+<!--                   All Products> -->
+<!--                   하의 -->
+<!--                </button> -->
+               
+<!--                <button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".men" name="신발"> -->
+<!--                  All Products> -->
+<!--                   신발 -->
+<!--                </button> -->
+               
+<!--                 <button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".men" name="잡화"> -->
+<!--                   All Products> -->
+<!--                   잡화 -->
+<!--                </button> -->
                </form>
 
-<!--                <button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".shoes"> -->
-<!--                   Shoes -->
-<!--                </button> -->
-
-<!--                <button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".watches"> -->
-<!--                   Watches -->
-<!--                </button> -->
             </div>
 
             <div class="flex-w flex-c-m m-tb-10">
@@ -294,7 +421,7 @@ int listCount = pageInfo.getListCount();
          
            
  
-            <!-- Filter -->필터
+            <!-- Filter -->
             <div class="dis-none panel-filter w-full p-t-10">
                <div class="wrap-filter flex-w bg6 w-full p-lr-40 p-t-27 p-lr-15-sm">
                   <div class="filter-col1 p-r-15 p-b-27">
@@ -343,73 +470,7 @@ int listCount = pageInfo.getListCount();
 
                  
 
-                  <div class="filter-col2 p-r-15 p-b-27">
-                     <div class="mtext-102 cl2 p-b-15">
-                        Color
-                     </div>
-
-                     <ul>
-                        <li class="p-b-6">
-                           <span class="fs-15 lh-12 m-r-6" style="color: #222;">
-                              <i class="zmdi zmdi-circle"></i>
-                           </span>
-
-                           <a href="#" class="filter-link stext-106 trans-04">
-                              Black
-                           </a>
-                        </li>
-
-                        <li class="p-b-6">
-                           <span class="fs-15 lh-12 m-r-6" style="color: #4272d7;">
-                              <i class="zmdi zmdi-circle"></i>
-                           </span>
-
-                           <a href="#" class="filter-link stext-106 trans-04 filter-link-active">
-                              Blue
-                           </a>
-                        </li>
-
-                        <li class="p-b-6">
-                           <span class="fs-15 lh-12 m-r-6" style="color: #b3b3b3;">
-                              <i class="zmdi zmdi-circle"></i>
-                           </span>
-
-                           <a href="#" class="filter-link stext-106 trans-04">
-                              Grey
-                           </a>
-                        </li>
-
-                        <li class="p-b-6">
-                           <span class="fs-15 lh-12 m-r-6" style="color: #00ad5f;">
-                              <i class="zmdi zmdi-circle"></i>
-                           </span>
-
-                           <a href="#" class="filter-link stext-106 trans-04">
-                              Green
-                           </a>
-                        </li>
-
-                        <li class="p-b-6">
-                           <span class="fs-15 lh-12 m-r-6" style="color: #fa4251;">
-                              <i class="zmdi zmdi-circle"></i>
-                           </span>
-
-                           <a href="#" class="filter-link stext-106 trans-04">
-                              Red
-                           </a>
-                        </li>
-
-                        <li class="p-b-6">
-                           <span class="fs-15 lh-12 m-r-6" style="color: #aaa;">
-                              <i class="zmdi zmdi-circle-o"></i>
-                           </span>
-
-                           <a href="#" class="filter-link stext-106 trans-04">
-                              White
-                           </a>
-                        </li>
-                     </ul>
-                  </div>
+                 
                   <!-- 여기도 태그 -->
                   <div class="filter-col4 p-b-27">
                      <div class="mtext-102 cl2 p-b-15">
@@ -458,10 +519,9 @@ int listCount = pageInfo.getListCount();
                 <div class="shop-item">
                 <a href="ProductDetailPro.pr?sell_num=${articleList.sell_num}&sell_brand=${articleList.sell_brand}">
                 
-                 <img src="./Upload/sell_img/${articleList.sell_img_real_name}" width="300px" height="400px" alt="Accessories Pack"/>
-                  <h4>${articleList.sell_img_real_name}</h4>
-                  </a>
-                   <h5>${articleList.sell_title }</h5>
+                 <img src="./Upload/sell_img/${articleList.sell_img_real_name}" onerror="this.style.display='none'" width="300px" height="400px" alt="Accessories Pack"/>
+                 	${articleList.sell_title }
+                     </a>
                    <h5>${articleList.sell_brand }</h5>
                    <h5>${articleList.sell_readcount }</h5>
                 </div>
@@ -477,6 +537,14 @@ int listCount = pageInfo.getListCount();
 	       <div class="flex-c-m flex-w w-full p-t-45">
          
        <!-- Ajax 사용 더보기 -->
+       
+       <section id="pageList">
+		<!-- 
+		현재 페이지 번호(pageNum)가 1보다 클 경우에만 [이전] 링크 동작
+		=> 클릭 시 notice.jsp 로 이동하면서 
+		   현재 페이지 번호(pageNum) - 1 값을 page 파라미터로 전달
+		-->
+		
             <a href="'Product.pr?page=${pageNum + 1}'" class="flex-c-m stext-101 cl5 size-103 bg2 bor1 hov-btn1 p-lr-15 trans-04">
                Load More
             </a>

@@ -1,9 +1,11 @@
 package action;
 
+import java.io.File;
 import java.io.PrintWriter;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Enumeration;
+import java.util.List;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
@@ -84,6 +86,9 @@ public class sellWriteProAction implements Action {
 				while(fileElements.hasMoreElements()) {
 					
 					String fileElement = (String)fileElements.nextElement();
+					File file = multi.getFile(fileElement);					
+						
+					if( file != null) {
 					String sell_img_name = multi.getOriginalFileName(fileElement);
 					String sell_img_real_name = multi.getFilesystemName(fileElement);
 						
@@ -94,8 +99,9 @@ public class sellWriteProAction implements Action {
 					
 					sellimglist.add(sellimg);
 					i++;
-					
+					}
 				}
+				
 				
 				
 				SellerWriteProService service = new SellerWriteProService();
@@ -121,4 +127,5 @@ public class sellWriteProAction implements Action {
 			}
 	}
 
+	
 

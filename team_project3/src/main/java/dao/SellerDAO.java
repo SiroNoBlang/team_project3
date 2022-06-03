@@ -430,9 +430,10 @@ public class SellerDAO {
 			String sql = "SELECT a.sell_num, a.sell_size , a.sell_category,a.sell_category_detail, a.sell_title, a.sell_color, a.sell_brand, a.sell_price, a.sell_readcount,"
 					+ " b.sell_img_name, b.sell_img_real_name ,b.sell_img_real_num ,b.sell_img_num,b.sell_img_name,b.sell_img_real_name, c.sell_list_num, c.sell_list_item_status"
 					+ " FROM sell AS a JOIN sell_img AS b ON a.sell_num = b.sell_img_real_num JOIN sell_list AS c ON a.sell_num = c.sell_list_num"
-					+ " WHERE sell_list_item_status='판매중' AND sell_brand Like '%" + productSearch + "%' AND" 
+					+ " WHERE sell_list_item_status='판매중' AND sell_brand Like '%" + productSearch + "%' OR sell_title Like '%" + productSearch + "%' AND " 
 					+ "(sell_img_real_num,sell_img_num)  in (SELECT sell_img_real_num, MAX(sell_img_num)  FROM sell_img    GROUP BY sell_img_real_num  ORDER BY sell_img_real_num ,sell_img_num DESC  )"
 					+ " ORDER BY a.sell_num DESC LIMIT ?,? ";
+					
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, startRow);
 			pstmt.setInt(2, listLimit);
@@ -638,10 +639,78 @@ public class SellerDAO {
 			}
 			
 			return member;
-		} 
-		
-		
-		
+		}
 
+		public ArrayList<SellerProductDTO> CateArticleList(int pageNum, int listLimit, String category) {
+			ArrayList<SellerProductDTO> productCateList = null;
+
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+
+			// 조회 시작 게시물 번호(행 번호) 계산
+			int startRow = (pageNum - 1) * listLimit;
+
+			// 게시물 목록 조회
+			// => 답글에 대한 처리
+			// 참조글번호(board_re_ref) 기준 내림차순,
+			// 순서번호(board_re_seq) 기준 오름차순 정렬
+			// => 조회 시작 게시물 번호(startRow) 부터 목록의 게시물 수(listLimit) 만큼 조회
+			try {
+				String sql = "SELECT a.sell_num, a.sell_size , a.sell_category,a.sell_category_detail, a.sell_title, a.sell_color, a.sell_brand, a.sell_price, a.sell_readcount,"
+						+ " b.sell_img_name, b.sell_img_real_name ,b.sell_img_real_num ,b.sell_img_num,b.sell_img_name,b.sell_img_real_name, c.sell_list_num, c.sell_list_item_status"
+						+ " FROM sell AS a JOIN sell_img AS b ON a.sell_num = b.sell_img_real_num JOIN sell_list AS c ON a.sell_num = c.sell_list_num"
+						+ " WHERE sell_list_item_status='판매중' AND sell_category = " + category +" AND" 
+						+ "(sell_img_real_num,sell_img_num)  in (SELECT sell_img_real_num, MAX(sell_img_num)  FROM sell_img    GROUP BY sell_img_real_num  ORDER BY sell_img_real_num ,sell_img_num DESC  )"
+						+ " ORDER BY a.sell_num DESC LIMIT ?,? ";
+				pstmt = con.prepareStatement(sql);
+				pstmt.setInt(1, startRow);
+				pstmt.setInt(2, listLimit);
+//				pstmt.setString(3, productSearch);
+
+				rs = pstmt.executeQuery();
+
+//	            sql = "SELECT a.sell_title, a.sell_brand, a.sell_price, a.sell_color, a.sell_readcount, b.sell_img_name, c.sell_list_num, c.sell_list_item_status, b.sell_img_real_name"
+//	                     + "FROM sell AS a JOIN sell_img AS b ON a.sell_num = b.sell_img_num JOIN sell_list AS c ON a.sell_num = c.sell_list_num "
+//	                     + "WHERE sell_list_item_status='판매중'";
+				// join을 사용하자
+				// sell -> 조회수, 타이틀,브랜드
+				// sell_list ->
+				// sell_img -> 일단 사진은 다 사용해야됨
+				// 이외에 좋아요 까지
+
+				productCateList = new ArrayList<SellerProductDTO>();
+
+				while (rs.next()) {
+					SellerProductDTO article = new SellerProductDTO();
+					article.setSell_num(rs.getInt("sell_num"));
+					article.setSell_size(rs.getString("sell_size"));
+					article.setSell_title(rs.getString("sell_title"));
+					article.setSell_price(rs.getInt("sell_price"));
+					article.setSell_color(rs.getString("sell_color"));
+					article.setSell_brand(rs.getString("sell_brand"));
+					article.setSell_readcount(rs.getInt("sell_readcount"));
+					article.setSell_list_num(rs.getInt("sell_list_num"));
+					article.setSell_list_item_status(rs.getString("sell_list_item_status"));
+					article.setSell_img_num(rs.getInt("Sell_img_num"));
+					article.setSell_img_real_num(rs.getInt("Sell_img_real_num"));
+					article.setSell_img_name(rs.getString("sell_img_name"));
+					article.setSell_img_real_name(rs.getString("sell_img_real_name"));
+					article.setSell_category(rs.getString("Sell_category"));
+					article.setSell_category_detail(rs.getString("Sell_category_detail"));
+
+					productCateList.add(article);
+
+				}
+			} catch (SQLException e) {
+				System.out.println("구문오류");
+				e.printStackTrace();
+			} finally {
+				close(pstmt);
+
+				close(rs);
+			}
+			return productCateList;
+		
+		}
 		
 }

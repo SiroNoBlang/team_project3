@@ -18,20 +18,20 @@ public class ProductCategoryProAction implements Action {
 		ActionForward forward = null;
 		
 		int pageNum = 1; // 현재 페이지 번호
-		int listLimit = 10; // 한 페이지 당 표시할 게시물 목록 갯수
+		int listLimit = 12; // 한 페이지 당 표시할 게시물 목록 갯수
 		
-		int pageLimit = 10; // 한 페이지 당 표시할 페이지 목록 갯수
+		int pageLimit = 12; // 한 페이지 당 표시할 페이지 목록 갯수
 		
-		String Category = request.getParameter("Category");
+		String Category = request.getParameter("sell_category");
 		if(request.getParameter("page") != null) {
 			pageNum = Integer.parseInt(request.getParameter("page"));
 		}
 		
-	
+		System.out.println(Category);
 		productSearchProService service = new productSearchProService();
 		int listCount = service.getSearchListCount();
 		
-		ArrayList<SellerProductDTO> ProductList = service.getProductList(pageNum, listLimit,Category);
+		ArrayList<SellerProductDTO> ProductCateList = service.getProductCateList(pageNum, listLimit,Category);
 
 		
 		int maxPage = (int)Math.ceil((double)listCount / listLimit);
@@ -46,8 +46,7 @@ public class ProductCategoryProAction implements Action {
 		PageInfo pageInfo = new PageInfo(pageNum, maxPage, startPage, endPage, listCount);
 
 		request.setAttribute("pageInfo", pageInfo); 
-		
-		request.setAttribute("articleList", ProductList); 
+		request.setAttribute("articleList", ProductCateList); 
 		
 		
 		forward = new ActionForward();
