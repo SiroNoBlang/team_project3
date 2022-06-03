@@ -29,6 +29,7 @@ public class MemberDAO {
 		this.con = con;
 	}
 
+	//회원가입
 	public int joinSuccess(MemberBean memberBean) {
         System.out.println("joinSuccess - DAO");
         int joinCount = 0;
