@@ -3,9 +3,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
-// AJAX 를 사용하여 전달받은 id 가져와서 변수에 저장 후
-// MemberDAO 객체의 checkId() 메서드를 호출하여 아이디 중복 여부 확인 작업 요청
-// => 파라미터 : 아이디(id)     리턴타입 : boolean(isDuplicate)
+// CheckNicknameService 객체의 checkNickname() 메서드를 호출하여 아이디 중복 여부 확인 작업 요청
+// 마찬가지로 이것도 하나의 파일로 만들어서 닉네임과 아이디 판별을 해야함.
 String nickname = request.getParameter("member_nickname");
 
 CheckNicknameService service = new CheckNicknameService();

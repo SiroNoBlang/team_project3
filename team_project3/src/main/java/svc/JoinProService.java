@@ -10,7 +10,6 @@ import vo.MemberBean;
 public class JoinProService {
 
 	public boolean joinSuccess(MemberBean memberBean) {
-		System.out.println("JoinProService");
 		boolean isJoinSuccess = false;
 		
 		Connection con = getConnection();

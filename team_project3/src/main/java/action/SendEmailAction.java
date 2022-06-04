@@ -13,14 +13,10 @@ public class SendEmailAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		System.out.println("SendEmailAction");
-		
 		ActionForward forward = null;
 		
 		
 		String email = request.getParameter("member_email1") + request.getParameter("member_email2") ;
-		
-		System.out.println(email);
 		
 		SendEmailService service = new SendEmailService();
 		boolean isSendEmail = service.isSendEmail(email, request);

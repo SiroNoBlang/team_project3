@@ -49,14 +49,10 @@ import vo.ActionForward;
 // 커뮤니티 게시판 Controller
 @WebServlet("*.co")
 public class CommunityFrontController extends HttpServlet {
-	protected void doProcess(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-//		System.out.println("CommunityFrontController");
-
+	protected void doProcess(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 
 		String command = request.getServletPath();
-//		System.out.println("command : " + command);
 
 		Action action = null;
 		ActionForward forward = null;
@@ -167,7 +163,7 @@ public class CommunityFrontController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		} else if (command.equals("/QnaDetail.co")) {// QnA 리스트 상세정보(/QnaDetail.co) 요청
+		} else if (command.equals("/QnaDetail.co")) { // QnA 리스트 상세정보(/QnaDetail.co) 요청
 			action = new QnaDetailAction();
 
 			try {
@@ -175,14 +171,14 @@ public class CommunityFrontController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		}else if (command.equals("/QnaSearch.co")) {// QnA 검색(/QnaSearch.co) 요청
+		}else if (command.equals("/QnaSearch.co")) { // QnA 검색(/QnaSearch.co) 요청
 			action = new QnaSearchAction();
 			try {
 				forward = action.execute(request, response);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		}else if(command.equals("/QnaModifyForm.co")) {// QnA 수정form(/QnaModifyForm.co) 요청
+		}else if(command.equals("/QnaModifyForm.co")) { // QnA 수정form(/QnaModifyForm.co) 요청
 			// 비즈니스 로직 처리를 위해 BoardModifyFormAction 클래스의 execute() 메서드 호출
 			action = new QnaModifyFormAction();
 			
@@ -191,7 +187,7 @@ public class CommunityFrontController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		} else if(command.equals("/QnaModifyPro.co")) {// QnA 수정 (/QnaModifyPro.co) 요청
+		} else if(command.equals("/QnaModifyPro.co")) { // QnA 수정 (/QnaModifyPro.co) 요청
 			action = new QnaModifyProAction();
 			
 			try {
@@ -199,7 +195,7 @@ public class CommunityFrontController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		}else if(command.equals("/QnaReplyForm.co")) {// QnA 답글 (/QnaReplyForm.co) 요청
+		}else if(command.equals("/QnaReplyForm.co")) { // QnA 답글 (/QnaReplyForm.co) 요청
 			action = new QnaReplyFormAction();
 			
 			try {
@@ -207,7 +203,7 @@ public class CommunityFrontController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		}else if(command.equals("/QnaReplyPro.co")) {// QnA 답글 (/QnaReplyPro.co) 요청
+		}else if(command.equals("/QnaReplyPro.co")) { // QnA 답글 (/QnaReplyPro.co) 요청
 			action = new QnaReplyProAction();
 			
 			try {
@@ -244,28 +240,28 @@ public class CommunityFrontController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		} else if (command.equals("/Classification.co")) { // 가입된 회원 목록
+		} else if (command.equals("/Classification.co")) { // 상태와 등급에 따른 회원 목록
 			action = new ClassificationAction();
 			try {
 				forward = action.execute(request, response);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		} else if (command.equals("/ClassificationDetail.co")) { // 회원의 상세 정보
+		} else if (command.equals("/ClassificationDetail.co")) { // 상태와 등급에 회원의 상세 정보
 			action = new ClassificationDetailAction();
 			try {
 				forward = action.execute(request, response);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		} else if (command.equals("/ClassificationUpdate.co")) { // 회원의 상태 변경
+		} else if (command.equals("/ClassificationUpdate.co")) { // 상태와 등급에 회원의 상태 변경
 			action = new ClassificationUpdateAction();
 			try {
 				forward = action.execute(request, response);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		} else if (command.equals("/ClassificationDelete.co")) {// 공지사항 삭제(/NoticeDelete.co) 요청
+		} else if (command.equals("/ClassificationDelete.co")) { // 공지사항 삭제(/NoticeDelete.co) 요청
 			action = new ClassificationDeleteAction();
 			try {
 				forward = action.execute(request, response);

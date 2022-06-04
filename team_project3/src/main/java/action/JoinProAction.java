@@ -32,7 +32,6 @@ public class JoinProAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-//		System.out.println("JoinProAction");
 		ActionForward forward = null;
 		
 		String val = "";
@@ -67,15 +66,12 @@ public class JoinProAction implements Action {
 		
 		// MyMessageDigest 객체의 getHashedData() 메서드를 호출하여 암호화 된 암호문을 리턴받아 출력
 		String result = mmd.getHashedData();
-		System.out.println("비밀번호 암호화 결과 : " + result);
-		
-		
 		
 		MemberBean memberBean = new MemberBean();
 		memberBean.setMember_nickname(request.getParameter("member_nickname"));
 		memberBean.setMember_id(request.getParameter("join_member_id"));
 		memberBean.setMember_passwd(result);
-		memberBean.setMember_email(request.getParameter("member_email1") + request.getParameter("member_email2"));
+		memberBean.setMember_email(email);
 		memberBean.setMember_info_gender(request.getParameter("member_info_gender"));
 		memberBean.setMember_info_age(request.getParameter("member_info_age"));
 		memberBean.setMember_info_detail_like_style(val);

@@ -10,8 +10,6 @@ public class LogoutAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		System.out.println("LogoutAction");
-		
 		ActionForward forward = null;
 		
 		HttpSession session = request.getSession();

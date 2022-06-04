@@ -31,7 +31,6 @@ public class MemberDAO {
 
 	//회원가입
 	public int joinSuccess(MemberBean memberBean) {
-        System.out.println("joinSuccess - DAO");
         int joinCount = 0;
         
         PreparedStatement pstmt = null, pstmt2 = null, pstmt3 = null, pstmt4 = null, pstmt5 = null , pstmt6 = null;
@@ -77,7 +76,6 @@ public class MemberDAO {
 
 	//로그인
 	public MemberBean isLogin(String member_id, String member_passwd) {
-		System.out.println("MemberDAO isLogin");
 		MemberBean isLogin = null;
 		
 		PreparedStatement pstmt = null, pstmt2 = null;
@@ -96,7 +94,6 @@ public class MemberDAO {
 				pstmt2.setString(2, member_passwd);
 				rs2 = pstmt2.executeQuery();
 				
-				System.out.println(pstmt2); 
 				if(rs2.next()) {
 					isLogin = new MemberBean();
 					isLogin.setMember_code(rs2.getString("a.member_code"));
@@ -115,7 +112,6 @@ public class MemberDAO {
 			close(pstmt);
 			close(rs);
 		}
-		System.out.println("dao다 : " + isLogin);
 		return isLogin;
 	}
 	
@@ -211,7 +207,6 @@ public class MemberDAO {
 			close(pstmt);
 			close(rs);
 		}
-		System.out.println("getMemberArticle" + memberDetail);
 		return memberDetail;
 	}
 
@@ -231,13 +226,8 @@ public class MemberDAO {
 					+ " AND c.member_info_detail_code=?";
 			
 			pstmt = con.prepareStatement(sql);
-//			pstmt .setString(1, memberBean.getMember_code());
-//			pstmt .setString(2, memberBean.getMember_num());
-//			pstmt .setString(3, memberBean.getMember_nickname());
-//			pstmt .setString(4, memberBean.getMember_id());
 			pstmt .setString(1, memberBean.getMember_passwd());
 			pstmt .setString(2, memberBean.getMember_email());
-//			pstmt .setString(7, memberBean.getMember_info_code());
 			pstmt .setString(3, memberBean.getMember_info_name());
 			pstmt .setString(4, memberBean.getMember_info_gender());
 			pstmt .setString(5, memberBean.getMember_info_phone());
@@ -248,29 +238,14 @@ public class MemberDAO {
 			pstmt .setString(10, memberBean.getMember_info_ship_post_code());
 			pstmt .setString(11, memberBean.getMember_info_ship_address());
 			pstmt .setString(12, memberBean.getMember_info_ship_address_detail());
-//			pstmt .setString(13, memberBean.getMember_info_grade_code());
-//			pstmt .setString(19, memberBean.getMember_info_mypage_img_name());
-//			pstmt .setString(20, memberBean.getMember_info_mypage_real_img_name());
-//			pstmt .setString(21, memberBean.getMember_info_detail_code());
 			pstmt .setString(13, memberBean.getMember_info_detail_like_style());
 			pstmt .setString(14, memberBean.getMember_info_detail_like_brand());
 			pstmt .setString(15, memberBean.getMember_info_detail_like_category());
-//			pstmt .setInt(25, memberBean.getMember_info_detail_point());
-//			pstmt .setInt(26, memberBean.getMember_info_detail_acc_money());
-//			pstmt .setString(27, memberBean.getMember_service_log_code());
-//			pstmt .setString(28, memberBean.getMember_service_log_status());
-//			pstmt .setString(29, memberBean.getMember_service_log_join_date());
-//			pstmt .setString(30, memberBean.getMember_service_log_passwd_change_date());
-//			pstmt .setString(31, memberBean.getMember_service_log_grade_change_date());
-//			pstmt .setString(32, memberBean.getMember_service_log_login_date());
-//			pstmt .setInt(33, memberBean.getMember_service_log_order_count());
 			pstmt .setString(16, memberBean.getMember_code());
 			pstmt .setString(17, memberBean.getMember_code());
 			pstmt .setString(18, memberBean.getMember_code());
-//			pstmt .setString(20, memberBean.getMember_code());
 			
 			updateCount = pstmt.executeUpdate(); 
-			System.out.println("DAO업데이트 :" + updateCount);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -280,53 +255,9 @@ public class MemberDAO {
 		return updateCount;
 	}
 
-	public boolean getMemberUpdate(String member_code, String member_status, String reason) {
-		boolean isMemberUpdate = false;
-		
-		PreparedStatement pstmt = null;
-		int sucess = 0;
-		
-		try {
-			if(member_status.equals("정상")) {
-				String sql = "UPDATE member_service_log SET member_service_log_status=?,member_service_log_status_reason=0 WHERE member_service_log_code=?";
-				pstmt = con.prepareStatement(sql);
-				pstmt.setString(1, member_status);
-				pstmt.setString(2, member_code);
-				sucess = pstmt.executeUpdate();
-			} else if(member_status.equals("정지")) {
-				String sql = "UPDATE member_service_log SET member_service_log_status=?,member_service_log_login_date=REPLACE(now(),'-',''),member_service_log_status_reason=? WHERE member_service_log_code=?";
-				pstmt = con.prepareStatement(sql);
-				pstmt.setString(1, member_status);
-				pstmt.setString(2, reason);
-				pstmt.setString(3, member_code);
-				sucess = pstmt.executeUpdate();
-			} else {
-				String sql = "UPDATE member_service_log SET member_service_log_status=?,member_service_log_login_date=REPLACE(now(),'-','') WHERE member_service_log_code=?";
-				pstmt = con.prepareStatement(sql);
-				pstmt.setString(1, member_status);
-				pstmt.setString(2, member_code);
-				sucess = pstmt.executeUpdate();
-			}
-			
-			if(sucess > 0) {
-				isMemberUpdate = true;
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			close(pstmt);
-		}
-		
-		return isMemberUpdate;
-	}
-	
 	public int getUpateImg(MemberBean member) { //이미지 수정
-		System.out.println("DAO getUpateImg()");
 		PreparedStatement pstmt = null;
 		int updateCount = 0;
-		System.out.println(member.getMember_info_mypage_img_name());
-		System.out.println(member.getMember_info_mypage_real_img_name());
-		System.out.println(member.getMember_code());
 		try {
 			String sql = "UPDATE member_info"
 					+ " SET member_info_mypage_img_name=?,member_info_mypage_real_img_name=?"
@@ -347,7 +278,8 @@ public class MemberDAO {
 		return updateCount;
 	}
 	
-	//닉네임 중복체크
+	// 닉네임 중복체크
+	// 아이디 중복 DAO랑 하나로 합쳐서 판별해야함.
 	public boolean checkNickname(String nickname) {
 		boolean isDuplicate = false;
 		
@@ -374,7 +306,8 @@ public class MemberDAO {
 		return isDuplicate;
 	}
 	
-	//아이디 중복 체크
+	// 아이디 중복 체크
+	// 닉네임 중복 체크 DAO랑 합쳐서 판별하여 하나로 만들어야함. 
 	public boolean checkId(String id) {
 		boolean isDuplicate = false;
 		
@@ -405,9 +338,6 @@ public class MemberDAO {
 	//아이디 찾기
 	public String isFindId(String nickname, String email) {
 		String isFindId = "";
-		System.out.println("MemberDAO - isFindId");
-//		System.out.println(nickname);
-//		System.out.println(email);
 		
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -437,10 +367,6 @@ public class MemberDAO {
 		
 		boolean isFindPasswd = false;
 		
-		System.out.println("MemberDAO - isFindPasswd");
-//		System.out.println("id : " + id);
-//		System.out.println("email : " + email);
-		
 		PreparedStatement pstmt = null, pstmt2 = null;
 		ResultSet rs = null;
 		
@@ -453,7 +379,6 @@ public class MemberDAO {
 			rs = pstmt.executeQuery();
 			
 			if(rs.next()) {
-//				System.out.println("passwd : " + rs.getString("member_passwd"));
 				sql = "UPDATE member SET member_passwd=? WHERE member_id=? AND member_email=?";
 				pstmt2 = con.prepareStatement(sql);
 				pstmt2.setString(1, code);
@@ -466,7 +391,6 @@ public class MemberDAO {
 		} catch (SQLException e) {
 			e.printStackTrace();
 			System.out.println("SQL 구문 오류 - insertAuthInfo()");
-
 		} finally {
 			close(pstmt2);
 			close(pstmt);
@@ -477,8 +401,6 @@ public class MemberDAO {
 	
 	//회원가입시 인증코드 보내기
 	public boolean insertAuthInfo(String receiver, String code) {
-		System.out.println("MemberDAO - insertAuthInfo");
-		
 		boolean isSendEmail = false;
 		
 		PreparedStatement pstmt = null, pstmt2 = null, pstmt3=null;
@@ -558,13 +480,9 @@ public class MemberDAO {
 	
 	//인증하기 완료시 auth 테이블에서 auth_code 지우기
 	public boolean changeAuthStatus(String email) {
-		System.out.println("MemberDAO - changeAuthStatus");
-		
 		boolean AuthStatusResult = false;
 		
 		PreparedStatement pstmt = null;
-		
-//		System.out.println("changeAuthStatus" + email + "삭제되었다");
 		
 		try {
 			String sql = "DELETE FROM auth WHERE email=?";
@@ -582,7 +500,6 @@ public class MemberDAO {
 	}
 	
 	public int selectListCount(String member_code) { //좋아료 리스트
-		System.out.println("DAO에서 멤버코드 : " + member_code);
 		int listCount = 0;
 		
 		PreparedStatement pstmt = null;
@@ -603,7 +520,6 @@ public class MemberDAO {
 			
 			if(rs.next()) {
 				listCount = rs.getInt(1);
-				System.out.println("DAO rs.getINT" +rs.getInt(1));
 			}
 		} catch (SQLException e) {
 			System.out.println("SQL 구문 오류 발생");
@@ -617,7 +533,6 @@ public class MemberDAO {
 	}
 	
 	public ArrayList<LikeListBean> selectArticleList(int pageNum, int listLimit, String member_code) {
-		System.out.println("selectArticleList - DAO");
 		ArrayList<LikeListBean> articleList = null;
 		
 		PreparedStatement pstmt = null;
@@ -647,7 +562,6 @@ public class MemberDAO {
 				article.setLike_list_img_name(rs.getString("like_list_img_name"));
 				
 				articleList.add(article);
-//				System.out.println("DAO에서 articleList - " + articleList);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -658,7 +572,6 @@ public class MemberDAO {
 
 	//총 구매목록 수 조회
 	public int selectBuyListCount(String tableName) {
-		System.out.println("MemberDAO - selectBuyListCount()");
 		
 		int listCount = 0;
 		
@@ -718,7 +631,6 @@ public class MemberDAO {
 				
 				buyList.add(buy);
 			}
-//			System.out.println(productConfirmList);
 		} catch (SQLException e) {
 			System.out.println("SQL 구문 오류 발생! - selectBuyList()");
 			e.printStackTrace();
@@ -730,7 +642,6 @@ public class MemberDAO {
 	}
 	
 	public int selectSellListCount(String member_code) { //판매리스트 카운트
-		System.out.println("DAO에서 멤버코드 : " + member_code);
 		int listCount = 0;
 		
 		PreparedStatement pstmt = null;
@@ -745,7 +656,6 @@ public class MemberDAO {
 			
 			if(rs.next()) {
 				listCount = rs.getInt(1);
-				System.out.println("DAO rs.getINT" +rs.getInt(1));
 			}
 		} catch (SQLException e) {
 			System.out.println("SQL 구문 오류 발생");
@@ -759,7 +669,6 @@ public class MemberDAO {
 	}
 
 	public ArrayList<SellerDTO> selectSellArticleList(int pageNum, int listLimit, String member_code) { //판매리스트 조회
-		System.out.println("selectArticleList - DAO");
 		ArrayList<SellerDTO> sellarticleList = null;
 		
 		PreparedStatement pstmt = null;

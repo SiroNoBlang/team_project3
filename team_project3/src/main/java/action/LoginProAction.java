@@ -24,9 +24,6 @@ public class LoginProAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		System.out.println("LoginProAction");
-		
-		
 		//단방향 암호화된 비밀번호 
 		ActionForward forward = null;
 		
@@ -37,13 +34,10 @@ public class LoginProAction implements Action {
 		MyMessageDigest mmd2 = new MyMessageDigest(algorithm, passwd);
 		String result2 = mmd2.getHashedData(); // 입력받은 패스워드 암호화 결과 리턴받기
 		
-		
 		String member_id = request.getParameter("login_member_id");
-		
 		
 		LoginProService service = new LoginProService();
 		MemberBean isLogin = service.isLogin(member_id, result2);
-		System.out.println("액션이다" + isLogin);
 		
 		if(isLogin != null) {
 			if(isLogin.getGrade_name().equals("Admin")) {
@@ -83,7 +77,6 @@ public class LoginProAction implements Action {
 			out.println("history.back()");
 			out.println("</script>");
 		}
-		
 		
 		return forward;
 	}

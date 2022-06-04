@@ -2,12 +2,10 @@ package action;
 
 import java.io.PrintWriter;
 
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import svc.MemberManagementUpdateService;
-import svc.MemberUpdateService;
 import vo.ActionForward;
 
 public class MemberUpdateAction implements Action {

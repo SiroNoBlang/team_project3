@@ -7,6 +7,8 @@ import java.sql.Connection;
 import dao.MemberDAO;
 
 public class CheckNicknameService {
+	// MemberDAO 객체의 checkNickname() 메서드를 호출하여 데이터베이스에서의 닉네임 중복 판별
+	// checkIdService랑 합쳐서 판별해야함. 하나의 서비스만 있으면 된다는 소리임.
 	public boolean checkNickname(String nickname) {
 		boolean isDuplicate = false;
 		
@@ -23,7 +25,7 @@ public class CheckNicknameService {
 		}
 		
 		close(con);
-		System.out.println(isDuplicate);
+		
 		return isDuplicate;
 	}
 }
