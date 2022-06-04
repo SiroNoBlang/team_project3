@@ -41,9 +41,6 @@ public class NoticeModifyProAction implements Action {
 		
 		MultipartRequest multi = new MultipartRequest(request, realPath, fileSize, "UTF-8", new DefaultFileRenamePolicy());
 		
-		int notice_num = Integer.parseInt(multi.getParameter("notice_num"));
-		int event_num = Integer.parseInt(multi.getParameter("notice_num"));
-
 		String communityType = multi.getParameter("communityType");
 		System.out.println(communityType); //커뮤니티 카테고리 확인 작업
 		
@@ -84,6 +81,7 @@ public class NoticeModifyProAction implements Action {
 		
 		//공지사항 수정
 		if(communityType.equals("notice")) {
+			int notice_num = Integer.parseInt(multi.getParameter("notice_num"));
 			
 			//공지사항 중에 첨부파일을 빼고 담을 NoticeBean
 			notice = new NoticeBean();
@@ -150,6 +148,7 @@ public class NoticeModifyProAction implements Action {
 			
 		//이벤트 수정	
 		} else if (communityType.equals("event")){
+			int event_num = Integer.parseInt(multi.getParameter("event_num"));
 			//이벤트 테이블 중에 첨부파일을 빼고 담을 NoticeBean
 			event = new EventBean();
 			
