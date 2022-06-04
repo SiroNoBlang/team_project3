@@ -1,10 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>   
- <%
-	//세션 객체에 저장된 세션 닉네임("sNickname") 가져와서 변수에 저장
-	String sNickname = (String)session.getAttribute("sNickname");
- %>  
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -226,7 +223,7 @@
 						</table>
 						<br>
 						<section class="pagination justify-content-center" >
-							<input class="page-item page-link listMargin" type="button" value="수정" onclick="location.href='CommunityQnaModifyForm.ma?qna_num=${param.qna_num}&page=${param.page}'">
+							<input class="page-item page-link listMargin" type="button" value="수정" onclick="location.href='CommunityQnaConfirm.ma?qna_num=${param.qna_num}&page=${param.page}'">
 							<input class="page-item page-link listMargin" type="button" value="삭제" onclick="location.href='CommunityQnaDeleteForm.ma?qna_num=${param.qna_num}&page=${param.page}'">
 							<input class="page-item page-link listMargin" type="button" value="목록" onclick="history.back()">
 						</section>

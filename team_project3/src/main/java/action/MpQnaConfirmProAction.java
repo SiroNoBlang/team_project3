@@ -32,7 +32,7 @@ public class MpQnaConfirmProAction implements Action {
 			out.println("</script>");
 		} else{
 			forward = new ActionForward();
-			forward.setPath("CommunityQnaDetail.ma?page=" + pageNum + "&qna_num="+qna_num);
+			forward.setPath("CommunityQnaModifyForm.ma?page=" + pageNum + "&qna_num="+qna_num);
 			forward.setRedirect(true);
 		}
 	

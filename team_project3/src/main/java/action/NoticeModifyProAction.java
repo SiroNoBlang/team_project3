@@ -42,7 +42,7 @@ public class NoticeModifyProAction implements Action {
 		MultipartRequest multi = new MultipartRequest(request, realPath, fileSize, "UTF-8", new DefaultFileRenamePolicy());
 		
 		String communityType = multi.getParameter("communityType");
-		System.out.println(communityType); //커뮤니티 카테고리 확인 작업
+//		System.out.println(communityType); //커뮤니티 카테고리 확인 작업
 		
 		CommunityModifyProService service = new CommunityModifyProService();
 		boolean isNoticeModifySuccess = false;

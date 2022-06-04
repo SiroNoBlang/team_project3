@@ -1,10 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>   
- <%
-	//세션 객체에 저장된 세션 닉네임("sNickname") 가져와서 변수에 저장
-	String sNickname = (String)session.getAttribute("sNickname");
- %>  
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -33,6 +30,7 @@ $(document).ready( function() {
 		$("#qnaTitleId").val("["+$(this).val()+"] " + title );
 	});
 });
+
 </script>
 </head>
 <body class="animsition">
@@ -242,7 +240,7 @@ $(document).ready( function() {
 							</tr>
 							<tr>
 								<th><label for="qna_nickname">작성자</label></th>
-								<td><input type="text" name="qna_nickname" value="<%=sNickname %>" readonly="readonly"></td>
+								<td><input type="text" name="qna_nickname" value="${sNickname }" readonly="readonly"></td>
 							</tr>
 							<tr>
 								<th><label for="qna_date">작성일</label></th>
@@ -258,8 +256,8 @@ $(document).ready( function() {
 						</table>
 						<br>
 						<section class="pagination justify-content-center" >	
-							<input class="page-item page-link listMargin"  type="submit" value="수정">&nbsp;&nbsp;
-							<input class="page-item page-link listMargin"  type="reset" value="다시쓰기">&nbsp;&nbsp;
+							<input class="page-item page-link listMargin"  type="submit" value="수정">
+							<input class="page-item page-link listMargin"  type="reset" value="다시쓰기">
 							<input class="page-item page-link listMargin"  type="button" value="취소" onclick="history.back()">
 						</section>
 					</form>
