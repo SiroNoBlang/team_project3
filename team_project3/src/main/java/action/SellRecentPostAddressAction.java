@@ -14,12 +14,12 @@ public class SellRecentPostAddressAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		System.out.println("SellRecentPostAddressAction -배송지 주소 찾기");
 		ActionForward forward = null;
 		
 		String sell_member_code =request.getParameter("member_code");
 		SellRecentPostAddressService service = new SellRecentPostAddressService();
 		//MemberBean memberBean = new MemberBean();
+		// 여기 addree 변수명은 있는데 사용처가 없습니다. 필요 없으면 삭제해주세요.
 		SellerAddress address = new SellerAddress();
 		ArrayList< SellerAddress> addressArr = new ArrayList<SellerAddress>();
 		addressArr =service.findAddress(sell_member_code);
@@ -29,10 +29,6 @@ public class SellRecentPostAddressAction implements Action {
 		forward = new ActionForward();
 		forward.setPath("SellRecentPostAddress.pr");
 		forward.setRedirect(false);
-		
-		
-		
-		
 		
 		return forward;
 	}

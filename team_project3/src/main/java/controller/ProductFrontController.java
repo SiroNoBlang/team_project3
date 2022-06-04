@@ -27,12 +27,9 @@ public class ProductFrontController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doProccess(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("ProductFrontController");
-
 		request.setCharacterEncoding("UTF-8");
 
 		String command = request.getServletPath();
-		System.out.println("command : " + command);
 
 		Action action = null;
 		ActionForward forward = null;

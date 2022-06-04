@@ -12,7 +12,6 @@ public class SendAdminAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		System.out.println("SendAdmin.pr");
 		ActionForward forward = null;
 		
 		String code = request.getParameter("member_code");
@@ -28,6 +27,7 @@ public class SendAdminAction implements Action {
 			PrintWriter out = response.getWriter();
 			out.println("<script>");
 			out.println("alert('메일이 정상적으로 전송되었습니다!')");
+//			out.println("location.href='Contact.pr?member_code=" + code + "'"); // 이걸보여줄까 고민중인거 뿐임.
 			out.println("</script>");
 			forward = new ActionForward("Contact.pr?member_code=" + code, true);
 		} else {

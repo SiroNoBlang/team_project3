@@ -32,10 +32,6 @@ public class SellerDAO {
 	}
 
 	public int insertArticle(SellerDTO seller, ArrayList<SellerimgDTO> sellimglist) { // 판매글 작성
-		System.out.println("====================");
-		System.out.println(seller);
-		System.out.println("====================");
-		System.out.println(sellimglist);
 		// INSERT 작업 결과를 리턴받아 저장할 변수 선언
 		int insertCount = 0;
 		int num = 0;
@@ -66,14 +62,11 @@ public class SellerDAO {
 			for (SellerimgDTO sellimg : sellimglist) {
 				sql = "INSERT INTO sell_img VALUES ((SELECT MAX(sell_num) FROM sell),?,?,?)";
 				pstmt2 = con.prepareStatement(sql);
-				// int sell_img_num =;
 				pstmt2.setInt(1, sellimg.getSell_img_num());
 				pstmt2.setString(2, sellimg.getSell_img_name());
 				pstmt2.setString(3, sellimg.getSell_img_real_name());
 
 				pstmt2.executeUpdate();
-//               close(pstmt);
-				System.out.println("INSERT -SELL_IMG");
 			}
 
 			sql = "INSERT INTO sell_list VALUES ((SELECT MAX(SELL_NUM) FROM sell), '판매중', ?, '관리자 작업필요')";// 검수자
@@ -82,9 +75,7 @@ public class SellerDAO {
 			pstmt3 = con.prepareStatement(sql);
 			pstmt3.setString(1, seller.getSell_list_approve_date());
 			insertCount = pstmt3.executeUpdate();
-			System.out.println("INSERT -SELL_LIST");
 
-			System.out.println("SellerDAO - insertArticle()");
 		} catch (SQLException e) {
 			System.out.println("SQL 구문 오류 발생! - insertArticle()");
 			e.printStackTrace();
@@ -102,8 +93,6 @@ public class SellerDAO {
 
 	// shop 클릭시 데이터 뿌리기 작업(검수완료된 데이터 갯수 세기)
 	public int selectListCount() {
-		System.out.println("SellerDAO - selectListCount()");
-
 		int listCount = 0;
 
 		PreparedStatement pstmt = null;
@@ -119,7 +108,6 @@ public class SellerDAO {
 			if (rs.next()) {
 				listCount = rs.getInt(1);
 			}
-			System.out.println("판매가능 상품 갯수:" + listCount);
 		} catch (SQLException e) {
 			System.out.println("SQL 구문 오류 발생! - selectListCount()");
 			e.printStackTrace();
@@ -133,8 +121,6 @@ public class SellerDAO {
 	}
 
 	public ArrayList<SellerProductDTO> selectArticleList(int pageNum, int listLimit) {
-		System.out.println("selectArticleList()ArrayList 객체 가져오기");
-
 		ArrayList<SellerProductDTO> articleList = null;
 
 		PreparedStatement pstmt = null;
@@ -143,11 +129,6 @@ public class SellerDAO {
 		// 조회 시작 게시물 번호(행 번호) 계산
 		int startRow = (pageNum - 1) * listLimit;
 
-		// 게시물 목록 조회
-		// => 답글에 대한 처리
-		// 참조글번호(board_re_ref) 기준 내림차순,
-		// 순서번호(board_re_seq) 기준 오름차순 정렬
-		// => 조회 시작 게시물 번호(startRow) 부터 목록의 게시물 수(listLimit) 만큼 조회
 		try {
 			String sql = "SELECT a.sell_num, a.sell_size , a.sell_category,a.sell_category_detail, a.sell_title, a.sell_color, a.sell_brand, a.sell_price, a.sell_readcount,"
 					+ " b.sell_img_name, b.sell_img_real_name ,b.sell_img_real_num ,b.sell_img_num,b.sell_img_name,b.sell_img_real_name, c.sell_list_num, c.sell_list_item_status"
@@ -160,15 +141,6 @@ public class SellerDAO {
 			pstmt.setInt(2, listLimit);
 
 			rs = pstmt.executeQuery();
-
-//            sql = "SELECT a.sell_title, a.sell_brand, a.sell_price, a.sell_color, a.sell_readcount, b.sell_img_name, c.sell_list_num, c.sell_list_item_status, b.sell_img_real_name"
-//                     + "FROM sell AS a JOIN sell_img AS b ON a.sell_num = b.sell_img_num JOIN sell_list AS c ON a.sell_num = c.sell_list_num "
-//                     + "WHERE sell_list_item_status='판매중'";
-			// join을 사용하자
-			// sell -> 조회수, 타이틀,브랜드
-			// sell_list ->
-			// sell_img -> 일단 사진은 다 사용해야됨
-			// 이외에 좋아요 까지
 
 			articleList = new ArrayList<SellerProductDTO>();
 
@@ -213,17 +185,13 @@ public class SellerDAO {
 
 		try {
 			String sql = "SELECT a.sell_num,a.sell_member_code, a.sell_size , a.sell_category, a.sell_category_detail, a.sell_title, a.sell_color, a.sell_brand, a.sell_price, a.sell_readcount,"
-					+" b.sell_img_name, b.sell_img_real_name ,b.sell_img_real_num ,b.sell_img_num,b.sell_img_name,b.sell_img_real_name, c.sell_list_num, c.sell_list_item_status"
-					+" FROM sell AS a JOIN sell_img AS b ON a.sell_num = b.sell_img_real_num JOIN sell_list AS c ON a.sell_num = c.sell_list_num"
-					+" WHERE sell_list_num= ? AND"
-					+"(sell_img_real_num,sell_img_num)  in (SELECT  sell_img_real_num, MAX(sell_img_num)  FROM sell_img    GROUP BY sell_img_real_num  ORDER BY sell_img_real_num ,sell_img_num DESC  )";
+					+ " b.sell_img_name, b.sell_img_real_name ,b.sell_img_real_num ,b.sell_img_num,b.sell_img_name,b.sell_img_real_name, c.sell_list_num, c.sell_list_item_status"
+					+ " FROM sell AS a JOIN sell_img AS b ON a.sell_num = b.sell_img_real_num JOIN sell_list AS c ON a.sell_num = c.sell_list_num"
+					+ " WHERE sell_list_num= ? AND"
+					+ "(sell_img_real_num,sell_img_num)  in (SELECT  sell_img_real_num, MAX(sell_img_num)  FROM sell_img    GROUP BY sell_img_real_num  ORDER BY sell_img_real_num ,sell_img_num DESC  )";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, sell_num);
 			rs = pstmt.executeQuery();
-
-//         SELECT a.sell_num, a.sell_category, a.sell_category_detail, a.sell_title, a.sell_color, 
-//         a.sell_brand, a.sell_price, a.sell_readcount, 
-//         b.sell_img_name, b.sell_img_real_name, c.sell_list_num
 
 			if (rs.next()) {
 				article = new SellerProductDTO();
@@ -241,7 +209,6 @@ public class SellerDAO {
 				article.setSell_img_real_name(rs.getString("sell_img_real_name"));
 				article.setSell_list_num(rs.getInt("sell_list_num"));
 				article.setSell_list_item_status(rs.getString("sell_list_item_status"));
-				System.out.println(article);
 
 			}
 		} catch (SQLException e) {
@@ -291,7 +258,7 @@ public class SellerDAO {
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, sell_num);
 			rs = pstmt.executeQuery();
-			
+
 			while (rs.next()) {
 				ProductRe = new SellerProductDTO();
 				ProductRe.setSell_num(rs.getInt("sell_num"));
@@ -301,10 +268,9 @@ public class SellerDAO {
 				ProductRe.setSell_price(rs.getInt("sell_price"));
 				ProductRe.setSell_img_name(rs.getString("sell_img_name"));
 				ProductRe.setSell_img_real_name(rs.getString("sell_img_real_name"));
-				
-				
+
 				productarr.add(ProductRe);
-				
+
 			}
 			System.out.println(productarr);
 
@@ -320,7 +286,6 @@ public class SellerDAO {
 	}
 
 	public MemberBean selectMemberShop(String member_code) { // 상세 글에서 (buy)구매하기->memberBean을 이용해 구매자 정보 가져오기
-		System.out.println("selectMemberShop-구매DAO(member_code)");
 		MemberBean memberbean = null;
 		/*
 		 * member_info테이블 fk=> member_info_code <-> member_code
@@ -366,7 +331,6 @@ public class SellerDAO {
 
 			}
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
@@ -398,8 +362,6 @@ public class SellerDAO {
 				productimg.add(Sellerdetailimg);
 			}
 
-			System.out.println(productimg);
-
 		} catch (SQLException e) {
 			System.out.println("SQL 구문 오류 발생! - updateReadcount()");
 			e.printStackTrace();
@@ -412,8 +374,6 @@ public class SellerDAO {
 	}
 
 	public ArrayList<SellerProductDTO> searchArticleList(int pageNum, int listLimit, String productSearch) {
-		System.out.println("selectArticleList()ArrayList 객체 가져오기");
-
 		ArrayList<SellerProductDTO> productList = null;
 
 		PreparedStatement pstmt = null;
@@ -422,34 +382,20 @@ public class SellerDAO {
 		// 조회 시작 게시물 번호(행 번호) 계산
 		int startRow = (pageNum - 1) * listLimit;
 
-		// 게시물 목록 조회
-		// => 답글에 대한 처리
-		// 참조글번호(board_re_ref) 기준 내림차순,
-		// 순서번호(board_re_seq) 기준 오름차순 정렬
-		// => 조회 시작 게시물 번호(startRow) 부터 목록의 게시물 수(listLimit) 만큼 조회
 		try {
 			String sql = "SELECT a.sell_num, a.sell_size , a.sell_category,a.sell_category_detail, a.sell_title, a.sell_color, a.sell_brand, a.sell_price, a.sell_readcount,"
 					+ " b.sell_img_name, b.sell_img_real_name ,b.sell_img_real_num ,b.sell_img_num,b.sell_img_name,b.sell_img_real_name, c.sell_list_num, c.sell_list_item_status"
 					+ " FROM sell AS a JOIN sell_img AS b ON a.sell_num = b.sell_img_real_num JOIN sell_list AS c ON a.sell_num = c.sell_list_num"
-					+ " WHERE sell_list_item_status='판매중' AND sell_brand Like '%" + productSearch + "%' OR sell_title Like '%" + productSearch + "%' AND " 
+					+ " WHERE sell_list_item_status='판매중' AND sell_brand Like '%" + productSearch
+					+ "%' OR sell_title Like '%" + productSearch + "%' AND "
 					+ "(sell_img_real_num,sell_img_num)  in (SELECT sell_img_real_num, MAX(sell_img_num)  FROM sell_img    GROUP BY sell_img_real_num  ORDER BY sell_img_real_num ,sell_img_num DESC  )"
 					+ " ORDER BY a.sell_num DESC LIMIT ?,? ";
-					
+
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, startRow);
 			pstmt.setInt(2, listLimit);
-//			pstmt.setString(3, productSearch);
 
 			rs = pstmt.executeQuery();
-
-//            sql = "SELECT a.sell_title, a.sell_brand, a.sell_price, a.sell_color, a.sell_readcount, b.sell_img_name, c.sell_list_num, c.sell_list_item_status, b.sell_img_real_name"
-//                     + "FROM sell AS a JOIN sell_img AS b ON a.sell_num = b.sell_img_num JOIN sell_list AS c ON a.sell_num = c.sell_list_num "
-//                     + "WHERE sell_list_item_status='판매중'";
-			// join을 사용하자
-			// sell -> 조회수, 타이틀,브랜드
-			// sell_list ->
-			// sell_img -> 일단 사진은 다 사용해야됨
-			// 이외에 좋아요 까지
 
 			productList = new ArrayList<SellerProductDTO>();
 
@@ -484,32 +430,32 @@ public class SellerDAO {
 		}
 		return productList;
 	}
-	//결제 완료 후 MemberBean 객체를 member_codo를 이용하여 action에서 받아온 MemberBean memberBeanIm 정보를 MemberBean 객체에 Update 해주기
-		public int updateMemberInfo ( MemberBean memberBeanIm) {
-			System.out.println("sellDAO(406행)-updateMemberInfo()");
-			
-			PreparedStatement pstmt = null;
-			int updateCount =0;
-			
-			try {
-				String sql ="UPDATE  member_info AS a"
-					 +  " JOIN member_info_detail AS b ON a.member_info_code = b.member_info_detail_code"
-					 +  " SET a.member_info_name=?, a.member_info_phone=?, a.member_info_post_code=?, a.member_info_address=?, a.member_info_address_detail=?,"
-					 +  " b.member_info_detail_point= b.member_info_detail_point - ?,b.member_info_detail_acc_money= b.member_info_detail_acc_money + ?"
-					 +  " WHERE member_info_code=?" ;
-				
-				pstmt=con.prepareStatement(sql);
-				pstmt.setString(1, memberBeanIm.getMember_info_name());
-				pstmt.setString(2, memberBeanIm.getMember_info_phone());
-				pstmt.setString(3, memberBeanIm.getMember_info_post_code());
-				pstmt.setString(4, memberBeanIm.getMember_info_address());
-				pstmt.setString(5, memberBeanIm.getMember_info_address_detail());
-				pstmt.setInt(6, memberBeanIm.getMember_info_detail_point());
-				pstmt.setInt(7, memberBeanIm.getMember_info_detail_acc_money());
-				pstmt.setString(8, memberBeanIm.getMember_code());
-				
-				updateCount = pstmt.executeUpdate();
-			
+
+	// 결제 완료 후 MemberBean 객체를 member_codo를 이용하여 action에서 받아온 MemberBean memberBeanIm
+	// 정보를 MemberBean 객체에 Update 해주기
+	public int updateMemberInfo(MemberBean memberBeanIm) {
+		PreparedStatement pstmt = null;
+		int updateCount = 0;
+
+		try {
+			String sql = "UPDATE  member_info AS a"
+					+ " JOIN member_info_detail AS b ON a.member_info_code = b.member_info_detail_code"
+					+ " SET a.member_info_name=?, a.member_info_phone=?, a.member_info_post_code=?, a.member_info_address=?, a.member_info_address_detail=?,"
+					+ " b.member_info_detail_point= b.member_info_detail_point - ?,b.member_info_detail_acc_money= b.member_info_detail_acc_money + ?"
+					+ " WHERE member_info_code=?";
+
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, memberBeanIm.getMember_info_name());
+			pstmt.setString(2, memberBeanIm.getMember_info_phone());
+			pstmt.setString(3, memberBeanIm.getMember_info_post_code());
+			pstmt.setString(4, memberBeanIm.getMember_info_address());
+			pstmt.setString(5, memberBeanIm.getMember_info_address_detail());
+			pstmt.setInt(6, memberBeanIm.getMember_info_detail_point());
+			pstmt.setInt(7, memberBeanIm.getMember_info_detail_acc_money());
+			pstmt.setString(8, memberBeanIm.getMember_code());
+
+			updateCount = pstmt.executeUpdate();
+
 //				sql=" UPDATE member_info_detail"				//price ,acc_money 업데이트해야됨.
 //						+ "	SET  member_info_detail_point=(SELECT member_info_detail_point"
 //						+ "					FROM member_info_detail"
@@ -518,267 +464,237 @@ public class SellerDAO {
 //						+ "					FROM member_info_detail"
 //						+ "						WHERE member_info_detail_code ='fb44a7c4dca011ec9fb70a0027000011')"
 //						+ "	WHERE member_info_detail_code='fb44a7c4dca011ec9fb70a0027000011'"; 
-				
-			} catch (Exception e) {
-				System.out.println("SQL구문 오류 발생! -updateMemberInfo()");
-				e.printStackTrace();
-			} finally {
-				close(pstmt); 
-				
-			}
-			
 
-			return updateCount;
-		}
-	//구매자 정보 저장용 DAO  -(구매시 구매자 정보 저장 )
-		public int insertMemberInfo(SellerProductDTO sellerDTO) {  
-			System.out.println("sellDAO-updateMemberInfo()");
-			int insertCount =0;
-			PreparedStatement pstmt = null;
-			
-			System.out.println("dao에서"+sellerDTO);
-			try {
-							//현재 service와 dao에서 값이 안넘어옴
-				String sql ="INSERT INTO buy VALUES(?,?,?,?,REPLACE(now(),'-',''),'배송중');";
-				 pstmt = con.prepareStatement(sql);
-				 pstmt.setString(1, sellerDTO.getBuy_member_code());
-				 pstmt.setInt(2, sellerDTO.getBuy_item_num());
-				 pstmt.setInt(3, sellerDTO.getBuy_price());
-				 pstmt.setInt(4, sellerDTO.getBuy_point());
-				 
-				 insertCount = pstmt.executeUpdate();
-				
-				
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}finally {
-				close(pstmt);
-			}
+		} catch (Exception e) {
+			System.out.println("SQL구문 오류 발생! -updateMemberInfo()");
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
 
-			return insertCount;
 		}
 
-		public MemberBean selectMemberInfo(String member_code) { //update 완료 후 update된 내용 가져오기
-			MemberBean member = null;
-			PreparedStatement pstmt = null;
-			ResultSet rs = null;
-			System.out.println(member_code);
-			try {
-				String sql ="SELECT a.member_info_name, a.member_info_phone, a.member_info_post_code, a.member_info_address, a.member_info_address_detail,"
-						 +  "b.member_info_detail_point, b.member_info_detail_acc_money "
-						 +  "FROM member_info AS a JOIN member_info_detail AS b ON a.member_info_code=b.member_info_detail_code WHERE member_info_code=?";
-						
-				pstmt =con.prepareStatement(sql);
-				pstmt.setString(1, member_code);
-				rs = pstmt.executeQuery();
-				if(rs.next()) {
-					member = new MemberBean();
-					member.setMember_info_name(rs.getString("member_info_name"));		
-					member.setMember_info_phone(rs.getString("member_info_phone"));
-					member.setMember_info_post_code(rs.getString("member_info_post_code"));
-					member.setMember_info_address(rs.getString("member_info_address"));
-					member.setMember_info_address_detail(rs.getString("member_info_address_detail"));
-					member.setMember_info_detail_point(rs.getInt("member_info_detail_point"));
-					member.setMember_info_detail_acc_money(rs.getInt("member_info_detail_acc_money"));
-					
-				System.out.println("(memberDAO)"+member);
-				}
-				
-				
-				
-			} catch (Exception e) {
-				System.out.println("구문오류");
-				e.printStackTrace();
-			}
-			
-			
-			
-			return member;
+		return updateCount;
+	}
+
+	// 구매자 정보 저장용 DAO -(구매시 구매자 정보 저장 )
+	public int insertMemberInfo(SellerProductDTO sellerDTO) {
+		int insertCount = 0;
+		PreparedStatement pstmt = null;
+
+		try {
+			// 현재 service와 dao에서 값이 안넘어옴
+			String sql = "INSERT INTO buy VALUES(?,?,?,?,REPLACE(now(),'-',''),'배송중');";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, sellerDTO.getBuy_member_code());
+			pstmt.setInt(2, sellerDTO.getBuy_item_num());
+			pstmt.setInt(3, sellerDTO.getBuy_price());
+			pstmt.setInt(4, sellerDTO.getBuy_point());
+
+			insertCount = pstmt.executeUpdate();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
 		}
-		//sell_num을 이용하여 update해주기 sell_list테이블의 sell_list_status: 판매중 ->판매완료
-		public int sellUpdate(int sell_num) {
-			PreparedStatement pstmt = null;
-			int updateCount=0;
-			try {
-				String sql="UPDATE sell_list"
-						+ " SET sell_list_item_status ='판매완료' "
-						+ " WHERE sell_list_num =?";
-				pstmt =con.prepareStatement(sql);
-				pstmt.setInt(1, sell_num);
-				
-				updateCount = pstmt.executeUpdate();
+
+		return insertCount;
+	}
+
+	public MemberBean selectMemberInfo(String member_code) { // update 완료 후 update된 내용 가져오기
+		MemberBean member = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		System.out.println(member_code);
+		try {
+			String sql = "SELECT a.member_info_name, a.member_info_phone, a.member_info_post_code, a.member_info_address, a.member_info_address_detail,"
+					+ "b.member_info_detail_point, b.member_info_detail_acc_money "
+					+ "FROM member_info AS a JOIN member_info_detail AS b ON a.member_info_code=b.member_info_detail_code WHERE member_info_code=?";
+
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, member_code);
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				member = new MemberBean();
+				member.setMember_info_name(rs.getString("member_info_name"));
+				member.setMember_info_phone(rs.getString("member_info_phone"));
+				member.setMember_info_post_code(rs.getString("member_info_post_code"));
+				member.setMember_info_address(rs.getString("member_info_address"));
+				member.setMember_info_address_detail(rs.getString("member_info_address_detail"));
+				member.setMember_info_detail_point(rs.getInt("member_info_detail_point"));
+				member.setMember_info_detail_acc_money(rs.getInt("member_info_detail_acc_money"));
+
+			}
+
+		} catch (Exception e) {
+			System.out.println("구문오류");
+			e.printStackTrace();
+		}
+
+		return member;
+	}
+
+	// sell_num을 이용하여 update해주기 sell_list테이블의 sell_list_status: 판매중 ->판매완료
+	public int sellUpdate(int sell_num) {
+		PreparedStatement pstmt = null;
+		int updateCount = 0;
+		try {
+			String sql = "UPDATE sell_list" + " SET sell_list_item_status ='판매완료' " + " WHERE sell_list_num =?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, sell_num);
+
+			updateCount = pstmt.executeUpdate();
 //				System.out.println(updateCount);
-			} catch (SQLException e) {
-				System.out.println("SQL 구문오류!");
-				e.printStackTrace();
+		} catch (SQLException e) {
+			System.out.println("SQL 구문오류!");
+			e.printStackTrace();
+		}
+		return updateCount;
+	}
+
+	public MemberBean getEmail(String code) {
+		MemberBean member = null;
+
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+			String sql = "SELECT member_code, member_email, member_nickname FROM member WHERE member_code=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, code);
+
+			rs = pstmt.executeQuery();
+
+			if (rs.next()) {
+				member = new MemberBean();
+				member.setMember_code(rs.getString(1));
+				member.setMember_email(rs.getString(2));
+				member.setMember_nickname(rs.getString(3));
 			}
-			return updateCount;
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
 		}
 
-		public MemberBean getEmail(String code) {
-			MemberBean member = null;
-			
-			PreparedStatement pstmt = null;
-			ResultSet rs = null;
-			
-			try {
-				String sql ="SELECT member_code, member_email, member_nickname FROM member WHERE member_code=?";
-				pstmt = con.prepareStatement(sql);
-				pstmt.setString(1, code);
-				
-				rs = pstmt.executeQuery();
-				
-				if(rs.next()) {
-					member = new MemberBean();
-					member.setMember_code(rs.getString(1));
-					member.setMember_email(rs.getString(2));
-					member.setMember_nickname(rs.getString(3));
-				}
-				
-			} catch (SQLException e) {
-				e.printStackTrace();
-			} finally {
-				close(pstmt);
-			}
-			
-			return member;
-		}
+		return member;
+	}
 
-		public ArrayList<SellerProductDTO> CateArticleList(int pageNum, int listLimit, String category) {
-			ArrayList<SellerProductDTO> productCateList = null;
+	public ArrayList<SellerProductDTO> CateArticleList(int pageNum, int listLimit, String category) {
+		ArrayList<SellerProductDTO> productCateList = null;
 
-			PreparedStatement pstmt = null;
-			ResultSet rs = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
 
-			// 조회 시작 게시물 번호(행 번호) 계산
-			int startRow = (pageNum - 1) * listLimit;
+		// 조회 시작 게시물 번호(행 번호) 계산
+		int startRow = (pageNum - 1) * listLimit;
 
-			// 게시물 목록 조회
-			// => 답글에 대한 처리
-			// 참조글번호(board_re_ref) 기준 내림차순,
-			// 순서번호(board_re_seq) 기준 오름차순 정렬
-			// => 조회 시작 게시물 번호(startRow) 부터 목록의 게시물 수(listLimit) 만큼 조회
-			try {
-				String sql = "SELECT a.sell_num, a.sell_size , a.sell_category,a.sell_category_detail, a.sell_title, a.sell_color, a.sell_brand, a.sell_price, a.sell_readcount,"
-						+ " b.sell_img_name, b.sell_img_real_name ,b.sell_img_real_num ,b.sell_img_num,b.sell_img_name,b.sell_img_real_name, c.sell_list_num, c.sell_list_item_status"
-						+ " FROM sell AS a JOIN sell_img AS b ON a.sell_num = b.sell_img_real_num JOIN sell_list AS c ON a.sell_num = c.sell_list_num"
-						+ " WHERE sell_list_item_status='판매중' AND sell_category = " + category +" AND" 
-						+ "(sell_img_real_num,sell_img_num)  in (SELECT sell_img_real_num, MAX(sell_img_num)  FROM sell_img    GROUP BY sell_img_real_num  ORDER BY sell_img_real_num ,sell_img_num DESC  )"
-						+ " ORDER BY a.sell_num DESC LIMIT ?,? ";
-				pstmt = con.prepareStatement(sql);
-				pstmt.setInt(1, startRow);
-				pstmt.setInt(2, listLimit);
+		try {
+			String sql = "SELECT a.sell_num, a.sell_size , a.sell_category,a.sell_category_detail, a.sell_title, a.sell_color, a.sell_brand, a.sell_price, a.sell_readcount,"
+					+ " b.sell_img_name, b.sell_img_real_name ,b.sell_img_real_num ,b.sell_img_num,b.sell_img_name,b.sell_img_real_name, c.sell_list_num, c.sell_list_item_status"
+					+ " FROM sell AS a JOIN sell_img AS b ON a.sell_num = b.sell_img_real_num JOIN sell_list AS c ON a.sell_num = c.sell_list_num"
+					+ " WHERE sell_list_item_status='판매중' AND sell_category = " + category + " AND"
+					+ "(sell_img_real_num,sell_img_num)  in (SELECT sell_img_real_num, MAX(sell_img_num)  FROM sell_img    GROUP BY sell_img_real_num  ORDER BY sell_img_real_num ,sell_img_num DESC  )"
+					+ " ORDER BY a.sell_num DESC LIMIT ?,? ";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, listLimit);
 //				pstmt.setString(3, productSearch);
 
-				rs = pstmt.executeQuery();
+			rs = pstmt.executeQuery();
 
-//	            sql = "SELECT a.sell_title, a.sell_brand, a.sell_price, a.sell_color, a.sell_readcount, b.sell_img_name, c.sell_list_num, c.sell_list_item_status, b.sell_img_real_name"
-//	                     + "FROM sell AS a JOIN sell_img AS b ON a.sell_num = b.sell_img_num JOIN sell_list AS c ON a.sell_num = c.sell_list_num "
-//	                     + "WHERE sell_list_item_status='판매중'";
-				// join을 사용하자
-				// sell -> 조회수, 타이틀,브랜드
-				// sell_list ->
-				// sell_img -> 일단 사진은 다 사용해야됨
-				// 이외에 좋아요 까지
+			productCateList = new ArrayList<SellerProductDTO>();
 
-				productCateList = new ArrayList<SellerProductDTO>();
+			while (rs.next()) {
+				SellerProductDTO article = new SellerProductDTO();
+				article.setSell_num(rs.getInt("sell_num"));
+				article.setSell_size(rs.getString("sell_size"));
+				article.setSell_title(rs.getString("sell_title"));
+				article.setSell_price(rs.getInt("sell_price"));
+				article.setSell_color(rs.getString("sell_color"));
+				article.setSell_brand(rs.getString("sell_brand"));
+				article.setSell_readcount(rs.getInt("sell_readcount"));
+				article.setSell_list_num(rs.getInt("sell_list_num"));
+				article.setSell_list_item_status(rs.getString("sell_list_item_status"));
+				article.setSell_img_num(rs.getInt("Sell_img_num"));
+				article.setSell_img_real_num(rs.getInt("Sell_img_real_num"));
+				article.setSell_img_name(rs.getString("sell_img_name"));
+				article.setSell_img_real_name(rs.getString("sell_img_real_name"));
+				article.setSell_category(rs.getString("Sell_category"));
+				article.setSell_category_detail(rs.getString("Sell_category_detail"));
 
-				while (rs.next()) {
-					SellerProductDTO article = new SellerProductDTO();
-					article.setSell_num(rs.getInt("sell_num"));
-					article.setSell_size(rs.getString("sell_size"));
-					article.setSell_title(rs.getString("sell_title"));
-					article.setSell_price(rs.getInt("sell_price"));
-					article.setSell_color(rs.getString("sell_color"));
-					article.setSell_brand(rs.getString("sell_brand"));
-					article.setSell_readcount(rs.getInt("sell_readcount"));
-					article.setSell_list_num(rs.getInt("sell_list_num"));
-					article.setSell_list_item_status(rs.getString("sell_list_item_status"));
-					article.setSell_img_num(rs.getInt("Sell_img_num"));
-					article.setSell_img_real_num(rs.getInt("Sell_img_real_num"));
-					article.setSell_img_name(rs.getString("sell_img_name"));
-					article.setSell_img_real_name(rs.getString("sell_img_real_name"));
-					article.setSell_category(rs.getString("Sell_category"));
-					article.setSell_category_detail(rs.getString("Sell_category_detail"));
+				productCateList.add(article);
 
-					productCateList.add(article);
-
-				}
-			} catch (SQLException e) {
-				System.out.println("구문오류");
-				e.printStackTrace();
-			} finally {
-				close(pstmt);
-
-				close(rs);
 			}
-			return productCateList;
-		
+		} catch (SQLException e) {
+			System.out.println("구문오류");
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+
+			close(rs);
 		}
-		 //결제버튼 클릭시 배송지 Address table에 자동저장  ---> 기본 member에있는 주소는 마이페이지에서 수정가능
-		 public void insertAddress(SellerAddress address) {  
-			System.out.println("sellerDAO-insertAddress");
-			PreparedStatement pstmt = null;
-			//System.out.println("address(DAO):"+address);
-			try {
-				
-				String sql ="INSERT INTO address VALUES(?,?,?,?,?,?)";
-				 pstmt = con.prepareStatement(sql);
-				 pstmt.setString(1,address.getMember_code());
-				 pstmt.setString(2,address.getPost_code());
-				 pstmt.setString(3,address.getAddress_code());
-				 pstmt.setString(4,address.getAddress_detail());
-				 pstmt.setString(5,address.getAddress_name());
-				 pstmt.setString(6,address.getAddress_phone());
-				 pstmt.executeUpdate();
-			} catch (SQLException e) {
-				System.out.println("SQL 구문오류!");
-				e.printStackTrace();
-			}
-		}  
-		  //배송지 주소 찾기
-		public ArrayList< SellerAddress>  findAddress(String sell_member_code) {  
-			System.out.println("sellerDAO-findAddress");
-			ArrayList< SellerAddress> addressArr = null;		 
-			SellerAddress address =null;
-			PreparedStatement pstmt =null;
-			ResultSet rs = null;
-	
-			try {
-				String sql="SELECT  member_code, post_code, address_code, address_detail, address_name, address_phone"
-						+ " FROM address"
-						+ " WHERE member_code=?"
-						+ "ORDER BY member_code DESC "
-						+ "LIMIT 0, 5";
-				pstmt=con.prepareStatement(sql);
-				pstmt.setString(1, sell_member_code);
-				
-				addressArr = new ArrayList<SellerAddress>();	
-				rs = pstmt.executeQuery();
-				
-				while(rs.next()) {
-					address = new SellerAddress();
-					address.setMember_code(rs.getString("member_code"));
-					address.setAddress_code(rs.getString("address_code"));
-					address.setAddress_detail(rs.getString("address_detail"));
-					address.setPost_code(rs.getString("post_code"));
-					address.setAddress_phone(rs.getString("address_phone"));
-					address.setAddress_name(rs.getString("address_name"));
-					
-					addressArr.add(address);
-				}
-				
-				
-				
-			} catch (Exception e) {
-				
-				e.printStackTrace();
-			}finally {
-				close(rs);
-				close(pstmt);
-			}
-			return addressArr;
+		return productCateList;
+
+	}
+
+	// 결제버튼 클릭시 배송지 Address table에 자동저장 ---> 기본 member에있는 주소는 마이페이지에서 수정가능
+	public void insertAddress(SellerAddress address) {
+		PreparedStatement pstmt = null;
+		try {
+
+			String sql = "INSERT INTO address VALUES(?,?,?,?,?,?)";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, address.getMember_code());
+			pstmt.setString(2, address.getPost_code());
+			pstmt.setString(3, address.getAddress_code());
+			pstmt.setString(4, address.getAddress_detail());
+			pstmt.setString(5, address.getAddress_name());
+			pstmt.setString(6, address.getAddress_phone());
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			System.out.println("SQL 구문오류!");
+			e.printStackTrace();
 		}
+	}
+
+	// 배송지 주소 찾기
+	public ArrayList<SellerAddress> findAddress(String sell_member_code) {
+		ArrayList<SellerAddress> addressArr = null;
+		SellerAddress address = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+			String sql = "SELECT  member_code, post_code, address_code, address_detail, address_name, address_phone"
+					+ " FROM address" + " WHERE member_code=?" + "ORDER BY member_code DESC " + "LIMIT 0, 5";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, sell_member_code);
+
+			addressArr = new ArrayList<SellerAddress>();
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				address = new SellerAddress();
+				address.setMember_code(rs.getString("member_code"));
+				address.setAddress_code(rs.getString("address_code"));
+				address.setAddress_detail(rs.getString("address_detail"));
+				address.setPost_code(rs.getString("post_code"));
+				address.setAddress_phone(rs.getString("address_phone"));
+				address.setAddress_name(rs.getString("address_name"));
+
+				addressArr.add(address);
+			}
+
+		} catch (Exception e) {
+
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		return addressArr;
+	}
 
 }

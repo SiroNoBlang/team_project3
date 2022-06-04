@@ -15,7 +15,6 @@ public class ShoppoingSucceedAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		System.out.println("ShoppoingSucceedAction- UPDATE 작업 진행");
 		ActionForward forward = null;
 		
 		int updateCount =0;
@@ -87,7 +86,6 @@ public class ShoppoingSucceedAction implements Action {
 		//System.out.println("action에서"+sellerDTO);
 		InsertBuyMemberService service1 = new InsertBuyMemberService();
 		
-		
 //----------------------------------------------------------------------------------------------------------------		
 		insertCount = service1.insertBuyMember(sellerDTO);//구매회원정보 insert 해줄 곳
 		addressService.insertAddress(address);    // address객체에 담아 insert하기(최근배송지 기능) 
@@ -98,10 +96,7 @@ public class ShoppoingSucceedAction implements Action {
 		//----------------------------------------------------------------------------------------------------------------	
 		MemberBean memberBean1 = new MemberBean();
 		
-		
 		memberBean1 = service.getArticleMemberInfo(member_code);
-//		System.out.println("ㅂㅈㄷㄱㄱㅈㄷ"+memberBean1);
-//		System.out.println("ㅂㅈㄷㄱㄱㅈㄷ"+sellerDTO);
 		request.setAttribute("memberBean", memberBean1);    //업데이트한 구매자 데이터
 		request.setAttribute("sellerDTO", sellerDTO);		//판매제품 데이터
 		
