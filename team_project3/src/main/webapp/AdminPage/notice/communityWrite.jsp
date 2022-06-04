@@ -1,12 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
- <%
 
-	//세션 객체에 저장된 세션 닉네임("sNickname") 가져와서 변수에 저장
-	String sNickname = (String)session.getAttribute("sNickname");
- 	
- %>  
 <!DOCTYPE html>
 <html>
 <head>
@@ -66,7 +60,7 @@
 							</tr>
 							<tr>
 								<th><label for="board_nickname">작성자</label></th>
-								<td><input type="text" name="board_nickname" value="<%=sNickname %>" readonly="readonly"></td>
+								<td><input type="text" name="board_nickname" value="${sNickname }" readonly="readonly"></td>
 							</tr>
 							<tr>
 								<th><label for="board_content">내용</label></th>
@@ -117,7 +111,7 @@
 							</tr>
 							<tr>
 								<th><label for="qna_nickname">작성자</label></th>
-								<td><input type="text" name="qna_nickname" value="<%=sNickname %>" readonly="readonly"></td>
+								<td><input type="text" name="qna_nickname" value="${sNickname }" readonly="readonly"></td>
 							</tr>
 							<tr>
 								<th><label for="qna_content">내용</label></th>
