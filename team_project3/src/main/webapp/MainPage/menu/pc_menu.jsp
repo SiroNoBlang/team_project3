@@ -1,10 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
-<%
-	String code = (String)session.getAttribute("sCode");
-	String nickname = (String)session.getAttribute("sNickname");
-%>    
 	
 <aside class="wrap-sidebar js-sidebar">
 <div class="s-full js-hide-sidebar"></div>
@@ -25,13 +21,13 @@
 			</li>
 
 			<li class="p-b-13">
-				<a href="Mypage.ma?member_code=<%=code %>" class="stext-102 cl2 hov-cl1 trans-04">
+				<a href="Mypage.ma?member_code=${sCode }" class="stext-102 cl2 hov-cl1 trans-04">
 					MyPage
 				</a>
 			</li>
 
 			<li class="p-b-13">
-				<a href="BuyList.ma?member_code=<%=code %>" class="stext-102 cl2 hov-cl1 trans-04">
+				<a href="BuyList.ma?member_code=${sCode }" class="stext-102 cl2 hov-cl1 trans-04">
 					My Account
 				</a>
 			</li>
