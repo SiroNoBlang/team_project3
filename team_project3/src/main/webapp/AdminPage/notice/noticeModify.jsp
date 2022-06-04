@@ -22,12 +22,19 @@
 	$(document).ready( function() {
 		let date = new Date();
 		let year = date.getFullYear();
+		
 		let month = date.getMonth() + 1;
+		month = month >= 10 ? month : '0' + month;
+		
 		let day = date.getDate();
+		day = day >= 10 ? day : '0' + day;
 		
 		
 		let title = $('input[name=board_title]').val();
 		$('input[name=board_title]').attr('value',"["+year+""+month+""+day+" 수정] "+title);
+		
+		
+		
 	});
 </script>
 </head>
