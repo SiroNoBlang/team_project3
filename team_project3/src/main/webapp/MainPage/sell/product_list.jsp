@@ -62,31 +62,31 @@ int listCount = pageInfo.getListCount();
       <!-- Header desktop -->
       <div class="container-menu-desktop">
          <!-- Topbar -->
-         <div class="top-bar">
-            <div class="content-topbar flex-sb-m h-full container">
-               <div class="left-top-bar">
-                  Free shipping for standard order over $100
-               </div>
+<!--          <div class="top-bar"> -->
+<!--             <div class="content-topbar flex-sb-m h-full container"> -->
+<!--                <div class="left-top-bar"> -->
+<!--                   Free shipping for standard order over $100 -->
+<!--                </div> -->
 
-               <div class="right-top-bar flex-w h-full">
-                  <a href="#" class="flex-c-m trans-04 p-lr-25">
-                     Help & FAQs
-                  </a>
+<!--                <div class="right-top-bar flex-w h-full"> -->
+<!--                   <a href="#" class="flex-c-m trans-04 p-lr-25"> -->
+<!--                      Help & FAQs -->
+<!--                   </a> -->
 
-                  <a href="#" class="flex-c-m trans-04 p-lr-25">
-                     My Account
-                  </a>
+<!--                   <a href="#" class="flex-c-m trans-04 p-lr-25"> -->
+<!--                      My Account -->
+<!--                   </a> -->
 
-                  <a href="#" class="flex-c-m trans-04 p-lr-25">
-                     EN
-                  </a>
+<!--                   <a href="#" class="flex-c-m trans-04 p-lr-25"> -->
+<!--                      EN -->
+<!--                   </a> -->
 
-                  <a href="#" class="flex-c-m trans-04 p-lr-25">
-                     USD
-                  </a>
-               </div>
-            </div>
-         </div>
+<!--                   <a href="#" class="flex-c-m trans-04 p-lr-25"> -->
+<!--                      USD -->
+<!--                   </a> -->
+<!--                </div> -->
+<!--             </div> -->
+<!--          </div> -->
 
          <div class="wrap-menu-desktop how-shadow1">
             <nav class="limiter-menu-desktop container">
@@ -121,11 +121,11 @@ int listCount = pageInfo.getListCount();
 							</li>
 
 							<li>
-								<a href="about.html">About</a>
+								<a href="CommunityNotice.ma">Community</a>
 							</li>
-
+			
 							<li>
-								<a href="contact.html">Contact</a>
+								<a href="Contact.pr">Contact</a>
 							</li>
 						</ul>
 					</div>
@@ -152,7 +152,7 @@ int listCount = pageInfo.getListCount();
       <div class="wrap-header-mobile">
          <!-- Logo moblie -->      
          <div class="logo-mobile">
-            <a href="index.html"><img src="MainPage/images/icons/logo-01.png" alt="IMG-LOGO"></a>
+            <a href="MainPage.pr"><img src="MainPage/images/icons/logo-01.png" alt="IMG-LOGO"></a>
          </div>
 
          <!-- Icon header -->
@@ -352,39 +352,39 @@ int listCount = pageInfo.getListCount();
       <div class="container">
          <div class="flex-w flex-sb-m p-b-52">
             <div class="flex-w flex-l-m filter-tope-group m-tb-10">
-            	<form action="ProductCategoryPro.pr">
-               <a href="Product.pr" style="color:black"> All Products </a>&nbsp;&nbsp;
-              <a href="ProductCategoryPro.pr?sell_category='상의'" style="color:black"> All Products>
-                  상의 </a>&nbsp;&nbsp;&nbsp;
-               <a href="ProductCategoryPro.pr?sell_category='하의'" style="color:black"> All Products>
-                  하의 </a>&nbsp;&nbsp;&nbsp;
-                <a href="ProductCategoryPro.pr?sell_category='신발'" style="color:black"> All Products>
-                  신발 </a>&nbsp;&nbsp;&nbsp;
-                 <a href="ProductCategoryPro.pr?sell_category='잡화'" style="color:black"> All Products>
-                  잡화 </a>&nbsp;&nbsp;&nbsp;
-                   
+            	<form>
+               <button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5 how-active1" data-filter="*" onclick="location.href='ProductCategoryPro.pr?Category=all'">
+                  All Products
+               </button>
 				
-<!--                <button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".women" name="상의"> -->
-<!--                   All Products> -->
-<!--                   상의 -->
-<!--                </button> -->
+               <button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".women" onclick="location.href='ProductCategoryPro.pr?Category=상의'">
+                  All Products>
+                  상의
+               </button>
 
-<!--                <button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".men" name="하의"> -->
-<!--                   All Products> -->
-<!--                   하의 -->
-<!--                </button> -->
-               
-<!--                <button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".men" name="신발"> -->
-<!--                  All Products> -->
-<!--                   신발 -->
-<!--                </button> -->
-               
-<!--                 <button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".men" name="잡화"> -->
-<!--                   All Products> -->
-<!--                   잡화 -->
-<!--                </button> -->
+               <button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".men" onclick="location.href='ProductCategoryPro.pr?Category=하의'">
+                  All Products>
+                  하의
+               </button>
+
+               <button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".bag" onclick="location.href='ProductCategoryPro.pr?Category=신발'">
+                  All Products>
+                  신발
+               </button>
+               																							
+               <button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".etc" onclick="location.href='ProductCategoryPro.pr?Category=잡화'">
+                  All Products>
+                  잡화
+               </button>
                </form>
 
+<!--                <button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".shoes"> -->
+<!--                   Shoes -->
+<!--                </button> -->
+
+<!--                <button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".watches"> -->
+<!--                   Watches -->
+<!--                </button> -->
             </div>
 
             <div class="flex-w flex-c-m m-tb-10">
@@ -421,7 +421,7 @@ int listCount = pageInfo.getListCount();
          
            
  
-            <!-- Filter -->
+            <!-- Filter -->필터
             <div class="dis-none panel-filter w-full p-t-10">
                <div class="wrap-filter flex-w bg6 w-full p-lr-40 p-t-27 p-lr-15-sm">
                   <div class="filter-col1 p-r-15 p-b-27">
@@ -470,7 +470,73 @@ int listCount = pageInfo.getListCount();
 
                  
 
-                 
+                  <div class="filter-col2 p-r-15 p-b-27">
+                     <div class="mtext-102 cl2 p-b-15">
+                        Color
+                     </div>
+
+                     <ul>
+                        <li class="p-b-6">
+                           <span class="fs-15 lh-12 m-r-6" style="color: #222;">
+                              <i class="zmdi zmdi-circle"></i>
+                           </span>
+
+                           <a href="#" class="filter-link stext-106 trans-04">
+                              Black
+                           </a>
+                        </li>
+
+                        <li class="p-b-6">
+                           <span class="fs-15 lh-12 m-r-6" style="color: #4272d7;">
+                              <i class="zmdi zmdi-circle"></i>
+                           </span>
+
+                           <a href="#" class="filter-link stext-106 trans-04 filter-link-active">
+                              Blue
+                           </a>
+                        </li>
+
+                        <li class="p-b-6">
+                           <span class="fs-15 lh-12 m-r-6" style="color: #b3b3b3;">
+                              <i class="zmdi zmdi-circle"></i>
+                           </span>
+
+                           <a href="#" class="filter-link stext-106 trans-04">
+                              Grey
+                           </a>
+                        </li>
+
+                        <li class="p-b-6">
+                           <span class="fs-15 lh-12 m-r-6" style="color: #00ad5f;">
+                              <i class="zmdi zmdi-circle"></i>
+                           </span>
+
+                           <a href="#" class="filter-link stext-106 trans-04">
+                              Green
+                           </a>
+                        </li>
+
+                        <li class="p-b-6">
+                           <span class="fs-15 lh-12 m-r-6" style="color: #fa4251;">
+                              <i class="zmdi zmdi-circle"></i>
+                           </span>
+
+                           <a href="#" class="filter-link stext-106 trans-04">
+                              Red
+                           </a>
+                        </li>
+
+                        <li class="p-b-6">
+                           <span class="fs-15 lh-12 m-r-6" style="color: #aaa;">
+                              <i class="zmdi zmdi-circle-o"></i>
+                           </span>
+
+                           <a href="#" class="filter-link stext-106 trans-04">
+                              White
+                           </a>
+                        </li>
+                     </ul>
+                  </div>
                   <!-- 여기도 태그 -->
                   <div class="filter-col4 p-b-27">
                      <div class="mtext-102 cl2 p-b-15">
@@ -519,9 +585,10 @@ int listCount = pageInfo.getListCount();
                 <div class="shop-item">
                 <a href="ProductDetailPro.pr?sell_num=${articleList.sell_num}&sell_brand=${articleList.sell_brand}">
                 
-                 <img src="./Upload/sell_img/${articleList.sell_img_real_name}" onerror="this.style.display='none'" width="300px" height="400px" alt="Accessories Pack"/>
-                 	${articleList.sell_title }
-                     </a>
+                 <img src="./Upload/sell_img/${articleList.sell_img_real_name}" width="300px" height="400px" alt="Accessories Pack"/>
+                  <h4>${articleList.sell_img_real_name}</h4>
+                  </a>
+                   <h5>${articleList.sell_title }</h5>
                    <h5>${articleList.sell_brand }</h5>
                    <h5>${articleList.sell_readcount }</h5>
                 </div>
@@ -537,14 +604,6 @@ int listCount = pageInfo.getListCount();
 	       <div class="flex-c-m flex-w w-full p-t-45">
          
        <!-- Ajax 사용 더보기 -->
-       
-       <section id="pageList">
-		<!-- 
-		현재 페이지 번호(pageNum)가 1보다 클 경우에만 [이전] 링크 동작
-		=> 클릭 시 notice.jsp 로 이동하면서 
-		   현재 페이지 번호(pageNum) - 1 값을 page 파라미터로 전달
-		-->
-		
             <a href="'Product.pr?page=${pageNum + 1}'" class="flex-c-m stext-101 cl5 size-103 bg2 bor1 hov-btn1 p-lr-15 trans-04">
                Load More
             </a>

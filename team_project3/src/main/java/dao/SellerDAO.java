@@ -9,6 +9,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import vo.MemberBean;
+import vo.SellerAddress;
 import vo.SellerDTO;
 import vo.SellerProductDTO;
 import vo.SellerimgDTO;
@@ -596,20 +597,23 @@ public class SellerDAO {
 			return member;
 		}
 		//sell_num을 이용하여 update해주기 sell_list테이블의 sell_list_status: 판매중 ->판매완료
-		public void sellUpdate(int sell_num) {
+		public int sellUpdate(int sell_num) {
 			PreparedStatement pstmt = null;
-			
+			int updateCount=0;
 			try {
 				String sql="UPDATE sell_list"
 						+ " SET sell_list_item_status ='판매완료' "
 						+ " WHERE sell_list_num =?";
 				pstmt =con.prepareStatement(sql);
 				pstmt.setInt(1, sell_num);
+				
+				updateCount = pstmt.executeUpdate();
+//				System.out.println(updateCount);
 			} catch (SQLException e) {
 				System.out.println("SQL 구문오류!");
 				e.printStackTrace();
 			}
-			
+			return updateCount;
 		}
 
 		public MemberBean getEmail(String code) {
@@ -712,5 +716,69 @@ public class SellerDAO {
 			return productCateList;
 		
 		}
-		
+		 //결제버튼 클릭시 배송지 Address table에 자동저장  ---> 기본 member에있는 주소는 마이페이지에서 수정가능
+		 public void insertAddress(SellerAddress address) {  
+			System.out.println("sellerDAO-insertAddress");
+			PreparedStatement pstmt = null;
+			//System.out.println("address(DAO):"+address);
+			try {
+				
+				String sql ="INSERT INTO address VALUES(?,?,?,?,?,?)";
+				 pstmt = con.prepareStatement(sql);
+				 pstmt.setString(1,address.getMember_code());
+				 pstmt.setString(2,address.getPost_code());
+				 pstmt.setString(3,address.getAddress_code());
+				 pstmt.setString(4,address.getAddress_detail());
+				 pstmt.setString(5,address.getAddress_name());
+				 pstmt.setString(6,address.getAddress_phone());
+				 pstmt.executeUpdate();
+			} catch (SQLException e) {
+				System.out.println("SQL 구문오류!");
+				e.printStackTrace();
+			}
+		}  
+		  //배송지 주소 찾기
+		public ArrayList< SellerAddress>  findAddress(String sell_member_code) {  
+			System.out.println("sellerDAO-findAddress");
+			ArrayList< SellerAddress> addressArr = null;		 
+			SellerAddress address =null;
+			PreparedStatement pstmt =null;
+			ResultSet rs = null;
+	
+			try {
+				String sql="SELECT  member_code, post_code, address_code, address_detail, address_name, address_phone"
+						+ " FROM address"
+						+ " WHERE member_code=?"
+						+ "ORDER BY member_code DESC "
+						+ "LIMIT 0, 5";
+				pstmt=con.prepareStatement(sql);
+				pstmt.setString(1, sell_member_code);
+				
+				addressArr = new ArrayList<SellerAddress>();	
+				rs = pstmt.executeQuery();
+				
+				while(rs.next()) {
+					address = new SellerAddress();
+					address.setMember_code(rs.getString("member_code"));
+					address.setAddress_code(rs.getString("address_code"));
+					address.setAddress_detail(rs.getString("address_detail"));
+					address.setPost_code(rs.getString("post_code"));
+					address.setAddress_phone(rs.getString("address_phone"));
+					address.setAddress_name(rs.getString("address_name"));
+					
+					addressArr.add(address);
+				}
+				
+				
+				
+			} catch (Exception e) {
+				
+				e.printStackTrace();
+			}finally {
+				close(rs);
+				close(pstmt);
+			}
+			return addressArr;
+		}
+
 }

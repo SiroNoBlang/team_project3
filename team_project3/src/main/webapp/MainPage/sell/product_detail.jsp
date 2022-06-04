@@ -66,42 +66,42 @@ ArrayList<SellerimgDTO> Sellerdetailimg = (ArrayList<SellerimgDTO>)request.getAt
 		<!-- Header desktop -->
 		<div class="container-menu-desktop">
 			<!-- Topbar -->
-			<div class="top-bar">
-				<div class="content-topbar flex-sb-m h-full container">
-					<div class="left-top-bar">
-						Free shipping for standard order over $100
-					</div>
+<!-- 			<div class="top-bar"> -->
+<!-- 				<div class="content-topbar flex-sb-m h-full container"> -->
+<!-- 					<div class="left-top-bar"> -->
+<!-- 						Free shipping for standard order over $100 -->
+<!-- 					</div> -->
 
-					<div class="right-top-bar flex-w h-full">
-						<a href="#" class="flex-c-m trans-04 p-lr-25">
-							Help & FAQs
-						</a>
+<!-- 					<div class="right-top-bar flex-w h-full"> -->
+<!-- 						<a href="#" class="flex-c-m trans-04 p-lr-25"> -->
+<!-- 							Help & FAQs -->
+<!-- 						</a> -->
 
-						<a href="#" class="flex-c-m trans-04 p-lr-25">
-							My Account
-						</a>
+<!-- 						<a href="#" class="flex-c-m trans-04 p-lr-25"> -->
+<!-- 							My Account -->
+<!-- 						</a> -->
 
-						<a href="#" class="flex-c-m trans-04 p-lr-25">
-							EN
-						</a>
+<!-- 						<a href="#" class="flex-c-m trans-04 p-lr-25"> -->
+<!-- 							EN -->
+<!-- 						</a> -->
 
-						<a href="#" class="flex-c-m trans-04 p-lr-25">
-							USD
-						</a>
-					</div>
-				</div>
-			</div>
+<!-- 						<a href="#" class="flex-c-m trans-04 p-lr-25"> -->
+<!-- 							USD -->
+<!-- 						</a> -->
+<!-- 					</div> -->
+<!-- 				</div> -->
+<!-- 			</div> -->
 
 			<div class="wrap-menu-desktop how-shadow1">
 				<nav class="limiter-menu-desktop container">
 					
 					<!-- Logo desktop -->		
-					<a href="#" class="logo">
+					<a href="MainPage.pr" class="logo">
 						<img src="MainPage/images/icons/logo-01.png" alt="IMG-LOGO">
 					</a>
 
 					<!-- Menu desktop -->
-					<div class="menu-desktop">
+					 <div class="menu-desktop">
 						<ul class="main-menu">
 							<li>
 								<a href="MainPage.pr">Home</a>
@@ -125,11 +125,11 @@ ArrayList<SellerimgDTO> Sellerdetailimg = (ArrayList<SellerimgDTO>)request.getAt
 							</li>
 
 							<li>
-								<a href="about.html">About</a>
+								<a href="CommunityNotice.ma">Community</a>
 							</li>
-
+			
 							<li>
-								<a href="contact.html">Contact</a>
+								<a href="Contact.pr">Contact</a>
 							</li>
 						</ul>
 					</div>
@@ -440,48 +440,23 @@ ArrayList<SellerimgDTO> Sellerdetailimg = (ArrayList<SellerimgDTO>)request.getAt
 									<br>
 									<br>
 									 <tr>
-									<% for(SellerimgDTO sellerimg : Sellerdetailimg) {%>
-									 <td><img src="./Upload/sell_img/<%=sellerimg.getSell_img_real_name() %>" onerror="this.style.display='none'" alt=''  width="150" height="150">	&nbsp;</td>
+									 
+									<%  for(SellerimgDTO sellerimg : Sellerdetailimg) {%>
+									
+									 <td><img src="./Upload/sell_img/<%=sellerimg.getSell_img_real_name() %>" width="150" height="150">	&nbsp;</td>
 									 <% } %>
+									 
 									 </tr>
+									 
 									 </table>
 					
+					  			
+				
 					</div>
 									 
 			</div>
-<!-- 				&nbsp;&nbsp;<h4>관련 상품</h4> -->
-			 <table border="1" style="border: none; background:white;">
-			 
-			<div class="container">
-			  <div class="row multi-columns-row">
-      		
-     		 	<form>
-     		 	
-            <% for(SellerProductDTO ProductRe : Relationdto) {%>
-              <div class="col-sm-6 col-md-3 col-lg-3 ">
-              
-                <div class="shop-item">
-              
-                
-                 <img src="./Upload/sell_img/<%=ProductRe.getSell_img_real_name() %>" onerror="this.style.display='none'" width="150px" height="200px" alt="Accessories Pack"/>
-                 	
-                     </a>
-                   <h4><%=ProductRe.getSell_title() %></h4>
-                   <h5><%=ProductRe.getSell_brand() %></h5>
-                   
-                </div>
-                 
-              </div>
-             <% } %>
-              </form>
-              </div>
-              </div>
-              </table>
-			<br>
-
-			
-			
 		
+			</div>
 		<div class="bg6 flex-c-m flex-w size-302 m-t-73 p-tb-15">
 			<span class="stext-107 cl6 p-lr-25">
 				SKU: JAK-01
@@ -550,7 +525,6 @@ ArrayList<SellerimgDTO> Sellerdetailimg = (ArrayList<SellerimgDTO>)request.getAt
 						</div>
 					</div>
 					
-				
 					<div class="col-md-6 col-lg-5 p-b-30">
 						<div class="p-r-50 p-t-5 p-lr-0-lg">
 							<h4 class="mtext-105 cl2 js-name-detail p-b-14">

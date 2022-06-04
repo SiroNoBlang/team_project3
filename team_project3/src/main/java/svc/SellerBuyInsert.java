@@ -4,10 +4,13 @@ import static db.JdbcUtil.close;
 import static db.JdbcUtil.commit;
 import static db.JdbcUtil.getConnection;
 import static db.JdbcUtil.rollback;
+
+import java.io.PrintWriter;
+
+
 import java.sql.Connection;
 
 import dao.SellerDAO;
-
 import vo.MemberBean;
 import vo.SellerProductDTO;
 
@@ -56,11 +59,11 @@ public class SellerBuyInsert {
 	
 		updateCount = sellerDAO.updateMemberInfo(memberBeanIm);   
 	
-		 System.out.println("dao 작업 수행 후 service로 리턴 ->(insertUpdate:)"+updateCount);
+		 //System.out.println("dao 작업 수행 후 service로 리턴 ->(insertUpdate:)"+updateCount);
 		
 		 if(updateCount>0) {  //update(dao) 작업 성공여부 결과
 			commit(con); 
-			System.out.println("성공");
+			//System.out.println("성공");
 			
 		} else {
 			rollback(con);
@@ -74,36 +77,36 @@ public class SellerBuyInsert {
 		return updateCount;
 	}
 
-	public int insertBuyMember(SellerProductDTO sellerDTO) {  //구매자 구매시, 구매 정보 저장용 -(buy Table)
-		int insertCount =0;
-		
-		
-		
-		Connection con = getConnection(); 
-		
-		
-		SellerDAO sellerDAO = SellerDAO.getInstance();
-		
-
-		
-		sellerDAO.setConnection(con);
-		
-		System.out.println("service 에서"+sellerDTO);
-		insertCount = sellerDAO.insertMemberInfo(sellerDTO);   
-	
-		
-		
-		 if(insertCount>0) {  //update(dao) 작업 성공여부 결과
-			commit(con); 
-			System.out.println("insert 성공");
-			
-		} else {
-			rollback(con);
-		}
-		close(con);
-
-		return insertCount;
-	}
+//	public int insertBuyMember(SellerProductDTO sellerDTO) {  //구매자 구매시, 구매 정보 저장용 -(buy Table)
+//		int insertCount =0;
+//		
+//		
+//		
+//		Connection con = getConnection(); 
+//		
+//		
+//		SellerDAO sellerDAO = SellerDAO.getInstance();
+//		
+//
+//		
+//		sellerDAO.setConnection(con);
+//		
+//		System.out.println("service 에서"+sellerDTO);
+//		insertCount = sellerDAO.insertMemberInfo(sellerDTO);   
+//	
+//		
+//		
+//		 if(insertCount>0) {  //update(dao) 작업 성공여부 결과
+//			commit(con); 
+//			System.out.println("insert 성공");
+//			
+//		} else {
+//			rollback(con);
+//		}
+//		close(con);
+//
+//		return insertCount;
+//	}
 
 	public MemberBean getArticleMemberInfo(String member_code) {
 		MemberBean bean = null;
@@ -126,14 +129,25 @@ public class SellerBuyInsert {
 	public void sellUpdate(int sell_num) { //받을값 없음  ->구매시 sell_list ->status 값 판매중 -> 판매완료로 변경
 		
 		Connection con = getConnection();
-		
+		int updateCount =0;
 		SellerDAO sellerDAO = SellerDAO.getInstance();
 
 		sellerDAO.setConnection(con);
 		
 		
-		 sellerDAO.sellUpdate(sell_num);    //sell_num을 이용하여 update해주기 sell_list테이블의 sell_list_status: 판매중 ->판매완료
-	
+		 updateCount = sellerDAO.sellUpdate(sell_num);    //sell_num을 이용하여 update해주기 sell_list테이블의 sell_list_status: 판매중 ->판매완료
+//		System.out.println("dddd"+updateCount);
+		 if(updateCount>0) {
+		// commit(con);   이거 주석풀면 판매완료로 바뀝니다.
+		 }else {
+			 System.out.println("실패");
+//			 	response.setContentType("text/html; charset=UTF-8");
+//				PrintWriter out = response.getWriter();
+//				out.println("<script>");
+//				out.println("alert('이게 왜 뜸?')");
+//				out.println("history.back()");
+//				out.println("</script>");
+		 }
 		close(con);
 		
 		

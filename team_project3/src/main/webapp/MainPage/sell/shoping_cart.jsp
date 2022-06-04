@@ -3,11 +3,13 @@
 <%@page import="vo.SellerDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
 <%	
 String member_nickname =(String)session.getAttribute("sNickname");
 String sell_member_code =(String)session.getAttribute("sCode");
 SellerProductDTO sellerDTO = (SellerProductDTO)request.getAttribute("sellerDTO");
 MemberBean memberbean = (MemberBean)request.getAttribute("memberBean");
+
 int charge = sellerDTO.getSell_price() /10; //검수비 판매가격 /10
 int price = sellerDTO.getSell_price()+charge+3000;     //최종 판매가격
 // int point1 = memberbean.getMember_info_detail_point();
@@ -101,52 +103,97 @@ int price = sellerDTO.getSell_price()+charge+3000;     //최종 판매가격
 		<!-- Header desktop -->
 		<div class="container-menu-desktop">
 			<!-- Topbar -->
-			<div class="top-bar">
-				<div class="content-topbar flex-sb-m h-full container">
-					<div class="left-top-bar">
-						Free shipping for standard order over $100
-					</div>
+<!-- 			<div class="top-bar"> -->
+<!-- 				<div class="content-topbar flex-sb-m h-full container"> -->
+<!-- 					<div class="left-top-bar"> -->
+<!-- 						Free shipping for standard order over $100 -->
+<!-- 					</div> -->
 
-					<div class="right-top-bar flex-w h-full">
-						<a href="#" class="flex-c-m trans-04 p-lr-25">
-							Help & FAQs
-						</a>
+<!-- 					<div class="right-top-bar flex-w h-full"> -->
+<!-- 						<a href="#" class="flex-c-m trans-04 p-lr-25"> -->
+<!-- 							Help & FAQs -->
+<!-- 						</a> -->
 
-						<a href="#" class="flex-c-m trans-04 p-lr-25">
-							My Account
-						</a>
+<!-- 						<a href="#" class="flex-c-m trans-04 p-lr-25"> -->
+<!-- 							My Account -->
+<!-- 						</a> -->
 
-						<a href="#" class="flex-c-m trans-04 p-lr-25">
-							EN
-						</a>
+<!-- 						<a href="#" class="flex-c-m trans-04 p-lr-25"> -->
+<!-- 							EN -->
+<!-- 						</a> -->
 
-						<a href="#" class="flex-c-m trans-04 p-lr-25">
-							USD
-						</a>
-					</div>
-				</div>
-			</div>
+<!-- 						<a href="#" class="flex-c-m trans-04 p-lr-25"> -->
+<!-- 							USD -->
+<!-- 						</a> -->
+<!-- 					</div> -->
+<!-- 				</div> -->
+<!-- 			</div> -->
 
-
-		<!-- pc_sub_header -->
 			<div class="wrap-menu-desktop how-shadow1">
 				<nav class="limiter-menu-desktop container">
-					<jsp:include page="/MainPage/menu/pc_sub_header.jsp"/>
+					
+					<!-- Logo desktop -->		
+					<a href="#" class="logo">
+						<img src="MainPage/images/icons/logo-01.png" alt="IMG-LOGO">
+					</a>
+
+					<!-- Menu desktop -->
+				<div class="menu-desktop">
+						<ul class="main-menu">
+							<li>
+								<a href="MainPage.pr">Home</a>
+<!-- 								<ul class="sub-menu"> -->
+<!-- 									<li><a href="index.html">Homepage 1</a></li> -->
+<!-- 									<li><a href="home-02.html">Homepage 2</a></li> -->
+<!-- 									<li><a href="home-03.html">Homepage 3</a></li> -->
+<!-- 								</ul> -->
+							</li>
+
+							<li>
+								<a href="Product.pr">Shop</a>
+							</li>
+
+<!-- 							<li class="label1" data-label1="hot"> -->
+<!-- 								<a href="shoping-cart.html">Features</a> -->
+<!-- 							</li> -->
+
+							<li>
+								<a href="SellForm.pr">Sell</a>
+							</li>
+
+							<li>
+								<a href="CommunityNotice.ma">Community</a>
+							</li>
+			
+							<li>
+								<a href="Contact.pr">Contact</a>
+							</li>
+						</ul>
+					</div>
+
+					<!-- Icon header -->
+					<div class="wrap-icon-header flex-w flex-r-m">
+						<div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 js-show-modal-search">
+							<i class="zmdi zmdi-search"></i>
+						</div>
+
+						<div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti js-show-cart" data-notify="2">
+							<i class="zmdi zmdi-shopping-cart"></i>
+						</div>
+
+						<a href="#" class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti" data-notify="0">
+							<i class="zmdi zmdi-favorite-outline"></i>
+						</a>
+					</div>
 				</nav>
 			</div>	
 		</div>
-
-		<!-- PC_menu_Sidebar -->
-		<jsp:include page="/MainPage/menu/pc_menu.jsp"/>
-
-
-
 
 		<!-- Header Mobile -->
 		<div class="wrap-header-mobile">
 			<!-- Logo moblie -->		
 			<div class="logo-mobile">
-				<a href="index.html"><img src="MainPage/images/icons/logo-01.png" alt="IMG-LOGO"></a>
+				<a href="MainPage.pr"><img src="MainPage/images/icons/logo-01.png" alt="IMG-LOGO"></a>
 			</div>
 
 			<!-- Icon header -->
@@ -249,9 +296,91 @@ int price = sellerDTO.getSell_price()+charge+3000;     //최종 판매가격
 		</div>
 	</header>
 
-		<!-- Cart -->
-	<jsp:include page="/MainPage/menu/pc_shopping cart.jsp"/>
-	
+	<!-- Cart -->
+	<div class="wrap-header-cart js-panel-cart">
+		<div class="s-full js-hide-cart"></div>
+
+		<div class="header-cart flex-col-l p-l-65 p-r-25">
+			<div class="header-cart-title flex-w flex-sb-m p-b-8">
+				<span class="mtext-103 cl2">
+					Your Cart
+				</span>
+
+				<div class="fs-35 lh-10 cl2 p-lr-5 pointer hov-cl1 trans-04 js-hide-cart">
+					<i class="zmdi zmdi-close"></i>
+				</div>
+			</div>
+			
+			<div class="header-cart-content flex-w js-pscroll">
+				<ul class="header-cart-wrapitem w-full">
+					<li class="header-cart-item flex-w flex-t m-b-12">
+						<div class="header-cart-item-img">
+							<img src="images/item-cart-01.jpg" alt="IMG">
+						</div>
+
+						<div class="header-cart-item-txt p-t-8">
+							<a href="#" class="header-cart-item-name m-b-18 hov-cl1 trans-04">
+								White Shirt Pleat
+							</a>
+
+							<span class="header-cart-item-info">
+								1 x $19.00
+							</span>
+						</div>
+					</li>
+
+					<li class="header-cart-item flex-w flex-t m-b-12">
+						<div class="header-cart-item-img">
+							<img src="MainPage/images/item-cart-02.jpg" alt="IMG">
+						</div>
+
+						<div class="header-cart-item-txt p-t-8">
+							<a href="#" class="header-cart-item-name m-b-18 hov-cl1 trans-04">
+								Converse All Star
+							</a>
+
+							<span class="header-cart-item-info">
+								1 x $39.00
+							</span>
+						</div>
+					</li>
+
+					<li class="header-cart-item flex-w flex-t m-b-12">
+						<div class="header-cart-item-img">
+							<img src="MainPage/images/item-cart-03.jpg" alt="IMG">
+						</div>
+
+						<div class="header-cart-item-txt p-t-8">
+							<a href="#" class="header-cart-item-name m-b-18 hov-cl1 trans-04">
+								Nixon Porter Leather
+							</a>
+
+							<span class="header-cart-item-info">
+								1 x $17.00
+							</span>
+						</div>
+					</li>
+				</ul>
+				
+				<div class="w-full">
+					<div class="header-cart-total w-full p-tb-40">
+						Total: $75.00
+					</div>
+
+					<div class="header-cart-buttons flex-w w-full">
+						<a href="shoping-cart.html" class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-r-8 m-b-10">
+							View Cart
+						</a>
+
+						<a href="shoping-cart.html" class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-b-10">
+							Check Out
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
 
 	<!-- breadcrumb -->
 	<div class="container">
@@ -271,9 +400,15 @@ int price = sellerDTO.getSell_price()+charge+3000;     //최종 판매가격
 	<!-- Shoping Cart -->
 	<form action="SucceedProductAction.pr" class="bg0 p-t-75 p-b-85">
 
+<!-- 	<input type="hidden" value= "member_nickname" name="member_nickname"> -->
+<%-- 	<input type="hidden" value= "${sellerDTO.getSell_num()}" name="sell_num"> --%>
+<%-- 	<input type="hidden" value= "${param.price}" name="member_info_detail_acc_money" > --%>
+<%-- 	<input type="hidden" value= "${sell_member_code}" name="member_code"> --%>
+<%-- 	<input type="hidden" value= "${sellerDTO.getSell_price()}" name="sell_price"> --%>
+	
 	<input type="hidden" value="member_nickname" name="member_nickname">
 	<input type="hidden" value="<%=sellerDTO.getSell_num() %>" name="sell_num">
-	<input type="hidden" value="<%=memberbean.getMember_info_detail_acc_money() %>" name="member_info_detail_acc_money" >
+	<input type="hidden" value="<%=price %>" name="member_info_detail_acc_money" >
 	<input type="hidden" value="<%=sell_member_code %>" name="member_code">
 	<input type="hidden" value="<%=sellerDTO.getSell_price() %>" name="sell_price">
 		<div class="container">
@@ -286,13 +421,13 @@ int price = sellerDTO.getSell_price()+charge+3000;     //최종 판매가격
 							<table class="table-shopping-cart">
 								<tr>
 									
-										<td><img width="200" height="288" src="./Upload/sell_img/<%=sellerDTO.getSell_img_real_name() %>" alt="IMG"></td>
+										<td><img width="200" height="288" src="./Upload/sell_img/<%=sellerDTO.getSell_img_real_name()%>" alt="IMG"></td>
 										
 										
 							
 										<td><%=sellerDTO.getSell_title() %><br>
-										<%=sellerDTO.getSell_size() %><br>
-										₩ <%=sellerDTO.getSell_price() %></td>
+										<%=sellerDTO.getSell_size()%><br>
+										<%=sellerDTO.getSell_price() %></td>
 							
 								</tr>
 								
@@ -309,31 +444,33 @@ int price = sellerDTO.getSell_price()+charge+3000;     //최종 판매가격
 									<td>
 										<input type="button" onclick="AddressDaumPostcode()" 
 										value="+새 배송지 추가" style="border: none; background: transparent; color: lightgrey;">
+										<input type="button" id="btn" onclick="recentPostAddress()"
+										value="+최근배송지" style="border: none; background: transparent; color: lightgrey;">
 									</td>
 																
 								</tr>
 								<tr style=" border:none;">
 							 		 <td  colspan="2">	
-									  	<input type="text"   name="address1" id="address1"  placeholder="주소" > 	
+									  	<input type="text"  value="${memberbean.getMember_info_address()}" name="address1" id="address1"  placeholder="주소" > 	
 									 </td>	
 									 <td></td> 	
 									  <td >		
-									  	<input type="text"  name="postcode" id="postcode"  readonly="readonly"  placeholder="우편번호" >
+									  	<input type="text" value="${memberbean.getMember_info_post_code()}" name="postcode" id="postcode"  readonly="readonly"  placeholder="우편번호" >
 							  		</td> 											
 								</tr>
 								<tr style=" border:none;">
 									<td>
-										<input type="text"   name="address2" id="address2" placeholder="상세주소" >
+										<input type="text"  value="${memberbean.getMember_info_address_detail()}"  name="address2" id="address2" placeholder="상세주소" >
 									</td>
 								</tr>				
 								<tr style=" border:none;">
 									<td>
-										<input type="text" name="name"  placeholder="받는분">
+										<input type="text" value="${memberbean.getMember_info_name()}" name="name"  placeholder="받는분">
 									</td>
 								</tr>				
 								<tr style=" border:none;">
 									<td>
-										<input type="text" name="phone"  placeholder="전화번호(-제외)">	
+										<input type="text" value="<%=memberbean.getMember_info_phone()%>" name="phone"  placeholder="전화번호(-제외)">	
 									</td>
 								</tr>
 							</table >
@@ -392,14 +529,18 @@ int price = sellerDTO.getSell_price()+charge+3000;     //최종 판매가격
 						</div>
 							
 						<div class="flex-w flex-sb-m bor15 p-t-18 p-b-15 p-lr-40 p-lr-15-sm">
-							<div class="flex-w flex-m m-r-20 m-tb-5">
-								Point:<input class="stext-104 cl2 plh4 size-117 bor13 p-lr-20 m-r-10 m-tb-5" type="text" name="point" id="MemberPoint" value="<%=memberbean.getMember_info_detail_point() %>">
-								<span id="realPoint"></span>
-								<div>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</div>	
+						
+								Point:<input class="stext-104 cl2 plh4 size-117 bor13 p-lr-20 m-r-10 m-tb-5" type="text" name="point" id="MemberPoint" 
+								onkeyup="AmountCommas(this.value)" value="0">
+<%-- 								 value="<%=memberbean.getMember_info_detail_point() %>" --%>
+								<div id="realPoint"></div>
+								<div>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+								</div>	
 								<input class="flex-c-m stext-101 cl2 size-118 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer m-tb-5" type="button" value="사용하기"  onclick="sub()"><br>
-								<p style="color: lightgrey;">*1000원 단위로 사용가능	</p>						
+								<p style="color: lightgrey;">현재 포인트:<%=memberbean.getMember_info_detail_point()%>	</p><br>
+								<div style="color: lightgrey;">1000원 단위로 사용가능</div>						
 							</div>
-						</div>
+						
 					</div>
 				
 				</div>
@@ -441,6 +582,9 @@ int price = sellerDTO.getSell_price()+charge+3000;     //최종 판매가격
 								<span class="stext-110 cl2">
 									포인트 -<input type="text" id="point" style="border: none; background: transparent; "readonly="readonly">
 								</span><br>
+								<span class="stext-110 cl2">
+									등급별 추가 할인: - <%=charge %>
+								</span><br> 
 						   </div>
 							
 							
@@ -671,16 +815,32 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 <!--===============================================================================================-->
 	<script src="MainPage/vendor/select2/select2.min.js"></script>
 <!--=========================488<포인트차감>==========================================================-->	
+<script>		
+		function recentPostAddress(){   //최근 배송지 스크립트
+			window.open('SellRecentPostAddressAction.pr?member_code=<%=sell_member_code%>',"","width=750,height=250");
+			
+		}
+</script>
 <script>
-		function sub() {
+		function sub() {			//포인트 사용 스크립트
+ 			$("#realPoint").empty();
 			var prePoint  = 30000;
 			var subPoint  = document.getElementById("MemberPoint").value;//사용 할 포인트
 			document.getElementById("realPoint").value =	prePoint - subPoint ;//차감후 남은 포인트
 			document.getElementById("point").value = subPoint;//최종 결제창에 띄울 포인트(사용할 포인트)
-			
+			if(subPoint>prePoint){
+				alert("포인트가 부족합니다. 현재 포인트:"+prePoint);
+// 				else if(subPoint/1000 != 0){
+// 					alert("포인트(1000원단위 사용가능)");
+// 				}
+			}else{
 			$("#realPoint").append("남은포인트:"+document.getElementById("realPoint").value);
+			}
 		}
-		
+// 		function AmountCommas(point){		//포인트 한글사용 불가처리 정규표현식
+// 		    return point.toString().replace(/\B(?=(\d{3})+(?!\d))/g,",");
+// 				return val.price.toLocaleString();
+// 			}
 	
 	</script>
 	<script>

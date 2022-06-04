@@ -15,6 +15,7 @@ import action.ProductCategoryProAction;
 import action.ProductDetailProAction;
 import action.ProductListProAction;
 import action.ProductSearchProAction;
+import action.SellRecentPostAddressAction;
 import action.SendAdminAction;
 import action.ShopingProAction;
 import action.ShoppoingSucceedAction;
@@ -118,8 +119,8 @@ public class ProductFrontController extends HttpServlet {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-	}
-		else if (command.equals("/ShopingPro.pr")) {// 쇼핑카트 액션  <곧 구매 버튼 선택 후 결제하기 들어갑니다.>
+	
+		}else if (command.equals("/ShopingPro.pr")) {// 쇼핑카트 액션  <곧 구매 버튼 선택 후 결제하기 들어갑니다.>
 			
 			action = new ShopingProAction();
 
@@ -129,6 +130,21 @@ public class ProductFrontController extends HttpServlet {
 				e.printStackTrace();
 			}
 
+		}else if (command.equals("/SellRecentPostAddressAction.pr")) {// 배송지 주소 찾기 액션  
+			
+			action =  new SellRecentPostAddressAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
+		}else if (command.equals("/SellRecentPostAddress.pr")) {// 배송지 주소 찾기 jsp
+
+			forward = new ActionForward();
+			forward.setPath("MainPage/sell/recentPostAddress.jsp");
+			forward.setRedirect(false);
+		
 		}else if (command.equals("/SucceedProduct.pr")) {// 쇼핑 결제 완료 페이지
 
 			forward = new ActionForward();
@@ -151,7 +167,7 @@ public class ProductFrontController extends HttpServlet {
 			forward.setPath("MainPage/sell/succeedProduct.jsp");
 			forward.setRedirect(false);
 		
-		} else if (command.equals("/Contact.pr")) {// 쇼핑 결제 완료 페이지
+		} else if (command.equals("/Contact.pr")) {//
 
 			action = new ContactAction();
 
@@ -161,7 +177,7 @@ public class ProductFrontController extends HttpServlet {
 				e.printStackTrace();
 			}
 		
-		} else if (command.equals("/SendAdmin.pr")) {// 쇼핑 결제 완료 페이지
+		} else if (command.equals("/SendAdmin.pr")) {// 
 
 			action = new SendAdminAction();
 
