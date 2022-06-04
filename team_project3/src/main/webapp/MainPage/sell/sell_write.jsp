@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-  
+  <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
  <%
  			//<<<<<<<<<<<p.413~~~~~~~~~~~443>>>>>>>사진 담당
 // MemberBean bean =new MemberBean();
@@ -66,7 +66,7 @@ function optionChange() {            //대분류 소분류 <select/>
 // 	} 
 
 
-function readURL(obj) {   //사진 5장 뿌리기 
+function readURL(obj) {   //사진 3장 뿌리기 
 	
     let reader = new FileReader();
     if(!obj.files.length) {
@@ -124,6 +124,33 @@ function readURL(obj) {   //사진 5장 뿌리기
 	<header class="header-v4">
 		<!-- Header desktop -->
 		<div class="container-menu-desktop">
+			<!-- Topbar -->
+<!-- 			<div class="top-bar"> -->
+<!-- 				<div class="content-topbar flex-sb-m h-full container"> -->
+<!-- 					<div class="left-top-bar"> -->
+<!-- 						Free shipping for standard order over $100 -->
+<!-- 					</div> -->
+
+<!-- 					<div class="right-top-bar flex-w h-full"> -->
+<!-- 						<a href="#" class="flex-c-m trans-04 p-lr-25"> -->
+<!-- 							Help & FAQs -->
+<!-- 						</a> -->
+
+<!-- 						<a href="#" class="flex-c-m trans-04 p-lr-25"> -->
+<!-- 							My Account -->
+<!-- 						</a> -->
+
+<!-- 						<a href="#" class="flex-c-m trans-04 p-lr-25"> -->
+<!-- 							EN -->
+<!-- 						</a> -->
+
+<!-- 						<a href="#" class="flex-c-m trans-04 p-lr-25"> -->
+<!-- 							USD -->
+<!-- 						</a> -->
+<!-- 					</div> -->
+<!-- 				</div> -->
+<!-- 			</div> -->
+
 			<div class="wrap-menu-desktop how-shadow1">
 				<nav class="limiter-menu-desktop container">
 					
@@ -137,12 +164,21 @@ function readURL(obj) {   //사진 5장 뿌리기
 						<ul class="main-menu">
 							<li>
 								<a href="MainPage.pr">Home</a>
+<!-- 								<ul class="sub-menu"> -->
+<!-- 									<li><a href="index.html">Homepage 1</a></li> -->
+<!-- 									<li><a href="home-02.html">Homepage 2</a></li> -->
+<!-- 									<li><a href="home-03.html">Homepage 3</a></li> -->
+<!-- 								</ul> -->
 							</li>
 
 							<li>
 								<a href="Product.pr">Shop</a>
 							</li>
-							
+
+<!-- 							<li class="label1" data-label1="hot"> -->
+<!-- 								<a href="shoping-cart.html">Features</a> -->
+<!-- 							</li> -->
+
 							<li>
 								<a href="SellForm.pr">Sell</a>
 							</li>
@@ -239,6 +275,11 @@ function readURL(obj) {   //사진 5장 뿌리기
 			<ul class="main-menu-m">
 				<li>
 					<a href="index.html">Home</a>
+					<ul class="sub-menu-m">
+						<li><a href="index.html">Homepage 1</a></li>
+						<li><a href="home-02.html">Homepage 2</a></li>
+						<li><a href="home-03.html">Homepage 3</a></li>
+					</ul>
 					<span class="arrow-main-menu-m">
 						<i class="fa fa-angle-right" aria-hidden="true"></i>
 					</span>
@@ -401,11 +442,170 @@ function readURL(obj) {   //사진 5장 뿌리기
 						<div class="wrap-slick3 flex-sb flex-w">
 							<div class="slick3 gallery-lb">
 								<!--사진 -->
-								<div class="item-slick3" data-thumb=""> <div id="previewDiv" ></div>
+								<div class="item-slick3" data-thumb=""> 
 									<div class="wrap-pic-w pos-relative">
 										 <!--  파일추가  -->
-										   
-<!-- 											 -->
+								<!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
+								<div id="container">
+								    <div class="slide_wrap">
+								      <div class="slide_box">
+								        <div class="slide_list clearfix">
+<%-- 								          <%for(int i=0;i<3;i++){ %> --%>
+								          <div class="slide_content slide01">
+								             <div id="previewDiv" ></div>
+								          </div>
+								          <div class="slide_content slide02">
+								           	 
+								          </div>
+								          <div class="slide_content slide03">
+								          
+								          </div>
+<%-- 								          <%} %> --%>
+								        </div>
+								        <!-- // .slide_list -->
+								      </div>
+								      <!-- // .slide_box -->
+								      <div class="slide_btn_box">
+								        <button type="button" class="slide_btn_prev">Prev</button>
+								        <button type="button" class="slide_btn_next">Next</button>
+								      </div>
+								      <!-- // .slide_btn_box -->
+								      <ul class="slide_pagination"></ul>
+								      <!-- // .slide_pagination -->
+								    </div>
+								    <!-- // .slide_wrap -->
+								  </div>
+								  <!-- // .container -->		   
+<!-- 	!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!	-->
+ <style>
+	 	html, body { box-sizing: border-box; padding: 0; margin: 0; text-align: center; }
+	    *, *:before, *:after { box-sizing: inherit; }
+	    .clearfix:after { content: ''; display: block; clear: both; float: none; }
+	    .title { margin-bottom: 0; text-align: center; font-size: 30px; color: #333; }
+	    .link, .link:visited { display: inline-block; margin: 20px 0; color: #555; text-decoration: none; font-weight: bold; }
+	    .link:hover, .link:focus { color: #9fd6c2; }
+	    /* container - body */
+/* 	    #container { width: 1000px; margin: auto; } */
+	    .slide_wrap { position: relative; width: 400px; margin: auto; padding-bottom: 30px; }
+	    .slide_box { width: 100%; margin: auto; overflow-x: hidden; }
+	    .slide_content { display: table; float: left; width: 400px; height: 400px; }
+	    .slide_content > p { display: table-cell; vertical-align: middle; text-align: center; font-size: 100px; font-weight: bold; color: #555; }
+	    .slide_content.slide01 { background: #ddbdff; }
+	    .slide_content.slide02 { background: #9fd6c2; }
+	    .slide_content.slide03 { background: #abe2f7; }
+	    .slide_content.slide04 { background: #f08c78; }
+	    .slide_content.slide05 { background: #fbdb65; }
+	    .slide_btn_box > button { position: absolute; top: 50%; margin-top: -45px; width: 60px; height: 60px; font-size: 16px; color: #999; background: none; border: 1px solid #ddd; cursor: pointer; }
+	    .slide_btn_box > .slide_btn_prev { left: -100px; }
+	    .slide_btn_box > .slide_btn_next { right: -100px; }
+	    .slide_pagination { position: absolute; left: 50%; bottom: 0; list-style: none; margin: 0; padding: 0; transform: translateX(-50%); }
+	    .slide_pagination .dot { display: inline-block; width: 15px; height: 15px; margin: 0 5px; overflow: hidden; background: #ddd; border-radius: 50%; transition: 0.3s; }
+	    .slide_pagination .dot.dot_active { background: #333; }
+	    .slide_pagination .dot a { display: block; width: 100%; height: 100%; }
+ </style>
+<!--  -->
+<script type="text/javascript">
+(function () {
+    const slideList = document.querySelector('.slide_list');  // Slide parent dom
+    const slideContents = document.querySelectorAll('.slide_content');  // each slide dom
+    const slideBtnNext = document.querySelector('.slide_btn_next'); // next button
+    const slideBtnPrev = document.querySelector('.slide_btn_prev'); // prev button
+    const pagination = document.querySelector('.slide_pagination');
+    const slideLen = slideContents.length;  // slide length
+    const slideWidth = 400; // slide width
+    const slideSpeed = 300; // slide speed
+    const startNum = 0; // initial slide index (0 ~ 4)
+    
+    slideList.style.width = slideWidth * (slideLen + 2) + "px";
+    
+    // Copy first and last slide
+    let firstChild = slideList.firstElementChild;
+    let lastChild = slideList.lastElementChild;
+    let clonedFirst = firstChild.cloneNode(true);
+    let clonedLast = lastChild.cloneNode(true);
+
+    // Add copied Slides
+    slideList.appendChild(clonedFirst);
+    slideList.insertBefore(clonedLast, slideList.firstElementChild);
+
+    // Add pagination dynamically
+    let pageChild = '';
+    for (var i = 0; i < slideLen; i++) {
+      pageChild += '<li class="dot';
+      pageChild += (i === startNum) ? ' dot_active' : '';
+      pageChild += '" data-index="' + i + '"><a href="#"></a></li>';
+    }
+    pagination.innerHTML = pageChild;
+    const pageDots = document.querySelectorAll('.dot'); // each dot from pagination
+
+    slideList.style.transform = "translate3d(-" + (slideWidth * (startNum + 1)) + "px, 0px, 0px)";
+
+    let curIndex = startNum; // current slide index (except copied slide)
+    let curSlide = slideContents[curIndex]; // current slide dom
+    curSlide.classList.add('slide_active');
+
+    /** Next Button Event */
+    slideBtnNext.addEventListener('click', function() {
+      if (curIndex <= slideLen - 1) {
+        slideList.style.transition = slideSpeed + "ms";
+        slideList.style.transform = "translate3d(-" + (slideWidth * (curIndex + 2)) + "px, 0px, 0px)";
+      }
+      if (curIndex === slideLen - 1) {
+        setTimeout(function() {
+          slideList.style.transition = "0ms";
+          slideList.style.transform = "translate3d(-" + slideWidth + "px, 0px, 0px)";
+        }, slideSpeed);
+        curIndex = -1;
+      }
+      curSlide.classList.remove('slide_active');
+      pageDots[(curIndex === -1) ? slideLen - 1 : curIndex].classList.remove('dot_active');
+      curSlide = slideContents[++curIndex];
+      curSlide.classList.add('slide_active');
+      pageDots[curIndex].classList.add('dot_active');
+    });
+
+    /** Prev Button Event */
+    slideBtnPrev.addEventListener('click', function() {
+      if (curIndex >= 0) {
+        slideList.style.transition = slideSpeed + "ms";
+        slideList.style.transform = "translate3d(-" + (slideWidth * curIndex) + "px, 0px, 0px)";
+      }
+      if (curIndex === 0) {
+        setTimeout(function() {
+          slideList.style.transition = "0ms";
+          slideList.style.transform = "translate3d(-" + (slideWidth * slideLen) + "px, 0px, 0px)";
+        }, slideSpeed);
+        curIndex = slideLen;
+      }
+      curSlide.classList.remove('slide_active');
+      pageDots[(curIndex === slideLen) ? 0 : curIndex].classList.remove('dot_active');
+      curSlide = slideContents[--curIndex];
+      curSlide.classList.add('slide_active');
+      pageDots[curIndex].classList.add('dot_active');
+    });
+
+    /** Pagination Button Event */
+    let curDot;
+    Array.prototype.forEach.call(pageDots, function (dot, i) {
+      dot.addEventListener('click', function (e) {
+        e.preventDefault();
+        curDot = document.querySelector('.dot_active');
+        curDot.classList.remove('dot_active');
+        
+        curDot = this;
+        this.classList.add('dot_active');
+
+        curSlide.classList.remove('slide_active');
+        curIndex = Number(this.getAttribute('data-index'));
+        curSlide = slideContents[curIndex];
+        curSlide.classList.add('slide_active');
+        slideList.style.transition = slideSpeed + "ms";
+        slideList.style.transform = "translate3d(-" + (slideWidth * (curIndex + 1)) + "px, 0px, 0px)";
+      });
+    });
+  })();
+</script>
+<!--!!!!!!!!!!!!!!!!!! -->
 										 <input type="file" id="imgInput" name="sell_img_name1" onchange="readURL(this)">
 										 <input type="button" id="fileadd" value="파일추가">
 										 <input type="file" id="imgInput" name="sell_img_name2" onchange="readURL(this)">
@@ -429,9 +629,46 @@ function readURL(obj) {   //사진 5장 뿌리기
 			                <input type="text" name="sell_title" id=""  required="required" placeholder="제목입력칸(413행)">
 						</h4>
 						<div class="mtext-106 cl2">
-							<input type="text" name="sell_price" id="sell_price" placeholder="희망하는 금액을 입력하세요." onblur="checkPrice(this.value);">
+<!-- 							<input type="text" name="sell_price" id="sell_price" placeholder="희망하는 금액을 입력하세요." onkeyup="javascript:inputNumberFormat(this)"> -->
+							<input type="text" name="sell_price" id="sell_price" placeholder="희망하는 금액을 입력하세요." onkeyup="this.value=this.value.replace(/[^-0-9]/g,'');">
+							<div id="realPoint"></div>
 						</div>
+		<script type="text/javascript">
+		
+// 		function checkNum() {
+// 			let str = document.getElementById("sell_price").value;	
+// 			let check = /^[0-9]+$/; 
+// 			if (!check.test(str)) {    alert("숫자만 입력 가능합니다.");
+// 			str.remove();
+// 			}
+// 		}
+			
+			
+			
+// 		var testString = document.getElementById("sell_price").value;	
+// 		var regex = /[^0-9]/g;				
+// 		var sell_price = testString.replace(regex, "");
+// 		 document.getElementById("sell_price").value=sell_price;		//-->(,)떼주는 기능이지만 onkeyup이외 onclick 이벤트가 필요
+		
+		
+		
+// 		function inputNumberFormat(obj) {								//단위 1000원단위로  (,)붙여주는 기능 
+// 			obj.value = comma(uncomma(obj.value));
+// 		}	
 
+// 		function comma(str) {
+// 			str = String(str);
+// 			return str.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,');
+// 		}
+
+// 		function uncomma(str) {
+// 			str = String(str);
+
+// 			return str.replace(/[^-0-9]/g,'');
+			
+// 		}
+		
+		</script>
 						<div class="mtext-106 cl2">
 									<input type="text" name="sell_brand" id=""  required="required" placeholder="브랜드를 입력해주세요."><br>
 					    </div>
@@ -541,7 +778,7 @@ function readURL(obj) {   //사진 5장 뿌리기
 									<input type="button" value="취소" onclick="history.back()" >&nbsp;&nbsp;
 									
 									<input type="submit" value="판매등록"  >
-									
+
 								</div>
 							</div>	
 						</div>

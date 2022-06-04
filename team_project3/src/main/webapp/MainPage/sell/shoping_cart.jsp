@@ -102,6 +102,32 @@ int price = sellerDTO.getSell_price()+charge+3000;     //최종 판매가격
 	<header class="header-v4">
 		<!-- Header desktop -->
 		<div class="container-menu-desktop">
+			<!-- Topbar -->
+<!-- 			<div class="top-bar"> -->
+<!-- 				<div class="content-topbar flex-sb-m h-full container"> -->
+<!-- 					<div class="left-top-bar"> -->
+<!-- 						Free shipping for standard order over $100 -->
+<!-- 					</div> -->
+
+<!-- 					<div class="right-top-bar flex-w h-full"> -->
+<!-- 						<a href="#" class="flex-c-m trans-04 p-lr-25"> -->
+<!-- 							Help & FAQs -->
+<!-- 						</a> -->
+
+<!-- 						<a href="#" class="flex-c-m trans-04 p-lr-25"> -->
+<!-- 							My Account -->
+<!-- 						</a> -->
+
+<!-- 						<a href="#" class="flex-c-m trans-04 p-lr-25"> -->
+<!-- 							EN -->
+<!-- 						</a> -->
+
+<!-- 						<a href="#" class="flex-c-m trans-04 p-lr-25"> -->
+<!-- 							USD -->
+<!-- 						</a> -->
+<!-- 					</div> -->
+<!-- 				</div> -->
+<!-- 			</div> -->
 
 			<div class="wrap-menu-desktop how-shadow1">
 				<nav class="limiter-menu-desktop container">
@@ -425,21 +451,21 @@ int price = sellerDTO.getSell_price()+charge+3000;     //최종 판매가격
 								</tr>
 								<tr style=" border:none;">
 							 		 <td  colspan="2">	
-									  	<input type="text"  value="${memberbean.getMember_info_address()}" name="address1" id="address1"  placeholder="주소" > 	
+									  	<input type="text"  value="<%=memberbean.getMember_info_address()%>" name="address1" id="address1"  placeholder="주소" > 	
 									 </td>	
 									 <td></td> 	
 									  <td >		
-									  	<input type="text" value="${memberbean.getMember_info_post_code()}" name="postcode" id="postcode"  readonly="readonly"  placeholder="우편번호" >
+									  	<input type="text" value="<%=memberbean.getMember_info_post_code()%>" name="postcode" id="postcode"  readonly="readonly"  placeholder="우편번호" >
 							  		</td> 											
 								</tr>
 								<tr style=" border:none;">
 									<td>
-										<input type="text"  value="${memberbean.getMember_info_address_detail()}"  name="address2" id="address2" placeholder="상세주소" >
+										<input type="text"  value="<%=memberbean.getMember_info_address_detail()%>"  name="address2" id="address2" placeholder="상세주소" >
 									</td>
 								</tr>				
 								<tr style=" border:none;">
 									<td>
-										<input type="text" value="${memberbean.getMember_info_name()}" name="name"  placeholder="받는분">
+										<input type="text" value="<%=memberbean.getMember_info_name()%>" name="name"  placeholder="받는분">
 									</td>
 								</tr>				
 								<tr style=" border:none;">
@@ -505,7 +531,7 @@ int price = sellerDTO.getSell_price()+charge+3000;     //최종 판매가격
 						<div class="flex-w flex-sb-m bor15 p-t-18 p-b-15 p-lr-40 p-lr-15-sm">
 						
 								Point:<input class="stext-104 cl2 plh4 size-117 bor13 p-lr-20 m-r-10 m-tb-5" type="text" name="point" id="MemberPoint" 
-								onkeyup="AmountCommas(this.value)" value="0">
+								onkeyup="inputNumberFormat(this)" >
 <%-- 								 value="<%=memberbean.getMember_info_detail_point() %>" --%>
 								<div id="realPoint"></div>
 								<div>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
@@ -798,10 +824,16 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 <script>
 		function sub() {			//포인트 사용 스크립트
  			$("#realPoint").empty();
-			var prePoint  = 30000;
-			var subPoint  = document.getElementById("MemberPoint").value;//사용 할 포인트
+ 			var prePoint  = 30000;
+		//----
+		var testString = document.getElementById("MemberPoint").value;	// 원래 문자열
+		var regex = /[^0-9]/g;				// 숫자가 아닌 문자열을 선택하는 정규식
+		var subPoint = testString.replace(regex, "");//사용 할 포인트
+		//----
+			
+// 			var subPoint  = document.getElementById("MemberPoint").value;//사용 할 포인트
 			document.getElementById("realPoint").value =	prePoint - subPoint ;//차감후 남은 포인트
-			document.getElementById("point").value = subPoint;//최종 결제창에 띄울 포인트(사용할 포인트)
+// 			document.getElementById("point").value = subPoint;//최종 결제창에 띄울 포인트(사용할 포인트)
 			if(subPoint>prePoint){
 				alert("포인트가 부족합니다. 현재 포인트:"+prePoint);
 // 				else if(subPoint/1000 != 0){
@@ -811,10 +843,21 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 			$("#realPoint").append("남은포인트:"+document.getElementById("realPoint").value);
 			}
 		}
-// 		function AmountCommas(point){		//포인트 한글사용 불가처리 정규표현식
-// 		    return point.toString().replace(/\B(?=(\d{3})+(?!\d))/g,",");
-// 				return val.price.toLocaleString();
-// 			}
+		function inputNumberFormat(obj) {			//가격표 1000원단이 (,)사용
+			obj.value = comma(uncomma(obj.value));
+		}
+
+		function comma(str) {
+			str = String(str);
+			return str.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,');
+		}
+
+		function uncomma(str) {
+			str = String(str);
+
+			return str.replace(/[^-0-9]/g,'');
+			
+		}
 	
 	</script>
 	<script>
