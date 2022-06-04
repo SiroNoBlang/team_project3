@@ -21,9 +21,13 @@
 <script type="text/javascript">
 	$(document).ready( function() {
 		$("#qnaTypeId").change(function(){
-			$("#qnaTitleId").val("["+$(this).val()+"] ");
+			$("#qnaTitleId").val("["+$(this).val()+"] ").focus();
 		});
 	});
+	
+	
+	
+	
 </script>
 </head>
 <body>

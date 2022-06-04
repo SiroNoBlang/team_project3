@@ -22,7 +22,7 @@
 		$(document).ready( function() {
 			$("#qnaTypeId").change(function(){
 				let title = $('input[name=qna_title]').val();
-				$("#qnaTitleId").val("["+$(this).val()+"] " + title );
+				$("#qnaTitleId").val("["+$(this).val()+"] " + title).focus();
 			});
 		});
 </script>
