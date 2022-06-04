@@ -12,17 +12,16 @@ public class SellerShopingService {
 	public SellerProductDTO getShoping(int sell_num) {
 		SellerProductDTO shoping = null;
 		
-		Connection con = getConnection(); // static import 적용되어 있을 경우
+		Connection con = getConnection();
 		
 		SellerDAO sellerDAO = SellerDAO.getInstance();
 		
 		sellerDAO.setConnection(con);
 		
-		shoping = sellerDAO.selectArticle(sell_num);    //SellerDAO 에서   <190행selectArticle(int sell_num)매서드 활용>
+		shoping = sellerDAO.selectArticle(sell_num);  //SellerDAO 에서   <190행selectArticle(int sell_num)매서드 활용>
 		
 		close(con);
 		
-		// 7. 조회 결과 리턴
 		return shoping;
 	
 	}
@@ -30,7 +29,7 @@ public class SellerShopingService {
 	public MemberBean getMemberShop(String member_code) {
 		MemberBean MemberShop = null;
 		
-		Connection con = getConnection(); // static import 적용되어 있을 경우
+		Connection con = getConnection();
 		
 		SellerDAO sellerDAO = SellerDAO.getInstance();
 		sellerDAO.setConnection(con);

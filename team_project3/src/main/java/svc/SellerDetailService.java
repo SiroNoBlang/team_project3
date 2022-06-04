@@ -35,17 +35,12 @@ public class SellerDetailService {
 		
 		SellerDAO sellerDAO = SellerDAO.getInstance();
 		
-		// 4. BoardDAO 객체에 Connection 객체 전달하기 - 공통
 		sellerDAO.setConnection(con);
 		
-		// 5. BoardDAO 객체의 updateReadcount() 메서드를 호출하여 게시물 조회수 증가
-		// => 파라미터 : board_num
 		sellerDAO.updateReadcount(sell_num);
 		
-		// 6. commit 작업 수행
 		commit(con);
 		
-		// 7. JdbcUtil 클래스로부터 가져온 Connection 객체를 반환 - 공통
 		close(con);
 		
 	}
