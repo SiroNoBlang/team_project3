@@ -57,11 +57,7 @@ public class Main extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		} else if(command.equals("/MainPage.ma")) { // home 버튼 클릭시 메인페이지로 이동
-			// 이건 메인페이지 컨트롤러로 옮겨야함.
-			forward = new ActionForward("MainPage/first_page/index.jsp", false);
-			
-		}else if(command.equals("/Login.ma")) {
+		} else if(command.equals("/Login.ma")) {
 			// 이것도 여기 있어도 됨.
 			forward = new ActionForward("join/login.jsp", false);
 			

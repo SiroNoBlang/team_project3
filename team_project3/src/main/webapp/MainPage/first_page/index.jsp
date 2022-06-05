@@ -4,18 +4,11 @@
 <%
 String code = (String)session.getAttribute("sCode");
 String nickname = (String)session.getAttribute("sNickname");
-%>    
+%>
 <!DOCTYPE html>
 <html lang="en">
 <head>  
 	<title>Home 03</title>
-	<script type="text/javascript">
-	function confirmLogout() {
-	if(confirm("로그아웃 하시겠습니까?")) {
-		location.href = "./Logout.ma";
-		}
-	} 
-	</script>           
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 <!--===============================================================================================-->	

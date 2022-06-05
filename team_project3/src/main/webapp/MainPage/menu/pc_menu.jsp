@@ -1,7 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
-	
+<script type="text/javascript">
+	function confirmLogout() {
+	if(confirm("로그아웃 하시겠습니까?")) {
+		location.href = "./Logout.ma";
+		}
+	} 
+</script>
 <aside class="wrap-sidebar js-sidebar">
 <div class="s-full js-hide-sidebar"></div>
 
@@ -15,7 +20,7 @@
 	<div class="sidebar-content flex-w w-full p-lr-65 js-pscroll">
 		<ul class="sidebar-link w-full">
 			<li class="p-b-13">
-				<a href="MainPage.ma" class="stext-102 cl2 hov-cl1 trans-04">
+				<a href="MainPage.pr" class="stext-102 cl2 hov-cl1 trans-04">
 					Home
 				</a>
 			</li>

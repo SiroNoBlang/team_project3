@@ -29,12 +29,7 @@
 <div class="menu-mobile">
 	<ul class="main-menu-m">
 		<li>
-			<a href="MainPage.ma">Home</a>
-			<!-- <ul class="sub-menu-m">
-				<li><a href="index.html">Homepage 1</a></li>
-				<li><a href="home-02.html">Homepage 2</a></li>
-				<li><a href="home-03.html">Homepage 3</a></li>
-			</ul> -->
+			<a href="MainPage.pr">Home</a>
 			<span class="arrow-main-menu-m">
 				<i class="fa fa-angle-right" aria-hidden="true"></i>
 			</span>

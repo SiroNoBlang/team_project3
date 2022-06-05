@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 					
 <!-- Logo desktop -->		
-<a href="MainPage.ma" class="logo">
+<a href="MainPage.pr" class="logo">
 	<img src="MainPage//images/icons/logo-01.png" alt="IMG-LOGO">
 </a>
 
@@ -10,17 +10,13 @@
 <div class="menu-desktop">
 	<ul class="main-menu">
 		<li>
-			<a href="MainPage.ma">Home</a>
+			<a href="MainPage.pr">Home</a>
 		</li>
 
 		<li>
 			<a href="Product.pr">Shop</a>
 		</li>
 
-<!-- 		<li class="label1" data-label1="hot">
-			<a href="shoping-cart.html">Features</a>
-		</li> 
- -->
 		<li>
 			<a href="SellForm.pr">Sell</a>
 		</li>
