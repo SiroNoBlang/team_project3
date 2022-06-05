@@ -217,7 +217,7 @@ $(document).ready( function() {
 						<table class="table write">
 							<tr>
 								<th><label for="qna_type">문의유형</label></th>
-								<td>
+								<td style="text-align:left;">
 									<select id="qnaTypeId" name="qna_type">
 									  <option value="상품문의">상품문의</option>
 									  <option value="배송문의">배송문의</option>
