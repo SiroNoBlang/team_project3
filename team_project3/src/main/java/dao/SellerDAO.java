@@ -640,61 +640,79 @@ public class SellerDAO {
 	}
 
 	// 결제버튼 클릭시 배송지 Address table에 자동저장 ---> 기본 member에있는 주소는 마이페이지에서 수정가능
-	public void insertAddress(SellerAddress address) {
-		PreparedStatement pstmt = null;
-		try {
-
-			String sql = "INSERT INTO address VALUES(?,?,?,?,?,?)";
-			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, address.getMember_code());
-			pstmt.setString(2, address.getPost_code());
-			pstmt.setString(3, address.getAddress_code());
-			pstmt.setString(4, address.getAddress_detail());
-			pstmt.setString(5, address.getAddress_name());
-			pstmt.setString(6, address.getAddress_phone());
-			pstmt.executeUpdate();
-		} catch (SQLException e) {
-			System.out.println("SQL 구문오류!");
-			e.printStackTrace();
-		}
-	}
-
-	// 배송지 주소 찾기
-	public ArrayList<SellerAddress> findAddress(String sell_member_code) {
-		ArrayList<SellerAddress> addressArr = null;
-		SellerAddress address = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-
-		try {
-			String sql = "SELECT  member_code, post_code, address_code, address_detail, address_name, address_phone"
-					+ " FROM address" + " WHERE member_code=?" + "ORDER BY member_code DESC " + "LIMIT 0, 5";
-			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, sell_member_code);
-
-			addressArr = new ArrayList<SellerAddress>();
-			rs = pstmt.executeQuery();
-
-			while (rs.next()) {
-				address = new SellerAddress();
-				address.setMember_code(rs.getString("member_code"));
-				address.setAddress_code(rs.getString("address_code"));
-				address.setAddress_detail(rs.getString("address_detail"));
-				address.setPost_code(rs.getString("post_code"));
-				address.setAddress_phone(rs.getString("address_phone"));
-				address.setAddress_name(rs.getString("address_name"));
-
-				addressArr.add(address);
+	 public void insertAddress(SellerAddress address) {  
+			System.out.println("sellerDAO-insertAddress");
+			PreparedStatement pstmt = null;
+			ResultSet rs =null;
+			int num=0;
+			try {
+				String sql = "SELECT MAX(address_num) FROM address";
+				pstmt = con.prepareStatement(sql);
+				rs = pstmt.executeQuery();
+				// rs.next()메서드를 통해 다음 레코드 존재 여부 확인
+				// =>다음 레코드가 존재하는 경우 기존 게시물이 있다는 의미이므로
+				// 조회된 값(num의 최대값) +1을 num 변수에 저장
+				if (rs.next()) {// 등록된 게시물이 하나라도 존재할 경우(= 최대값이 조회될 경우)
+					num = rs.getInt(1) + 1;
+				}
+				
+				 sql ="INSERT INTO address VALUES(?,?,?,?,?,?,?)";
+				 pstmt = con.prepareStatement(sql);
+				 pstmt.setInt(1,num);
+				 pstmt.setString(2,address.getMember_code());
+				 pstmt.setString(3,address.getPost_code());
+				 pstmt.setString(4,address.getAddress_code());
+				 pstmt.setString(5,address.getAddress_detail());
+				 pstmt.setString(6,address.getAddress_name());
+				 pstmt.setString(7,address.getAddress_phone());
+				 pstmt.executeUpdate();
+			} catch (SQLException e) {
+				System.out.println("SQL 구문오류!");
+				e.printStackTrace();
 			}
-
-		} catch (Exception e) {
-
-			e.printStackTrace();
-		} finally {
-			close(rs);
-			close(pstmt);
+		}  
+	// 배송지 주소 찾기
+	 public ArrayList< SellerAddress>  findAddress(String sell_member_code) {  
+			System.out.println("sellerDAO-findAddress");
+			ArrayList< SellerAddress> addressArr = null;		 
+			SellerAddress address =null;
+			PreparedStatement pstmt =null;
+			ResultSet rs = null;
+	
+			try {
+				String sql="SELECT  member_code, post_code, address_code, address_detail, address_name, address_phone"
+						+ " FROM address"
+						+ " WHERE member_code=?"
+						+ "ORDER BY address_num DESC "
+						+ "LIMIT 0, 5";
+				pstmt=con.prepareStatement(sql);
+				pstmt.setString(1, sell_member_code);
+				
+				addressArr = new ArrayList<SellerAddress>();	
+				rs = pstmt.executeQuery();
+				
+				while(rs.next()) {
+					address = new SellerAddress();
+					address.setMember_code(rs.getString("member_code"));
+					address.setAddress_code(rs.getString("address_code"));
+					address.setAddress_detail(rs.getString("address_detail"));
+					address.setPost_code(rs.getString("post_code"));
+					address.setAddress_phone(rs.getString("address_phone"));
+					address.setAddress_name(rs.getString("address_name"));
+					
+					addressArr.add(address);
+				}
+				
+				
+				
+			} catch (Exception e) {
+				
+				e.printStackTrace();
+			}finally {
+				close(rs);
+				close(pstmt);
+			}
+			return addressArr;
 		}
-		return addressArr;
-	}
 
 }

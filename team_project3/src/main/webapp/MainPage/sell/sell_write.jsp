@@ -606,8 +606,31 @@ function readURL(obj) {   //사진 3장 뿌리기
   })();
 </script>
 <!--!!!!!!!!!!!!!!!!!! -->
+
+ <script> 
+//  $(function(){
+// 	$('#button-add-file').click(addFileForm);
+// 	$(document).on('click', '.button-delete-file', function(event) {
+//  		$(this).parent().remove();
+//  	});
+//  });
+//  var count = 0;
+//  function addFileForm() {
+//  	var html = "<div id='item_"+count+"'>";
+//  	html += "<input type='file'  />";
+//  	html += "<button class='button-delete-file'>삭제</button></div>";
+//  	count++;
+//  	$("#my-form").append(html);
+	
+//  		return html;
+ 	
+//  }
+ </script> 
+<!-- <button id='button-add-file'>파일 추가</button> -->
+<!-- <div id='my-form'></div> -->
+
+										
 										 <input type="file" id="imgInput" name="sell_img_name1" onchange="readURL(this)">
-										 <input type="button" id="fileadd" value="파일추가">
 										 <input type="file" id="imgInput" name="sell_img_name2" onchange="readURL(this)">
 										 <input type="file" id="imgInput" name="sell_img_name3" onchange="readURL(this)">
 											</div>

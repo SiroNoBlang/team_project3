@@ -13,6 +13,7 @@ MemberBean memberbean = (MemberBean)request.getAttribute("memberBean");
 int charge = sellerDTO.getSell_price() /10; //검수비 판매가격 /10
 int price = sellerDTO.getSell_price()+charge+3000;     //최종 판매가격
 // int point1 = memberbean.getMember_info_detail_point();
+int member_point = memberbean.getMember_info_detail_point();
 %>
    
 <!DOCTYPE html>
@@ -418,6 +419,7 @@ int price = sellerDTO.getSell_price()+charge+3000;     //최종 판매가격
 					<div class="m-l-25 m-r--38 m-lr-0-xl">
 						<div class="wrap-table-shopping-cart">
 							<h4 style="color: lightgrey;">상품 정보</h4>
+							
 							<table class="table-shopping-cart">
 								<tr>
 									
@@ -449,7 +451,37 @@ int price = sellerDTO.getSell_price()+charge+3000;     //최종 판매가격
 									</td>
 																
 								</tr>
+								
+								<%if(memberbean.getMember_info_address().equals("")&&memberbean.getMember_info_post_code().equals("")&&
+										memberbean.getMember_info_address_detail().equals("")){ %>
 								<tr style=" border:none;">
+							 		 <td  colspan="2">	
+									  	<input type="text"  value="" name="address1" id="address1"  placeholder="주소" > 	
+									 </td>	
+									 <td></td> 	
+									  <td >		
+									  	<input type="text" value="" name="postcode" id="postcode"  readonly="readonly"  placeholder="우편번호" >
+							  		</td> 											
+								</tr>
+								<tr style=" border:none;">
+									<td>
+										<input type="text"  value=""  name="address2" id="address2" placeholder="상세주소" >
+									</td>
+								</tr>				
+								<tr style=" border:none;">
+									<td>
+										<input type="text" value="" name="name"  placeholder="받는분">
+									</td>
+								</tr>				
+								<tr style=" border:none;">
+									<td>
+										<input type="text" value="" name="phone"  placeholder="전화번호(-제외)">	
+									</td>
+								</tr>
+										
+							<%}else{ %>
+							
+							<tr style=" border:none;">
 							 		 <td  colspan="2">	
 									  	<input type="text"  value="<%=memberbean.getMember_info_address()%>" name="address1" id="address1"  placeholder="주소" > 	
 									 </td>	
@@ -465,54 +497,18 @@ int price = sellerDTO.getSell_price()+charge+3000;     //최종 판매가격
 								</tr>				
 								<tr style=" border:none;">
 									<td>
-										<input type="text" value="<%=memberbean.getMember_info_name()%>" name="name"  placeholder="받는분">
+										<input type="text" value="<%=memberbean.getMember_info_name()%>" name="name" id="name"  placeholder="받는분">
 									</td>
 								</tr>				
 								<tr style=" border:none;">
 									<td>
-										<input type="text" value="<%=memberbean.getMember_info_phone()%>" name="phone"  placeholder="전화번호(-제외)">	
+										<input type="text" value="<%=memberbean.getMember_info_phone()%>" name="phone" id="phone" placeholder="전화번호(-제외)">	
 									</td>
 								</tr>
+							
+							<%} %>
 							</table >
-<%-- 								<%} else{ %>	 --%>
-<!-- 									<table class="table-shopping-cart"> -->
-<!-- 								<tr style=" border:none;"> -->
-<!-- 									<td> -->
-<!-- 										<h4 style="color: lightgrey;">배송 정보</h4>	 -->
-<!-- 									</td> -->
-<!-- 									<td colspan="2"></td><td></td> -->
-<!-- 									<td> -->
-<!-- 										<input type="button" onclick="AddressDaumPostcode()"  -->
-<!-- 										value="+새 배송지 추가" style="border: none; background: transparent; color: lightgrey;"> -->
-<!-- 									</td> -->
-																
-<!-- 								</tr> -->
-<!-- 								<tr style=" border:none;"> -->
-<!-- 							 		 <td  colspan="2">	 -->
-<!-- 									  	<input type="text"   name="address1" id="address1"  placeholder="주소" > 	 -->
-<!-- 									 </td>	 -->
-<!-- 									 <td></td> 	 -->
-<!-- 									  <td >		 -->
-<!-- 									  	<input type="text"  name="postcode" id="postcode"  readonly="readonly"  placeholder="우편번호" > -->
-<!-- 							  		</td> 											 -->
-<!-- 								</tr> -->
-<!-- 								<tr style=" border:none;"> -->
-<!-- 									<td> -->
-<!-- 										<input type="text"   name="address2" id="address2" placeholder="상세주소" > -->
-<!-- 									</td> -->
-<!-- 								</tr>				 -->
-<!-- 								<tr style=" border:none;"> -->
-<!-- 									<td> -->
-<!-- 										<input type="text" name="name"  placeholder="받는분"> -->
-<!-- 									</td> -->
-<!-- 								</tr>				 -->
-<!-- 								<tr style=" border:none;"> -->
-<!-- 									<td> -->
-<!-- 										<input type="text" name="phone"  placeholder="전화번호(-제외)">	 -->
-<!-- 									</td> -->
-<!-- 								</tr> -->
-<!-- 							</table > -->
-<%-- 						<%} %> --%>
+
 									<table  class="table-shopping-cart">
 									<tr >
 									<td>
@@ -530,9 +526,10 @@ int price = sellerDTO.getSell_price()+charge+3000;     //최종 판매가격
 							
 						<div class="flex-w flex-sb-m bor15 p-t-18 p-b-15 p-lr-40 p-lr-15-sm">
 						
-								Point:<input class="stext-104 cl2 plh4 size-117 bor13 p-lr-20 m-r-10 m-tb-5" type="text" name="point" id="MemberPoint" 
-								onkeyup="inputNumberFormat(this)" >
-<%-- 								 value="<%=memberbean.getMember_info_detail_point() %>" --%>
+								Point:<input class="stext-104 cl2 plh4 size-117 bor13 p-lr-20 m-r-10 m-tb-5" type="text" name="point" id="MemberPoint" value="0"
+								onkeyup="this.value=this.value.replace(/[^-0-9]/g,'');" >
+<!-- 								onkeyup="inputNumberFormat(this)" -->
+
 								<div id="realPoint"></div>
 								<div>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
 								</div>	
@@ -554,13 +551,13 @@ int price = sellerDTO.getSell_price()+charge+3000;     //최종 판매가격
 						<div class="flex-w flex-t bor12 p-b-13">
 							<div class="size-208">
 								<span class="stext-110 cl2">
-									제품 가격
+								제품 가격
 								</span>
 							</div>
 
 							<div class="size-209">
 								<span class="mtext-110 cl2">
-									₩<%=sellerDTO.getSell_price() %>
+									₩<span>&nbsp</span><%=sellerDTO.getSell_price() %>
 								</span>
 							</div>
 						</div>
@@ -568,22 +565,23 @@ int price = sellerDTO.getSell_price()+charge+3000;     //최종 판매가격
 						<div class="flex-w flex-t bor12 p-t-15 p-b-30">
 							<div class="size-208 w-full-ssm">
 								<span class="stext-110 cl2">
-									배송비  -3000
+									배송비 <span>&nbsp</span> 3000
 								</span><br>
 								
 								<span class="stext-110 cl2">
-									검수비 - free
+									검수비 <span>&nbsp</span> free
 								</span><br>
 								
 								<span class="stext-110 cl2">
-									수수료 - <%=charge %>
+									수수료<span>&nbsp&nbsp</span>  <%=charge %>
 								</span><br> 
 								
 								<span class="stext-110 cl2">
-									포인트 -<input type="text" id="point" style="border: none; background: transparent; "readonly="readonly">
+									포인트<span>&nbsp</span> <span id="point"></span>
+<!-- 									style="border: none; background: transparent; " -->
 								</span><br>
 								<span class="stext-110 cl2">
-									등급별 추가 할인: - <%=charge %>
+									<span>&nbsp</span><%=charge %>
 								</span><br> 
 						   </div>
 							
@@ -817,15 +815,16 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 <!--=========================488<포인트차감>==========================================================-->	
 <script>		
 		function recentPostAddress(){   //최근 배송지 스크립트
-			window.open('SellRecentPostAddressAction.pr?member_code=<%=sell_member_code%>',"","width=750,height=250");
+			window.open('SellRecentPostAddressAction.pr?member_code=<%=sell_member_code%>',"","width=750,height=450");
 			
 		}
 </script>
 <script>
 		function sub() {			//포인트 사용 스크립트
  			$("#realPoint").empty();
- 			var prePoint  = 30000;
-		//----
+ 			var prePoint  = <%=member_point%>
+//  			var prePoint = 
+ 			//----
 		var testString = document.getElementById("MemberPoint").value;	// 원래 문자열
 		var regex = /[^0-9]/g;				// 숫자가 아닌 문자열을 선택하는 정규식
 		var subPoint = testString.replace(regex, "");//사용 할 포인트
@@ -833,7 +832,9 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 			
 // 			var subPoint  = document.getElementById("MemberPoint").value;//사용 할 포인트
 			document.getElementById("realPoint").value =	prePoint - subPoint ;//차감후 남은 포인트
-// 			document.getElementById("point").value = subPoint;//최종 결제창에 띄울 포인트(사용할 포인트)
+
+			$("#point").empty();			//최종 결제 포인트에서 보여주는곳
+			$("#point").append(subPoint);	//최종 결제 포인트에서 보여주는곳
 			if(subPoint>prePoint){
 				alert("포인트가 부족합니다. 현재 포인트:"+prePoint);
 // 				else if(subPoint/1000 != 0){
@@ -843,22 +844,24 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 			$("#realPoint").append("남은포인트:"+document.getElementById("realPoint").value);
 			}
 		}
-		function inputNumberFormat(obj) {			//가격표 1000원단이 (,)사용
-			obj.value = comma(uncomma(obj.value));
-		}
+		
+//-------------------------------------------------------------------------------------------		
+// 		function inputNumberFormat(obj) {			//가격표 1000원단이 (,)사용
+// 			obj.value = comma(uncomma(obj.value));
+// 		}
 
-		function comma(str) {
-			str = String(str);
-			return str.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,');
-		}
+// 		function comma(str) {
+// 			str = String(str);
+// 			return str.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,');
+// 		}
 
-		function uncomma(str) {
-			str = String(str);
+// 		function uncomma(str) {
+// 			str = String(str);
 
-			return str.replace(/[^-0-9]/g,'');
+// 			return str.replace(/[^-0-9]/g,'');
 			
-		}
-	
+// 		}
+//-------------------------------------------------------------------------------------	
 	</script>
 	<script>
 		$(".js-select2").each(function(){

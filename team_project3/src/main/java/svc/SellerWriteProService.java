@@ -32,6 +32,7 @@ public class SellerWriteProService {
 			
 			isWriteSuccess = true;
 		} else { // 작업 실패 시
+			
 			rollback(con);
 		}
 		
