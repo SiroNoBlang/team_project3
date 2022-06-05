@@ -5,21 +5,53 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
 <%	
+String name = "";
+String email = "";
+String phone = "";
+String address = "";
+int totalPrice = 1;
+
+
 String member_nickname =(String)session.getAttribute("sNickname");
 String sell_member_code =(String)session.getAttribute("sCode");
 SellerProductDTO sellerDTO = (SellerProductDTO)request.getAttribute("sellerDTO");
 MemberBean memberbean = (MemberBean)request.getAttribute("memberBean");
+double member_grade=0;
+if(memberbean.getGrade_name().equals("Basic")){
+	 member_grade = 0.98;
+}else if(memberbean.getGrade_name().equals("Bronze")){
+	 member_grade = 0.97;	
+}else if(memberbean.getGrade_name().equals("silver")){
+	 member_grade = 0.96;	
+}else if(memberbean.getGrade_name().equals("Gold")){
+	 member_grade = 0.95;
+}else if(memberbean.getGrade_name().equals("Vip")){
+	 member_grade = 0.94;
+}else if(memberbean.getGrade_name().equals("VVip")){
+	 member_grade = 0.93;
+}else if(memberbean.getGrade_name().equals("VVVip")){
+	 member_grade = 0.92;
+}else {
+	 member_grade=0.9;
+}
 
-int charge = sellerDTO.getSell_price() /10; //검수비 판매가격 /10
-int price = sellerDTO.getSell_price()+charge+3000;     //최종 판매가격
-// int point1 = memberbean.getMember_info_detail_point();
-int member_point = memberbean.getMember_info_detail_point();
+double charge = (double)(sellerDTO.getSell_price() * 0.2); //검수비 :5퍼센트
+int realCharge=(int)Math.round(charge);   //반올림해서 보여줄 값
+
+double price = (double) (sellerDTO.getSell_price()+realCharge+3000 )*member_grade;     //최종 판매가격= 판매가격+배송비(3000원)+검수비(판매가격의 5퍼센트)-포인트-등급별할인율
+int realPrice=(int)Math.round(price); 
+
+int member_point = memberbean.getMember_info_detail_point();  //자바스크립트에서 쓸라고 만듦
+
+
+
 %>
    
 <!DOCTYPE html>
 <html lang="en">
 <head>
 	<title>Shoping Cart</title>
+
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 	<script type="text/javascript">
 	function AddressDaumPostcode() {			//----도로명주소-----
@@ -409,7 +441,7 @@ int member_point = memberbean.getMember_info_detail_point();
 	
 	<input type="hidden" value="member_nickname" name="member_nickname">
 	<input type="hidden" value="<%=sellerDTO.getSell_num() %>" name="sell_num">
-	<input type="hidden" value="<%=price %>" name="member_info_detail_acc_money" >
+	<input type="hidden" value="<%=realPrice %>" name="member_info_detail_acc_money" >
 	<input type="hidden" value="<%=sell_member_code %>" name="member_code">
 	<input type="hidden" value="<%=sellerDTO.getSell_price() %>" name="sell_price">
 		<div class="container">
@@ -557,31 +589,32 @@ int member_point = memberbean.getMember_info_detail_point();
 
 							<div class="size-209">
 								<span class="mtext-110 cl2">
-									₩<span>&nbsp</span><%=sellerDTO.getSell_price() %>
+									₩<span>&nbsp</span> <%=sellerDTO.getSell_price() %>
 								</span>
 							</div>
 						</div>
 
 						<div class="flex-w flex-t bor12 p-t-15 p-b-30">
 							<div class="size-208 w-full-ssm">
-								<span class="stext-110 cl2">
-									배송비 <span>&nbsp</span> 3000
-								</span><br>
+<!-- 								<span class="stext-110 cl2"> -->
+<!-- 									배송비 <span>&nbsp</span> 3000 -->
+<!-- 								</span><br> -->
+								
+<!-- 								<span class="stext-110 cl2"> -->
+<!-- 									검수비 <span>&nbsp</span> free -->
+<!-- 								</span><br> -->
 								
 								<span class="stext-110 cl2">
-									검수비 <span>&nbsp</span> free
-								</span><br>
-								
-								<span class="stext-110 cl2">
-									수수료<span>&nbsp&nbsp</span>  <%=charge %>
+									수수료 <span>&nbsp&nbsp</span> ₩ <%=realCharge %>
 								</span><br> 
 								
 								<span class="stext-110 cl2">
-									포인트<span>&nbsp</span> <span id="point"></span>
+									포인트<span>&nbsp&nbsp&nbsp&nbsp</span>₩ <span id="point"></span>
 <!-- 									style="border: none; background: transparent; " -->
 								</span><br>
 								<span class="stext-110 cl2">
-									<span>&nbsp</span><%=charge %>
+									 등급<span>&nbsp&nbsp</span><%=memberbean.getGrade_name() %>    
+									 <span><img  width="29" height="30" alt="회원등급표" src="./Upload/sell_img/sellerpart.jpg" onclick="checkMember_grade()"></span>
 								</span><br> 
 						   </div>
 							
@@ -636,19 +669,20 @@ int member_point = memberbean.getMember_info_detail_point();
 
 							<div class="size-209 p-t-1">
 								<span class="mtext-110 cl2">
-									₩  <%=price %>
+									₩  <%=realPrice %>
 								</span>
 							</div>
 						</div>
-					  <input type="submit" value="신용카드결제" class="flex-c-m stext-101 cl0 size-116 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer">
+					  <input type="submit" value="결제하기" onclick="" class="flex-c-m stext-101 cl0 size-116 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer">
+					</div>
+					<div>
+					
 					</div>
 				</div>
 			</div>
 		</div>
 	</form>
-		
-	
-		
+		 
 
 	<!-- Footer -->
 	<footer class="bg3 p-t-75 p-b-32">
@@ -815,8 +849,10 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 <!--=========================488<포인트차감>==========================================================-->	
 <script>		
 		function recentPostAddress(){   //최근 배송지 스크립트
-			window.open('SellRecentPostAddressAction.pr?member_code=<%=sell_member_code%>',"","width=750,height=450");
-			
+			window.open('SellRecentPostAddressAction.pr?member_code=<%=sell_member_code%>',"","width=750,height=450");	
+		}
+		function checkMember_grade(){
+			window.open('SellMemberGrade.pr?member_code=<%=sell_member_code%>',"","width=750,height=450");
 		}
 </script>
 <script>

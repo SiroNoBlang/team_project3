@@ -8,7 +8,7 @@
 String member_nickname =(String)session.getAttribute("sNickname");
 String sell_member_code =(String)session.getAttribute("sCode");
 
-
+int prev_acc_money = (int)request.getAttribute("member_info_detail_acc_money");
 SellerProductDTO sellerDTO = (SellerProductDTO)request.getAttribute("sellerDTO");
 MemberBean memberbean = (MemberBean)request.getAttribute("memberBean");
 int charge = sellerDTO.getSell_price() /10; //검수비 판매가격 /10
@@ -20,7 +20,8 @@ int price = sellerDTO.getSell_price()+charge+3000;     //최종 판매가격+수
 <html lang="en">
 <head>
 	<title>succeedProduct</title>
-
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>		<!-- 결제 기능 스크립트 -->
+<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>	<!-- 결제 기능 스크립트 -->
     
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -350,7 +351,7 @@ int price = sellerDTO.getSell_price()+charge+3000;     //최종 판매가격+수
 	</div>
 	
 	<center>
-		<h2>결제 완료! </h2>
+		<h2>결제페이지 </h2>
 	</center>
 <!-- 	<form action="SucceedProduct.pr" class="bg0 p-t-75 p-b-85"> -->
 		<div class="container" >
@@ -412,13 +413,13 @@ int price = sellerDTO.getSell_price()+charge+3000;     //최종 판매가격+수
 									point:<%=memberbean.getMember_info_detail_point() %>
 								</span><br>
 								<span class="stext-110 cl2">
-									acc_money:<%=memberbean.getMember_info_detail_acc_money()%>	
+										
 								</span><br>
 								<span class="stext-110 cl2">
-									회원등급 :<%=memberbean.getMember_info_post_code() %>	
+									회원등급 :<%=memberbean.getGrade_name() %>	
 								</span><br> 
 								<span class="stext-190 cl2">
- 									최종금액:<%=price%>
+ 									최종금액 : <%=prev_acc_money%>
 								</span><br>	
 								
 <!--  									<P>우리 COZA_STORE에서는 택배비+검수 수수료 합산하여 결제 됨을 알려드립니다.</P> -->
@@ -452,9 +453,9 @@ int price = sellerDTO.getSell_price()+charge+3000;     //최종 판매가격+수
 								</span>
 							</div>
 						</div>
-					  <input type="button" value="홈으로" onclick="location.href='MainPage.pr'"  class="flex-c-m stext-101 cl0 size-116 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer"> 
+					     <input type="button" value="결제하기" onclick="location.href='MainPage.pr'"  class="flex-c-m stext-101 cl0 size-116 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer"> 
 					 
-					  <input type="button" value="마이페이지" onclick="location.href='MainPage.pr'"  class="flex-c-m stext-101 cl0 size-116 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer"> 
+<!-- 					  <input type="button" value="마이페이지" onclick="location.href='MainPage.pr'"  class="flex-c-m stext-101 cl0 size-116 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer">  -->
 					</div>
 				</div>
 			</div>
@@ -462,7 +463,67 @@ int price = sellerDTO.getSell_price()+charge+3000;     //최종 판매가격+수
 <!-- 	</form> -->
 
 	
+	<script>
+    
+		 $(function(){
+        var IMP = window.IMP; // 생략가능
+        IMP.init('iamport'); // 'iamport' 대신 부여받은 "가맹점 식별코드"를 사용
+        var msg;
+        
+        IMP.request_pay({
+            pg : 'kakaopay',
+            pay_method : 'card',
+            merchant_uid : 'merchant_' + new Date().getTime(),
+            name : 'COZA STORE',
+            amount : <%=prev_acc_money%>,     
+            buyer_email : '<%=memberbean.getMember_email()%>',
+            buyer_name : '<%=memberbean.getMember_info_name()%>',
+            buyer_tel : '<%=memberbean.getMember_info_phone()%>',
+            buyer_addr : '<%=memberbean.getMember_info_address()%>',
+            buyer_addr_detail:'<%=memberbean.getMember_info_address_detail()%>',
+            buyer_postcode : '<%=memberbean.getMember_info_post_code()%>',
+            //m_redirect_url : 'http://www.naver.com'
+        }, function(rsp) {
+            if ( rsp.success ) {
+                //[1] 서버단에서 결제정보 조회를 위해 jQuery ajax로 imp_uid 전달하기
+                jQuery.ajax({
+                    url: "/payments/complete", //cross-domain error가 발생하지 않도록 주의해주세요
+                    type: 'POST',
+                    dataType: 'json',
+                    data: {
+                        imp_uid : rsp.imp_uid
+                        //기타 필요한 데이터가 있으면 추가 전달
+                    }
+                }).done(function(data) {
+                    //[2] 서버에서 REST API로 결제정보확인 및 서비스루틴이 정상적인 경우
+                    if ( everythings_fine ) {
+                        msg = '결제가 완료되었습니다.';
+                        msg += '\n고유ID : ' + rsp.imp_uid;
+                        msg += '\n상점 거래ID : ' + rsp.merchant_uid;
+                        msg += '\결제 금액 : ' + rsp.paid_amount;
+                        msg += '카드 승인번호 : ' + rsp.apply_num;
+                        
+                        alert(msg);
+                    } else {
+                        //[3] 아직 제대로 결제가 되지 않았습니다.
+                        //[4] 결제된 금액이 요청한 금액과 달라 결제를 자동취소처리하였습니다.
+                    }
+                });
+                //성공시 이동할 페이지
+//                 location.href='SucceedProductAction.pr'
+            } else {
+                msg = '결제에 실패하였습니다.';
+                msg += '에러내용 : ' + rsp.error_msg;
+                //실패시 이동할 페이지
+                
+                alert(msg);
+            }
+        });
+        
+    });
+    </script>
 	
+<%-- 		location.href="<%=request.getContextPath()%>/order/payFail"; --%>
 		
 
 	<!-- Footer -->

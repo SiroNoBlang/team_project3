@@ -11,8 +11,8 @@ import vo.SellerProductDTO;
 public class SellRecentPostAddressService {
 	public ArrayList<SellerAddress> findAddress(String sell_member_code) {
 		// 여기 아래도 마찬가지 및에 변수는 생성해두고 쓰지 않을 꺼면 없애주세요.
-		SellerProductDTO shoping = null;
-		SellerAddress address = new SellerAddress();
+//		SellerProductDTO shoping = null;
+//		SellerAddress address = new SellerAddress();
 		ArrayList<SellerAddress> addressArr = new ArrayList<SellerAddress>();
 		Connection con = getConnection();
 

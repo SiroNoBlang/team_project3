@@ -15,6 +15,7 @@ import action.ProductCategoryProAction;
 import action.ProductDetailProAction;
 import action.ProductListProAction;
 import action.ProductSearchProAction;
+import action.SellMemberGradeAction;
 import action.SellRecentPostAddressAction;
 import action.SendAdminAction;
 import action.ShopingProAction;
@@ -141,8 +142,23 @@ public class ProductFrontController extends HttpServlet {
 			forward = new ActionForward();
 			forward.setPath("MainPage/sell/recentPostAddress.jsp");
 			forward.setRedirect(false);
+			
+		} else if (command.equals("/SellMemberGrade.pr")) { // 멤버 등급표 표시하기 (action)
 
-		} else if (command.equals("/SucceedProduct.pr")) { // 쇼핑 결제 완료 페이지
+			action = new SellMemberGradeAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+		}else if (command.equals("/SellMemberGradeForm.pr")) { // 멤버 등급표 표시하기 (jsp)
+
+			forward = new ActionForward();
+			forward.setPath("MainPage/sell/sellMemberGradeForm.jsp");
+			forward.setRedirect(false);
+
+		}else if (command.equals("/SucceedProduct.pr")) { // 쇼핑 결제 완료 페이지
 
 			forward = new ActionForward();
 			forward.setPath("MainPage/sell/succeedProduct.jsp");

@@ -308,9 +308,11 @@ public class SellerDAO {
 		ResultSet rs = null;
 
 		try {
-			String sql = " SELECT a.member_code, b.member_info_name, b.member_info_phone, b.member_info_post_code, b.member_info_address, b.member_info_address_detail, b.member_info_ship_post_code, b.member_info_ship_address, b.member_info_ship_address_detail,"
-					+ " c.member_info_detail_point, c.member_info_detail_acc_money"
-					+ " FROM member AS a JOIN member_info AS b ON a.member_code = b.member_info_code JOIN member_info_detail AS c ON b.member_info_code = c.member_info_detail_code WHERE a.member_code = ?";
+			String sql = "SELECT a.member_code, b.member_info_name, b.member_info_phone, b.member_info_post_code, b.member_info_address, b.member_info_address_detail, b.member_info_ship_post_code, b.member_info_ship_address, b.member_info_ship_address_detail,"
+					+ "	c.member_info_detail_point, c.member_info_detail_acc_money, d.grade_name"
+					+ "	FROM member AS a JOIN member_info AS b ON a.member_code = b.member_info_code JOIN member_info_detail AS c ON b.member_info_code = c.member_info_detail_code JOIN grade AS d"
+					+ "	ON c.member_info_detail_code  BETWEEN d.lowest_acc_money AND d.highest_acc_money"
+					+ "	WHERE a.member_code =  ?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, member_code);
 			rs = pstmt.executeQuery();
@@ -328,6 +330,7 @@ public class SellerDAO {
 				memberbean.setMember_info_ship_address_detail(rs.getString("member_info_ship_address_detail"));
 				memberbean.setMember_info_detail_point(rs.getInt("member_info_detail_point"));
 				memberbean.setMember_info_detail_acc_money(rs.getInt("member_info_detail_acc_money"));
+				memberbean.setGrade_name(rs.getString("grade_name"));
 
 			}
 		} catch (Exception e) {
@@ -508,9 +511,11 @@ public class SellerDAO {
 		System.out.println(member_code);
 		try {
 			String sql = "SELECT a.member_info_name, a.member_info_phone, a.member_info_post_code, a.member_info_address, a.member_info_address_detail,"
-					+ "b.member_info_detail_point, b.member_info_detail_acc_money "
-					+ "FROM member_info AS a JOIN member_info_detail AS b ON a.member_info_code=b.member_info_detail_code WHERE member_info_code=?";
-
+					+ " b.member_info_detail_point, b.member_info_detail_acc_money ,c.grade_name"
+					+ "	FROM member_info AS a JOIN member_info_detail AS b ON a.member_info_code=b.member_info_detail_code"
+					+ "	JOIN grade AS c ON b.member_info_detail_acc_money BETWEEN c.lowest_acc_money AND c.highest_acc_money"
+					+ " WHERE member_info_code=?";
+					
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, member_code);
 			rs = pstmt.executeQuery();
@@ -523,7 +528,7 @@ public class SellerDAO {
 				member.setMember_info_address_detail(rs.getString("member_info_address_detail"));
 				member.setMember_info_detail_point(rs.getInt("member_info_detail_point"));
 				member.setMember_info_detail_acc_money(rs.getInt("member_info_detail_acc_money"));
-
+				member.setGrade_name(rs.getString("grade_name"));
 			}
 
 		} catch (Exception e) {
@@ -715,4 +720,63 @@ public class SellerDAO {
 			return addressArr;
 		}
 
+	public ArrayList<MemberBean> memberGrade(String member_code) {
+		System.out.println("DAO 작업");
+		ArrayList<MemberBean> memberArr = new ArrayList<MemberBean>();
+		MemberBean bean = null;
+		PreparedStatement pstmt=null ,pstmt1= null;
+		ResultSet rs =null;
+		
+		try {
+		
+			String sql ="SELECT * FROM grade";
+			pstmt=con.prepareStatement(sql);
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				bean = new MemberBean();
+				bean.setGrade_name(rs.getString("grade_name"));
+				bean.setLowest_acc_money(rs.getInt("lowest_acc_money"));
+				bean.setHighest_acc_money(rs.getInt("highest_acc_money"));
+				
+				memberArr.add(bean);
+			}
+			close(rs);
+		
+			sql="SELECT a.member_info_detail_acc_money ,b.grade_name, b.lowest_acc_money, b.highest_acc_money"
+					+ " FROM member_info_detail AS a JOIN grade AS b"
+					+ " ON a.member_info_detail_acc_money BETWEEN b.lowest_acc_money AND b.highest_acc_money "
+					+ " WHERE member_info_detail_code = ? ";
+			pstmt1=con.prepareStatement(sql);
+			pstmt.setString(1, member_code);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				bean = new MemberBean();
+				bean.setMember_info_detail_acc_money(rs.getInt("member_info_detail_acc_money"));
+				bean.setGrade_name(rs.getString("grade_name"));
+				bean.setLowest_acc_money(rs.getInt("lowest_acc_money"));
+				bean.setHighest_acc_money(rs.getInt("highest_acc_money"));
+				memberArr.add(bean);
+				System.out.println("ㅎㅇ3");
+			}
+			System.out.println(memberArr);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(pstmt1);
+			close(pstmt);
+			close(rs);
+		}
+		
+		return memberArr;
+	}
+
+	
+	
+	
+	
+	
+	
+	
+	
 }

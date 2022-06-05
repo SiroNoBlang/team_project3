@@ -97,6 +97,8 @@ public class ShoppoingSucceedAction implements Action {
 		MemberBean memberBean1 = new MemberBean();
 		
 		memberBean1 = service.getArticleMemberInfo(member_code);
+		 System.out.println(member_info_detail_acc_money);
+		request.setAttribute("member_info_detail_acc_money",member_info_detail_acc_money);
 		request.setAttribute("memberBean", memberBean1);    //업데이트한 구매자 데이터
 		request.setAttribute("sellerDTO", sellerDTO);		//판매제품 데이터
 		
