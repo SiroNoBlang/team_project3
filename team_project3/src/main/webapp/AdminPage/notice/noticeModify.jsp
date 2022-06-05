@@ -31,6 +31,8 @@
 		
 		
 		let title = $('input[name=board_title]').val();
+		title = title.substring(title.lastIndexOf("]")+1);
+		
 		$('input[name=board_title]').attr('value',"["+year+""+month+""+day+" 수정] "+title);
 		
 		

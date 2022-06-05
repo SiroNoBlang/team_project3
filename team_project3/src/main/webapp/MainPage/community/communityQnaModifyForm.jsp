@@ -27,6 +27,8 @@
 $(document).ready( function() {
 	$("#qnaTypeId").change(function(){
 		let title = $('input[name=qna_title]').val();
+		title = title.substring(title.lastIndexOf("]")+1);
+		
 		$("#qnaTitleId").val("["+$(this).val()+"] " + title ).focus();
 	});
 });
