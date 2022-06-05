@@ -14,7 +14,7 @@ $(function(){
 	
 		$.ajax({
 			type:"GET",
-			url:"Reason.ma?reason=<%=request.getAttribute("sReasonContent")%>",
+			url:"Reason.ma?reason=${sReasonContent}",
 			data: sendData, // 함수 사용시 가져온 데이터 전달
 			dataType:"text",
 			success:function(msg){
@@ -27,8 +27,9 @@ $(function(){
 </head>
 <body>
 	<h2>본 회원은 정지되어 있는 상태입니다.</h2>
-	<h4>정지 일자 : <%=request.getAttribute("sLoginDate") %></h4>
+	<h4>정지 일자 : ${sLoginDate}</h4>
 	<h5>정지 사유가 궁금하시면 <input type="button" value="여기" id="btnOk">를 눌러주세요.</h5>
-	<span id="reason_content"></span>
+	<span id="reason_content"></span><br>
+	<input type="button" value="홈페이지로 돌아가기" onclick="location.href='./'">
 </body>
 </html>

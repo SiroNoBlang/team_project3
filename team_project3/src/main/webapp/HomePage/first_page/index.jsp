@@ -788,48 +788,60 @@
 						</div>
 						<div class="field half">
 							<label for="member_info_detail_like_style">Style</label> 
-							<input type="checkbox" name="style" value="귀여움" id="Check16">
-							<label for="Check16">귀여움</label>
-							<input type="checkbox" name="style" value="청순" id="Check17">
-							<label for="Check17">청순</label>
-							<input type="checkbox" name="style" value="캐주얼" id="Check3">
-							<label for="Check3">캐주얼</label>
-							
-							
-<!-- 							<select id="member_info_detail_like_style" name="member_info_detail_like_style"> -->
-<!-- 								<option value="귀여움">귀여움</option> -->
-<!-- 								<option value="섹시함">섹시함</option> -->
-<!-- 							</select> -->
+							<input type="checkbox" name="style" value="러블리" id="Check3">
+							<label for="Check3">러블리</label>
+							<input type="checkbox" name="style" value="모던시크" id="Check4">
+							<label for="Check4">모던시크</label>
+							<input type="checkbox" name="style" value="캐주얼" id="Check5">
+							<label for="Check5">캐주얼</label>
+							<input type="checkbox" name="style" value="심플베이직" id="Check6">
+							<label for="Check6">심플베이직</label>
+							<input type="checkbox" name="style" value="유니크" id="Check7">
+							<label for="Check7">유니크</label>
+							<input type="checkbox" name="style" value="빈티지" id="Check8">
+							<label for="Check8">빈티지</label>
+							<input type="checkbox" name="style" value="럭셔리" id="Check9">
+							<label for="Check9">럭셔리</label>
+							<input type="checkbox" name="style" value="아메카지" id="Check10">
+							<label for="Check10">아메카지</label>
+							<input type="checkbox" name="style" value="클래식" id="Check11">
+							<label for="Check11">클래식</label>
+							<input type="checkbox" name="style" value="유니섹스" id="Check12">
+							<label for="Check12">유니섹스</label>
 						</div>
 						<div class="field half">
 							<label for="member_info_detail_like_brand">Brand</label> 
-							<input type="checkbox" name="brand" value="나이키" id="Check6">
-							<label for="Check6">나이키</label>
-							<input type="checkbox" name="brand" value="아디다스" id="Check7">
-							<label for="Check7">아디다스</label>
-							<input type="checkbox" name="brand" value="아페쎄" id="Check8">
-							<label for="Check8">아페쎄</label>
-							<input type="checkbox" name="brand" value="칼하트" id="Check9">
-							<label for="Check9">칼하트</label>
-							<input type="checkbox" name="brand" value="샤넬" id="Check10">
-							<label for="Check10">샤넬</label>
-<!-- 							<select id="member_info_detail_like_brand" name="member_info_detail_like_brand"> -->
-<!-- 								<option value="나이키">나이키</option> -->
-<!-- 								<option value="에르메스">에르메스</option> -->
-<!-- 							</select> -->
+							<input type="checkbox" name="brand" value="에르메스" id="Check13">
+							<label for="Check13">에르메스</label>
+							<input type="checkbox" name="brand" value="샤넬" id="Check14">
+							<label for="Check14">샤넬</label>
+							<input type="checkbox" name="brand" value="루이비통" id="Check15">
+							<label for="Check15">루이비통</label>
+							<input type="checkbox" name="brand" value="롤렉스" id="Check16">
+							<label for="Check16">롤렉스</label>
+							<input type="checkbox" name="brand" value="까르띠에" id="Check17">
+							<label for="Check17">까르띠에</label>
+							<input type="checkbox" name="brand" value="프라다" id="Check18">
+							<label for="Check18">프라다</label>
+							<input type="checkbox" name="brand" value="미우미우" id="Check19">
+							<label for="Check19">미우미우</label>
+							<input type="checkbox" name="brand" value="셀린느" id="Check20">
+							<label for="Check20">셀린느</label>
+							<input type="checkbox" name="brand" value="톰브라운" id="Check21">
+							<label for="Check21">톰브라운</label>
+							<input type="checkbox" name="brand" value="발렌시아가" id="Check22">
+							<label for="Check22">발렌시아가</label>
 						</div>
 						<div class="field half">
 							<label for="member_info_detail_like_category">Like Item</label> 
-							<input type="checkbox" name="category" value="상의" id="Check11">
-							<label for="Check11">상의</label>
-							<input type="checkbox" name="category" value="하의" id="Check12">
-							<label for="Check12">하의</label>
-							<input type="checkbox" name="category" value="신발" id="Check13">
-							<label for="Check13">신발</label>
-							<input type="checkbox" name="category" value="잡화" id="Check14">
-							<label for="Check14">잡화</label>
-							<input type="checkbox" name="category" value="상의" id="Check15">
-							<label for="Check15">상의</label>
+							<input type="checkbox" name="category" value="상의" id="Check23">
+							<label for="Check23">상의</label>
+							<input type="checkbox" name="category" value="하의" id="Check24">
+							<label for="Check24">하의</label>
+							<input type="checkbox" name="category" value="신발" id="Check25">
+							<label for="Check25">신발</label>
+							<input type="checkbox" name="category" value="잡화" id="Check26">
+							<label for="Check26">잡화</label>
 						</div>
 					</div>
 					<ul class="actions">

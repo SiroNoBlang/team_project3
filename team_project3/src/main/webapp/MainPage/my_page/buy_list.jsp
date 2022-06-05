@@ -7,8 +7,14 @@
 <meta charset="UTF-8">
 <title>구매 내역</title>
 <style type="text/css">
+
 	img {
 		width: 100px;
+	}
+	
+	td {
+		text-align : center;
+ 		vertical-align : middle;
 	}
 
 </style>
@@ -45,7 +51,7 @@
 							Help & FAQs
 						</a>
 
-						<a href="#" class="flex-c-m trans-04 p-lr-25">
+						<a href="BuyList.ma?member_code=${sCode }" class="flex-c-m trans-04 p-lr-25">
 							My Account
 						</a>
 
@@ -118,7 +124,7 @@
 							Help & FAQs
 						</a>
 
-						<a href="#" class="flex-c-m p-lr-10 trans-04">
+						<a href="BuyList.ma?member_code=${sCode }"class="flex-c-m p-lr-10 trans-04">
 							My Account
 						</a>
 
@@ -202,35 +208,13 @@
 		<div id="com_container">
 			<div class=" container d-flex justify-content-center" >     
 		        <ul class="pagination shadow-lg">
-		            <li class="page-item "><a class="page-link" href="CommunityNotice.ma"><small>공지사항</small></a></li>
-		            <li class="page-item active"><a class="page-link" href="CommunityEvent.ma"><small>이벤트</small></a></li>                        
-		            <li class="page-item  "><a class="page-link " href="CommunityQna.ma"><small>Q&#38;A</small></a></li>  
+		            <li class="page-item "><a class="page-link" href="Mypage.ma"><small>마이페이지</small></a></li>
+		            <li class="page-item "><a class="page-link" href="LikeList.ma"><small>찜목록</small></a></li>                        
+		            <li class="page-item active "><a class="page-link " href="BuyList.ma?member_code=${sCode }"><small>구매내역</small></a></li> 
+		            <li class="page-item  "><a class="page-link " href="SellList.ma"><small>판매내역</small></a></li> 
 		        </ul> 
 		    </div>
 	  </div>  
-	    
-	
-		<!-- 검색창  -->
-		
-<!-- 		<form action="CommunityEventSearch.ma"> -->
-<!-- 			<div class="form-group row justify-content-center"> -->
-<!-- 				<div class="w100" style="padding-right:10px"> -->
-<!-- 					<select class="form-control form-control-sm" name="searchType" id="searchType"> -->
-<!-- 						<option value="event_title">제목</option> -->
-<!-- 						<option value="event_content">본문</option> -->
-<!-- 					</select> -->
-<!-- 				</div> -->
-	
-<!-- 				<div class="w300" style="padding-right:10px"> -->
-<!-- 					<input type="search"  class="form-control form-control-sm" id="search" name="search"> -->
-<!-- 				</div> -->
-<!-- 				<div> -->
-<!-- 					<button type="submit" class="btn btn-sm btn-primary" id="btnSearch" >검색</button> -->
-<!-- 				</div> -->
-<!-- 			</div> -->
-<!-- 		</form>	 -->
-		
-		
 	<!-- 페이징 처리 -->		
 	<c:set var="pageNum" value="${pageInfo.getPageNum() }" /> <!-- 현재 페이지 번호 --> 
 	<c:set var="maxPage" value="${pageInfo.getMaxPage() }" /><!-- 최대 페이지 수 --> 
@@ -256,12 +240,12 @@
                	<c:if test="${not empty buyList and pageInfo.getListCount() > 0}">
 					<c:forEach var="buy" items="${buyList }" varStatus="status">
 						<tr>
-							<td>${listCount -(listCount -((pageNum-1)* listLimit + status.index)-1)} </td> 
+							<td style="vertical-align : middle;">${listCount -(listCount -((pageNum-1)* listLimit + status.index)-1)} </td> 
 							<td><img src="./Upload/sell_img/${buy.getSell_img_real_name() }"></td>
-							<td>${buy.getSell_title() } </td>
-							<td>${buy.getSell_size() }</td>
-							<td>${buy.getBuy_sell_item_date() } </td>
-							<td>${buy.getBuy_item_status() } </td>
+							<td style="vertical-align : middle;">${buy.getSell_title() } </td>
+							<td style="vertical-align : middle;">${buy.getSell_size() }</td>
+							<td style="vertical-align : middle;">${buy.getBuy_sell_item_date() } </td>
+							<td style="vertical-align : middle;">${buy.getBuy_item_status() } </td>
 						</tr>
 					</c:forEach>
 				</c:if>
