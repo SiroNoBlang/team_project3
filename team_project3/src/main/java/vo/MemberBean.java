@@ -5,6 +5,7 @@ public class MemberBean {
 	private String grade_name;
 	private int lowest_acc_money;
 	private int highest_acc_money;
+	private String discount_rate;
 	private String reason_num;
 	private String reason_content;
 	private String member_num;
@@ -42,12 +43,12 @@ public class MemberBean {
 	
 	public MemberBean() {}
 
-	public MemberBean(String grade_name, int lowest_acc_money, int highest_acc_money, String reason_num,
-			String reason_content, String member_num, String member_code, String member_nickname, String member_id,
-			String member_passwd, String member_email, String member_info_name, String member_info_gender,
-			String member_info_phone, String member_info_age, String member_info_post_code, String member_info_address,
-			String member_info_address_detail, String member_info_ship_post_code, String member_info_ship_address,
-			String member_info_ship_address_detail, String member_info_mypage_img_name,
+	public MemberBean(String grade_name, int lowest_acc_money, int highest_acc_money, String discount_rate,
+			String reason_num, String reason_content, String member_num, String member_code, String member_nickname,
+			String member_id, String member_passwd, String member_email, String member_info_name,
+			String member_info_gender, String member_info_phone, String member_info_age, String member_info_post_code,
+			String member_info_address, String member_info_address_detail, String member_info_ship_post_code,
+			String member_info_ship_address, String member_info_ship_address_detail, String member_info_mypage_img_name,
 			String member_info_mypage_real_img_name, String member_info_detail_like_style,
 			String member_info_detail_like_brand, String member_info_detail_like_category, int member_info_detail_point,
 			int member_info_detail_acc_money, String member_service_log_status, String member_service_log_join_date,
@@ -57,6 +58,7 @@ public class MemberBean {
 		this.grade_name = grade_name;
 		this.lowest_acc_money = lowest_acc_money;
 		this.highest_acc_money = highest_acc_money;
+		this.discount_rate = discount_rate;
 		this.reason_num = reason_num;
 		this.reason_content = reason_content;
 		this.member_num = member_num;
@@ -115,6 +117,14 @@ public class MemberBean {
 
 	public void setHighest_acc_money(int highest_acc_money) {
 		this.highest_acc_money = highest_acc_money;
+	}
+
+	public String getDiscount_rate() {
+		return discount_rate;
+	}
+
+	public void setDiscount_rate(String discount_rate) {
+		this.discount_rate = discount_rate;
 	}
 
 	public String getReason_num() {
@@ -392,17 +402,18 @@ public class MemberBean {
 	@Override
 	public String toString() {
 		return "MemberBean [grade_name=" + grade_name + ", lowest_acc_money=" + lowest_acc_money
-				+ ", highest_acc_money=" + highest_acc_money + ", reason_num=" + reason_num + ", reason_content="
-				+ reason_content + ", member_num=" + member_num + ", member_code=" + member_code + ", member_nickname="
-				+ member_nickname + ", member_id=" + member_id + ", member_passwd=" + member_passwd + ", member_email="
-				+ member_email + ", member_info_name=" + member_info_name + ", member_info_gender=" + member_info_gender
-				+ ", member_info_phone=" + member_info_phone + ", member_info_age=" + member_info_age
-				+ ", member_info_post_code=" + member_info_post_code + ", member_info_address=" + member_info_address
-				+ ", member_info_address_detail=" + member_info_address_detail + ", member_info_ship_post_code="
-				+ member_info_ship_post_code + ", member_info_ship_address=" + member_info_ship_address
-				+ ", member_info_ship_address_detail=" + member_info_ship_address_detail
-				+ ", member_info_mypage_img_name=" + member_info_mypage_img_name + ", member_info_mypage_real_img_name="
-				+ member_info_mypage_real_img_name + ", member_info_detail_like_style=" + member_info_detail_like_style
+				+ ", highest_acc_money=" + highest_acc_money + ", discount_rate=" + discount_rate + ", reason_num="
+				+ reason_num + ", reason_content=" + reason_content + ", member_num=" + member_num + ", member_code="
+				+ member_code + ", member_nickname=" + member_nickname + ", member_id=" + member_id + ", member_passwd="
+				+ member_passwd + ", member_email=" + member_email + ", member_info_name=" + member_info_name
+				+ ", member_info_gender=" + member_info_gender + ", member_info_phone=" + member_info_phone
+				+ ", member_info_age=" + member_info_age + ", member_info_post_code=" + member_info_post_code
+				+ ", member_info_address=" + member_info_address + ", member_info_address_detail="
+				+ member_info_address_detail + ", member_info_ship_post_code=" + member_info_ship_post_code
+				+ ", member_info_ship_address=" + member_info_ship_address + ", member_info_ship_address_detail="
+				+ member_info_ship_address_detail + ", member_info_mypage_img_name=" + member_info_mypage_img_name
+				+ ", member_info_mypage_real_img_name=" + member_info_mypage_real_img_name
+				+ ", member_info_detail_like_style=" + member_info_detail_like_style
 				+ ", member_info_detail_like_brand=" + member_info_detail_like_brand
 				+ ", member_info_detail_like_category=" + member_info_detail_like_category
 				+ ", member_info_detail_point=" + member_info_detail_point + ", member_info_detail_acc_money="
@@ -412,8 +423,8 @@ public class MemberBean {
 				+ ", member_service_log_login_date=" + member_service_log_login_date
 				+ ", member_service_log_order_count=" + member_service_log_order_count + ", top_level=" + top_level
 				+ ", nomal=" + nomal + ", suspension=" + suspension + ", withdrawal=" + withdrawal + "]";
-	};
-	
+	}
+
 	
 	
 }

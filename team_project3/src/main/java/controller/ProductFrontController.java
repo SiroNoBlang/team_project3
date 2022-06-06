@@ -14,6 +14,8 @@ import action.ContactAction;
 import action.ProductCategoryProAction;
 import action.ProductDetailProAction;
 import action.ProductListProAction;
+import action.ProductRecCountProAction;
+import action.ProductRecUpdateProAction;
 import action.ProductSearchProAction;
 import action.SellMemberGradeAction;
 import action.SellRecentPostAddressAction;
@@ -78,6 +80,24 @@ public class ProductFrontController extends HttpServlet {
 			forward = new ActionForward();
 			forward.setPath("MainPage/sell/product_list.jsp");
 			forward.setRedirect(false);
+		}else if (command.equals("/ProductRecUpdate.pr")) { // 각상품에 대한 좋아요 UPDATE기능()
+
+			action = new ProductRecUpdateProAction();
+
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}else if (command.equals("/ProductRecCount.pr")) { // 각상품에 대한 좋아요 DELETE기능()
+
+			action = new ProductRecCountProAction();
+
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		} else if (command.equals("/ProductDetailPro.pr")) { // 상품 상세조회(ProductDetailProAction.java)
 
 			action = new ProductDetailProAction();

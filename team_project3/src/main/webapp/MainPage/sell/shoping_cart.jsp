@@ -5,11 +5,11 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
 <%	
-String name = "";
-String email = "";
-String phone = "";
-String address = "";
-int totalPrice = 1;
+// String name = "";
+// String email = "";
+// String phone = "";
+// String address = "";
+// int totalPrice = 1;
 
 
 String member_nickname =(String)session.getAttribute("sNickname");

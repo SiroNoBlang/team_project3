@@ -720,57 +720,77 @@ public class SellerDAO {
 			return addressArr;
 		}
 
-	public ArrayList<MemberBean> memberGrade(String member_code) {
-		System.out.println("DAO 작업");
-		ArrayList<MemberBean> memberArr = new ArrayList<MemberBean>();
-		MemberBean bean = null;
-		PreparedStatement pstmt=null ,pstmt1= null;
-		ResultSet rs =null;
+		//grade table의 모든 컬럼의 데이터를 가져와 등급 알아볼 때 기준으로 사용할 쿼리
+		public ArrayList<MemberBean> memberGrade() {  
+			System.out.println("DAO 작업");
+			ArrayList<MemberBean> memberArr = new ArrayList<MemberBean>();
+			MemberBean bean = null;
+			PreparedStatement pstmt= null;
+			ResultSet rs =null;
+			
+			try {
 		
-		try {
-		
-			String sql ="SELECT * FROM grade";
-			pstmt=con.prepareStatement(sql);
-			rs=pstmt.executeQuery();
-			while(rs.next()) {
-				bean = new MemberBean();
-				bean.setGrade_name(rs.getString("grade_name"));
-				bean.setLowest_acc_money(rs.getInt("lowest_acc_money"));
-				bean.setHighest_acc_money(rs.getInt("highest_acc_money"));
+				String sql ="SELECT * FROM grade";
+				pstmt=con.prepareStatement(sql);
+				rs=pstmt.executeQuery();
+				while(rs.next()) {
+					bean = new MemberBean();
+					bean.setGrade_name(rs.getString("grade_name"));
+					bean.setLowest_acc_money(rs.getInt("lowest_acc_money"));
+					bean.setHighest_acc_money(rs.getInt("highest_acc_money"));
+					bean.setDiscount_rate(rs.getString("discount_rate"));
+					memberArr.add(bean);
+				}			
+//				system.out.println(memberarr);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}finally {
 				
-				memberArr.add(bean);
+				close(rs);
+				close(pstmt);
 			}
-			close(rs);
-		
-			sql="SELECT a.member_info_detail_acc_money ,b.grade_name, b.lowest_acc_money, b.highest_acc_money"
-					+ " FROM member_info_detail AS a JOIN grade AS b"
-					+ " ON a.member_info_detail_acc_money BETWEEN b.lowest_acc_money AND b.highest_acc_money "
-					+ " WHERE member_info_detail_code = ? ";
-			pstmt1=con.prepareStatement(sql);
-			pstmt.setString(1, member_code);
-			rs=pstmt.executeQuery();
-			if(rs.next()) {
-				bean = new MemberBean();
-				bean.setMember_info_detail_acc_money(rs.getInt("member_info_detail_acc_money"));
-				bean.setGrade_name(rs.getString("grade_name"));
-				bean.setLowest_acc_money(rs.getInt("lowest_acc_money"));
-				bean.setHighest_acc_money(rs.getInt("highest_acc_money"));
-				memberArr.add(bean);
-				System.out.println("ㅎㅇ3");
-			}
-			System.out.println(memberArr);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}finally {
-			close(pstmt1);
-			close(pstmt);
-			close(rs);
+			
+			return memberArr;
 		}
-		
-		return memberArr;
-	}
 
+		
+
+
+		 //기존 회원의 등급정보를 가져옴 (shoping_cart.jsp) 자신의 등급 알아보기 기능
+	public MemberBean memberHasGrade(String member_code) {   
+			MemberBean member =new MemberBean();
+			PreparedStatement pstmt =null;
+			ResultSet rs =null; 
+			
+			try {
+				String sql="SELECT a.member_info_detail_acc_money ,b.grade_name, b.lowest_acc_money, b.highest_acc_money"
+						+ " FROM member_info_detail AS a JOIN grade AS b"
+						+ " ON a.member_info_detail_acc_money BETWEEN b.lowest_acc_money AND b.highest_acc_money "
+						+ " WHERE member_info_detail_code = ? ";
+				pstmt=con.prepareStatement(sql);
+				pstmt.setString(1, member_code);
+				rs=pstmt.executeQuery();
+				if(rs.next()) {
+					
+					member.setMember_info_detail_acc_money(rs.getInt("member_info_detail_acc_money"));
+					member.setGrade_name(rs.getString("grade_name"));
+					member.setLowest_acc_money(rs.getInt("lowest_acc_money"));
+					member.setHighest_acc_money(rs.getInt("highest_acc_money"));
+				      
+					}
+				
+				} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}finally {
+				close(rs);
+				close(pstmt);
+			}
+				
+		
+			return member;
+		}
 	
 	
 	
