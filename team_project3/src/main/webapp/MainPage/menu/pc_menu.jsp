@@ -26,12 +26,6 @@
 			</li>
 
 			<li class="p-b-13">
-				<a href="Mypage.ma?member_code=${sCode }" class="stext-102 cl2 hov-cl1 trans-04">
-					MyPage
-				</a>
-			</li>
-
-			<li class="p-b-13">
 				<a href="BuyList.ma?member_code=${sCode }" class="stext-102 cl2 hov-cl1 trans-04">
 					My Account
 				</a>

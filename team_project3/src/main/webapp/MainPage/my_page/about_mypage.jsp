@@ -1,7 +1,38 @@
-<%@page import="java.io.File"%>
-<%@page import="vo.MemberBean"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" type="image/png"
+	href="MainPage/images/icons/favicon.png" />
+<link rel="stylesheet" type="text/css"
+	href="MainPage/vendor/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css"
+	href="MainPage/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" type="text/css"
+	href="MainPage/fonts/iconic/css/material-design-iconic-font.min.css">
+<link rel="stylesheet" type="text/css"
+	href="MainPage/fonts/linearicons-v1.0.0/icon-font.min.css">
+<link rel="stylesheet" type="text/css"
+	href="MainPage/vendor/animate/animate.css">
+<link rel="stylesheet" type="text/css"
+	href="MainPage/vendor/css-hamburgers/hamburgers.min.css">
+<link rel="stylesheet" type="text/css"
+	href="MainPage/vendor/animsition/css/animsition.min.css">
+<link rel="stylesheet" type="text/css"
+	href="MainPage/vendor/select2/select2.min.css">
+<link rel="stylesheet" type="text/css"
+	href="MainPage/vendor/perfect-scrollbar/perfect-scrollbar.css">
+<link rel="stylesheet" type="text/css" href="MainPage/css/util.css">
+<link rel="stylesheet" type="text/css" href="MainPage/css/main.css">
+<link rel="stylesheet" type="text/css" href="MainPage/css/community.css">
+<script type="text/javascript"
+	src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+<%@page import="java.io.File"%>
+<%@page import="vo.MemberBean"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%
@@ -9,8 +40,7 @@ String code = (String) session.getAttribute("sCode");
 String nickname = (String) session.getAttribute("sNickname");
 MemberBean member = (MemberBean) request.getAttribute("memberDetail");
 %>
-<!DOCTYPE html>
-<html lang="en">
+
 <head>
 <title>Mypage</title>
 <script
@@ -94,96 +124,29 @@ MemberBean member = (MemberBean) request.getAttribute("memberDetail");
 </script>
 
 <meta charset="UTF-8">
-<link rel="stylesheet" type="text/css"
-	href="MainPage/vendor/bootstrap/css/bootstrap.min.css">
-<!--===============================================================================================-->
-<link rel="stylesheet" type="text/css"
-	href="MainPage/fonts/linearicons-v1.0.0/icon-font.min.css">
-<!--===============================================================================================-->
-<link rel="stylesheet" type="text/css" href="MainPage/css/util.css">
-<link rel="stylesheet" type="text/css" href="MainPage/css/main.css">
-<!--===============================================================================================-->
 </head>
+<body class="animsition">
 	<!-- Header -->
 	<header class="header-v4">
 		<!-- Header desktop -->
 		<div class="container-menu-desktop">
-			<!-- Topbar -->
-			<div class="top-bar">
-				<div class="content-topbar flex-sb-m h-full container">
-					<div class="left-top-bar">Free shipping for standard order
-						over $100</div>
-
-					<div class="right-top-bar flex-w h-full">
-						<a href="#" class="flex-c-m trans-04 p-lr-25"> Help & FAQs </a> <a
-							href="Mypage.ma?member_code=${memberDetail.member_code }"
-							class="flex-c-m trans-04 p-lr-25">
-							${memberDetail.member_nickname }님 마이페이지 </a> <a
-							href="javascript:void(0)" onclick="confirmLogout()"
-							class="flex-c-m trans-04 p-lr-25"> 로그아웃 </a>
-					</div>
-				</div>
-			</div>
-
+			<!-- pc_sub_header -->
 			<div class="wrap-menu-desktop how-shadow1">
 				<nav class="limiter-menu-desktop container">
-
-					<!-- Logo desktop -->
-					<a href="#" class="logo"> <img
-						src="MainPage/images/icons/logo-01.png" alt="IMG-LOGO">
-					</a>
-
-					<!-- Menu desktop -->
-					<div class="menu-desktop">
-						<ul class="main-menu">
-							<li><a href="index.jsp">Home</a>
-								<ul class="sub-menu">
-									<li><a href="index.jsp">Homepage 1</a></li>
-									<li><a href="home_02.jsp">Homepage 2</a></li>
-									<li><a href="home_03.jsp">Homepage 3</a></li>
-								</ul></li>
-
-							<li><a href="product.jsp">Shop</a></li>
-
-							<li class="label1" data-label1="hot"><a
-								href="shoping-cart.jsp">Features</a></li>
-
-							<li><a href="blog.jsp">Blog</a></li>
-
-							<li class="active-menu"><a href="about.jsp">About</a></li>
-
-							<li><a href="contact.jsp">Contact</a></li>
-						</ul>
-					</div>
-
-					<!-- Icon header -->
-					<div class="wrap-icon-header flex-w flex-r-m">
-						<div
-							class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 js-show-modal-search">
-							<i class="zmdi zmdi-search"></i>
-						</div>
-
-						<div
-							class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti js-show-cart"
-							data-notify="2">
-							<i class="zmdi zmdi-shopping-cart"></i>
-						</div>
-
-						<a href="#"
-							class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti"
-							data-notify="0"> <i class="zmdi zmdi-favorite-outline"></i>
-						</a>
-					</div>
+					<jsp:include page="/MainPage/menu/pc_sub_header.jsp" />
 				</nav>
 			</div>
 		</div>
+
+		<!-- PC_menu_Sidebar -->
+		<jsp:include page="/MainPage/menu/pc_menu.jsp" />
 
 		<!-- Header Mobile -->
 		<div class="wrap-header-mobile">
 			<!-- Logo moblie -->
 			<div class="logo-mobile">
-				<a href="index.jsp"><img src="MainPage/images/icons/logo-01.png"
-					alt="IMG-LOGO"></a>
+				<a href="index.html"><img
+					src="MainPage/images/icons/logo-01.png" alt="IMG-LOGO"></a>
 			</div>
 
 			<!-- Icon header -->
@@ -232,25 +195,25 @@ MemberBean member = (MemberBean) request.getAttribute("memberDetail");
 			</ul>
 
 			<ul class="main-menu-m">
-				<li><a href="index.jsp">Home</a>
+				<li><a href="index.html">Home</a>
 					<ul class="sub-menu-m">
-						<li><a href="index.jsp">Homepage 1</a></li>
-						<li><a href="home_02.jsp">Homepage 2</a></li>
-						<li><a href="home_03.jsp">Homepage 3</a></li>
+						<li><a href="index.html">Homepage 1</a></li>
+						<li><a href="home-02.html">Homepage 2</a></li>
+						<li><a href="home-03.html">Homepage 3</a></li>
 					</ul> <span class="arrow-main-menu-m"> <i
 						class="fa fa-angle-right" aria-hidden="true"></i>
 				</span></li>
 
-				<li><a href="product.jsp">Shop</a></li>
+				<li><a href="product.html">Shop</a></li>
 
-				<li><a href="shoping-cart.jsp" class="label1 rs1"
+				<li><a href="shoping-cart.html" class="label1 rs1"
 					data-label1="hot">Features</a></li>
 
-				<li><a href="blog.jsp">Blog</a></li>
+				<li><a href="blog.html">Blog</a></li>
 
-				<li><a href="about.jsp">About</a></li>
+				<li><a href="about.html">About</a></li>
 
-				<li><a href="contact.jsp">Contact</a></li>
+				<li><a href="contact.html">Contact</a></li>
 			</ul>
 		</div>
 
@@ -274,73 +237,9 @@ MemberBean member = (MemberBean) request.getAttribute("memberDetail");
 		</div>
 	</header>
 
+
 	<!-- Cart -->
-	<div class="wrap-header-cart js-panel-cart">
-		<div class="s-full js-hide-cart"></div>
-
-		<div class="header-cart flex-col-l p-l-65 p-r-25">
-			<div class="header-cart-title flex-w flex-sb-m p-b-8">
-				<span class="mtext-103 cl2"> Your Cart </span>
-
-				<div
-					class="fs-35 lh-10 cl2 p-lr-5 pointer hov-cl1 trans-04 js-hide-cart">
-					<i class="zmdi zmdi-close"></i>
-				</div>
-			</div>
-
-			<div class="header-cart-content flex-w js-pscroll">
-				<ul class="header-cart-wrapitem w-full">
-					<li class="header-cart-item flex-w flex-t m-b-12">
-						<div class="header-cart-item-img">
-							<img src="MainPage/images/item-cart-01.jpg" alt="IMG">
-						</div>
-
-						<div class="header-cart-item-txt p-t-8">
-							<a href="#" class="header-cart-item-name m-b-18 hov-cl1 trans-04">
-								White Shirt Pleat </a> <span class="header-cart-item-info"> 1
-								x $19.00 </span>
-						</div>
-					</li>
-
-					<li class="header-cart-item flex-w flex-t m-b-12">
-						<div class="header-cart-item-img">
-							<img src="MainPage/images/item-cart-02.jpg" alt="IMG">
-						</div>
-
-						<div class="header-cart-item-txt p-t-8">
-							<a href="#" class="header-cart-item-name m-b-18 hov-cl1 trans-04">
-								Converse All Star </a> <span class="header-cart-item-info"> 1
-								x $39.00 </span>
-						</div>
-					</li>
-
-					<li class="header-cart-item flex-w flex-t m-b-12">
-						<div class="header-cart-item-img">
-							<img src="MainPage/images/item-cart-03.jpg" alt="IMG">
-						</div>
-
-						<div class="header-cart-item-txt p-t-8">
-							<a href="#" class="header-cart-item-name m-b-18 hov-cl1 trans-04">
-								Nixon Porter Leather </a> <span class="header-cart-item-info">
-								1 x $17.00 </span>
-						</div>
-					</li>
-				</ul>
-
-				<div class="w-full">
-					<div class="header-cart-total w-full p-tb-40">Total: $75.00</div>
-
-					<div class="header-cart-buttons flex-w w-full">
-						<a href="shoping_cart.jsp"
-							class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-r-8 m-b-10">
-							View Cart </a> <a href="shoping_cart.jsp"
-							class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-b-10">
-							Check Out </a>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+	<jsp:include page="/MainPage/menu/pc_shopping cart.jsp" />
 
 
 	<!-- Title page -->
@@ -348,373 +247,283 @@ MemberBean member = (MemberBean) request.getAttribute("memberDetail");
 		style="background-image: url('MainPage/images/bg-01.jpg');">
 		<h2 class="ltext-105 cl0 txt-center">MyPage</h2>
 	</section>
+	
+	<div id="com_container">
+			<div class=" container d-flex justify-content-center" >     
+		        <ul class="pagination shadow-lg">
+		            <li class="page-item "><a class="page-link" href="Mypage.ma?member_code=${sCode }"><small>마이페이지</small></a></li>
+		            <li class="page-item "><a class="page-link" href="LikeList.ma"><small>찜목록</small></a></li>                        
+		            <li class="page-item active "><a class="page-link " href="BuyList.ma?member_code=${sCode }"><small>구매내역</small></a></li> 
+		            <li class="page-item  "><a class="page-link " href="SellList.ma"><small>판매내역</small></a></li> 
+		        </ul> 
+		    </div>
+	  </div>  
 
 	<!-- Content page -->
-				<table border="1">
-					<tr>
-						<td><a href="">내가 구매한 목록</a></td>
-						<td><a href="LikeList.ma?member_code=${memberDetail.member_code }">찜한 목록</a></td>
-						<td><a href="SellList.ma?member_code=${memberDetail.member_code }">판매 목록</a></td>
-					</tr>
-				</table>
 
-				<form action="ProfileImgUpdate.ma" method="post"
-					enctype="multipart/form-data">
-					<table border="1">
-						<tr>
-							<td><input type="hidden" name="member_code" id="member_code"
-								value="${memberDetail.member_code }"></td>
-						</tr>
-						<tr>
-							<div id="previewDiv">
-								<img id="image_section" alt="" width="300" height="300"
-									src="Upload/mypage_img/${memberDetail.member_info_mypage_real_img_name }">
-							</div>
-						</tr>
-						<tr>
-							<input type="file" id="member_info_mypage_img_name"
-								name="member_info_mypage_img_name" value=""
-								onchange="changeImg(this)">
-						</tr>
-					</table>
-					<button type="submit">수정</button>
-				</form>
-
-				<form action="Modify_Member.ma" method="post">
-					<table border="1">
-						<tr>
-							<td><input type="hidden" name="member_code" id="member_code"
-								value="${memberDetail.member_code }"></td>
-						</tr>
-						<tr>
-							<th>회원 등급</th>
-							<td colspan="2"><input type="text" name="grade_name"
-								id="grade_name" value="${memberDetail.grade_name }"
-								readonly="readonly"></td>
-						</tr>
-						<tr>
-							<th>닉네임</th>
-							<td colspan="2"><input type="text" name="member_nickname"
-								id="member_nickname" value="${memberDetail.member_nickname }"
-								readonly="readonly"></td>
-						</tr>
-						<tr>
-							<th>아이디</th>
-							<td colspan="2"><input type="text" name="member_id"
-								id="member_id" value="${memberDetail.member_id }"
-								readonly="readonly"></td>
-						</tr>
-						<tr>
-							<th>패스워드</th>
-							<td colspan="2"><a href="javascript:onPassModify();">패스워드
-									수정하기</a> <input type="password" name="member_passwd"
-								id="member_passwd" value="${memberDetail.member_passwd }"
-								style="display: none;"></td>
-						</tr>
-						<tr>
-							<th>이메일</th>
-							<td colspan="2"><input type="text" name="member_email1"
-								id="member_email1" value="${memberDetail.member_email }"></td>
-						</tr>
-						<tr>
-							<th>이름</th>
-							<td colspan="2"><input type="text" name="member_info_name"
-								id="member_info_name" value="${memberDetail.member_info_name }"></td>
-						</tr>
-						<tr>
-							<th>성별</th>
-							<td colspan="2"><select id="member_info_gender"
-								name="member_info_gender">
-									<option value="male"
-										<c:if test="${memberDetail.member_info_gender eq 'male' }" >selected</c:if>>남자</option>
-									<option value="female"
-										<c:if test="${memberDetail.member_info_gender eq 'female' }">selected</c:if>>여자</option>
-							</select></td>
-						</tr>
-						<tr>
-							<th>전화번호</th>
-							<td colspan="2"><input type="text" name="member_info_phone"
-								id="member_info_phone"
-								value="${memberDetail.member_info_phone }"></td>
-						</tr>
-						<tr>
-							<th>나이대</th>
-							<td colspan="2"><select id="member_info_age"
-								name="member_info_age">
-									<option value="19세이하"
-										<c:if test="${memberDetail.member_info_age eq '19세이하' }" >selected</c:if>>19세이하</option>
-									<option value="20~29"
-										<c:if test="${memberDetail.member_info_age eq '20~29' }" >selected</c:if>>20~29</option>
-									<option value="30~39"
-										<c:if test="${memberDetail.member_info_age eq '30~39' }" >selected</c:if>>30~39</option>
-									<option value="40~49"
-										<c:if test="${memberDetail.member_info_age eq '40~49' }" >selected</c:if>>40~49</option>
-									<option value="50~59"
-										<c:if test="${memberDetail.member_info_age eq '50~59' }" >selected</c:if>>50~59</option>
-									<option value="60~69"
-										<c:if test="${memberDetail.member_info_age eq '60~69' }" >selected</c:if>>60~69</option>
-									<option value="70대이상"
-										<c:if test="${memberDetail.member_info_age eq '70대이상' }" >selected</c:if>>70대이상</option>
-							</select></td>
-						</tr>
-						<tr>
-							<th>우편번호</th>
-							<td colspan="2"><input type="text"
-								name="member_info_post_code" id="member_info_post_code"
-								value="${memberDetail.member_info_post_code }"
-								readonly="readonly"> <input type="button"
-								onclick="findAddr()" value="우편번호 찾기"></td>
-						</tr>
-						<tr>
-							<th>주소</th>
-							<td colspan="2"><input type="text"
-								name="member_info_address" id="member_info_address"
-								value="${memberDetail.member_info_address }" readonly="readonly"></td>
-						</tr>
-						<tr>
-							<th>상세주소</th>
-							<td colspan="2"><input type="text"
-								name="member_info_address_detail"
-								id="member_info_address_detail"
-								value="${memberDetail.member_info_address_detail }"></td>
-						</tr>
-						<tr>
-							<th>배송지우편번호</th>
-							<td colspan="2"><input type="text"
-								name="member_info_ship_post_code"
-								id="member_info_ship_post_code"
-								value="${memberDetail.member_info_ship_post_code }"
-								readonly="readonly"> <input type="button"
-								onclick="findAddr1()" value="우편번호 찾기"></td>
-						</tr>
-						<tr>
-							<th>배송지주소</th>
-							<td colspan="2"><input type="text"
-								name="member_info_ship_address" id="member_info_ship_address"
-								value="${memberDetail.member_info_ship_address }"
-								readonly="readonly"></td>
-						</tr>
-						<tr>
-							<th>배송지상세주소</th>
-							<td colspan="2"><input type="text"
-								name="member_info_ship_address_detail"
-								id="member_info_ship_address_detail"
-								value="${memberDetail.member_info_ship_address_detail }"></td>
-						</tr>
-						<tr>
-							<th>누적금액</th>
-							<td colspan="2"><input type="text"
-								name="member_info_detail_acc_money"
-								id="member_info_detail_acc_money"
-								value="${memberDetail.member_info_detail_acc_money }"
-								readonly="readonly"></td>
-						</tr>
-						
-						<tr>
-							<th>누적 포인트</th>
-							<td colspan="2"><input type="text"
-								name="member_info_detail_point" id="member_info_detail_point"
-								value="${memberDetail.member_info_detail_point }"
-								readonly="readonly"></td>
-						</tr>
-						<tr>
-							<th>회원 상태(정상,정지,탈퇴)</th>
-							<td colspan="2"><input type="text"
-								name="member_service_log_status" id="member_service_log_status"
-								value="${memberDetail.member_service_log_status }"
-								readonly="readonly"></td>
-						</tr>
-						<tr>
-							<th>회원가입 날짜</th>
-							<td colspan="2"><input type="text"
-								name="member_service_log_join_date"
-								id="member_service_log_join_date"
-								value="${memberDetail.member_service_log_join_date }"
-								readonly="readonly"></td>
-						</tr>
-						<tr>
-							<th>구매횟수</th>
-							<td colspan="2"><input type="text"
-								name="member_service_log_order_count"
-								id="member_service_log_order_count"
-								value="${memberDetail.member_service_log_order_count }"
-								readonly="readonly"></td>
-						</tr>
-						<tr>
-							<td colspan="3"></td>
-						</tr>
-
-					</table>
-					<table border="1">
-						<tr>
-							<th>스타일</th>
-							<td><label for="member_info_detail_like_style"></label> <input
-								type="checkbox" name="style" value="귀여움"
-								<c:if test="${fn:contains(memberDetail.member_info_detail_like_style, '귀여움')}" >checked</c:if>>귀여움
-								<input type="checkbox" name="style" value="청순"
-								<c:if test="${fn:contains(memberDetail.member_info_detail_like_style, '청순') }" >checked</c:if>>청순
-								<input type="checkbox" name="style" value="캐주얼"
-								<c:if test="${fn:contains(memberDetail.member_info_detail_like_style, '캐주얼') }" >checked</c:if>>캐주얼
-							</td>
-						</tr>
-						<tr>
-							<th>브랜드</th>
-							<td><label for="member_info_detail_like_brand"></label> <input
-								type="checkbox" name="brand" value="나이키"
-								<c:if test="${fn:contains(memberDetail.member_info_detail_like_brand, '나이키')}" >checked</c:if>>나이키
-								<input type="checkbox" name="brand" value="아디다스"
-								<c:if test="${fn:contains(memberDetail.member_info_detail_like_brand, '아디다스')}" >checked</c:if>>아디다스
-								<input type="checkbox" name="brand" value="아페쎄"
-								<c:if test="${fn:contains(memberDetail.member_info_detail_like_brand, '아페쎄')}" >checked</c:if>>아페쎄
-								<input type="checkbox" name="brand" value="칼하트"
-								<c:if test="${fn:contains(memberDetail.member_info_detail_like_brand, '칼하트')}" >checked</c:if>>칼하트
-								<input type="checkbox" name="brand" value="샤넬"
-								<c:if test="${fn:contains(memberDetail.member_info_detail_like_brand, '샤넬')}" >checked</c:if>>샤넬
-							</td>
-						</tr>
-						<tr>
-							<th>관심품목</th>
-							<td><label for="member_info_detail_like_category"></label>
-								<input type="checkbox" name="category" value="상의"
-								<c:if test="${fn:contains(memberDetail.member_info_detail_like_category, '상의')}" >checked</c:if>>상의
-								<input type="checkbox" name="category" value="하의"
-								<c:if test="${fn:contains(memberDetail.member_info_detail_like_category, '하의')}" >checked</c:if>>하의
-								<input type="checkbox" name="category" value="신발"
-								<c:if test="${fn:contains(memberDetail.member_info_detail_like_category, '신발')}" >checked</c:if>>신발
-								<input type="checkbox" name="category" value="잡화"
-								<c:if test="${fn:contains(memberDetail.member_info_detail_like_category, '잡화')}" >checked</c:if>>잡화
-							</td>
-						</tr>
-					</table>
-						<input type="submit" value="수정">
-
-				</form>
-
-	<!-- Footer -->
-	<footer class="bg3 p-t-75 p-b-32">
-		<div class="container">
-			<div class="row">
-				<div class="col-sm-6 col-lg-3 p-b-50">
-					<h4 class="stext-301 cl0 p-b-30">Categories</h4>
-
-					<ul>
-						<li class="p-b-10"><a href="#"
-							class="stext-107 cl7 hov-cl1 trans-04"> Women </a></li>
-
-						<li class="p-b-10"><a href="#"
-							class="stext-107 cl7 hov-cl1 trans-04"> Men </a></li>
-
-						<li class="p-b-10"><a href="#"
-							class="stext-107 cl7 hov-cl1 trans-04"> Shoes </a></li>
-
-						<li class="p-b-10"><a href="#"
-							class="stext-107 cl7 hov-cl1 trans-04"> Watches </a></li>
-					</ul>
+	<form action="ProfileImgUpdate.ma" method="post"
+		enctype="multipart/form-data">
+		<table border="1">
+			<tr>
+				<td><input type="hidden" name="member_code" id="member_code"
+					value="${memberDetail.member_code }"></td>
+			</tr>
+			<tr>
+				<div id="previewDiv">
+					<img id="image_section" alt="" width="300" height="300"
+						src="Upload/mypage_img/${memberDetail.member_info_mypage_real_img_name }">
 				</div>
+			</tr>
+			<tr>
+				<input type="file" id="member_info_mypage_img_name"
+					name="member_info_mypage_img_name" value=""
+					onchange="changeImg(this)">
+			</tr>
+		</table>
+		<button type="submit">수정</button>
+	</form>
 
-				<div class="col-sm-6 col-lg-3 p-b-50">
-					<h4 class="stext-301 cl0 p-b-30">Help</h4>
+	<form action="Modify_Member.ma" method="post">
+		<table border="1">
+			<tr>
+				<td><input type="hidden" name="member_code" id="member_code"
+					value="${memberDetail.member_code }"></td>
+			</tr>
+			<tr>
+				<th>회원 등급</th>
+				<td colspan="2"><input type="text" name="grade_name"
+					id="grade_name" value="${memberDetail.grade_name }"
+					readonly="readonly"></td>
+			</tr>
+			<tr>
+				<th>닉네임</th>
+				<td colspan="2"><input type="text" name="member_nickname"
+					id="member_nickname" value="${memberDetail.member_nickname }"
+					readonly="readonly"></td>
+			</tr>
+			<tr>
+				<th>아이디</th>
+				<td colspan="2"><input type="text" name="member_id"
+					id="member_id" value="${memberDetail.member_id }"
+					readonly="readonly"></td>
+			</tr>
+			<tr>
+				<th>패스워드</th>
+				<td colspan="2"><a href="javascript:onPassModify();">패스워드
+						수정하기</a> <input type="password" name="member_passwd"
+					id="member_passwd" value="${memberDetail.member_passwd }"
+					style="display: none;"></td>
+			</tr>
+			<tr>
+				<th>이메일</th>
+				<td colspan="2"><input type="text" name="member_email1"
+					id="member_email1" value="${memberDetail.member_email }"></td>
+			</tr>
+			<tr>
+				<th>이름</th>
+				<td colspan="2"><input type="text" name="member_info_name"
+					id="member_info_name" value="${memberDetail.member_info_name }"></td>
+			</tr>
+			<tr>
+				<th>성별</th>
+				<td colspan="2"><select id="member_info_gender"
+					name="member_info_gender">
+						<option value="male"
+							<c:if test="${memberDetail.member_info_gender eq 'male' }" >selected</c:if>>남자</option>
+						<option value="female"
+							<c:if test="${memberDetail.member_info_gender eq 'female' }">selected</c:if>>여자</option>
+				</select></td>
+			</tr>
+			<tr>
+				<th>전화번호</th>
+				<td colspan="2"><input type="text" name="member_info_phone"
+					id="member_info_phone" value="${memberDetail.member_info_phone }"></td>
+			</tr>
+			<tr>
+				<th>나이대</th>
+				<td colspan="2"><select id="member_info_age"
+					name="member_info_age">
+						<option value="19세이하"
+							<c:if test="${memberDetail.member_info_age eq '19세이하' }" >selected</c:if>>19세이하</option>
+						<option value="20~29"
+							<c:if test="${memberDetail.member_info_age eq '20~29' }" >selected</c:if>>20~29</option>
+						<option value="30~39"
+							<c:if test="${memberDetail.member_info_age eq '30~39' }" >selected</c:if>>30~39</option>
+						<option value="40~49"
+							<c:if test="${memberDetail.member_info_age eq '40~49' }" >selected</c:if>>40~49</option>
+						<option value="50~59"
+							<c:if test="${memberDetail.member_info_age eq '50~59' }" >selected</c:if>>50~59</option>
+						<option value="60~69"
+							<c:if test="${memberDetail.member_info_age eq '60~69' }" >selected</c:if>>60~69</option>
+						<option value="70대이상"
+							<c:if test="${memberDetail.member_info_age eq '70대이상' }" >selected</c:if>>70대이상</option>
+				</select></td>
+			</tr>
+			<tr>
+				<th>우편번호</th>
+				<td colspan="2"><input type="text" name="member_info_post_code"
+					id="member_info_post_code"
+					value="${memberDetail.member_info_post_code }" readonly="readonly">
+					<input type="button" onclick="findAddr()" value="우편번호 찾기"></td>
+			</tr>
+			<tr>
+				<th>주소</th>
+				<td colspan="2"><input type="text" name="member_info_address"
+					id="member_info_address"
+					value="${memberDetail.member_info_address }" readonly="readonly"></td>
+			</tr>
+			<tr>
+				<th>상세주소</th>
+				<td colspan="2"><input type="text"
+					name="member_info_address_detail" id="member_info_address_detail"
+					value="${memberDetail.member_info_address_detail }"></td>
+			</tr>
+			<tr>
+				<th>배송지우편번호</th>
+				<td colspan="2"><input type="text"
+					name="member_info_ship_post_code" id="member_info_ship_post_code"
+					value="${memberDetail.member_info_ship_post_code }"
+					readonly="readonly"> <input type="button"
+					onclick="findAddr1()" value="우편번호 찾기"></td>
+			</tr>
+			<tr>
+				<th>배송지주소</th>
+				<td colspan="2"><input type="text"
+					name="member_info_ship_address" id="member_info_ship_address"
+					value="${memberDetail.member_info_ship_address }"
+					readonly="readonly"></td>
+			</tr>
+			<tr>
+				<th>배송지상세주소</th>
+				<td colspan="2"><input type="text"
+					name="member_info_ship_address_detail"
+					id="member_info_ship_address_detail"
+					value="${memberDetail.member_info_ship_address_detail }"></td>
+			</tr>
+			<tr>
+				<th>누적금액</th>
+				<td colspan="2"><input type="text"
+					name="member_info_detail_acc_money"
+					id="member_info_detail_acc_money"
+					value="${memberDetail.member_info_detail_acc_money }"
+					readonly="readonly"></td>
+			</tr>
 
-					<ul>
-						<li class="p-b-10"><a href="#"
-							class="stext-107 cl7 hov-cl1 trans-04"> Track Order </a></li>
+			<tr>
+				<th>누적 포인트</th>
+				<td colspan="2"><input type="text"
+					name="member_info_detail_point" id="member_info_detail_point"
+					value="${memberDetail.member_info_detail_point }"
+					readonly="readonly"></td>
+			</tr>
+			<tr>
+				<th>회원 상태(정상,정지,탈퇴)</th>
+				<td colspan="2"><input type="text"
+					name="member_service_log_status" id="member_service_log_status"
+					value="${memberDetail.member_service_log_status }"
+					readonly="readonly"></td>
+			</tr>
+			<tr>
+				<th>회원가입 날짜</th>
+				<td colspan="2"><input type="text"
+					name="member_service_log_join_date"
+					id="member_service_log_join_date"
+					value="${memberDetail.member_service_log_join_date }"
+					readonly="readonly"></td>
+			</tr>
+			<tr>
+				<th>구매횟수</th>
+				<td colspan="2"><input type="text"
+					name="member_service_log_order_count"
+					id="member_service_log_order_count"
+					value="${memberDetail.member_service_log_order_count }"
+					readonly="readonly"></td>
+			</tr>
 
-						<li class="p-b-10"><a href="#"
-							class="stext-107 cl7 hov-cl1 trans-04"> Returns </a></li>
+		</table>
+		<table border="1">
+			<tr>
+				<th>스타일</th>
+				<td><label for="member_info_detail_like_style"></label> <input
+					type="checkbox" name="style" value="심플베이직"
+					<c:if test="${fn:contains(memberDetail.member_info_detail_like_style, '심플베이직')}" >checked</c:if>>심플베이직
+					<input type="checkbox" name="style" value="캐주얼"
+					<c:if test="${fn:contains(memberDetail.member_info_detail_like_style, '캐주얼')}" >checked</c:if>>캐주얼
+					<input type="checkbox" name="style" value="모던시크"
+					<c:if test="${fn:contains(memberDetail.member_info_detail_like_style, '모던시크')}" >checked</c:if>>모던시크
+					<input type="checkbox" name="style" value="러블리"
+					<c:if test="${fn:contains(memberDetail.member_info_detail_like_style, '러블리')}" >checked</c:if>>러블리
+					<input type="checkbox" name="style" value="유니크"
+					<c:if test="${fn:contains(memberDetail.member_info_detail_like_style, '유니크')}" >checked</c:if>>유니크
+					<input type="checkbox" name="style" value="빈티지"
+					<c:if test="${fn:contains(memberDetail.member_info_detail_like_style, '빈티지')}" >checked</c:if>>빈티지
+					<input type="checkbox" name="style" value="아메카지"
+					<c:if test="${fn:contains(memberDetail.member_info_detail_like_style, '아메카지')}" >checked</c:if>>아메카지
+					<input type="checkbox" name="style" value="럭셔리"
+					<c:if test="${fn:contains(memberDetail.member_info_detail_like_style, '럭셔리')}" >checked</c:if>>럭셔리
+					<input type="checkbox" name="style" value="클래식"
+					<c:if test="${fn:contains(memberDetail.member_info_detail_like_style, '클래식')}" >checked</c:if>>클래식
+					<input type="checkbox" name="style" value="유지섹스"
+					<c:if test="${fn:contains(memberDetail.member_info_detail_like_style, '유지섹스')}" >checked</c:if>>유지섹스
 
-						<li class="p-b-10"><a href="#"
-							class="stext-107 cl7 hov-cl1 trans-04"> Shipping </a></li>
+					<!-- 								<input type="checkbox" name="style" value="청순" --> <%-- 								<c:if test="${fn:contains(memberDetail.member_info_detail_like_style, '청순') }" >checked</c:if>>청순 --%>
+					<!-- 								<input type="checkbox" name="style" value="캐주얼" --> <%-- 								<c:if test="${fn:contains(memberDetail.member_info_detail_like_style, '캐주얼') }" >checked</c:if>>캐주얼 --%>
+				</td>
+			</tr>
+			<tr>
+				<th>브랜드</th>
+				<td><label for="member_info_detail_like_brand"></label> <input
+					type="checkbox" name="brand" value="에르메스"
+					<c:if test="${fn:contains(memberDetail.member_info_detail_like_brand, '에르메스')}" >checked</c:if>>에르메스
+					<input type="checkbox" name="brand" value="샤넬"
+					<c:if test="${fn:contains(memberDetail.member_info_detail_like_brand, '샤넬')}" >checked</c:if>>샤넬
+					<input type="checkbox" name="brand" value="루이비통"
+					<c:if test="${fn:contains(memberDetail.member_info_detail_like_brand, '루이비통')}" >checked</c:if>>루이비통
+					<input type="checkbox" name="brand" value="롤렉스"
+					<c:if test="${fn:contains(memberDetail.member_info_detail_like_brand, '롤렉스')}" >checked</c:if>>롤렉스
+					<input type="checkbox" name="brand" value="까르띠에"
+					<c:if test="${fn:contains(memberDetail.member_info_detail_like_brand, '까르띠에')}" >checked</c:if>>까르띠에
+					<input type="checkbox" name="brand" value="프라다"
+					<c:if test="${fn:contains(memberDetail.member_info_detail_like_brand, '프라다')}" >checked</c:if>>프라다
+					<input type="checkbox" name="brand" value="미우미우"
+					<c:if test="${fn:contains(memberDetail.member_info_detail_like_brand, '미우미우')}" >checked</c:if>>미우미우
+					<input type="checkbox" name="brand" value="셀린느"
+					<c:if test="${fn:contains(memberDetail.member_info_detail_like_brand, '셀린느')}" >checked</c:if>>셀린느
+					<input type="checkbox" name="brand" value="톰브라운"
+					<c:if test="${fn:contains(memberDetail.member_info_detail_like_brand, '톰브라운')}" >checked</c:if>>톰브라운
+					<input type="checkbox" name="brand" value="발렌시아가"
+					<c:if test="${fn:contains(memberDetail.member_info_detail_like_brand, '발렌시아가')}" >checked</c:if>>발렌시아가
 
-						<li class="p-b-10"><a href="#"
-							class="stext-107 cl7 hov-cl1 trans-04"> FAQs </a></li>
-					</ul>
-				</div>
+					<%-- 							<input type="checkbox" name="brand" value="아디다스" <c:if test="${fn:contains(memberDetail.member_info_detail_like_brand, '아디다스')}" >checked</c:if>>아디다스 --%>
+					<!-- 								<input type="checkbox" name="brand" value="아페쎄" --> <%-- 								<c:if test="${fn:contains(memberDetail.member_info_detail_like_brand, '아페쎄')}" >checked</c:if>>아페쎄 --%>
+					<!-- 								<input type="checkbox" name="brand" value="칼하트" --> <%-- 								<c:if test="${fn:contains(memberDetail.member_info_detail_like_brand, '칼하트')}" >checked</c:if>>칼하트 --%>
+					<!-- 								<input type="checkbox" name="brand" value="샤넬" --> <%-- 								<c:if test="${fn:contains(memberDetail.member_info_detail_like_brand, '샤넬')}" >checked</c:if>>샤넬 --%>
+				</td>
+			</tr>
+			<tr>
+				<th>관심품목</th>
+				<td><label for="member_info_detail_like_category"></label> <input
+					type="checkbox" name="category" value="상의"
+					<c:if test="${fn:contains(memberDetail.member_info_detail_like_category, '상의')}" >checked</c:if>>상의
+					<input type="checkbox" name="category" value="하의"
+					<c:if test="${fn:contains(memberDetail.member_info_detail_like_category, '하의')}" >checked</c:if>>하의
+					<input type="checkbox" name="category" value="신발"
+					<c:if test="${fn:contains(memberDetail.member_info_detail_like_category, '신발')}" >checked</c:if>>신발
+					<input type="checkbox" name="category" value="잡화"
+					<c:if test="${fn:contains(memberDetail.member_info_detail_like_category, '잡화')}" >checked</c:if>>잡화
+				</td>
+			</tr>
+		</table>
+		<input type="submit" value="수정">
 
-				<div class="col-sm-6 col-lg-3 p-b-50">
-					<h4 class="stext-301 cl0 p-b-30">GET IN TOUCH</h4>
+	</form>
+	<!-- Footer영역과 상단 이동 버튼-->
+	<jsp:include page="/MainPage/menu/footer.jsp" />
 
-					<p class="stext-107 cl7 size-201">Any questions? Let us know in
-						store at 8th floor, 379 Hudson St, New York, NY 10018 or call us
-						on (+1) 96 716 6879</p>
-
-					<div class="p-t-27">
-						<a href="#" class="fs-18 cl7 hov-cl1 trans-04 m-r-16"> <i
-							class="fa fa-facebook"></i>
-						</a> <a href="#" class="fs-18 cl7 hov-cl1 trans-04 m-r-16"> <i
-							class="fa fa-instagram"></i>
-						</a> <a href="#" class="fs-18 cl7 hov-cl1 trans-04 m-r-16"> <i
-							class="fa fa-pinterest-p"></i>
-						</a>
-					</div>
-				</div>
-
-				<div class="col-sm-6 col-lg-3 p-b-50">
-					<h4 class="stext-301 cl0 p-b-30">Newsletter</h4>
-
-					<form>
-						<div class="wrap-input1 w-full p-b-4">
-							<input class="input1 bg-none plh1 stext-107 cl7" type="text"
-								name="email" placeholder="email@example.com">
-							<div class="focus-input1 trans-04"></div>
-						</div>
-
-						<div class="p-t-18">
-							<button
-								class="flex-c-m stext-101 cl0 size-103 bg1 bor1 hov-btn2 p-lr-15 trans-04">
-								Subscribe</button>
-						</div>
-					</form>
-				</div>
-			</div>
-
-			<div class="p-t-40">
-				<div class="flex-c-m flex-w p-b-18">
-					<a href="#" class="m-all-1"> <img
-						src="MainPage/images/icons/icon-pay-01.png" alt="ICON-PAY">
-					</a> <a href="#" class="m-all-1"> <img
-						src="MainPage/images/icons/icon-pay-02.png" alt="ICON-PAY">
-					</a> <a href="#" class="m-all-1"> <img
-						src="MainPage/images/icons/icon-pay-03.png" alt="ICON-PAY">
-					</a> <a href="#" class="m-all-1"> <img
-						src="MainPage/images/icons/icon-pay-04.png" alt="ICON-PAY">
-					</a> <a href="#" class="m-all-1"> <img
-						src="MainPage/images/icons/icon-pay-05.png" alt="ICON-PAY">
-					</a>
-				</div>
-
-				<p class="stext-107 cl6 txt-center">
-					<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-					Copyright &copy;
-					<script>
-						document.write(new Date().getFullYear());
-					</script>
-					All rights reserved | Made with <i class="fa fa-heart-o"
-						aria-hidden="true"></i> by <a href="https://colorlib.com"
-						target="_blank">Colorlib</a> &amp; distributed by <a
-						href="https://themewagon.com" target="_blank">ThemeWagon</a>
-					<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-
-				</p>
-			</div>
-		</div>
-	</footer>
-
-
-	<!-- Back to top -->
-	<div class="btn-back-to-top" id="myBtn">
-		<span class="symbol-btn-back-to-top"> <i
-			class="zmdi zmdi-chevron-up"></i>
-		</span>
-	</div>
-
-	<!--===============================================================================================-->
 	<script src="MainPage/vendor/jquery/jquery-3.2.1.min.js"></script>
-	<!--===============================================================================================-->
 	<script src="MainPage/vendor/animsition/js/animsition.min.js"></script>
-	<!--===============================================================================================-->
 	<script src="MainPage/vendor/bootstrap/js/popper.js"></script>
 	<script src="MainPage/vendor/bootstrap/js/bootstrap.min.js"></script>
-	<!--===============================================================================================-->
 	<script src="MainPage/vendor/select2/select2.min.js"></script>
 	<script>
 		$(".js-select2").each(function() {
@@ -724,10 +533,8 @@ MemberBean member = (MemberBean) request.getAttribute("memberDetail");
 			});
 		})
 	</script>
-	<!--===============================================================================================-->
 	<script
 		src="MainPage/vendor/MagnificPopup/jquery.magnific-popup.min.js"></script>
-	<!--===============================================================================================-->
 	<script
 		src="MainPage/vendor/perfect-scrollbar/perfect-scrollbar.min.js"></script>
 	<script>
@@ -745,8 +552,8 @@ MemberBean member = (MemberBean) request.getAttribute("memberDetail");
 			})
 		});
 	</script>
-	<!--===============================================================================================-->
 	<script src="MainPage/js/main.js"></script>
+	<script src="MainPage/js/community.js"></script>
 
 </body>
 </html>
