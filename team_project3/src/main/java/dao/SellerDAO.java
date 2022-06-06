@@ -311,7 +311,7 @@ public class SellerDAO {
 			String sql = "SELECT a.member_code, b.member_info_name, b.member_info_phone, b.member_info_post_code, b.member_info_address, b.member_info_address_detail, b.member_info_ship_post_code, b.member_info_ship_address, b.member_info_ship_address_detail,"
 					+ "	c.member_info_detail_point, c.member_info_detail_acc_money, d.grade_name"
 					+ "	FROM member AS a JOIN member_info AS b ON a.member_code = b.member_info_code JOIN member_info_detail AS c ON b.member_info_code = c.member_info_detail_code JOIN grade AS d"
-					+ "	ON c.member_info_detail_code  BETWEEN d.lowest_acc_money AND d.highest_acc_money"
+					+ "	ON c.member_info_detail_acc_money  BETWEEN d.lowest_acc_money AND d.highest_acc_money"
 					+ "	WHERE a.member_code =  ?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, member_code);
