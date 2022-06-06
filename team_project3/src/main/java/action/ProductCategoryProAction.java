@@ -32,7 +32,7 @@ public class ProductCategoryProAction implements Action {
 		ArrayList<SellerProductDTO> ProductCateList = service.getProductCateList(pageNum, listLimit, Category);
 
 		int maxPage = (int) Math.ceil((double) listCount / listLimit);
-		int startPage = ((int) ((double) pageNum / pageLimit + 0.9) - 1) * pageLimit + 1;
+		int startPage = ((pageNum-1) /listLimit) * listLimit + 1;
 		int endPage = startPage + pageLimit - 1;
 
 		if (endPage > maxPage) {

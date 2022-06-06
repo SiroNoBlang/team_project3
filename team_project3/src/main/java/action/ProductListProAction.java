@@ -35,7 +35,7 @@ public class ProductListProAction implements Action {
 		int maxPage = (int) Math.ceil((double) listCount / listLimit);
 
 		// 현재 페이지에서 보여줄 시작 페이지 번호(1, 11, 21 등의 시작 번호) 계산
-		int startPage = ((int) ((double) pageNum / pageLimit + 0.9) - 1) * pageLimit + 1;
+		int startPage = ((pageNum-1) /listLimit) * listLimit + 1;
 
 		// 현재 페이지에서 보여줄 끝 페이지 번호(10, 20, 30 등의 끝 번호) 계산
 		int endPage = startPage + pageLimit - 1;
@@ -54,7 +54,7 @@ public class ProductListProAction implements Action {
 		request.setAttribute("articleList", articleList); // 게시물 목록 객체
 
 		forward = new ActionForward();
-		forward.setPath("Product_list.pr");
+		forward.setPath("./MainPage/sell/product_list.jsp");
 		forward.setRedirect(false); // Dispatcher 방식(생략 가능)
 
 		return forward;

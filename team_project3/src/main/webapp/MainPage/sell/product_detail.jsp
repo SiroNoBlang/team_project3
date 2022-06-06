@@ -4,180 +4,174 @@
 <%@page import="vo.PageInfo"%>
 <%@page import="vo.SellerDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%
-String member_nickname =(String)session.getAttribute("sNickname");
-String member_code =(String)session.getAttribute("sCode");
-SellerDTO seller = new SellerDTO();
-SellerProductDTO sellerdto = (SellerProductDTO)request.getAttribute("sellerdto");
-PageInfo pageInfo = (PageInfo)request.getAttribute("pageInfo");
-ArrayList<SellerProductDTO> Relationdto = (ArrayList<SellerProductDTO>)request.getAttribute("Relationdto");
-ArrayList<SellerimgDTO> Sellerdetailimg = (ArrayList<SellerimgDTO>)request.getAttribute("Sellerdetailimg");
-
-// int pageNum = pageInfo.getPageNum();     //페이지를 안넘겨줌 처리해야됨.
-// int maxPage = pageInfo.getMaxPage();
-// int startPage = pageInfo.getStartPage();
-// int endPage = pageInfo.getEndPage();
-// int listCount = pageInfo.getListCount();
-%>
-
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>Product Detail</title>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-<!--===============================================================================================-->	
-	<link rel="icon" type="image/png" href="MainPage/images/icons/favicon.png"/>
+<title>Product Detail</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="MainPage/vendor/bootstrap/css/bootstrap.min.css">
+<link rel="icon" type="image/png"
+	href="MainPage/images/icons/favicon.png" />
 <!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="MainPage/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" type="text/css"
+	href="MainPage/vendor/bootstrap/css/bootstrap.min.css">
 <!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="MainPage/fonts/iconic/css/material-design-iconic-font.min.css">
+<link rel="stylesheet" type="text/css"
+	href="MainPage/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
 <!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="MainPage/fonts/linearicons-v1.0.0/icon-font.min.css">
+<link rel="stylesheet" type="text/css"
+	href="MainPage/fonts/iconic/css/material-design-iconic-font.min.css">
 <!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="MainPage/vendor/animate/animate.css">
-<!--===============================================================================================-->	
-	<link rel="stylesheet" type="text/css" href="MainPage/vendor/css-hamburgers/hamburgers.min.css">
+<link rel="stylesheet" type="text/css"
+	href="MainPage/fonts/linearicons-v1.0.0/icon-font.min.css">
 <!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="MainPage/vendor/animsition/css/animsition.min.css">
+<link rel="stylesheet" type="text/css"
+	href="MainPage/vendor/animate/animate.css">
 <!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="MainPage/vendor/select2/select2.min.css">
-<!--===============================================================================================-->	
-	<link rel="stylesheet" type="text/css" href="MainPage/vendor/daterangepicker/daterangepicker.css">
+<link rel="stylesheet" type="text/css"
+	href="MainPage/vendor/css-hamburgers/hamburgers.min.css">
 <!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="MainPage/vendor/slick/slick.css">
+<link rel="stylesheet" type="text/css"
+	href="MainPage/vendor/animsition/css/animsition.min.css">
 <!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="MainPage/vendor/MagnificPopup/magnific-popup.css">
+<link rel="stylesheet" type="text/css"
+	href="MainPage/vendor/select2/select2.min.css">
 <!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="MainPage/vendor/perfect-scrollbar/perfect-scrollbar.css">
+<link rel="stylesheet" type="text/css"
+	href="MainPage/vendor/daterangepicker/daterangepicker.css">
 <!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="MainPage/css/util.css">
-	<link rel="stylesheet" type="text/css" href="MainPage/css/main.css">
+<link rel="stylesheet" type="text/css"
+	href="MainPage/vendor/slick/slick.css">
+<!--===============================================================================================-->
+<link rel="stylesheet" type="text/css"
+	href="MainPage/vendor/MagnificPopup/magnific-popup.css">
+<!--===============================================================================================-->
+<link rel="stylesheet" type="text/css"
+	href="MainPage/vendor/perfect-scrollbar/perfect-scrollbar.css">
+<!--===============================================================================================-->
+<link rel="stylesheet" type="text/css" href="MainPage/css/util.css">
+<link rel="stylesheet" type="text/css" href="MainPage/css/main.css">
 <!--===============================================================================================-->
 </head>
 <body class="animsition">
-	
+
 	<!-- Header -->
 	<header class="header-v4">
 		<!-- Header desktop -->
 		<div class="container-menu-desktop">
 			<!-- Topbar -->
-<!-- 			<div class="top-bar"> -->
-<!-- 				<div class="content-topbar flex-sb-m h-full container"> -->
-<!-- 					<div class="left-top-bar"> -->
-<!-- 						Free shipping for standard order over $100 -->
-<!-- 					</div> -->
+			<!-- 			<div class="top-bar"> -->
+			<!-- 				<div class="content-topbar flex-sb-m h-full container"> -->
+			<!-- 					<div class="left-top-bar"> -->
+			<!-- 						Free shipping for standard order over $100 -->
+			<!-- 					</div> -->
 
-<!-- 					<div class="right-top-bar flex-w h-full"> -->
-<!-- 						<a href="#" class="flex-c-m trans-04 p-lr-25"> -->
-<!-- 							Help & FAQs -->
-<!-- 						</a> -->
+			<!-- 					<div class="right-top-bar flex-w h-full"> -->
+			<!-- 						<a href="#" class="flex-c-m trans-04 p-lr-25"> -->
+			<!-- 							Help & FAQs -->
+			<!-- 						</a> -->
 
-<!-- 						<a href="#" class="flex-c-m trans-04 p-lr-25"> -->
-<!-- 							My Account -->
-<!-- 						</a> -->
+			<!-- 						<a href="#" class="flex-c-m trans-04 p-lr-25"> -->
+			<!-- 							My Account -->
+			<!-- 						</a> -->
 
-<!-- 						<a href="#" class="flex-c-m trans-04 p-lr-25"> -->
-<!-- 							EN -->
-<!-- 						</a> -->
+			<!-- 						<a href="#" class="flex-c-m trans-04 p-lr-25"> -->
+			<!-- 							EN -->
+			<!-- 						</a> -->
 
-<!-- 						<a href="#" class="flex-c-m trans-04 p-lr-25"> -->
-<!-- 							USD -->
-<!-- 						</a> -->
-<!-- 					</div> -->
-<!-- 				</div> -->
-<!-- 			</div> -->
+			<!-- 						<a href="#" class="flex-c-m trans-04 p-lr-25"> -->
+			<!-- 							USD -->
+			<!-- 						</a> -->
+			<!-- 					</div> -->
+			<!-- 				</div> -->
+			<!-- 			</div> -->
 
 			<div class="wrap-menu-desktop how-shadow1">
 				<nav class="limiter-menu-desktop container">
-					
-					<!-- Logo desktop -->		
-					<a href="MainPage.pr" class="logo">
-						<img src="MainPage/images/icons/logo-01.png" alt="IMG-LOGO">
+
+					<!-- Logo desktop -->
+					<a href="MainPage.pr" class="logo"> <img
+						src="MainPage/images/icons/logo-01.png" alt="IMG-LOGO">
 					</a>
 
 					<!-- Menu desktop -->
-					 <div class="menu-desktop">
+					<div class="menu-desktop">
 						<ul class="main-menu">
-							<li>
-								<a href="MainPage.pr">Home</a>
-<!-- 								<ul class="sub-menu"> -->
-<!-- 									<li><a href="index.html">Homepage 1</a></li> -->
-<!-- 									<li><a href="home-02.html">Homepage 2</a></li> -->
-<!-- 									<li><a href="home-03.html">Homepage 3</a></li> -->
-<!-- 								</ul> -->
-							</li>
+							<li><a href="MainPage.pr">Home</a> <!-- 								<ul class="sub-menu"> -->
+								<!-- 									<li><a href="index.html">Homepage 1</a></li> --> <!-- 									<li><a href="home-02.html">Homepage 2</a></li> -->
+								<!-- 									<li><a href="home-03.html">Homepage 3</a></li> -->
+								<!-- 								</ul> --></li>
 
-							<li>
-								<a href="Product.pr">Shop</a>
-							</li>
+							<li><a href="Product.pr">Shop</a></li>
 
-<!-- 							<li class="label1" data-label1="hot"> -->
-<!-- 								<a href="shoping-cart.html">Features</a> -->
-<!-- 							</li> -->
+							<!-- 							<li class="label1" data-label1="hot"> -->
+							<!-- 								<a href="shoping-cart.html">Features</a> -->
+							<!-- 							</li> -->
 
-							<li>
-								<a href="SellForm.pr">Sell</a>
-							</li>
+							<li><a href="SellForm.pr">Sell</a></li>
 
-							<li>
-								<a href="CommunityNotice.ma">Community</a>
-							</li>
-			
-							<li>
-								<a href="Contact.pr">Contact</a>
-							</li>
+							<li><a href="CommunityNotice.ma">Community</a></li>
+
+							<li><a href="Contact.pr">Contact</a></li>
 						</ul>
 					</div>
 
 					<!-- Icon header -->
 					<div class="wrap-icon-header flex-w flex-r-m">
-						<div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 js-show-modal-search">
+						<div
+							class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 js-show-modal-search">
 							<i class="zmdi zmdi-search"></i>
 						</div>
 
-						<div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti js-show-cart" data-notify="2">
+						<div
+							class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti js-show-cart"
+							data-notify="2">
 							<i class="zmdi zmdi-shopping-cart"></i>
 						</div>
 
-						<a href="#" class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti" data-notify="0">
-							<i class="zmdi zmdi-favorite-outline"></i>
+						<a href="#"
+							class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti"
+							data-notify="0"> <i class="zmdi zmdi-favorite-outline"></i>
 						</a>
 					</div>
 				</nav>
-			</div>	
+			</div>
 		</div>
 
 		<!-- Header Mobile -->
 		<div class="wrap-header-mobile">
-			<!-- Logo moblie -->		
+			<!-- Logo moblie -->
 			<div class="logo-mobile">
-				<a href="index.html"><img src="MainPage/images/icons/logo-01.png" alt="IMG-LOGO"></a>
+				<a href="index.html"><img
+					src="MainPage/images/icons/logo-01.png" alt="IMG-LOGO"></a>
 			</div>
 
 			<!-- Icon header -->
 			<div class="wrap-icon-header flex-w flex-r-m m-r-15">
-				<div class="icon-header-item cl2 hov-cl1 trans-04 p-r-11 js-show-modal-search">
+				<div
+					class="icon-header-item cl2 hov-cl1 trans-04 p-r-11 js-show-modal-search">
 					<i class="zmdi zmdi-search"></i>
 				</div>
 
-				<div class="icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10 icon-header-noti js-show-cart" data-notify="2">
+				<div
+					class="icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10 icon-header-noti js-show-cart"
+					data-notify="2">
 					<i class="zmdi zmdi-shopping-cart"></i>
 				</div>
 
-				<a href="#" class="dis-block icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10 icon-header-noti" data-notify="0">
-					<i class="zmdi zmdi-favorite-outline"></i>
+				<a href="#"
+					class="dis-block icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10 icon-header-noti"
+					data-notify="0"> <i class="zmdi zmdi-favorite-outline"></i>
 				</a>
 			</div>
 
 			<!-- Button show menu -->
 			<div class="btn-show-menu-mobile hamburger hamburger--squeeze">
-				<span class="hamburger-box">
-					<span class="hamburger-inner"></span>
+				<span class="hamburger-box"> <span class="hamburger-inner"></span>
 				</span>
 			</div>
 		</div>
@@ -187,71 +181,49 @@ ArrayList<SellerimgDTO> Sellerdetailimg = (ArrayList<SellerimgDTO>)request.getAt
 		<div class="menu-mobile">
 			<ul class="topbar-mobile">
 				<li>
-					<div class="left-top-bar">
-						Free shipping for standard order over $100
-					</div>
+					<div class="left-top-bar">Free shipping for standard order
+						over $100</div>
 				</li>
 
 				<li>
 					<div class="right-top-bar flex-w h-full">
-						<a href="#" class="flex-c-m p-lr-10 trans-04">
-							Help & FAQs
-						</a>
-
-						<a href="#" class="flex-c-m p-lr-10 trans-04">
-							My Account
-						</a>
-
-						<a href="#" class="flex-c-m p-lr-10 trans-04">
-							EN
-						</a>
-
-						<a href="#" class="flex-c-m p-lr-10 trans-04">
-							USD
-						</a>
+						<a href="#" class="flex-c-m p-lr-10 trans-04"> Help & FAQs </a> <a
+							href="#" class="flex-c-m p-lr-10 trans-04"> My Account </a> <a
+							href="#" class="flex-c-m p-lr-10 trans-04"> EN </a> <a href="#"
+							class="flex-c-m p-lr-10 trans-04"> USD </a>
 					</div>
 				</li>
 			</ul>
 
 			<ul class="main-menu-m">
-				<li>
-					<a href="MainPage.pr">Home</a>
+				<li><a href="MainPage.pr">Home</a>
 					<ul class="sub-menu-m">
 						<li><a href="index.html">Homepage 1</a></li>
 						<li><a href="home-02.html">Homepage 2</a></li>
 						<li><a href="home-03.html">Homepage 3</a></li>
-					</ul>
-					<span class="arrow-main-menu-m">
-						<i class="fa fa-angle-right" aria-hidden="true"></i>
-					</span>
-				</li>
+					</ul> <span class="arrow-main-menu-m"> <i
+						class="fa fa-angle-right" aria-hidden="true"></i>
+				</span></li>
 
-				<li>
-					<a href="product.html">Shop</a>
-				</li>
+				<li><a href="product.html">Shop</a></li>
 
-				<li>
-					<a href="shoping-cart.html" class="label1 rs1" data-label1="hot">Features</a>
-				</li>
+				<li><a href="shoping-cart.html" class="label1 rs1"
+					data-label1="hot">Features</a></li>
 
-				<li>
-					<a href="#">Sell</a>
-				</li>
+				<li><a href="#">Sell</a></li>
 
-				<li>
-					<a href="about.html">About</a>
-				</li>
+				<li><a href="about.html">About</a></li>
 
-				<li>
-					<a href="contact.html">Contact</a>
-				</li>
+				<li><a href="contact.html">Contact</a></li>
 			</ul>
 		</div>
 
 		<!-- Modal Search -->
-		<div class="modal-search-header flex-c-m trans-04 js-hide-modal-search">
+		<div
+			class="modal-search-header flex-c-m trans-04 js-hide-modal-search">
 			<div class="container-search-header">
-				<button class="flex-c-m btn-hide-modal-search trans-04 js-hide-modal-search">
+				<button
+					class="flex-c-m btn-hide-modal-search trans-04 js-hide-modal-search">
 					<img src="MainPage/images/icons/icon-close2.png" alt="CLOSE">
 				</button>
 
@@ -259,7 +231,8 @@ ArrayList<SellerimgDTO> Sellerdetailimg = (ArrayList<SellerimgDTO>)request.getAt
 					<button class="flex-c-m trans-04">
 						<i class="zmdi zmdi-search"></i>
 					</button>
-					<input class="plh3" type="text" name="search" placeholder="Search...">
+					<input class="plh3" type="text" name="search"
+						placeholder="Search...">
 				</form>
 			</div>
 		</div>
@@ -271,15 +244,14 @@ ArrayList<SellerimgDTO> Sellerdetailimg = (ArrayList<SellerimgDTO>)request.getAt
 
 		<div class="header-cart flex-col-l p-l-65 p-r-25">
 			<div class="header-cart-title flex-w flex-sb-m p-b-8">
-				<span class="mtext-103 cl2">
-					Your Cart
-				</span>
+				<span class="mtext-103 cl2"> Your Cart </span>
 
-				<div class="fs-35 lh-10 cl2 p-lr-5 pointer hov-cl1 trans-04 js-hide-cart">
+				<div
+					class="fs-35 lh-10 cl2 p-lr-5 pointer hov-cl1 trans-04 js-hide-cart">
 					<i class="zmdi zmdi-close"></i>
 				</div>
 			</div>
-			
+
 			<div class="header-cart-content flex-w js-pscroll">
 				<ul class="header-cart-wrapitem w-full">
 					<li class="header-cart-item flex-w flex-t m-b-12">
@@ -289,12 +261,8 @@ ArrayList<SellerimgDTO> Sellerdetailimg = (ArrayList<SellerimgDTO>)request.getAt
 
 						<div class="header-cart-item-txt p-t-8">
 							<a href="#" class="header-cart-item-name m-b-18 hov-cl1 trans-04">
-								White Shirt Pleat
-							</a>
-
-							<span class="header-cart-item-info">
-								1 x $19.00
-							</span>
+								White Shirt Pleat </a> <span class="header-cart-item-info"> 1
+								x $19.00 </span>
 						</div>
 					</li>
 
@@ -305,12 +273,8 @@ ArrayList<SellerimgDTO> Sellerdetailimg = (ArrayList<SellerimgDTO>)request.getAt
 
 						<div class="header-cart-item-txt p-t-8">
 							<a href="#" class="header-cart-item-name m-b-18 hov-cl1 trans-04">
-								Converse All Star
-							</a>
-
-							<span class="header-cart-item-info">
-								1 x $39.00
-							</span>
+								Converse All Star </a> <span class="header-cart-item-info"> 1
+								x $39.00 </span>
 						</div>
 					</li>
 
@@ -321,29 +285,21 @@ ArrayList<SellerimgDTO> Sellerdetailimg = (ArrayList<SellerimgDTO>)request.getAt
 
 						<div class="header-cart-item-txt p-t-8">
 							<a href="#" class="header-cart-item-name m-b-18 hov-cl1 trans-04">
-								Nixon Porter Leather
-							</a>
-
-							<span class="header-cart-item-info">
-								1 x $17.00
-							</span>
+								Nixon Porter Leather </a> <span class="header-cart-item-info">
+								1 x $17.00 </span>
 						</div>
 					</li>
 				</ul>
-				
+
 				<div class="w-full">
-					<div class="header-cart-total w-full p-tb-40">
-						Total: $75.00
-					</div>
+					<div class="header-cart-total w-full p-tb-40">Total: $75.00</div>
 
 					<div class="header-cart-buttons flex-w w-full">
-						<a href="shoping-cart.html" class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-r-8 m-b-10">
-							View Cart
-						</a>
-
-						<a href="shoping-cart.html" class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-b-10">
-							Check Out
-						</a>
+						<a href="shoping-cart.html"
+							class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-r-8 m-b-10">
+							View Cart </a> <a href="shoping-cart.html"
+							class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-b-10">
+							Check Out </a>
 					</div>
 				</div>
 			</div>
@@ -355,147 +311,186 @@ ArrayList<SellerimgDTO> Sellerdetailimg = (ArrayList<SellerimgDTO>)request.getAt
 	<div class="container">
 		<div class="bread-crumb flex-w p-l-25 p-r-15 p-t-30 p-lr-0-lg">
 			<a href="MainPage.pr" class="stext-109 cl8 hov-cl1 trans-04">
-				Home
-				<i class="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i>
-			</a>
-
-			<a href="Product.pr" class="stext-109 cl8 hov-cl1 trans-04">
-				Shop
- 				<i class="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i>
-			</a>
-
-			<span class="stext-109 cl4">
-				category:<%=sellerdto.getSell_category() %>
-			</span>
+				Home <i class="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i>
+			</a> <a href="Product.pr" class="stext-109 cl8 hov-cl1 trans-04">
+				Shop <i class="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i>
+			</a> <span class="stext-109 cl4">
+				category:${sellerdto.getSell_category()} </span>
 		</div>
 	</div>
-		
+
 
 	<!-- Product Detail -->
-	<input type="button" name="구매" onclick="location.href='ShopingPro.pr?sell_num=<%=sellerdto.getSell_num()%>&member_code=<%=member_code%>'">
-<form border="1" action="ShopingPro.pr">
-<input type="hidden" >
-<%-- 판매번호:<%=sellerdto.getSell_list_num() %> --%>
-	
+	<input type="button" name="구매"
+		onclick="location.href='ShopingPro.pr?sell_num=${sellerdto.getSell_num() }&member_code=${sCode}'">
+	<form border="1" action="ShopingPro.pr">
+		<input type="hidden">
+
+
 		<div class="container">
 			<div class="row">
 				<div class="col-md-6 col-lg-7 p-b-30">
 					<div class="p-l-25 p-r-30 p-lr-0-lg">
 						<div class="wrap-slick3 flex-sb flex-w">
 							<div class="wrap-slick3-arrows flex-sb-m flex-w"></div>
-								<div class="slick3 gallery-lb">
+							<div class="slick3 gallery-lb">
 								<!-- ------------------------------------ -->
 								<div id="container">
-								    <div class="slide_wrap">
-								      <div class="slide_box">
-								        <div class="slide_list clearfix">
-								          <%  for(SellerimgDTO sellerimg : Sellerdetailimg) {%>
-									
-									  <div class="slide_content slide01"><img src="./Upload/sell_img/<%=sellerimg.getSell_img_real_name() %>" width="400" height="600">	&nbsp;  </div>
-									 <% } %>
-								        </div>
-								        
-								        <!-- // .slide_list -->
-								      </div>
-								      <!-- // .slide_box -->
-								      <div class="slide_btn_box">
-								        <button type="button" class="slide_btn_prev">Prev</button>
-								        <button type="button" class="slide_btn_next">Next</button>
-								      </div>
-								      <!-- // .slide_btn_box -->
-								      <ul class="slide_pagination"></ul>
-								      <!-- // .slide_pagination -->
-								    </div>
-								    <!-- // .slide_wrap -->
-								  </div>
+									<div class="slide_wrap">
+										<div class="slide_box">
+											<div class="slide_list clearfix">
+
+												<c:forEach items="${Sellerdetailimg }" var="sellerimg">
+
+													<div class="slide_content slide01">
+														<img
+															src="./Upload/sell_img/${sellerimg.getSell_img_real_name() }"
+															width="400" height="600"> &nbsp;
+													</div>
+												</c:forEach>
+											</div>
+
+											<!-- // .slide_list -->
+										</div>
+										<!-- // .slide_box -->
+										<div class="slide_btn_box">
+											<button type="button" class="slide_btn_prev">Prev</button>
+											<button type="button" class="slide_btn_next">Next</button>
+										</div>
+										<!-- // .slide_btn_box -->
+										<ul class="slide_pagination"></ul>
+										<!-- // .slide_pagination -->
+									</div>
+									<!-- // .slide_wrap -->
+								</div>
 							</div>
 						</div>
-						
+
 					</div>
 				</div>
-					
+
 				<div class="col-md-6 col-lg-5 p-b-30">
 					<div class="p-r-50 p-t-5 p-lr-0-lg">
 						<h2 class="mtext-105 cl2 js-name-detail p-b-14">
-							제목:<%=sellerdto.getSell_title() %>
-						</h2>
-<%-- 									<img src="./Upload/sell_img/<%=sellerdto.getSell_img_real_name() %>" alt="IMG-PRODUCT"> --%>
-								<table>
-									<tr><td>Brand: <%=sellerdto.getSell_brand() %></td></tr>
-									<tr><td>Category: <%=sellerdto.getSell_category() %></td></tr>
-										
-									<tr><td>detail :<%=sellerdto.getSell_category_detail() %></td></tr>
-								    	
-								    <tr><td> Size:	<%=sellerdto.getSell_size() %></td></tr>
-										
-									<tr><td>Color:  <%=sellerdto.getSell_color() %></td></tr>
-										
-									<tr><td> Price:  <%=sellerdto.getSell_price() %></td></tr>
-									<tr><td>  </td></tr>
-									<tr><td><input class="cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail" type="button" value="장바구니" onclick="location.href='ShopingPro.pr?sell_num=<%=sellerdto.getSell_num()%>&member_code=<%=member_code%>'"></td>
-								
-										<td><input class="cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail" type="button" value="구매" onclick="location.href='ShopingPro.pr?sell_num=<%=sellerdto.getSell_num()%>&member_code=<%=member_code%>'">
-									</td></tr>
-										
-									 </table>
-	
-					</form>						
-						<div class="flex-w flex-m p-l-100 p-t-40 respon7">
-							<div class="flex-m bor9 p-r-10 m-r-11">
-								<a href="#" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 js-addwish-detail tooltip100" data-tooltip="Add to Wishlist">
-									<i class="zmdi zmdi-favorite"></i>
-								</a>
+							제목:${sellerdto.getSell_title() }</h2>
+
+						<table>
+							<tr>
+								<td>Brand: ${sellerdto.getSell_brand() }</td>
+							</tr>
+							<tr>
+								<td>Category: ${sellerdto.getSell_category() }</td>
+							</tr>
+							<tr>
+								<td>detail : ${sellerdto.getSell_category_detail() }</td>
+							</tr>
+							<tr>
+								<td>Size: ${sellerdto.getSell_size()}</td>
+							</tr>
+							<tr>
+								<td>Color: ${sellerdto.getSell_color() }</td>
+							</tr>
+							<tr>
+								<td>Price: ${sellerdto.getSell_price() }</td>
+							</tr>
+							<tr>
+								<td></td>
+							</tr>
+							<tr>
+								<td><input
+									class="cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail"
+									type="button" value="장바구니"
+									onclick="location.href='ShopingPro.pr?sell_num=${sellerdto.getSell_num() }&member_code=${sCode }'"></td>
+
+								<td><input
+									class="cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail"
+									type="button" value="구매"
+									onclick="location.href='ShopingPro.pr?sell_num=${sellerdto.getSell_num() }&member_code=${sCode }'">
+								</td>
+							</tr>
+
+						</table>
+	</form>
+	<div class="flex-w flex-m p-l-100 p-t-40 respon7">
+		<div class="flex-m bor9 p-r-10 m-r-11">
+			<a href="#"
+				class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 js-addwish-detail tooltip100"
+				data-tooltip="Add to Wishlist"> <i class="zmdi zmdi-favorite"></i>
+			</a>
+		</div>
+
+		<a href="#"
+			class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100"
+			data-tooltip="Facebook"> <i class="fa fa-facebook"></i>
+		</a> <a href="#"
+			class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100"
+			data-tooltip="Twitter"> <i class="fa fa-twitter"></i>
+		</a> <a href="#"
+			class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100"
+			data-tooltip="Google Plus"> <i class="fa fa-google-plus"></i>
+		</a>
+	</div>
+	</div>
+	<br>
+	<br>
+
+	<table>
+
+		<tr>
+			<c:forEach items="${Sellerdetailimg }" var="sellerimg">
+				<td><img
+					src="./Upload/sell_img/${sellerimg.sell_img_real_name}" width="150"
+					height="150"> &nbsp;</td>
+		</tr>
+		</c:forEach>
+	</table>
+	</div>
+	</div>
+	<!-- 				&nbsp;&nbsp;<h4>관련 상품</h4> -->
+	<table border="1" style="border: none; background: white;">
+
+		<div class="container">
+			<div class="row multi-columns-row">
+
+				<form>
+
+
+					<c:forEach items="${Relationdto }" var="ProductRe">
+						<div class="col-sm-6 col-md-3 col-lg-3 ">
+
+							<div class="shop-item">
+
+
+								<img
+									src="./Upload/sell_img/${ProductRe.getSell_img_real_name() } "
+									onerror="this.style.display='none'" width="150px"
+									height="200px" alt="Accessories Pack" /> </a>
+								<h4>${ProductRe.getSell_title() }</h4>
+								<h5>${ProductRe.getSell_brand() }</h5>
+
 							</div>
 
-							<a href="#" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100" data-tooltip="Facebook">
-								<i class="fa fa-facebook"></i>
-							</a>
-
-							<a href="#" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100" data-tooltip="Twitter">
-								<i class="fa fa-twitter"></i>
-							</a>
-
-							<a href="#" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100" data-tooltip="Google Plus">
-								<i class="fa fa-google-plus"></i>
-							</a>
 						</div>
-					</div>
-									<table>
-									<br>
-									<br>
-									 <tr>
-									 
-									<%  for(SellerimgDTO sellerimg : Sellerdetailimg) {%>
-									
-									 <td><img src="./Upload/sell_img/<%=sellerimg.getSell_img_real_name() %>" width="150" height="150">	&nbsp;</td>
-									 <% } %>
-									 
-									 </tr>
-									 
-									 </table>
-					
-					  			
-				
-					</div>
-									 
+					</c:forEach>
+				</form>
 			</div>
-		
-			</div>
-		<div class="bg6 flex-c-m flex-w size-302 m-t-73 p-tb-15">
-			<span class="stext-107 cl6 p-lr-25">
-				SKU: JAK-01
-			</span>
-
-			<span class="stext-107 cl6 p-lr-25">
-				Categories: Jacket, Men
-			</span>
 		</div>
-	
+	</table>
+	<br>
+
+
+
+
+	<div class="bg6 flex-c-m flex-w size-302 m-t-73 p-tb-15">
+		<span class="stext-107 cl6 p-lr-25"> SKU: JAK-01 </span> <span
+			class="stext-107 cl6 p-lr-25"> Categories: Jacket, Men </span>
+	</div>
+
 
 
 
 	<!-- Footer영역과 상단 이동 버튼-->
-	<jsp:include page="/MainPage/menu/footer.jsp"/>
+	<jsp:include page="/MainPage/menu/footer.jsp" />
 
 	<!-- Modal1 -->
 	<div class="wrap-modal1 js-modal1 p-t-60 p-b-20">
@@ -515,32 +510,38 @@ ArrayList<SellerimgDTO> Sellerdetailimg = (ArrayList<SellerimgDTO>)request.getAt
 								<div class="wrap-slick3-arrows flex-sb-m flex-w"></div>
 
 								<div class="slick3 gallery-lb">
-									<div class="item-slick3" data-thumb="MainPage/images/product-detail-01.jpg">
+									<div class="item-slick3"
+										data-thumb="MainPage/images/product-detail-01.jpg">
 										<div class="wrap-pic-w pos-relative">
-											<img src="MainPage/images/product-detail-01.jpg" alt="IMG-PRODUCT">
-
-											<a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="MainPage/images/product-detail-01.jpg">
-												<i class="fa fa-expand"></i>
+											<img src="MainPage/images/product-detail-01.jpg"
+												alt="IMG-PRODUCT"> <a
+												class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04"
+												href="MainPage/images/product-detail-01.jpg"> <i
+												class="fa fa-expand"></i>
 											</a>
 										</div>
 									</div>
 
-									<div class="item-slick3" data-thumb="MainPage/images/product-detail-02.jpg">
+									<div class="item-slick3"
+										data-thumb="MainPage/images/product-detail-02.jpg">
 										<div class="wrap-pic-w pos-relative">
-											<img src="MainPage/images/product-detail-02.jpg" alt="IMG-PRODUCT">
-
-											<a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="MainPage/images/product-detail-02.jpg">
-												<i class="fa fa-expand"></i>
+											<img src="MainPage/images/product-detail-02.jpg"
+												alt="IMG-PRODUCT"> <a
+												class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04"
+												href="MainPage/images/product-detail-02.jpg"> <i
+												class="fa fa-expand"></i>
 											</a>
 										</div>
 									</div>
 
-									<div class="item-slick3" data-thumb="MainPage/images/product-detail-03.jpg">
+									<div class="item-slick3"
+										data-thumb="MainPage/images/product-detail-03.jpg">
 										<div class="wrap-pic-w pos-relative">
-											<img src="MainPage/images/product-detail-03.jpg" alt="IMG-PRODUCT">
-
-											<a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="MainPage/images/product-detail-03.jpg">
-												<i class="fa fa-expand"></i>
+											<img src="MainPage/images/product-detail-03.jpg"
+												alt="IMG-PRODUCT"> <a
+												class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04"
+												href="MainPage/images/product-detail-03.jpg"> <i
+												class="fa fa-expand"></i>
 											</a>
 										</div>
 									</div>
@@ -548,27 +549,22 @@ ArrayList<SellerimgDTO> Sellerdetailimg = (ArrayList<SellerimgDTO>)request.getAt
 							</div>
 						</div>
 					</div>
-					
+
 					<div class="col-md-6 col-lg-5 p-b-30">
 						<div class="p-r-50 p-t-5 p-lr-0-lg">
-							<h4 class="mtext-105 cl2 js-name-detail p-b-14">
-								Lightweight Jacket
-							</h4>
+							<h4 class="mtext-105 cl2 js-name-detail p-b-14">Lightweight
+								Jacket</h4>
 
-							<span class="mtext-106 cl2">
-								$58.79
-							</span>
+							<span class="mtext-106 cl2"> $58.79 </span>
 
-							<p class="stext-102 cl3 p-t-23">
-								Nulla eget sem vitae eros pharetra viverra. Nam vitae luctus ligula. Mauris consequat ornare feugiat.
-							</p>
-							
+							<p class="stext-102 cl3 p-t-23">Nulla eget sem vitae eros
+								pharetra viverra. Nam vitae luctus ligula. Mauris consequat
+								ornare feugiat.</p>
+
 							<!--  -->
 							<div class="p-t-33">
 								<div class="flex-w flex-r-m p-b-10">
-									<div class="size-203 flex-c-m respon6">
-										Size
-									</div>
+									<div class="size-203 flex-c-m respon6">Size</div>
 
 									<div class="size-204 respon6-next">
 										<div class="rs1-select2 bor8 bg0">
@@ -585,9 +581,7 @@ ArrayList<SellerimgDTO> Sellerdetailimg = (ArrayList<SellerimgDTO>)request.getAt
 								</div>
 
 								<div class="flex-w flex-r-m p-b-10">
-									<div class="size-203 flex-c-m respon6">
-										Color
-									</div>
+									<div class="size-203 flex-c-m respon6">Color</div>
 
 									<div class="size-204 respon6-next">
 										<div class="rs1-select2 bor8 bg0">
@@ -606,42 +600,46 @@ ArrayList<SellerimgDTO> Sellerdetailimg = (ArrayList<SellerimgDTO>)request.getAt
 								<div class="flex-w flex-r-m p-b-10">
 									<div class="size-204 flex-w flex-m respon6-next">
 										<div class="wrap-num-product flex-w m-r-20 m-tb-10">
-											<div class="btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m">
+											<div
+												class="btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m">
 												<i class="fs-16 zmdi zmdi-minus"></i>
 											</div>
 
-											<input class="mtext-104 cl3 txt-center num-product" type="number" name="num-product" value="1">
+											<input class="mtext-104 cl3 txt-center num-product"
+												type="number" name="num-product" value="1">
 
-											<div class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m">
+											<div
+												class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m">
 												<i class="fs-16 zmdi zmdi-plus"></i>
 											</div>
 										</div>
 
-										<button class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail">
-											Add to cart
-										</button>
+										<button
+											class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail">
+											Add to cart</button>
 									</div>
-								</div>	
+								</div>
 							</div>
 
 							<!--  -->
 							<div class="flex-w flex-m p-l-100 p-t-40 respon7">
 								<div class="flex-m bor9 p-r-10 m-r-11">
-									<a href="#" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 js-addwish-detail tooltip100" data-tooltip="Add to Wishlist">
-										<i class="zmdi zmdi-favorite"></i>
+									<a href="#"
+										class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 js-addwish-detail tooltip100"
+										data-tooltip="Add to Wishlist"> <i
+										class="zmdi zmdi-favorite"></i>
 									</a>
 								</div>
 
-								<a href="#" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100" data-tooltip="Facebook">
-									<i class="fa fa-facebook"></i>
-								</a>
-
-								<a href="#" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100" data-tooltip="Twitter">
-									<i class="fa fa-twitter"></i>
-								</a>
-
-								<a href="#" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100" data-tooltip="Google Plus">
-									<i class="fa fa-google-plus"></i>
+								<a href="#"
+									class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100"
+									data-tooltip="Facebook"> <i class="fa fa-facebook"></i>
+								</a> <a href="#"
+									class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100"
+									data-tooltip="Twitter"> <i class="fa fa-twitter"></i>
+								</a> <a href="#"
+									class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100"
+									data-tooltip="Google Plus"> <i class="fa fa-google-plus"></i>
 								</a>
 							</div>
 						</div>
@@ -651,14 +649,14 @@ ArrayList<SellerimgDTO> Sellerdetailimg = (ArrayList<SellerimgDTO>)request.getAt
 		</div>
 	</div>
 
-<!--===============================================================================================-->	
+	<!--===============================================================================================-->
 	<script src="MainPage/vendor/jquery/jquery-3.2.1.min.js"></script>
-<!--===============================================================================================-->
+	<!--===============================================================================================-->
 	<script src="MainPage/vendor/animsition/js/animsition.min.js"></script>
-<!--===============================================================================================-->
+	<!--===============================================================================================-->
 	<script src="MainPage/vendor/bootstrap/js/popper.js"></script>
 	<script src="MainPage/vendor/bootstrap/js/bootstrap.min.js"></script>
-<!--===============================================================================================-->
+	<!--===============================================================================================-->
 	<script src="MainPage/vendor/select2/select2.min.js"></script>
 	<script>
 		$(".js-select2").each(function(){
@@ -668,19 +666,20 @@ ArrayList<SellerimgDTO> Sellerdetailimg = (ArrayList<SellerimgDTO>)request.getAt
 			});
 		})
 	</script>
-<!--===============================================================================================-->
+	<!--===============================================================================================-->
 	<script src="MainPage/vendor/daterangepicker/moment.min.js"></script>
 	<script src="MainPage/vendor/daterangepicker/daterangepicker.js"></script>
-<!--===============================================================================================-->
+	<!--===============================================================================================-->
 	<script src="MainPage/vendor/slick/slick.min.js"></script>
 	<script src="MainPage/js/slick-custom.js"></script>
-<!--===============================================================================================-->
+	<!--===============================================================================================-->
 	<script src="MainPage/vendor/parallax100/parallax100.js"></script>
 	<script>
         $('.parallax100').parallax100();
 	</script>
-<!--===============================================================================================-->
-	<script src="MainPage/vendor/MagnificPopup/jquery.magnific-popup.min.js"></script>
+	<!--===============================================================================================-->
+	<script
+		src="MainPage/vendor/MagnificPopup/jquery.magnific-popup.min.js"></script>
 	<script>
 		$('.gallery-lb').each(function() { // the containers for all your galleries
 			$(this).magnificPopup({
@@ -693,9 +692,9 @@ ArrayList<SellerimgDTO> Sellerdetailimg = (ArrayList<SellerimgDTO>)request.getAt
 		    });
 		});
 	</script>
-<!--===============================================================================================-->
+	<!--===============================================================================================-->
 	<script src="MainPage/vendor/isotope/isotope.pkgd.min.js"></script>
-<!--===============================================================================================-->
+	<!--===============================================================================================-->
 	<script src="MainPage/vendor/sweetalert/sweetalert.min.js"></script>
 	<script>
 		$('.js-addwish-b2, .js-addwish-detail').on('click', function(e){
@@ -733,8 +732,9 @@ ArrayList<SellerimgDTO> Sellerdetailimg = (ArrayList<SellerimgDTO>)request.getAt
 		});
 	
 	</script>
-<!--===============================================================================================-->
-	<script src="MainPage/vendor/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+	<!--===============================================================================================-->
+	<script
+		src="MainPage/vendor/perfect-scrollbar/perfect-scrollbar.min.js"></script>
 	<script>
 		$('.js-pscroll').each(function(){
 			$(this).css('position','relative');
@@ -750,9 +750,9 @@ ArrayList<SellerimgDTO> Sellerdetailimg = (ArrayList<SellerimgDTO>)request.getAt
 			})
 		});
 	</script>
-<!--===============================================================================================-->
+	<!--===============================================================================================-->
 	<script src="MainPage/js/main.js"></script>
-<script type="text/javascript">
+	<script type="text/javascript">
 (function () {
     const slideList = document.querySelector('.slide_list');  // Slide parent dom
     const slideContents = document.querySelectorAll('.slide_content');  // each slide dom
@@ -853,29 +853,141 @@ ArrayList<SellerimgDTO> Sellerdetailimg = (ArrayList<SellerimgDTO>)request.getAt
     });
   })();
 </script>
-<style>
- html, body { box-sizing: border-box; padding: 0; margin: 0; text-align: center; }
-    *, *:before, *:after { box-sizing: inherit; }
-    .clearfix:after { content: ''; display: block; clear: both; float: none; }
-    .title { margin-bottom: 0; text-align: center; font-size: 30px; color: #333; }
-    .link, .link:visited { display: inline-block; margin: 20px 0; color: #555; text-decoration: none; font-weight: bold; }
-    .link:hover, .link:focus { color: #9fd6c2; }
-    /* container - body */
-    #container { width: 1000px; margin: auto; }
-    .slide_wrap { position: relative; width: 400px; margin: auto; padding-bottom: 30px; }
-    .slide_box { width: 100%; margin: auto; overflow-x: hidden; }
-    .slide_content { display: table; float: left; width: 400px; height: 400px; }
-    .slide_content > p { display: table-cell; vertical-align: middle; text-align: center; font-size: 100px; font-weight: bold; color: #555; }
-    .slide_content.slide01 { background: #ffffff; }
-    .slide_content.slide02 { background: #ffffff; }
-    .slide_content.slide03 { background: #ffffff; }
-    .slide_btn_box > button { position: absolute; top: 50%; margin-top: -45px; width: 60px; height: 60px; font-size: 16px; color: #999; background: none; border: 1px solid #ddd; cursor: pointer; }
-    .slide_btn_box > .slide_btn_prev { left: -100px; }
-    .slide_btn_box > .slide_btn_next { right: -100px; }
-    .slide_pagination { position: absolute; left: 50%; bottom: 0; list-style: none; margin: 0; padding: 0; transform: translateX(-50%); }
-    .slide_pagination .dot { display: inline-block; width: 15px; height: 15px; margin: 0 5px; overflow: hidden; background: #ddd; border-radius: 50%; transition: 0.3s; }
-    .slide_pagination .dot.dot_active { background: #333; }
-    .slide_pagination .dot a { display: block; width: 100%; height: 100%; }
+	<style>
+html, body {
+	box-sizing: border-box;
+	padding: 0;
+	margin: 0;
+	text-align: center;
+}
+
+*, *:before, *:after {
+	box-sizing: inherit;
+}
+
+.clearfix:after {
+	content: '';
+	display: block;
+	clear: both;
+	float: none;
+}
+
+.title {
+	margin-bottom: 0;
+	text-align: center;
+	font-size: 30px;
+	color: #333;
+}
+
+.link, .link:visited {
+	display: inline-block;
+	margin: 20px 0;
+	color: #555;
+	text-decoration: none;
+	font-weight: bold;
+}
+
+.link:hover, .link:focus {
+	color: #9fd6c2;
+}
+/* container - body */
+#container {
+	width: 1000px;
+	margin: auto;
+}
+
+.slide_wrap {
+	position: relative;
+	width: 400px;
+	margin: auto;
+	padding-bottom: 30px;
+}
+
+.slide_box {
+	width: 100%;
+	margin: auto;
+	overflow-x: hidden;
+}
+
+.slide_content {
+	display: table;
+	float: left;
+	width: 400px;
+	height: 400px;
+}
+
+.slide_content>p {
+	display: table-cell;
+	vertical-align: middle;
+	text-align: center;
+	font-size: 100px;
+	font-weight: bold;
+	color: #555;
+}
+
+.slide_content.slide01 {
+	background: #ffffff;
+}
+
+.slide_content.slide02 {
+	background: #ffffff;
+}
+
+.slide_content.slide03 {
+	background: #ffffff;
+}
+
+.slide_btn_box>button {
+	position: absolute;
+	top: 50%;
+	margin-top: -45px;
+	width: 60px;
+	height: 60px;
+	font-size: 16px;
+	color: #999;
+	background: none;
+	border: 1px solid #ddd;
+	cursor: pointer;
+}
+
+.slide_btn_box>.slide_btn_prev {
+	left: -100px;
+}
+
+.slide_btn_box>.slide_btn_next {
+	right: -100px;
+}
+
+.slide_pagination {
+	position: absolute;
+	left: 50%;
+	bottom: 0;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	transform: translateX(-50%);
+}
+
+.slide_pagination .dot {
+	display: inline-block;
+	width: 15px;
+	height: 15px;
+	margin: 0 5px;
+	overflow: hidden;
+	background: #ddd;
+	border-radius: 50%;
+	transition: 0.3s;
+}
+
+.slide_pagination .dot.dot_active {
+	background: #333;
+}
+
+.slide_pagination .dot a {
+	display: block;
+	width: 100%;
+	height: 100%;
+}
 </style>
 </body>
 </html>

@@ -1,24 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
   <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
- <%
- 			//<<<<<<<<<<<p.413~~~~~~~~~~~443>>>>>>>사진 담당
-// MemberBean bean =new MemberBean();
-// String member_code =request.getParameter("id");
-String member_nickname =(String)session.getAttribute("sNickname");
-String sell_member_code =(String)session.getAttribute("sCode");
-
-//BoardListAction 클래스에서 request 객체에 저장한 객체 꺼내기(getAttribute())
-//=> "pageInfo" 와 "articleList" 라는 속성명을 사용하여 꺼내기
-//=> 단, 리턴타입이 Object 타입이므로 각 데이터타입으로 강제 형변환 필요
-
-%>   
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <title>Product Detail</title>
-<script src="../js/jquery-3.6.0.js"></script>
+<script src="MainPage/js/jquery-3.6.0.js"></script>
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script type="text/javascript">
 function optionChange() {            //대분류 소분류 <select/>
@@ -432,10 +419,10 @@ function readURL(obj) {   //사진 3장 뿌리기
 
 
 	<!-- Product Detail -->
-<form action="SellWritePro.pr?sell_member_code=<%=sell_member_code %>" name="sellForm" method="post" enctype="multipart/form-data">	
+<form action="SellWritePro.pr?sell_member_code=${sCode}" name="sellForm" method="post" enctype="multipart/form-data">	
 	<section class="sec-product-detail bg0 p-t-65 p-b-60">
 		<div class="container">
-			<h3 >&nbsp;&nbsp;&nbsp;&nbsp; <%=member_nickname %>님의 판매글 작성</h3>
+			<h3 >&nbsp;&nbsp;&nbsp;&nbsp; ${sNickname }님의 판매글 작성</h3>
 			<div class="row">
 				<div class="col-md-6 col-lg-7 p-b-30">
 					<div class="p-l-25 p-r-30 p-lr-0-lg">
@@ -606,30 +593,6 @@ function readURL(obj) {   //사진 3장 뿌리기
   })();
 </script>
 <!--!!!!!!!!!!!!!!!!!! -->
-
- <script> 
-//  $(function(){
-// 	$('#button-add-file').click(addFileForm);
-// 	$(document).on('click', '.button-delete-file', function(event) {
-//  		$(this).parent().remove();
-//  	});
-//  });
-//  var count = 0;
-//  function addFileForm() {
-//  	var html = "<div id='item_"+count+"'>";
-//  	html += "<input type='file'  />";
-//  	html += "<button class='button-delete-file'>삭제</button></div>";
-//  	count++;
-//  	$("#my-form").append(html);
-	
-//  		return html;
- 	
-//  }
- </script> 
-<!-- <button id='button-add-file'>파일 추가</button> -->
-<!-- <div id='my-form'></div> -->
-
-										
 										 <input type="file" id="imgInput" name="sell_img_name1" onchange="readURL(this)">
 										 <input type="file" id="imgInput" name="sell_img_name2" onchange="readURL(this)">
 										 <input type="file" id="imgInput" name="sell_img_name3" onchange="readURL(this)">
@@ -657,39 +620,6 @@ function readURL(obj) {   //사진 3장 뿌리기
 							<div id="realPoint"></div>
 						</div>
 		<script type="text/javascript">
-		
-// 		function checkNum() {
-// 			let str = document.getElementById("sell_price").value;	
-// 			let check = /^[0-9]+$/; 
-// 			if (!check.test(str)) {    alert("숫자만 입력 가능합니다.");
-// 			str.remove();
-// 			}
-// 		}
-			
-			
-			
-// 		var testString = document.getElementById("sell_price").value;	
-// 		var regex = /[^0-9]/g;				
-// 		var sell_price = testString.replace(regex, "");
-// 		 document.getElementById("sell_price").value=sell_price;		//-->(,)떼주는 기능이지만 onkeyup이외 onclick 이벤트가 필요
-		
-		
-		
-// 		function inputNumberFormat(obj) {								//단위 1000원단위로  (,)붙여주는 기능 
-// 			obj.value = comma(uncomma(obj.value));
-// 		}	
-
-// 		function comma(str) {
-// 			str = String(str);
-// 			return str.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,');
-// 		}
-
-// 		function uncomma(str) {
-// 			str = String(str);
-
-// 			return str.replace(/[^-0-9]/g,'');
-			
-// 		}
 		
 		</script>
 						<div class="mtext-106 cl2">
