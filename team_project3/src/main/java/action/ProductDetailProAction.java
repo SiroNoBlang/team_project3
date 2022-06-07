@@ -34,6 +34,7 @@ public class ProductDetailProAction implements Action {
 			// BoardDetailService 객체의 increaseReadcount() 메서드 호출
 			service.increaseReadcount(sell_num);
 		}
+		System.out.println(sellerdto);
 		request.setAttribute("sellerdto", sellerdto);
 		request.setAttribute("Relationdto", Relationdto);
 		request.setAttribute("Sellerdetailimg", Sellerdetailimg);

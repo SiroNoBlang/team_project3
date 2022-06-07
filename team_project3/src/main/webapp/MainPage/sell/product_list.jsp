@@ -914,14 +914,20 @@
 
 	$(function(){
 		
-		$("#rec_update").click(function(){
+		$(".fa-heart").click(function(a){
 			
+			var thisRow = $(this).closest('div');
+// 			alert(thisRow);
+			var sell_num = thisRow.children('span').find('.sell_num');
+// 			var sell_num = document.getElementsByClassName('sell_num:eq(0)');
+			alert(sell_num);
+		debugger;
 			$.ajax({
 				url: "ProductRecUpdate.pr",
 	            type: "POST",
 	            data: {
 	                no: '\${articleList.sell_num}',   //ajax 를 사용시 현재 articleList.sell_num 은 600행에서 완전한 for 문으로 돌리고있는 값이라 안되는거 같음 . 
-	                id: '\${sCode}'					  //값을 보내기 위해서 어떤 방법으로 데이터를 넘길지 물어보기.
+	                id: sCode					  //값을 보내기 위해서 어떤 방법으로 데이터를 넘길지 물어보기.
 	            },
 	            success: function () {
 			        recCount();
@@ -936,17 +942,17 @@
 				url: "ProductRecCount.pr",
 	            type: "POST",
 	            data: {
-	                no: \${articleList.sell_num},
-	                id: \${#sCode}.val();
+	                no: '\${articleList.sell_num}',
+	                id: sCode
 	            },
 	            success: function (count) {
 	            	$(".rec_count").html(count);
 	            },
 			})
+	    
 	    };
-	    recCount();
-	});
 	
+	});
 </script>
 </body>
 </html>

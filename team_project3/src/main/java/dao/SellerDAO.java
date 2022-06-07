@@ -184,7 +184,7 @@ public class SellerDAO {
 		ResultSet rs = null;
 
 		try {
-			String sql = "SELECT a.sell_num,a.sell_member_code, a.sell_size , a.sell_category, a.sell_category_detail, a.sell_title, a.sell_color, a.sell_brand, a.sell_price, a.sell_readcount,"
+			String sql = "SELECT a.sell_content,a.sell_num,a.sell_member_code, a.sell_size , a.sell_category, a.sell_category_detail, a.sell_title, a.sell_color, a.sell_brand, a.sell_price, a.sell_readcount,"
 					+ " b.sell_img_name, b.sell_img_real_name ,b.sell_img_real_num ,b.sell_img_num,b.sell_img_name,b.sell_img_real_name, c.sell_list_num, c.sell_list_item_status"
 					+ " FROM sell AS a JOIN sell_img AS b ON a.sell_num = b.sell_img_real_num JOIN sell_list AS c ON a.sell_num = c.sell_list_num"
 					+ " WHERE sell_list_num= ? AND"
@@ -441,18 +441,16 @@ public class SellerDAO {
 		int updateCount = 0;
 
 		try {
-			String sql = "UPDATE  member_info AS a"
-					+ " JOIN member_info_detail AS b ON a.member_info_code = b.member_info_detail_code"
-					+ " SET a.member_info_name=?, a.member_info_phone=?, a.member_info_post_code=?, a.member_info_address=?, a.member_info_address_detail=?,"
-					+ " b.member_info_detail_point= b.member_info_detail_point - ?,b.member_info_detail_acc_money= b.member_info_detail_acc_money + ?"
-					+ " WHERE member_info_code=?";
+			String sql ="UPDATE   member_info_detail"
+					+ "	SET member_info_detail_point= b.member_info_detail_point - ?,member_info_detail_acc_money= b.member_info_detail_acc_money + ?"
+					+ "	WHERE member_info_code= ? ";
 
 			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, memberBeanIm.getMember_info_name());
-			pstmt.setString(2, memberBeanIm.getMember_info_phone());
-			pstmt.setString(3, memberBeanIm.getMember_info_post_code());
-			pstmt.setString(4, memberBeanIm.getMember_info_address());
-			pstmt.setString(5, memberBeanIm.getMember_info_address_detail());
+//			pstmt.setString(1, memberBeanIm.getMember_info_name());
+//			pstmt.setString(2, memberBeanIm.getMember_info_phone());     //삭제해도됨
+//			pstmt.setString(3, memberBeanIm.getMember_info_post_code());
+//			pstmt.setString(4, memberBeanIm.getMember_info_address());
+//			pstmt.setString(5, memberBeanIm.getMember_info_address_detail());
 			pstmt.setInt(6, memberBeanIm.getMember_info_detail_point());
 			pstmt.setInt(7, memberBeanIm.getMember_info_detail_acc_money());
 			pstmt.setString(8, memberBeanIm.getMember_code());
@@ -661,7 +659,7 @@ public class SellerDAO {
 					num = rs.getInt(1) + 1;
 				}
 				
-				 sql ="INSERT INTO address VALUES(?,?,?,?,?,?,?)";
+				 sql ="INSERT INTO address VALUES(?,?,?,?,?,?,?,REPLACE(now(),'-',''))";
 				 pstmt = con.prepareStatement(sql);
 				 pstmt.setInt(1,num);
 				 pstmt.setString(2,address.getMember_code());
@@ -738,7 +736,7 @@ public class SellerDAO {
 					bean.setGrade_name(rs.getString("grade_name"));
 					bean.setLowest_acc_money(rs.getInt("lowest_acc_money"));
 					bean.setHighest_acc_money(rs.getInt("highest_acc_money"));
-					bean.setDiscount_rate(rs.getString("discount_rate"));
+					bean.setDiscount_rate(rs.getInt("discount_rate"));
 					memberArr.add(bean);
 				}			
 //				system.out.println(memberarr);
@@ -764,7 +762,7 @@ public class SellerDAO {
 			ResultSet rs =null; 
 			
 			try {
-				String sql="SELECT a.member_info_detail_acc_money ,b.grade_name, b.lowest_acc_money, b.highest_acc_money"
+				String sql="SELECT a.member_info_detail_acc_money ,b.grade_name, b.lowest_acc_money, b.highest_acc_money b.discount_rate"
 						+ " FROM member_info_detail AS a JOIN grade AS b"
 						+ " ON a.member_info_detail_acc_money BETWEEN b.lowest_acc_money AND b.highest_acc_money "
 						+ " WHERE member_info_detail_code = ? ";
@@ -777,7 +775,7 @@ public class SellerDAO {
 					member.setGrade_name(rs.getString("grade_name"));
 					member.setLowest_acc_money(rs.getInt("lowest_acc_money"));
 					member.setHighest_acc_money(rs.getInt("highest_acc_money"));
-				      
+				    member.setDiscount_rate(rs.getInt("discount_rate"));  
 					}
 				
 				} catch (Exception e) {
