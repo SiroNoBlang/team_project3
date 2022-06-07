@@ -59,7 +59,7 @@ public class LikeListAction implements Action {
 		request.setAttribute("articleList", articleList); //게시물 목록 객체
 		System.out.println("액션에서 articleList" + articleList);
 		
-		forward = new ActionForward("./MainPage/my_page/test.jsp", false);
+		forward = new ActionForward("./MainPage/my_page/like_list.jsp", false);
 		
 		return forward;
 	}
