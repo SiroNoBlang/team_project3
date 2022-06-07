@@ -38,7 +38,7 @@ public class ProductListProAction implements Action {
 		int startPage = ((pageNum-1) /listLimit) * listLimit + 1;
 
 		// 현재 페이지에서 보여줄 끝 페이지 번호(10, 20, 30 등의 끝 번호) 계산
-		int endPage = startPage + pageLimit - 1;
+		int endPage = startPage + pageLimit - 3;
 
 		// 만약, 끝 페이지(endPage)가 현재 페이지에서 표시할 총 페이지 수(maxPage)보다 클 경우 - 끝 페이지 번호를 총 페이지 수로
 		// 대체

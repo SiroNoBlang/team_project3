@@ -435,9 +435,9 @@
 	<br>
 
 	<table>
-
+		<c:forEach items="${Sellerdetailimg }" var="sellerimg">
 		<tr>
-			<c:forEach items="${Sellerdetailimg }" var="sellerimg">
+			
 				<td><img
 					src="./Upload/sell_img/${sellerimg.sell_img_real_name}" width="150"
 					height="150"> &nbsp;</td>

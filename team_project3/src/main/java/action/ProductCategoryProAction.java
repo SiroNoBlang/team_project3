@@ -22,6 +22,7 @@ public class ProductCategoryProAction implements Action {
 		int pageLimit = 12; // 한 페이지 당 표시할 페이지 목록 갯수
 
 		String Category = request.getParameter("sell_category");
+		
 		if (request.getParameter("page") != null) {
 			pageNum = Integer.parseInt(request.getParameter("page"));
 		}
@@ -33,7 +34,7 @@ public class ProductCategoryProAction implements Action {
 
 		int maxPage = (int) Math.ceil((double) listCount / listLimit);
 		int startPage = ((pageNum-1) /listLimit) * listLimit + 1;
-		int endPage = startPage + pageLimit - 1;
+		int endPage = startPage + pageLimit - 3;
 
 		if (endPage > maxPage) {
 			endPage = maxPage;

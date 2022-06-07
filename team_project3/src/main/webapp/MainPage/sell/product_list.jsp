@@ -5,18 +5,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>     
-<% 
-String member_nickname =(String)session.getAttribute("sNickname");
-String member_code =(String)session.getAttribute("sCode");
-SellerProductDTO seller = new SellerProductDTO();
-ArrayList<SellerProductDTO> articleList = (ArrayList<SellerProductDTO>)request.getAttribute("articleList");
-PageInfo pageInfo = (PageInfo)request.getAttribute("pageInfo");
-int pageNum = pageInfo.getPageNum();
-int maxPage = pageInfo.getMaxPage();
-int startPage = pageInfo.getStartPage();
-int endPage = pageInfo.getEndPage();
-int listCount = pageInfo.getListCount();
-%>
 
 
 <!DOCTYPE html>
@@ -60,6 +48,12 @@ int listCount = pageInfo.getListCount();
 <!--===============================================================================================-->
 </head>
 <body class="animsition">
+
+	<c:set var="pageNum" value="${pageInfo.getPageNum() }" />
+	<c:set var="maxPage" value="${pageInfo.getMaxPage() }" />
+	<c:set var="startPage" value="${pageInfo.getStartPage() }" />
+	<c:set var="endPage" value="${pageInfo.getEndPage() }" />
+	<c:set var="listCount" value="${pageInfo.getListCount() }" />
    
    <!-- Header -->
    <header class="header-v4">
@@ -356,30 +350,16 @@ int listCount = pageInfo.getListCount();
       <div class="container">
          <div class="flex-w flex-sb-m p-b-52">
             <div class="flex-w flex-l-m filter-tope-group m-tb-10">
-            	<form>
-               <button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5 how-active1" data-filter="*" onclick="location.href='ProductCategoryPro.pr?Category=all'">
-                  All Products
-               </button>
-				
-               <button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".women" onclick="location.href='ProductCategoryPro.pr?Category=상의'">
-                  All Products>
-                  상의
-               </button>
-
-               <button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".men" onclick="location.href='ProductCategoryPro.pr?Category=하의'">
-                  All Products>
-                  하의
-               </button>
-
-               <button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".bag" onclick="location.href='ProductCategoryPro.pr?Category=신발'">
-                  All Products>
-                  신발
-               </button>
-               																							
-               <button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".etc" onclick="location.href='ProductCategoryPro.pr?Category=잡화'">
-                  All Products>
-                  잡화
-               </button>
+            	<form action="ProductCategoryPro.pr">
+						<a href="Product.pr" style="color: black"> All Products </a>&nbsp;&nbsp;
+						<a href="ProductCategoryPro.pr?sell_category='상의'"
+							style="color: black"> All Products> 상의 </a>&nbsp;&nbsp;&nbsp; <a
+							href="ProductCategoryPro.pr?sell_category='하의'"
+							style="color: black"> All Products> 하의 </a>&nbsp;&nbsp;&nbsp; <a
+							href="ProductCategoryPro.pr?sell_category='신발'"
+							style="color: black"> All Products> 신발 </a>&nbsp;&nbsp;&nbsp; <a
+							href="ProductCategoryPro.pr?sell_category='잡화'"
+							style="color: black"> All Products> 잡화 </a>&nbsp;&nbsp;&nbsp;
                </form>
 
 <!--                <button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".shoes"> -->
@@ -629,10 +609,45 @@ int listCount = pageInfo.getListCount();
     
 	       <div class="flex-c-m flex-w w-full p-t-45">
          
-       <!-- Ajax 사용 더보기 -->
-            <a href="'Product.pr?page=${pageNum + 1}'" class="flex-c-m stext-101 cl5 size-103 bg2 bor1 hov-btn1 p-lr-15 trans-04">
-               Load More
-            </a>
+   <section id="pageList">
+		<!-- 
+		현재 페이지 번호(pageNum)가 1보다 클 경우에만 [이전] 링크 동작
+		=> 클릭 시 notice.jsp 로 이동하면서 
+		   현재 페이지 번호(pageNum) - 1 값을 page 파라미터로 전달
+		-->
+		<c:choose>
+			<c:when test="${pageNum > 1}">
+				<input type="button" value="이전" onclick="location.href='Product.pr?page=${pageNum - 1}'">
+			</c:when>
+			<c:otherwise>
+				<input type="button" value="이전">
+			</c:otherwise>
+		</c:choose>
+			
+		<!-- 페이지 번호 목록은 시작 페이지(startPage)부터 끝 페이지(endPage) 까지 표시 -->
+		<c:forEach var="i" begin="${startPage }" end="${endPage }">
+			<!-- 단, 현재 페이지 번호는 링크 없이 표시 -->
+			<c:choose>
+				<c:when test="${pageNum eq i}">
+					${i }
+				</c:when>
+				<c:otherwise>
+					<a href="Product.pr?page=${i }">${i }</a>
+				</c:otherwise>
+			</c:choose>
+		</c:forEach>
+
+		<!-- 현재 페이지 번호(pageNum)가 총 페이지 수보다 작을 때만 [다음] 링크 동작 -->
+		<c:choose>
+			<c:when test="${pageNum < maxPage}">
+				<input type="button" value="다음" onclick="location.href='Product.pr?page=${pageNum + 1}'">
+			</c:when>
+			<c:otherwise>
+				<input type="button" value="다음">
+			</c:otherwise>
+		</c:choose>
+	</section>
+          
          </div>
       </div>
    </div>
