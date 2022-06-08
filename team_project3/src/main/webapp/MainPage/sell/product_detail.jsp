@@ -503,61 +503,29 @@
 
 						<!-- - -->
 						<div class="tab-pane fade" id="information" role="tabpanel">
-							<div class="row">
-								<div class="col-sm-10 col-md-8 col-lg-6 m-lr-auto">
+<!-- 							<div class="row"> -->
+<!-- 								<div class="col-sm-10 col-md-8 col-lg-6 m-lr-auto"> -->
 									<ul class="p-lr-28 p-lr-15-sm">
 										<li class="flex-w flex-t p-b-7">
-											<span class="stext-102 cl3 size-205">
-												Weight
-											</span>
-
-											<span class="stext-102 cl6 size-206">
-												0.79 kg
-											</span>
-										</li>
-
-										<li class="flex-w flex-t p-b-7">
-											<span class="stext-102 cl3 size-205">
-												Dimensions
-											</span>
-
-											<span class="stext-102 cl6 size-206">
-												110 x 33 x 100 cm
-											</span>
-										</li>
-
-										<li class="flex-w flex-t p-b-7">
-											<span class="stext-102 cl3 size-205">
-												Materials
-											</span>
-
-											<span class="stext-102 cl6 size-206">
-												60% cotton
-											</span>
-										</li>
-
-										<li class="flex-w flex-t p-b-7">
-											<span class="stext-102 cl3 size-205">
-												Color
-											</span>
-
-											<span class="stext-102 cl6 size-206">
-												Black, Blue, Grey, Green, Red, White
-											</span>
-										</li>
-
-										<li class="flex-w flex-t p-b-7">
-											<span class="stext-102 cl3 size-205">
-												Size
-											</span>
-
-											<span class="stext-102 cl6 size-206">
-												XL, L, M, S
-											</span>
+										
+											<table border="1" style="border: none; background: white;">
+												 <c:forEach items="${Relationdto}" var="ProductRe">
+													<span>	
+														<a href="#"><img src="./Upload/sell_img/${ProductRe.getSell_img_real_name() } "onerror="this.style.display='none'" width="130px"height="160px" alt="판매사진"/></a>
+															<h4>${ProductRe.getSell_title() }</h4>
+														<h5>${ProductRe.getSell_brand() }</h5>
+														<a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+														&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+														&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+														</a>
+													</span>
+												</c:forEach>
+											</table>
 										</li>
 									</ul>
-								</div>
-							</div>
+										
+<!-- 								</div> -->
+<!-- 							</div> -->
 						</div>
 
 						<!-- - -->
@@ -648,36 +616,8 @@
 		</div>
 
 <!-- ----------------------------------------------------------- -->
-	<table border="1" style="border: none; background: white;">
-
-		<div class="container">
-			<div class="row multi-columns-row">
-
-				<form>
-
-
-					<c:forEach items="${Relationdto }" var="ProductRe">
-						<div class="col-sm-6 col-md-3 col-lg-3 ">
-
-							<div class="shop-item">
-
-
-								<img
-									src="./Upload/sell_img/${ProductRe.getSell_img_real_name() } "
-									onerror="this.style.display='none'" width="150px"
-									height="200px" alt="Accessories Pack" alt="판매사진"/> </a>
-								<h4>${ProductRe.getSell_title() }</h4>
-								<h5>${ProductRe.getSell_brand() }</h5>
-
-							</div>
-
-						</div>
-					</c:forEach>
-				</form>
-			</div>
-		</div>
-	</table>
-	<br>
+	
+	
 
 
 

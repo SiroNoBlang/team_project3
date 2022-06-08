@@ -253,7 +253,8 @@ public class SellerDAO {
 		try {
 			String sql = "SELECT a.sell_num, a.sell_size , a.sell_title, a.sell_brand, a.sell_price, b.sell_img_name, b.sell_img_real_name "
 					+ "FROM sell AS a JOIN sell_img AS b ON a.sell_num = b.sell_img_real_num WHERE sell_num !=? "
-					+ " AND sell_brand Like '%" + sell_brand + "%' ";
+					+ " AND sell_brand Like '%" + sell_brand + "%' "
+				    + " LIMIT 0,5";
 
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, sell_num);
@@ -790,6 +791,64 @@ public class SellerDAO {
 		
 			return member;
 		}
+
+	public int recCeck(String sCode, int sell_num) {  //좋아요 확인 (true/false) 매서드
+		int selectCount = 0;
+		PreparedStatement pstmt =null;
+		ResultSet rs =null;
+		
+		try {
+			String sql ="SELECT * FROM like_list  "
+					  +" WHERE like_list_member_code = ? AND  like_list_item_num=?";
+			pstmt=con.prepareStatement(sql);
+			pstmt.setString(1, sCode);
+			pstmt.setInt(2, sell_num);
+			
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				selectCount =1;
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return selectCount;
+	}
+
+	public void recUpdate(String sCode, int sell_num) {  //좋아요 실행(INSERT)
+		PreparedStatement pstmt =null;
+		
+		try {
+			String sql="INSERT INTO like_list VALUES(?,?)";
+			pstmt=con.prepareStatement(sql);
+			pstmt.setString(1, sCode);
+			pstmt.setInt(2, sell_num);
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		
+	}
+
+	public void reDelete(String sCode, int sell_num) {  //좋아요 취소(DELETE)
+		PreparedStatement pstmt =null;
+		
+		
+		try {
+			String sql="DELETE FROM like_list "
+					 +" WHERE like_list_member_code = ? AND  like_list_item_num=?";
+			pstmt=con.prepareStatement(sql);
+			pstmt.setString(1, sCode);
+			pstmt.setInt(2, sell_num);
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 	
 	
 	

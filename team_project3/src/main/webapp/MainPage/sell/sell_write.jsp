@@ -54,7 +54,7 @@ function optionChange() {            //대분류 소분류 <select/>
 
 
 function readURL(obj) {   //사진 3장 뿌리기 
-	
+	  alert(obj);
     let reader = new FileReader();
     if(!obj.files.length) {
         return;
@@ -65,12 +65,82 @@ function readURL(obj) {   //사진 3장 뿌리기
         let img = $('<img  width=418,height=517 />');
         $(img).attr('src', e.target.result);
         $('#previewDiv').append(img);
+        
     }
 	}
     
 }
 
+function readURL1(obj) {   //사진 3장 뿌리기 
+	
+    let reader = new FileReader();
+    if(!obj.files.length) {
+        return;
+    }
+    for(let i=0;i<obj.files.length;i++){
+    reader.readAsDataURL(obj.files[i]);
+    reader.onload = function (e) {
+        let img = $('<img  width=418,height=517 />');
+        $(img).attr('src', e.target.result);
+        $('#previewDiv1').append(img);
+       
+    }
+	}
+    
+}
 
+function readURL2(obj) {   //사진 3장 뿌리기 
+	
+    let reader = new FileReader();
+    if(!obj.files.length) {
+        return;
+    }
+    for(let i=0;i<obj.files.length;i++){
+    reader.readAsDataURL(obj.files[i]);
+    reader.onload = function (e) {
+        let img = $('<img  width=418,height=517 />');
+        $(img).attr('src', e.target.result);
+        $('#previewDiv2').append(img);
+        alert('#previewDiv2');
+    }
+	}
+    
+}
+
+function readURL3(obj) {   //사진 3장 뿌리기 
+	
+    let reader = new FileReader();
+    if(!obj.files.length) {
+        return;
+    }
+    for(let i=0;i<obj.files.length;i++){
+    reader.readAsDataURL(obj.files[i]);
+    reader.onload = function (e) {
+        let img = $('<img  width=418,height=517 />');
+        $(img).attr('src', e.target.result);
+        $('#previewDiv3').append(img);
+       
+    }
+	}
+    
+}
+function readURL4(obj) {   //사진 3장 뿌리기 
+	
+    let reader = new FileReader();
+    if(!obj.files.length) {
+        return;
+    }
+    for(let i=0;i<obj.files.length;i++){
+    reader.readAsDataURL(obj.files[i]);
+    reader.onload = function (e) {
+        let img = $('<img  width=418,height=517 />');
+        $(img).attr('src', e.target.result);
+        $('#previewDiv4').append(img);
+        
+    }
+	}
+    
+}
 </script>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -437,17 +507,23 @@ function readURL(obj) {   //사진 3장 뿌리기
 								    <div class="slide_wrap">
 								      <div class="slide_box">
 								        <div class="slide_list clearfix">
-<%-- 								          <%for(int i=0;i<3;i++){ %> --%>
+								         
 								          <div class="slide_content slide01">
-								             <div id="previewDiv" ></div>
+								          	 <div id="previewDiv" ></div>	
 								          </div>
 								          <div class="slide_content slide02">
-								           	 
+								           	 <div id="previewDiv1" ></div>
 								          </div>
 								          <div class="slide_content slide03">
-								          
+								             <div id="previewDiv2" ></div>
 								          </div>
-<%-- 								          <%} %> --%>
+								          <div class="slide_content slide04">
+								           <div id="previewDiv3" ></div>
+								          </div>
+								          <div class="slide_content slide05">
+								             <div id="previewDiv4" ></div>
+								          </div>		
+								     
 								        </div>
 								        <!-- // .slide_list -->
 								      </div>
@@ -480,8 +556,8 @@ function readURL(obj) {   //사진 3장 뿌리기
 	    .slide_content.slide01 { background: #ddbdff; }
 	    .slide_content.slide02 { background: #9fd6c2; }
 	    .slide_content.slide03 { background: #abe2f7; }
-	    .slide_content.slide04 { background: #f08c78; }
-	    .slide_content.slide05 { background: #fbdb65; }
+ 	    .slide_content.slide04 { background: #f08c78; } 
+	    .slide_content.slide05 { background: #fbdb65; } 
 	    .slide_btn_box > button { position: absolute; top: 50%; margin-top: -45px; width: 60px; height: 60px; font-size: 16px; color: #999; background: none; border: 1px solid #ddd; cursor: pointer; }
 	    .slide_btn_box > .slide_btn_prev { left: -100px; }
 	    .slide_btn_box > .slide_btn_next { right: -100px; }
@@ -593,9 +669,12 @@ function readURL(obj) {   //사진 3장 뿌리기
   })();
 </script>
 <!--!!!!!!!!!!!!!!!!!! -->
-										 <input type="file" id="imgInput" name="sell_img_name1" onchange="readURL(this)">
-										 <input type="file" id="imgInput" name="sell_img_name2" onchange="readURL(this)">
-										 <input type="file" id="imgInput" name="sell_img_name3" onchange="readURL(this)">
+										 <input type="file" id="imgInput" name="sell_img_name1" value="" onchange="readURL(this)">
+										 <input type="file" id="imgInput" name="sell_img_name2" onchange="readURL1(this)">
+										 <input type="file" id="imgInput" name="sell_img_name3" onchange="readURL2(this)">
+										  <input type="file" id="imgInput" name="sell_img_name2" onchange="readURL3(this)">
+										 <input type="file" id="imgInput" name="sell_img_name3" onchange="readURL4(this)">  
+										 	
 											</div>
 										</div>
 										

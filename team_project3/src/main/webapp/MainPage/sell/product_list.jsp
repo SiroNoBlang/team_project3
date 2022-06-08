@@ -11,6 +11,10 @@
 <html lang="en">
 <head>
    <title>Product</title>
+   <script type="text/javascript">
+    	var sCode = '${sCode}'
+    	var sell_num
+   </script>
    <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js"
 	integrity="sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI="
 	crossorigin="anonymous"></script>
@@ -567,14 +571,13 @@
               <div class="col-sm-6 col-md-3 col-lg-3 ">
               
                 <div class="shop-item">   <!-- 여기 -->
-                <div class="sell_num">${articleList.sell_num }</div>
+               <input class="sell_num" value="${articleList.sell_num}"/>
                 <a href="ProductDetailPro.pr?sell_num=${articleList.sell_num}&sell_brand=${articleList.sell_brand}">
                    
                  <img src="./Upload/sell_img/${articleList.sell_img_real_name}" width="300px" height="400px" alt="Accessories Pack"/> </a>
                 
                   <span>${articleList.sell_img_real_name}</span>
-                 <a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+                 <a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
                  <i class="fa fa-eye"></i><span style="text-align: right;">${articleList.sell_readcount } </span>|
                  <span>
                	     <span>
@@ -911,40 +914,44 @@
 <!--===============================================================================================-->
    <script src="MainPage/js/main.js"></script>
 <!-- ================================================================================================좋아요 기능 -->
-<script type="text/javascript">// 추천버튼 클릭시(추천 추가 또는 추천 제거) & 게시글 추천수
+<script type="text/javascript">// 추천버튼 클릭시(추천 추가 또는 추천 제거)
 
 	$(function(){
 		
 		$(".fa-heart").click(function(a){
 			
-			var thisRow = $(this).closest('div');
+		var thisRow = $(this).closest('div');
 // 			alert(thisRow);
-			var sell_num = thisRow.children('div').find('sell_num');
+		var sell_num =  thisRow.find('input').val();
+// 			var sell_num = thisRow.children('div').find('input');
 // 			var sell_num = document.getElementsByClassName('sell_num:eq(0)');
 // 			alert(JSON.stringify(sell_num));
-			alert(sell_num)			
-		debugger;
+			alert("LIKE->판매글:"+sell_num)			
+// 		debugger;
 			$.ajax({
 				url: "ProductRecUpdate.pr",
 	            type: "POST",
 	            data: {
-	                no: '\${articleList.sell_num}',   //ajax 를 사용시 현재 articleList.sell_num 은 600행에서 완전한 for 문으로 돌리고있는 값이라 안되는거 같음 . 
-	                id: sCode					  //값을 보내기 위해서 어떤 방법으로 데이터를 넘길지 물어보기.
+	         sell_num : sell_num,    
+	                id: sCode					 
 	            },
-	            success: function () {
+	            success: function (sell_num) {
 			        recCount();
 	            },
 			})
 		});
 		
 		
-	    function recCount() {
-			
+	    function recCount(sell_num) { //  좋아요 갯수
+// 	    	var thisRow = $(this).closest('div');
+// 	    	var sell_num =  thisRow.find('input').val();
+	    	alert("판매번호"+sell_num);
+	    	debugger;
 			$.ajax({
 				url: "ProductRecCount.pr",
 	            type: "POST",
 	            data: {
-	                no: '\${articleList.sell_num}',
+	         sell_num : sell_num,
 	                id: sCode
 	            },
 	            success: function (count) {

@@ -51,7 +51,9 @@ int member_point = memberbean.getMember_info_detail_point();  //자바스크립�
 <html lang="en">
 <head>
 	<title>Shoping Cart</title>
-
+<!-- 	 <script type="text/javascript"> -->
+<%--     	var member_price = ${sellerDTO.getMember_price()}; --%>
+<!--    </script> -->
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 	<script type="text/javascript">
 	function AddressDaumPostcode() {			//----도로명주소-----

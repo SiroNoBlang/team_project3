@@ -37,7 +37,7 @@ ArrayList<MemberBean> gradeArr = (ArrayList<MemberBean>)request.getAttribute("gr
 					${gradeArr.highest_acc_money}
 				</td>
 				<td style="text-align: center;">
-					${gradeArr.discount_rate}
+					${gradeArr.discount_rate}%
 				</td>
 			</tr>
 <%-- 			<c:if test="${ memberbean.grade_name  eq gradeArr.grade_name }"> --%>
