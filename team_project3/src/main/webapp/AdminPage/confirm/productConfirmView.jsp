@@ -2,6 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>   
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <!DOCTYPE html>
 <html>
@@ -71,7 +72,8 @@
 						</tr>
 						<tr>
 							<th><label for="board_title">가격</label></th>
-							<td>${confirmArticle.getSell_price() }</td>
+ 							<td><fmt:formatNumber value="${confirmArticle.getSell_price() }" pattern="#,###" />원</td>
+					<%-- 		<td>${confirmArticle.getSell_price() }</td> --%>
 						</tr>
 						<tr>
 							<th><label for="board_title">색상</label></th>
@@ -134,7 +136,7 @@
 										판매완료되었습니다.
 								</c:when> 
 								<c:otherwise>
-										검수 반려되었습니다.
+										검수 반려되었습니다. 관리자에게 문의해주세요.
 								</c:otherwise> 
 							</c:choose> 
 							</td>
