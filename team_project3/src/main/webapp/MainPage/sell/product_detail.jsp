@@ -194,29 +194,39 @@
 					</div>
 				</li>
 			</ul>
+				<div class="menu-desktop">
+						<ul class="main-menu">
+							<li>
+								<a href="MainPage.pr">Home</a>
+<!-- 								<ul class="sub-menu"> -->
+<!-- 									<li><a href="index.html">Homepage 1</a></li> -->
+<!-- 									<li><a href="home-02.html">Homepage 2</a></li> -->
+<!-- 									<li><a href="home-03.html">Homepage 3</a></li> -->
+<!-- 								</ul> -->
+							</li>
 
-			<ul class="main-menu-m">
-				<li><a href="MainPage.pr">Home</a>
-					<ul class="sub-menu-m">
-						<li><a href="index.html">Homepage 1</a></li>
-						<li><a href="home-02.html">Homepage 2</a></li>
-						<li><a href="home-03.html">Homepage 3</a></li>
-					</ul> <span class="arrow-main-menu-m"> <i
-						class="fa fa-angle-right" aria-hidden="true"></i>
-				</span></li>
+							<li>
+								<a href="Product.pr">Shop</a>
+							</li>
 
-				<li><a href="product.html">Shop</a></li>
+<!-- 							<li class="label1" data-label1="hot"> -->
+<!-- 								<a href="shoping-cart.html">Features</a> -->
+<!-- 							</li> -->
 
-				<li><a href="shoping-cart.html" class="label1 rs1"
-					data-label1="hot">Features</a></li>
+							<li>
+								<a href="SellForm.pr">Sell</a>
+							</li>
 
-				<li><a href="#">Sell</a></li>
+							<li>
+								<a href="CommunityNotice.ma">Community</a>
+							</li>
+			
+							<li>
+								<a href="Contact.pr">Contact</a>
+							</li>
+						</ul>
+					</div>
 
-				<li><a href="about.html">About</a></li>
-
-				<li><a href="contact.html">Contact</a></li>
-			</ul>
-		</div>
 
 		<!-- Modal Search -->
 		<div
@@ -369,33 +379,45 @@
 					</div>
 				</div>
 
+
+
 				<div class="col-md-6 col-lg-5 p-b-30">
 					<div class="p-r-50 p-t-5 p-lr-0-lg">
-						<h2 class="mtext-105 cl2 js-name-detail p-b-14">
-							제목:${sellerdto.getSell_title() }</h2>
-
+					<style>
+						td{
+						text-align: center;
+						}
+					</style>						
 						<table>
 							<tr>
-								<td>Brand: ${sellerdto.getSell_brand() }</td>
+							<td colspan="2"><h2 class="mtext-105 cl2 js-name-detail p-b-14">
+							제목:${sellerdto.sell_title}</h2></td>
 							</tr>
 							<tr>
-								<td>Category: ${sellerdto.getSell_category() }</td>
+								<td>Brand </td>
+								<td style="text-align: left;">${sellerdto.sell_brand}</td>
 							</tr>
 							<tr>
-								<td>detail : ${sellerdto.getSell_category_detail() }</td>
+								<td>Category </td>
+								<td style="text-align: left;">${sellerdto.sell_category}</td>
 							</tr>
 							<tr>
-								<td>Size: ${sellerdto.getSell_size()}</td>
+								<td>detail </td>
+								<td style="text-align: left;"> ${sellerdto.sell_category_detail}</td>
 							</tr>
 							<tr>
-								<td>Color: ${sellerdto.getSell_color() }</td>
+								<td>Size </td>
+								<td style="text-align: left;">${sellerdto.sell_size}</td>
 							</tr>
 							<tr>
-								<td>Price: ${sellerdto.getSell_price() }</td>
+								<td>Color </td>
+								<td style="text-align: left;">${sellerdto.sell_color}</td>
 							</tr>
 							<tr>
-								<td></td>
+								<td>Price</td>
+								<td style="text-align: left;"> ${sellerdto.sell_price}</td>
 							</tr>
+							
 							<tr>
 								<td><input
 									class="cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail"
@@ -455,15 +477,15 @@
 					<!-- Nav tabs -->
 					<ul class="nav nav-tabs" role="tablist">
 						<li class="nav-item p-b-10">
-							<a class="nav-link active" data-toggle="tab" href="#description" role="tab">Description</a>
+							<a class="nav-link active" data-toggle="tab" href="#description" role="tab">상세내용</a>
 						</li>
 
 						<li class="nav-item p-b-10">
-							<a class="nav-link" data-toggle="tab" href="#information" role="tab">Additional information</a>
+							<a class="nav-link" data-toggle="tab" href="#information" role="tab">이런상품은 어떠세요?</a>
 						</li>
 
 						<li class="nav-item p-b-10">
-							<a class="nav-link" data-toggle="tab" href="#reviews" role="tab">Reviews (1)</a>
+							<a class="nav-link" data-toggle="tab" href="#reviews" role="tab">판매자 리뷰</a>
 						</li>
 					</ul>
 
@@ -472,8 +494,9 @@
 						<!-- - -->
 						<div class="tab-pane fade show active" id="description" role="tabpanel">
 							<div class="how-pos2 p-lr-15-md">
+								<div style="text-align: center;">content</div>
 								<p class="stext-102 cl6">
-									Aenean sit amet gravida nisi. Nam fermentum est felis, quis feugiat nunc fringilla sit amet. Ut in blandit ipsum. Quisque luctus dui at ante aliquet, in hendrerit lectus interdum. Morbi elementum sapien rhoncus pretium maximus. Nulla lectus enim, cursus et elementum sed, sodales vitae eros. Ut ex quam, porta consequat interdum in, faucibus eu velit. Quisque rhoncus ex ac libero varius molestie. Aenean tempor sit amet orci nec iaculis. Cras sit amet nulla libero. Curabitur dignissim, nunc nec laoreet consequat, purus nunc porta lacus, vel efficitur tellus augue in ipsum. Cras in arcu sed metus rutrum iaculis. Nulla non tempor erat. Duis in egestas nunc.
+								 ${sellerdto.sell_content}
 								</p>
 							</div>
 						</div>
@@ -643,8 +666,8 @@
 									src="./Upload/sell_img/${ProductRe.getSell_img_real_name() } "
 									onerror="this.style.display='none'" width="150px"
 									height="200px" alt="Accessories Pack" alt="판매사진"/> </a>
-<%-- 								<h4>${ProductRe.getSell_title() }</h4> --%>
-<%-- 								<h5>${ProductRe.getSell_brand() }</h5> --%>
+								<h4>${ProductRe.getSell_title() }</h4>
+								<h5>${ProductRe.getSell_brand() }</h5>
 
 							</div>
 

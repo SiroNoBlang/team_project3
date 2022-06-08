@@ -16,7 +16,7 @@ public class ShopingProAction implements Action {
 		ActionForward forward = null;	
 		String member_code = request.getParameter("member_code");
 		int sell_num = Integer.parseInt(request.getParameter("sell_num"));
-		
+	
 		//articleList 
 		SellerShopingService service = new SellerShopingService();
 		SellerProductDTO sellerDTO = new SellerProductDTO();

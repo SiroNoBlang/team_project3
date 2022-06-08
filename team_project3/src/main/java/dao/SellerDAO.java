@@ -209,7 +209,7 @@ public class SellerDAO {
 				article.setSell_img_real_name(rs.getString("sell_img_real_name"));
 				article.setSell_list_num(rs.getInt("sell_list_num"));
 				article.setSell_list_item_status(rs.getString("sell_list_item_status"));
-
+				article.setSell_content(rs.getString("sell_content"));
 			}
 		} catch (SQLException e) {
 			System.out.println("SQL 구문 오류 발생! - selectArticle()");
@@ -309,7 +309,7 @@ public class SellerDAO {
 
 		try {
 			String sql = "SELECT a.member_code, b.member_info_name, b.member_info_phone, b.member_info_post_code, b.member_info_address, b.member_info_address_detail, b.member_info_ship_post_code, b.member_info_ship_address, b.member_info_ship_address_detail,"
-					+ "	c.member_info_detail_point, c.member_info_detail_acc_money, d.grade_name"
+					+ "	c.member_info_detail_point, c.member_info_detail_acc_money, d.grade_name,d.discount_rate"
 					+ "	FROM member AS a JOIN member_info AS b ON a.member_code = b.member_info_code JOIN member_info_detail AS c ON b.member_info_code = c.member_info_detail_code JOIN grade AS d"
 					+ "	ON c.member_info_detail_acc_money  BETWEEN d.lowest_acc_money AND d.highest_acc_money"
 					+ "	WHERE a.member_code =  ?";
@@ -331,6 +331,7 @@ public class SellerDAO {
 				memberbean.setMember_info_detail_point(rs.getInt("member_info_detail_point"));
 				memberbean.setMember_info_detail_acc_money(rs.getInt("member_info_detail_acc_money"));
 				memberbean.setGrade_name(rs.getString("grade_name"));
+				memberbean.setDiscount_rate(rs.getInt("discount_rate"));
 
 			}
 		} catch (Exception e) {
@@ -762,7 +763,7 @@ public class SellerDAO {
 			ResultSet rs =null; 
 			
 			try {
-				String sql="SELECT a.member_info_detail_acc_money ,b.grade_name, b.lowest_acc_money, b.highest_acc_money b.discount_rate"
+				String sql="SELECT a.member_info_detail_acc_money ,b.grade_name, b.lowest_acc_money, b.highest_acc_money ,b.discount_rate"
 						+ " FROM member_info_detail AS a JOIN grade AS b"
 						+ " ON a.member_info_detail_acc_money BETWEEN b.lowest_acc_money AND b.highest_acc_money "
 						+ " WHERE member_info_detail_code = ? ";

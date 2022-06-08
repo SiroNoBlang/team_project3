@@ -4,7 +4,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%	
-
+// 현재 페이지에서 수정할것 ----> 이 페이지를 가장마지막으로 돌리고 결제 페이지 빈페이지를 하나 보여줘서 넘기는쪽으로?어떰?
+		
 String member_nickname =(String)session.getAttribute("sNickname");
 String sell_member_code =(String)session.getAttribute("sCode");
 
@@ -351,7 +352,7 @@ int price = sellerDTO.getSell_price()+charge+3000;     //최종 판매가격+수
 	</div>
 	
 	<center>
-		<h2>결제페이지 </h2>
+		<h2>결제 정보 </h2>
 	</center>
 <!-- 	<form action="SucceedProduct.pr" class="bg0 p-t-75 p-b-85"> -->
 		<div class="container" >
@@ -365,16 +366,16 @@ int price = sellerDTO.getSell_price()+charge+3000;     //최종 판매가격+수
 						<div class="flex-w flex-t bor12 p-b-13">
 							<div class="size-208">
 								<span class="stext-110 cl2">
-									<img src="./Upload/sell_img/<%=sellerDTO.getSell_img_name() %>" width="150" height="150">	
+									<img src="./Upload/sell_img/${sellerDTO.sell_img_name}" width="150" height="150">	
 						
 								</span>
 							</div>
 							<div class="size-209">
 								
-								title:<%=sellerDTO.getSell_title() %><br>
-								brand:<%=sellerDTO.getSell_brand() %><br>
-								size:<%=sellerDTO.getSell_size() %><br>
-								price:<%=sellerDTO.getSell_price() %><br>
+								title:${sellerDTO.sell_title}<br>
+								brand:${sellerDTO.sell_brand}<br>
+								size: ${sellerDTO.sell_size}<br>
+								price:${sellerDTO.sell_price}<br>
 							
 							</div>
 							
@@ -387,19 +388,19 @@ int price = sellerDTO.getSell_price()+charge+3000;     //최종 판매가격+수
 								<span class="stext-110 cl2">
 								</span><br>
 								<span class="stext-110 cl2">
-									address:<%=memberbean.getMember_info_address() %>
+									address: ${memberBean.member_info_address}
 								</span><br>
 								<span class="stext-110 cl2">
-									address:<%=memberbean.getMember_info_address_detail() %>	
+									address:${memberBean.member_info_address_detail } 
 								</span><br>
 								<span class="stext-110 cl2">
-									post:<%=memberbean.getMember_info_post_code() %>	
+									post: ${memberBean.member_info_post_code}
 								</span><br> 
 								<span class="stext-190 cl2">
- 									name:<%=memberbean.getMember_info_name() %>
+ 									name: ${memberBean.member_info_name}
 								</span><br>	
 								<span class="stext-190 cl2">
- 									phone:<%=memberbean.getMember_info_phone() %>
+ 									phone:${memberBean.member_info_phone } 
 								</span><br>	
   					   		</div>
 							<div class="flex-w flex-t bor12 p-t-15 p-b-30">
@@ -410,16 +411,16 @@ int price = sellerDTO.getSell_price()+charge+3000;     //최종 판매가격+수
 								<span class="stext-110 cl2">
 								</span><br>
 								<span class="stext-110 cl2">
-									point:<%=memberbean.getMember_info_detail_point() %>
+									사용한 포인트  ${param.point }
 								</span><br>
 								<span class="stext-110 cl2">
 										
 								</span><br>
 								<span class="stext-110 cl2">
-									회원등급 :<%=memberbean.getGrade_name() %>	
+									회원등급 : ${memberBean.grade_name }   
 								</span><br> 
 								<span class="stext-190 cl2">
- 									최종금액 : <%=prev_acc_money%>
+ 									최종금액 : ${param.member_info_detail_acc_money}  <!-- 모든 할인 검수비 적용 후 최종 가격 -->
 								</span><br>	
 								
 <!--  									<P>우리 COZA_STORE에서는 택배비+검수 수수료 합산하여 결제 됨을 알려드립니다.</P> -->
@@ -475,13 +476,13 @@ int price = sellerDTO.getSell_price()+charge+3000;     //최종 판매가격+수
             pay_method : 'card',
             merchant_uid : 'merchant_' + new Date().getTime(),
             name : 'COZA STORE',
-            amount : <%=prev_acc_money%>,     
-            buyer_email : '<%=memberbean.getMember_email()%>',
-            buyer_name : '<%=memberbean.getMember_info_name()%>',
-            buyer_tel : '<%=memberbean.getMember_info_phone()%>',
-            buyer_addr : '<%=memberbean.getMember_info_address()%>',
-            buyer_addr_detail:'<%=memberbean.getMember_info_address_detail()%>',
-            buyer_postcode : '<%=memberbean.getMember_info_post_code()%>',
+            amount :  ${param.member_info_detail_acc_money},     
+            buyer_email : '${memberBean.member_email}',
+            buyer_name : '${memberBean.member_info_name}',
+            buyer_tel : '${memberBean.member_info_phone}',
+            buyer_addr : '${memberBean.member_info_address}',
+            buyer_addr_detail:'${memberBean.member_info_address_detail}',
+            buyer_postcode : '${memberBean.member_info_post_code}',
             //m_redirect_url : 'http://www.naver.com'
         }, function(rsp) {
             if ( rsp.success ) {

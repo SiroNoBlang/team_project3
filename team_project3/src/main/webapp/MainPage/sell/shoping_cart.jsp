@@ -849,10 +849,10 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 <!--=========================488<포인트차감>==========================================================-->	
 <script>		
 		function recentPostAddress(){   //최근 배송지 스크립트
-			window.open('SellRecentPostAddressAction.pr?member_code=<%=sell_member_code%>',"","width=750,height=450");	
+			window.open('SellRecentPostAddressAction.pr?member_code=${sCode}',"","width=750,height=450");	
 		}
-		function checkMember_grade(){
-			window.open('SellMemberGrade.pr?member_code=<%=sell_member_code%>',"","width=750,height=450");
+		function checkMember_grade(){    //나의 등급 정보 
+			window.open('SellMemberGrade.pr?member_code=${sCode}',"","width=750,height=450");
 		}
 </script>
 <script>

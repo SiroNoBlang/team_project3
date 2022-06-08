@@ -566,7 +566,8 @@
             <c:forEach items="${articleList}" var="articleList">
               <div class="col-sm-6 col-md-3 col-lg-3 ">
               
-                <div class="shop-item">
+                <div class="shop-item">   <!-- 여기 -->
+                <div class="sell_num">${articleList.sell_num }</div>
                 <a href="ProductDetailPro.pr?sell_num=${articleList.sell_num}&sell_brand=${articleList.sell_brand}">
                    
                  <img src="./Upload/sell_img/${articleList.sell_img_real_name}" width="300px" height="400px" alt="Accessories Pack"/> </a>
@@ -918,9 +919,10 @@
 			
 			var thisRow = $(this).closest('div');
 // 			alert(thisRow);
-			var sell_num = thisRow.children('span').find('.sell_num');
+			var sell_num = thisRow.children('div').find('sell_num');
 // 			var sell_num = document.getElementsByClassName('sell_num:eq(0)');
-			alert(sell_num);
+// 			alert(JSON.stringify(sell_num));
+			alert(sell_num)			
 		debugger;
 			$.ajax({
 				url: "ProductRecUpdate.pr",
