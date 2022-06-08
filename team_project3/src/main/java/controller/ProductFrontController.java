@@ -13,6 +13,7 @@ import action.Action;
 import action.ContactAction;
 import action.ProductCategoryProAction;
 import action.ProductDetailProAction;
+import action.ProductFilterProAction;
 import action.ProductListProAction;
 import action.ProductRecCountProAction;
 import action.ProductRecUpdateProAction;
@@ -74,7 +75,14 @@ public class ProductFrontController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+		} else if (command.equals("/ProductFilterPro.pr")) { // 상품 필터 분류 처리
+			action = new ProductFilterProAction();
 
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}	
 		} else if (command.equals("/Product_list.pr")) { // 상품 판매목록(product_list.jsp)
 
 			forward = new ActionForward();

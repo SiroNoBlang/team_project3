@@ -18,6 +18,103 @@
    <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js"
 	integrity="sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI="
 	crossorigin="anonymous"></script>
+	<script type="text/javascript" >
+function filter(value){
+			if(value == "price") {
+				var tagSpan = document.getElementById("checkbox2");
+					tagSpan.innerHTML =  "<table action ='' style='text-align:center'>"
+										+ "<tr><td><input type='checkbox' name='color' value='TopPrice' onclick='price(this.value)'>TopPrice</td>"
+										+"<td><input type='checkbox' name='color' value='LowPrice'>LowPrice </td></tr></table>";
+			}
+			else if(value =="view") {
+				var tagSpan = document.getElementById("checkbox2");
+				tagSpan.innerHTML =  "<input type='checkbox' name='color' value='TopView'> TopView "
+						+ "<input type='checkbox' name='color' value='LowView'> LowView"
+						+ "<input type='checkbox' name='color' value='MostLike'> MostLike "	;
+			} 
+			else if(value =="brand") {
+				var tagSpan = document.getElementById("checkbox2");	
+				tagSpan.innerHTML =  "<label><input type='checkbox' value='Gucci'> Gucci</label> "
+						+"<label><input type='checkbox' value='Hermes'> Hermes</label>"
+						+"<label><input type='checkbox' name='Chanel' value='Chanel'> Chanel</label>"
+						+"<label><input type='checkbox' name='Louis Vuitton' value='Louis Vuitton'> Louis Vuitton</label>"
+						+"<label><input type='checkbox' name='Bottega Veneta' value='Bottega'> Bottega Veneta</label>"
+						+"<label><input type='checkbox' name='Prada' value='Prada'> Prada</label>"
+						+"<label><input type='checkbox' name='Rolex' value='red'> Rolex</label>"
+						+"<label><input type='checkbox' name='Dior' value='red'> Dior</label>"
+						+"<label><input type='checkbox' name='Celine' value='red'> Celine</label>";	
+			} 
+			else if(value =="category") {
+				var tagSpan = document.getElementById("checkbox2");
+		 		tagSpan.innerHTML =  "<label><input type='checkbox' name='color' value='상의'> 상의</label> "
+					+"<label><input type='checkbox' name='color' value='하의'> 하의</label>"
+					+"<label><input type='checkbox' name='color' value='신발'> 신발</label>"
+					+"<label><input type='checkbox' name='color' value='잡화'> 잡화</label>";
+				
+			}
+		
+}
+
+function price(a){
+	var sendData = {price:$('#a').val()};
+	
+	alert(sendData);
+	 $.ajax({
+	        type: GET,
+	        url : "ProductFilterPro.pr",
+	        data: sendData,
+	        dataType:"json",
+	        success : function() {
+	            alert(a);
+	        },
+	        error: function() {
+	            
+	        }
+	    });
+	}
+	
+// function filter(clicked.value) {
+// 	alert(clicked.value);
+// var tagSpan = document.getElementById("checkbox2");
+
+// 		price, view, brand ,category
+// 		tagSpan.innerHTML =  "<label><input type='checkbox' name='color' value='TopPrice'> TopPrice</label> "
+// 							+"<label><input type='checkbox' name='color' value='LowPrice'> LowPrice</label>";
+							
+// 		tagSpan.innerHTML =  "<label><input type='checkbox' name='color' value='TopView'> TopView</label> "
+// 							+ "<label><input type='checkbox' name='color' value='LowView'> LowView</label>"
+// 							+ "<label><input type='checkbox' name='color' value='MostLike'> MostLike</label> "	;
+							
+						
+			
+// 		tagSpan.innerHTML =  "<label><input type='checkbox' value='Gucci'> Gucci</label> "
+// 							+"<label><input type='checkbox' value='Hermes'> Hermes</label>"
+// 							+"<label><input type='checkbox' name='Chanel' value='Chanel'> Chanel</label>"
+// 							+"<label><input type='checkbox' name='Louis Vuitton' value='Louis Vuitton'> Louis Vuitton</label>"
+// 							+"<label><input type='checkbox' name='Bottega Veneta' value='Bottega'> Bottega Veneta</label>"
+// 							+"<label><input type='checkbox' name='Prada' value='Prada'> Prada</label>"
+// 							+"<label><input type='checkbox' name='Rolex' value='red'> Rolex</label>"
+// 							+"<label><input type='checkbox' name='Dior' value='red'> Dior</label>"
+// 							+"<label><input type='checkbox' name='Celine' value='red'> Celine</label>";	
+
+// 		tagSpan.innerHTML =  "<label><input type='checkbox' name='color' value='상의'> 상의</label> "
+// 							+"<label><input type='checkbox' name='color' value='하의'> 하의</label>"
+// 							+"<label><input type='checkbox' name='color' value='신발'> 신발</label>"
+// 							+"<label><input type='checkbox' name='color' value='잡화'> 잡화</label>";
+	
+// }
+
+
+	
+
+
+
+
+
+
+
+</script>  
+	
    <meta charset="UTF-8">
    <meta name="viewport" content="width=device-width, initial-scale=1">
 <!--===============================================================================================-->   
@@ -354,17 +451,13 @@
       <div class="container">
          <div class="flex-w flex-sb-m p-b-52">
             <div class="flex-w flex-l-m filter-tope-group m-tb-10">
-            	<form action="ProductCategoryPro.pr">
-						<a href="Product.pr" style="color: black"> All Products </a>&nbsp;&nbsp;
-						<a href="ProductCategoryPro.pr?sell_category='상의'"
-							style="color: black"> All Products> 상의 </a>&nbsp;&nbsp;&nbsp; <a
-							href="ProductCategoryPro.pr?sell_category='하의'"
-							style="color: black"> All Products> 하의 </a>&nbsp;&nbsp;&nbsp; <a
-							href="ProductCategoryPro.pr?sell_category='신발'"
-							style="color: black"> All Products> 신발 </a>&nbsp;&nbsp;&nbsp; <a
-							href="ProductCategoryPro.pr?sell_category='잡화'"
-							style="color: black"> All Products> 잡화 </a>&nbsp;&nbsp;&nbsp;
-               </form>
+            	 <div class="flex-w flex-l-m filter-tope-group m-tb-10">
+			 	 <input type="button" class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" value="All Products" onclick="Product.pr" >
+                 <input type="button" class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" value="All Products> 상의" onclick="location.href='ProductCategoryPro.pr?sell_category=상의'" >
+                 <input type="button" class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" value="All Products> 하의" onclick="location.href='ProductCategoryPro.pr?sell_category=하의'" >
+				 <input type="button" class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" value="All Products> 신발" onclick="location.href='ProductCategoryPro.pr?sell_category=신발'" >
+                 <input type="button" class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" value="All Products> 잡화" onclick="location.href='ProductCategoryPro.pr?sell_category=잡화'" >
+            </div>
 
 <!--                <button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".shoes"> -->
 <!--                   Shoes -->
@@ -413,146 +506,36 @@
             <div class="dis-none panel-filter w-full p-t-10">
                <div class="wrap-filter flex-w bg6 w-full p-lr-40 p-t-27 p-lr-15-sm">
                   <div class="filter-col1 p-r-15 p-b-27">
-                     <div class="mtext-102 cl2 p-b-15">
-                        Sort By
-                     </div>
-
-                     <ul>
-                        <li class="p-b-6">
-                           <a href="#" class="filter-link stext-106 trans-04">
-                              Default
-                           </a>
-                        </li>
-
-                        <li class="p-b-6">
-                           <a href="#" class="filter-link stext-106 trans-04">
-                              Popularity
-                           </a>
-                        </li>
-
-                        <li class="p-b-6">
-                           <a href="#" class="filter-link stext-106 trans-04">
-                              Average rating
-                           </a>
-                        </li>
-
-                        <li class="p-b-6">
-                           <a href="#" class="filter-link stext-106 trans-04 filter-link-active">
-                              Newness
-                           </a>
-                        </li>
-
-                        <li class="p-b-6">
-                           <a href="#" class="filter-link stext-106 trans-04">
-                              Price: Low to High
-                           </a>
-                        </li>
-
-                        <li class="p-b-6">
-                           <a href="#" class="filter-link stext-106 trans-04">
-                              Price: High to Low
-                           </a>
-                        </li>
-                     </ul>
-                  </div>
-
-                 
-
-                  <div class="filter-col2 p-r-15 p-b-27">
-                     <div class="mtext-102 cl2 p-b-15">
-                        Color
-                     </div>
-
-                     <ul>
-                        <li class="p-b-6">
-                           <span class="fs-15 lh-12 m-r-6" style="color: #222;">
-                              <i class="zmdi zmdi-circle"></i>
-                           </span>
-
-                           <a href="#" class="filter-link stext-106 trans-04">
-                              Black
-                           </a>
-                        </li>
-
-                        <li class="p-b-6">
-                           <span class="fs-15 lh-12 m-r-6" style="color: #4272d7;">
-                              <i class="zmdi zmdi-circle"></i>
-                           </span>
-
-                           <a href="#" class="filter-link stext-106 trans-04 filter-link-active">
-                              Blue
-                           </a>
-                        </li>
-
-                        <li class="p-b-6">
-                           <span class="fs-15 lh-12 m-r-6" style="color: #b3b3b3;">
-                              <i class="zmdi zmdi-circle"></i>
-                           </span>
-
-                           <a href="#" class="filter-link stext-106 trans-04">
-                              Grey
-                           </a>
-                        </li>
-
-                        <li class="p-b-6">
-                           <span class="fs-15 lh-12 m-r-6" style="color: #00ad5f;">
-                              <i class="zmdi zmdi-circle"></i>
-                           </span>
-
-                           <a href="#" class="filter-link stext-106 trans-04">
-                              Green
-                           </a>
-                        </li>
-
-                        <li class="p-b-6">
-                           <span class="fs-15 lh-12 m-r-6" style="color: #fa4251;">
-                              <i class="zmdi zmdi-circle"></i>
-                           </span>
-
-                           <a href="#" class="filter-link stext-106 trans-04">
-                              Red
-                           </a>
-                        </li>
-
-                        <li class="p-b-6">
-                           <span class="fs-15 lh-12 m-r-6" style="color: #aaa;">
-                              <i class="zmdi zmdi-circle-o"></i>
-                           </span>
-
-                           <a href="#" class="filter-link stext-106 trans-04">
-                              White
-                           </a>
-                        </li>
-                     </ul>
-                  </div>
-                  <!-- 여기도 태그 -->
-                  <div class="filter-col4 p-b-27">
-                     <div class="mtext-102 cl2 p-b-15">
-                        Tags
-                     </div>
-
-                     <div class="flex-w p-t-4 m-r--5">
-                        <a href="#" class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
-                           Fashion
-                        </a>
-
-                        <a href="#" class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
-                           Lifestyle
-                        </a>
-
-                        <a href="#" class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
-                           Denim
-                        </a>
-
-                        <a href="#" class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
-                           Streetstyle
-                        </a>
-
-                        <a href="#" class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
-                           Crafts
-                        </a>
-                     </div>
-                  </div>
+                     <div id="checkbox1">
+                  <table>
+						<tr> 
+							<th><input type="button" class="filter-link stext-106 trans-04" name=filter value="price" onclick="filter(this.value)" /></th>
+						</tr>	
+						<tr>
+							<th><input type="button" class="filter-link stext-106 trans-04" name=filter  value="view" onclick="filter(this.value)"></th>
+							
+						</tr>
+						<tr>
+							<th><input type="button" class="filter-link stext-106 trans-04" name=filter value="brand" onclick="filter(this.value)"></th>
+							
+						</tr>
+						<tr>
+							<th><input type="button" class="filter-link stext-106 trans-04"  name=filter value="category" onclick="filter(this.value)"></th>
+							
+						</tr>
+				</table>
+				</div>
+				<div id="checkbox2" style="text-align: left"></div>
+ 	<!-- 					 <input type="checkbox" id="price"> -->
+<!--        				 <label for="Price">Price</label> -->
+<!--        				 <input type="checkbox" id="view"> -->
+<!--        				 <label for="view">view</label> -->
+<!--        				 <input type="checkbox" id="brand"> -->
+<!--        				 <label for="brand">brand</label> -->
+<!--        				 <input type="checkbox" id="category"> -->
+<!--        				 <label for="category">category</label> -->
+  
+               
                </div>
             </div>
          </div>
