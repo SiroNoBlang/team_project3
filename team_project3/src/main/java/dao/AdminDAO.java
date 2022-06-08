@@ -1550,7 +1550,7 @@ public class AdminDAO {
 				confirm.setSell_category(rs.getString("sell_category"));
 				confirm.setSell_category_detail(rs.getString("sell_category_detail"));
 				confirm.setSell_content(rs.getString("sell_content"));
-				confirm.setSell_price(rs.getShort("sell_price"));
+				confirm.setSell_price(rs.getInt("sell_price"));
 				confirm.setSell_color(rs.getString("sell_color"));
 				confirm.setSell_size(rs.getString("sell_size"));
 				confirm.setSell_brand(rs.getString("sell_brand"));
