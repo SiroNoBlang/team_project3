@@ -38,7 +38,7 @@
 		<!-- Header desktop -->
 		<div class="container-menu-desktop">
 			<!-- pc_sub_header -->
-			<div class="wrap-menu-desktop how-shadow1">
+			<div class="wrap-menu-desktop how-shadow1" style="top:0px;">
 				<nav class="limiter-menu-desktop container">
 					<jsp:include page="/MainPage/menu/pc_sub_header.jsp"/>
 				</nav>

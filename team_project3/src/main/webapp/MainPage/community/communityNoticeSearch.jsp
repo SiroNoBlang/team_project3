@@ -28,7 +28,7 @@
 		<!-- Header desktop -->
 		<div class="container-menu-desktop">
 			<!-- Topbar -->
-			<div class="top-bar">
+<!-- 			<div class="top-bar">
 				<div class="content-topbar flex-sb-m h-full container">
 					<div class="left-top-bar">
 						Free shipping for standard order over $100
@@ -53,9 +53,9 @@
 					</div>
 				</div>
 			</div>
-
-				<!-- pc_sub_header -->
-			<div class="wrap-menu-desktop how-shadow1">
+ -->
+		<!-- pc_sub_header -->
+			<div class="wrap-menu-desktop how-shadow1" style="top:0px;">
 				<nav class="limiter-menu-desktop container">
 					<jsp:include page="/MainPage/menu/pc_sub_header.jsp"/>
 				</nav>
