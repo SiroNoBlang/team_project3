@@ -607,7 +607,7 @@ public class MemberDAO {
 		int startRow = (pageNum - 1) * listLimit;
 		
 		try { // 목록 카테고리에 필요한 값만 저장
-			String sql = "SELECT s.sell_title, s.sell_size, b.buy_sell_item_date, b.buy_item_status, si.sell_img_name, si.sell_img_real_name, s.sell_num FROM sell s JOIN buy b ON s.sell_num = b.buy_item_num JOIN sell_img si ON si.sell_img_real_num = s.sell_num JOIN sell_list sl ON sl.sell_list_num = s.sell_num WHERE b.buy_member_code=? AND sl.sell_list_item_status='판매완료' ORDER BY buy_sell_item_date DESC LIMIT ?,?";
+			String sql = "SELECT s.sell_title, s.sell_size, b.buy_sell_item_date, b.buy_item_status, si.sell_img_name, si.sell_img_real_name, s.sell_num FROM sell s JOIN buy b ON s.sell_num = b.buy_item_num JOIN sell_img si ON si.sell_img_real_num = s.sell_num JOIN sell_list sl ON sl.sell_list_num = s.sell_num WHERE b.buy_member_code=? AND sl.sell_list_item_status='판매완료' AND (sell_img_real_num,sell_img_num)  in (SELECT  sell_img_real_num, MAX(sell_img_num)  FROM sell_img    GROUP BY sell_img_real_num  ORDER BY sell_img_real_num ,sell_img_num DESC  ) ORDER BY buy_sell_item_date DESC LIMIT ?,?";
 			
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, code);
