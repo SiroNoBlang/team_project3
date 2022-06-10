@@ -466,8 +466,6 @@ MemberBean member = (MemberBean) request.getAttribute("memberDetail");
 					<input type="checkbox" name="style" value="유지섹스"
 					<c:if test="${fn:contains(memberDetail.member_info_detail_like_style, '유지섹스')}" >checked</c:if>>유지섹스
 
-					<!-- 								<input type="checkbox" name="style" value="청순" --> <%-- 								<c:if test="${fn:contains(memberDetail.member_info_detail_like_style, '청순') }" >checked</c:if>>청순 --%>
-					<!-- 								<input type="checkbox" name="style" value="캐주얼" --> <%-- 								<c:if test="${fn:contains(memberDetail.member_info_detail_like_style, '캐주얼') }" >checked</c:if>>캐주얼 --%>
 				</td>
 			</tr>
 			<tr>
@@ -494,10 +492,6 @@ MemberBean member = (MemberBean) request.getAttribute("memberDetail");
 					<input type="checkbox" name="brand" value="발렌시아가"
 					<c:if test="${fn:contains(memberDetail.member_info_detail_like_brand, '발렌시아가')}" >checked</c:if>>발렌시아가
 
-					<%-- 							<input type="checkbox" name="brand" value="아디다스" <c:if test="${fn:contains(memberDetail.member_info_detail_like_brand, '아디다스')}" >checked</c:if>>아디다스 --%>
-					<!-- 								<input type="checkbox" name="brand" value="아페쎄" --> <%-- 								<c:if test="${fn:contains(memberDetail.member_info_detail_like_brand, '아페쎄')}" >checked</c:if>>아페쎄 --%>
-					<!-- 								<input type="checkbox" name="brand" value="칼하트" --> <%-- 								<c:if test="${fn:contains(memberDetail.member_info_detail_like_brand, '칼하트')}" >checked</c:if>>칼하트 --%>
-					<!-- 								<input type="checkbox" name="brand" value="샤넬" --> <%-- 								<c:if test="${fn:contains(memberDetail.member_info_detail_like_brand, '샤넬')}" >checked</c:if>>샤넬 --%>
 				</td>
 			</tr>
 			<tr>

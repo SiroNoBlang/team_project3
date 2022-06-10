@@ -12,6 +12,7 @@ import vo.LikeListBean;
 import vo.MemberBean;
 import vo.SellerDTO;
 import vo.SellerProductDTO;
+import vo.SellerimgDTO;
 
 import static db.JdbcUtil.*;
 public class MemberDAO {
@@ -771,5 +772,47 @@ public class MemberDAO {
 		}
 		return likeSmallList;
 	}
+	
+	public ArrayList<SellerimgDTO> selectSellimgList(String member_code) { //셀리스트 사진
+		System.out.println("DAO에서 멤버코드" + member_code);
+		ArrayList<SellerimgDTO> sellimgList = null;
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			String sql = "select a.member_code, b.sell_num, b.sell_member_code, c.sell_img_num, c.sell_img_name, c.sell_img_real_name"
+					+ " FROM member AS a"
+					+ " JOIN sell AS b"
+					+ " ON a.member_code=b.sell_member_code"
+					+ " JOIN sell_img AS c"
+					+ " ON c.sell_img_real_num=b.sell_num"
+					+ " WHERE a.member_code=?";
+			
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, member_code);
+	
+			rs = pstmt.executeQuery();
+			
+			sellimgList = new ArrayList<SellerimgDTO>();
+			
+			while(rs.next()) {
+				SellerimgDTO imgList = new SellerimgDTO();
+				imgList.setSell_img_name(rs.getString("sell_img_name"));
+				imgList.setSell_img_real_name(rs.getString("sell_img_real_name"));
+				sellimgList.add(imgList);
+				System.out.println("DAO에서 이미지리스트" + imgList);
+			}
+			
+		} catch (SQLException e) {
+			System.out.println("SQL 구문 오류 발생!");
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rs);
+		}
+		return sellimgList;
+	}
+	
 
 }

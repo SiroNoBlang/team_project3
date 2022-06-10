@@ -10,6 +10,7 @@ import svc.SellListService;
 import vo.ActionForward;
 import vo.PageInfo;
 import vo.SellerDTO;
+import vo.SellerimgDTO;
 
 public class SellListAction implements Action {
 
@@ -43,12 +44,16 @@ public class SellListAction implements Action {
 		}
 		
 		PageInfo pageInfo = new PageInfo(pageNum, maxPage, startPage, endPage, listCount);
-//
+
+		ArrayList<SellerimgDTO> sellimgList = service.getSellimgList(member_code);
+		
+		
 		HttpSession session = request.getSession(); // articleList 객체 생성 
 		session.setAttribute("sellarticleList", sellarticleList);
 		
 		request.setAttribute("pageInfo", pageInfo); // 페이징 처리 정보 객체
 		request.setAttribute("articleList", sellarticleList); //게시물 목록 객체
+		request.setAttribute("sellimgList", sellimgList);
 		
 		forward = new ActionForward("./MainPage/my_page/sell_list_page.jsp", false);
 		

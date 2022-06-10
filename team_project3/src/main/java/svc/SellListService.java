@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import dao.MemberDAO;
 import vo.LikeListBean;
 import vo.SellerDTO;
+import vo.SellerimgDTO;
 
 public class SellListService {
 
@@ -39,6 +40,16 @@ public class SellListService {
 		
 		
 		return sellarticleList;
+	}
+	
+	public ArrayList<SellerimgDTO> getSellimgList(String member_code) {
+		ArrayList<SellerimgDTO> sellimgList = null;
+		Connection con = getConnection();
+		MemberDAO memberDAO = MemberDAO.getInstance();
+		memberDAO.setConnection(con);
+		
+		sellimgList = memberDAO.selectSellimgList(member_code);
+		return sellimgList;
 	}
 
 }

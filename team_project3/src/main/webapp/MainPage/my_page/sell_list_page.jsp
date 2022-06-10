@@ -205,6 +205,7 @@ MemberBean member = (MemberBean) request.getAttribute("memberDetail");
 		<tr>
 			<th scope="col" class="th-date">번호</th>
 			<th scope="col" class="th-date">제목</th>
+			<th scope="col" class="th-date">제품사진</th>
 			<th scope="col" class="th-date">가격</th>
 			<th scope="col" class="th-date">카테고리</th>
 			<th scope="col" class="th-date">글쓴날짜</th>
@@ -218,6 +219,11 @@ MemberBean member = (MemberBean) request.getAttribute("memberDetail");
 						<a href="">
 							${sell_list.getSell_title() }
 						</a>
+					</td>
+					<td>
+					<c:forEach var="sell_img_list" items="${sellimgList }">
+					<img src="./Upload/sell_img/${sell_img_list.getSell_img_real_name() }"> 
+					</c:forEach>
 					</td>
 					<td>${sell_list.getSell_price() } </td>
 					<td>${sell_list.getSell_category() }</td>
