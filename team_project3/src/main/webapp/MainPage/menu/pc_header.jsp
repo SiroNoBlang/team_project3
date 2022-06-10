@@ -4,7 +4,7 @@
 				<nav class="limiter-menu-desktop p-l-45">
 					
 					<!-- Logo desktop		 -->
-					<a href="MainPage.ma" class="logo">
+					<a href="MainPage.pr" class="logo">
 						<img src="MainPage/images/icons/logo-02.png" alt="IMG-LOGO">
 					</a>
 					
@@ -12,7 +12,7 @@
 					<div class="menu-desktop">
 						<ul class="main-menu">
 							<li>
-								<a href="MainPage.ma">Home</a>
+								<a href="MainPage.pr">Home</a>
 <!-- 								<ul class="sub-menu">
 									<li><a href="index.html">Homepage 1</a></li>
 									<li><a href="home-02.html">Homepage 2</a></li>
