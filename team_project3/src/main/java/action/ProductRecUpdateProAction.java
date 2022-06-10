@@ -1,5 +1,6 @@
 package action;
 
+import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -18,7 +19,7 @@ public class ProductRecUpdateProAction implements Action {
 		ActionForward forward = null;
 		String sCode = request.getParameter("id");
 		int sell_num = Integer.parseInt((request.getParameter("sell_num")));
-		
+		int likeCount =0;
 		
 		// no와 id값을 map에 저장
 //		Map<String, String> m = new HashMap<>();
@@ -35,7 +36,17 @@ public class ProductRecUpdateProAction implements Action {
 			service.reDelete(sCode,sell_num);  //좋아요 취소	result =1 일시, result =0 으로 (DELETE)테이블에 sCode & sell_num 
 			System.out.println("좋아요 취소~");
 		}
-		return null;
+		
+		ProductLikeService service1 = new ProductLikeService();
+		
+		likeCount = service1.likeCount(sell_num);
+		System.out.println(likeCount);
+		PrintWriter out = response.getWriter();
+		out.print(likeCount);
+//		
+		out.println(likeCount);
+		
+		return forward;
 	}
 
 }

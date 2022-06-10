@@ -1,22 +1,36 @@
 package action;
 
+
+import java.io.PrintWriter;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
+import svc.ProductLikeService;
 import vo.ActionForward;
 
 public class ProductRecCountProAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		System.out.println("좋아요 갯수 찾는 기능");
 		request.setCharacterEncoding("utf-8");
-		String sCode = request.getParameter("id");
-		int sell_num = Integer.parseInt((request.getParameter("sell_num")));
-		System.out.println("sell_num"+sell_num);
-		System.out.println("sCode"+sCode);
+		int likeCount =0;
+		int sell_num = Integer.parseInt((request.getParameter("sell_num")));   //판매 번호로 좋아요 갯수찾기
 		ActionForward forward = null;
-		return forward;
+		
+		ProductLikeService service = new ProductLikeService();
+		
+		likeCount = service.likeCount(sell_num);
+		System.out.println(likeCount);
+		PrintWriter out = response.getWriter();
+		out.print(likeCount);
+	
+		out.println(likeCount);
+//		out.close();
+		
+		
+		//이파일 곧 삭제 예정.
+		
+		return null;
 	}
 
 }

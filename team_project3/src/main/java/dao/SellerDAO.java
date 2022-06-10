@@ -242,7 +242,7 @@ public class SellerDAO {
 
 	}
 
-	public ArrayList<SellerProductDTO> selectProductRe(String sell_brand, int sell_num) {
+	public ArrayList<SellerProductDTO> selectProductRe(String sell_brand, int sell_num) {   //상세판매 페이지에서 관심상품 뿌리는기능
 		ArrayList<SellerProductDTO> productarr = new ArrayList<SellerProductDTO>();
 		SellerProductDTO ProductRe = null;
 		PreparedStatement pstmt = null;
@@ -254,7 +254,7 @@ public class SellerDAO {
 			String sql = "SELECT a.sell_num, a.sell_size , a.sell_title, a.sell_brand, a.sell_price, b.sell_img_name, b.sell_img_real_name "
 					+ "FROM sell AS a JOIN sell_img AS b ON a.sell_num = b.sell_img_real_num WHERE sell_num !=? "
 					+ " AND sell_brand Like '%" + sell_brand + "%' "
-				    + " LIMIT 0,5";
+				    + " LIMIT 0,6";
 
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, sell_num);
@@ -599,14 +599,13 @@ public class SellerDAO {
 			String sql = "SELECT a.sell_num, a.sell_size , a.sell_category,a.sell_category_detail, a.sell_title, a.sell_color, a.sell_brand, a.sell_price, a.sell_readcount,"
 					+ " b.sell_img_name, b.sell_img_real_name ,b.sell_img_real_num ,b.sell_img_num,b.sell_img_name,b.sell_img_real_name, c.sell_list_num, c.sell_list_item_status"
 					+ " FROM sell AS a JOIN sell_img AS b ON a.sell_num = b.sell_img_real_num JOIN sell_list AS c ON a.sell_num = c.sell_list_num"
-					+ " WHERE sell_list_item_status='판매중' AND sell_category =? AND "
+					+ " WHERE sell_list_item_status='판매중' AND sell_category = " + category + " AND "
 					+ "(sell_img_real_num,sell_img_num)  in (SELECT sell_img_real_num, MAX(sell_img_num)  FROM sell_img    GROUP BY sell_img_real_num  ORDER BY sell_img_real_num ,sell_img_num DESC  )"
 					+ " ORDER BY a.sell_num DESC LIMIT ?,? ";
 			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, category);
-			pstmt.setInt(2, startRow);
-			pstmt.setInt(3, listLimit);
-				
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, listLimit);
+//				pstmt.setString(3, productSearch);
 
 			rs = pstmt.executeQuery();
 
@@ -744,7 +743,6 @@ public class SellerDAO {
 				}			
 //				system.out.println(memberarr);
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}finally {
 				
@@ -782,7 +780,6 @@ public class SellerDAO {
 					}
 				
 				} catch (Exception e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}finally {
 				close(rs);
@@ -810,7 +807,6 @@ public class SellerDAO {
 				selectCount =1;
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return selectCount;
@@ -826,7 +822,6 @@ public class SellerDAO {
 			pstmt.setInt(2, sell_num);
 			pstmt.executeUpdate();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
@@ -846,9 +841,30 @@ public class SellerDAO {
 			pstmt.setInt(2, sell_num);
 			pstmt.executeUpdate();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+
+	public int likeCount(int sell_num) { //판매번호를 통하여 좋아요 갯수 구하기
+		int likeCount = 0;
+		PreparedStatement pstmt =null;
+		ResultSet rs =null;
+		
+		try {
+			String sql="SELECT COUNT(*) FROM like_list WHERE like_list_item_num= ?";
+			pstmt=con.prepareStatement(sql);
+			pstmt.setInt(1,sell_num);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				likeCount = rs.getInt(1);
+			}
+				
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		
+		return likeCount;
 	}
 	
 	

@@ -8,113 +8,16 @@
 
 
 <!DOCTYPE html>
-<html lang="en">
+<html >
 <head>
    <title>Product</title>
-   <script type="text/javascript">
+   <script type="text/javascript">   //좋아요 기능을 위하여 sCode 값을 script 위에 뿌려줌
     	var sCode = '${sCode}'
     	var sell_num
    </script>
    <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js"
 	integrity="sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI="
 	crossorigin="anonymous"></script>
-	<script type="text/javascript" >
-function filter(value){
-			if(value == "price") {
-				var tagSpan = document.getElementById("checkbox2");
-					tagSpan.innerHTML =  "<table action ='' style='text-align:center'>"
-										+ "<tr><td><input type='checkbox' name='color' value='TopPrice' onclick='price(this.value)'>TopPrice</td>"
-										+"<td><input type='checkbox' name='color' value='LowPrice'>LowPrice </td></tr></table>";
-			}
-			else if(value =="view") {
-				var tagSpan = document.getElementById("checkbox2");
-				tagSpan.innerHTML =  "<input type='checkbox' name='color' value='TopView'> TopView "
-						+ "<input type='checkbox' name='color' value='LowView'> LowView"
-						+ "<input type='checkbox' name='color' value='MostLike'> MostLike "	;
-			} 
-			else if(value =="brand") {
-				var tagSpan = document.getElementById("checkbox2");	
-				tagSpan.innerHTML =  "<label><input type='checkbox' value='Gucci'> Gucci</label> "
-						+"<label><input type='checkbox' value='Hermes'> Hermes</label>"
-						+"<label><input type='checkbox' name='Chanel' value='Chanel'> Chanel</label>"
-						+"<label><input type='checkbox' name='Louis Vuitton' value='Louis Vuitton'> Louis Vuitton</label>"
-						+"<label><input type='checkbox' name='Bottega Veneta' value='Bottega'> Bottega Veneta</label>"
-						+"<label><input type='checkbox' name='Prada' value='Prada'> Prada</label>"
-						+"<label><input type='checkbox' name='Rolex' value='red'> Rolex</label>"
-						+"<label><input type='checkbox' name='Dior' value='red'> Dior</label>"
-						+"<label><input type='checkbox' name='Celine' value='red'> Celine</label>";	
-			} 
-			else if(value =="category") {
-				var tagSpan = document.getElementById("checkbox2");
-		 		tagSpan.innerHTML =  "<label><input type='checkbox' name='color' value='상의'> 상의</label> "
-					+"<label><input type='checkbox' name='color' value='하의'> 하의</label>"
-					+"<label><input type='checkbox' name='color' value='신발'> 신발</label>"
-					+"<label><input type='checkbox' name='color' value='잡화'> 잡화</label>";
-				
-			}
-		
-}
-
-function price(a){
-	var sendData = {price:$('#a').val()};
-	
-	alert(sendData);
-	 $.ajax({
-	        type: GET,
-	        url : "ProductFilterPro.pr",
-	        data: sendData,
-	        dataType:"json",
-	        success : function() {
-	            alert(a);
-	        },
-	        error: function() {
-	            
-	        }
-	    });
-	}
-	
-// function filter(clicked.value) {
-// 	alert(clicked.value);
-// var tagSpan = document.getElementById("checkbox2");
-
-// 		price, view, brand ,category
-// 		tagSpan.innerHTML =  "<label><input type='checkbox' name='color' value='TopPrice'> TopPrice</label> "
-// 							+"<label><input type='checkbox' name='color' value='LowPrice'> LowPrice</label>";
-							
-// 		tagSpan.innerHTML =  "<label><input type='checkbox' name='color' value='TopView'> TopView</label> "
-// 							+ "<label><input type='checkbox' name='color' value='LowView'> LowView</label>"
-// 							+ "<label><input type='checkbox' name='color' value='MostLike'> MostLike</label> "	;
-							
-						
-			
-// 		tagSpan.innerHTML =  "<label><input type='checkbox' value='Gucci'> Gucci</label> "
-// 							+"<label><input type='checkbox' value='Hermes'> Hermes</label>"
-// 							+"<label><input type='checkbox' name='Chanel' value='Chanel'> Chanel</label>"
-// 							+"<label><input type='checkbox' name='Louis Vuitton' value='Louis Vuitton'> Louis Vuitton</label>"
-// 							+"<label><input type='checkbox' name='Bottega Veneta' value='Bottega'> Bottega Veneta</label>"
-// 							+"<label><input type='checkbox' name='Prada' value='Prada'> Prada</label>"
-// 							+"<label><input type='checkbox' name='Rolex' value='red'> Rolex</label>"
-// 							+"<label><input type='checkbox' name='Dior' value='red'> Dior</label>"
-// 							+"<label><input type='checkbox' name='Celine' value='red'> Celine</label>";	
-
-// 		tagSpan.innerHTML =  "<label><input type='checkbox' name='color' value='상의'> 상의</label> "
-// 							+"<label><input type='checkbox' name='color' value='하의'> 하의</label>"
-// 							+"<label><input type='checkbox' name='color' value='신발'> 신발</label>"
-// 							+"<label><input type='checkbox' name='color' value='잡화'> 잡화</label>";
-	
-// }
-
-
-	
-
-
-
-
-
-
-
-</script>  
-	
    <meta charset="UTF-8">
    <meta name="viewport" content="width=device-width, initial-scale=1">
 <!--===============================================================================================-->   
@@ -132,7 +35,7 @@ function price(a){
 <!--===============================================================================================-->   
    <link rel="stylesheet" type="text/css" href="MainPage/vendor/css-hamburgers/hamburgers.min.css">
 <!--===============================================================================================-->
-   <link rel="stylesheet" type="text/css" href="MainPage/vendor/animsition/css/animsition.min.css">
+   <link rel="stylesheet" type="text/css" href="MainPage/vendor/animsition/css/animsition.min.css">    <!-- 여기인거같기도 -->
 <!--===============================================================================================-->
    <link rel="stylesheet" type="text/css" href="MainPage/vendor/select2/select2.min.css">
 <!--===============================================================================================-->   
@@ -148,7 +51,7 @@ function price(a){
    <link rel="stylesheet" type="text/css" href="MainPage/css/main.css">
 <!--===============================================================================================-->
 </head>
-<body class="animsition">
+<body >
 
 	<c:set var="pageNum" value="${pageInfo.getPageNum() }" />
 	<c:set var="maxPage" value="${pageInfo.getMaxPage() }" />
@@ -187,7 +90,7 @@ function price(a){
 <!--             </div> -->
 <!--          </div> -->
 
-         <div class="wrap-menu-desktop how-shadow1">
+         <div class="wrap-menu-desktop how-shadow1" style="top:0px;">
             <nav class="limiter-menu-desktop container">
                
                <!-- Logo desktop -->      
@@ -451,13 +354,17 @@ function price(a){
       <div class="container">
          <div class="flex-w flex-sb-m p-b-52">
             <div class="flex-w flex-l-m filter-tope-group m-tb-10">
-            	 <div class="flex-w flex-l-m filter-tope-group m-tb-10">
-			 	 <input type="button" class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" value="All Products" onclick="Product.pr" >
-                 <input type="button" class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" value="All Products> 상의" onclick="location.href='ProductCategoryPro.pr?sell_category=상의'" >
-                 <input type="button" class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" value="All Products> 하의" onclick="location.href='ProductCategoryPro.pr?sell_category=하의'" >
-				 <input type="button" class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" value="All Products> 신발" onclick="location.href='ProductCategoryPro.pr?sell_category=신발'" >
-                 <input type="button" class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" value="All Products> 잡화" onclick="location.href='ProductCategoryPro.pr?sell_category=잡화'" >
-            </div>
+            	<form action="ProductCategoryPro.pr">
+						<a href="Product.pr" style="color: black"> All Products </a>&nbsp;&nbsp;
+						<a href="ProductCategoryPro.pr?sell_category='상의'"
+							style="color: black"> All Products> 상의 </a>&nbsp;&nbsp;&nbsp; <a
+							href="ProductCategoryPro.pr?sell_category='하의'"
+							style="color: black"> All Products> 하의 </a>&nbsp;&nbsp;&nbsp; <a
+							href="ProductCategoryPro.pr?sell_category='신발'"
+							style="color: black"> All Products> 신발 </a>&nbsp;&nbsp;&nbsp; <a
+							href="ProductCategoryPro.pr?sell_category='잡화'"
+							style="color: black"> All Products> 잡화 </a>&nbsp;&nbsp;&nbsp;
+               </form>
 
 <!--                <button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".shoes"> -->
 <!--                   Shoes -->
@@ -506,36 +413,146 @@ function price(a){
             <div class="dis-none panel-filter w-full p-t-10">
                <div class="wrap-filter flex-w bg6 w-full p-lr-40 p-t-27 p-lr-15-sm">
                   <div class="filter-col1 p-r-15 p-b-27">
-                     <div id="checkbox1">
-                  <table>
-						<tr> 
-							<th><input type="button" class="filter-link stext-106 trans-04" name=filter value="price" onclick="filter(this.value)" /></th>
-						</tr>	
-						<tr>
-							<th><input type="button" class="filter-link stext-106 trans-04" name=filter  value="view" onclick="filter(this.value)"></th>
-							
-						</tr>
-						<tr>
-							<th><input type="button" class="filter-link stext-106 trans-04" name=filter value="brand" onclick="filter(this.value)"></th>
-							
-						</tr>
-						<tr>
-							<th><input type="button" class="filter-link stext-106 trans-04"  name=filter value="category" onclick="filter(this.value)"></th>
-							
-						</tr>
-				</table>
-				</div>
-				<div id="checkbox2" style="text-align: left"></div>
- 	<!-- 					 <input type="checkbox" id="price"> -->
-<!--        				 <label for="Price">Price</label> -->
-<!--        				 <input type="checkbox" id="view"> -->
-<!--        				 <label for="view">view</label> -->
-<!--        				 <input type="checkbox" id="brand"> -->
-<!--        				 <label for="brand">brand</label> -->
-<!--        				 <input type="checkbox" id="category"> -->
-<!--        				 <label for="category">category</label> -->
-  
-               
+                     <div class="mtext-102 cl2 p-b-15">
+                        Sort By
+                     </div>
+
+                     <ul>
+                        <li class="p-b-6">
+                           <a href="#" class="filter-link stext-106 trans-04">
+                              Default
+                           </a>
+                        </li>
+
+                        <li class="p-b-6">
+                           <a href="#" class="filter-link stext-106 trans-04">
+                              Popularity
+                           </a>
+                        </li>
+
+                        <li class="p-b-6">
+                           <a href="#" class="filter-link stext-106 trans-04">
+                              Average rating
+                           </a>
+                        </li>
+
+                        <li class="p-b-6">
+                           <a href="#" class="filter-link stext-106 trans-04 filter-link-active">
+                              Newness
+                           </a>
+                        </li>
+
+                        <li class="p-b-6">
+                           <a href="#" class="filter-link stext-106 trans-04">
+                              Price: Low to High
+                           </a>
+                        </li>
+
+                        <li class="p-b-6">
+                           <a href="#" class="filter-link stext-106 trans-04">
+                              Price: High to Low
+                           </a>
+                        </li>
+                     </ul>
+                  </div>
+
+                 
+
+                  <div class="filter-col2 p-r-15 p-b-27">
+                     <div class="mtext-102 cl2 p-b-15">
+                        Color
+                     </div>
+
+                     <ul>
+                        <li class="p-b-6">
+                           <span class="fs-15 lh-12 m-r-6" style="color: #222;">
+                              <i class="zmdi zmdi-circle"></i>
+                           </span>
+
+                           <a href="#" class="filter-link stext-106 trans-04">
+                              Black
+                           </a>
+                        </li>
+
+                        <li class="p-b-6">
+                           <span class="fs-15 lh-12 m-r-6" style="color: #4272d7;">
+                              <i class="zmdi zmdi-circle"></i>
+                           </span>
+
+                           <a href="#" class="filter-link stext-106 trans-04 filter-link-active">
+                              Blue
+                           </a>
+                        </li>
+
+                        <li class="p-b-6">
+                           <span class="fs-15 lh-12 m-r-6" style="color: #b3b3b3;">
+                              <i class="zmdi zmdi-circle"></i>
+                           </span>
+
+                           <a href="#" class="filter-link stext-106 trans-04">
+                              Grey
+                           </a>
+                        </li>
+
+                        <li class="p-b-6">
+                           <span class="fs-15 lh-12 m-r-6" style="color: #00ad5f;">
+                              <i class="zmdi zmdi-circle"></i>
+                           </span>
+
+                           <a href="#" class="filter-link stext-106 trans-04">
+                              Green
+                           </a>
+                        </li>
+
+                        <li class="p-b-6">
+                           <span class="fs-15 lh-12 m-r-6" style="color: #fa4251;">
+                              <i class="zmdi zmdi-circle"></i>
+                           </span>
+
+                           <a href="#" class="filter-link stext-106 trans-04">
+                              Red
+                           </a>
+                        </li>
+
+                        <li class="p-b-6">
+                           <span class="fs-15 lh-12 m-r-6" style="color: #aaa;">
+                              <i class="zmdi zmdi-circle-o"></i>
+                           </span>
+
+                           <a href="#" class="filter-link stext-106 trans-04">
+                              White
+                           </a>
+                        </li>
+                     </ul>
+                  </div>
+                  <!-- 여기도 태그 -->
+                  <div class="filter-col4 p-b-27">
+                     <div class="mtext-102 cl2 p-b-15">
+                        Tags
+                     </div>
+
+                     <div class="flex-w p-t-4 m-r--5">
+                        <a href="#" class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
+                           Fashion
+                        </a>
+
+                        <a href="#" class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
+                           Lifestyle
+                        </a>
+
+                        <a href="#" class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
+                           Denim
+                        </a>
+
+                        <a href="#" class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
+                           Streetstyle
+                        </a>
+
+                        <a href="#" class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
+                           Crafts
+                        </a>
+                     </div>
+                  </div>
                </div>
             </div>
          </div>
@@ -566,15 +583,16 @@ function price(a){
                	     <span>
 						<span class="w3-border w3-center w3-padding">      <!-- 좋아요 기능을 위한 스크립트(Ajax)는 892행  -->
 							<c:if test="${ sCode  eq null }">
-							 <button type="button" id="newLogin"><b class="w3-text-blue">로그인</b></button> 후 사용 가능합니다.<br />
+							 <li type="button" id="newLogin"><b class="w3-text-blue">로그인</b></li> 후 사용 가능합니다.<br />
 								<i class="fa fa-heart" style="font-size:16px;color:red"></i>   
-								<span class="rec_count"></span>					
+								<span class="rec_count"></span>	
+								 <div class="rs1-select2 bor8 bg0">		</div>		
 							</c:if>
 							<c:if test="${ sCode ne null }">
-								<button class="w3-button w3-black w3-round" id="rec_update">
+								<li class="w3-button w3-black w3-round" id="rec_update">
 									<i class="fa fa-heart" style="font-size:16px;color:red"></i>
 									&nbsp;<span class="rec_count"></span>
-								</button> 
+								</li> 
 							</c:if>
 						</span>
 					</span>
@@ -838,7 +856,7 @@ function price(a){
       });
    </script>
 <!--===============================================================================================-->
-   <script src="MainPage/vendor/isotope/isotope.pkgd.min.js"></script>
+<!--    <script src="MainPage/vendor/isotope/isotope.pkgd.min.js"></script> -->
 <!--===============================================================================================-->
    <script src="MainPage/vendor/sweetalert/sweetalert.min.js"></script>
    <script>
@@ -881,19 +899,20 @@ function price(a){
    <script src="MainPage/vendor/perfect-scrollbar/perfect-scrollbar.min.js"></script>
    <script>
       $('.js-pscroll').each(function(){
-         $(this).css('position','relative');
+       
+    	  $(this).css('position','relative');
          $(this).css('overflow','hidden');
          var ps = new PerfectScrollbar(this, {
             wheelSpeed: 1,
             scrollingThreshold: 1000,
             wheelPropagation: false,
          });
-
+      
          $(window).on('resize', function(){
             ps.update();
          })
       });
-   </script>
+  </script>
 <!--===============================================================================================-->
    <script src="MainPage/js/main.js"></script>
 <!-- ================================================================================================좋아요 기능 -->
@@ -901,50 +920,54 @@ function price(a){
 
 	$(function(){
 		
+		
+		
 		$(".fa-heart").click(function(a){
-			
-		var thisRow = $(this).closest('div');
-// 			alert(thisRow);
-		var sell_num =  thisRow.find('input').val();
+		var thisRow = $(this).closest('div');  //하트표시 줄의 부모(div)를 찾아  thisRow값에 저장
+		var thisplace = thisRow.find('span:eq(5)')[0];
+		
+		var sell_num =  thisRow.find('input').val(); //thisRow의 하위 요소인 find(input)=>input이라는 value를 찾아 sell_num에 저장 == ${sell_num}
+		
 // 			var sell_num = thisRow.children('div').find('input');
 // 			var sell_num = document.getElementsByClassName('sell_num:eq(0)');
 // 			alert(JSON.stringify(sell_num));
-			alert("LIKE->판매글:"+sell_num)			
+// 			alert("관심상품 등록되었습니다. <찜 취소시, 취소되었습니다 출력되게해야됨>")			
 // 		debugger;
 			$.ajax({
 				url: "ProductRecUpdate.pr",
 	            type: "POST",
 	            data: {
-	         sell_num : sell_num,    
+	         		sell_num : sell_num,    
 	                id: sCode					 
 	            },
-	            success: function (sell_num) {
-			        recCount();
-	            },
+	            success: function (data) {
+	            	thisplace.innerHTML = data;
+	            }
 			})
 		});
 		
-		
-	    function recCount(sell_num) { //  좋아요 갯수
-// 	    	var thisRow = $(this).closest('div');
-// 	    	var sell_num =  thisRow.find('input').val();
-	    	alert("판매번호"+sell_num);
-	    	debugger;
-			$.ajax({
-				url: "ProductRecCount.pr",
-	            type: "POST",
-	            data: {
-	         sell_num : sell_num,
-	                id: sCode
-	            },
-	            success: function (count) {
-	            	$(".rec_count").html(count);
-	            },
-			})
-	    
-	    };
-	
 	});
+	
+	function recCount(sell_num,thisRow) { //  좋아요 갯수
+	    
+
+	    	
+	    		
+//     	alert("<좋아요갯수세기>--판매번호"+sell_num);
+		$.ajax({
+			url: "ProductRecCount.pr",
+            type: "POST",
+            data: {
+         		sell_num : sell_num
+            },
+            success: function (data) {   //성공시 값을 반환못함 -> 
+           		console.log(data);
+//             	$("thisplace").innerHTML(data);
+ 				debugger;
+            }
+		})
+    
+    };
 </script>
 </body>
 </html>

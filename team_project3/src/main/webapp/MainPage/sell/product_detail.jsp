@@ -11,6 +11,9 @@
 <html lang="en">
 <head>
 <title>Product Detail</title>
+<script type="text/javascript"> //좋아요 기능을 위하여 sCode 값을 script 위에 뿌려줌
+    	var sCode = '${sCode}'	
+</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!--===============================================================================================-->
@@ -432,15 +435,20 @@
 							</tr>
 
 						</table>
-	</form>
+</form>
 	<div class="flex-w flex-m p-l-100 p-t-40 respon7">
 		<div class="flex-m bor9 p-r-10 m-r-11">
-			<a href="#"
-				class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 js-addwish-detail tooltip100"
-				data-tooltip="Add to Wishlist"> <i class="zmdi zmdi-favorite"></i>
-			</a>
-		</div>
-
+<!-- 			<div class="flex-w flex-m p-l-100 p-t-40 respon7"> -->
+				<div class="flex-m bor9 p-r-10 m-r-11">
+					<c:if test="${ sCode ne null }">
+					<button class="w3-button w3-black w3-round" id="rec_update">
+						<i class="fa fa-heart" style="font-size:16px;color:red"></i>
+						&nbsp;<span class="rec_count"></span>
+					</button> 
+				</c:if>
+			</div>
+<!-- 		</div> -->
+	
 		<a href="#"
 			class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100"
 			data-tooltip="Facebook"> <i class="fa fa-facebook"></i>
@@ -1130,5 +1138,51 @@ html, body {
 	height: 100%;
 }
 </style>
+<script type="text/javascript">// 추천버튼 클릭시(추천 추가 또는 추천 제거)
+
+	$(function(){
+		
+		$(".fa-heart").click(function(a){
+		var thisRow = $(this).closest('div');  //하트표시 줄의 부모(div)를 찾아  thisRow값에 저장
+		var sell_num =  thisRow.find('input').val(); //thisRow의 하위 요소인 find(input)=>input이라는 value를 찾아 sell_num에 저장 == ${sell_num}
+		
+
+		alert("관심상품 등록되었습니다. <찜 취소시, 취소되었습니다 출력되게해야됨>")  	
+
+			$.ajax({
+				url: "ProductRecUpdate.pr",
+	            type: "POST",
+	            data: {
+	         sell_num : sell_num,    
+	                id: sCode					 
+	            },
+	            success: function () {
+			        recCount(sell_num);
+	            },
+			})
+		});
+		
+		
+	    function recCount(sell_num) { //  좋아요 갯수
+// 	    	var thisRow = $(this).closest('div');
+// 	    	var sell_num =  thisRow.find('input').val();
+	    	alert("<좋아요갯수세기>--판매번호"+sell_num);
+	    	debugger;
+			$.ajax({
+				url: "ProductRecCount.pr",
+	            type: "POST",
+	            data: {
+	         sell_num : sell_num,
+
+	            },
+	            success: function (count) {   //성공시 값을 반환못함 -> 
+	            	$(".rec_count").html(count);
+	            },
+			})
+	    
+	    };
+	
+	});
+</script>
 </body>
 </html>
