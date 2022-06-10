@@ -116,7 +116,7 @@ public class MyPageUpdateAction implements Action {
 			
 		} else {
 			forward = new ActionForward();
-			forward.setPath("MainPage/my_page/about_mypage.jsp");
+			forward.setPath("Mypage.ma?member_code=" + member_code);
 			forward.setRedirect(true);
 		}
 		
