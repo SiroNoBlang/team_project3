@@ -28,7 +28,6 @@ public class SellListService {
 	}
 //====================================================================================================
 	public ArrayList<SellerDTO> getArticleList(int pageNum, int listLimit, String member_code) {
-		System.out.println("ArrayList - service");
 		ArrayList<SellerDTO> sellarticleList = null;
 		Connection con = getConnection();
 		MemberDAO memberDAO = MemberDAO.getInstance();
