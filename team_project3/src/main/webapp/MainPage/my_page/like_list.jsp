@@ -34,35 +34,9 @@
 	<header class="header-v4">
 		<!-- Header desktop -->
 		<div class="container-menu-desktop">
-			<!-- Topbar -->
-			<div class="top-bar">
-				<div class="content-topbar flex-sb-m h-full container">
-					<div class="left-top-bar">
-						Free shipping for standard order over $100
-					</div>
-
-					<div class="right-top-bar flex-w h-full">
-						<a href="#" class="flex-c-m trans-04 p-lr-25">
-							Help & FAQs
-						</a>
-
-						<a href="#" class="flex-c-m trans-04 p-lr-25">
-							My Account
-						</a>
-
-						<a href="#" class="flex-c-m trans-04 p-lr-25">
-							EN
-						</a>
-
-						<a href="#" class="flex-c-m trans-04 p-lr-25">
-							USD
-						</a>
-					</div>
-				</div>
-			</div>
 
 				<!-- pc_sub_header -->
-			<div class="wrap-menu-desktop how-shadow1">
+			<div class="wrap-menu-desktop how-shadow1" style="top:0px;">
 				<nav class="limiter-menu-desktop container">
 					<jsp:include page="/MainPage/menu/pc_sub_header.jsp"/>
 				</nav>
@@ -202,9 +176,9 @@
 			<div class=" container d-flex justify-content-center" >     
 		        <ul class="pagination shadow-lg">
 		            <li class="page-item "><a class="page-link" href="Mypage.ma?member_code=${sCode }"><small>마이페이지</small></a></li>
-		            <li class="page-item "><a class="page-link" href="LikeList.ma"><small>찜목록</small></a></li>                        
-		            <li class="page-item active "><a class="page-link " href="BuyList.ma?member_code=${sCode }"><small>구매내역</small></a></li> 
-		            <li class="page-item  "><a class="page-link " href="SellList.ma"><small>판매내역</small></a></li> 
+		            <li class="page-item active "><a class="page-link" href="LikeList.ma?member_code=${sCode }"><small>찜목록</small></a></li>                        
+		            <li class="page-item "><a class="page-link " href="BuyList.ma?member_code=${sCode }"><small>구매내역</small></a></li> 
+		            <li class="page-item  "><a class="page-link " href="SellList.ma?member_code=${sCode }"><small>판매내역</small></a></li> 
 		        </ul> 
 		    </div>
 	  </div>  

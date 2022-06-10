@@ -251,10 +251,10 @@ MemberBean member = (MemberBean) request.getAttribute("memberDetail");
 	<div id="com_container">
 			<div class=" container d-flex justify-content-center" >     
 		        <ul class="pagination shadow-lg">
-		            <li class="page-item "><a class="page-link" href="Mypage.ma?member_code=${sCode }"><small>마이페이지</small></a></li>
-		            <li class="page-item "><a class="page-link" href="LikeList.ma"><small>찜목록</small></a></li>                        
-		            <li class="page-item active "><a class="page-link " href="BuyList.ma?member_code=${sCode }"><small>구매내역</small></a></li> 
-		            <li class="page-item  "><a class="page-link " href="SellList.ma"><small>판매내역</small></a></li> 
+		            <li class="page-item active"><a class="page-link" href="Mypage.ma?member_code=${sCode }"><small>마이페이지</small></a></li>
+		            <li class="page-item "><a class="page-link" href="LikeList.ma?member_code=${sCode }"><small>찜목록</small></a></li>                        
+		            <li class="page-item "><a class="page-link " href="BuyList.ma?member_code=${sCode }"><small>구매내역</small></a></li> 
+		            <li class="page-item  "><a class="page-link " href="SellList.ma?member_code=${sCode }"><small>판매내역</small></a></li> 
 		        </ul> 
 		    </div>
 	  </div>  
