@@ -58,5 +58,20 @@ public class productSearchProService {
 
 		return productCateList;
 	}
+	public ArrayList<SellerProductDTO> getProductBrandList(int pageNum, int listLimit, String brand) {
+		ArrayList<SellerProductDTO> productBrandList = null;
+
+		Connection con = getConnection();
+
+		SellerDAO sellerDAO = SellerDAO.getInstance();
+
+		sellerDAO.setConnection(con);
+
+		productBrandList = sellerDAO.BrandArticleList(pageNum, listLimit, brand);
+
+		close(con);
+
+		return productBrandList;
+	}
 
 }

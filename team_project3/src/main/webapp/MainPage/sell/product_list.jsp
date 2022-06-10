@@ -5,8 +5,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>     
-
-
 <!DOCTYPE html>
 <html >
 <head>
@@ -18,6 +16,65 @@
    <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js"
 	integrity="sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI="
 	crossorigin="anonymous"></script>
+	<style type="text/css">
+	.selectbox {  text-align:right;   position: relative;    width: 200px;  /* 너비설정 */    border: 1px solid #999;  /* 테두리 설정 */    z-index: 1;}
+		a:link { color: black; }
+		a:visited { color: green; }
+		a:hover { color: blue; }
+		a:active { color: red; }
+	</style>
+		<script type="text/javascript" >
+function filter(value){
+	
+			if(value =="brand") {
+				var tagSpan = document.getElementById("checkbox2");	
+				tagSpan.innerHTML =  
+									"<a href='ProductBrandPro.pr?sell_brand=Hermes' > Hermes </a> &nbsp;&nbsp;"
+									+"<a href='ProductBrandPro.pr?sell_brand=Louis Vuitton' > Louis Vuitton </a>&nbsp;&nbsp;"
+									+"<a href='ProductBrandPro.pr?sell_brand=Bottega Veneta'> Bottega Veneta </a>&nbsp;&nbsp;"
+									+"<a href='ProductBrandPro.pr?sell_brand=Prada' > Prada </a>&nbsp;&nbsp;"
+									+"<a href='ProductBrandPro.pr?sell_brand=Rolex'> Rolex </a>&nbsp;&nbsp;"
+									+"<a href='ProductBrandPro.pr?sell_brand=Dior' > Dior </a>&nbsp;&nbsp;"
+									+"<a href='ProductBrandPro.pr?sell_brand=Celine' > Celine </a>&nbsp;&nbsp;"
+									+"<a href='ProductBrandPro.pr?sell_brand=Balenciaga' > Balenciaga </a>&nbsp;&nbsp;"
+									+"<a href='ProductBrandPro.pr?sell_brand=Cartier' > Cartier </a>&nbsp;&nbsp;"
+									+"<a href='ProductBrandPro.pr?sell_brand=Fendi' > Fendi </a>&nbsp;&nbsp;"
+									+"<a href='ProductBrandPro.pr?sell_brand=Goyard' > Goyard </a>&nbsp;&nbsp;"
+									+"<a href='ProductBrandPro.pr?sell_brand=MiuMiu' > MiuMiu </a>"
+									+"<a href='ProductBrandPro.pr?sell_brand=Lemaire' > Lemaire </a>&nbsp;&nbsp;"
+									+"<a href='ProductBrandPro.pr?sell_brand=Loewe' > Loewe </a>&nbsp;&nbsp;"
+									+"<a href='ProductBrandPro.pr?sell_brand=Marni' > Marni </a>&nbsp;&nbsp;"
+									+"<a href='ProductBrandPro.pr?sell_brand=Off-White' > Off-White </a>&nbsp;&nbsp;"
+									+"<a href='ProductBrandPro.pr?sell_brand=Supreme' > Supreme </a>&nbsp;&nbsp;"
+									+"<a href='ProductBrandPro.pr?sell_brand=Jordan' > Jordan </a>&nbsp;&nbsp;"
+									+"<a href='ProductBrandPro.pr?sell_brand=Jordan' > Nike </a>&nbsp;&nbsp;"
+									+"<a href='ProductBrandPro.pr?sell_brand=Jordan' > Chanel </a>&nbsp;&nbsp;"
+									+"<a href='ProductBrandPro.pr?sell_brand=Jordan' > Moncler </a>&nbsp;&nbsp;"
+									+"<a href='ProductBrandPro.pr?sell_brand=Jil Sander'> Jil Sander </a>";
+			} 
+			else if(value =="category") {
+				var tagSpan = document.getElementById("checkbox2");
+				
+				tagSpan.innerHTML = "<a></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
+								   +"<a href='ProductCategoryPro.pr?sell_category=상의' style='font-size: 1.0em'> 상의 </a>&nbsp;&nbsp;&nbsp;"
+								   +"<a href='ProductCategoryPro.pr?sell_category=하의' style='font-size: 1.0em'> 하의 </a>&nbsp;&nbsp;&nbsp;"
+								   +"<a href='ProductCategoryPro.pr?sell_category=신발' style='font-size: 1.0em'> 신발 </a>&nbsp;&nbsp;&nbsp;"
+								   +"<a href='ProductCategoryPro.pr?sell_category=잡화' style='font-size: 1.0em'> 잡화 </a>";	   
+			}
+			else if(value =="price") {
+				var tagSpan = document.getElementById("checkbox2");
+				
+				tagSpan.innerHTML = "<a></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
+								   +"<a href='ProductCategoryPro.pr?sell_price=10000' style='font-size: 1.0em'> 10만원 이하 </a>&nbsp;&nbsp;&nbsp;"
+								   +"<a href='ProductCategoryPro.pr?sell_price=100000' style='font-size: 1.0em'> 10만원 - 50만원 이하 </a>&nbsp;&nbsp;&nbsp;"
+								   +"<a href='ProductCategoryPro.pr?sell_price=1000000' style='font-size: 1.0em'> 50만원 -100만원 이하 </a>&nbsp;&nbsp;&nbsp;"
+								   +"<a href='ProductCategoryPro.pr?sell_price=1000000' style='font-size: 1.0em'> 100만원 - 500만원 이하 </a>&nbsp;&nbsp;&nbsp;"
+								   +"<a href='ProductCategoryPro.pr?sell_price=10000000' style='font-size: 1.0em'> 500만원 이상- 1000만원 이하 </a>";	   
+			}
+		
+}
+
+</script>  
    <meta charset="UTF-8">
    <meta name="viewport" content="width=device-width, initial-scale=1">
 <!--===============================================================================================-->   
@@ -354,25 +411,7 @@
       <div class="container">
          <div class="flex-w flex-sb-m p-b-52">
             <div class="flex-w flex-l-m filter-tope-group m-tb-10">
-            	<form action="ProductCategoryPro.pr">
-						<a href="Product.pr" style="color: black"> All Products </a>&nbsp;&nbsp;
-						<a href="ProductCategoryPro.pr?sell_category='상의'"
-							style="color: black"> All Products> 상의 </a>&nbsp;&nbsp;&nbsp; <a
-							href="ProductCategoryPro.pr?sell_category='하의'"
-							style="color: black"> All Products> 하의 </a>&nbsp;&nbsp;&nbsp; <a
-							href="ProductCategoryPro.pr?sell_category='신발'"
-							style="color: black"> All Products> 신발 </a>&nbsp;&nbsp;&nbsp; <a
-							href="ProductCategoryPro.pr?sell_category='잡화'"
-							style="color: black"> All Products> 잡화 </a>&nbsp;&nbsp;&nbsp;
-               </form>
-
-<!--                <button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".shoes"> -->
-<!--                   Shoes -->
-<!--                </button> -->
-
-<!--                <button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".watches"> -->
-<!--                   Watches -->
-<!--                </button> -->
+           
             </div>
 
             <div class="flex-w flex-c-m m-tb-10">
@@ -411,151 +450,32 @@
  
             <!-- Filter -->필터
             <div class="dis-none panel-filter w-full p-t-10">
-               <div class="wrap-filter flex-w bg6 w-full p-lr-40 p-t-27 p-lr-15-sm">
-                  <div class="filter-col1 p-r-15 p-b-27">
-                     <div class="mtext-102 cl2 p-b-15">
-                        Sort By
-                     </div>
+					<div
+						class="wrap-filter flex-w bg6 w-full p-lr-40 p-t-27 p-lr-15-sm">
 
-                     <ul>
-                        <li class="p-b-6">
-                           <a href="#" class="filter-link stext-106 trans-04">
-                              Default
-                           </a>
-                        </li>
-
-                        <li class="p-b-6">
-                           <a href="#" class="filter-link stext-106 trans-04">
-                              Popularity
-                           </a>
-                        </li>
-
-                        <li class="p-b-6">
-                           <a href="#" class="filter-link stext-106 trans-04">
-                              Average rating
-                           </a>
-                        </li>
-
-                        <li class="p-b-6">
-                           <a href="#" class="filter-link stext-106 trans-04 filter-link-active">
-                              Newness
-                           </a>
-                        </li>
-
-                        <li class="p-b-6">
-                           <a href="#" class="filter-link stext-106 trans-04">
-                              Price: Low to High
-                           </a>
-                        </li>
-
-                        <li class="p-b-6">
-                           <a href="#" class="filter-link stext-106 trans-04">
-                              Price: High to Low
-                           </a>
-                        </li>
-                     </ul>
-                  </div>
-
-                 
-
-                  <div class="filter-col2 p-r-15 p-b-27">
-                     <div class="mtext-102 cl2 p-b-15">
-                        Color
-                     </div>
-
-                     <ul>
-                        <li class="p-b-6">
-                           <span class="fs-15 lh-12 m-r-6" style="color: #222;">
-                              <i class="zmdi zmdi-circle"></i>
-                           </span>
-
-                           <a href="#" class="filter-link stext-106 trans-04">
-                              Black
-                           </a>
-                        </li>
-
-                        <li class="p-b-6">
-                           <span class="fs-15 lh-12 m-r-6" style="color: #4272d7;">
-                              <i class="zmdi zmdi-circle"></i>
-                           </span>
-
-                           <a href="#" class="filter-link stext-106 trans-04 filter-link-active">
-                              Blue
-                           </a>
-                        </li>
-
-                        <li class="p-b-6">
-                           <span class="fs-15 lh-12 m-r-6" style="color: #b3b3b3;">
-                              <i class="zmdi zmdi-circle"></i>
-                           </span>
-
-                           <a href="#" class="filter-link stext-106 trans-04">
-                              Grey
-                           </a>
-                        </li>
-
-                        <li class="p-b-6">
-                           <span class="fs-15 lh-12 m-r-6" style="color: #00ad5f;">
-                              <i class="zmdi zmdi-circle"></i>
-                           </span>
-
-                           <a href="#" class="filter-link stext-106 trans-04">
-                              Green
-                           </a>
-                        </li>
-
-                        <li class="p-b-6">
-                           <span class="fs-15 lh-12 m-r-6" style="color: #fa4251;">
-                              <i class="zmdi zmdi-circle"></i>
-                           </span>
-
-                           <a href="#" class="filter-link stext-106 trans-04">
-                              Red
-                           </a>
-                        </li>
-
-                        <li class="p-b-6">
-                           <span class="fs-15 lh-12 m-r-6" style="color: #aaa;">
-                              <i class="zmdi zmdi-circle-o"></i>
-                           </span>
-
-                           <a href="#" class="filter-link stext-106 trans-04">
-                              White
-                           </a>
-                        </li>
-                     </ul>
-                  </div>
-                  <!-- 여기도 태그 -->
-                  <div class="filter-col4 p-b-27">
-                     <div class="mtext-102 cl2 p-b-15">
-                        Tags
-                     </div>
-
-                     <div class="flex-w p-t-4 m-r--5">
-                        <a href="#" class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
-                           Fashion
-                        </a>
-
-                        <a href="#" class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
-                           Lifestyle
-                        </a>
-
-                        <a href="#" class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
-                           Denim
-                        </a>
-
-                        <a href="#" class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
-                           Streetstyle
-                        </a>
-
-                        <a href="#" class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
-                           Crafts
-                        </a>
-                     </div>
-                  </div>
-               </div>
-            </div>
-         </div>
+						<div id="checkbox1">
+							<table width=400px>
+								<tr>
+									<th><input type="button" style="font-size: 35px"
+										class="filter-link stext-106 trans-04" name=filter
+										value="brand" onclick="filter(this.value)"></th>
+										<th><input type="button" style="font-size: 35px"
+										class="filter-link stext-106 trans-04" name=filter
+										value="category" onclick="filter(this.value)"></th>
+										<th><input type=button style="font-size: 35px"
+										class="filter-link stext-106 trans-04" name=filter
+										value="price" onclick="filter(this.value)"></th>
+								</tr>
+								<tr>
+								</tr>
+							</table>
+							<br>
+						</div>
+							
+							<div id="checkbox2" style="vertical-align:middle; display:inline-block; margin-bottom:2px;"></div>
+					</div>
+				</div>
+			</div>
          
          
          
@@ -620,16 +540,18 @@
 		=> 클릭 시 notice.jsp 로 이동하면서 
 		   현재 페이지 번호(pageNum) - 1 값을 page 파라미터로 전달
 		-->
-		<c:choose>
-			<c:when test="${pageNum > 1}">
-				<input type="button" value="이전" onclick="location.href='Product.pr?page=${pageNum - 1}'">
-			</c:when>
-			<c:otherwise>
-				<input type="button" value="이전">
-			</c:otherwise>
-		</c:choose>
+ 		
+<%-- 		<c:choose> --%>
+<%-- 			<c:when test="${pageNum > 1}"> --%>
+<%-- 				<input type="button" value="이전" onclick="location.href='Product.pr?page=${pageNum - 1}'"> --%>
+<%-- 			</c:when> --%>
+<%-- 			<c:otherwise> --%>
+<!-- 				<input type="button" value="이전"> -->
+<%-- 			</c:otherwise> --%>
+<%-- 		</c:choose> --%>
 			
 		<!-- 페이지 번호 목록은 시작 페이지(startPage)부터 끝 페이지(endPage) 까지 표시 -->
+		
 		<c:forEach var="i" begin="${startPage }" end="${endPage }">
 			<!-- 단, 현재 페이지 번호는 링크 없이 표시 -->
 			<c:choose>
@@ -637,22 +559,30 @@
 					${i }
 				</c:when>
 				<c:otherwise>
-					<a href="Product.pr?page=${i }">${i }</a>
+					
+					<a href="Product.pr?page=${i }" class=" how-pagination1 trans-04 m-all-7">${i }</a>
+				
 				</c:otherwise>
 			</c:choose>
 		</c:forEach>
+		
+		
+		
+		
 
 		<!-- 현재 페이지 번호(pageNum)가 총 페이지 수보다 작을 때만 [다음] 링크 동작 -->
-		<c:choose>
-			<c:when test="${pageNum < maxPage}">
-				<input type="button" value="다음" onclick="location.href='Product.pr?page=${pageNum + 1}'">
-			</c:when>
-			<c:otherwise>
-				<input type="button" value="다음">
-			</c:otherwise>
-		</c:choose>
+<%-- 		<c:choose> --%>
+<%-- 			<c:when test="${pageNum < maxPage}"> --%>
+<%-- 				<input type="button" value="다음" onclick="location.href='Product.pr?page=${pageNum + 1}'"> --%>
+<%-- 			</c:when> --%>
+<%-- 			<c:otherwise> --%>
+<!-- 				<input type="button" value="다음"> -->
+<%-- 			</c:otherwise> --%>
+<%-- 		</c:choose> --%>
+		
 	</section>
-          
+				
+       
          </div>
       </div>
    </div>

@@ -11,9 +11,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import action.Action;
 import action.ContactAction;
+import action.ProductBrandProAction;
 import action.ProductCategoryProAction;
 import action.ProductDetailProAction;
-import action.ProductFilterProAction;
 import action.ProductListProAction;
 import action.ProductRecCountProAction;
 import action.ProductRecUpdateProAction;
@@ -75,8 +75,8 @@ public class ProductFrontController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		} else if (command.equals("/ProductFilterPro.pr")) { // 상품 필터 분류 처리
-			action = new ProductFilterProAction();
+		} else if (command.equals("/ProductBrandPro.pr")) { // 상품 필터 분류 처리
+			action = new ProductBrandProAction();
 
 			try {
 				forward = action.execute(request, response);
