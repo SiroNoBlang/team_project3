@@ -672,8 +672,8 @@ function readURL4(obj) {   //사진 3장 뿌리기
 										 <input type="file" id="imgInput" name="sell_img_name1" value="" onchange="readURL(this)">
 										 <input type="file" id="imgInput" name="sell_img_name2" onchange="readURL1(this)">
 										 <input type="file" id="imgInput" name="sell_img_name3" onchange="readURL2(this)">
-										  <input type="file" id="imgInput" name="sell_img_name2" onchange="readURL3(this)">
-										 <input type="file" id="imgInput" name="sell_img_name3" onchange="readURL4(this)">  
+										  <input type="file" id="imgInput" name="sell_img_name4" onchange="readURL3(this)">
+										 <input type="file" id="imgInput" name="sell_img_name5" onchange="readURL4(this)">  
 										 	
 											</div>
 										</div>

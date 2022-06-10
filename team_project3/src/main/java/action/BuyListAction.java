@@ -17,11 +17,9 @@ public class BuyListAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		System.out.println("BuyListAction");
 		ActionForward forward = null;
 		
 		String code = request.getParameter("member_code");
-		System.out.println("멤버 코드 " + code);
 		
 		// 페이징 처리를 위한 변수 선언
 		int pageNum = 1; // 현재 페이지 번호
@@ -39,13 +37,8 @@ public class BuyListAction implements Action {
 		
 		int listCount = service.getListCount(tableName);
 		
-		
 		//구매리스트 목록 담아오기 
 		ArrayList<SellerProductDTO> buyList = service.getBuyList(pageNum, listLimit, code);
-//		ArrayList<SellerProductDTO> sellList = service.getBuySellList(pageNum, listLimit, code);
-		
-		//구매리스트 목록에 필요한 사진
-//		ArrayList<SellerProductDTO> buyImgFileList = service.getBuyListImg(code);
 		
 		int maxPage = (int)Math.ceil((double)listCount / listLimit);
 		int startPage = ((int)((double)pageNum / pageLimit + 0.9) - 1) * pageLimit + 1;
@@ -59,8 +52,6 @@ public class BuyListAction implements Action {
 		
 		request.setAttribute("pageInfo", pageInfo); 
 		request.setAttribute("buyList", buyList); 
-//		request.setAttribute("sellList", sellList);
-//		request.setAttribute("buyImgFileList", buyImgFileList);
 		
 		forward = new ActionForward();
 		forward.setPath("MainPage/my_page/buy_list.jsp");

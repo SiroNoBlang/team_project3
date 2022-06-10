@@ -45,9 +45,10 @@
 						</ul>
 					</div>	
 				<!-- 	Icon header -->
-					<div class="wrap-icon-header flex-w flex-r-m h-full" onclick="LikeSmallList.ma?member_code=${sCode}" >							
-						<div class="flex-c-m h-full p-r-25 bor6">
-							<div class="icon-header-item cl0 hov-cl1 trans-04 p-lr-11 js-show-sidebar">
+					<div class="wrap-icon-header flex-w flex-r-m h-full" onclick="location.href='LikeSmallList.ma?member_code=${sCode}'">
+<!-- 					<div class="wrap-icon-header flex-w flex-r-m h-full">							 -->
+						<div class="flex-c-m h-full p-r-25 bor6" >
+							<div class="icon-header-item cl0 hov-cl1 trans-04 p-lr-11 js-show-sidebar"  >
 								<i class="zmdi zmdi-account zmd-fw"></i>
 							</div>
 						</div>

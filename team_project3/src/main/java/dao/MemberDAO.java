@@ -607,7 +607,7 @@ public class MemberDAO {
 		int startRow = (pageNum - 1) * listLimit;
 		
 		try { // 목록 카테고리에 필요한 값만 저장
-			String sql = "SELECT s.sell_title, s.sell_size, b.buy_sell_item_date, b.buy_item_status, si.sell_img_name, si.sell_img_real_name, s.sell_num FROM sell s JOIN buy b ON s.sell_num = b.buy_item_num JOIN sell_img si ON si.sell_img_real_num = s.sell_num WHERE buy_member_code=? ORDER BY buy_sell_item_date DESC LIMIT ?,?";
+			String sql = "SELECT s.sell_title, s.sell_size, b.buy_sell_item_date, b.buy_item_status, si.sell_img_name, si.sell_img_real_name, s.sell_num FROM sell s JOIN buy b ON s.sell_num = b.buy_item_num JOIN sell_img si ON si.sell_img_real_num = s.sell_num JOIN sell_list sl ON sl.sell_list_num = s.sell_num WHERE b.buy_member_code=? AND sl.sell_list_item_status='판매완료' ORDER BY buy_sell_item_date DESC LIMIT ?,?";
 			
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, code);
@@ -625,7 +625,7 @@ public class MemberDAO {
 				buy.setSell_size(rs.getString("s.sell_size"));
 				buy.setBuy_sell_item_date(rs.getString("b.buy_sell_item_date").substring(0,8));
 				buy.setBuy_item_status(rs.getString("b.buy_item_status"));
-				buy.setSell_img_name(rs.getString("si.sell_img_name"));
+//				buy.setSell_img_name(rs.getString("si.sell_img_name"));
 				buy.setSell_img_real_name(rs.getString("si.sell_img_real_name"));
 				buy.setSell_num(rs.getInt("s.sell_num"));
 				
@@ -706,6 +706,70 @@ public class MemberDAO {
 		
 		return sellarticleList;
 		
+	}
+
+	public int selectLikeSmallListCount(String tableName) {
+		int listCount = 0;
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			String sql = "SELECT COUNT(*) FROM "+tableName;
+			pstmt = con.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				listCount = rs.getInt(1);
+			}
+		} catch (SQLException e) {
+			System.out.println("SQL 구문 오류 발생! - selectListCount()");
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rs);
+		}
+		
+		return listCount;
+	}
+
+	//찜목록 작게 띄우기
+	public ArrayList<SellerProductDTO> selectLikeSmallList(int pageNum, int listLimit, String code) {
+		ArrayList<SellerProductDTO> likeSmallList = null;
+		SellerProductDTO like = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		int startRow = (pageNum - 1) * listLimit;
+		
+		try { // 목록 카테고리에 필요한 값만 저장
+			String sql = "SELECT s.sell_img_real_name FROM sell_img s JOIN like_list l ON s.sell_img_real_num = l.like_list_item_num WHERE l.like_list_member_code=? ORDER BY l.like_list_item_num DESC LIMIT ?,?";
+			
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, code);
+			pstmt.setInt(2, startRow);
+			pstmt.setInt(3, listLimit);
+			
+			rs = pstmt.executeQuery();
+			
+			likeSmallList = new ArrayList<SellerProductDTO>();
+			
+			while(rs.next()) {
+				
+				like = new SellerProductDTO();
+//				like.setSell_img_name(rs.getString("si.sell_img_name"));
+				like.setSell_img_real_name(rs.getString("s.sell_img_real_name"));
+				
+				likeSmallList.add(like);
+			}
+		} catch (SQLException e) {
+			System.out.println("SQL 구문 오류 발생! - selectLikeSmallList()");
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rs);
+		}
+		return likeSmallList;
 	}
 
 }
