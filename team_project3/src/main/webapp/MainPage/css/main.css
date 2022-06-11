@@ -1615,9 +1615,9 @@ button.mfp-close {
   font-family: Poppins-Regular;
   font-size: 15px;
   color: #888;
-  line-height: 1.2;
+  line-height: 2.2;
 
-  padding: 0;
+  padding: 19;
   border-radius: 0px;
   border: none;
   border-bottom: 1px solid transparent;

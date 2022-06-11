@@ -29,7 +29,8 @@ public class ProductListProAction implements Action {
 		productListProService service = new productListProService();
 		int listCount = service.getListCount();
 
-		ArrayList<SellerProductDTO> articleList = service.getArticleList(pageNum, listLimit);
+		ArrayList<SellerProductDTO> articleList = service.getArticleList(pageNum, listLimit);  //상품 갯수(12)한페이지에 뿌리는 작업
+		
 		// 페이징 처리를 위한 계산 작업
 		// java.lang.Math 클래스의 ceil() 메서드를 사용하여 반올림 가능
 		int maxPage = (int) Math.ceil((double) listCount / listLimit);

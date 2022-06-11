@@ -3079,9 +3079,9 @@ iframe {border: none;}
 .m-r--99, .m-lr--99, .m-all--99 {margin-right: -99px;}
 .m-r--100, .m-lr--100, .m-all--100 {margin-right: -100px;}
 
-.m-l-auto {margin-left: auto;}
-.m-r-auto {margin-right: auto;}
-.m-lr-auto {margin-left: auto; margin-right: auto;}
+.m-l-auto {margin-left: 500px;}
+.m-r-auto {margin-right: 500px;}
+.m-lr-auto {margin-left: 350px; margin-right: 500px;}
 
 
 

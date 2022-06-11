@@ -44,7 +44,7 @@ public class ProductRecUpdateProAction implements Action {
 		PrintWriter out = response.getWriter();
 		out.print(likeCount);
 //		
-		out.println(likeCount);
+	
 		
 		return forward;
 	}

@@ -857,7 +857,7 @@ function readURL4(obj) {   //사진 3장 뿌리기
 <!-- 						</li> -->
 <!-- 					</ul> -->
 
-<!-- 					Tab panes -->
+<!-- <!-- 					Tab panes --> 
 <!-- 					<div class="tab-content p-t-43"> -->
 <!-- 						- -->
 <!-- 						<div class="tab-pane fade show active" id="description" role="tabpanel"> -->
@@ -1011,6 +1011,7 @@ function readURL4(obj) {   //사진 3장 뿌리기
 <!-- 						</div> -->
 <!-- 					</div> -->
 <!-- 				</div> -->
+				
 <!-- 			</div> -->
 <!-- 		</div> -->
 

@@ -503,15 +503,15 @@ function filter(value){
                	     <span>
 						<span class="w3-border w3-center w3-padding">      <!-- 좋아요 기능을 위한 스크립트(Ajax)는 892행  -->
 							<c:if test="${ sCode  eq null }">
-							 <li type="button" id="newLogin"><b class="w3-text-blue">로그인</b></li> 후 사용 가능합니다.<br />
-								<i class="fa fa-heart" style="font-size:16px;color:red"></i>   
-								<span class="rec_count"></span>	
-								 <div class="rs1-select2 bor8 bg0">		</div>		
+<!-- 							 <li type="button" id="newLogin"><b class="w3-text-blue">로그인</b></li> 후 사용 가능합니다.<br /> -->
+<!-- 								<i class="fa fa-heart" style="font-size:16px;color:red"></i>    -->
+								<span class="rec_count">세션이 만료되었습니다-로그인필요!</span>	
+<!-- 								 <div class="rs1-select2 bor8 bg0">		</div>		 -->
 							</c:if>
 							<c:if test="${ sCode ne null }">
 								<li class="w3-button w3-black w3-round" id="rec_update">
 									<i class="fa fa-heart" style="font-size:16px;color:red"></i>
-									&nbsp;<span class="rec_count"></span>
+									&nbsp;<span class="rec_count">${articleList.sell_likecount }</span>
 								</li> 
 							</c:if>
 						</span>
@@ -879,10 +879,7 @@ function filter(value){
 	});
 	
 	function recCount(sell_num,thisRow) { //  좋아요 갯수
-	    
-
-	    	
-	    		
+		
 //     	alert("<좋아요갯수세기>--판매번호"+sell_num);
 		$.ajax({
 			url: "ProductRecCount.pr",

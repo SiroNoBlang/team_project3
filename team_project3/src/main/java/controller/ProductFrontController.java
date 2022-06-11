@@ -15,7 +15,7 @@ import action.ProductBrandProAction;
 import action.ProductCategoryProAction;
 import action.ProductDetailProAction;
 import action.ProductListProAction;
-import action.ProductRecCountProAction;
+
 import action.ProductRecUpdateProAction;
 import action.ProductSearchProAction;
 import action.SellMemberGradeAction;
@@ -88,18 +88,9 @@ public class ProductFrontController extends HttpServlet {
 			forward = new ActionForward();
 			forward.setPath("MainPage/sell/product_list.jsp");
 			forward.setRedirect(false);
-		}else if (command.equals("/ProductRecUpdate.pr")) { // 각상품에 대한 좋아요 UPDATE기능()
+		}else if (command.equals("/ProductRecUpdate.pr")) { // 각상품에 대한 좋아요 UPDATE기능()//좋아요/좋아요 취소 기능 포함
 
 			action = new ProductRecUpdateProAction();
-
-			try {
-				forward = action.execute(request, response);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		}else if (command.equals("/ProductRecCount.pr")) { // 각상품에 대한 좋아요 DELETE기능()
-
-			action = new ProductRecCountProAction();
 
 			try {
 				forward = action.execute(request, response);

@@ -13,6 +13,7 @@
 <title>Product Detail</title>
 <script type="text/javascript"> //좋아요 기능을 위하여 sCode 값을 script 위에 뿌려줌
     	var sCode = '${sCode}'	
+    	var sellNum = ${param.sell_num};
 </script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -393,7 +394,7 @@
 					</style>						
 						<table>
 							<tr>
-							<td colspan="2"><h2 class="mtext-105 cl2 js-name-detail p-b-14">
+							<td colspan="2" ><h2 class="mtext-105 cl2 js-name-detail p-b-14">
 							제목:${sellerdto.sell_title}</h2></td>
 							</tr>
 							<tr>
@@ -441,12 +442,12 @@
 <!-- 			<div class="flex-w flex-m p-l-100 p-t-40 respon7"> -->
 				<div class="flex-m bor9 p-r-10 m-r-11">
 					<c:if test="${ sCode ne null }">
-					<button class="w3-button w3-black w3-round" id="rec_update">
-						<i class="fa fa-heart" style="font-size:16px;color:red"></i>
-						&nbsp;<span class="rec_count"></span>
-					</button> 
-				</c:if>
-			</div>
+						<li class="w3-button w3-black w3-round" id="rec_update">
+							<i class="fa fa-heart" style="font-size:16px;color:red"></i>
+							&nbsp;<span class="rec_count">${sellerdto.sell_likecount }</span>
+						</li> 
+					</c:if>
+				</div>
 <!-- 		</div> -->
 	
 		<a href="#"
@@ -477,9 +478,9 @@
 	</table>
 	</div>
 	</div>
-	<!-- 				&nbsp;&nbsp;<h4>관련 상품</h4> -->
+	<!-- 				&nbsp;&nbsp;<h4>관련 상품</h4> 여기에 찐으로담자ㅁㄴㅇㅎㄹ> --> 
 	<!-- --------------------------------------------------------- -->
-<div class="bor10 m-t-50 p-t-43 p-b-40">
+			 <div class="bor10 m-t-50 p-t-43 p-b-40">
 				<!-- Tab01 -->
 				<div class="tab01">
 					<!-- Nav tabs -->
@@ -497,19 +498,20 @@
 						</li>
 					</ul>
 
-					<!-- Tab panes -->
+<!-- 					Tab panes -->
 					<div class="tab-content p-t-43">
-						<!-- - -->
+						-
 						<div class="tab-pane fade show active" id="description" role="tabpanel">
 							<div class="how-pos2 p-lr-15-md">
 								<div style="text-align: center;">content</div>
-								<p class="stext-102 cl6">
-								 ${sellerdto.sell_content}
-								</p>
-							</div>
-						</div>
-
-						<!-- - -->
+									<p class="stext-102 cl6">
+										${sellerdto.sell_content}
+									</p>
+									<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+						   </div>
+					    </div>
+ <!-- 이러한 상품은 어떠세요? -->
+						
 						<div class="tab-pane fade" id="information" role="tabpanel">
 <!-- 							<div class="row"> -->
 <!-- 								<div class="col-sm-10 col-md-8 col-lg-6 m-lr-auto"> -->
@@ -522,9 +524,7 @@
 														<a href="#"><img src="./Upload/sell_img/${ProductRe.getSell_img_real_name() } "onerror="this.style.display='none'" width="130px"height="160px" alt="판매사진"/></a>
 															<h4>${ProductRe.getSell_title() }</h4>
 														<h5>${ProductRe.getSell_brand() }</h5>
-														<a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-														&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-														&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+														<a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 														</a>
 													</span>
 												</c:forEach>
@@ -536,9 +536,9 @@
 <!-- 							</div> -->
 						</div>
 
-						<!-- - -->
+	<!-- 리뷰 입니다. -->					
 						<div class="tab-pane fade" id="reviews" role="tabpanel">
-							<div class="row">
+<!-- 							<div class="row"> -->
 								<div class="col-sm-10 col-md-8 col-lg-6 m-lr-auto">
 									<div class="p-b-30 m-lr-15-sm">
 										<!-- Review -->
@@ -623,21 +623,11 @@
 			</div>
 		</div>
 
-<!-- ----------------------------------------------------------- -->
-	
-	
-
-
-
-
+<!-- ------------------------------------------------------------------ -->
 	<div class="bg6 flex-c-m flex-w size-302 m-t-73 p-tb-15">
 		<span class="stext-107 cl6 p-lr-25"> SKU: JAK-01 </span> <span
 			class="stext-107 cl6 p-lr-25"> Categories: Jacket, Men </span>
 	</div>
-
-
-
-
 	<!-- Footer영역과 상단 이동 버튼-->
 	<jsp:include page="/MainPage/menu/footer.jsp" />
 
@@ -769,7 +759,7 @@
 									</div>
 								</div>
 							</div>
-
+							
 							<!--  -->
 							<div class="flex-w flex-m p-l-100 p-t-40 respon7">
 								<div class="flex-m bor9 p-r-10 m-r-11">
@@ -797,6 +787,9 @@
 			</div>
 		</div>
 	</div>
+	
+	
+	
 
 	<!--===============================================================================================-->
 	<script src="MainPage/vendor/jquery/jquery-3.2.1.min.js"></script>
@@ -1142,47 +1135,55 @@ html, body {
 
 	$(function(){
 		
-		$(".fa-heart").click(function(a){
-		var thisRow = $(this).closest('div');  //하트표시 줄의 부모(div)를 찾아  thisRow값에 저장
-		var sell_num =  thisRow.find('input').val(); //thisRow의 하위 요소인 find(input)=>input이라는 value를 찾아 sell_num에 저장 == ${sell_num}
 		
-
-		alert("관심상품 등록되었습니다. <찜 취소시, 취소되었습니다 출력되게해야됨>")  	
-
+		
+		$(".fa-heart").click(function(a){
+			
+			var thisRow = $(this).closest('div');  //하트표시 줄의 부모(div)를 찾아  thisRow값에 저장
+			var thisplace = thisRow.find('span')[0];
+// 			debugger;
+// 		var thisRow = $(this).closest('div');  //하트표시 줄의 부모(div)를 찾아  thisRow값에 저장
+// 		var thisplace = thisRow.find('span:eq(5)')[0];
+		
+// 		var sell_num =  thisRow.find('input').val(); //thisRow의 하위 요소인 find(input)=>input이라는 value를 찾아 sell_num에 저장 == ${sell_num}
+		
+// 			var sell_num = thisRow.children('div').find('input');
+// 			var sell_num = document.getElementsByClassName('sell_num:eq(0)');
+// 			alert(JSON.stringify(sell_num));
+// 			alert("관심상품 등록되었습니다. <찜 취소시, 취소되었습니다 출력되게해야됨>")			
+// 		debugger;
 			$.ajax({
 				url: "ProductRecUpdate.pr",
 	            type: "POST",
 	            data: {
-	         sell_num : sell_num,    
+	         		sell_num : sellNum,    
 	                id: sCode					 
 	            },
-	            success: function () {
-			        recCount(sell_num);
-	            },
+	            success: function (data) {
+	            	thisplace.innerHTML = data;
+	            }
 			})
 		});
 		
-		
-	    function recCount(sell_num) { //  좋아요 갯수
-// 	    	var thisRow = $(this).closest('div');
-// 	    	var sell_num =  thisRow.find('input').val();
-	    	alert("<좋아요갯수세기>--판매번호"+sell_num);
-	    	debugger;
-			$.ajax({
-				url: "ProductRecCount.pr",
-	            type: "POST",
-	            data: {
-	         sell_num : sell_num,
-
-	            },
-	            success: function (count) {   //성공시 값을 반환못함 -> 
-	            	$(".rec_count").html(count);
-	            },
-			})
-	    
-	    };
-	
 	});
+	
+	function recCount(sell_num) { //  좋아요 갯수
+	    alert("갯수찾기 드가자"+sell_num);  		
+//     	alert("<좋아요갯수세기>--판매번호"+sell_num);
+		$.ajax({
+			url: "ProductRecCount.pr",
+            type: "POST",
+            data: {
+         		sell_num :sell_num
+            },
+            success: function (data) {   //성공시 값을 반환못함 -> 
+           		console.log(data);
+//             	$("thisplace").innerHTML(data);
+ 				debugger;
+            }
+		})
+    
+    };
 </script>
 </body>
 </html>

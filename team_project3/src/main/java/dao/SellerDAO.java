@@ -123,19 +123,31 @@ public class SellerDAO {
 	public ArrayList<SellerProductDTO> selectArticleList(int pageNum, int listLimit) {
 		ArrayList<SellerProductDTO> articleList = null;
 
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
+		PreparedStatement pstmt = null , pstmt1 =null;
+		ResultSet rs = null , rs1=null;
 
 		// 조회 시작 게시물 번호(행 번호) 계산
 		int startRow = (pageNum - 1) * listLimit;
 
+//		SELECT a.sell_num, a.sell_size , a.sell_category,a.sell_category_detail, a.sell_title, a.sell_color, a.sell_brand, a.sell_price, a.sell_readcount, a.sell_likecoun=(SELECT  COUNT(like_list_item_num) from like_list WHERE  like_list_member_code='8574fe73e34011ec995e0a0027000011' AND like_list_item_num=23),
+//				b.sell_img_name, b.sell_img_real_name ,b.sell_img_real_num ,b.sell_img_num,b.sell_img_name,b.sell_img_real_name, c.sell_list_num, c.sell_list_item_status
+//				 FROM sell AS a JOIN like_list AS b ON  a.sell_code = b.like_list_member_code JOIN sell_list AS c ON a.sell_num = c.sell_list_num JOIN sell_img AS d ON a.sell_num = d.sell_img_real_num
+//				 WHERE sell_list_item_status='판매중' AND
+//				(sell_img_real_num,sell_img_num)  in (SELECT  sell_img_real_num, MAX(sell_img_num)  FROM sell_img   
+//			        GROUP BY sell_img_real_num  
+// 				ORDER BY sell_img_real_num ,sell_img_num DESC  )
+//				ORDER BY a.sell_num DESC LIMIT 0,11;
+		
+		
 		try {
-			String sql = "SELECT a.sell_num, a.sell_size , a.sell_category,a.sell_category_detail, a.sell_title, a.sell_color, a.sell_brand, a.sell_price, a.sell_readcount,"
-					+ " b.sell_img_name, b.sell_img_real_name ,b.sell_img_real_num ,b.sell_img_num,b.sell_img_name,b.sell_img_real_name, c.sell_list_num, c.sell_list_item_status"
-					+ " FROM sell AS a JOIN sell_img AS b ON a.sell_num = b.sell_img_real_num JOIN sell_list AS c ON a.sell_num = c.sell_list_num"
-					+ " WHERE sell_list_item_status='판매중' AND"
-					+ "(sell_img_real_num,sell_img_num)  in (SELECT  sell_img_real_num, MAX(sell_img_num)  FROM sell_img    GROUP BY sell_img_real_num  ORDER BY sell_img_real_num ,sell_img_num DESC  )"
-					+ " ORDER BY a.sell_num DESC LIMIT ?,?";
+			String sql="SELECT a.sell_num, a.sell_size , a.sell_category, a.sell_category_detail, a.sell_title, a.sell_color, a.sell_brand, a.sell_price, (SELECT COUNT(*) FROM like_list WHERE like_list_item_num= a.sell_num ) AS sell_likecount , a.sell_readcount, a.sell_member_code,"
+					+ "	b.sell_img_name, b.sell_img_real_name ,b.sell_img_real_num ,b.sell_img_num,b.sell_img_name,b.sell_img_real_name,"
+					+ "	c.sell_list_num, c.sell_list_item_status"
+					+ "	FROM sell AS a JOIN sell_img AS b ON a.sell_num = b.sell_img_real_num JOIN sell_list AS c ON a.sell_num = c.sell_list_num"
+					+ "	WHERE sell_list_item_status='판매중'  AND"
+					+ "	(sell_img_real_num,sell_img_num)  in (SELECT  sell_img_real_num, MAX(sell_img_num)  FROM sell_img    GROUP BY sell_img_real_num  ORDER BY sell_img_real_num ,sell_img_num DESC  )"
+					+ "	ORDER BY a.sell_num DESC LIMIT ?,?";
+
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, startRow);
 			pstmt.setInt(2, listLimit);
@@ -161,7 +173,8 @@ public class SellerDAO {
 				article.setSell_img_real_name(rs.getString("sell_img_real_name"));
 				article.setSell_category(rs.getString("Sell_category"));
 				article.setSell_category_detail(rs.getString("Sell_category_detail"));
-
+				article.setSell_likecount(rs.getInt("sell_likecount"));
+				
 				articleList.add(article);
 
 			}
@@ -184,7 +197,7 @@ public class SellerDAO {
 		ResultSet rs = null;
 
 		try {
-			String sql = "SELECT a.sell_content,a.sell_num,a.sell_member_code, a.sell_size , a.sell_category, a.sell_category_detail, a.sell_title, a.sell_color, a.sell_brand, a.sell_price, a.sell_readcount,"
+			String sql = "SELECT a.sell_content,a.sell_num,a.sell_member_code, a.sell_size , a.sell_category, a.sell_category_detail, a.sell_title, a.sell_color, a.sell_brand, a.sell_price, a.sell_readcount,(SELECT COUNT(*) FROM like_list WHERE like_list_item_num= a.sell_num ) AS sell_likecount ,"
 					+ " b.sell_img_name, b.sell_img_real_name ,b.sell_img_real_num ,b.sell_img_num,b.sell_img_name,b.sell_img_real_name, c.sell_list_num, c.sell_list_item_status"
 					+ " FROM sell AS a JOIN sell_img AS b ON a.sell_num = b.sell_img_real_num JOIN sell_list AS c ON a.sell_num = c.sell_list_num"
 					+ " WHERE sell_list_num= ? AND"
@@ -210,6 +223,7 @@ public class SellerDAO {
 				article.setSell_list_num(rs.getInt("sell_list_num"));
 				article.setSell_list_item_status(rs.getString("sell_list_item_status"));
 				article.setSell_content(rs.getString("sell_content"));
+				article.setSell_likecount(rs.getInt("sell_likecount"));
 			}
 		} catch (SQLException e) {
 			System.out.println("SQL 구문 오류 발생! - selectArticle()");
@@ -821,6 +835,7 @@ public class SellerDAO {
 			pstmt.setString(1, sCode);
 			pstmt.setInt(2, sell_num);
 			pstmt.executeUpdate();
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
