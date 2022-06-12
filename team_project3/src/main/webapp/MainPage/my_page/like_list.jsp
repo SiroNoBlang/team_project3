@@ -194,18 +194,21 @@
 		<tr>
 			<th scope="col" class="th-date">번호</th>
 			<th scope="col" class="th-date">제목</th>
-			<th scope="col" class="th-date">이미지제목</th>
+			<th scope="col" class="th-date">제품사진</th>
 		</tr>
 <%-- 		<c:if test="${not empty articleList and pageInfo.getListCount() > 0}"> --%>
 			<c:forEach var="like_list" items="${articleList }">
+				<c:set var="i" value="${i+1 }"/>
 				<tr>
-					<td>${like_list.getLike_list_count() }</td>
+					<td>${i }</td>
 					<td id="subject">
 						<a href="">
-							${like_list.getLike_list_title() }
+							${like_list.getSell_title() }
 						</a>
 					</td>
-					<td>${like_list.getLike_list_img_name() } </td>
+					<td>
+					<img src="./Upload/sell_img/${like_list.getSell_img_real_name() }"> 
+					</td>
 				</tr>
 			</c:forEach>
 <%-- 		</c:if> --%>

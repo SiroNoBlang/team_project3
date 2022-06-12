@@ -211,26 +211,25 @@ MemberBean member = (MemberBean) request.getAttribute("memberDetail");
 			<th scope="col" class="th-date">글쓴날짜</th>
 		</tr>
 		 </thead>
-<%-- 		<c:if test="${not empty articleList and pageInfo.getListCount() > 0}"> --%>
+		<c:if test="${not empty articleList and pageInfo.getListCount() > 0}">
 			<c:forEach var="sell_list" items="${sellarticleList }">
+				<c:set var="i" value="${i+1 }"/>
 				<tr>
-					<td>${sell_list.getSell_num() }</td>
+					<td>${i }</td>
 					<td id="subject">
 						<a href="">
 							${sell_list.getSell_title() }
 						</a>
 					</td>
 					<td>
-					<c:forEach var="sell_img_list" items="${sellimgList }">
-					<img src="./Upload/sell_img/${sell_img_list.getSell_img_real_name() }"> 
-					</c:forEach>
+					<img src="./Upload/sell_img/${sell_list.getSell_img_real_name() }"> 
 					</td>
 					<td>${sell_list.getSell_price() } </td>
 					<td>${sell_list.getSell_category() }</td>
 					<td>${sell_list.getSell_write_date() }</td>
 				</tr>
 			</c:forEach>
-<%-- 		</c:if> --%>
+		</c:if>
 	</table>
 		
 		<!-- 페이징 처리 -->
@@ -250,7 +249,6 @@ MemberBean member = (MemberBean) request.getAttribute("memberDetail");
 			<!-- 단, 현재 페이지 번호는 링크 없이 표시 -->
 			<c:choose>
 				<c:when test="${pageNum eq i}">
-					${i }
 				</c:when>
 				<c:otherwise>
 					<a href="">${i }</a>

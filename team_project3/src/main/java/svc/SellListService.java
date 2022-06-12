@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import dao.MemberDAO;
 import vo.LikeListBean;
 import vo.SellerDTO;
+import vo.SellerProductDTO;
 import vo.SellerimgDTO;
 
 public class SellListService {
@@ -28,8 +29,8 @@ public class SellListService {
 		return listCount;
 	}
 //====================================================================================================
-	public ArrayList<SellerDTO> getArticleList(int pageNum, int listLimit, String member_code) {
-		ArrayList<SellerDTO> sellarticleList = null;
+	public ArrayList<SellerProductDTO> getArticleList(int pageNum, int listLimit, String member_code) {
+		ArrayList<SellerProductDTO> sellarticleList = null;
 		Connection con = getConnection();
 		MemberDAO memberDAO = MemberDAO.getInstance();
 		memberDAO.setConnection(con);
@@ -38,18 +39,7 @@ public class SellListService {
 		
 		close(con);	
 		
-		
 		return sellarticleList;
-	}
-	
-	public ArrayList<SellerimgDTO> getSellimgList(String member_code) {
-		ArrayList<SellerimgDTO> sellimgList = null;
-		Connection con = getConnection();
-		MemberDAO memberDAO = MemberDAO.getInstance();
-		memberDAO.setConnection(con);
-		
-		sellimgList = memberDAO.selectSellimgList(member_code);
-		return sellimgList;
 	}
 
 }

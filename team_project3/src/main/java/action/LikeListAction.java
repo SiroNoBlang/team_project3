@@ -12,6 +12,7 @@ import vo.LikeListBean;
 import vo.MemberBean;
 import vo.PageInfo;
 import vo.SellerDTO;
+import vo.SellerProductDTO;
 
 public class LikeListAction implements Action {
 
@@ -34,7 +35,7 @@ public class LikeListAction implements Action {
 		
 		//==================================================================================
 		
-		ArrayList<LikeListBean> articleList = service.getArticleList(pageNum, listLimit, member_code);
+		ArrayList<SellerProductDTO> articleList = service.getArticleList(pageNum, listLimit, member_code);
 		
 		int maxPage = (int)Math.ceil((double)listCount / listLimit);
 		int startPage = ((int)((double)pageNum / pageLimit + 0.9) - 1) * pageLimit + 1;

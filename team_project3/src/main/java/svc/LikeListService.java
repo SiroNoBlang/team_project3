@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 import dao.MemberDAO;
 import vo.LikeListBean;
+import vo.SellerProductDTO;
 
 public class LikeListService {
 
@@ -25,8 +26,8 @@ public class LikeListService {
 		return listCount;
 	}
 
-	public ArrayList<LikeListBean> getArticleList(int pageNum, int listLimit, String member_code) {
-		ArrayList<LikeListBean> articleList = null;
+	public ArrayList<SellerProductDTO> getArticleList(int pageNum, int listLimit, String member_code) {
+		ArrayList<SellerProductDTO> articleList = null;
 		Connection con = getConnection();
 		MemberDAO memberDAO = MemberDAO.getInstance();
 		memberDAO.setConnection(con);

@@ -500,7 +500,7 @@ public class MemberDAO {
 		return AuthStatusResult;
 	}
 	
-	public int selectListCount(String member_code) { //좋아료 리스트
+	public int selectListCount(String member_code) { //좋아료 리스트 카운트
 		int listCount = 0;
 		
 		PreparedStatement pstmt = null;
@@ -533,8 +533,8 @@ public class MemberDAO {
 		return listCount;
 	}
 	
-	public ArrayList<LikeListBean> selectArticleList(int pageNum, int listLimit, String member_code) {
-		ArrayList<LikeListBean> articleList = null;
+	public ArrayList<SellerProductDTO> selectArticleList(int pageNum, int listLimit, String member_code) { //좋아요 리스트
+		ArrayList<SellerProductDTO> articleList = null;
 		
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -542,25 +542,32 @@ public class MemberDAO {
 		int startRow = (pageNum - 1) * listLimit;
 		
 		try {
-			String sql = "SELECT a.like_list_num,a.like_list_count,a.like_list_title,a.like_list_img_name,b.sell_num,b.sell_title"
-					+ " FROM mypage_like_list AS a"
-					+ " JOIN sell AS b"
-					+ " ON a.like_list_num = b.sell_num"
-					+ " WHERE b.sell_member_code=?"
-					+ " ORDER BY like_list_count LIMIT ?,?";
+			String sql = "SELECT a.member_code, s.sell_title, b.sell_img_name, b.sell_img_real_name, s.sell_num, l.like_list_member_code, l.like_list_item_num"
+					+ " FROM sell s"
+					+ " JOIN sell_img b"
+					+ " ON b.sell_img_real_num = s.sell_num"
+					+ " JOIN member a"
+					+ " ON a.member_code = s.sell_member_code"
+					+ " JOIN like_list l"
+					+ " ON l.like_list_member_code = a.member_code"
+					+ " WHERE a.member_code=?"
+					+ " ORDER BY s.sell_num DESC LIMIT ?,?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, member_code);
 			pstmt.setInt(2, startRow);
 			pstmt.setInt(3, listLimit);
 			
 			rs = pstmt.executeQuery();
-			articleList = new ArrayList<LikeListBean>();
+			articleList = new ArrayList<SellerProductDTO>();
 			
 			while(rs.next()) {
-				LikeListBean article = new LikeListBean();
-				article.setLike_list_count(rs.getInt("like_list_count"));
-				article.setLike_list_title(rs.getString("like_list_title"));
-				article.setLike_list_img_name(rs.getString("like_list_img_name"));
+				SellerProductDTO article = new SellerProductDTO();
+				article.setSell_num(rs.getInt("sell_num"));
+				article.setSell_title(rs.getString("sell_title"));
+				article.setSell_img_real_name(rs.getString("sell_img_real_name"));
+//				article.setLike_list_count(rs.getInt("like_list_count"));
+//				article.setLike_list_title(rs.getString("like_list_title"));
+//				article.setLike_list_img_name(rs.getString("like_list_img_name"));
 				
 				articleList.add(article);
 			}
@@ -569,7 +576,6 @@ public class MemberDAO {
 		}
 		return articleList;
 	}
-
 
 	//총 구매목록 수 조회
 	public int selectBuyListCount(String tableName) {
@@ -669,8 +675,8 @@ public class MemberDAO {
 		return listCount;
 	}
 
-	public ArrayList<SellerDTO> selectSellArticleList(int pageNum, int listLimit, String member_code) { //판매리스트 조회
-		ArrayList<SellerDTO> sellarticleList = null;
+	public ArrayList<SellerProductDTO> selectSellArticleList(int pageNum, int listLimit, String member_code) { //판매리스트 조회
+		ArrayList<SellerProductDTO> sellarticleList = null;
 		
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -678,25 +684,29 @@ public class MemberDAO {
 		int startRow = (pageNum - 1) * listLimit;
 		
 		try {
-			String sql = "SELECT sell_num, sell_member_code, sell_title, sell_category, sell_price, sell_write_date"
-					+ " FROM sell"
-					+ " WHERE sell_member_code=?"
-					+ " ORDER BY sell_num LIMIT ?,?";
+			String sql = "SELECT a.member_code, s.sell_title, s.sell_price, b.sell_img_name, b.sell_img_real_name, s.sell_num, s.sell_category, s.sell_write_date"
+					+ " FROM sell s"
+					+ " JOIN sell_img b"
+					+ " ON b.sell_img_real_num = s.sell_num"
+					+ " JOIN member a"
+					+ " ON a.member_code = s.sell_member_code "
+					+ " WHERE a.member_code=?"
+					+ " ORDER BY s.sell_num DESC LIMIT ?,?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, member_code);
 			pstmt.setInt(2, startRow);
 			pstmt.setInt(3, listLimit);
 			
 			rs = pstmt.executeQuery();
-			sellarticleList = new ArrayList<SellerDTO>();
+			sellarticleList = new ArrayList<SellerProductDTO>();
 			
 			while(rs.next()) {
-				SellerDTO article = new SellerDTO();
+				SellerProductDTO article = new SellerProductDTO();
 				article.setSell_num(rs.getInt("sell_num"));
-				article.setSell_member_code(rs.getString("sell_member_code"));
 				article.setSell_title(rs.getString("sell_title"));
-				article.setSell_category(rs.getString("sell_category"));
+				article.setSell_img_real_name(rs.getString("sell_img_real_name"));
 				article.setSell_price(rs.getInt("sell_price"));
+				article.setSell_category(rs.getString("sell_category"));
 				article.setSell_write_date(rs.getString("sell_write_date"));
 				
 				sellarticleList.add(article);
@@ -733,48 +743,5 @@ public class MemberDAO {
 		
 		return listCount;
 	}
-
-	
-	public ArrayList<SellerimgDTO> selectSellimgList(String member_code) { //셀리스트 사진
-		System.out.println("DAO에서 멤버코드" + member_code);
-		ArrayList<SellerimgDTO> sellimgList = null;
-		
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		
-		try {
-			String sql = "select a.member_code, b.sell_num, b.sell_member_code, c.sell_img_num, c.sell_img_name, c.sell_img_real_name"
-					+ " FROM member AS a"
-					+ " JOIN sell AS b"
-					+ " ON a.member_code=b.sell_member_code"
-					+ " JOIN sell_img AS c"
-					+ " ON c.sell_img_real_num=b.sell_num"
-					+ " WHERE a.member_code=?";
-			
-			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, member_code);
-	
-			rs = pstmt.executeQuery();
-			
-			sellimgList = new ArrayList<SellerimgDTO>();
-			
-			while(rs.next()) {
-				SellerimgDTO imgList = new SellerimgDTO();
-				imgList.setSell_img_name(rs.getString("sell_img_name"));
-				imgList.setSell_img_real_name(rs.getString("sell_img_real_name"));
-				sellimgList.add(imgList);
-				System.out.println("DAO에서 이미지리스트" + imgList);
-			}
-			
-		} catch (SQLException e) {
-			System.out.println("SQL 구문 오류 발생!");
-			e.printStackTrace();
-		} finally {
-			close(pstmt);
-			close(rs);
-		}
-		return sellimgList;
-	}
-	
 
 }
