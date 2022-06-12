@@ -28,12 +28,14 @@ public class ClassificationAction implements Action {
 			pageNum = Integer.parseInt(request.getParameter("page"));
 		}
 		
+		// 해당 개시물의 총 수
 		MemberManagementListService service = new MemberManagementListService();
 		int listCount = service.getListCount();
 		
 		//게시물 목록 담아오기 
 		ArrayList<MemberBean> classificationList = service.getClassificationList(pageNum, listLimit, value);
 		
+		// 등급과 상태에 따른 회원 수
 		MemberBean bean = new MemberBean();
 		bean = service.getStatusCount();
 		

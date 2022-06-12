@@ -219,42 +219,42 @@ public class CommunityFrontController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		}else if (command.equals("/MemberManagement.co")) { // 가입된 회원 목록
+		}else if (command.equals("/MemberManagement.co")) { // 가입된 회원 목록 _이효민 06.12 확인
 			action = new MemberManagementListAction();
 			try {
 				forward = action.execute(request, response);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		} else if (command.equals("/MemberDetail.co")) { // 회원의 상세 정보
+		} else if (command.equals("/MemberDetail.co")) { // 회원의 상세 정보 _이효민 06.12 확인
 			action = new MemberDetailAction();
 			try {
 				forward = action.execute(request, response);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		} else if (command.equals("/MemberUpdate.co")) { // 회원의 상태 변경
+		} else if (command.equals("/MemberUpdate.co")) { // 회원의 상태 변경 _이효민 06.12 확인
 			action = new MemberUpdateAction();
 			try {
 				forward = action.execute(request, response);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		} else if (command.equals("/Classification.co")) { // 상태와 등급에 따른 회원 목록
+		} else if (command.equals("/Classification.co")) { // 상태와 등급에 따른 회원 목록 _이효민 06.12 확인
 			action = new ClassificationAction();
 			try {
 				forward = action.execute(request, response);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		} else if (command.equals("/ClassificationDetail.co")) { // 상태와 등급에 회원의 상세 정보
+		} else if (command.equals("/ClassificationDetail.co")) { // 상태와 등급에 회원의 상세 정보 _이효민 06.12 확인
 			action = new ClassificationDetailAction();
 			try {
 				forward = action.execute(request, response);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		} else if (command.equals("/ClassificationUpdate.co")) { // 상태와 등급에 회원의 상태 변경
+		} else if (command.equals("/ClassificationUpdate.co")) { // 상태와 등급에 회원의 상태 변경 _이효민 06.12 확인
 			action = new ClassificationUpdateAction();
 			try {
 				forward = action.execute(request, response);
@@ -268,9 +268,9 @@ public class CommunityFrontController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		} else if (command.equals("/Sales.co")) { // 매출관리 페이지
+		} else if (command.equals("/Sales.co")) { // 매출관리 페이지(따로 DB 작업 필요 없습니다.) _이효민 06.12 확인
 			forward =  new ActionForward("AdminPage/sales/sales_main.jsp", false);
-		} else if (command.equals("/SalesChart.co")) { // 매출그래프를 위한 AJAX 작업용
+		} else if (command.equals("/SalesChart.co")) { // 매출그래프를 위한 AJAX 작업용 _이효민 06.12 확인
 			action = new SalesChartAction();
 			try {
 				forward = action.execute(request, response);

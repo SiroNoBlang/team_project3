@@ -16,6 +16,7 @@ public class MemberManagementDetailService {
 		AdminDAO adminDAO = AdminDAO.getInstance();
 		adminDAO.setConnection(con);
 		
+		// DAO 작업을 하여 가져올 getMemberArticle() 메서드 _이효민 06.12 수정
 		memberDetail = adminDAO.getMemberArticle(member_code);
 		
 		if(memberDetail != null) {

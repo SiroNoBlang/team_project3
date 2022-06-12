@@ -22,9 +22,12 @@ public class SalesChartAction implements Action {
 		
 		SalesChartService service = new SalesChartService();
 		
+		// 해당하는 월의 값을 List에 담기
 		List<SalesList> salesChartList = service.getSalesChartList(month);
 		
 		request.setAttribute("salesChartList", salesChartList);
+		
+		// AJAX를 통해 json 파일을 건네주어야하기 때문에 받은 List의 값을 json 변환 작업 _이효민 06.12 확인
 		String json = new Gson().toJson(salesChartList);
 		
 		response.getWriter().write(json);

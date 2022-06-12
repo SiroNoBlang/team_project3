@@ -16,6 +16,7 @@ public class MemberManagementUpdateService {
 		AdminDAO adminDAO = AdminDAO.getInstance();
 		adminDAO.setConnection(con);
 		
+		// 업데이트 한 결과를 가져올 getMemberUpdate() 메서드 _이효민 06.12 확인
 		isMemberUpdate = adminDAO.getMemberUpdate(member_code, member_status, reason);
 		
 		if(isMemberUpdate) {

@@ -104,10 +104,8 @@ public class AdminDAO {
 		return insertCount;
 	}
 
-	//총 게시물 수를 조회
+	// 총 게시물 수를 조회 _이효민 06.12 수정
 	public int selectListCount(String tableName) {
-//		System.out.println("AdminDAO - selectListCount()");
-		
 		int listCount = 0;
 		
 		PreparedStatement pstmt = null;
@@ -1221,7 +1219,7 @@ public class AdminDAO {
 		return isArticleWriter;
 	}
 
-	// MemberManagement 페이지 리스트 출력
+	// MemberManagement 페이지 리스트 출력할 구문 작성 _이효민 06.12 수정
 	public ArrayList<MemberBean> selectMemberManagementList(int pageNum, int listLimit) {
 		ArrayList<MemberBean> memberManagementList = null;
 		
@@ -1263,7 +1261,7 @@ public class AdminDAO {
 		return memberManagementList;
 	}
 
-	// 정상, 정지, 탈퇴, 검색 기능으로 이동할 페이지 리스트 출력
+	// 정상, 정지, 탈퇴, 검색 기능으로 이동할 페이지 리스트 출력할 구문 작성 _이효민 06.12 수정
 	public ArrayList<MemberBean> selectClassificationList(int pageNum, int listLimit, String value) {
 		ArrayList<MemberBean> classificationList = null;
 		
@@ -1783,7 +1781,7 @@ public class AdminDAO {
 		return listCount;
 	}
 
-	// 차트 그리기 위한 select 구문
+	// 차트 그리기 위한 select 구문 _이효민 06.12 확인
 	public ArrayList<SalesList> selectSalesChartList(String[] month) {
 		ArrayList<SalesList> salesChartList = null;
 		
@@ -2015,7 +2013,7 @@ public class AdminDAO {
 		return salesChartList;
 	}
 
-	// Member 상세정보를 위한 select 구문
+	// Member 상세정보를 위한 select 구문 작성 _이효민 06.12 확인
 	public MemberBean getMemberArticle(String member_code) {
 		MemberBean memberDetail = null;
 		
@@ -2109,6 +2107,7 @@ public class AdminDAO {
 		return memberDetail;
 	}
 
+	// 상태에 따른 업데이트 구문 구별하여 실행 _이효민 06.12 확인
 	public boolean getMemberUpdate(String member_code, String member_status, String reason) {
 		boolean isMemberUpdate = false;
 		

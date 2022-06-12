@@ -20,8 +20,7 @@ public class ClassificationUpdateAction implements Action {
 		String pageNum = request.getParameter("page");
 		String value = request.getParameter("value");
 		
-//		System.out.println(member_code + ", " + member_status); // 이미지 파일 있을때도 확인용이므로 잠시 킵해두겠습니다.
-		
+		// 해당 멤버의 상태와 상태에 대한 이유 변경의 위한 getMemberUpdate() 작성 _이효민 06.12 확인
 		MemberManagementUpdateService service = new MemberManagementUpdateService();
 		boolean isMemberUpdate = service.getMemberUpdate(member_code, member_status, reason);
 		

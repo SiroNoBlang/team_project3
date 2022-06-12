@@ -19,6 +19,7 @@ public class MemberUpdateAction implements Action {
 		String reason = request.getParameter("reason");
 		String pageNum = request.getParameter("page");
 		
+		// 해당 회원의 상태를 수정하기 위한 getMemberUpdate() 메서드 _이효민 06.12 확인
 		MemberManagementUpdateService service = new MemberManagementUpdateService();
 		boolean isMemberUpdate = service.getMemberUpdate(member_code, member_status, reason);
 		if(isMemberUpdate) {

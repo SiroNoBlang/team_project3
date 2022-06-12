@@ -3,7 +3,7 @@ import static db.JdbcUtil.*;
 
 import java.sql.Connection;
 
-import dao.MemberDAO;
+import dao.AdminDAO;
 import vo.MemberBean;
 
 public class MemberDetailService {
@@ -13,10 +13,11 @@ public class MemberDetailService {
 		
 		Connection con = getConnection();
 		
-		MemberDAO memberDAO = MemberDAO.getInstance();
-		memberDAO.setConnection(con);
+		AdminDAO adminDAO = AdminDAO.getInstance();
+		adminDAO.setConnection(con);
 		
-		memberDetail = memberDAO.getMemberArticle(member_code);
+		// 해당 멤버코드의 상세 정보 출력 _이효민 06.12 수정
+		memberDetail = adminDAO.getMemberArticle(member_code);
 		
 		if(memberDetail != null) {
 			commit(con);
