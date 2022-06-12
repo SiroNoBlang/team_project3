@@ -6,13 +6,6 @@
 <head>
 <meta charset="UTF-8">
 <title>구매 내역</title>
-<style type="text/css">
-
-	img {
-		width: 100px;
-	}
-	
-</style>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="icon" type="image/png" href="MainPage/images/icons/favicon.png"/>
 	<link rel="stylesheet" type="text/css" href="MainPage/vendor/bootstrap/css/bootstrap.min.css">
@@ -236,7 +229,7 @@
 					<c:forEach var="buy" items="${buyList }" varStatus="status">
 						<tr>
 							<td style="vertical-align : middle;">${listCount -(listCount -((pageNum-1)* listLimit + status.index)-1)} </td> 
-							<td><img src="./Upload/sell_img/${buy.getSell_img_real_name() }"></td>
+							<td><img src="./Upload/sell_img/${buy.getSell_img_real_name() }" class="buyListImg"></td>
 							<td style="vertical-align : middle;">${buy.getSell_title() } </td>
 							<td style="vertical-align : middle;">${buy.getSell_size() }</td>
 							<td style="vertical-align : middle;">${buy.getBuy_sell_item_date() } </td>

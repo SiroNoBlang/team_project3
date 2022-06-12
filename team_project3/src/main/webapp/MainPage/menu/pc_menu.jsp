@@ -8,13 +8,6 @@
 		}
 	} 
 </script>
-<style type="text/css">
-
-	img {
-		width: 100px;
-	}
-	
-</style>
 <aside class="wrap-sidebar js-sidebar">
 <div class="s-full js-hide-sidebar"></div>
 
@@ -69,65 +62,60 @@
 				@ CozaStore
 			</span>
 
-			<div class="flex-w flex-sb p-t-36 gallery-lb">
-				item gallery sidebar<br>
-				<c:if test="${not empty likeSmallList and pageInfo.getListCount() > 0}">
-					<c:forEach var="like" items="${likeSmallList }" varStatus="status">
-					<img src="./Upload/sell_img/${like.getSell_img_real_name() }">
-<!-- 				<div class="wrap-item-gallery m-b-10"> -->
-<%-- 					<a class="item-gallery bg-img1" href="./Upload/sell_img/${like.getSell_img_real_name() }" data-lightbox="gallery"  --%>
-<%-- 					style="background-image: url('./Upload/sell_img/${like.getSell_img_real_name() }');"></a> --%>
-<!-- 				</div> -->
-									</c:forEach>
-				</c:if>
+<div class="flex-w flex-sb p-t-36 gallery-lb">
+				<!-- item gallery sidebar -->
+				<div class="wrap-item-gallery m-b-10">
+					<a class="item-gallery bg-img1" href="MainPage/images/gallery-01.jpg" data-lightbox="gallery" 
+					style="background-image: url('MainPage/images/gallery-01.jpg');"></a>
+				</div>
 
-<!-- 				item gallery sidebar -->
-<!-- 				<div class="wrap-item-gallery m-b-10"> -->
-<!-- 					<a class="item-gallery bg-img1" href="MainPage/images/gallery-02.jpg" data-lightbox="gallery"  -->
-<!-- 					style="background-image: url('MainPage/images/gallery-02.jpg');"></a> -->
-<!-- 				</div> -->
+				<!-- item gallery sidebar -->
+				<div class="wrap-item-gallery m-b-10">
+					<a class="item-gallery bg-img1" href="MainPage/images/gallery-02.jpg" data-lightbox="gallery" 
+					style="background-image: url('MainPage/images/gallery-02.jpg');"></a>
+				</div>
 
-<!-- 				item gallery sidebar -->
-<!-- 				<div class="wrap-item-gallery m-b-10"> -->
-<!-- 					<a class="item-gallery bg-img1" href="MainPage/images/gallery-03.jpg" data-lightbox="gallery"  -->
-<!-- 					style="background-image: url('MainPage/images/gallery-03.jpg');"></a> -->
-<!-- 				</div> -->
+				<!-- item gallery sidebar -->
+				<div class="wrap-item-gallery m-b-10">
+					<a class="item-gallery bg-img1" href="MainPage/images/gallery-03.jpg" data-lightbox="gallery" 
+					style="background-image: url('MainPage/images/gallery-03.jpg');"></a>
+				</div>
 
-<!-- 				item gallery sidebar -->
-<!-- 				<div class="wrap-item-gallery m-b-10"> -->
-<!-- 					<a class="item-gallery bg-img1" href="MainPage/images/gallery-04.jpg" data-lightbox="gallery"  -->
-<!-- 					style="background-image: url('MainPage/images/gallery-04.jpg');"></a> -->
-<!-- 				</div> -->
+				<!-- item gallery sidebar -->
+				<div class="wrap-item-gallery m-b-10">
+					<a class="item-gallery bg-img1" href="MainPage/images/gallery-04.jpg" data-lightbox="gallery" 
+					style="background-image: url('MainPage/images/gallery-04.jpg');"></a>
+				</div>
 
-<!-- 				item gallery sidebar -->
-<!-- 				<div class="wrap-item-gallery m-b-10"> -->
-<!-- 					<a class="item-gallery bg-img1" href="MainPage/images/gallery-05.jpg" data-lightbox="gallery"  -->
-<!-- 					style="background-image: url('MainPage/images/gallery-05.jpg');"></a> -->
-<!-- 				</div> -->
+				<!-- item gallery sidebar -->
+				<div class="wrap-item-gallery m-b-10">
+					<a class="item-gallery bg-img1" href="MainPage/images/gallery-05.jpg" data-lightbox="gallery" 
+					style="background-image: url('MainPage/images/gallery-05.jpg');"></a>
+				</div>
 
-<!-- 				item gallery sidebar -->
-<!-- 				<div class="wrap-item-gallery m-b-10"> -->
-<!-- 					<a class="item-gallery bg-img1" href="MainPage/images/gallery-06.jpg" data-lightbox="gallery"  -->
-<!-- 					style="background-image: url('MainPage/images/gallery-06.jpg');"></a> -->
-<!-- 				</div> -->
+				<!-- item gallery sidebar -->
+				<div class="wrap-item-gallery m-b-10">
+					<a class="item-gallery bg-img1" href="MainPage/images/gallery-06.jpg" data-lightbox="gallery" 
+					style="background-image: url('MainPage/images/gallery-06.jpg');"></a>
+				</div>
 
-<!-- 				item gallery sidebar -->
-<!-- 				<div class="wrap-item-gallery m-b-10"> -->
-<!-- 					<a class="item-gallery bg-img1" href="MainPage/images/gallery-07.jpg" data-lightbox="gallery"  -->
-<!-- 					style="background-image: url('MainPage/images/gallery-07.jpg');"></a> -->
-<!-- 				</div> -->
+				<!-- item gallery sidebar -->
+				<div class="wrap-item-gallery m-b-10">
+					<a class="item-gallery bg-img1" href="MainPage/images/gallery-07.jpg" data-lightbox="gallery" 
+					style="background-image: url('MainPage/images/gallery-07.jpg');"></a>
+				</div>
 
-<!-- 				item gallery sidebar -->
-<!-- 				<div class="wrap-item-gallery m-b-10"> -->
-<!-- 					<a class="item-gallery bg-img1" href="MainPage/images/gallery-08.jpg" data-lightbox="gallery"  -->
-<!-- 					style="background-image: url('MainPage/images/gallery-08.jpg');"></a> -->
-<!-- 				</div> -->
+				<!-- item gallery sidebar -->
+				<div class="wrap-item-gallery m-b-10">
+					<a class="item-gallery bg-img1" href="MainPage/images/gallery-08.jpg" data-lightbox="gallery" 
+					style="background-image: url('MainPage/images/gallery-08.jpg');"></a>
+				</div>
 
-<!-- 				item gallery sidebar -->
-<!-- 				<div class="wrap-item-gallery m-b-10"> -->
-<!-- 					<a class="item-gallery bg-img1" href="MainPage/images/gallery-09.jpg" data-lightbox="gallery"  -->
-<!-- 					style="background-image: url('MainPage/images/gallery-09.jpg');"></a> -->
-<!-- 					</div> -->
+				<!-- item gallery sidebar -->
+				<div class="wrap-item-gallery m-b-10">
+					<a class="item-gallery bg-img1" href="MainPage/images/gallery-09.jpg" data-lightbox="gallery" 
+					style="background-image: url('MainPage/images/gallery-09.jpg');"></a>
+					</div>
 				</div>
 			</div>
 

@@ -734,44 +734,6 @@ public class MemberDAO {
 		return listCount;
 	}
 
-	//찜목록 작게 띄우기
-	public ArrayList<SellerProductDTO> selectLikeSmallList(int pageNum, int listLimit, String code) {
-		ArrayList<SellerProductDTO> likeSmallList = null;
-		SellerProductDTO like = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		
-		int startRow = (pageNum - 1) * listLimit;
-		
-		try { // 목록 카테고리에 필요한 값만 저장
-			String sql = "SELECT s.sell_img_real_name FROM sell_img s JOIN like_list l ON s.sell_img_real_num = l.like_list_item_num WHERE l.like_list_member_code=? ORDER BY l.like_list_item_num DESC LIMIT ?,?";
-			
-			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, code);
-			pstmt.setInt(2, startRow);
-			pstmt.setInt(3, listLimit);
-			
-			rs = pstmt.executeQuery();
-			
-			likeSmallList = new ArrayList<SellerProductDTO>();
-			
-			while(rs.next()) {
-				
-				like = new SellerProductDTO();
-//				like.setSell_img_name(rs.getString("si.sell_img_name"));
-				like.setSell_img_real_name(rs.getString("s.sell_img_real_name"));
-				
-				likeSmallList.add(like);
-			}
-		} catch (SQLException e) {
-			System.out.println("SQL 구문 오류 발생! - selectLikeSmallList()");
-			e.printStackTrace();
-		} finally {
-			close(pstmt);
-			close(rs);
-		}
-		return likeSmallList;
-	}
 	
 	public ArrayList<SellerimgDTO> selectSellimgList(String member_code) { //셀리스트 사진
 		System.out.println("DAO에서 멤버코드" + member_code);

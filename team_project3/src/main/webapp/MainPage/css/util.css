@@ -3713,3 +3713,7 @@ iframe {border: none;}
 .pointer-none {
 	pointer-events: none;
 }
+
+.buyListImg {
+   width: 100px;
+}

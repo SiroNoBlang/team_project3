@@ -15,7 +15,6 @@ import action.FindIdAction;
 import action.FindPasswdAction;
 import action.JoinProAction;
 import action.LikeListAction;
-import action.LikeSmallListAction;
 import action.LoginProAction;
 import action.LogoutAction;
 import action.MpEventDetailAction;
@@ -278,13 +277,6 @@ public class Main extends HttpServlet {
 		} else if (command.equals("/BuyList.ma")) { // 구매목록 조회
 			// 이것도 메인 페이지 컨트롤러로 옮겨야함.
 			action = new BuyListAction();
-			try {
-				forward = action.execute(request, response);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		} else if (command.equals("/LikeSmallList.ma")) { // 찜목록 사진 조회
-			action = new LikeSmallListAction();
 			try {
 				forward = action.execute(request, response);
 			} catch (Exception e) {
