@@ -22,7 +22,6 @@ public class MemberUpdateAction implements Action {
 		MemberManagementUpdateService service = new MemberManagementUpdateService();
 		boolean isMemberUpdate = service.getMemberUpdate(member_code, member_status, reason);
 		if(isMemberUpdate) {
-			request.setAttribute("member_code", member_code);
 			forward = new ActionForward("MemberDetail.co?member_code=" + member_code +"&page=" + pageNum, true);
 		} else {
 			response.setContentType("text/html; charset=UTF-8");
