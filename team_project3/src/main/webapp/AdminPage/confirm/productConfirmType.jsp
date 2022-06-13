@@ -80,8 +80,16 @@
 				      </section>
 				</div>
 				<div class="card">
-					<div class="title">검수 목록</div>
-					
+					<div class="title">
+						<c:choose>
+							<c:when test="${param.cmStatus eq '판매중' }">
+								 검수완료 목록
+							</c:when>
+							<c:otherwise>
+								${param.cmStatus} 목록
+							</c:otherwise>
+						</c:choose>
+					</div>
 					<div id="board-search">
 					        <div class="container">
 					            <div class="search-window">

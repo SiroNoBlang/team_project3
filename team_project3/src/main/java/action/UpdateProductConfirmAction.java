@@ -1,6 +1,7 @@
 package action;
 
 import java.io.PrintWriter;
+import java.net.URLEncoder;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -15,6 +16,7 @@ public class UpdateProductConfirmAction implements Action {
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 //		System.out.println("UpdateProductConfirmAction");
+		
 		ActionForward forward = null;
 		
 		int sell_num = Integer.parseInt(request.getParameter("sell_num"));
@@ -44,7 +46,10 @@ public class UpdateProductConfirmAction implements Action {
 			out.println("</script>");
 		} else {
 			forward = new ActionForward();
-			forward.setPath("ProductConfirm.co");
+			String status = request.getParameter("cmStatus");
+			status = status.equals("검수완료") ? "판매중" : status;
+			sell_list_item_status = URLEncoder.encode(status,"UTF-8");
+			forward.setPath("ProductConfirmType.co?cmStatus="+ sell_list_item_status);
 			forward.setRedirect(true);
 		}
 		

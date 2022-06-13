@@ -43,7 +43,7 @@
 		</div>
 		<div id="page-container">
 			<div class="card">
-				<div class="title">검수현황</div>
+				<div class="title">검수현황 </div>
 				    <section class="row text-center placeholders">
 				        <div class="col-6 col-sm-3" id="completion" onclick="confirmType(this.id)">
 				          <div class="panel panel-default">
@@ -80,7 +80,7 @@
 				      </section>
 				</div>
 				<div class="card">
-					<div class="title">검수 목록</div>
+					<div class="title">검수 목록 </div>
 					
 					<div id="board-search">
 					        <div class="container">
