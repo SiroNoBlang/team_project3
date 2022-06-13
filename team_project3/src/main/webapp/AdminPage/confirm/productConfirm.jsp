@@ -86,6 +86,12 @@
 					        <div class="container">
 					            <div class="search-window">
 					                <form action="ProductSearch.co" class="formCss">
+					               		<select name="cmStatus" id="product">
+										    <option value="판매중" >검수완료</option>
+										    <option value="검수중" <c:if test="${param.cmStatus eq '검수중'}"> selected="selected"</c:if>>검수중</option>
+										    <option value="검수반려" <c:if test="${param.cmStatus eq '검수반려'}"> selected="selected"</c:if>>검수반려</option>
+										    <option value="판매완료" <c:if test="${param.cmStatus eq '판매완료'}"> selected="selected"</c:if>>판매완료</option>
+										</select>
 										<select name="searchType" id="product">
 										    <option value="sell_title" >상품명</option>
 										    <option value="sell_brand" <c:if test="${param.searchType eq 'sell_brand'}"> selected="selected"</c:if>>브랜드</option>
