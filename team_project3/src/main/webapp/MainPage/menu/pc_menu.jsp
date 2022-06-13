@@ -27,14 +27,14 @@
 			</li>
 
 			<li class="p-b-13">
-				<a href="#" class="stext-102 cl2 hov-cl1 trans-04">
+				<a href="Mypage.ma?member_code=${sCode }" class="stext-102 cl2 hov-cl1 trans-04">
 					My Page
 				</a>
 			</li>
 
 			<li class="p-b-13">
-				<a href="#" class="stext-102 cl2 hov-cl1 trans-04">
-					Track Oder
+				<a href="SellList.ma?member_code=${sCode }" class="stext-102 cl2 hov-cl1 trans-04">
+					SellList
 				</a>
 			</li>
 			
