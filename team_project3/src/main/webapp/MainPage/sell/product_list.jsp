@@ -8,22 +8,18 @@
 <!DOCTYPE html>
 <html >
 <head>
-   <title>Product</title>
-   <script type="text/javascript">   //좋아요 기능을 위하여 sCode 값을 script 위에 뿌려줌
-    	var sCode = '${sCode}'
-    	var sell_num
-   </script>
-   <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js"
-	integrity="sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI="
-	crossorigin="anonymous"></script>
-	<style type="text/css">
-	.selectbox {  text-align:right;   position: relative;    width: 200px;  /* 너비설정 */    border: 1px solid #999;  /* 테두리 설정 */    z-index: 1;}
-		a:link { color: black; }
-		a:visited { color: green; }
-		a:hover { color: blue; }
-		a:active { color: red; }
-	</style>
-		<script type="text/javascript" >
+<title>Product</title>
+<script src="MainPage/assets/js/jquery-3.6.0.js"></script>
+<style type="text/css">
+a:link {
+	color: black;
+}
+</style>
+<script type="text/javascript" >
+//좋아요 기능을 위하여 sCode 값을 script 위에 뿌려줌
+var sCode = '${sCode}'
+var sell_num
+
 function filter(value){
 	
 			if(value =="brand") {
@@ -54,23 +50,21 @@ function filter(value){
 			} 
 			else if(value =="category") {
 				var tagSpan = document.getElementById("checkbox2");
-				
 				tagSpan.innerHTML = "<a></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
-								   +"<a href='ProductCategoryPro.pr?sell_category=상의' style='font-size: 1.0em'> 상의 </a>&nbsp;&nbsp;&nbsp;"
-								   +"<a href='ProductCategoryPro.pr?sell_category=하의' style='font-size: 1.0em'> 하의 </a>&nbsp;&nbsp;&nbsp;"
-								   +"<a href='ProductCategoryPro.pr?sell_category=신발' style='font-size: 1.0em'> 신발 </a>&nbsp;&nbsp;&nbsp;"
-								   +"<a href='ProductCategoryPro.pr?sell_category=잡화' style='font-size: 1.0em'> 잡화 </a>";	   
+								   +"<a href='ProductCategoryPro.pr?sell_category=상의' style='font-size: 1.0em'> Top </a>&nbsp;&nbsp;&nbsp;"
+								   +"<a href='ProductCategoryPro.pr?sell_category=하의' style='font-size: 1.0em'> Bottom </a>&nbsp;&nbsp;&nbsp;"
+								   +"<a href='ProductCategoryPro.pr?sell_category=신발' style='font-size: 1.0em'> Shoes </a>&nbsp;&nbsp;&nbsp;"
+								   +"<a href='ProductCategoryPro.pr?sell_category=잡화' style='font-size: 1.0em'> Accessories </a>";	   
 			}
 			else if(value =="price") {
 				var tagSpan = document.getElementById("checkbox2");
-				
-				tagSpan.innerHTML = "<a></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
-								   +"<a href='ProductCategoryPro.pr?sell_price=10000' style='font-size: 1.0em'> 10만원 이하 </a>&nbsp;&nbsp;&nbsp;"
-								   +"<a href='ProductCategoryPro.pr?sell_price=100000' style='font-size: 1.0em'> 10만원 - 50만원 이하 </a>&nbsp;&nbsp;&nbsp;"
-								   +"<a href='ProductCategoryPro.pr?sell_price=1000000' style='font-size: 1.0em'> 50만원 -100만원 이하 </a>&nbsp;&nbsp;&nbsp;"
-								   +"<a href='ProductCategoryPro.pr?sell_price=1000000' style='font-size: 1.0em'> 100만원 - 500만원 이하 </a>&nbsp;&nbsp;&nbsp;"
-								   +"<a href='ProductCategoryPro.pr?sell_price=10000000' style='font-size: 1.0em'> 500만원 이상- 1000만원 이하 </a>";	   
-			}
+				tagSpan.innerHTML = "<a></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
+					+ "<a href='ProductPricePro.pr?sell_price=100000' style='font-size: 1.0em'> 10만원 이하 </a>&nbsp;&nbsp;&nbsp;"
+					+ "<a href='ProductPricePro.pr?sell_price=500000' style='font-size: 1.0em'> 10만원 - 50만원 이하 </a>&nbsp;&nbsp;&nbsp;"
+					+ "<a href='ProductPricePro.pr?sell_price=1000000' style='font-size: 1.0em'> 50만원 -100만원 이하 </a>&nbsp;&nbsp;&nbsp;"
+					+ "<a href='ProductPricePro.pr?sell_price=5000000' style='font-size: 1.0em'> 100만원 - 500만원 이하 </a>&nbsp;&nbsp;&nbsp;"
+					+ "<a href='ProductPricePro.pr?sell_price=10000000' style='font-size: 1.0em'> 500만원 이상- 1000만원 이하 </a>";
+		}
 		
 }
 
@@ -122,255 +116,95 @@ function filter(value){
       <div class="container-menu-desktop">
          <!-- Topbar -->
 
-         <div class="wrap-menu-desktop how-shadow1" style="top:0px;">
-            <nav class="limiter-menu-desktop container">
-               
-               <!-- Logo desktop -->      
-               <a href="#" class="logo">
-                  <img src="MainPage/images/icons/logo-01.png" alt="IMG-LOGO">
-               </a>
-
-               <!-- Menu desktop -->
-               <div class="menu-desktop">
-						<ul class="main-menu">
-							<li>
-								<a href="MainPage.pr">Home</a>
-							</li>
-
-							<li>
-								<a href="Product.pr">Shop</a>
-							</li>
-
-							<li>
-								<a href="SellForm.pr">Sell</a>
-							</li>
-
-							<li>
-								<a href="CommunityNotice.ma">Community</a>
-							</li>
+        	<div class="wrap-menu-desktop how-shadow1" style="top: 0px;">
+				<nav class="limiter-menu-desktop container">
+					<jsp:include page="/MainPage/menu/pc_sub_header.jsp" />
+				</nav>
+			</div>
+			</div>
 			
-							<li>
-								<a href="Contact.pr">Contact</a>
-							</li>
-						</ul>
-					</div>
+			
+				<jsp:include page="/MainPage/menu/pc_menu.jsp" />
 
-               <!-- Icon header -->
-               <div class="wrap-icon-header flex-w flex-r-m">
-                  <div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 js-show-modal-search">
-                     <i class="zmdi zmdi-search"></i>
-                  </div>
+			<!-- Header Mobile -->
+			<div class="wrap-header-mobile">
+				<!-- Logo moblie -->
+				<div class="logo-mobile">
+					<a href="MainPage.pr"><img
+						src="MainPage/images/icons/logo-01.png" alt="IMG-LOGO"></a>
+				</div>
 
-                  <div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti js-show-cart" data-notify="2">
-                     <i class="zmdi zmdi-shopping-cart"></i>
-                  </div>
-
-                  <a href="#" class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti" data-notify="0">
-                     <i class="zmdi zmdi-favorite-outline"></i>
-                  </a>
-               </div>
-            </nav>
-         </div>   
-      </div>
-
-      <!-- Header Mobile -->
-      <div class="wrap-header-mobile">
-         <!-- Logo moblie -->      
-         <div class="logo-mobile">
-            <a href="MainPage.pr"><img src="MainPage/images/icons/logo-01.png" alt="IMG-LOGO"></a>
-         </div>
-
-         <!-- Icon header -->
-         <div class="wrap-icon-header flex-w flex-r-m m-r-15">
-            <div class="icon-header-item cl2 hov-cl1 trans-04 p-r-11 js-show-modal-search">
-               <i class="zmdi zmdi-search"></i>
-            </div>
-
-            <div class="icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10 icon-header-noti js-show-cart" data-notify="2">
-               <i class="zmdi zmdi-shopping-cart"></i>
-            </div>
-
-            <a href="#" class="dis-block icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10 icon-header-noti" data-notify="0">
-               <i class="zmdi zmdi-favorite-outline"></i>
-            </a>
-         </div>
-
-         <!-- Button show menu -->
-         <div class="btn-show-menu-mobile hamburger hamburger--squeeze">
-            <span class="hamburger-box">
-               <span class="hamburger-inner"></span>
-            </span>
-         </div>
-      </div>
+				<!-- Icon header -->
+				
+				<!-- Button show menu -->
+				<div class="btn-show-menu-mobile hamburger hamburger--squeeze">
+					<span class="hamburger-box"> <span class="hamburger-inner"></span>
+					</span>
+				</div>
+			</div>
 
 
-      <!-- Menu Mobile -->
-      <div class="menu-mobile">
-         <ul class="topbar-mobile">
-            <li>
-               <div class="left-top-bar">
-                  Free shipping for standard order over $100
-               </div>
-            </li>
+			<!-- Menu Mobile -->
+			<div class="menu-mobile">
+				<ul class="topbar-mobile">
+					<li>
+						<div class="left-top-bar">Free shipping for standard order
+							over $100</div>
+					</li>
 
-            <li>
-               <div class="right-top-bar flex-w h-full">
-                  <a href="#" class="flex-c-m p-lr-10 trans-04">
-                     Help & FAQs
-                  </a>
+					<li>
+						<div class="right-top-bar flex-w h-full">
+							<a href="#" class="flex-c-m p-lr-10 trans-04"> Help & FAQs </a> <a
+								href="#" class="flex-c-m p-lr-10 trans-04"> My Account </a> <a
+								href="#" class="flex-c-m p-lr-10 trans-04"> EN </a> <a href="#"
+								class="flex-c-m p-lr-10 trans-04"> USD </a>
+						</div>
+					</li>
+				</ul>
 
-                  <a href="#" class="flex-c-m p-lr-10 trans-04">
-                     My Account
-                  </a>
+				<ul class="main-menu-m">
+					<li><a href="index.html">Home</a>
+						<ul class="sub-menu-m">
+							<li><a href="index.html">Homepage 1</a></li>
+							<li><a href="home-02.html">Homepage 2</a></li>
+							<li><a href="home-03.html">Homepage 3</a></li>
+						</ul> <span class="arrow-main-menu-m"> <i
+							class="fa fa-angle-right" aria-hidden="true"></i>
+					</span></li>
 
-                  <a href="#" class="flex-c-m p-lr-10 trans-04">
-                     EN
-                  </a>
+					<li><a href="product.pr">Shop</a></li>
 
-                  <a href="#" class="flex-c-m p-lr-10 trans-04">
-                     USD
-                  </a>
-               </div>
-            </li>
-         </ul>
+					<li><a href="shoping-cart.html" class="label1 rs1"
+						data-label1="hot">Features</a></li>
 
-         <ul class="main-menu-m">
-            <li>
-               <a href="index.html">Home</a>
-               <ul class="sub-menu-m">
-                  <li><a href="index.html">Homepage 1</a></li>
-                  <li><a href="home-02.html">Homepage 2</a></li>
-                  <li><a href="home-03.html">Homepage 3</a></li>
-               </ul>
-               <span class="arrow-main-menu-m">
-                  <i class="fa fa-angle-right" aria-hidden="true"></i>
-               </span>
-            </li>
+					<li><a href="SellForm.pr">Sell</a></li>
 
-            <li>
-               <a href="product.pr">Shop</a>
-            </li>
+					<li><a href="about.html">About</a></li>
 
-            <li>
-               <a href="shoping-cart.html" class="label1 rs1" data-label1="hot">Features</a>
-            </li>
+					<li><a href="contact.html">Contact</a></li>
+				</ul>
+			</div>
 
-            <li>
-               <a href="SellForm.pr">Sell</a>
-            </li>
+			<!-- Modal Search -->
+			<div class="modal-search-header flex-c-m trans-04 js-hide-modal-search">
+				<div class="container-search-header">
+					<button class="flex-c-m btn-hide-modal-search trans-04 js-hide-modal-search">
+						<img src="MainPage/images/icons/icon-close2.png" alt="CLOSE">
+					</button>
 
-            <li>
-               <a href="about.html">About</a>
-            </li>
-
-            <li>
-               <a href="contact.html">Contact</a>
-            </li>
-         </ul>
-      </div>
-
-      <!-- Modal Search -->
-      <div class="modal-search-header flex-c-m trans-04 js-hide-modal-search">
-         <div class="container-search-header">
-            <button class="flex-c-m btn-hide-modal-search trans-04 js-hide-modal-search">
-               <img src="MainPage/images/icons/icon-close2.png" alt="CLOSE">
-            </button>
-
-            <form class="wrap-search-header flex-w p-l-15">
-               <button class="flex-c-m trans-04">
-                  <i class="zmdi zmdi-search"></i>
-               </button>
-               <input class="plh3" type="text" name="search" placeholder="Search...">
-            </form>
-         </div>
-      </div>
-   </header>
-<!-- 여기까지 헤더 -->
-   <!-- Cart -->
-   <div class="wrap-header-cart js-panel-cart">
-      <div class="s-full js-hide-cart"></div>
-
-      <div class="header-cart flex-col-l p-l-65 p-r-25">
-         <div class="header-cart-title flex-w flex-sb-m p-b-8">
-            <span class="mtext-103 cl2">
-               Your Cart
-            </span>
-
-            <div class="fs-35 lh-10 cl2 p-lr-5 pointer hov-cl1 trans-04 js-hide-cart">
-               <i class="zmdi zmdi-close"></i>
-            </div>
-         </div>
-         
-         <div class="header-cart-content flex-w js-pscroll">
-            <ul class="header-cart-wrapitem w-full">
-               <li class="header-cart-item flex-w flex-t m-b-12">
-                  <div class="header-cart-item-img">
-                     <img src="images/item-cart-01.jpg" alt="IMG">
-                  </div>
-
-                  <div class="header-cart-item-txt p-t-8">
-                     <a href="#" class="header-cart-item-name m-b-18 hov-cl1 trans-04">
-                        White Shirt Pleat
-                     </a>
-
-                     <span class="header-cart-item-info">
-                        1 x $19.00
-                     </span>
-                  </div>
-               </li>
-
-               <li class="header-cart-item flex-w flex-t m-b-12">
-                  <div class="header-cart-item-img">
-                     <img src="MainPage/images/item-cart-02.jpg" alt="IMG">
-                  </div>
-
-                  <div class="header-cart-item-txt p-t-8">
-                     <a href="#" class="header-cart-item-name m-b-18 hov-cl1 trans-04">
-                        Converse All Star
-                     </a>
-
-                     <span class="header-cart-item-info">
-                        1 x $39.00
-                     </span>
-                  </div>
-               </li>
-
-               <li class="header-cart-item flex-w flex-t m-b-12">
-                  <div class="header-cart-item-img">
-                     <img src="MainPage/images/item-cart-03.jpg" alt="IMG">
-                  </div>
-
-                  <div class="header-cart-item-txt p-t-8">
-                     <a href="#" class="header-cart-item-name m-b-18 hov-cl1 trans-04">
-                        Nixon Porter Leather
-                     </a>
-
-                     <span class="header-cart-item-info">
-                        1 x $17.00
-                     </span>
-                  </div>
-               </li>
-            </ul>
-            
-            <div class="w-full">
-               <div class="header-cart-total w-full p-tb-40">
-                  Total: $75.00
-               </div>
-
-               <div class="header-cart-buttons flex-w w-full">
-                  <a href="shoping-cart.html" class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-r-8 m-b-10">
-                     View Cart
-                  </a>
-
-                  <a href="shoping-cart.html" class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-b-10">
-                     Check Out
-                  </a>
-               </div>
-            </div>
-         </div>
-      </div>
-   </div>
-
+					<form class="wrap-search-header flex-w p-l-15">
+						<button class="flex-c-m trans-04">
+							<i class="zmdi zmdi-search"></i>
+						</button>
+						<input class="plh3" type="text" name="search"
+							placeholder="Search...">
+					</form>
+				</div>
+			</div>
+	</header>
+	<!-- 여기까지 헤더 -->
+	<!-- Cart -->
+	<jsp:include page="/MainPage/menu/pc_shopping cart.jsp" />
 <!--     우리가 필터링으로 구분해줘야될 곳 -->
    <!-- Product -->
    <div class="bg0 m-t-23 p-b-140">
@@ -396,49 +230,38 @@ function filter(value){
             
             <!-- Search product -->
             <div class="dis-none panel-search w-full p-t-10 p-b-15">
-              	<form action="ProductSearchPro.pr">
-              	<table>
-              	<tr>
-              	<td>
-            	  <input type="text" placeholder="상품을 입력해주세요." name="ProductSearch">
-            	  </td>
-            	  <td>
-                  <input  type="submit" value="검색" placeholder="Search">
-                  </td>
-                  </tr>
-                  </table>
-           		 </form>
-             </div>
+					<form action="ProductSearchPro.pr">
+						<table>
+							<tr>
+								<td><input type="text" placeholder="상품을 입력해주세요."
+									name="ProductSearch"></td>
+								<td><input type="submit" value="검색" placeholder="Search">
+								</td>
+							</tr>
+						</table>
+					</form>
+				</div>
             
-            
-         
-           
- 
-            <!-- Filter -->필터
+            <!-- Filter -->
             <div class="dis-none panel-filter w-full p-t-10">
-					<div
-						class="wrap-filter flex-w bg6 w-full p-lr-40 p-t-27 p-lr-15-sm">
-
-						<div id="checkbox1">
+					<div class="wrap-filter flex-w bg6 w-full p-lr-40 p-t-27 p-lr-15-sm">
+						<div id="checkbox1"> 
 							<table width=400px>
 								<tr>
 									<th><input type="button" style="font-size: 35px"
 										class="filter-link stext-106 trans-04" name=filter
 										value="brand" onclick="filter(this.value)"></th>
-										<th><input type="button" style="font-size: 35px"
+									<th><input type="button" style="font-size: 35px"
 										class="filter-link stext-106 trans-04" name=filter
 										value="category" onclick="filter(this.value)"></th>
-										<th><input type=button style="font-size: 35px"
+									<th><input type=button style="font-size: 35px"
 										class="filter-link stext-106 trans-04" name=filter
 										value="price" onclick="filter(this.value)"></th>
-								</tr>
-								<tr>
 								</tr>
 							</table>
 							<br>
 						</div>
-							
-							<div id="checkbox2" style="vertical-align:middle; display:inline-block; margin-bottom:2px;"></div>
+						 <div id="checkbox2" class="filter-link stext-106 trans-04" style="vertical-align:bottom; display:inline-block; margin-bottom:2px;"></div>
 					</div>
 				</div>
 			</div>
@@ -501,21 +324,6 @@ function filter(value){
 	       <div class="flex-c-m flex-w w-full p-t-45">
          
    <section id="pageList">
-		<!-- 
-		현재 페이지 번호(pageNum)가 1보다 클 경우에만 [이전] 링크 동작
-		=> 클릭 시 notice.jsp 로 이동하면서 
-		   현재 페이지 번호(pageNum) - 1 값을 page 파라미터로 전달
-		-->
- 		
-<%-- 		<c:choose> --%>
-<%-- 			<c:when test="${pageNum > 1}"> --%>
-<%-- 				<input type="button" value="이전" onclick="location.href='Product.pr?page=${pageNum - 1}'"> --%>
-<%-- 			</c:when> --%>
-<%-- 			<c:otherwise> --%>
-<!-- 				<input type="button" value="이전"> -->
-<%-- 			</c:otherwise> --%>
-<%-- 		</c:choose> --%>
-			
 		<!-- 페이지 번호 목록은 시작 페이지(startPage)부터 끝 페이지(endPage) 까지 표시 -->
 		
 		<c:forEach var="i" begin="${startPage }" end="${endPage }">
@@ -531,21 +339,6 @@ function filter(value){
 				</c:otherwise>
 			</c:choose>
 		</c:forEach>
-		
-		
-		
-		
-
-		<!-- 현재 페이지 번호(pageNum)가 총 페이지 수보다 작을 때만 [다음] 링크 동작 -->
-<%-- 		<c:choose> --%>
-<%-- 			<c:when test="${pageNum < maxPage}"> --%>
-<%-- 				<input type="button" value="다음" onclick="location.href='Product.pr?page=${pageNum + 1}'"> --%>
-<%-- 			</c:when> --%>
-<%-- 			<c:otherwise> --%>
-<!-- 				<input type="button" value="다음"> -->
-<%-- 			</c:otherwise> --%>
-<%-- 		</c:choose> --%>
-		
 	</section>
 				
        

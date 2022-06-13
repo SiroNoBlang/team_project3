@@ -11,14 +11,14 @@ import javax.servlet.http.HttpServletResponse;
 
 import action.Action;
 import action.ContactAction;
+import action.MplistProAction;
 import action.ProductBrandProAction;
 import action.ProductCategoryProAction;
 import action.ProductDetailProAction;
 import action.ProductListProAction;
-
+import action.ProductPriceProAction;
 import action.ProductRecUpdateProAction;
 import action.ProductSearchProAction;
-import action.SelectSellListAction;
 import action.SellMemberGradeAction;
 import action.SellRecentPostAddressAction;
 import action.SendAdminAction;
@@ -43,7 +43,6 @@ public class ProductFrontController extends HttpServlet {
 			forward = new ActionForward();
 			forward.setPath("MainPage/first_page/index.jsp");
 			forward.setRedirect(false);
-
 		}  else if (command.equals("/SellForm.pr")) { // 상품 판매글(FORM.JSP)
 
 			forward = new ActionForward();
@@ -84,8 +83,15 @@ public class ProductFrontController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}	
-		} else if (command.equals("/Product_list.pr")) { // 상품 판매목록(product_list.jsp)
+		} else if (command.equals("/ProductPricePro.pr")) { // 상품 가격 필터 분류 처리
+			action = new ProductPriceProAction();
 
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}	
+		} else if (command.equals("/Product_list.pr")) { // 상품 판매목록(product_list.jsp)
 			forward = new ActionForward();
 			forward.setPath("MainPage/sell/product_list.jsp");
 			forward.setRedirect(false);
@@ -118,12 +124,10 @@ public class ProductFrontController extends HttpServlet {
 			}
 
 		} else if (command.equals("/ProductDetailForm.pr")) { // 상품 판매목록 상세(product_detail.jsp)
-
 			forward = new ActionForward();
 			forward.setPath("MainPage/sell/product_detail.jsp");
 			forward.setRedirect(false);
 		} else if (command.equals("/ShopingForm.pr")) { // 쇼핑카트 오더(shoping_cart.jsp)
-
 			forward = new ActionForward();
 			forward.setPath("MainPage/sell/shoping_cart.jsp");
 			forward.setRedirect(false);

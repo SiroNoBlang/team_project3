@@ -73,5 +73,20 @@ public class productSearchProService {
 
 		return productBrandList;
 	}
+	public ArrayList<SellerProductDTO> getProductPriceList(int pageNum, int listLimit, int begin, int last) {
+		ArrayList<SellerProductDTO> productPriceList = null;
+
+		Connection con = getConnection();
+
+		SellerDAO sellerDAO = SellerDAO.getInstance();
+
+		sellerDAO.setConnection(con);
+
+		productPriceList = sellerDAO.PriceArticleList(pageNum, listLimit, begin, last);
+
+		close(con);
+
+		return productPriceList;
+	}
 
 }
