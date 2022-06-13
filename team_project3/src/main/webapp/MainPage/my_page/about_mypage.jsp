@@ -43,6 +43,39 @@ MemberBean member = (MemberBean) request.getAttribute("memberDetail");
 
 <head>
 <title>Mypage</title>
+<style type="text/css">
+body {
+	padding: 1.5em;
+	background: #f5f5f5
+}
+
+table {
+	border: 1px #a39485 solid;
+	font-size: 17px;
+	box-shadow: 0 2px 5px rgba(0, 0, 0, .25);
+	width: 60%;
+	border-collapse: collapse;
+	border-radius: 5px;
+	overflow: hidden;
+	margin: auto;
+}
+
+image_section {
+	display: block;
+	margin: auto;
+}
+
+thead {
+	font-weight: bold;
+	color: #fff;
+	background: #73685d;
+}
+
+td, th, td, th {
+	padding: 1em .5em;
+	vertical-align: middle;
+}
+</style>
 <script
 	src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script type="text/javascript">
@@ -247,268 +280,276 @@ MemberBean member = (MemberBean) request.getAttribute("memberDetail");
 		style="background-image: url('MainPage/images/bg-01.jpg');">
 		<h2 class="ltext-105 cl0 txt-center">MyPage</h2>
 	</section>
-	
+
 	<div id="com_container">
-			<div class=" container d-flex justify-content-center" >     
-		        <ul class="pagination shadow-lg">
-		            <li class="page-item active"><a class="page-link" href="Mypage.ma?member_code=${sCode }"><small>마이페이지</small></a></li>
-		            <li class="page-item "><a class="page-link" href="LikeList.ma?member_code=${sCode }"><small>찜목록</small></a></li>                        
-		            <li class="page-item "><a class="page-link " href="BuyList.ma?member_code=${sCode }"><small>구매내역</small></a></li> 
-		            <li class="page-item  "><a class="page-link " href="SellList.ma?member_code=${sCode }"><small>판매내역</small></a></li> 
-		        </ul> 
-		    </div>
-	  </div>  
+		<div class=" container d-flex justify-content-center">
+			<ul class="pagination shadow-lg">
+				<li class="page-item active"><a class="page-link"
+					href="Mypage.ma?member_code=${sCode }"><small>마이페이지</small></a></li>
+				<li class="page-item "><a class="page-link"
+					href="LikeList.ma?member_code=${sCode }"><small>찜목록</small></a></li>
+				<li class="page-item "><a class="page-link "
+					href="BuyList.ma?member_code=${sCode }"><small>구매내역</small></a></li>
+				<li class="page-item  "><a class="page-link "
+					href="SellList.ma?member_code=${sCode }"><small>판매내역</small></a></li>
+			</ul>
+		</div>
+	</div>
 
 	<!-- Content page -->
 
 	<form action="ProfileImgUpdate.ma" method="post"
 		enctype="multipart/form-data">
+		<input type="hidden" name="member_code" id="member_code"
+			value="${memberDetail.member_code }">
 		<table border="1">
 			<tr>
-				<td><input type="hidden" name="member_code" id="member_code"
-					value="${memberDetail.member_code }"></td>
+				<td><div id="previewDiv">
+						<img id="image_section" alt="" width="300" height="300"
+							src="Upload/mypage_img/${memberDetail.member_info_mypage_real_img_name }">
+					</div></td>
 			</tr>
 			<tr>
-				<div id="previewDiv">
-					<img id="image_section" alt="" width="300" height="300"
-						src="Upload/mypage_img/${memberDetail.member_info_mypage_real_img_name }">
-				</div>
-			</tr>
-			<tr>
-				<input type="file" id="member_info_mypage_img_name"
+				<td><input type="file" id="member_info_mypage_img_name"
 					name="member_info_mypage_img_name" value=""
-					onchange="changeImg(this)">
+					onchange="changeImg(this)"></td>
+			</tr>
+			<tr>
+				<td><button type="submit">수정</button></td>
 			</tr>
 		</table>
-		<button type="submit">수정</button>
 	</form>
 
 	<form action="Modify_Member.ma" method="post">
+		<input type="hidden" name="member_code" id="member_code"
+			value="${memberDetail.member_code }">
 		<table border="1">
-			<tr>
-				<td><input type="hidden" name="member_code" id="member_code"
-					value="${memberDetail.member_code }"></td>
-			</tr>
-			<tr>
-				<th>회원 등급</th>
-				<td colspan="2"><input type="text" name="grade_name"
-					id="grade_name" value="${memberDetail.grade_name }"
-					readonly="readonly"></td>
-			</tr>
-			<tr>
-				<th>닉네임</th>
-				<td colspan="2"><input type="text" name="member_nickname"
-					id="member_nickname" value="${memberDetail.member_nickname }"
-					readonly="readonly"></td>
-			</tr>
-			<tr>
-				<th>아이디</th>
-				<td colspan="2"><input type="text" name="member_id"
-					id="member_id" value="${memberDetail.member_id }"
-					readonly="readonly"></td>
-			</tr>
-			<tr>
-				<th>패스워드</th>
-				<td colspan="2"><a href="javascript:onPassModify();">패스워드
-						수정하기</a> <input type="password" name="member_passwd"
-					id="member_passwd" value="${memberDetail.member_passwd }"
-					style="display: none;"></td>
-			</tr>
-			<tr>
-				<th>이메일</th>
-				<td colspan="2"><input type="text" name="member_email1"
-					id="member_email1" value="${memberDetail.member_email }"></td>
-			</tr>
-			<tr>
-				<th>이름</th>
-				<td colspan="2"><input type="text" name="member_info_name"
-					id="member_info_name" value="${memberDetail.member_info_name }"></td>
-			</tr>
-			<tr>
-				<th>성별</th>
-				<td colspan="2"><select id="member_info_gender"
-					name="member_info_gender">
-						<option value="male"
-							<c:if test="${memberDetail.member_info_gender eq 'male' }" >selected</c:if>>남자</option>
-						<option value="female"
-							<c:if test="${memberDetail.member_info_gender eq 'female' }">selected</c:if>>여자</option>
-				</select></td>
-			</tr>
-			<tr>
-				<th>전화번호</th>
-				<td colspan="2"><input type="text" name="member_info_phone"
-					id="member_info_phone" value="${memberDetail.member_info_phone }"></td>
-			</tr>
-			<tr>
-				<th>나이대</th>
-				<td colspan="2"><select id="member_info_age"
-					name="member_info_age">
-						<option value="19세이하"
-							<c:if test="${memberDetail.member_info_age eq '19세이하' }" >selected</c:if>>19세이하</option>
-						<option value="20~29"
-							<c:if test="${memberDetail.member_info_age eq '20~29' }" >selected</c:if>>20~29</option>
-						<option value="30~39"
-							<c:if test="${memberDetail.member_info_age eq '30~39' }" >selected</c:if>>30~39</option>
-						<option value="40~49"
-							<c:if test="${memberDetail.member_info_age eq '40~49' }" >selected</c:if>>40~49</option>
-						<option value="50~59"
-							<c:if test="${memberDetail.member_info_age eq '50~59' }" >selected</c:if>>50~59</option>
-						<option value="60~69"
-							<c:if test="${memberDetail.member_info_age eq '60~69' }" >selected</c:if>>60~69</option>
-						<option value="70대이상"
-							<c:if test="${memberDetail.member_info_age eq '70대이상' }" >selected</c:if>>70대이상</option>
-				</select></td>
-			</tr>
-			<tr>
-				<th>우편번호</th>
-				<td colspan="2"><input type="text" name="member_info_post_code"
-					id="member_info_post_code"
-					value="${memberDetail.member_info_post_code }" readonly="readonly">
-					<input type="button" onclick="findAddr()" value="우편번호 찾기"></td>
-			</tr>
-			<tr>
-				<th>주소</th>
-				<td colspan="2"><input type="text" name="member_info_address"
-					id="member_info_address"
-					value="${memberDetail.member_info_address }" readonly="readonly"></td>
-			</tr>
-			<tr>
-				<th>상세주소</th>
-				<td colspan="2"><input type="text"
-					name="member_info_address_detail" id="member_info_address_detail"
-					value="${memberDetail.member_info_address_detail }"></td>
-			</tr>
-			<tr>
-				<th>배송지우편번호</th>
-				<td colspan="2"><input type="text"
-					name="member_info_ship_post_code" id="member_info_ship_post_code"
-					value="${memberDetail.member_info_ship_post_code }"
-					readonly="readonly"> <input type="button"
-					onclick="findAddr1()" value="우편번호 찾기"></td>
-			</tr>
-			<tr>
-				<th>배송지주소</th>
-				<td colspan="2"><input type="text"
-					name="member_info_ship_address" id="member_info_ship_address"
-					value="${memberDetail.member_info_ship_address }"
-					readonly="readonly"></td>
-			</tr>
-			<tr>
-				<th>배송지상세주소</th>
-				<td colspan="2"><input type="text"
-					name="member_info_ship_address_detail"
-					id="member_info_ship_address_detail"
-					value="${memberDetail.member_info_ship_address_detail }"></td>
-			</tr>
-			<tr>
-				<th>누적금액</th>
-				<td colspan="2"><input type="text"
-					name="member_info_detail_acc_money"
-					id="member_info_detail_acc_money"
-					value="${memberDetail.member_info_detail_acc_money }"
-					readonly="readonly"></td>
-			</tr>
+			<tbody>
+				<tr>
+					<th>회원 등급</th>
+					<td colspan="2"><input type="text" name="grade_name"
+						id="grade_name" value="${memberDetail.grade_name }"
+						readonly="readonly"></td>
+				</tr>
+				<tr>
+					<th>닉네임</th>
+					<td colspan="2"><input type="text" name="member_nickname"
+						id="member_nickname" value="${memberDetail.member_nickname }"
+						readonly="readonly"></td>
+				</tr>
+				<tr>
+					<th>아이디</th>
+					<td colspan="2"><input type="text" name="member_id"
+						id="member_id" value="${memberDetail.member_id }"
+						readonly="readonly"></td>
+				</tr>
+				<tr>
+					<th>패스워드</th>
+					<td colspan="2"><a href="javascript:onPassModify();">패스워드
+							수정하기</a> <input type="password" name="member_passwd"
+						id="member_passwd" value="${memberDetail.member_passwd }"
+						style="display: none;"></td>
+				</tr>
+				<tr>
+					<th>이메일</th>
+					<td colspan="2"><input type="text" name="member_email1"
+						id="member_email1" value="${memberDetail.member_email }"></td>
+				</tr>
+				<tr>
+					<th>이름</th>
+					<td colspan="2"><input type="text" name="member_info_name"
+						id="member_info_name" value="${memberDetail.member_info_name }"></td>
+				</tr>
+				<tr>
+					<th>성별</th>
+					<td colspan="2"><select id="member_info_gender"
+						name="member_info_gender">
+							<option value="male"
+								<c:if test="${memberDetail.member_info_gender eq 'male' }" >selected</c:if>>남자</option>
+							<option value="female"
+								<c:if test="${memberDetail.member_info_gender eq 'female' }">selected</c:if>>여자</option>
+					</select></td>
+				</tr>
+				<tr>
+					<th>전화번호</th>
+					<td colspan="2"><input type="text" name="member_info_phone"
+						id="member_info_phone" value="${memberDetail.member_info_phone }"></td>
+				</tr>
+				<tr>
+					<th>나이대</th>
+					<td colspan="2"><select id="member_info_age"
+						name="member_info_age">
+							<option value="19세이하"
+								<c:if test="${memberDetail.member_info_age eq '19세이하' }" >selected</c:if>>19세이하</option>
+							<option value="20~29"
+								<c:if test="${memberDetail.member_info_age eq '20~29' }" >selected</c:if>>20~29</option>
+							<option value="30~39"
+								<c:if test="${memberDetail.member_info_age eq '30~39' }" >selected</c:if>>30~39</option>
+							<option value="40~49"
+								<c:if test="${memberDetail.member_info_age eq '40~49' }" >selected</c:if>>40~49</option>
+							<option value="50~59"
+								<c:if test="${memberDetail.member_info_age eq '50~59' }" >selected</c:if>>50~59</option>
+							<option value="60~69"
+								<c:if test="${memberDetail.member_info_age eq '60~69' }" >selected</c:if>>60~69</option>
+							<option value="70대이상"
+								<c:if test="${memberDetail.member_info_age eq '70대이상' }" >selected</c:if>>70대이상</option>
+					</select></td>
+				</tr>
+				<tr>
+					<th>우편번호</th>
+					<td colspan="2"><input type="text"
+						name="member_info_post_code" id="member_info_post_code"
+						value="${memberDetail.member_info_post_code }" readonly="readonly">
+						<input type="button" onclick="findAddr()" value="우편번호 찾기"></td>
+				</tr>
+				<tr>
+					<th>주소</th>
+					<td colspan="2"><input type="text" name="member_info_address"
+						id="member_info_address"
+						value="${memberDetail.member_info_address }" readonly="readonly"></td>
+				</tr>
+				<tr>
+					<th>상세주소</th>
+					<td colspan="2"><input type="text"
+						name="member_info_address_detail" id="member_info_address_detail"
+						value="${memberDetail.member_info_address_detail }"></td>
+				</tr>
+				<tr>
+					<th>배송지우편번호</th>
+					<td colspan="2"><input type="text"
+						name="member_info_ship_post_code" id="member_info_ship_post_code"
+						value="${memberDetail.member_info_ship_post_code }"
+						readonly="readonly"> <input type="button"
+						onclick="findAddr1()" value="우편번호 찾기"></td>
+				</tr>
+				<tr>
+					<th>배송지주소</th>
+					<td colspan="2"><input type="text"
+						name="member_info_ship_address" id="member_info_ship_address"
+						value="${memberDetail.member_info_ship_address }"
+						readonly="readonly"></td>
+				</tr>
+				<tr>
+					<th>배송지상세주소</th>
+					<td colspan="2"><input type="text"
+						name="member_info_ship_address_detail"
+						id="member_info_ship_address_detail"
+						value="${memberDetail.member_info_ship_address_detail }"></td>
+				</tr>
+				<tr>
+					<th>누적금액</th>
+					<td colspan="2"><input type="text"
+						name="member_info_detail_acc_money"
+						id="member_info_detail_acc_money"
+						value="${memberDetail.member_info_detail_acc_money }"
+						readonly="readonly"></td>
+				</tr>
 
-			<tr>
-				<th>누적 포인트</th>
-				<td colspan="2"><input type="text"
-					name="member_info_detail_point" id="member_info_detail_point"
-					value="${memberDetail.member_info_detail_point }"
-					readonly="readonly"></td>
-			</tr>
-			<tr>
-				<th>회원 상태(정상,정지,탈퇴)</th>
-				<td colspan="2"><input type="text"
-					name="member_service_log_status" id="member_service_log_status"
-					value="${memberDetail.member_service_log_status }"
-					readonly="readonly"></td>
-			</tr>
-			<tr>
-				<th>회원가입 날짜</th>
-				<td colspan="2"><input type="text"
-					name="member_service_log_join_date"
-					id="member_service_log_join_date"
-					value="${memberDetail.member_service_log_join_date }"
-					readonly="readonly"></td>
-			</tr>
-			<tr>
-				<th>구매횟수</th>
-				<td colspan="2"><input type="text"
-					name="member_service_log_order_count"
-					id="member_service_log_order_count"
-					value="${memberDetail.member_service_log_order_count }"
-					readonly="readonly"></td>
-			</tr>
+				<tr>
+					<th>누적 포인트</th>
+					<td colspan="2"><input type="text"
+						name="member_info_detail_point" id="member_info_detail_point"
+						value="${memberDetail.member_info_detail_point }"
+						readonly="readonly"></td>
+				</tr>
+				<tr>
+					<th>회원 상태(정상,정지,탈퇴)</th>
+					<td colspan="2"><input type="text"
+						name="member_service_log_status" id="member_service_log_status"
+						value="${memberDetail.member_service_log_status }"
+						readonly="readonly"></td>
+				</tr>
+				<tr>
+					<th>회원가입 날짜</th>
+					<td colspan="2"><input type="text"
+						name="member_service_log_join_date"
+						id="member_service_log_join_date"
+						value="${memberDetail.member_service_log_join_date }"
+						readonly="readonly"></td>
+				</tr>
+				<tr>
+					<th>구매횟수</th>
+					<td colspan="2"><input type="text"
+						name="member_service_log_order_count"
+						id="member_service_log_order_count"
+						value="${memberDetail.member_service_log_order_count }"
+						readonly="readonly"></td>
+				</tr>
+			</tbody>
 
 		</table>
 		<table border="1">
-			<tr>
-				<th>스타일</th>
-				<td><label for="member_info_detail_like_style"></label> <input
-					type="checkbox" name="style" value="심플베이직"
-					<c:if test="${fn:contains(memberDetail.member_info_detail_like_style, '심플베이직')}" >checked</c:if>>심플베이직
-					<input type="checkbox" name="style" value="캐주얼"
-					<c:if test="${fn:contains(memberDetail.member_info_detail_like_style, '캐주얼')}" >checked</c:if>>캐주얼
-					<input type="checkbox" name="style" value="모던시크"
-					<c:if test="${fn:contains(memberDetail.member_info_detail_like_style, '모던시크')}" >checked</c:if>>모던시크
-					<input type="checkbox" name="style" value="러블리"
-					<c:if test="${fn:contains(memberDetail.member_info_detail_like_style, '러블리')}" >checked</c:if>>러블리
-					<input type="checkbox" name="style" value="유니크"
-					<c:if test="${fn:contains(memberDetail.member_info_detail_like_style, '유니크')}" >checked</c:if>>유니크
-					<input type="checkbox" name="style" value="빈티지"
-					<c:if test="${fn:contains(memberDetail.member_info_detail_like_style, '빈티지')}" >checked</c:if>>빈티지
-					<input type="checkbox" name="style" value="아메카지"
-					<c:if test="${fn:contains(memberDetail.member_info_detail_like_style, '아메카지')}" >checked</c:if>>아메카지
-					<input type="checkbox" name="style" value="럭셔리"
-					<c:if test="${fn:contains(memberDetail.member_info_detail_like_style, '럭셔리')}" >checked</c:if>>럭셔리
-					<input type="checkbox" name="style" value="클래식"
-					<c:if test="${fn:contains(memberDetail.member_info_detail_like_style, '클래식')}" >checked</c:if>>클래식
-					<input type="checkbox" name="style" value="유지섹스"
-					<c:if test="${fn:contains(memberDetail.member_info_detail_like_style, '유지섹스')}" >checked</c:if>>유지섹스
+			<tbody>
+				<tr>
+					<th>스타일</th>
+					<td><label for="member_info_detail_like_style"></label> <input
+						type="checkbox" name="style" value="심플베이직"
+						<c:if test="${fn:contains(memberDetail.member_info_detail_like_style, '심플베이직')}" >checked</c:if>>심플베이직
+						<input type="checkbox" name="style" value="캐주얼"
+						<c:if test="${fn:contains(memberDetail.member_info_detail_like_style, '캐주얼')}" >checked</c:if>>캐주얼
+						<input type="checkbox" name="style" value="모던시크"
+						<c:if test="${fn:contains(memberDetail.member_info_detail_like_style, '모던시크')}" >checked</c:if>>모던시크
+						<input type="checkbox" name="style" value="러블리"
+						<c:if test="${fn:contains(memberDetail.member_info_detail_like_style, '러블리')}" >checked</c:if>>러블리
+						<input type="checkbox" name="style" value="유니크"
+						<c:if test="${fn:contains(memberDetail.member_info_detail_like_style, '유니크')}" >checked</c:if>>유니크
+						<input type="checkbox" name="style" value="빈티지"
+						<c:if test="${fn:contains(memberDetail.member_info_detail_like_style, '빈티지')}" >checked</c:if>>빈티지
+						<input type="checkbox" name="style" value="아메카지"
+						<c:if test="${fn:contains(memberDetail.member_info_detail_like_style, '아메카지')}" >checked</c:if>>아메카지
+						<input type="checkbox" name="style" value="럭셔리"
+						<c:if test="${fn:contains(memberDetail.member_info_detail_like_style, '럭셔리')}" >checked</c:if>>럭셔리
+						<input type="checkbox" name="style" value="클래식"
+						<c:if test="${fn:contains(memberDetail.member_info_detail_like_style, '클래식')}" >checked</c:if>>클래식
+						<input type="checkbox" name="style" value="유니섹스"
+						<c:if test="${fn:contains(memberDetail.member_info_detail_like_style, '유니섹스')}" >checked</c:if>>유니섹스
 
-				</td>
-			</tr>
-			<tr>
-				<th>브랜드</th>
-				<td><label for="member_info_detail_like_brand"></label> <input
-					type="checkbox" name="brand" value="에르메스"
-					<c:if test="${fn:contains(memberDetail.member_info_detail_like_brand, '에르메스')}" >checked</c:if>>에르메스
-					<input type="checkbox" name="brand" value="샤넬"
-					<c:if test="${fn:contains(memberDetail.member_info_detail_like_brand, '샤넬')}" >checked</c:if>>샤넬
-					<input type="checkbox" name="brand" value="루이비통"
-					<c:if test="${fn:contains(memberDetail.member_info_detail_like_brand, '루이비통')}" >checked</c:if>>루이비통
-					<input type="checkbox" name="brand" value="롤렉스"
-					<c:if test="${fn:contains(memberDetail.member_info_detail_like_brand, '롤렉스')}" >checked</c:if>>롤렉스
-					<input type="checkbox" name="brand" value="까르띠에"
-					<c:if test="${fn:contains(memberDetail.member_info_detail_like_brand, '까르띠에')}" >checked</c:if>>까르띠에
-					<input type="checkbox" name="brand" value="프라다"
-					<c:if test="${fn:contains(memberDetail.member_info_detail_like_brand, '프라다')}" >checked</c:if>>프라다
-					<input type="checkbox" name="brand" value="미우미우"
-					<c:if test="${fn:contains(memberDetail.member_info_detail_like_brand, '미우미우')}" >checked</c:if>>미우미우
-					<input type="checkbox" name="brand" value="셀린느"
-					<c:if test="${fn:contains(memberDetail.member_info_detail_like_brand, '셀린느')}" >checked</c:if>>셀린느
-					<input type="checkbox" name="brand" value="톰브라운"
-					<c:if test="${fn:contains(memberDetail.member_info_detail_like_brand, '톰브라운')}" >checked</c:if>>톰브라운
-					<input type="checkbox" name="brand" value="발렌시아가"
-					<c:if test="${fn:contains(memberDetail.member_info_detail_like_brand, '발렌시아가')}" >checked</c:if>>발렌시아가
+					</td>
+				</tr>
+				<tr>
+					<th>브랜드</th>
+					<td><label for="member_info_detail_like_brand"></label> <input
+						type="checkbox" name="brand" value="에르메스"
+						<c:if test="${fn:contains(memberDetail.member_info_detail_like_brand, '에르메스')}" >checked</c:if>>에르메스
+						<input type="checkbox" name="brand" value="샤넬"
+						<c:if test="${fn:contains(memberDetail.member_info_detail_like_brand, '샤넬')}" >checked</c:if>>샤넬
+						<input type="checkbox" name="brand" value="루이비통"
+						<c:if test="${fn:contains(memberDetail.member_info_detail_like_brand, '루이비통')}" >checked</c:if>>루이비통
+						<input type="checkbox" name="brand" value="롤렉스"
+						<c:if test="${fn:contains(memberDetail.member_info_detail_like_brand, '롤렉스')}" >checked</c:if>>롤렉스
+						<input type="checkbox" name="brand" value="까르띠에"
+						<c:if test="${fn:contains(memberDetail.member_info_detail_like_brand, '까르띠에')}" >checked</c:if>>까르띠에
+						<input type="checkbox" name="brand" value="프라다"
+						<c:if test="${fn:contains(memberDetail.member_info_detail_like_brand, '프라다')}" >checked</c:if>>프라다
+						<input type="checkbox" name="brand" value="미우미우"
+						<c:if test="${fn:contains(memberDetail.member_info_detail_like_brand, '미우미우')}" >checked</c:if>>미우미우
+						<input type="checkbox" name="brand" value="셀린느"
+						<c:if test="${fn:contains(memberDetail.member_info_detail_like_brand, '셀린느')}" >checked</c:if>>셀린느
+						<input type="checkbox" name="brand" value="톰브라운"
+						<c:if test="${fn:contains(memberDetail.member_info_detail_like_brand, '톰브라운')}" >checked</c:if>>톰브라운
+						<input type="checkbox" name="brand" value="발렌시아가"
+						<c:if test="${fn:contains(memberDetail.member_info_detail_like_brand, '발렌시아가')}" >checked</c:if>>발렌시아가
 
-				</td>
-			</tr>
-			<tr>
-				<th>관심품목</th>
-				<td><label for="member_info_detail_like_category"></label> <input
-					type="checkbox" name="category" value="상의"
-					<c:if test="${fn:contains(memberDetail.member_info_detail_like_category, '상의')}" >checked</c:if>>상의
-					<input type="checkbox" name="category" value="하의"
-					<c:if test="${fn:contains(memberDetail.member_info_detail_like_category, '하의')}" >checked</c:if>>하의
-					<input type="checkbox" name="category" value="신발"
-					<c:if test="${fn:contains(memberDetail.member_info_detail_like_category, '신발')}" >checked</c:if>>신발
-					<input type="checkbox" name="category" value="잡화"
-					<c:if test="${fn:contains(memberDetail.member_info_detail_like_category, '잡화')}" >checked</c:if>>잡화
-				</td>
-			</tr>
+					</td>
+				</tr>
+				<tr>
+					<th>관심품목</th>
+					<td><label for="member_info_detail_like_category"></label> <input
+						type="checkbox" name="category" value="상의"
+						<c:if test="${fn:contains(memberDetail.member_info_detail_like_category, '상의')}" >checked</c:if>>상의
+						<input type="checkbox" name="category" value="하의"
+						<c:if test="${fn:contains(memberDetail.member_info_detail_like_category, '하의')}" >checked</c:if>>하의
+						<input type="checkbox" name="category" value="신발"
+						<c:if test="${fn:contains(memberDetail.member_info_detail_like_category, '신발')}" >checked</c:if>>신발
+						<input type="checkbox" name="category" value="잡화"
+						<c:if test="${fn:contains(memberDetail.member_info_detail_like_category, '잡화')}" >checked</c:if>>잡화
+					</td>
+				</tr>
+				<tr>
+					<td colspan="2"><input type="submit" value="수정하기"></td>
+				</tr>
+			</tbody>
 		</table>
-		<input type="submit" value="수정">
 
 	</form>
 	<!-- Footer영역과 상단 이동 버튼-->
