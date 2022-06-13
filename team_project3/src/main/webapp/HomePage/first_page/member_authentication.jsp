@@ -24,14 +24,13 @@ if(!AuthStatusResult){
 if(result == 0){ //인증실패 (잘못된 인증코드)
 	msg = "인증실패 (잘못된 인증코드)";
 	
-}else if (result == -1){ //인증실패 (인증 정보가 존재하지 않음)
+} else if (result == -1){ //인증실패 (인증 정보가 존재하지 않음)
 	msg = "인증실패 (인증 정보가 존재하지 않음)";
-}else{ // 인증성공
+} else { // 인증성공
 	msg = "인증성공";
 
 commit(con);
 close(con);	
-
 
 }
 

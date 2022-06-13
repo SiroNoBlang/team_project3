@@ -1,21 +1,12 @@
 package action;
 
 import java.io.PrintWriter;
-import java.security.InvalidKeyException;
-import java.security.NoSuchAlgorithmException;
-import java.security.PrivateKey;
-import java.security.PublicKey;
 
-import javax.crypto.BadPaddingException;
-import javax.crypto.IllegalBlockSizeException;
-import javax.crypto.NoSuchPaddingException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import googleSMTPAuthenticator.MyMessageDigest;
-import googleSMTPAuthenticator.RSACipher;
-import googleSMTPAuthenticator.RSAKeyGenerator;
 import svc.LoginProService;
 import vo.ActionForward;
 import vo.MemberBean;
@@ -44,10 +35,10 @@ public class LoginProAction implements Action {
 				HttpSession session = request.getSession();
 				session.setAttribute("sCode", isLogin.getMember_code());
 				session.setAttribute("sNickname", isLogin.getMember_nickname());
-				
 				forward = new ActionForward();
 				forward.setPath("MemberManagement.co");
 				forward.setRedirect(true);
+				
 			} else if(isLogin.getMember_service_log_status().equals("정상")) {
 				HttpSession session = request.getSession();
 				session.setAttribute("sCode", isLogin.getMember_code());

@@ -17,7 +17,6 @@ if(isFindId.equals("")) {
 	out.println("</script>");
 } else {
 	out.println("아이디는 '" + isFindId + "'입니다.");
-	
 }
 
 %>    

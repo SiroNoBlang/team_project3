@@ -1,3 +1,4 @@
+<%@page import="org.apache.ibatis.reflection.SystemMetaObject"%>
 <%@page import="svc.CheckNicknameService"%>
 <%@page import="dao.MemberDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -9,39 +10,38 @@ String nickname = request.getParameter("member_nickname");
 
 CheckNicknameService service = new CheckNicknameService();
 boolean isDuplicate = service.checkNickname(nickname);
+boolean result = true;
+String str = "";
 
 if(isDuplicate) { // 중복
-	out.println("이미 사용중인 닉네임");
-	response.setContentType("text/html; charset=UTF-8");
-	out.println("<script>");
-	out.println("var checkNickname = false");
-	out.println("</script>");
+	str = "이미 사용중인 닉네임";
+	result = false;
 } else { // 중복 아님
-	if(nickname.length()>=8 && nickname.length()<=16 ){
-		String[] spec = {"!", "@", "#", "$", "%", "^", "&", "*", "(", ")", "-", "_", "+", "=" ,"`" ,"~" ,"[" ,"{" ,"]" ,"}" ,";" ,":" ,"'" ,"\"" ,"," ,"<" ,"." ,">" ,"/" ,"?" ,"\\" ,"|"}; 
-		
-		for( String s : spec){
-			if(nickname.contains(s)){
-				if(s!=""){
-				out.println(s+" 사용불가");
-				response.setContentType("text/html; charset=UTF-8");
-				out.println("<script>");
-				out.println("var checkNickname = false");
-				out.println("</script>");
+	if (nickname.length() >= 8 && nickname.length() <= 16) {
+		String[] spec = { "!", "@", "#", "$", "%", "^", "&", "*", "(", ")", "-", "_", "+", "=", "`", "~", "[", "{", "]",
+		"}", ";", ":", "'", "\"", ",", "<", ".", ">", "/", "?", "\\", "|" };
+
+		for (String s : spec) {
+			if (nickname.contains(s)) {
+				if (s != "") {
+					str = s + "사용불가";
+					result = false;
 				}
-			}
+			} 
 		}
 		
-	}else{
-		out.println("8자 ~ 16자 닉네임 필수");
-		response.setContentType("text/html; charset=UTF-8");
-		out.println("<script>");
-		out.println("var checkNickname = false");
-		out.println("</script>");
+		if(result){
+			str = "닉네임 사용가능";
+		}
+
+	} else {
+		str = "8자 ~ 16자 닉네임 필수";
+		result = false;
 	}
-	response.setContentType("text/html; charset=UTF-8");
-	out.println("<script>");
-	out.println("var checkNickname = true");
-	out.println("</script>");
 }
+out.println(str);
+response.setContentType("text/html; charset=UTF-8");
+out.println("<script>");
+out.println("checkNickname = " + result);
+out.println("</script>");
 %>

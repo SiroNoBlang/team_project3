@@ -5,8 +5,6 @@ import java.sql.Connection;
 import java.util.ArrayList;
 
 import dao.MemberDAO;
-import vo.BuyDTO;
-import vo.SellerDTO;
 import vo.SellerProductDTO;
 
 import static db.JdbcUtil.*;
@@ -30,7 +28,6 @@ public class BuyListService {
 
 	//구매리스트 목록 담아오기
 	public ArrayList<SellerProductDTO> getBuyList(int pageNum, int listLimit, String code) {
-	System.out.println("BuyListService - getBuyList()");
 	
 	ArrayList<SellerProductDTO> buyList = null;
 	

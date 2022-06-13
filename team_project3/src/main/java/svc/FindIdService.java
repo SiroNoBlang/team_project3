@@ -9,7 +9,6 @@ import static db.JdbcUtil.*;
 public class FindIdService {
 
 	public String isFindId(String nickname, String email) {
-		System.out.println("FindIdService - isFindId");
 		
 		String isFindId ="";
 		
@@ -18,8 +17,6 @@ public class FindIdService {
 		memberDAO.setConnection(con);
 		
 		isFindId = memberDAO.isFindId(nickname, email);
-		
-		System.out.println("service : " + isFindId);
 		
 		close(con);
 		

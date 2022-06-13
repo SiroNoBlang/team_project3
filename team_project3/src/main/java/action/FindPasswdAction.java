@@ -6,15 +6,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import svc.FindPasswdService;
-import svc.LoginProService;
 import vo.ActionForward;
-import vo.MemberBean;
 
 public class FindPasswdAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		System.out.println("FindPasswdAction");
 		
 		ActionForward forward = null;
 		
@@ -29,7 +26,6 @@ public class FindPasswdAction implements Action {
 			PrintWriter out = response.getWriter();
 			out.println("<script>");
 			out.println("alert('이메일로 임시 비밀번호를 전송하였습니다!')");
-//			forward = new ActionForward("./", true);
 			out.println("location.href='./'");
 			out.println("</script>");
 		} else {

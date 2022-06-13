@@ -6,11 +6,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import svc.BuyListService;
-import svc.ProductConfirmListService;
 import vo.ActionForward;
-import vo.BuyDTO;
 import vo.PageInfo;
-import vo.SellerDTO;
 import vo.SellerProductDTO;
 
 public class BuyListAction implements Action {

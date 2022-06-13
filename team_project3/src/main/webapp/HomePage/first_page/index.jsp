@@ -11,11 +11,11 @@
 <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 <script src="HomePage/assets/js/jquery-3.6.0.js"></script>
 <script type="text/javascript">
-//==================================================================================제약조건
-// var isCheckConfirmPasswd = false, passSafe = false, isCheckEmail = false, checkNickname = false, checkId = false;
+//==================================================================================제약조건  
+var isCheckConfirmPasswd = false, passSafe = false, isCheckEmail = false, checkNickname = false, checkId = false;
 //==================================================================================제약조건
 
-
+	//패스워드 제약 조건
 	function checkPass(pass) {
 		var spanElem = document.getElementById("passSafe");
 		var lengthRegex = /^[A-Za-z0-9-!@#$%]{8,16}$/;
@@ -64,6 +64,7 @@
 		}
 	}
 	
+	//패스워드와 패스워드 일치여부
 	function checkPassResult(pass2){
 		var spanElem = document.getElementById("passCheck");
 		var pass = fr.join_member_passwd.value;
@@ -79,14 +80,17 @@
 		}
 	}
 	
-
+	//join버튼 클릭시 제출하기 버튼 숨기기
+	function submitHide(){
+		$('#checkSubmit').hide();
+	}
+	
+	//이용약관 체크박스 첫번째만 체크할 경우 제출하기 버튼 숨기기 & 두개 다 체크 될 경우 버튼 나타내기
 	var result ,result2;
 	function is_checked1() {
 		  
-		  // 1. checkbox element를 찾습니다.
 		  const checkbox = document.getElementById('Check1');
 
-		  // 2. checked 속성을 체크합니다.
 		  const is_checked = checkbox.checked;
 		  
 			 result = is_checked;
@@ -98,12 +102,12 @@
 			 }
 		  
 		}
+	
+	//이용약관 체크박스 두번째만 체크할 경우 제출하기 버튼 숨기기 & 두개 다 체크 될 경우 버튼 나타내기
 	function is_checked2() {
 		  
-		  // 1. checkbox element를 찾습니다.
 		  const checkbox = document.getElementById('Check2');
 
-		  // 2. checked 속성을 체크합니다.
 		  const is_checked = checkbox.checked;
 
 		  result2 = is_checked;
@@ -115,15 +119,14 @@
 			 }
 		  
 		}
+	
+	//이용약관 체크박스 전체동의 체크시 모든 버튼 체크되면서 제출하기 버튼 나타내기
 	function is_checked3() {
 		  
-		  // 1. checkbox element를 찾습니다.
 		  const checkbox = document.getElementById('CheckAll');
 
-		  // 2. checked 속성을 체크합니다.
 		  const is_checked = checkbox.checked;
 
-		  // 3. 결과를 출력합니다.
 			  document.getElementById('Check1').checked = is_checked;
 			  document.getElementById('Check2').checked = is_checked;
 		
@@ -135,11 +138,7 @@
 		 
 		}
 
-	function submitHide(){
-		$('#checkSubmit').hide();
-	}
-
-	
+	//닉네임 입력시 제약조건 
 	$(function(){
 		$("#member_nickname").on("keyup",function(){
 			let sendData = $("#fr").serialize();
@@ -152,8 +151,10 @@
 				async : false,
 				success:function(msg){
 					$("#nicknameResultArea").html(msg);
+					
 				},
 				error: function(xhr, textStatus, errorThrown){
+					$("#nicknameResultArea").empty();
 					$("#nicknameResultArea").html(
 							"xhr = " + xhr + "<br>"
 							+ "textStatus = " + textStatus + "<br>"
@@ -163,7 +164,7 @@
 		});
 	});		
 
-	
+	//아이디 입력시 제약조건
 	$(function(){
 		$("#join_member_id").on("keyup",function(){
 			let sendData = $("#fr").serialize();
@@ -187,9 +188,7 @@
 		});
 	});	
 	
-	
-	
-	
+	//이메일 입력시 제약조건
 	function checkEmail(email){
 		var spanElem = document.getElementById("emailCheck");
 		var specRegex = /@/;
@@ -204,33 +203,36 @@
 		}
 	}
 	
-//==================================================================================제약조건
-// 	function checkForm(){
-// 		//($('.username_input').attr("check_result") == "fail")
-// 		if(!checkNickname){
-// 			alert("닉네임 확인 필수!");
-// 			document.fr.member_nickname.focus();
-// 			return false;
-// 		} else if(!checkId){
-// 			alert("아이디 확인 필수!");
-// 			document.fr.join_member_id.focus();
-// 			return false;
-// 		} else if(!passSafe){
-// 			alert("패스워드 조건 확인 필수!");
-// 			document.fr.join_member_passwd.focus();
-// 			return false;
-// 		} else if(!isCheckConfirmPasswd){
-// 			alert("패스워드 확인 필수!");
-// 			document.fr.join_member_passwd_check.focus();
-// 			return false;
-// 		} else if (!isCheckEmail){
-// 			alert("이메일 확인 필수!");
-// 			document.fr.member_email1.focus();
-// 			return false;
-// 		}
-// 	}	
-//==================================================================================제약조건
+	// 제약조건
+	function checkForm(){
+		if(!checkNickname){ // 닉네임 제약조건
+			alert("닉네임 확인 필수!");
+			document.fr.member_nickname.focus();
+			return false;
+		} 
+		if(!checkId){ //아이디 제약조건
+			alert("아이디 확인 필수!");
+			document.fr.join_member_id.focus();
+			return false;
+		}
+		if(!passSafe){ //패스워드 제약조건
+			alert("패스워드 조건 확인 필수!");
+			document.fr.join_member_passwd.focus();
+			return false;
+		}
+		if(!isCheckConfirmPasswd){ //패스워드 확인 제약조건
+			alert("패스워드 확인 필수!");
+			document.fr.join_member_passwd_check.focus();
+			return false;
+		}
+		if (!isCheckEmail){ //이메일 제약조건
+			alert("이메일 확인 필수!");
+			document.fr.member_email1.focus();
+			return false;
+		}
+	}	
 	
+	//아이디찾기
 	$(function(){
 		$('#idFind_login').hide();
 		$("#idFind").on("click",function(){
@@ -255,6 +257,7 @@
 		});
 	});	
 	
+	//아이디찾기 버튼 클릭시 찾은 결과값 출력 
 	$(function(){
 		$("#idFind_login").on("click", function(){
 			location.href="#contact";
@@ -326,7 +329,7 @@
 						</div>
 						<div class="field half">
 							<label for="find_id_member_email">EMAIL</label>
-							<input type="email" name="find_id_member_email" id="find_id_member_email" />
+							<input type="email" name="find_id_member_email" id="find_id_member_email"  placeholder="xxx@xxx.xxx형식으로 입력하세요"/>
 						</div>
 					</div>
 					<ul class="actions">
@@ -343,7 +346,7 @@
 						</div>
 						<div class="field half">
 							<label for="find_passwd_member_email">EMAIL</label>
-							<input type="email" name="find_passwd_member_email" id="find_passwd_member_email" />
+							<input type="email" name="find_passwd_member_email" id="find_passwd_member_email" placeholder="xxx@xxx.xxx형식으로 입력하세요"/>
 						</div>
 					</div>
 					<ul class="actions">

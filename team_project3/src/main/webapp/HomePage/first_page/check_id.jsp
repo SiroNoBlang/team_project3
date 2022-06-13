@@ -9,40 +9,39 @@ String id = request.getParameter("join_member_id");
 
 CheckIdService service = new CheckIdService();
 boolean isDuplicate = service.checkId(id);
- 
-if(isDuplicate) { // 중복
-	out.println("이미 사용중인 아이디");
-	response.setContentType("text/html; charset=UTF-8");
-	out.println("<script>");
-	out.println("var checkId = false");
-	out.println("</script>");
+boolean result = true;
+String str = "";
+
+if (isDuplicate) { // 중복
+	str = "이미 사용중인 아이디";
+	result = false;
 } else { // 중복 아님
-	if(id.length()>=8 && id.length()<=16 ){
-		String[] spec = {"!", "@", "#", "$", "%", "^", "&", "*", "(", ")", "-", "_", "+", "=" ,"`" ,"~" ,"[" ,"{" ,"]" ,"}" ,";" ,":" ,"'" ,"\"" ,"," ,"<" ,"." ,">" ,"/" ,"?" ,"\\" ,"|"}; 
-		
-		for( String s : spec){
-			if(id.contains(s)){
-				if(s!=""){
-				out.println(s+" 사용불가");
-				response.setContentType("text/html; charset=UTF-8");
-				out.println("<script>");
-				out.println("var checkNickname = false");
-				out.println("</script>");
+	if (id.length() >= 8 && id.length() <= 16) {
+		String[] spec = { "!", "@", "#", "$", "%", "^", "&", "*", "(", ")", "-", "_", "+", "=", "`", "~", "[", "{", "]",
+		"}", ";", ":", "'", "\"", ",", "<", ".", ">", "/", "?", "\\", "|" };
+
+		for (String s : spec) {
+			if (id.contains(s)) {
+				if (s != "") {
+					str = s + "사용불가";
+					result = false;
 				}
 			}
 		}
 		
-	}else{
-		out.println("8자 ~ 16자 아이디 필수");
-		response.setContentType("text/html; charset=UTF-8");
-		out.println("<script>");
-		out.println("var checkId = false");
-		out.println("</script>");
+		if(result){
+			str = "아이디 사용가능";
+		}
+
+	} else {
+		str = "8자 ~ 16자 아이디 필수";
+		result = false;
 	}
+}
+	out.println(str);
 	response.setContentType("text/html; charset=UTF-8");
 	out.println("<script>");
-	out.println("var checkId = true");
+	out.println("checkId = " + result);
 	out.println("</script>");
-}
 %>
 

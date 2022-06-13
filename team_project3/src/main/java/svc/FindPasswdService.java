@@ -26,10 +26,6 @@ import googleSMTPAuthenticator.MyMessageDigest;
 public class FindPasswdService {
 
 	public boolean isFindPasswd(String id, String email, HttpServletRequest request) {
-		System.out.println("FindPasswdService - isFindPasswd");
-		
-		
-		
 		
 		boolean isFindPasswd = false;
 		
@@ -38,7 +34,7 @@ public class FindPasswdService {
 		
 		String algorithm = "SHA-256"; // 암호화 코드(MessageDigest)의 길이가 256 비트인 암호화 알고리즘을 지정
 		
-		String passwd = request.getParameter("login_member_passwd");; // 평문
+//		String passwd = request.getParameter("login_member_passwd");; // 평문
 		
 		MyMessageDigest mmd2 = new MyMessageDigest(algorithm, code);
 		String result2 = mmd2.getHashedData(); // 입력받은 패스워드 암호화 결과 리턴받기
@@ -54,8 +50,6 @@ public class FindPasswdService {
 		String receiver = email;
 		String content = "";
 
-		System.out.println(code);
-		
 			content = "임시비밀번호는 " + code + "입니다";
 			title = request.getParameter("find_passwd_member_id") + "님의 임시 비밀번호입니다.";
 			Connection con = getConnection();
@@ -65,8 +59,6 @@ public class FindPasswdService {
 			commit(con);
 			close(con);
 			
-
-
 		try{
 			// ------- 메일 전송에 필요한 설정 작업 -------
 			// 메일 전송 프로토콜 : SMTP(Simple Mail Tranfer Protocol) 
@@ -85,7 +77,6 @@ public class FindPasswdService {
 
 			//메일 서버에 대한 인증 정보를 관리하는 사용자 정의 클래스의 인스턴스 생성()
 			Authenticator authenticator = new GoogleSMTPAuthenticator(request); //업캐스팅
-			
 
 			// 자바 메일의 기본 전송 단위를 javax.mail.Session 객체 단위로 관리
 			// => Session 클래스의 getDefaultInstance() 메서드를 호출하여 파라미터로 서버 정보, 인증 정보 전달
@@ -128,11 +119,9 @@ public class FindPasswdService {
 			// javax.mail.Transport 클래스의 static 메서드 send() 메서드 호출
 			Transport.send(mailMessage);
 			
-			
 		}catch(Exception e){
 			e.printStackTrace();
 		}
-		
 		return isFindPasswd;
 	}
 
