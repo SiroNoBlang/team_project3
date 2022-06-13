@@ -94,6 +94,7 @@
 					        <div class="container">
 					            <div class="search-window">
 					                <form action="ProductSearch.co" class="formCss">
+					                	<input type="hidden"  name="cmStatus"  value="${param.cmStatus}">
 										<select name="searchType" id="product">
 										    <option value="sell_title" >상품명</option>
 										    <option value="sell_brand" <c:if test="${param.searchType eq 'sell_brand'}"> selected="selected"</c:if>>브랜드</option>

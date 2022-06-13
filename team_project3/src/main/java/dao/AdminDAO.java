@@ -1440,7 +1440,7 @@ public class AdminDAO {
 	}
 	
 	//검수현황 카레코리 - 검색어에 해당하는 게시물 수
-	public int selectConfirmSearchListCount(String tableName, String search, String searchType) {
+	public int selectConfirmSearchListCount(String tableName, String search, String searchType,String cmStatus) {
 		int listCount =  0;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -1448,9 +1448,19 @@ public class AdminDAO {
 		try {
 			con = getConnection();
 			
-			String sql = "SELECT COUNT(sell_num) FROM "+ tableName+ " WHERE " + searchType + " LIKE ?";
+			
+			
+			
+			String sql = "SELECT COUNT(sell_num) "
+					+ "FROM "+tableName+" JOIN sell_list "
+					+ "on sell_num = sell_list_num "
+					+ "WHERE sell_list_item_status = ? AND "+ searchType +" LIKE ?";
+					
+					
+//			String sql = "SELECT COUNT(sell_num) FROM "+ tableName+ " WHERE " + searchType + " LIKE ?";
 			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, "%" + search + "%");
+			pstmt.setString(1, cmStatus);
+			pstmt.setString(2, "%" + search + "%");
 			rs = pstmt.executeQuery();
 			
 			if(rs.next()) {
@@ -1468,7 +1478,7 @@ public class AdminDAO {
 	}
 
 	//검수현황 카테고리 - 검색어에 해당하는 게시물 
-	public ArrayList<SellerDTO> selectConfirmSearchList(int pageNum, int listLimit, String search, String searchType) {
+	public ArrayList<SellerDTO> selectConfirmSearchList(int pageNum, int listLimit, String search, String searchType, String cmStatus) {
 		ArrayList<SellerDTO> productConfirmSearch =null;
 		SellerDTO confirm = null;
 		PreparedStatement pstmt = null;
@@ -1480,13 +1490,14 @@ public class AdminDAO {
 			
 			String sql = "SELECT  a.sell_num, a.sell_category, a.sell_title, a.sell_brand, a.sell_write_date, c.sell_list_item_status,c.sell_list_approve_date "
 					+ "FROM sell AS a JOIN sell_list AS c ON a.sell_num = c.sell_list_num "
-					+ "WHERE "+ searchType + " LIKE ? "
+					+ "WHERE sell_list_item_status = ? AND "+ searchType + " LIKE ? "
 					+ "ORDER BY sell_num DESC LIMIT ?,?";
 			
 			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, "%" + search + "%");
-			pstmt.setInt(2, startRow);
-			pstmt.setInt(3, listLimit);
+			pstmt.setString(1, cmStatus);
+			pstmt.setString(2, "%" + search + "%");
+			pstmt.setInt(3, startRow);
+			pstmt.setInt(4, listLimit);
 			
 			rs = pstmt.executeQuery();
 			

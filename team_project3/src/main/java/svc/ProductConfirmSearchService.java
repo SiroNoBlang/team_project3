@@ -12,7 +12,7 @@ import vo.SellerDTO;
 
 public class ProductConfirmSearchService {
 
-	public int selectConfirmSearchListCount(String tableName, String search, String searchType) {
+	public int selectConfirmSearchListCount(String tableName, String search, String searchType,String cmStatus) {
 	int listCount =  0;
 		
 		Connection con = getConnection();
@@ -20,14 +20,14 @@ public class ProductConfirmSearchService {
 		
 		adminDAO.setConnection(con);
 		
-		listCount = adminDAO.selectConfirmSearchListCount(tableName,search,searchType);
+		listCount = adminDAO.selectConfirmSearchListCount(tableName,search,searchType,cmStatus);
 		
 		close(con);
 		
 		return listCount;
 	}
 
-	public ArrayList<SellerDTO> selectConfirmSearchList(int pageNum, int listLimit, String search, String searchType) {
+	public ArrayList<SellerDTO> selectConfirmSearchList(int pageNum, int listLimit, String search, String searchType,String cmStatus) {
 //		System.out.println("selectConfirmSearchList");
 		
 		ArrayList<SellerDTO> productConfirmSearch =null;
@@ -37,7 +37,7 @@ public class ProductConfirmSearchService {
 		
 		adminDAO.setConnection(con);
 		
-		productConfirmSearch = adminDAO.selectConfirmSearchList(pageNum, listLimit, search, searchType);
+		productConfirmSearch = adminDAO.selectConfirmSearchList(pageNum, listLimit, search, searchType, cmStatus);
 		
 		close(con);
 		

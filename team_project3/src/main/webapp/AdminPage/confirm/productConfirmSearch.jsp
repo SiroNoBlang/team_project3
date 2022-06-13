@@ -80,12 +80,22 @@
 				      </section>
 				</div>
 				<div class="card">
-					<div class="title">검수 목록</div>
+					<div class="title">
+					 <c:choose>
+							<c:when test="${param.cmStatus eq '판매중' }">
+								 검수완료 목록
+							</c:when>
+							<c:otherwise>
+								${param.cmStatus} 목록
+							</c:otherwise>
+						</c:choose> 
+					</div>
 					
 					<div id="board-search">
 					        <div class="container">
 					            <div class="search-window">
 					                <form action="ProductSearch.co" class="formCss">
+					                	<input type="hidden"  name="cmStatus"  value="${param.cmStatus}">
 										<select name="searchType" id="product">
 										    <option value="sell_title" >상품명</option>
 										    <option value="sell_brand" <c:if test="${param.searchType eq 'sell_brand'}"> selected="selected"</c:if>>브랜드</option>
@@ -143,7 +153,7 @@
     					 <section id="pageList">
 								<c:choose>
 									<c:when test="${pageNum > 1}">
-										<input type="button" value="이전" onclick="location.href='ProductSearch.co?page=${pageNum - 1}'">
+										<input type="button" value="이전" onclick="location.href='ProductSearch.co?page=${pageNum - 1}&cmStatus=${param.cmStatus}&searchType=${param.searchType}&search=${param.search}'">
 									</c:when>
 									<c:otherwise>
 										<input type="button" value="이전">
@@ -156,14 +166,14 @@
 											${i }
 										</c:when>
 										<c:otherwise>
-											<a href="ProductSearch.co?page=${i }">${i }</a>
+											<a href="ProductSearch.co?page=${i }&cmStatus=${param.cmStatus}&searchType=${param.searchType}&search=${param.search}">${i }</a>
 										</c:otherwise>
 									</c:choose>
 								</c:forEach>
 						
 								<c:choose>
 									<c:when test="${pageNum < maxPage}">
-										<input type="button" value="다음" onclick="location.href='ProductSearch.co?page=${pageNum + 1}'">
+										<input type="button" value="다음" onclick="location.href='ProductSearch.co?page=${pageNum + 1}&cmStatus=${param.cmStatus}&searchType=${param.searchType}&search=${param.search}'">
 									</c:when>
 									<c:otherwise>
 										<input type="button" value="다음">

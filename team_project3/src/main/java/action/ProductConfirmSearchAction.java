@@ -21,7 +21,9 @@ public class ProductConfirmSearchAction implements Action {
 		
 		String search = request.getParameter("search");
 		String searchType = request.getParameter("searchType");
+		String cmStatus = request.getParameter("cmStatus");
 		
+//		System.out.println(cmStatus);
 		String tableName = "sell";
 		
 //		System.out.println(search);
@@ -29,7 +31,7 @@ public class ProductConfirmSearchAction implements Action {
 		
 		//검색어에 해당하는 게시물 목록 갯수를 조회
 		ProductConfirmSearchService service = new ProductConfirmSearchService();
-		int listCount = service.selectConfirmSearchListCount(tableName,search, searchType);
+		int listCount = service.selectConfirmSearchListCount(tableName,search, searchType, cmStatus);
 		SellerDTO CountType = service.getListCountType();
 		
 		//검색어에 해당하는 게시물 목록 담아오기(검색어 페이징)
@@ -50,7 +52,7 @@ public class ProductConfirmSearchAction implements Action {
 		}
 		
 		PageInfo pageInfo = new PageInfo(pageNum, maxPage, startPage, endPage, listCount,listLimit);
-		ArrayList<SellerDTO> productConfirmSearch = service.selectConfirmSearchList(pageNum, listLimit, search, searchType);
+		ArrayList<SellerDTO> productConfirmSearch = service.selectConfirmSearchList(pageNum, listLimit, search, searchType,cmStatus);
 		
 		request.setAttribute("CountType", CountType); 
 		request.setAttribute("pageInfo", pageInfo);
