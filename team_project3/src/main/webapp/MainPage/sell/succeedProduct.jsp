@@ -8,21 +8,18 @@
 		
 String member_nickname =(String)session.getAttribute("sNickname");
 String sell_member_code =(String)session.getAttribute("sCode");
-
 int prev_acc_money = (int)request.getAttribute("member_info_detail_acc_money");
 SellerProductDTO sellerDTO = (SellerProductDTO)request.getAttribute("sellerDTO");
 MemberBean memberbean = (MemberBean)request.getAttribute("memberBean");
-int charge = sellerDTO.getSell_price() /10; //검수비 판매가격 /10
-int price = sellerDTO.getSell_price()+charge+3000;     //최종 판매가격+수수료+배송비
-// int point1 = memberbean.getMember_info_detail_point();
+
 %>
  
 <!DOCTYPE html>
 <html lang="en">
 <head>
 	<title>succeedProduct</title>
-<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>		<!-- 결제 기능 스크립트 -->
-<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>	<!-- 결제 기능 스크립트 -->
+<!-- <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>		결제 기능 스크립트 -->
+<!-- <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>	결제 기능 스크립트 -->
     
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -375,7 +372,7 @@ int price = sellerDTO.getSell_price()+charge+3000;     //최종 판매가격+수
 								title:${sellerDTO.sell_title}<br>
 								brand:${sellerDTO.sell_brand}<br>
 								size: ${sellerDTO.sell_size}<br>
-								price:${sellerDTO.sell_price}<br>
+								price:${sellerDTO.sell_price *10000}<br>
 							
 							</div>
 							
@@ -388,19 +385,19 @@ int price = sellerDTO.getSell_price()+charge+3000;     //최종 판매가격+수
 								<span class="stext-110 cl2">
 								</span><br>
 								<span class="stext-110 cl2">
-									address: ${memberBean.member_info_address}
+									address: ${post.address_code}
 								</span><br>
 								<span class="stext-110 cl2">
-									address:${memberBean.member_info_address_detail } 
+									address:${post.address_detail} 
 								</span><br>
 								<span class="stext-110 cl2">
-									post: ${memberBean.member_info_post_code}
+									post: ${post.post_code}
 								</span><br> 
 								<span class="stext-190 cl2">
- 									name: ${memberBean.member_info_name}
+ 									name: ${post.address_name}
 								</span><br>	
 								<span class="stext-190 cl2">
- 									phone:${memberBean.member_info_phone } 
+ 									phone:${post.address_phone} 
 								</span><br>	
   					   		</div>
 							<div class="flex-w flex-t bor12 p-t-15 p-b-30">
@@ -411,7 +408,7 @@ int price = sellerDTO.getSell_price()+charge+3000;     //최종 판매가격+수
 								<span class="stext-110 cl2">
 								</span><br>
 								<span class="stext-110 cl2">
-									사용한 포인트  ${param.point }
+									사용한 포인트  ${param.point}
 								</span><br>
 								<span class="stext-110 cl2">
 										
@@ -420,7 +417,7 @@ int price = sellerDTO.getSell_price()+charge+3000;     //최종 판매가격+수
 									회원등급 : ${memberBean.grade_name }   
 								</span><br> 
 								<span class="stext-190 cl2">
- 									최종금액 : ${param.member_info_detail_acc_money}  <!-- 모든 할인 검수비 적용 후 최종 가격 -->
+ 									최종금액 : ${Math.ceil(param.member_info_detail_acc_money*10000)}  <!-- 모든 할인 검수비 적용 후 최종 가격 -->
 								</span><br>	
 								
 <!--  									<P>우리 COZA_STORE에서는 택배비+검수 수수료 합산하여 결제 됨을 알려드립니다.</P> -->
@@ -454,14 +451,15 @@ int price = sellerDTO.getSell_price()+charge+3000;     //최종 판매가격+수
 								</span>
 							</div>
 						</div>
-					     <input type="button" value="결제하기" onclick="location.href='MainPage.pr'"  class="flex-c-m stext-101 cl0 size-116 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer"> 
+					     <input type="button" value="메인페이지" onclick="location.href='MainPage.pr'"  class="flex-c-m stext-101 cl0 size-116 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer"> 
 					 
 <!-- 					  <input type="button" value="마이페이지" onclick="location.href='MainPage.pr'"  class="flex-c-m stext-101 cl0 size-116 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer">  -->
 					</div>
 				</div>
 			</div>
 		</div>
-<!-- 	</form> -->
+	</div>
+
 
 	
 	<script>
@@ -511,7 +509,7 @@ int price = sellerDTO.getSell_price()+charge+3000;     //최종 판매가격+수
                     }
                 });
                 //성공시 이동할 페이지
-//                 location.href='SucceedProductAction.pr'
+                 location.href='SucceedProductAction.pr'
             } else {
                 msg = '결제에 실패하였습니다.';
                 msg += '에러내용 : ' + rsp.error_msg;
@@ -666,7 +664,6 @@ int price = sellerDTO.getSell_price()+charge+3000;     //최종 판매가격+수
 					<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
 Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | Made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a> &amp; distributed by <a href="https://themewagon.com" target="_blank">ThemeWagon</a>
 <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-
 				</p>
 			</div>
 		</div>
@@ -690,26 +687,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 <!--===============================================================================================-->
 	<script src="MainPage/vendor/select2/select2.min.js"></script>
 <!--=========================488<포인트차감>==========================================================-->	
-	<script>
-		function sub() {
-			var prePoint  = 6400;
-			var subPoint  = document.getElementById("MemberPoint").value;//사용 할 포인트
-			document.getElementById("realPoint").value =	prePoint - subPoint ;//차감후 남은 포인트
-			document.getElementById("point").value = subPoint;//최종 결제창에 띄울 포인트(사용할 포인트)
-			
-			$("#realPoint").append("남은포인트:"+document.getElementById("realPoint").value);
-		}
-		
-	
-	</script>
-	<script>
-		$(".js-select2").each(function(){
-			$(this).select2({
-				minimumResultsForSearch: 20,
-				dropdownParent: $(this).next('.dropDownSelect2')
-			});
-		})
-	</script>
+
 <!--===============================================================================================-->
 	<script src="MainPage/vendor/MagnificPopup/jquery.magnific-popup.min.js"></script>
 <!--===============================================================================================-->

@@ -18,6 +18,7 @@ import action.ProductListProAction;
 
 import action.ProductRecUpdateProAction;
 import action.ProductSearchProAction;
+import action.SelectSellListAction;
 import action.SellMemberGradeAction;
 import action.SellRecentPostAddressAction;
 import action.SendAdminAction;
@@ -38,12 +39,12 @@ public class ProductFrontController extends HttpServlet {
 		Action action = null;
 		ActionForward forward = null;
 
-		if (command.equals("/MainPage.pr")) { // 로그인 후 메인 페이지
+		if (command.equals("/MainPage.pr")) { // 로그인 후 메인 페이지 
 			forward = new ActionForward();
 			forward.setPath("MainPage/first_page/index.jsp");
 			forward.setRedirect(false);
 
-		} else if (command.equals("/SellForm.pr")) { // 상품 판매글(FORM.JSP)
+		}  else if (command.equals("/SellForm.pr")) { // 상품 판매글(FORM.JSP)
 
 			forward = new ActionForward();
 			forward.setPath("MainPage/sell/sell_write.jsp");
@@ -176,16 +177,8 @@ public class ProductFrontController extends HttpServlet {
 			forward = new ActionForward();
 			forward.setPath("MainPage/sell/sellMemberGradeForm.jsp");
 			forward.setRedirect(false);
-
-		}else if (command.equals("/SucceedProduct.pr")) { // 쇼핑 결제 완료 페이지
-
-			forward = new ActionForward();
-			forward.setPath("MainPage/sell/succeedProduct.jsp");
-			forward.setRedirect(false);
-
-		} else if (command.equals("/SucceedProductAction.pr")) { // 쇼핑 결제 완료 페이지(Action에서 UPDATE 작업 진행 후 .JSP(file)로 값
-																	// 가져옴)
-
+		}
+		 else if (command.equals("/SucceedProductAction.pr")) { 
 			action = new ShoppoingSucceedAction();
 
 			try {
@@ -193,14 +186,14 @@ public class ProductFrontController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-
-		} else if (command.equals("/SucceedProduct.pr")) { // 쇼핑 결제 완료 페이지
-
+		}else if (command.equals("/SucceedProduct.pr")) { /// 쇼핑 결제 완료 페이지(Action에서 UPDATE 작업 진행 후 .JSP(file)로 값
+														// 가져옴)
 			forward = new ActionForward();
 			forward.setPath("MainPage/sell/succeedProduct.jsp");
 			forward.setRedirect(false);
 
-		} else if (command.equals("/Contact.pr")) { // 회사 위치 등 건의 사항 메일 보내는 페이지 이동
+		}
+		else if (command.equals("/Contact.pr")) { // 회사 위치 등 건의 사항 메일 보내는 페이지 이동
 
 			action = new ContactAction();
 

@@ -8,6 +8,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import vo.AddressVO;
 import vo.MemberBean;
 import vo.SellerAddress;
 import vo.SellerDTO;
@@ -43,7 +44,7 @@ public class SellerDAO {
 
 		try {
 
-			String sql = "INSERT INTO sell VALUES (?,?,?,?,?,?,?,?,?,?,REPLACE(now(),'-',''),?)";
+			String sql = "INSERT INTO sell VALUES (?,?,?,?,?,?,?,?,?,?,REPLACE(now(),'-',''),?,?)";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, num);
 			pstmt.setString(2, seller.getSell_member_code());
@@ -56,7 +57,7 @@ public class SellerDAO {
 			pstmt.setString(9, seller.getSell_size());
 			pstmt.setString(10, seller.getSell_brand());
 			pstmt.setInt(11, 0); // 조회수 컬럼
-
+			pstmt.setInt(12, 0);
 			pstmt.executeUpdate();
 			System.out.println("INSERT -SELL");
 			for (SellerimgDTO sellimg : sellimglist) {
@@ -123,8 +124,8 @@ public class SellerDAO {
 	public ArrayList<SellerProductDTO> selectArticleList(int pageNum, int listLimit) {
 		ArrayList<SellerProductDTO> articleList = null;
 
-		PreparedStatement pstmt = null , pstmt1 =null;
-		ResultSet rs = null , rs1=null;
+		PreparedStatement pstmt = null, pstmt1 = null;
+		ResultSet rs = null, rs1 = null;
 
 		// 조회 시작 게시물 번호(행 번호) 계산
 		int startRow = (pageNum - 1) * listLimit;
@@ -137,10 +138,9 @@ public class SellerDAO {
 //			        GROUP BY sell_img_real_num  
 // 				ORDER BY sell_img_real_num ,sell_img_num DESC  )
 //				ORDER BY a.sell_num DESC LIMIT 0,11;
-		
-		
+
 		try {
-			String sql="SELECT a.sell_num, a.sell_size , a.sell_category, a.sell_category_detail, a.sell_title, a.sell_color, a.sell_brand, a.sell_price, (SELECT COUNT(*) FROM like_list WHERE like_list_item_num= a.sell_num ) AS sell_likecount , a.sell_readcount, a.sell_member_code,"
+			String sql = "SELECT a.sell_num, a.sell_size , a.sell_category, a.sell_category_detail, a.sell_title, a.sell_color, a.sell_brand, a.sell_price, (SELECT COUNT(*) FROM like_list WHERE like_list_item_num= a.sell_num ) AS sell_likecount , a.sell_readcount, a.sell_member_code,"
 					+ "	b.sell_img_name, b.sell_img_real_name ,b.sell_img_real_num ,b.sell_img_num,b.sell_img_name,b.sell_img_real_name,"
 					+ "	c.sell_list_num, c.sell_list_item_status"
 					+ "	FROM sell AS a JOIN sell_img AS b ON a.sell_num = b.sell_img_real_num JOIN sell_list AS c ON a.sell_num = c.sell_list_num"
@@ -174,7 +174,7 @@ public class SellerDAO {
 				article.setSell_category(rs.getString("Sell_category"));
 				article.setSell_category_detail(rs.getString("Sell_category_detail"));
 				article.setSell_likecount(rs.getInt("sell_likecount"));
-				
+
 				articleList.add(article);
 
 			}
@@ -256,7 +256,7 @@ public class SellerDAO {
 
 	}
 
-	public ArrayList<SellerProductDTO> selectProductRe(String sell_brand, int sell_num) {   //상세판매 페이지에서 관심상품 뿌리는기능
+	public ArrayList<SellerProductDTO> selectProductRe(String sell_brand, int sell_num) { // 상세판매 페이지에서 관심상품 뿌리는기능
 		ArrayList<SellerProductDTO> productarr = new ArrayList<SellerProductDTO>();
 		SellerProductDTO ProductRe = null;
 		PreparedStatement pstmt = null;
@@ -267,8 +267,7 @@ public class SellerDAO {
 		try {
 			String sql = "SELECT a.sell_num, a.sell_size , a.sell_title, a.sell_brand, a.sell_price, b.sell_img_name, b.sell_img_real_name "
 					+ "FROM sell AS a JOIN sell_img AS b ON a.sell_num = b.sell_img_real_num WHERE sell_num !=? "
-					+ " AND sell_brand Like '%" + sell_brand + "%' "
-				    + " LIMIT 0,6";
+					+ " AND sell_brand Like '%" + sell_brand + "%' " + " LIMIT 0,6";
 
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, sell_num);
@@ -457,9 +456,9 @@ public class SellerDAO {
 		int updateCount = 0;
 
 		try {
-			String sql ="UPDATE   member_info_detail"
-					+ "	SET member_info_detail_point= b.member_info_detail_point - ?,member_info_detail_acc_money= b.member_info_detail_acc_money + ?"
-					+ "	WHERE member_info_code= ? ";
+			String sql = "UPDATE   member_info_detail"
+					+ "	SET member_info_detail_point= member_info_detail_point - ?,member_info_detail_acc_money= member_info_detail_acc_money + ?"
+					+ "	WHERE member_info_detail_code= ? ";
 
 			pstmt = con.prepareStatement(sql);
 //			pstmt.setString(1, memberBeanIm.getMember_info_name());
@@ -467,9 +466,9 @@ public class SellerDAO {
 //			pstmt.setString(3, memberBeanIm.getMember_info_post_code());
 //			pstmt.setString(4, memberBeanIm.getMember_info_address());
 //			pstmt.setString(5, memberBeanIm.getMember_info_address_detail());
-			pstmt.setInt(6, memberBeanIm.getMember_info_detail_point());
-			pstmt.setInt(7, memberBeanIm.getMember_info_detail_acc_money());
-			pstmt.setString(8, memberBeanIm.getMember_code());
+			pstmt.setInt(1, memberBeanIm.getMember_info_detail_point());
+			pstmt.setInt(2, memberBeanIm.getMember_info_detail_acc_money());
+			pstmt.setString(3, memberBeanIm.getMember_code());
 
 			updateCount = pstmt.executeUpdate();
 
@@ -529,7 +528,7 @@ public class SellerDAO {
 					+ "	FROM member_info AS a JOIN member_info_detail AS b ON a.member_info_code=b.member_info_detail_code"
 					+ "	JOIN grade AS c ON b.member_info_detail_acc_money BETWEEN c.lowest_acc_money AND c.highest_acc_money"
 					+ " WHERE member_info_code=?";
-					
+
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, member_code);
 			rs = pstmt.executeQuery();
@@ -659,166 +658,184 @@ public class SellerDAO {
 	}
 
 	// 결제버튼 클릭시 배송지 Address table에 자동저장 ---> 기본 member에있는 주소는 마이페이지에서 수정가능
-	 public void insertAddress(SellerAddress address) {  
-			System.out.println("sellerDAO-insertAddress");
-			PreparedStatement pstmt = null;
-			ResultSet rs =null;
-			int num=0;
-			try {
-				String sql = "SELECT MAX(address_num) FROM address";
-				pstmt = con.prepareStatement(sql);
-				rs = pstmt.executeQuery();
-				// rs.next()메서드를 통해 다음 레코드 존재 여부 확인
-				// =>다음 레코드가 존재하는 경우 기존 게시물이 있다는 의미이므로
-				// 조회된 값(num의 최대값) +1을 num 변수에 저장
-				if (rs.next()) {// 등록된 게시물이 하나라도 존재할 경우(= 최대값이 조회될 경우)
-					num = rs.getInt(1) + 1;
-				}
-				
-				 sql ="INSERT INTO address VALUES(?,?,?,?,?,?,?,REPLACE(now(),'-',''))";
-				 pstmt = con.prepareStatement(sql);
-				 pstmt.setInt(1,num);
-				 pstmt.setString(2,address.getMember_code());
-				 pstmt.setString(3,address.getPost_code());
-				 pstmt.setString(4,address.getAddress_code());
-				 pstmt.setString(5,address.getAddress_detail());
-				 pstmt.setString(6,address.getAddress_name());
-				 pstmt.setString(7,address.getAddress_phone());
-				 pstmt.executeUpdate();
-			} catch (SQLException e) {
-				System.out.println("SQL 구문오류!");
-				e.printStackTrace();
-			}
-		}  
-	// 배송지 주소 찾기
-	 public ArrayList< SellerAddress>  findAddress(String sell_member_code) {  
-			System.out.println("sellerDAO-findAddress");
-			ArrayList< SellerAddress> addressArr = null;		 
-			SellerAddress address =null;
-			PreparedStatement pstmt =null;
-			ResultSet rs = null;
-	
-			try {
-				String sql="SELECT  member_code, post_code, address_code, address_detail, address_name, address_phone"
-						+ " FROM address"
-						+ " WHERE member_code=?"
-						+ "ORDER BY address_num DESC "
-						+ "LIMIT 0, 5";
-				pstmt=con.prepareStatement(sql);
-				pstmt.setString(1, sell_member_code);
-				
-				addressArr = new ArrayList<SellerAddress>();	
-				rs = pstmt.executeQuery();
-				
-				while(rs.next()) {
-					address = new SellerAddress();
-					address.setMember_code(rs.getString("member_code"));
-					address.setAddress_code(rs.getString("address_code"));
-					address.setAddress_detail(rs.getString("address_detail"));
-					address.setPost_code(rs.getString("post_code"));
-					address.setAddress_phone(rs.getString("address_phone"));
-					address.setAddress_name(rs.getString("address_name"));
-					
-					addressArr.add(address);
-				}
-				
-				
-				
-			} catch (Exception e) {
-				
-				e.printStackTrace();
-			}finally {
-				close(rs);
-				close(pstmt);
-			}
-			return addressArr;
-		}
-
-		//grade table의 모든 컬럼의 데이터를 가져와 등급 알아볼 때 기준으로 사용할 쿼리
-		public ArrayList<MemberBean> memberGrade() {  
-			System.out.println("DAO 작업");
-			ArrayList<MemberBean> memberArr = new ArrayList<MemberBean>();
-			MemberBean bean = null;
-			PreparedStatement pstmt= null;
-			ResultSet rs =null;
-			
-			try {
-		
-				String sql ="SELECT * FROM grade";
-				pstmt=con.prepareStatement(sql);
-				rs=pstmt.executeQuery();
-				while(rs.next()) {
-					bean = new MemberBean();
-					bean.setGrade_name(rs.getString("grade_name"));
-					bean.setLowest_acc_money(rs.getInt("lowest_acc_money"));
-					bean.setHighest_acc_money(rs.getInt("highest_acc_money"));
-					bean.setDiscount_rate(rs.getInt("discount_rate"));
-					memberArr.add(bean);
-				}			
-//				system.out.println(memberarr);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}finally {
-				
-				close(rs);
-				close(pstmt);
-			}
-			
-			return memberArr;
-		}
-
-		
-
-
-		 //기존 회원의 등급정보를 가져옴 (shoping_cart.jsp) 자신의 등급 알아보기 기능
-	public MemberBean memberHasGrade(String member_code) {   
-			MemberBean member =new MemberBean();
-			PreparedStatement pstmt =null;
-			ResultSet rs =null; 
-			
-			try {
-				String sql="SELECT a.member_info_detail_acc_money ,b.grade_name, b.lowest_acc_money, b.highest_acc_money ,b.discount_rate"
-						+ " FROM member_info_detail AS a JOIN grade AS b"
-						+ " ON a.member_info_detail_acc_money BETWEEN b.lowest_acc_money AND b.highest_acc_money "
-						+ " WHERE member_info_detail_code = ? ";
-				pstmt=con.prepareStatement(sql);
-				pstmt.setString(1, member_code);
-				rs=pstmt.executeQuery();
-				if(rs.next()) {
-					
-					member.setMember_info_detail_acc_money(rs.getInt("member_info_detail_acc_money"));
-					member.setGrade_name(rs.getString("grade_name"));
-					member.setLowest_acc_money(rs.getInt("lowest_acc_money"));
-					member.setHighest_acc_money(rs.getInt("highest_acc_money"));
-				    member.setDiscount_rate(rs.getInt("discount_rate"));  
-					}
-				
-				} catch (Exception e) {
-				e.printStackTrace();
-			}finally {
-				close(rs);
-				close(pstmt);
-			}
-				
-		
-			return member;
-		}
-
-	public int recCeck(String sCode, int sell_num) {  //좋아요 확인 (true/false) 매서드
-		int selectCount = 0;
-		PreparedStatement pstmt =null;
-		ResultSet rs =null;
-		
+	public void insertAddress(SellerAddress address) {
+		System.out.println("sellerDAO-insertAddress");
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		int num = 0;
 		try {
-			String sql ="SELECT * FROM like_list  "
-					  +" WHERE like_list_member_code = ? AND  like_list_item_num=?";
-			pstmt=con.prepareStatement(sql);
+			String sql = "SELECT MAX(address_num) FROM address";
+			pstmt = con.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			// rs.next()메서드를 통해 다음 레코드 존재 여부 확인
+			// =>다음 레코드가 존재하는 경우 기존 게시물이 있다는 의미이므로
+			// 조회된 값(num의 최대값) +1을 num 변수에 저장
+			if (rs.next()) {// 등록된 게시물이 하나라도 존재할 경우(= 최대값이 조회될 경우)
+				num = rs.getInt(1) + 1;
+			}
+
+			sql = "INSERT INTO address VALUES(?,?,?,?,?,?,?)";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, num);
+			pstmt.setString(2, address.getMember_code());
+			pstmt.setString(3, address.getPost_code());
+			pstmt.setString(4, address.getAddress_code());
+			pstmt.setString(5, address.getAddress_detail());
+			pstmt.setString(6, address.getAddress_name());
+			pstmt.setString(7, address.getAddress_phone());
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			System.out.println("SQL 구문오류!");
+			e.printStackTrace();
+		}
+	}
+
+	// 배송지 주소 찾기
+	public ArrayList<SellerAddress> findAddress(String sell_member_code) {
+		System.out.println("sellerDAO-findAddress");
+		ArrayList<SellerAddress> addressArr = null;
+		SellerAddress address = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+			String sql = "SELECT  DISTINCT address_code, post_code, member_code,  address_detail, address_name, address_phone"
+					 + "  FROM address  WHERE member_code=? ORDER BY address_num DESC LIMIT 0, 5";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, sell_member_code);
+
+			addressArr = new ArrayList<SellerAddress>();
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				address = new SellerAddress();
+				address.setMember_code(rs.getString("member_code"));
+				address.setAddress_code(rs.getString("address_code"));
+				address.setAddress_detail(rs.getString("address_detail"));
+				address.setPost_code(rs.getString("post_code"));
+				address.setAddress_phone(rs.getString("address_phone"));
+				address.setAddress_name(rs.getString("address_name"));
+
+				addressArr.add(address);
+			}
+
+		} catch (Exception e) {
+
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		return addressArr;
+	}
+
+	// grade table의 모든 컬럼의 데이터를 가져와 등급 알아볼 때 기준으로 사용할 쿼리
+	public ArrayList<MemberBean> memberGrade() {
+		System.out.println("DAO 작업");
+		ArrayList<MemberBean> memberArr = new ArrayList<MemberBean>();
+		MemberBean bean = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+
+			String sql = "SELECT * FROM grade LIMIT 0,7";
+			pstmt = con.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				bean = new MemberBean();
+				bean.setGrade_name(rs.getString("grade_name"));
+				bean.setLowest_acc_money(rs.getInt("lowest_acc_money"));
+				bean.setHighest_acc_money(rs.getInt("highest_acc_money"));
+				bean.setDiscount_rate(rs.getInt("discount_rate"));
+				memberArr.add(bean);
+			}
+//				system.out.println(memberarr);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+
+			close(rs);
+			close(pstmt);
+		}
+
+		return memberArr;
+	}
+
+	// 기존 회원의 등급정보를 가져옴 (shoping_cart.jsp) 자신의 등급 알아보기 기능
+	public MemberBean memberHasGrade(String member_code) {
+		MemberBean member = new MemberBean();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+			String sql = "SELECT a.member_info_detail_acc_money ,b.grade_name, b.lowest_acc_money, b.highest_acc_money ,b.discount_rate"
+					+ " FROM member_info_detail AS a JOIN grade AS b"
+					+ " ON a.member_info_detail_acc_money BETWEEN b.lowest_acc_money AND b.highest_acc_money "
+					+ " WHERE member_info_detail_code = ? ";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, member_code);
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+
+				member.setMember_info_detail_acc_money(rs.getInt("member_info_detail_acc_money"));
+				member.setGrade_name(rs.getString("grade_name"));
+				member.setLowest_acc_money(rs.getInt("lowest_acc_money"));
+				member.setHighest_acc_money(rs.getInt("highest_acc_money"));
+				member.setDiscount_rate(rs.getInt("discount_rate"));
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+
+		return member;
+	}
+
+	//구매완료 시, 배송지 정보 뿌려줄 기능
+	public AddressVO getAddress() {
+		AddressVO post = new AddressVO();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			String sql =" SELECT * FROM address WHERE address_num=(select MAX(address_num) from address) ";
+			pstmt = con.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				post.setAddress_code(rs.getString("address_code"));
+				post.setAddress_detail(rs.getString("address_detail"));
+				post.setPost_code(rs.getString("post_code"));
+				post.setAddress_name(rs.getString("address_name"));
+				post.setAddress_phone(rs.getString("address_phone"));
+			}
+		} catch (Exception e) {
+			System.out.println("SQL구문오류 - getAddress()");
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+
+		return post;
+	}
+
+	public int recCeck(String sCode, int sell_num) { // 좋아요 확인 (true/false) 매서드
+		int selectCount = 0;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+			String sql = "SELECT * FROM like_list  " + " WHERE like_list_member_code = ? AND  like_list_item_num=?";
+			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, sCode);
 			pstmt.setInt(2, sell_num);
-			
-			rs=pstmt.executeQuery();
-			if(rs.next()) {
-				selectCount =1;
+
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				selectCount = 1;
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -826,32 +843,28 @@ public class SellerDAO {
 		return selectCount;
 	}
 
-	public void recUpdate(String sCode, int sell_num) {  //좋아요 실행(INSERT)
-		PreparedStatement pstmt =null;
-		
+	public void recUpdate(String sCode, int sell_num) { // 좋아요 실행(INSERT)
+		PreparedStatement pstmt = null;
+
 		try {
-			String sql="INSERT INTO like_list VALUES(?,?)";
-			pstmt=con.prepareStatement(sql);
+			String sql = "INSERT INTO like_list VALUES(?,?)";
+			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, sCode);
 			pstmt.setInt(2, sell_num);
 			pstmt.executeUpdate();
-			
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
-		
-		
+
 	}
 
-	public void reDelete(String sCode, int sell_num) {  //좋아요 취소(DELETE)
-		PreparedStatement pstmt =null;
-		
-		
+	public void reDelete(String sCode, int sell_num) { // 좋아요 취소(DELETE)
+		PreparedStatement pstmt = null;
+
 		try {
-			String sql="DELETE FROM like_list "
-					 +" WHERE like_list_member_code = ? AND  like_list_item_num=?";
-			pstmt=con.prepareStatement(sql);
+			String sql = "DELETE FROM like_list " + " WHERE like_list_member_code = ? AND  like_list_item_num=?";
+			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, sCode);
 			pstmt.setInt(2, sell_num);
 			pstmt.executeUpdate();
@@ -860,28 +873,27 @@ public class SellerDAO {
 		}
 	}
 
-	public int likeCount(int sell_num) { //판매번호를 통하여 좋아요 갯수 구하기
+	public int likeCount(int sell_num) { // 판매번호를 통하여 좋아요 갯수 구하기
 		int likeCount = 0;
-		PreparedStatement pstmt =null;
-		ResultSet rs =null;
-		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
 		try {
-			String sql="SELECT COUNT(*) FROM like_list WHERE like_list_item_num= ?";
-			pstmt=con.prepareStatement(sql);
-			pstmt.setInt(1,sell_num);
-			rs=pstmt.executeQuery();
-			if(rs.next()) {
+			String sql = "SELECT COUNT(*) FROM like_list WHERE like_list_item_num= ?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, sell_num);
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
 				likeCount = rs.getInt(1);
 			}
-				
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
-		
+
 		return likeCount;
 	}
-	
+
 	public ArrayList<SellerProductDTO> BrandArticleList(int pageNum, int listLimit, String brand) {
 		ArrayList<SellerProductDTO> productBrandList = null;
 
@@ -902,7 +914,6 @@ public class SellerDAO {
 			pstmt.setString(1, brand);
 			pstmt.setInt(2, startRow);
 			pstmt.setInt(3, listLimit);
-				
 
 			rs = pstmt.executeQuery();
 
@@ -940,13 +951,5 @@ public class SellerDAO {
 		return productBrandList;
 
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
 }

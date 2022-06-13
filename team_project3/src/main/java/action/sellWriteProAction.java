@@ -36,7 +36,7 @@ public class sellWriteProAction implements Action {
 
 		// ServletContext 객체의 getRealPath() 메서드를 호출
 		String realPath = context.getRealPath(uploadPath); // 가상의 업로드 폴더명을 파라미터로 전달
-
+		System.out.println("저장"+uploadPath);
 		// D:\Developer\workspace_teamProject\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\team_project3\Upload\sell_img
 		// => 실제 업로드 될 폴더 위치(워크스페이스 내의 프로젝트 폴더에 있는 upload 폴더는 가상 폴더)
 
@@ -59,7 +59,8 @@ public class sellWriteProAction implements Action {
 		seller.setSell_size(multi.getParameter("sell_size"));
 		seller.setSell_brand(multi.getParameter("sell_brand"));
 		// 주의! 파일 정보는 getParameter() 메서드로 가져올 수 없으며 별도의 추가 작업 필요
-		seller.setSell_price(Integer.parseInt(multi.getParameter("sell_price")));
+		int parsingPrice = (Integer.parseInt(multi.getParameter("sell_price")));
+		seller.setSell_price(parsingPrice/10000);
 		seller.setSell_category(multi.getParameter("sell_category"));
 		seller.setSell_category_detail(multi.getParameter("sell_category_detail"));
 		seller.setSell_list_item_status("검수중"); // 글작업수행 후 검수중으로 바꿔줘야됨. 현재 관리자페이지 관여없어서 강제 판매중.

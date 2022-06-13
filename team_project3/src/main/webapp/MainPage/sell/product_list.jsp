@@ -121,31 +121,6 @@ function filter(value){
       <!-- Header desktop -->
       <div class="container-menu-desktop">
          <!-- Topbar -->
-<!--          <div class="top-bar"> -->
-<!--             <div class="content-topbar flex-sb-m h-full container"> -->
-<!--                <div class="left-top-bar"> -->
-<!--                   Free shipping for standard order over $100 -->
-<!--                </div> -->
-
-<!--                <div class="right-top-bar flex-w h-full"> -->
-<!--                   <a href="#" class="flex-c-m trans-04 p-lr-25"> -->
-<!--                      Help & FAQs -->
-<!--                   </a> -->
-
-<!--                   <a href="#" class="flex-c-m trans-04 p-lr-25"> -->
-<!--                      My Account -->
-<!--                   </a> -->
-
-<!--                   <a href="#" class="flex-c-m trans-04 p-lr-25"> -->
-<!--                      EN -->
-<!--                   </a> -->
-
-<!--                   <a href="#" class="flex-c-m trans-04 p-lr-25"> -->
-<!--                      USD -->
-<!--                   </a> -->
-<!--                </div> -->
-<!--             </div> -->
-<!--          </div> -->
 
          <div class="wrap-menu-desktop how-shadow1" style="top:0px;">
             <nav class="limiter-menu-desktop container">
@@ -160,20 +135,11 @@ function filter(value){
 						<ul class="main-menu">
 							<li>
 								<a href="MainPage.pr">Home</a>
-<!-- 								<ul class="sub-menu"> -->
-<!-- 									<li><a href="index.html">Homepage 1</a></li> -->
-<!-- 									<li><a href="home-02.html">Homepage 2</a></li> -->
-<!-- 									<li><a href="home-03.html">Homepage 3</a></li> -->
-<!-- 								</ul> -->
 							</li>
 
 							<li>
 								<a href="Product.pr">Shop</a>
 							</li>
-
-<!-- 							<li class="label1" data-label1="hot"> -->
-<!-- 								<a href="shoping-cart.html">Features</a> -->
-<!-- 							</li> -->
 
 							<li>
 								<a href="SellForm.pr">Sell</a>

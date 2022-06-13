@@ -5,6 +5,7 @@ import java.sql.Connection;
 import java.util.ArrayList;
 
 import dao.SellerDAO;
+import vo.AddressVO;
 import vo.SellerAddress;
 import vo.SellerProductDTO;
 
@@ -40,6 +41,23 @@ public class SellRecentPostAddressService {
 		commit(con);
 		close(con);
 
+	}
+
+	public AddressVO getAddress() {  //결제 완료페이지에서 배송지 찾기
+		AddressVO post = new AddressVO();
+		
+		Connection con = getConnection();
+
+		SellerDAO sellerDAO = SellerDAO.getInstance();
+
+		sellerDAO.setConnection(con);
+
+		post=sellerDAO.getAddress();
+		
+		
+		close(con);
+		
+		return post;
 	}
 
 }

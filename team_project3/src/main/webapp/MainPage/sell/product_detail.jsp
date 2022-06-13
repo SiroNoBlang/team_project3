@@ -335,10 +335,10 @@
 
 
 	<!-- Product Detail -->
-	<input type="button" name="구매"
-		onclick="location.href='ShopingPro.pr?sell_num=${sellerdto.getSell_num() }&member_code=${sCode}'">
-	<form border="1" action="ShopingPro.pr">
-		<input type="hidden">
+<!-- 	<input type="button" name="구매" -->
+<%-- 		onclick="location.href='ShopingPro.pr?sell_num=${sellerdto.getSell_num() }&member_code=${sCode}'"> --%>
+<!-- 	<form border="1" action="ShopingPro.pr"> -->
+<!-- 		<input type="hidden"> -->
 
 
 		<div class="container">
@@ -419,7 +419,7 @@
 							</tr>
 							<tr>
 								<td>Price</td>
-								<td style="text-align: left;"> ${sellerdto.sell_price}</td>
+								<td style="text-align: left;"> ${sellerdto.sell_price *10000}만원</td>
 							</tr>
 							
 							<tr>
@@ -521,7 +521,7 @@
 											<table border="1" style="border: none; background: white;">
 												 <c:forEach items="${Relationdto}" var="ProductRe">
 													<span>	
-														<a href="#"><img src="./Upload/sell_img/${ProductRe.getSell_img_real_name() } "onerror="this.style.display='none'" width="130px"height="160px" alt="판매사진"/></a>
+														<a href="ProductDetailPro.pr?sell_num=${ProductRe.getSell_num()}&sell_brand=${ProductRe.getSell_brand() }"><img src="./Upload/sell_img/${ProductRe.getSell_img_real_name() } "onerror="this.style.display='none'" width="130px"height="160px" alt="판매사진"/></a>
 															<h4>${ProductRe.getSell_title() }</h4>
 														<h5>${ProductRe.getSell_brand() }</h5>
 														<a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -869,7 +869,7 @@
 		$('.js-addcart-detail').each(function(){
 			var nameProduct = $(this).parent().parent().parent().parent().find('.js-name-detail').html();
 			$(this).on('click', function(){
-				swal(nameProduct, "is added to cart !", "success");
+				swal(nameProduct, "구매페이지로 이동합니다.", "success");
 			});
 		});
 	

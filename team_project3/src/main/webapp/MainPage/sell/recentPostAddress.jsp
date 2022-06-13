@@ -2,7 +2,7 @@
 <%@page import="vo.SellerAddress"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
 <%
 ArrayList<SellerAddress> arrAddressDTO = (ArrayList<SellerAddress>) request.getAttribute("arrAddressDTO");
 String member_id = (String) session.getAttribute("sId"); //아이디 값 세션
@@ -64,6 +64,7 @@ String member_id = (String) session.getAttribute("sId"); //아이디 값 세션
 								window.opener.document.getElementById("phone").value = address_phone;
 				        		// 3. 자식창 닫기
 				        		window.close();
+				        		
 				            } else {
 				                // 취소 버튼 클릭 시 동작
 				                alert("취소되었습니다.");
@@ -93,28 +94,26 @@ String member_id = (String) session.getAttribute("sId"); //아이디 값 세션
 				<td style="text-align: center;">버튼</td>
 			</tr>
 
-			<%
-			for (SellerAddress arrAddressdto : arrAddressDTO) {
-			%>
+			<c:forEach items="${arrAddressDTO}" var="arrAddressDTO">
 			<tr>
 				<td style="text-align: center;">
-					<input value="<%=arrAddressdto.getAddress_code()%>"
+					<input value="${arrAddressDTO.address_code }"
 					style=""/>
 				</td>
 				<td style="text-align: center;">
-					<input value="<%=arrAddressdto.getAddress_detail()%>"
+					<input value="${arrAddressDTO.address_detail}"
 					/>
 				</td>
 				<td style="text-align: center;">
-					<input value="<%=arrAddressdto.getPost_code()%>"
+					<input value="${arrAddressDTO.post_code}"
 					/>
 				</td>
 				<td style="text-align: center;">
-					<input value="<%=arrAddressdto.getAddress_name()%>"
+					<input value="${arrAddressDTO.address_name}"
 					/>
 				</td>
 				<td style="text-align: center;">
-					<input value="<%=arrAddressdto.getAddress_phone()%>"
+					<input value="${arrAddressDTO.address_phone}"
 					/>
 				</td>
 				<td><input type="button" value="선택" class="checkBtn"
@@ -123,9 +122,7 @@ String member_id = (String) session.getAttribute("sId"); //아이디 값 세션
 				
 				<!-- onclick="useAddress('')"  -->
 			</tr>
-			<%
-			}
-			%>
+			</c:forEach>
 		</table>
 		<div class="col-lg-12" id="ex2_Result1"></div>
 		<div class="col-lg-12" id="ex2_Result2"></div>
