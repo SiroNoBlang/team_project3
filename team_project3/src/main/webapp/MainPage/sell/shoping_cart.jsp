@@ -356,12 +356,11 @@ MemberBean memberbean = (MemberBean) request.getAttribute("memberBean");
 		<!-- 		<form action="SucceedLoding.pr" class="bg0 p-t-75 p-b-85">   -->
 		<input type="hidden" value="member_nickname" name="member_nickname">
 		<input type="hidden" value="${sellerDTO.sell_num}" name="sell_num">
-		<input type="hidden"
-			value="${Math.floor((((sellerDTO.sell_price*10000 +((sellerDTO.sell_price*10000) *0.2)+3000)*((100-memberBean.discount_rate)/100))))}"
-			name="member_info_detail_acc_money"> <input type="hidden"
-			value="${sCode}" name="member_code"> <input type="hidden"
-			value="${sellerDTO.sell_price}" name="sell_price">
-
+		<input type="hidden"value="${sellerDTO.sell_price}"name="member_info_detail_acc_money">
+		<input type="hidden" value="${memberBean.discount_rate }">
+		<input type="hidden"value="${sCode}" name="member_code"> 
+		<input type="hidden"value="${sellerDTO.sell_price}" name="sell_price">
+		
 		<!-- 	<input type="hidden" value="member_nickname" name="member_nickname"> -->
 		<%-- 	<input type="hidden" value="<%=sellerDTO.getSell_num() %>" name="sell_num"> --%>
 		<%-- 	<input type="hidden" value="<%=realPrice %>" name="member_info_detail_acc_money" > --%>
@@ -578,9 +577,17 @@ MemberBean memberbean = (MemberBean) request.getAttribute("memberBean");
 
 							<div class="size-209 p-t-1">
 
-								<span class="mtext-110 cl2" id=realPrice><%--  <c:if test="">	 포인트 사용 클릭시 여기에 값 뿌리기  --%>
-									₩ ${Math.floor(((sellerDTO.sell_price*10000) +((sellerDTO.sell_price*10000 *0.2))+3000) *((100-memberBean.discount_rate)/100)) }
+								<span class="mtext-110 cl2" id=realPrice>
+									₩ 
 								</span>
+								<script>  //값 INT형으로 바꾸기
+									window.onload =function(){
+										var a= document.getElementById('realPrice').innerHTML
+										<%--  <c:if test="">	 포인트 사용 클릭시 여기에 값 뿌리기  --%>
+										=${((sellerDTO.sell_price*10000) +((sellerDTO.sell_price*10000 *0.2))+3000)*((100-memberBean.discount_rate)/100)};										
+									}
+								</script>
+						
 							</div>
 						</div>
 						<input type="submit" value="구매하기"
