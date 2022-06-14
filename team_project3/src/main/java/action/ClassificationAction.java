@@ -30,7 +30,7 @@ public class ClassificationAction implements Action {
 		
 		// 해당 개시물의 총 수
 		MemberManagementListService service = new MemberManagementListService();
-		int listCount = service.getListCount();
+		int listCount = service.getListCount(value);
 		
 		//게시물 목록 담아오기 
 		ArrayList<MemberBean> classificationList = service.getClassificationList(pageNum, listLimit, value);

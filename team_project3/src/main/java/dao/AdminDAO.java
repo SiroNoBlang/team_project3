@@ -2237,6 +2237,38 @@ public class AdminDAO {
 		}
 		return deleteCount;	
 	}
+
+	public int selectListCount(String tableName, String value) {
+		int listCount = 0;
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			String sql = "";
+			if(value.equals("0")) {
+				sql = "SELECT COUNT(*) FROM " + tableName + " WHERE member_info_detail_acc_money >= 100001 AND member_info_detail_acc_money <= 999999999";
+			} else if(value.equals("정상") || value.equals("정지") || value.equals("탈퇴")) {
+				sql = "SELECT COUNT(*) FROM " + tableName + " WHERE member_service_log_status ='" + value + "'";
+			} else {
+				sql = "SELECT COUNT(*) FROM " + tableName + " WHERE member_nickname LIKE '%" + value + "%'";
+			}
+			pstmt = con.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+				
+			if(rs.next()) {
+				listCount = rs.getInt(1);
+			}
+		} catch (SQLException e) {
+			System.out.println("SQL 구문 오류 발생! - selectListCount()");
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rs);
+		}
+		
+		return listCount;
+	}
 }	
 	
 	

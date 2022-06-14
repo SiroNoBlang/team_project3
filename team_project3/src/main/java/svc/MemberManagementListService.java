@@ -76,5 +76,38 @@ public class MemberManagementListService {
 		
 		return classificationList;
 	}
+	
+	// 각 값에 해당하는 총 개시물 수를 가져오기 위해 DAO로 연결하는 service 객체 내의 getListCount() 메서드 _이효민 06.14 수정
+	public int getListCount(String value) {
+		int listCount = 0;
+		
+		Connection con = getConnection();
+		AdminDAO adminDAO= AdminDAO.getInstance();
+		
+		adminDAO.setConnection(con);
+		
+		String tableName = "";
+		if(value.equals("0")) {
+			tableName = "member_info_detail";
+			value = "0";
+		} else if(value.equals("1") || value.equals("2") || value.equals("3")) {
+			tableName = "member_service_log";
+			if(value.equals("1")) {
+				value = "정상";
+			} else if(value.equals("2")) {
+				value = "정지";
+			} else {
+				value = "탈퇴";
+			}
+		} else {
+			tableName = "member";
+		}
+		
+		listCount = adminDAO.selectListCount(tableName, value);
+		
+		close(con);
+		
+		return listCount;
+	}
 
 }
