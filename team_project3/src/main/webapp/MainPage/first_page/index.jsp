@@ -1,3 +1,6 @@
+<%@page import="vo.SellerProductDTO"%>
+<%@page import="vo.PageInfo"%>
+<%@page import="vo.SellerDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>   
@@ -27,52 +30,55 @@ a:link {
 var sCode = '${sCode}' //좋아요 기능을 위하여 sCode 값을 script 위에 뿌려줌
 var sell_num
 
-	function filter(value) {
+	
+$(function(){
+	
+	
+	
+	$(".fa-heart").click(function(a){
+	var thisRow = $(this).closest('div');  //하트표시 줄의 부모(div)를 찾아  thisRow값에 저장
+	var thisplace = thisRow.find('span:eq(5)')[0];
+	
+	var sell_num =  thisRow.find('input').val(); //thisRow의 하위 요소인 find(input)=>input이라는 value를 찾아 sell_num에 저장 == ${sell_num}
+	
+//			var sell_num = thisRow.children('div').find('input');
+//			var sell_num = document.getElementsByClassName('sell_num:eq(0)');
+//			alert(JSON.stringify(sell_num));
+//			alert("관심상품 등록되었습니다. <찜 취소시, 취소되었습니다 출력되게해야됨>")			
+//		debugger;
+		$.ajax({
+			url: "ProductRecUpdate.pr",
+            type: "POST",
+            data: {
+         		sell_num : sell_num,    
+                id: sCode					 
+            },
+            success: function (data) {
+            	thisplace.innerHTML = data;
+            }
+		})
+	});
+	
+});
 
-		if (value == "brand") {
-			var tagSpan = document.getElementById("checkbox2");
-			tagSpan.innerHTML = "<a href='ProductBrandPro.pr?sell_brand=Hermes' > Hermes </a> &nbsp;&nbsp;"
-					+ "<a href='ProductBrandPro.pr?sell_brand=Louis Vuitton' > Louis Vuitton </a>&nbsp;&nbsp;"
-					+ "<a href='ProductBrandPro.pr?sell_brand=Bottega Veneta'> Bottega Veneta </a>&nbsp;&nbsp;"
-					+ "<a href='ProductBrandPro.pr?sell_brand=Prada' > Prada </a>&nbsp;&nbsp;"
-					+ "<a href='ProductBrandPro.pr?sell_brand=Rolex'> Rolex </a>&nbsp;&nbsp;"
-					+ "<a href='ProductBrandPro.pr?sell_brand=Dior' > Dior </a>&nbsp;&nbsp;"
-					+ "<a href='ProductBrandPro.pr?sell_brand=Celine' > Celine </a>&nbsp;&nbsp;"
-					+ "<a href='ProductBrandPro.pr?sell_brand=Balenciaga' > Balenciaga </a>&nbsp;&nbsp;"
-					+ "<a href='ProductBrandPro.pr?sell_brand=Cartier' > Cartier </a>&nbsp;&nbsp;"
-					+ "<a href='ProductBrandPro.pr?sell_brand=Fendi' > Fendi </a>&nbsp;&nbsp;"
-					+ "<a href='ProductBrandPro.pr?sell_brand=Goyard' > Goyard </a>&nbsp;&nbsp;"
-					+ "<a href='ProductBrandPro.pr?sell_brand=MiuMiu' > MiuMiu </a>"
-					+ "<a href='ProductBrandPro.pr?sell_brand=Lemaire' > Lemaire </a>&nbsp;&nbsp;"
-					+ "<a href='ProductBrandPro.pr?sell_brand=Loewe' > Loewe </a>&nbsp;&nbsp;"
-					+ "<a href='ProductBrandPro.pr?sell_brand=Marni' > Marni </a>&nbsp;&nbsp;"
-					+ "<a href='ProductBrandPro.pr?sell_brand=Off-White' > Off-White </a>&nbsp;&nbsp;"
-					+ "<a href='ProductBrandPro.pr?sell_brand=Supreme' > Supreme </a>&nbsp;&nbsp;"
-					+ "<a href='ProductBrandPro.pr?sell_brand=Jordan' > Jordan </a>&nbsp;&nbsp;"
-					+ "<a href='ProductBrandPro.pr?sell_brand=Jordan' > Nike </a>&nbsp;&nbsp;"
-					+ "<a href='ProductBrandPro.pr?sell_brand=Jordan' > Chanel </a>&nbsp;&nbsp;"
-					+ "<a href='ProductBrandPro.pr?sell_brand=Jordan' > Moncler </a>&nbsp;&nbsp;"
-					+ "<a href='ProductBrandPro.pr?sell_brand=Jil Sander'> Jil Sander </a>";
-		} else if (value == "category") {
-			var tagSpan = document.getElementById("checkbox2");
+function recCount(sell_num,thisRow) { //  좋아요 갯수
+	
+// 	alert("<좋아요갯수세기>--판매번호"+sell_num);
+	$.ajax({
+		url: "ProductRecCount.pr",
+        type: "POST",
+        data: {
+     		sell_num : sell_num
+        },
+        success: function (data) {   //성공시 값을 반환못함 -> 
+       		console.log(data);
+//         	$("thisplace").innerHTML(data);
+				debugger;
+        }
+	})
 
-			tagSpan.innerHTML = "<a></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
-					+ "<a href='ProductCategoryPro.pr?sell_category=상의' style='font-size: 1.0em'> 상의 </a>&nbsp;&nbsp;&nbsp;"
-					+ "<a href='ProductCategoryPro.pr?sell_category=하의' style='font-size: 1.0em'> 하의 </a>&nbsp;&nbsp;&nbsp;"
-					+ "<a href='ProductCategoryPro.pr?sell_category=신발' style='font-size: 1.0em'> 신발 </a>&nbsp;&nbsp;&nbsp;"
-					+ "<a href='ProductCategoryPro.pr?sell_category=잡화' style='font-size: 1.0em'> 잡화 </a>";
-		} else if (value == "price") {
-			var tagSpan = document.getElementById("checkbox2");
-
-			tagSpan.innerHTML = "<a></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
-					+ "<a href='ProductCategoryPro.pr?sell_price=10000' style='font-size: 1.0em'> 10만원 이하 </a>&nbsp;&nbsp;&nbsp;"
-					+ "<a href='ProductCategoryPro.pr?sell_price=100000' style='font-size: 1.0em'> 10만원 - 50만원 이하 </a>&nbsp;&nbsp;&nbsp;"
-					+ "<a href='ProductCategoryPro.pr?sell_price=1000000' style='font-size: 1.0em'> 50만원 -100만원 이하 </a>&nbsp;&nbsp;&nbsp;"
-					+ "<a href='ProductCategoryPro.pr?sell_price=1000000' style='font-size: 1.0em'> 100만원 - 500만원 이하 </a>&nbsp;&nbsp;&nbsp;"
-					+ "<a href='ProductCategoryPro.pr?sell_price=10000000' style='font-size: 1.0em'> 500만원 이상- 1000만원 이하 </a>";
-		}
-
-	}
+};	
+	
 </script>
 
 <!--===============================================================================================-->	
@@ -247,292 +253,86 @@ var sell_num
 		</div>
 	</section>
 
+	<!-- Product -->
 
-	<!-- Banner -->
-	<div class="sec-banner bg0 p-t-95 p-b-55">
-		<div class="container">
-			<div class="row">
-				<div class="col-md-6 p-b-30 m-lr-auto">
-					<!-- Block1 -->
-					
-					<div class="block1 wrap-pic-w">
-						<img src="MainPage/images/banner-04.jpg" alt="IMG-BANNER">
-
-						<a href="product.html" class="block1-txt ab-t-l s-full flex-col-l-sb p-lr-38 p-tb-34 trans-03 respon3">
-							<div class="block1-txt-child1 flex-col-l">
-								<span class="block1-name ltext-102 trans-04 p-b-8">
-									Women
-								</span>
-
-								<span class="block1-info stext-102 trans-04">
-									New Trend
-								</span>
-							</div>
-
-							<div class="block1-txt-child2 p-b-4 trans-05">
-								<div class="block1-link stext-101 cl0 trans-09">
-									Shop Now
-								</div>
-							</div>
-						</a>
-					</div>
-				</div>
-				
-
-				<div class="col-md-6 p-b-30 m-lr-auto">
-					<!-- Block1 -->
-					<div class="block1 wrap-pic-w">
-						<img src="MainPage/images/banner-05.jpg" alt="IMG-BANNER">
-
-						<a href="product.html" class="block1-txt ab-t-l s-full flex-col-l-sb p-lr-38 p-tb-34 trans-03 respon3">
-							<div class="block1-txt-child1 flex-col-l">
-								<span class="block1-name ltext-102 trans-04 p-b-8">
-									Men
-								</span>
-
-								<span class="block1-info stext-102 trans-04">
-									New Trend
-								</span>
-							</div>
-
-							<div class="block1-txt-child2 p-b-4 trans-05">
-								<div class="block1-link stext-101 cl0 trans-09">
-									Shop Now
-								</div>
-							</div>
-						</a>
-					</div>
-				</div>
-
-				<div class="col-md-6 col-lg-4 p-b-30 m-lr-auto">
-					<!-- Block1 -->
-					<div class="block1 wrap-pic-w">
-						<img src="MainPage/images/banner-07.jpg" alt="IMG-BANNER">
-
-						<a href="product.html" class="block1-txt ab-t-l s-full flex-col-l-sb p-lr-38 p-tb-34 trans-03 respon3">
-							<div class="block1-txt-child1 flex-col-l">
-								<span class="block1-name ltext-102 trans-04 p-b-8">
-									Watches
-								</span>
-
-								<span class="block1-info stext-102 trans-04">
-									Spring 2018
-								</span>
-							</div>
-
-							<div class="block1-txt-child2 p-b-4 trans-05">
-								<div class="block1-link stext-101 cl0 trans-09">
-									Shop Now
-								</div>
-							</div>
-						</a>
-					</div>
-				</div>
-
-				<div class="col-md-6 col-lg-4 p-b-30 m-lr-auto">
-				
-					<!-- Block1 -->
-					<div class="block1 wrap-pic-w">
-						<img src="MainPage/images/banner-08.jpg" alt="IMG-BANNER">
-
-						<a href="product.html" class="block1-txt ab-t-l s-full flex-col-l-sb p-lr-38 p-tb-34 trans-03 respon3">
-							<div class="block1-txt-child1 flex-col-l">
-								<span class="block1-name ltext-102 trans-04 p-b-8">
-									Bags
-								</span>
-
-								<span class="block1-info stext-102 trans-04">
-									Spring 2018
-								</span>
-							</div>
-
-							<div class="block1-txt-child2 p-b-4 trans-05">
-								<div class="block1-link stext-101 cl0 trans-09">
-									Shop Now
-								</div>
-							</div>
-						</a>
-					</div>
-				</div>
-
-				<div class="col-md-6 col-lg-4 p-b-30 m-lr-auto">
-					<!-- Block1 -->
-					<div class="block1 wrap-pic-w">
-						<img src="MainPage/images/banner-09.jpg" alt="IMG-BANNER">
-
-						<a href="team_project3/ProductCategoryPro.pr?sell_category=잡화" class="block1-txt ab-t-l s-full flex-col-l-sb p-lr-38 p-tb-34 trans-03 respon3">
-							<div class="block1-txt-child1 flex-col-l">
-								<span class="block1-name ltext-102 trans-04 p-b-8">
-									Accessories
-								</span>
-
-								<span class="block1-info stext-102 trans-04">
-									Spring 2018
-								</span>
-							</div>
-
-							<div class="block1-txt-child2 p-b-4 trans-05">
-								<div class="block1-link stext-101 cl0 trans-09">
-									Shop Now
-								</div>
-								
-							</div>
-						</a>
-					</div>
+	<div class="container" >
+		<div class="flex-w flex-sb-m p-b-52">
+			<div class="flex-w flex-c-m m-tb-10">
+			
+				<div
+					class="flex-c-m stext-106 cl6 size-105 bor4 pointer hov-btn3 trans-04 m-tb-4 js-show-search">
+					<i class="icon-search cl2 m-r-6 fs-15 trans-04 zmdi zmdi-search"></i>
+					<i
+						class="icon-close-search cl2 m-r-6 fs-15 trans-04 zmdi zmdi-close dis-none"></i>
+					Search
 				</div>
 			</div>
+
+			<!-- Search product -->
+			<div class="dis-none panel-search w-full p-t-10 p-b-15">
+				<form action="ProductSearchPro.pr">
+					<table>
+						<tr>
+							<td><input type="text" placeholder="상품을 입력해주세요."
+								name="ProductSearch"></td>
+							<td><input type="submit" value="검색" placeholder="Search">
+							</td>
+						</tr>
+					</table>
+				</form>
+			</div>
+
 		</div>
-	</div>
-	
 
+		<table border="1" style="border: none; background: white;">
+			<div class="container">
+				<div class="row multi-columns-row">
+					<form>
+						<c:forEach items="${mainarticleList}" var="mainarticleList">
+							<div class="col-sm-6 col-md-3 col-lg-3 ">
 
+								<div class="shop-item">
+									<!-- 여기 -->
+									<input class="sell_num" value="${mainarticleList.sell_num}" />
+									<a
+										href="ProductDetailPro.pr?sell_num=${mainarticleList.sell_num}&sell_brand=${mainarticleList.sell_brand}">
 
-	<!-- Product -->
-	
-		<div class="container">
-			<div class="flex-w flex-sb-m p-b-52">
-				<div class="flex-w flex-c-m m-tb-10">
-					<div
-						class="flex-c-m stext-106 cl6 size-104 bor4 pointer hov-btn3 trans-04 m-r-8 m-tb-4 js-show-filter">
-						<i
-							class="icon-filter cl2 m-r-6 fs-15 trans-04 zmdi zmdi-filter-list"></i>
-						<i
-							class="icon-close-filter cl2 m-r-6 fs-15 trans-04 zmdi zmdi-close dis-none"></i>
-						Filter
-					</div>
-
-					<div
-						class="flex-c-m stext-106 cl6 size-105 bor4 pointer hov-btn3 trans-04 m-tb-4 js-show-search">
-						<i class="icon-search cl2 m-r-6 fs-15 trans-04 zmdi zmdi-search"></i>
-						<i
-							class="icon-close-search cl2 m-r-6 fs-15 trans-04 zmdi zmdi-close dis-none"></i>
-						Search
-					</div>
-				</div>
-
-				<!-- Search product -->
-				<div class="dis-none panel-search w-full p-t-10 p-b-15">
-					<form action="ProductSearchPro.pr">
-						<table>
-							<tr>
-								<td><input type="text" placeholder="상품을 입력해주세요."
-									name="ProductSearch"></td>
-								<td><input type="submit" value="검색" placeholder="Search">
-								</td>
-							</tr>
-						</table>
+										<img
+										src="./Upload/sell_img/${mainarticleList.sell_img_real_name}"
+										width="300px" height="400px" alt="Accessories Pack" />
+									</a> <span>${mainarticleList.sell_img_real_name}</span> <a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+									<i class="fa fa-eye"></i><span style="text-align: right;">${mainarticleList.sell_readcount }
+									</span>| <span> <span> <span class="w3-border w3-center w3-padding"> <!-- 좋아요 기능을 위한 스크립트(Ajax)는 892행  -->
+												<c:if test="${ sCode  eq null }">
+													<i class="fa fa-heart" style="font-size: 16px; color: red"></i>    -->
+								<span class="rec_count">세션이 만료되었습니다-로그인필요!</span>
+												</c:if> <c:if test="${ sCode ne null }">
+													<li class="w3-button w3-black w3-round" id="rec_update">
+														<i class="fa fa-heart" style="font-size: 16px; color: red"></i>
+														&nbsp;<span class="rec_count">${mainarticleList.sell_likecount }</span>
+													</li>
+												</c:if>
+										</span>
+									</span>
+									</span>
+									<h5>${mainarticleList.sell_title }</h5>
+									<h5>${mainarticleList.sell_brand }</h5>
+								</div>
+							</div>
+						</c:forEach>
 					</form>
 				</div>
-
-				<!-- Filter -->
-				<div class="dis-none panel-filter w-full p-t-10">
-					<div
-						class="wrap-filter flex-w bg6 w-full p-lr-40 p-t-27 p-lr-15-sm">
-						<div id="checkbox1" style="margin-bottom: 30px;" width="400">
-							<table width=400px>
-								<tr>
-									<th><input type="button" style="font-size: 35px"
-										class="filter-link stext-106 trans-04" name=filter
-										value="brand" onclick="filter(this.value)"></th>
-									<th><input type="button" style="font-size: 35px"
-										class="filter-link stext-106 trans-04" name=filter
-										value="category" onclick="filter(this.value)"></th>
-									<th><input type=button style="font-size: 35px"
-										class="filter-link stext-106 trans-04" name=filter
-										value="price" onclick="filter(this.value)"></th>
-								</tr>
-								<tr>
-								</tr>
-							</table>
-							<br>
-						</div>
-
-						<div id="checkbox2"
-							style="vertical-align: middle; margin-bottom: 5px;"></div>
-					</div>
-				</div>
 			</div>
+		</table>
 
-
-			<div class="row isotope-grid">
-
-				<div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item women">
-					<table border="1" style="border: none; background: white;">
-						<form>
-							<c:forEach items="${articleList}" var="articleList">
-								<div class="col-sm-6 col-md-3 col-lg-3 ">
-
-									<div class="shop-item">
-										<!-- 여기 -->
-										<input class="sell_num" value="${articleList.sell_num}" /> <a
-											href="ProductDetailPro.pr?sell_num=${articleList.sell_num}&sell_brand=${articleList.sell_brand}">
-
-											<img
-											src="./Upload/sell_img/${articleList.sell_img_real_name}"
-											width="300px" height="400px" alt="Accessories Pack" />
-										</a> <span>${articleList.sell_img_real_name}</span> <a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
-										<i class="fa fa-eye"></i><span style="text-align: right;">${articleList.sell_readcount }
-										</span>| <span> <span> <span
-												class="w3-border w3-center w3-padding"> <!-- 좋아요 기능을 위한 스크립트(Ajax)는 892행  -->
-													<c:if test="${ sCode  eq null }">
-														<i class="fa fa-heart" style="font-size: 16px; color: red"></i>    -->
-								<span class="rec_count">세션이 만료되었습니다-로그인필요!</span>
-													</c:if> <c:if test="${ sCode ne null }">
-														<li class="w3-button w3-black w3-round" id="rec_update">
-															<i class="fa fa-heart"
-															style="font-size: 16px; color: red"></i> &nbsp;<span
-															class="rec_count">${articleList.sell_likecount }</span>
-														</li>
-													</c:if>
-											</span>
-										</span>
-										</span>
-										<h5>${articleList.sell_title }</h5>
-										<h5>${articleList.sell_brand }</h5>
-										<!-- ------------------------------------------ -->
-
-										<!-- ------------------------------------------ -->
-									</div>
-								</div>
-							</c:forEach>
-						</form>
-					</table>
-				</div>
-			</div>
-
-			<!-- Pagination -->
-
-			<div class="flex-c-m flex-w w-full p-t-45">
-
-				<section id="pageList">
-					<!-- 
-		현재 페이지 번호(pageNum)가 1보다 클 경우에만 [이전] 링크 동작
-		=> 클릭 시 notice.jsp 로 이동하면서 
-		   현재 페이지 번호(pageNum) - 1 값을 page 파라미터로 전달
-		-->
-					<!-- 페이지 번호 목록은 시작 페이지(startPage)부터 끝 페이지(endPage) 까지 표시 -->
-					<c:forEach var="i" begin="${startPage }" end="${endPage }">
-						<!-- 단, 현재 페이지 번호는 링크 없이 표시 -->
-						<c:choose>
-							<c:when test="${pageNum eq i}">${i }
-								</c:when>
-									<c:otherwise>
-									<a href="Product.pr?page=${i }"
-									class=" how-pagination1 trans-04 m-all-7">${i }</a>
-									</c:otherwise>
-						</c:choose>
-					</c:forEach>
-				</section>
-
-
-			</div>
-		</div>
+		
+	</div>
 
 
 
 
 
-		<!-- Footer영역과 상단 이동 버튼-->
+	<!-- Footer영역과 상단 이동 버튼-->
 	<jsp:include page="/MainPage/menu/footer.jsp"/>
 
 	<!-- Modal1 -->

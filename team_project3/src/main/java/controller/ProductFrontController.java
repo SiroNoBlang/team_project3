@@ -39,10 +39,20 @@ public class ProductFrontController extends HttpServlet {
 		Action action = null;
 		ActionForward forward = null;
 
-		if (command.equals("/MainPage.pr")) { // 로그인 후 메인 페이지 
+		if (command.equals("/MainPagelogin.pr")) { // 로그인 후 메인 페이지 
 			forward = new ActionForward();
 			forward.setPath("MainPage/first_page/index.jsp");
 			forward.setRedirect(false);
+		}  else if (command.equals("/MainPage.pr")) { // 상품 판매글(FORM.JSP)
+
+			action = new MplistProAction();
+
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
 		}  else if (command.equals("/SellForm.pr")) { // 상품 판매글(FORM.JSP)
 
 			forward = new ActionForward();

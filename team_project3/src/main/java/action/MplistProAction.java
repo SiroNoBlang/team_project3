@@ -30,7 +30,7 @@ public class MplistProAction implements Action {
 			productListProService service = new productListProService();
 			int listCount = service.getListCount();
 
-			ArrayList<SellerProductDTO> articleList2 = service.getArticleList(pageNum, listLimit);  //상품 갯수(12)한페이지에 뿌리는 작업
+			ArrayList<SellerProductDTO> mainarticleList = service.getMainArticleList(pageNum, listLimit);  //상품 갯수(12)한페이지에 뿌리는 작업
 			
 			// 페이징 처리를 위한 계산 작업
 			// java.lang.Math 클래스의 ceil() 메서드를 사용하여 반올림 가능
@@ -53,10 +53,10 @@ public class MplistProAction implements Action {
 
 			// 뷰페이지(jsp)로 객체 전달을 위해 request 객체의 setAttribute() 메서드를 호출하여 객체 저장
 			request.setAttribute("pageInfo", pageInfo); // 페이징 처리 정보 객체
-			request.setAttribute("articleList", articleList2); // 게시물 목록 객체
+			request.setAttribute("mainarticleList", mainarticleList); // 게시물 목록 객체
 
 			forward = new ActionForward();
-			forward.setPath("MainPage.pr");
+			forward.setPath("./MainPage/first_page/index.jsp");
 			forward.setRedirect(false); // Dispatcher 방식(생략 가능)
 
 			return forward;

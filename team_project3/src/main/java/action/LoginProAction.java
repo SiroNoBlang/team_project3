@@ -44,7 +44,7 @@ public class LoginProAction implements Action {
 				session.setAttribute("sCode", isLogin.getMember_code());
 				session.setAttribute("sNickname", isLogin.getMember_nickname());
 				forward = new ActionForward();
-				forward.setPath("MainPage.pr");
+				forward.setPath("MainPagelogin.pr");
 				forward.setRedirect(true);
 				
 			} else if(isLogin.getMember_service_log_status().equals("정지")) {

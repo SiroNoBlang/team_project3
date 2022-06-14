@@ -207,145 +207,136 @@ function filter(value){
 	<jsp:include page="/MainPage/menu/pc_shopping cart.jsp" />
 <!--     우리가 필터링으로 구분해줘야될 곳 -->
    <!-- Product -->
-   <div class="bg0 m-t-23 p-b-140">
-      <div class="container">
-         <div class="flex-w flex-sb-m p-b-52">
-            <div class="flex-w flex-l-m filter-tope-group m-tb-10">
-           
-            </div>
 
-            <div class="flex-w flex-c-m m-tb-10">
-               <div class="flex-c-m stext-106 cl6 size-104 bor4 pointer hov-btn3 trans-04 m-r-8 m-tb-4 js-show-filter">
-                  <i class="icon-filter cl2 m-r-6 fs-15 trans-04 zmdi zmdi-filter-list"></i>
-                  <i class="icon-close-filter cl2 m-r-6 fs-15 trans-04 zmdi zmdi-close dis-none"></i>
-                   Filter
-               </div>
+	<div class="container">
+		<div class="flex-w flex-sb-m p-b-52">
+			<div class="flex-w flex-l-m filter-tope-group m-tb-10"></div>
 
-               <div class="flex-c-m stext-106 cl6 size-105 bor4 pointer hov-btn3 trans-04 m-tb-4 js-show-search">
-                  <i class="icon-search cl2 m-r-6 fs-15 trans-04 zmdi zmdi-search"></i>
-                  <i class="icon-close-search cl2 m-r-6 fs-15 trans-04 zmdi zmdi-close dis-none"></i>
-                  Search
-               </div>
-            </div>
-            
-            <!-- Search product -->
-            <div class="dis-none panel-search w-full p-t-10 p-b-15">
-					<form action="ProductSearchPro.pr">
-						<table>
-							<tr>
-								<td><input type="text" placeholder="상품을 입력해주세요."
-									name="ProductSearch"></td>
-								<td><input type="submit" value="검색" placeholder="Search">
-								</td>
-							</tr>
-						</table>
-					</form>
+			<div class="flex-w flex-c-m m-tb-10">
+				<div
+					class="flex-c-m stext-106 cl6 size-104 bor4 pointer hov-btn3 trans-04 m-r-8 m-tb-4 js-show-filter">
+					<i
+						class="icon-filter cl2 m-r-6 fs-15 trans-04 zmdi zmdi-filter-list"></i>
+					<i
+						class="icon-close-filter cl2 m-r-6 fs-15 trans-04 zmdi zmdi-close dis-none"></i>
+					Filter
 				</div>
-            
-            <!-- Filter -->
-            <div class="dis-none panel-filter w-full p-t-10">
-					<div class="wrap-filter flex-w bg6 w-full p-lr-40 p-t-27 p-lr-15-sm">
-						<div id="checkbox1"> 
-							<table width=400px>
-								<tr>
-									<th><input type="button" style="font-size: 35px"
-										class="filter-link stext-106 trans-04" name=filter
-										value="brand" onclick="filter(this.value)"></th>
-									<th><input type="button" style="font-size: 35px"
-										class="filter-link stext-106 trans-04" name=filter
-										value="category" onclick="filter(this.value)"></th>
-									<th><input type=button style="font-size: 35px"
-										class="filter-link stext-106 trans-04" name=filter
-										value="price" onclick="filter(this.value)"></th>
-								</tr>
-							</table>
-							<br>
-						</div>
-						 <div id="checkbox2" class="filter-link stext-106 trans-04" style="vertical-align:bottom; display:inline-block; margin-bottom:2px;"></div>
-					</div>
+
+				<div
+					class="flex-c-m stext-106 cl6 size-105 bor4 pointer hov-btn3 trans-04 m-tb-4 js-show-search">
+					<i class="icon-search cl2 m-r-6 fs-15 trans-04 zmdi zmdi-search"></i>
+					<i
+						class="icon-close-search cl2 m-r-6 fs-15 trans-04 zmdi zmdi-close dis-none"></i>
+					Search
 				</div>
 			</div>
-         
-         
-         
-         <!-- 여기서부터 사진 상세보기로 서블릿만들기 -->
-          <table border="1" style="border: none; background:white;">
 
-<!--     </table>  구매물품 뿌려주는 곳    -->
-     	<div class="container">
-            <div class="row multi-columns-row">
-      
-     		 	<form>
-            <c:forEach items="${articleList}" var="articleList">
-              <div class="col-sm-6 col-md-3 col-lg-3 ">
-              
-                <div class="shop-item">   <!-- 여기 -->
-               <input class="sell_num" value="${articleList.sell_num}"/>
-                <a href="ProductDetailPro.pr?sell_num=${articleList.sell_num}&sell_brand=${articleList.sell_brand}">
-                   
-                 <img src="./Upload/sell_img/${articleList.sell_img_real_name}" width="300px" height="400px" alt="Accessories Pack"/> </a>
-                
-                  <span>${articleList.sell_img_real_name}</span>
-                 <a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
-                 <i class="fa fa-eye"></i><span style="text-align: right;">${articleList.sell_readcount } </span>|
-                 <span>
-               	     <span>
-						<span class="w3-border w3-center w3-padding">      <!-- 좋아요 기능을 위한 스크립트(Ajax)는 892행  -->
-							<c:if test="${ sCode  eq null }">
-<!-- 							 <li type="button" id="newLogin"><b class="w3-text-blue">로그인</b></li> 후 사용 가능합니다.<br /> -->
-<!-- 								<i class="fa fa-heart" style="font-size:16px;color:red"></i>    -->
-								<span class="rec_count">세션이 만료되었습니다-로그인필요!</span>	
-<!-- 								 <div class="rs1-select2 bor8 bg0">		</div>		 -->
-							</c:if>
-							<c:if test="${ sCode ne null }">
-								<li class="w3-button w3-black w3-round" id="rec_update">
-									<i class="fa fa-heart" style="font-size:16px;color:red"></i>
-									&nbsp;<span class="rec_count">${articleList.sell_likecount }</span>
-								</li> 
-							</c:if>
-						</span>
-					</span>
-				</span>
-                   <h5>${articleList.sell_title }</h5>
-                   <h5>${articleList.sell_brand }</h5>
-                   <!-- ------------------------------------------ -->
+			<!-- Search product -->
+			<div class="dis-none panel-search w-full p-t-10 p-b-15">
+				<form action="ProductSearchPro.pr">
+					<table>
+						<tr>
+							<td><input type="text" placeholder="상품을 입력해주세요."
+								name="ProductSearch"></td>
+							<td><input type="submit" value="검색" placeholder="Search">
+							</td>
+						</tr>
+					</table>
+				</form>
+			</div>
 
-                   <!-- ------------------------------------------ -->
-                </div>
-                 
-              </div>
-              </c:forEach>
-              </form>
-              </div>
-              
-              </div>
-              </table>
-    
-	       <div class="flex-c-m flex-w w-full p-t-45">
-         
-   <section id="pageList">
-		<!-- 페이지 번호 목록은 시작 페이지(startPage)부터 끝 페이지(endPage) 까지 표시 -->
-		
-		<c:forEach var="i" begin="${startPage }" end="${endPage }">
-			<!-- 단, 현재 페이지 번호는 링크 없이 표시 -->
-			<c:choose>
-				<c:when test="${pageNum eq i}">
+			<!-- Filter -->
+			<div class="dis-none panel-filter w-full p-t-10">
+				<div class="wrap-filter flex-w bg6 w-full p-lr-40 p-t-27 p-lr-15-sm">
+					<div id="checkbox1">
+						<table width=400px>
+							<tr>
+								<th><input type="button" style="font-size: 35px"
+									class="filter-link stext-106 trans-04" name=filter
+									value="brand" onclick="filter(this.value)"></th>
+								<th><input type="button" style="font-size: 35px"
+									class="filter-link stext-106 trans-04" name=filter
+									value="category" onclick="filter(this.value)"></th>
+								<th><input type=button style="font-size: 35px"
+									class="filter-link stext-106 trans-04" name=filter
+									value="price" onclick="filter(this.value)"></th>
+							</tr>
+						</table>
+						<br>
+					</div>
+					<div id="checkbox2" class="filter-link stext-106 trans-04"
+						style="vertical-align: bottom; display: inline-block; margin-bottom: 2px;"></div>
+				</div>
+			</div>
+		</div>
+
+
+
+		<!-- 여기서부터 사진 상세보기로 서블릿만들기 -->
+		<table border="1" style="border: none; background: white;">
+
+			<!--     </table>  구매물품 뿌려주는 곳    -->
+			<div class="container">
+				<div class="row multi-columns-row">
+
+					<form>
+						<c:forEach items="${articleList}" var="articleList">
+							<div class="col-sm-6 col-md-3 col-lg-3 ">
+
+								<div class="shop-item">
+									<!-- 여기 -->
+									<input class="sell_num" value="${articleList.sell_num}" /> <a
+										href="ProductDetailPro.pr?sell_num=${articleList.sell_num}&sell_brand=${articleList.sell_brand}">
+
+										<img src="./Upload/sell_img/${articleList.sell_img_real_name}"
+										width="300px" height="400px" alt="Accessories Pack" />
+									</a> <span>${articleList.sell_img_real_name}</span> <a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+									<i class="fa fa-eye"></i><span style="text-align: right;">${articleList.sell_readcount }
+									</span>| <span> <span> <span class="w3-border w3-center w3-padding"> <!-- 좋아요 기능을 위한 스크립트(Ajax)는 892행  -->
+												<c:if test="${ sCode  eq null }">
+												<span class="rec_count">세션이 만료되었습니다-로그인필요!</span>
+																		 <div class="rs1-select2 bor8 bg0">		</div>		 -->
+												</c:if> <c:if test="${ sCode ne null }">
+													<li class="w3-button w3-black w3-round" id="rec_update">
+														<i class="fa fa-heart" style="font-size: 16px; color: red"></i>
+														&nbsp;<span class="rec_count">${articleList.sell_likecount }</span>
+													</li>
+												</c:if>
+										</span>
+									</span>
+									</span>
+									<h5>${articleList.sell_title }</h5>
+									<h5>${articleList.sell_brand }</h5>
+								</div>
+							</div>
+						</c:forEach>
+					</form>
+				</div>
+			</div>
+		</table>
+
+		<div class="flex-c-m flex-w w-full p-t-45">
+			<section id="pageList">
+				<!-- 페이지 번호 목록은 시작 페이지(startPage)부터 끝 페이지(endPage) 까지 표시 -->
+				<c:forEach var="i" begin="${startPage }" end="${endPage }">
+					<!-- 단, 현재 페이지 번호는 링크 없이 표시 -->
+					<c:choose>
+						<c:when test="${pageNum eq i}">
 					${i }
 				</c:when>
-				<c:otherwise>
-					
-					<a href="Product.pr?page=${i }" class=" how-pagination1 trans-04 m-all-7">${i }</a>
-				
-				</c:otherwise>
-			</c:choose>
-		</c:forEach>
-	</section>
-				
-       
-         </div>
-      </div>
-   </div>
-    
+						<c:otherwise>
+
+							<a href="Product.pr?page=${i }"
+								class=" how-pagination1 trans-04 m-all-7">${i }</a>
+
+						</c:otherwise>
+					</c:choose>
+				</c:forEach>
+			</section>
+		</div>
+	</div>
+
+
 	<!-- Footer영역과 상단 이동 버튼-->
 	<jsp:include page="/MainPage/menu/footer.jsp"/>
    <!-- Modal1 -->
