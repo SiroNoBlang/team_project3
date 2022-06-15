@@ -13,6 +13,19 @@
 	}
 
 </style>
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>       <!-- 결제기능 -->
+<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>    <!-- 결제기능 -->
+<script type="text/javascript">
+	function selectAll(selectAll)  {
+	  const checkboxes 
+	       = document.getElementsByName('items');
+	  
+	  checkboxes.forEach((checkbox) => {
+	    checkbox.checked = selectAll.checked;
+	  })
+	}		
+</script>
+  
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="icon" type="image/png" href="MainPage/images/icons/favicon.png"/>
 	<link rel="stylesheet" type="text/css" href="MainPage/vendor/bootstrap/css/bootstrap.min.css">
@@ -190,17 +203,19 @@
 	<c:set var="listCount" value="${pageInfo.getListCount() }" />
 	
 	<div class="container">
+	<form action="">
 	<table class="table table-hover">
 		<tr>
-			<th scope="col" class="th-date">번호</th>
+			<th scope="col" class="th-date"><input type="checkbox" onclick='selectAll(this)'>번호</th>
 			<th scope="col" class="th-date">제목</th>
 			<th scope="col" class="th-date">제품사진</th>
 		</tr>
+		
 <%-- 		<c:if test="${not empty articleList and pageInfo.getListCount() > 0}"> --%>
 			<c:forEach var="like_list" items="${articleList }">
 				<c:set var="i" value="${i+1 }"/>
 				<tr>
-					<td>${i }</td>
+					<td><input type="checkbox" name="items">${i }</td>
 					<td id="subject">
 						<a href="">
 							${like_list.getSell_title() }
@@ -212,8 +227,14 @@
 				</tr>
 			</c:forEach>
 <%-- 		</c:if> --%>
+			
+				
+			
+			
 	</table>
-		
+	<input type="button" value="구매하기" id="buyCard" >
+	
+	</form>	
 		<!-- 페이징 처리 -->
 		<section id="pageList"> 
 		<ul class="pagination justify-content-center">
@@ -283,6 +304,103 @@
 			})
 		});
 	</script>
+   <script>
+   
+   
+   $(document).ready(function () {
+      
+       $("#buyCard").click(function () { 
+          debugger;         
+//             var address1 = document.getElementById('address1').value;
+//             var address2 = document.getElementById('address2').value;
+//             var postcode = document.getElementById('postcode').value;
+//             var name = document.getElementById('name').value;
+//             var phone = document.getElementById('phone').value;
+//             var price = document.getElementById('realPrice').value;  
+//             var point = document.getElementById('MemberPoint').value;
+//             var member_info_detail_acc_money = document.getElementById('realPrice').value; 
+            
+        var IMP = window.IMP; // 생략가능
+        IMP.init('iamport'); // 'iamport' 대신 부여받은 "가맹점 식별코드"를 사용
+        var msg;
+        
+        IMP.request_pay({
+            pg : 'kakaopay',
+            pay_method : 'card',
+            merchant_uid : 'merchant_' + new Date().getTime(),
+//             name : 'COZA STORE',
+            amount : 100 ,     //price 100원으로 고치면 100원만나감
+//             buyer_email : '${memberBean.member_email}',
+            buyer_name : '1',//name,
+            buyer_tel : '1',//phone,
+            buyer_addr : '1',//address1,
+            buyer_addr_detail: '1',//address2,
+            buyer_postcode : '1',//postcode,
+            //m_redirect_url : 'http://www.naver.com'
+        }, function(rsp) {
+            if ( rsp.success ) {
+                //[1] 서버단에서 결제정보 조회를 위해 jQuery ajax로 imp_uid 전달하기
+                jQuery.ajax({
+                    url: "/payments/complete", //cross-domain error가 발생하지 않도록 주의해주세요
+                    type: 'POST',
+                    dataType: 'json',
+                    data: {
+                        imp_uid : rsp.imp_uid
+                        //기타 필요한 데이터가 있으면 추가 전달
+                    }
+                }).done(function(data) {
+                    //[2] 서버에서 REST API로 결제정보확인 및 서비스루틴이 정상적인 경우
+                    if ( everythings_fine ) {
+                        msg = '결제가 완료되었습니다.';
+                        msg += '\n고유ID : ' + rsp.imp_uid  //
+                        msg += '\n상점 거래ID : ' + rsp.merchant_uid;  // merchant_uid : 'merchant_' + new Date().getTime(),
+                        msg += '\결제 금액 : ' + rsp.paid_amount;
+                        msg += '카드 승인번호 : ' + rsp.apply_num;
+                        
+                        alert(msg);
+                    } else {
+                        //[3] 아직 제대로 결제가 되지 않았습니다.
+                        //[4] 결제된 금액이 요청한 금액과 달라 결제를 자동취소처리하였습니다.
+                    }
+                });
+        /*
+       member_code  ㅇ 무조건 있어야됨
+      sell_num   ㅇ
+      sell_price  ㅇ
+      member_info_detail_acc_money  o
+      ----------------------
+      address1     x   var address1 = document.getElementById('address1').value;
+      address2   x var address2 = document.getElementById('address2').value;
+      postcode  x var postcode = document.getElementById('postcode').value;
+      name     x var name = document.getElementById('name').value;
+      phone    x var phone = document.getElementById('phone').value;
+      point.val()}      x
+      
+      <input type="hidden" value="member_nickname" name="member_nickname">
+      <input type="hidden" value="${sellerDTO.sell_num}" name="sell_num">
+      <input type="hidden"value="${sellerDTO.sell_price}"name="member_info_detail_acc_money">
+      <input type="hidden" value="${memberBean.discount_rate }">
+      <input type="hidden"value="${sCode}" name="member_code"> 
+      <input type="hidden"value="${sellerDTO.sell_price}" name="sell_price">
+      ------------------------
+      1 판매에 관한 내용은 무조건 있어야됨. 하지만 2 구매자 정보는 없을 수도있음 포인트 -> 3 내보유 포인트 값은 보여주지만, 보유포인트를 얼마쓸 지는 모름 
+      */
+       
+                //성공시 이동할 페이지
+                 location.href='SucceedProductAction.pr?member_code=${sCode}&sell_num=${sellerDTO.sell_num}&sell_price=${sellerDTO.sell_price}'
+                          +'&address1='+address1+'&address2='+address2+'&postcode='+postcode+'&name='+name+'&phone='+phone+'&point='+point+'&member_info_detail_acc_money='+member_info_detail_acc_money;
+            } else {
+                msg = '결제에 실패하였습니다.';
+                msg += '에러내용 : ' + rsp.error_msg;
+                //실패시 이동할 페이지
+                
+                alert(msg);
+            }
+        });
+        
+    });
+});
+    </script>
 	<script src="MainPage/js/main.js"></script>
 	<script src="MainPage/js/community.js"></script>
 	
