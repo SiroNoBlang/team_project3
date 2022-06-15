@@ -2421,8 +2421,8 @@ input.num-product::-webkit-inner-spin-button {
 /*//////////////////////////////////////////////////////////////////
 [ Size ]*/
 .size-101 {
-  min-width: 161px;
-  height: 46px;
+  min-width: 200px;
+  height: 63px;
 }
 
 .size-102 {
@@ -2433,8 +2433,8 @@ input.num-product::-webkit-inner-spin-button {
 .size-103 {
   min-width: 179px;
   height: 46px;
-}
 
+}
 .size-104 {
   min-width: 94px;
   height: 40px;
@@ -2680,7 +2680,7 @@ input.num-product::-webkit-inner-spin-button {
 .bor0 {border-radius: 50%;}
 
 .bor1 {
-  border-radius: 23px;
+  border-radius: 40px;
 }
 
 .bor2 {
@@ -2868,7 +2868,7 @@ input.num-product::-webkit-inner-spin-button {
 /*---------------------------------------------*/
 .how-pagination1 {
   font-family: Poppins-Regular;
-  font-size: 28px;
+  font-size: 14px;
   color: #808080;
 
   width: 36px;

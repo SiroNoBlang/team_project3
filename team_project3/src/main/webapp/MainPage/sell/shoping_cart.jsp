@@ -15,9 +15,9 @@ MemberBean memberbean = (MemberBean) request.getAttribute("memberBean");
 <html lang="en">
 <head>
 <title>Shoping Cart</title>
-
-<script
-	src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>		 
+<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>	
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script type="text/javascript">
 	var checkAddress = false;
 
@@ -205,13 +205,16 @@ MemberBean memberbean = (MemberBean) request.getAttribute("memberBean");
 
 
 	<!-- breadcrumb -->
-	<div class="container">
+		<div class="container">
 		<div class="bread-crumb flex-w p-l-25 p-r-15 p-t-30 p-lr-0-lg">
-			<a href="index.html" class="stext-109 cl8 hov-cl1 trans-04"> Home
+			<a href="MainPage.pr" class="stext-109 cl8 hov-cl1 trans-04">
+				Home
 				<i class="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i>
-			</a> <span class="stext-109 cl4"> Shoping Cart </span>
-			 <span class="stext-109 cl4"> 결제 정보
-			  </span>
+			</a>
+
+			<span class="stext-109 cl4">
+				구매정보
+			</span>
 		</div>
 	</div>
 
@@ -219,320 +222,296 @@ MemberBean memberbean = (MemberBean) request.getAttribute("memberBean");
 	<!-- Shoping Cart -->
 	<form action="SucceedProductAction.pr" class="bg0 p-t-75 p-b-85">
 
-		<!-- 		<form action="SucceedLoding.pr" class="bg0 p-t-75 p-b-85">   -->
 		<input type="hidden" value="member_nickname" name="member_nickname">
 		<input type="hidden" value="${sellerDTO.sell_num}" name="sell_num">
 		<input type="hidden"value="${sellerDTO.sell_price}"name="member_info_detail_acc_money">
 		<input type="hidden" value="${memberBean.discount_rate }">
 		<input type="hidden"value="${sCode}" name="member_code"> 
 		<input type="hidden"value="${sellerDTO.sell_price}" name="sell_price">
-		
-		<!-- 	<input type="hidden" value="member_nickname" name="member_nickname"> -->
-		<%-- 	<input type="hidden" value="<%=sellerDTO.getSell_num() %>" name="sell_num"> --%>
-		<%-- 	<input type="hidden" value="<%=realPrice %>" name="member_info_detail_acc_money" > --%>
-		<%-- 	<input type="hidden" value="<%=sell_member_code %>" name="member_code"> --%>
-		<%-- 	<input type="hidden" value="<%=sellerDTO.getSell_price() %>" name="sell_price"> --%>
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-10 col-xl-7 m-lr-auto m-b-50">
-
+					
 					<div class="m-l-25 m-r--38 m-lr-0-xl">
 						<div class="wrap-table-shopping-cart">
-
 							<h4 style="color: lightgrey;">상품 정보</h4>
-							<table class="table-shopping-cart" style="border: none;">
+							
+							<table class="table-shopping-cart">
 								<tr>
-									<td rowspan="4" width="210" height="290"><img width="200"
-										height="288"
-										src="./Upload/sell_img/${sellerDTO.sell_img_real_name}"
-										alt="IMG"></td>
+										<td width="350"><img width="200"height="288"src="./Upload/sell_img/${sellerDTO.sell_img_real_name}" alt="IMG"></td>
+							
+										<td width="350">
+											Title:&nbsp&nbsp${sellerDTO.sell_title}<br>
+											<br>
+											Size:&nbsp&nbsp${sellerDTO.sell_size}<br><br>
+											Price:&nbsp&nbsp${sellerDTO.sell_price}
+										</td>
+							
 								</tr>
-								<tr>
-									<td style="text-align: center; border-bottom: none;"><h4>Title</h4></td>
-									<td style="text-align: left;"><h4>${sellerDTO.sell_title}</h4></td>
-								</tr>
-								<tr>
-									<td style="text-align: center; border-bottom: none;"><h4>Size</h4></td>
-									<td style="text-align: left;"><h4>${sellerDTO.sell_size}</h4></td>
-								</tr>
-								<tr>
-									<td style="text-align: center; border-bottom: none;"><h4>Price</h4></td>
-									<td style="text-align: left;"><h4>${sellerDTO.sell_price *10000}</h4></td>
-								</tr>
-								<!-- 									style="" -->
-
-								<%-- 										제목:<td>${sellerDTO.sell_title}<br> --%>
-								<%-- 										사이즈:${sellerDTO.sell_size}<br> --%>
-								<%-- 										가격:${sellerDTO.sell_price}</td> --%>
+								
 							</table>
 						</div>
-						<div class="wrap-table-shopping-cart">
-							<%-- 								<%if(memberbean.getMember_info_address().equals("")||memberbean.getMember_info_address_detail().equals("")||memberbean.getMember_info_postcode.equals("")){ %> --%>
-							<table class="table-shopping-cart">
+							<div class="wrap-table-shopping-cart">
+								<table class="table-shopping-cart">
 								<tr style="border: none;">
 									<td>
 										<h4 style="color: lightgrey;">배송 정보</h4>
 									</td>
 									<td colspan="2"></td>
 									<td></td>
-									<td><input type="button" onclick="AddressDaumPostcode()"
-										value="+새 배송지 추가"
-										style="border: none; background: transparent; color: lightgrey;">
-										<input type="button" id="btn" onclick="recentPostAddress()"
-										value="+최근배송지"
-										style="border: none; background: transparent; color: lightgrey;">
+									<td>
+										<input type="button" onclick="AddressDaumPostcode()"value="+새 배송지 추가" style="border: none; background: transparent; color: lightgrey;">
+										<input type="button" id="btn" onclick="recentPostAddress()" value="+최근배송지" style="border: none; background: transparent; color: lightgrey;">
 									</td>
-
 								</tr>
-								<tr style="border: none;">
-									<td colspan="2"><input type="text" value=""
-										name="address1" id="address1" placeholder="주소"
-										required="required"></td>
-									<td></td>
-									<td><input type="text" value="" name="postcode"
-										id="postcode" readonly="readonly" placeholder="우편번호"
-										required="required"></td>
-								</tr>
-								<tr style="border: none;">
-									<td><input type="text" value="" name="address2"
-										id="address2" placeholder="상세주소" required="required">
+								
+								<tr style="border: none;">	
+									<td colspan="2">
+										<input type="text" value="" name="address1" id="address1" placeholder="주소"required="required" style="width: 378px; border: none;">
+									</td>
+									<td>
+									
+									</td>
+									<td>
+										<input type="text" value="" name="postcode" id="postcode" readonly="readonly" placeholder="우편번호"required="required" style=" border: none;">
 									</td>
 								</tr>
 								<tr style="border: none;">
-									<td><input type="text" value="" name="name"
-										id="name" placeholder="받는분" required="required"></td>
+									<td>
+										<input type="text" value="" name="address2"id="address2" placeholder="상세주소" required="required" style="width: 378px; border: none;">
+									</td>
 								</tr>
 								<tr style="border: none;">
-									<td><input type="text" value="" name="phone"
-										id="phone"	placeholder="전화번호(-제외)" required="required"></td>
+									<td>
+										<input type="text" value="" name="name" id="name" placeholder="받는분" required="required" style="width: 378px; border: none;">
+									</td>
 								</tr>
-
+								<tr style="border: none;">
+									<td>
+										<input type="text" value="" name="phone"id="phone"	placeholder="전화번호(-제외)" required="required" style="width: 378px; border: none;">
+									</td>
+								</tr>
 
 								<c:if test="${memberBean.member_info_address ne null} ">
 									<tr style="border: none;">
-										<td colspan="2"><input type="text"
-											value="${memberBean.member_info_address}" name="address1"
-											id="address1" placeholder="주소" required="required"></td>
-										<td></td>
-										<td><input type="text"
-											value="${memberBean.member_info_post_code}" name="postcode"
-											id="postcode" readonly="readonly" placeholder="우편번호"
-											required="required"></td>
+										<td colspan="2">
+											<input type="text"value="${memberBean.member_info_address}" name="address1"id="address1" placeholder="주소" required="required">
+										</td>
+										<td>
+										
+										</td>
+										<td>
+											<input type="text"value="${memberBean.member_info_post_code}" name="postcode"id="postcode" readonly="readonly" placeholder="우편번호"required="required">
+										</td>
 									</tr>
 									<tr style="border: none;">
-										<td><input type="text"
-											value="${memberBean.member_info_address_detail}"
-											name="address2" id="address2" placeholder="상세주소"
-											required="required"></td>
+										<td>
+											<input type="text"value="${memberBean.member_info_address_detail}"name="address2" id="address2" placeholder="상세주소"required="required">
+										</td>
 									</tr>
 									<tr style="border: none;">
-										<td><input type="text"
-											value="${memberBean.member_info_name}" name="name" id="name"
-											placeholder="받는분" required="required"></td>
+										<td>
+											<input type="text"value="${memberBean.member_info_name}" name="name" id="name"placeholder="받는분" required="required">
+										</td>
 									</tr>
-									<tr style="border: none;">
-										<td><input type="text"
-											value="${memberBean.member_info_phone}" name="phone"
-											id="phone" placeholder="전화번호(-제외)" required="required">
+									 <tr style="border: none;">
+										<td>
+											<input type="text"value="${memberBean.member_info_phone}" name="phone"id="phone" placeholder="전화번호(-제외)" required="required">
 										</td>
 									</tr>
 
 								</c:if>
 							</table>
 
-							<table class="table-shopping-cart">
-								<tr>
+							<table  class="table-shopping-cart">
+								<tr >
 									<td>
-										<div>
-											<h4>배송 방법</h4>
-										</div> <img src="./Upload/sell_img/1.jpg" width="75" height="80">
-
+										<div><h4>배송 방법</h4></div>
+										<img src="./Upload/sell_img/1.jpg" width="75" height="80">
 									</td>
 									<td>
 										<p>일반배송(배송비) 3000원 배송 후 5-7일 도착예정</p>
 									</td>
-								</tr>
-
-							</table>
+								</tr>											  			
+						   </table>
 						</div>
-
-						<div
-							class="flex-w flex-sb-m bor15 p-t-18 p-b-15 p-lr-40 p-lr-15-sm">
-
-							Point:<input
-								class="stext-104 cl2 plh4 size-117 bor13 p-lr-20 m-r-10 m-tb-5"
-								type="text" name="point" id="MemberPoint" value="0"
-								onkeyup="this.value=this.value.replace(/[^-0-9]/g,'');">
-							<!-- 								onkeyup="inputNumberFormat(this)" -->
-
-							<div id="realPoint"></div>
-							<div>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-							</div>
-							<input
-								class="flex-c-m stext-101 cl2 size-118 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer m-tb-5"
-								type="button" value="사용하기" onclick="sub()"><br>
-							<p style="color: lightgrey;">현재
-								포인트:${memberBean.member_info_detail_point}</p>
-							<br>
-							<div style="color: lightgrey;">1000원 단위로 사용가능</div>
+							<div class="flex-w flex-sb-m bor15 p-t-18 p-b-15 p-lr-40 p-lr-15-sm">
+							Point:<input class="stext-104 cl2 plh4 size-117 bor13 p-lr-20 m-r-10 m-tb-5"type="text"name="point" id="MemberPoint" value="0"onkeyup="this.value=this.value.replace(/[^-0-9]/g,'');">
+						<div id="realPoint"></div><br>
+							<input  class="flex-c-m stext-101 cl2 size-118 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer m-tb-5" type="button" value="사용하기" onclick="sub()">
+							<p style="color: lightgrey;">현재 포인트:${memberBean.member_info_detail_point}</p><br>
+							<div style="color: lightgrey;">10000원 단위로 사용가능</div>
 						</div>
-
 					</div>
-
 				</div>
 
 				<div class="col-sm-10 col-lg-7 col-xl-5 m-lr-auto m-b-50">
-					<div
-						class="bor10 p-lr-40 p-t-30 p-b-40 m-l-63 m-r-40 m-lr-0-xl p-lr-15-sm">
-						<h4 class="mtext-109 cl2 p-b-30">주문 정보</h4>
+					<div class="bor10 p-lr-40 p-t-30 p-b-40 m-l-63 m-r-40 m-lr-0-xl p-lr-15-sm">
+						<h4 class="mtext-109 cl2 p-b-30" style="color: lightgrey;">
+							상품 정보
+						</h4>
 
 						<div class="flex-w flex-t bor12 p-b-13">
 							<div class="size-208">
-								<span class="stext-110 cl2"> 제품 가격 </span>
+								<span class="stext-110 cl2">
+								제품 가격
+								</span>
 							</div>
 
 							<div class="size-209">
-								<span class="mtext-110 cl2"> ₩<span>&nbsp</span>${sellerDTO.sell_price *10000}
+								<span class="mtext-110 cl2">
+									₩<span>&nbsp</span>${sellerDTO.sell_price}
 								</span>
 							</div>
 						</div>
 
 						<div class="flex-w flex-t bor12 p-t-15 p-b-30">
 							<div class="size-208 w-full-ssm">
-								<!-- 								<span class="stext-110 cl2"> -->
-								<!-- 									배송비 <span>&nbsp</span> 3000 -->
-								<!-- 								</span><br> -->
-
-								<!-- 								<span class="stext-110 cl2"> -->
-								<!-- 									검수비 <span>&nbsp</span> free -->
-								<!-- 								</span><br> -->
-
-								<span class="stext-110 cl2"> 수수료 <span>&nbsp&nbsp</span>
-									₩ ${Math.round((sellerDTO.sell_price *10000) *0.2)}
-								</span><br> <span class="stext-110 cl2"> 포인트<span>&nbsp&nbsp&nbsp&nbsp</span>₩
-									<span id="point"></span> <!-- 									style="border: none; background: transparent; " -->
-								</span><br> <span class="stext-110 cl2"> 등급<span>&nbsp&nbsp</span>${memberBean.grade_name}
-									<span><img width="29" height="30" alt="회원등급표"
-										src="./Upload/sell_img/sellerpart.jpg"
-										onclick="checkMember_grade()"></span>
+								<span class="stext-110 cl2">
+									 등급<span>&nbsp&nbsp</span>${memberBean.grade_name}
+									 <span><img  width="29" height="30" alt="회원등급표" src="./Upload/sell_img/sellerpart.jpg" onclick="checkMember_grade()"></span>
+								</span><br> 
+								 <span class="stext-110 cl2"> 포인트<span>&nbsp&nbsp&nbsp&nbsp</span>₩
+									<span id="point"></span>								 <!--style="border: none; background: transparent;"-->
 								</span><br>
-							</div>
-
-
+						   </div>
+							
+							
 							<div class="size-209 p-r-18 p-r-0-sm w-full-ssm">
 								<p class="stext-111 cl6 p-t-2"></p>
-
-
 								<div class="p-t-15">
-									<span class="stext-112 cl8"> </span>
-
+									<span class="stext-112 cl8"></span>
 								</div>
 							</div>
 						</div>
-
-
-
-
 						<div class="flex-w flex-t p-t-27 p-b-33">
 							<div class="size-208">
-								<span class="mtext-101 cl2"> 최종 금액 </span>
+							<span class="mtext-101 cl2">
+								최종 금액
+							</span>
 							</div>
-
-							<div class="size-209 p-t-1">
-
-								<span class="mtext-110 cl2" id=realPrice>
-									₩ 
+						<div class="size-209 p-t-1">
+							<h5><input type="text" value="${sellerDTO.sell_price}" id="realPrice" readonly="readonly" style="border: none;"></h5>
+								<span class="mtext-110 cl2" id="realPrice">
+										<h6 style="color: lightgrey;">부가세 포함 (35%)</h6>
 								</span>
-								<script>  //값 INT형으로 바꾸기
-									window.onload =function(){
-										var a= document.getElementById('realPrice').innerHTML
-										<%--  <c:if test="">	 포인트 사용 클릭시 여기에 값 뿌리기  --%>
-										=${((sellerDTO.sell_price*10000) +((sellerDTO.sell_price*10000 *0.2))+3000)*((100-memberBean.discount_rate)/100)};										
-									}
-								</script>
-						
-							</div>
+						</div>    <!-- 537         482 -->
 						</div>
-						<input type="submit" value="구매하기"
-							class="flex-c-m stext-101 cl0 size-116 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer">
+					  	<input id="buyCard" type="button" value="결제하기" class="flex-c-m stext-101 cl0 size-116 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer">
 					</div>
-					<div></div>
+					<div>
 				</div>
 			</div>
 		</div>
-	</form>
+	</div>
+</form>
 	<!-- Footer -->
 	<footer class="bg3 p-t-75 p-b-32">
 		<div class="container">
 			<div class="row">
 				<div class="col-sm-6 col-lg-3 p-b-50">
-					<h4 class="stext-301 cl0 p-b-30">Categories</h4>
+					<h4 class="stext-301 cl0 p-b-30">
+						Categories
+					</h4>
 
 					<ul>
-						<li class="p-b-10"><a href="#"
-							class="stext-107 cl7 hov-cl1 trans-04"> Women </a></li>
+						<li class="p-b-10">
+							<a href="#" class="stext-107 cl7 hov-cl1 trans-04">
+								Women
+							</a>
+						</li>
 
-						<li class="p-b-10"><a href="#"
-							class="stext-107 cl7 hov-cl1 trans-04"> Men </a></li>
+						<li class="p-b-10">
+							<a href="#" class="stext-107 cl7 hov-cl1 trans-04">
+								Men
+							</a>
+						</li>
 
-						<li class="p-b-10"><a href="#"
-							class="stext-107 cl7 hov-cl1 trans-04"> Shoes </a></li>
+						<li class="p-b-10">
+							<a href="#" class="stext-107 cl7 hov-cl1 trans-04">
+								Shoes
+							</a>
+						</li>
 
-						<li class="p-b-10"><a href="#"
-							class="stext-107 cl7 hov-cl1 trans-04"> Watches </a></li>
+						<li class="p-b-10">
+							<a href="#" class="stext-107 cl7 hov-cl1 trans-04">
+								Watches
+							</a>
+						</li>
 					</ul>
 				</div>
 
 				<div class="col-sm-6 col-lg-3 p-b-50">
-					<h4 class="stext-301 cl0 p-b-30">Help</h4>
+					<h4 class="stext-301 cl0 p-b-30">
+						Help
+					</h4>
 
 					<ul>
-						<li class="p-b-10"><a href="#"
-							class="stext-107 cl7 hov-cl1 trans-04"> Track Order </a></li>
+						<li class="p-b-10">
+							<a href="#" class="stext-107 cl7 hov-cl1 trans-04">
+								Track Order
+							</a>
+						</li>
 
-						<li class="p-b-10"><a href="#"
-							class="stext-107 cl7 hov-cl1 trans-04"> Returns </a></li>
+						<li class="p-b-10">
+							<a href="#" class="stext-107 cl7 hov-cl1 trans-04">
+								Returns 
+							</a>
+						</li>
 
-						<li class="p-b-10"><a href="#"
-							class="stext-107 cl7 hov-cl1 trans-04"> Shipping </a></li>
+						<li class="p-b-10">
+							<a href="#" class="stext-107 cl7 hov-cl1 trans-04">
+								Shipping
+							</a>
+						</li>
 
-						<li class="p-b-10"><a href="#"
-							class="stext-107 cl7 hov-cl1 trans-04"> FAQs </a></li>
+						<li class="p-b-10">
+							<a href="#" class="stext-107 cl7 hov-cl1 trans-04">
+								FAQs
+							</a>
+						</li>
 					</ul>
 				</div>
 
 				<div class="col-sm-6 col-lg-3 p-b-50">
-					<h4 class="stext-301 cl0 p-b-30">GET IN TOUCH</h4>
+					<h4 class="stext-301 cl0 p-b-30">
+						GET IN TOUCH
+					</h4>
 
-					<p class="stext-107 cl7 size-201">Any questions? Let us know in
-						store at 8th floor, 379 Hudson St, New York, NY 10018 or call us
-						on (+1) 96 716 6879</p>
+					<p class="stext-107 cl7 size-201">
+						Any questions? Let us know in store at 8th floor, 379 Hudson St, New York, NY 10018 or call us on (+1) 96 716 6879
+					</p>
 
 					<div class="p-t-27">
-						<a href="#" class="fs-18 cl7 hov-cl1 trans-04 m-r-16"> <i
-							class="fa fa-facebook"></i>
-						</a> <a href="#" class="fs-18 cl7 hov-cl1 trans-04 m-r-16"> <i
-							class="fa fa-instagram"></i>
-						</a> <a href="#" class="fs-18 cl7 hov-cl1 trans-04 m-r-16"> <i
-							class="fa fa-pinterest-p"></i>
+						<a href="#" class="fs-18 cl7 hov-cl1 trans-04 m-r-16">
+							<i class="fa fa-facebook"></i>
+						</a>
+
+						<a href="#" class="fs-18 cl7 hov-cl1 trans-04 m-r-16">
+							<i class="fa fa-instagram"></i>
+						</a>
+
+						<a href="#" class="fs-18 cl7 hov-cl1 trans-04 m-r-16">
+							<i class="fa fa-pinterest-p"></i>
 						</a>
 					</div>
 				</div>
 
 				<div class="col-sm-6 col-lg-3 p-b-50">
-					<h4 class="stext-301 cl0 p-b-30">Newsletter</h4>
+					<h4 class="stext-301 cl0 p-b-30">
+						Newsletter
+					</h4>
 
 					<form>
 						<div class="wrap-input1 w-full p-b-4">
-							<input class="input1 bg-none plh1 stext-107 cl7" type="text"
-								name="email" placeholder="email@example.com">
+							<input class="input1 bg-none plh1 stext-107 cl7" type="text" name="email" placeholder="email@example.com">
 							<div class="focus-input1 trans-04"></div>
 						</div>
 
 						<div class="p-t-18">
-							<button
-								class="flex-c-m stext-101 cl0 size-103 bg1 bor1 hov-btn2 p-lr-15 trans-04">
-								Subscribe</button>
+							<button class="flex-c-m stext-101 cl0 size-103 bg1 bor1 hov-btn2 p-lr-15 trans-04">
+								Subscribe
+							</button>
 						</div>
 					</form>
 				</div>
@@ -540,30 +519,31 @@ MemberBean memberbean = (MemberBean) request.getAttribute("memberBean");
 
 			<div class="p-t-40">
 				<div class="flex-c-m flex-w p-b-18">
-					<a href="#" class="m-all-1"> <img
-						src="MainPage/images/icons/icon-pay-01.png" alt="ICON-PAY">
-					</a> <a href="#" class="m-all-1"> <img
-						src="MainPage/images/icons/icon-pay-02.png" alt="ICON-PAY">
-					</a> <a href="#" class="m-all-1"> <img
-						src="MainPage/images/icons/icon-pay-03.png" alt="ICON-PAY">
-					</a> <a href="#" class="m-all-1"> <img
-						src="MainPage/images/icons/icon-pay-04.png" alt="ICON-PAY">
-					</a> <a href="#" class="m-all-1"> <img
-						src="MainPage/images/icons/icon-pay-05.png" alt="ICON-PAY">
+					<a href="#" class="m-all-1">
+						<img src="MainPage/images/icons/icon-pay-01.png" alt="ICON-PAY">
+					</a>
+
+					<a href="#" class="m-all-1">
+						<img src="MainPage/images/icons/icon-pay-02.png" alt="ICON-PAY">
+					</a>
+
+					<a href="#" class="m-all-1">
+						<img src="MainPage/images/icons/icon-pay-03.png" alt="ICON-PAY">
+					</a>
+
+					<a href="#" class="m-all-1">
+						<img src="MainPage/images/icons/icon-pay-04.png" alt="ICON-PAY">
+					</a>
+
+					<a href="#" class="m-all-1">
+						<img src="MainPage/images/icons/icon-pay-05.png" alt="ICON-PAY">
 					</a>
 				</div>
 
 				<p class="stext-107 cl6 txt-center">
 					<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-					Copyright &copy;
-					<script>
-						document.write(new Date().getFullYear());
-					</script>
-					All rights reserved | Made with <i class="fa fa-heart-o"
-						aria-hidden="true"></i> by <a href="https://colorlib.com"
-						target="_blank">Colorlib</a> &amp; distributed by <a
-						href="https://themewagon.com" target="_blank">ThemeWagon</a>
-					<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | Made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a> &amp; distributed by <a href="https://themewagon.com" target="_blank">ThemeWagon</a>
+<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
 
 				</p>
 			</div>
@@ -573,21 +553,127 @@ MemberBean memberbean = (MemberBean) request.getAttribute("memberBean");
 
 	<!-- Back to top -->
 	<div class="btn-back-to-top" id="myBtn">
-		<span class="symbol-btn-back-to-top"> <i
-			class="zmdi zmdi-chevron-up"></i>
+		<span class="symbol-btn-back-to-top">
+			<i class="zmdi zmdi-chevron-up"></i>
 		</span>
 	</div>
 
-	<!--===============================================================================================-->
+<!--===============================================================================================-->	
 	<script src="MainPage/vendor/jquery/jquery-3.2.1.min.js"></script>
-	<!--===============================================================================================-->
+<!--===============================================================================================-->
 	<script src="MainPage/vendor/animsition/js/animsition.min.js"></script>
-	<!--===============================================================================================-->
+<!--===============================================================================================-->
 	<script src="MainPage/vendor/bootstrap/js/popper.js"></script>
 	<script src="MainPage/vendor/bootstrap/js/bootstrap.min.js"></script>
-	<!--===============================================================================================-->
+<!--===============================================================================================-->
 	<script src="MainPage/vendor/select2/select2.min.js"></script>
-	<!--=========================488<포인트차감>==========================================================-->
+<!--=========================488<포인트차감>==========================================================-->	
+	<script>    //결제기능 api
+	
+	
+	$(document).ready(function () {
+		
+		 $("#buyCard").click(function () { 
+			 debugger;         
+				var address1 = document.getElementById('address1').value;
+				var address2 = document.getElementById('address2').value;
+				var postcode = document.getElementById('postcode').value;
+				var name = document.getElementById('name').value;
+				var phone = document.getElementById('phone').value;
+				var price = document.getElementById('realPrice').value;  
+				var point = document.getElementById('MemberPoint').value;
+				var member_info_detail_acc_money = document.getElementById('realPrice').value; 
+				
+        var IMP = window.IMP; // 생략가능
+        IMP.init('iamport'); // 'iamport' 대신 부여받은 "가맹점 식별코드"를 사용
+        var msg;
+        
+        IMP.request_pay({
+            pg : 'kakaopay',
+            pay_method : 'card',
+            merchant_uid : 'merchant_' + new Date().getTime(),
+//             name : 'COZA STORE',
+            amount :  100,     // 100원으로 고치면 100원만나감 price
+//             buyer_email : '${memberBean.member_email}',
+            buyer_name : name,
+            buyer_tel : phone,
+            buyer_addr : address1,
+            buyer_addr_detail: address2,
+            buyer_postcode : postcode,
+            //m_redirect_url : 'http://www.naver.com'
+        }, function(rsp) {
+            if ( rsp.success ) {
+                //[1] 서버단에서 결제정보 조회를 위해 jQuery ajax로 imp_uid 전달하기
+                jQuery.ajax({
+                    url: "/payments/complete", //cross-domain error가 발생하지 않도록 주의해주세요
+                    type: 'POST',
+                    dataType: 'json',
+                    data: {
+                        imp_uid : rsp.imp_uid
+                        //기타 필요한 데이터가 있으면 추가 전달
+                    }
+                }).done(function(data) {
+                    //[2] 서버에서 REST API로 결제정보확인 및 서비스루틴이 정상적인 경우
+                    if ( everythings_fine ) {
+                        msg = '결제가 완료되었습니다.';
+                        msg += '\n고유ID : ' + rsp.imp_uid  //
+                        msg += '\n상점 거래ID : ' + rsp.merchant_uid;  // merchant_uid : 'merchant_' + new Date().getTime(),
+                        msg += '\결제 금액 : ' + rsp.paid_amount;
+                        msg += '카드 승인번호 : ' + rsp.apply_num;
+                        
+                        alert(msg);
+                    } else {
+                        //[3] 아직 제대로 결제가 되지 않았습니다.
+                        //[4] 결제된 금액이 요청한 금액과 달라 결제를 자동취소처리하였습니다.
+                    }
+                });
+        /*
+       member_code  ㅇ 무조건 있어야됨
+		sell_num	ㅇ
+		sell_price  ㅇ
+		member_info_detail_acc_money  o
+		----------------------
+		address1     x	var address1 = document.getElementById('address1').value;
+		address2	x var address2 = document.getElementById('address2').value;
+		postcode  x var postcode = document.getElementById('postcode').value;
+		name     x var name = document.getElementById('name').value;
+		phone    x var phone = document.getElementById('phone').value;
+		point.val()}      x
+		
+		<input type="hidden" value="member_nickname" name="member_nickname">
+		<input type="hidden" value="${sellerDTO.sell_num}" name="sell_num">
+		<input type="hidden"value="${sellerDTO.sell_price}"name="member_info_detail_acc_money">
+		<input type="hidden" value="${memberBean.discount_rate }">
+		<input type="hidden"value="${sCode}" name="member_code"> 
+		<input type="hidden"value="${sellerDTO.sell_price}" name="sell_price">
+		------------------------
+		1 판매에 관한 내용은 무조건 있어야됨. 하지만 2 구매자 정보는 없을 수도있음 포인트 -> 3 내보유 포인트 값은 보여주지만, 보유포인트를 얼마쓸 지는 모름 
+		*/
+       
+                //성공시 이동할 페이지
+                 location.href='SucceedProductAction.pr?member_code=${sCode}&sell_num=${sellerDTO.sell_num}&sell_price=${sellerDTO.sell_price}'
+                 			+'&address1='+address1+'&address2='+address2+'&postcode='+postcode+'&name='+name+'&phone='+phone+'&point='+point+'&member_info_detail_acc_money='+member_info_detail_acc_money;
+            } else {
+                msg = '결제에 실패하였습니다.';
+                msg += '에러내용 : ' + rsp.error_msg;
+                //실패시 이동할 페이지
+                
+                alert(msg);
+            }
+        });
+        
+    });
+});
+    </script>
+<script>
+	function openWindow() { //쿠폰찾기 기능
+		window.open('SellCouponUseAction.pr?member_code=${sCode}',
+				"", "width=750,height=450");
+		
+	}
+	
+	
+	</script>
 	<script>
 		// 	var sCode = '${sCode}';
 		// 	alert(sCode)
@@ -601,11 +687,23 @@ MemberBean memberbean = (MemberBean) request.getAttribute("memberBean");
 					"width=750,height=450");
 		}
 	</script>
+<!-- 	<script> -->
+<!-- 	$(document).ready(function){ -->
+<!-- 		debugger; -->
+<%-- 		var price =${sellerDTO.sell_price}; --%>
+<%-- 		${"#realPrice"}.append(price); --%>
+		
+<!-- }); -->
+<!-- 	</script> -->
 	<script>
+
+	
 		function sub() { //포인트 사용 스크립트
-			$("#realPoint").empty();
-			var finalPrice = ${((sellerDTO.sell_price * 10000)+ ((sellerDTO.sell_price * 10000) * 0.2) + 3000)* ((100 - memberBean.discount_rate) / 100)}
 			debugger;
+			$("#realPoint").empty();
+			var finalPrice = ${sellerDTO.sell_price};    // 결제할 금액
+			var realprice = document.getElementById("realPrice").value;
+			alert(realprice);
 			//------------------------------------------------------------------------------
 			var prePoint = ${memberBean.member_info_detail_point} //현재 보유포인트
 			var testString = document.getElementById("MemberPoint").value; // 원래 문자열
@@ -615,13 +713,18 @@ MemberBean memberbean = (MemberBean) request.getAttribute("memberBean");
 			document.getElementById("realPoint").value = prePoint - subPoint;//차감후 남은 포인트	
 			$("#point").empty(); //최종 결제 포인트에서 보여주는곳
 			$("#point").append(subPoint); //최종 결제 포인트에서 보여주는곳
-
-			if ((subPoint % 10000) != 0) { //포인트 10000단위로 사용가능
+// 			var pointSubPrice = ${sellerDTO.sell_price};
+			// 			pointSubPrice = finalPrice - subPoint;
+			
+			if(prePoint<10000){
+				$("#point").empty();
+				alert("보유 포인트가 10000원 이하입니다.보유포인트:"+prePoint);
+			}else if ((subPoint % 10000) != 0) { //포인트 10000단위로 사용가능
 				$("#point").empty();
 				alert("10000원 단위 사용가능!");
-			} else if (subPoint > finalPrice) { //포인트가  결제할금액을 초과했을 경우 
+			} else if (subPoint >= finalPrice) { //포인트가  결제할금액을 초과했을 경우 
 				$("#point").empty();
-				alert("사용할 포인트가 결제금액보다 많습니다.")
+				alert("사용할 포인트가 결제금액보다 많습니다.");
 			} else if (subPoint > prePoint) { //현재 보유포인트보다 더 많이 사용 할 경우
 				$("#point").empty();
 				alert("포인트가 부족합니다. 현재 포인트:" + prePoint);
@@ -629,39 +732,40 @@ MemberBean memberbean = (MemberBean) request.getAttribute("memberBean");
 				// 					finalPrice -=realPoint;
 				$("#realPoint").append(
 						"남은포인트:" + document.getElementById("realPoint").value);
-
+// 				${"#realPrice"}.append( '1123');
 			}
+			
 		}
+		
+		
 	</script>
 	<script>
-		$(".js-select2").each(function() {
+		$(".js-select2").each(function(){
 			$(this).select2({
-				minimumResultsForSearch : 20,
-				dropdownParent : $(this).next('.dropDownSelect2')
+				minimumResultsForSearch: 20,
+				dropdownParent: $(this).next('.dropDownSelect2')
 			});
 		})
 	</script>
-	<!--===============================================================================================-->
-	<script
-		src="MainPage/vendor/MagnificPopup/jquery.magnific-popup.min.js"></script>
-	<!--===============================================================================================-->
-	<script
-		src="MainPage/vendor/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+<!--===============================================================================================-->
+	<script src="MainPage/vendor/MagnificPopup/jquery.magnific-popup.min.js"></script>
+<!--===============================================================================================-->
+	<script src="MainPage/vendor/perfect-scrollbar/perfect-scrollbar.min.js"></script>
 	<script>
-		$('.js-pscroll').each(function() {
-			$(this).css('position', 'relative');
-			$(this).css('overflow', 'hidden');
+		$('.js-pscroll').each(function(){
+			$(this).css('position','relative');
+			$(this).css('overflow','hidden');
 			var ps = new PerfectScrollbar(this, {
-				wheelSpeed : 1,
-				scrollingThreshold : 1000,
-				wheelPropagation : false,
+				wheelSpeed: 1,
+				scrollingThreshold: 1000,
+				wheelPropagation: false,
 			});
-			$(window).on('resize', function() {
+			$(window).on('resize', function(){
 				ps.update();
 			})
 		});
 	</script>
-	<!--===============================================================================================-->
+<!--===============================================================================================-->
 	<script src="MainPage/js/main.js"></script>
 
 </body>

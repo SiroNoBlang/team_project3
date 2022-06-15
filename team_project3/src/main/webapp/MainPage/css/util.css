@@ -1,6 +1,4 @@
 
-
-
 /*//////////////////////////////////////////////////////////////////
 [ REBOOT ]*/
 *, *:before, *:after {
@@ -13,7 +11,7 @@
 
 body, html {
 	font-family: Arial, sans-serif;
-	font-size: 15px;
+	font-size: 19px;
 	color: #666666;
 
 	height: 100%;
@@ -40,7 +38,7 @@ ul, li {
 input, textarea, label {
 	display: block;
 	outline: none;
-	border: none;
+/* 	border: none; */
 }
 
 /*---------------------------------------------*/
@@ -2413,7 +2411,7 @@ iframe {border: none;}
 .m-r-37, .m-lr-37, .m-all-37 {margin-right: 37px;}
 .m-r-38, .m-lr-38, .m-all-38 {margin-right: 38px;}
 .m-r-39, .m-lr-39, .m-all-39 {margin-right: 39px;}
-.m-r-40, .m-lr-40, .m-all-40 {margin-right: 40px;}
+.m-r-40, .m-lr-40, .m-all-40 {margin-right: -88px;}
 .m-r-41, .m-lr-41, .m-all-41 {margin-right: 41px;}
 .m-r-42, .m-lr-42, .m-all-42 {margin-right: 42px;}
 .m-r-43, .m-lr-43, .m-all-43 {margin-right: 43px;}
@@ -3079,9 +3077,9 @@ iframe {border: none;}
 .m-r--99, .m-lr--99, .m-all--99 {margin-right: -99px;}
 .m-r--100, .m-lr--100, .m-all--100 {margin-right: -100px;}
 
-.m-l-auto {margin-left: 500px;}
-.m-r-auto {margin-right: 500px;}
-.m-lr-auto {margin-left: 350px; margin-right: 500px;}
+.m-l-auto {margin-left: auto;}
+.m-r-auto {margin-right: auto;}
+.m-lr-auto {margin-left: auto; margin-right: auto;}
 
 
 

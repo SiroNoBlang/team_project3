@@ -153,7 +153,6 @@
 				</div>
 			</div>
 	</header>
-	<!-- 여기까지 헤더 -->
 	<!-- Cart -->
 	<jsp:include page="/MainPage/menu/pc_shopping cart.jsp" />
 
@@ -176,16 +175,6 @@
 			</span>
 		</div>
 	</div>
-	
-
-
-	<!-- Product Detail -->
-<!-- 	<input type="button" name="구매" -->
-<%-- 		onclick="location.href='ShopingPro.pr?sell_num=${sellerdto.getSell_num() }&member_code=${sCode}'"> --%>
-<!-- 	<form border="1" action="ShopingPro.pr"> -->
-<!-- 		<input type="hidden"> -->
-
-
 		<div class="container">
 			<div class="row">
 				<div class="col-md-6 col-lg-7 p-b-30">
@@ -213,8 +202,8 @@
 										</div>
 										<!-- // .slide_box -->
 										<div class="slide_btn_box">
-											<button type="button" class="slide_btn_prev">Prev</button>
-											<button type="button" class="slide_btn_next">Next</button>
+											<button type="button" class="slide_btn_prev">이전</button>
+											<button type="button" class="slide_btn_next">다음</button>
 										</div>
 										<!-- // .slide_btn_box -->
 										<ul class="slide_pagination"></ul>
@@ -227,16 +216,16 @@
 
 					</div>
 				</div>
-
+<style>
+td{
+text-align: center;
+}
+</style>
 
 
 				<div class="col-md-6 col-lg-5 p-b-30">
 					<div class="p-r-50 p-t-5 p-lr-0-lg">
-					<style>
-						td{
-						text-align: center;
-						}
-					</style>						
+											
 						<table>
 							<tr>
 							<td colspan="2" ><h2 class="mtext-105 cl2 js-name-detail p-b-14">
@@ -264,18 +253,15 @@
 							</tr>
 							<tr>
 								<td>Price</td>
-								<td style="text-align: left;"> ${sellerdto.sell_price *10000}만원</td>
+								<td style="text-align: left;"> ${sellerdto.sell_price}원</td>
 							</tr>
 							
 							<tr>
-								<td><input
-									class="cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail"
-									type="button" value="장바구니"
-									onclick="location.href='ShopingPro.pr?sell_num=${sellerdto.getSell_num() }&member_code=${sCode }'"></td>
-
-								<td><input
-									class="cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail"
-									type="button" value="구매"
+								<td><input style="border: none;"
+									class="cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-like" type="button" value="찜하기">
+								</td>
+								<td><input style="border: none;"
+									class="cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail" type="button" value="구매"
 									onclick="location.href='ShopingPro.pr?sell_num=${sellerdto.getSell_num() }&member_code=${sCode }'">
 								</td>
 							</tr>
@@ -283,31 +269,14 @@
 						</table>
 </form>
 	<div class="flex-w flex-m p-l-100 p-t-40 respon7">
-		<div class="flex-m bor9 p-r-10 m-r-11">
-<!-- 			<div class="flex-w flex-m p-l-100 p-t-40 respon7"> -->
-				<div class="flex-m bor9 p-r-10 m-r-11">
 					<c:if test="${ sCode ne null }">
 						<li class="w3-button w3-black w3-round" id="rec_update">
-							<i class="fa fa-heart" style="font-size:16px;color:red"></i>
-							&nbsp;<span class="rec_count">${sellerdto.sell_likecount }</span>
+							<i class="fa fa-heart " style="font-size:16px;color:red"></i>
+							&nbsp;<span class="rec_count">${sellerdto.sell_likecount}</span>
 						</li> 
 					</c:if>
 				</div>
-<!-- 		</div> -->
-	
-		<a href="#"
-			class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100"
-			data-tooltip="Facebook"> <i class="fa fa-facebook"></i>
-		</a> <a href="#"
-			class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100"
-			data-tooltip="Twitter"> <i class="fa fa-twitter"></i>
-		</a> <a href="#"
-			class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100"
-			data-tooltip="Google Plus"> <i class="fa fa-google-plus"></i>
-		</a>
-	</div>
-	</div>
-	<br>
+	  <br>
 	<br>
 
 	<table>
@@ -345,12 +314,12 @@
 
 <!-- 					Tab panes -->
 					<div class="tab-content p-t-43">
-						-
+						
 						<div class="tab-pane fade show active" id="description" role="tabpanel">
 							<div class="how-pos2 p-lr-15-md">
-								<div style="text-align: center;">content</div>
+								<div style="text-align: center;"><h4 sty>content</h4></div>
 									<p class="stext-102 cl6">
-										${sellerdto.sell_content}
+										<h5>${sellerdto.sell_content}</h5>
 									</p>
 									<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
 						   </div>
@@ -360,12 +329,15 @@
 						<div class="tab-pane fade" id="information" role="tabpanel">
 <!-- 							<div class="row"> -->
 <!-- 								<div class="col-sm-10 col-md-8 col-lg-6 m-lr-auto"> -->
+								
 									<ul class="p-lr-28 p-lr-15-sm">
 										<li class="flex-w flex-t p-b-7">
 										
 											<table border="1" style="border: none; background: white;">
+												<tr>
 												 <c:forEach items="${Relationdto}" var="ProductRe">
-													<span>	
+												 	<td style="border: none;">
+													<span style="text-align: center;">	
 														<a href="ProductDetailPro.pr?sell_num=${ProductRe.getSell_num()}&sell_brand=${ProductRe.getSell_brand() }"><img src="./Upload/sell_img/${ProductRe.getSell_img_real_name() } "onerror="this.style.display='none'" width="130px"height="160px" alt="판매사진"/></a>
 															<h4>${ProductRe.getSell_title() }</h4>
 														<h5>${ProductRe.getSell_brand() }</h5>
@@ -373,18 +345,19 @@
 														</a>
 													</span>
 												</c:forEach>
+												</tr>
 											</table>
 										</li>
 									</ul>
-										
+<!-- 								</div>	 -->
 <!-- 								</div> -->
-<!-- 							</div> -->
+							
 						</div>
 
 	<!-- 리뷰 입니다. -->					
 						<div class="tab-pane fade" id="reviews" role="tabpanel">
 <!-- 							<div class="row"> -->
-								<div class="col-sm-10 col-md-8 col-lg-6 m-lr-auto">
+								<div class="col-sm-10 col-md-8 col-lg-6 m-lr-auto" style="width: 1733.04px;">
 									<div class="p-b-30 m-lr-15-sm">
 										<!-- Review -->
 										<div class="flex-w flex-t p-b-68">
@@ -467,7 +440,6 @@
 				</div>
 			</div>
 		</div>
-
 <!-- ------------------------------------------------------------------ -->
 	<div class="bg6 flex-c-m flex-w size-302 m-t-73 p-tb-15">
 		<span class="stext-107 cl6 p-lr-25"> SKU: JAK-01 </span> <span
@@ -717,6 +689,14 @@
 				swal(nameProduct, "구매페이지로 이동합니다.", "success");
 			});
 		});
+		
+		$('.js-addcart-detail').each(function(){
+			var nameProduct = $(this).parent().parent().parent().parent().find('.js-name-detail').html();
+			$(this).on('click', function(){
+				swal(nameProduct, "구매페이지로 이동합니다.", "success");
+			});
+		});
+		
 	
 	</script>
 	<!--===============================================================================================-->
@@ -978,57 +958,35 @@ html, body {
 </style>
 <script type="text/javascript">// 추천버튼 클릭시(추천 추가 또는 추천 제거)
 
-	$(function(){
-		
-		
-		
-		$(".fa-heart").click(function(a){
+$('.js-like').each(function(){
+	//var nameProduct = $(this).parent().parent().parent().parent().find('.js-name-detail').html();
+	var rec_count =document.getElementsByClassName("rec_count")
+	$(this).on('click', function(){		
 			
-			var thisRow = $(this).closest('div');  //하트표시 줄의 부모(div)를 찾아  thisRow값에 저장
-			var thisplace = thisRow.find('span')[0];
-// 			debugger;
-// 		var thisRow = $(this).closest('div');  //하트표시 줄의 부모(div)를 찾아  thisRow값에 저장
-// 		var thisplace = thisRow.find('span:eq(5)')[0];
+			debugger;
+			
+		var thisRow = $(this).closest('div');  //하트표시 줄의 부모(div)를 찾아  thisRow값에 저장
+		var thisplace = thisRow.find('span')[0];
 		
-// 		var sell_num =  thisRow.find('input').val(); //thisRow의 하위 요소인 find(input)=>input이라는 value를 찾아 sell_num에 저장 == ${sell_num}
-		
-// 			var sell_num = thisRow.children('div').find('input');
-// 			var sell_num = document.getElementsByClassName('sell_num:eq(0)');
-// 			alert(JSON.stringify(sell_num));
-// 			alert("관심상품 등록되었습니다. <찜 취소시, 취소되었습니다 출력되게해야됨>")			
-// 		debugger;
-			$.ajax({
-				url: "ProductRecUpdate.pr",
-	            type: "POST",
-	            data: {
-	         		sell_num : sellNum,    
-	                id: sCode					 
-	            },
-	            success: function (data) {
-	            	thisplace.innerHTML = data;
-	            }
-			})
-		});
-		
-	});
-	
-	function recCount(sell_num) { //  좋아요 갯수
-	    alert("갯수찾기 드가자"+sell_num);  		
-//     	alert("<좋아요갯수세기>--판매번호"+sell_num);
 		$.ajax({
-			url: "ProductRecCount.pr",
+			url: "ProductRecUpdate.pr",
             type: "POST",
             data: {
-         		sell_num :sell_num
+         		sell_num : sellNum,    
+                id: sCode					 
             },
-            success: function (data) {   //성공시 값을 반환못함 -> 
-           		console.log(data);
-//             	$("thisplace").innerHTML(data);
- 				debugger;
+            success: function (data) {
+            	thisplace.innerHTML = data;
+            	if(data == 1){
+    				swal("LIKE!", "해당 제품을 찜 하셨습니다." );
+    			}else{
+    				swal("LIKE!", "해당 제품을 찜 취소하셨습니다" );
+    			}
             }
 		})
-    
-    };
+
+	});
+});
 </script>
 </body>
 </html>

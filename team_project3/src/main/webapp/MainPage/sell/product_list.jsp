@@ -273,40 +273,41 @@ function filter(value){
 
 
 		<!-- 여기서부터 사진 상세보기로 서블릿만들기 -->
-		<table border="1" style="border: none; background: white;">
+		 <table border="1" style="border: none; background:white;">
 
-			<!--     </table>  구매물품 뿌려주는 곳    -->
-			<div class="container">
-				<div class="row multi-columns-row">
-
-					<form>
-						<c:forEach items="${articleList}" var="articleList">
-							<div class="col-sm-6 col-md-3 col-lg-3 ">
-
-								<div class="shop-item">
-									<!-- 여기 -->
-									<input class="sell_num" value="${articleList.sell_num}" /> <a
-										href="ProductDetailPro.pr?sell_num=${articleList.sell_num}&sell_brand=${articleList.sell_brand}">
-
-										<img src="./Upload/sell_img/${articleList.sell_img_real_name}"
-										width="300px" height="400px" alt="Accessories Pack" />
-									</a> <span>${articleList.sell_img_real_name}</span> <a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
-									<i class="fa fa-eye"></i><span style="text-align: right;">${articleList.sell_readcount }
-									</span>| <span> <span> <span class="w3-border w3-center w3-padding"> <!-- 좋아요 기능을 위한 스크립트(Ajax)는 892행  -->
-												<c:if test="${ sCode  eq null }">
-												<span class="rec_count">세션이 만료되었습니다-로그인필요!</span>
-																		 <div class="rs1-select2 bor8 bg0">		</div>		 -->
-												</c:if> <c:if test="${ sCode ne null }">
-													<li class="w3-button w3-black w3-round" id="rec_update">
-														<i class="fa fa-heart" style="font-size: 16px; color: red"></i>
-														&nbsp;<span class="rec_count">${articleList.sell_likecount }</span>
-													</li>
-												</c:if>
-										</span>
-									</span>
-									</span>
-									<h5>${articleList.sell_title }</h5>
-									<h5>${articleList.sell_brand }</h5>
+<!--     </table>  구매물품 뿌려주는 곳    -->
+     	<div class="container">
+            <div class="row multi-columns-row">
+      
+     		 	<form>
+            <c:forEach items="${articleList}" var="articleList">
+              <div class="col-sm-6 col-md-3 col-lg-3 ">
+              
+                <div class="shop-item">   <!-- 여기 -->
+               <input class="sell_num" value="${articleList.sell_num}" readonly="readonly" style="border: none;">
+                <a href="ProductDetailPro.pr?sell_num=${articleList.sell_num}&sell_brand=${articleList.sell_brand}">
+                 <img src="./Upload/sell_img/${articleList.sell_img_real_name}" width="300px" height="400px" alt="Accessories Pack"/></a>
+                
+                   <a href="ProductDetailPro.pr?sell_num=${articleList.sell_num}&sell_brand=${articleList.sell_brand}"> <span>${articleList.sell_img_real_name}</span></a>
+                 <a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+                 <i class="fa fa-eye"></i><span style="text-align: right;">${articleList.sell_readcount } </span>|
+                 <span>
+               	     <span>
+						<span class="w3-border w3-center w3-padding">      <!-- 좋아요 기능을 위한 스크립트(Ajax)는 892행  -->
+							<c:if test="${ sCode  eq null }">
+								<span class="rec_count">세션이 만료되었습니다-로그인필요!</span>	
+							</c:if>
+							<c:if test="${ sCode ne null }">
+								<li class="w3-button w3-black w3-round" id="rec_update">
+									<i class="fa fa-heart" style="font-size:16px;color:red"></i>
+									&nbsp;<span class="rec_count">${articleList.sell_likecount }</span>
+								</li> 
+							</c:if>
+						</span>
+					</span>
+				</span>
+                <a href="ProductDetailPro.pr?sell_num=${articleList.sell_num}&sell_brand=${articleList.sell_brand}">   <h5>${articleList.sell_title }</h5></a>
+                  <a href="ProductDetailPro.pr?sell_num=${articleList.sell_num}&sell_brand=${articleList.sell_brand}">  <h5>${articleList.sell_brand }</h5></a>
 								</div>
 							</div>
 						</c:forEach>
@@ -598,53 +599,35 @@ function filter(value){
 <!-- ================================================================================================좋아요 기능 -->
 <script type="text/javascript">// 추천버튼 클릭시(추천 추가 또는 추천 제거)
 
-	$(function(){
-		
-		
-		
-		$(".fa-heart").click(function(a){
-		var thisRow = $(this).closest('div');  //하트표시 줄의 부모(div)를 찾아  thisRow값에 저장
-		var thisplace = thisRow.find('span:eq(5)')[0];
-		
-		var sell_num =  thisRow.find('input').val(); //thisRow의 하위 요소인 find(input)=>input이라는 value를 찾아 sell_num에 저장 == ${sell_num}
-		
-// 			var sell_num = thisRow.children('div').find('input');
-// 			var sell_num = document.getElementsByClassName('sell_num:eq(0)');
-// 			alert(JSON.stringify(sell_num));
-// 			alert("관심상품 등록되었습니다. <찜 취소시, 취소되었습니다 출력되게해야됨>")			
-// 		debugger;
-			$.ajax({
-				url: "ProductRecUpdate.pr",
-	            type: "POST",
-	            data: {
-	         		sell_num : sell_num,    
-	                id: sCode					 
-	            },
-	            success: function (data) {
-	            	thisplace.innerHTML = data;
-	            }
-			})
-		});
-		
-	});
+$(function(){
+	$(".fa-heart").click(function(a){
+	var thisRow = $(this).closest('div');  //하트표시 줄의 부모(div)를 찾아  thisRow값에 저장
+	var thisplace = thisRow.find('span:eq(5)')[0];
 	
-	function recCount(sell_num,thisRow) { //  좋아요 갯수
-		
-//     	alert("<좋아요갯수세기>--판매번호"+sell_num);
+	var sell_num =  thisRow.find('input').val(); //thisRow의 하위 요소인 find(input)=>input이라는 value를 찾아 sell_num에 저장 == ${sell_num}
+	
 		$.ajax({
-			url: "ProductRecCount.pr",
+			url: "ProductRecUpdate.pr",
             type: "POST",
             data: {
-         		sell_num : sell_num
+         		sell_num : sell_num,    
+                id: sCode					 
             },
-            success: function (data) {   //성공시 값을 반환못함 -> 
-           		console.log(data);
-//             	$("thisplace").innerHTML(data);
- 				debugger;
+            success: function (data) {
+            	thisplace.innerHTML = data;
+            	if(data == 1){
+    				swal("LIKE!", "해당 제품을 찜 하셨습니다." );
+    			}else{
+    				swal("LIKE!", "해당 제품을 찜 취소하셨습니다" );
+    			}
             }
 		})
-    
-    };
+	});
+	
+});
+
+
+
 </script>
 </body>
 </html>

@@ -62,7 +62,7 @@ function readURL(obj) {   //사진 3장 뿌리기
     for(let i=0;i<obj.files.length;i++){
     reader.readAsDataURL(obj.files[i]);
     reader.onload = function (e) {
-        let img = $('<img  width=418,height=517 />');
+        let img = $('<img  width="400",height="400" />');
         $(img).attr('src', e.target.result);
         $('#previewDiv').append(img);
         
@@ -80,7 +80,7 @@ function readURL1(obj) {   //사진 3장 뿌리기
     for(let i=0;i<obj.files.length;i++){
     reader.readAsDataURL(obj.files[i]);
     reader.onload = function (e) {
-        let img = $('<img  width=418,height=517 />');
+        let img = $('<img  width=400,height=400 />');
         $(img).attr('src', e.target.result);
         $('#previewDiv1').append(img);
        
@@ -98,7 +98,7 @@ function readURL2(obj) {   //사진 3장 뿌리기
     for(let i=0;i<obj.files.length;i++){
     reader.readAsDataURL(obj.files[i]);
     reader.onload = function (e) {
-        let img = $('<img  width=418,height=517 />');
+        let img = $('<img  width=400,height=400 />');
         $(img).attr('src', e.target.result);
         $('#previewDiv2').append(img);
        
@@ -116,7 +116,7 @@ function readURL3(obj) {   //사진 3장 뿌리기
     for(let i=0;i<obj.files.length;i++){
     reader.readAsDataURL(obj.files[i]);
     reader.onload = function (e) {
-        let img = $('<img  width=418,height=517 />');
+        let img = $('<img  width=400,height=400 />');
         $(img).attr('src', e.target.result);
         $('#previewDiv3').append(img);
        
@@ -133,7 +133,7 @@ function readURL4(obj) {   //사진 3장 뿌리기
     for(let i=0;i<obj.files.length;i++){
     reader.readAsDataURL(obj.files[i]);
     reader.onload = function (e) {
-        let img = $('<img  width=418,height=517 />');
+        let img = $('<img  width=400,height=400 />');
         $(img).attr('src', e.target.result);
         $('#previewDiv4').append(img);
         
@@ -181,98 +181,269 @@ function readURL4(obj) {   //사진 3장 뿌리기
 	<header class="header-v4">
 		<!-- Header desktop -->
 		<div class="container-menu-desktop">
-<div class="wrap-menu-desktop how-shadow1" style="top: 0px;">
+			<!-- Topbar -->
+			<div class="wrap-menu-desktop how-shadow1" style="top:0px;">
 				<nav class="limiter-menu-desktop container">
-					<jsp:include page="/MainPage/menu/pc_sub_header.jsp" />
+					
+					<!-- Logo desktop -->		
+					<a href="MainPage.pr" class="logo">
+						<img src="MainPage/images/icons/logo-01.png" alt="IMG-LOGO">
+					</a>
+
+					<!-- Menu desktop -->
+					<div class="menu-desktop">
+						<ul class="main-menu">
+							<li>
+								<a href="MainPage.pr">Home</a>
+							</li>
+
+							<li>
+								<a href="Product.pr">Shop</a>
+							</li>
+
+							<li>
+								<a href="SellForm.pr">Sell</a>
+							</li>
+
+							<li>
+								<a href="CommunityNotice.ma">Community</a>
+							</li>
+			
+							<li>
+								<a href="Contact.pr">Contact</a>
+							</li>
+						</ul>
+					</div>
+
+					<!-- Icon header -->
+					<div class="wrap-icon-header flex-w flex-r-m">
+						<div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 js-show-modal-search">
+							<i class="zmdi zmdi-search"></i>
+						</div>
+
+						<div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti js-show-cart" data-notify="2">
+							<i class="zmdi zmdi-shopping-cart"></i>
+						</div>
+
+						<a href="#" class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti" data-notify="0">
+							<i class="zmdi zmdi-favorite-outline"></i>
+						</a>
+					</div>
 				</nav>
-			</div>
-			</div>
-			
-			
-				<jsp:include page="/MainPage/menu/pc_menu.jsp" />
+			</div>	
+		</div>
 
-			<!-- Header Mobile -->
-			<div class="wrap-header-mobile">
-				<!-- Logo moblie -->
-				<div class="logo-mobile">
-					<a href="MainPage.pr"><img
-						src="MainPage/images/icons/logo-01.png" alt="IMG-LOGO"></a>
+		<!-- Header Mobile -->
+		<div class="wrap-header-mobile">
+			<!-- Logo moblie -->		
+			<div class="logo-mobile">
+				<a href="index.html"><img src="MainPage/images/icons/logo-01.png" alt="IMG-LOGO"></a>
+			</div>
+
+			<!-- Icon header -->
+			<div class="wrap-icon-header flex-w flex-r-m m-r-15">
+				<div class="icon-header-item cl2 hov-cl1 trans-04 p-r-11 js-show-modal-search">
+					<i class="zmdi zmdi-search"></i>
 				</div>
 
-				<!-- Icon header -->
-				
-				<!-- Button show menu -->
-				<div class="btn-show-menu-mobile hamburger hamburger--squeeze">
-					<span class="hamburger-box"> <span class="hamburger-inner"></span>
+				<div class="icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10 icon-header-noti js-show-cart" data-notify="2">
+					<i class="zmdi zmdi-shopping-cart"></i>
+				</div>
+
+				<a href="#" class="dis-block icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10 icon-header-noti" data-notify="0">
+					<i class="zmdi zmdi-favorite-outline"></i>
+				</a>
+			</div>
+
+			<!-- Button show menu -->
+			<div class="btn-show-menu-mobile hamburger hamburger--squeeze">
+				<span class="hamburger-box">
+					<span class="hamburger-inner"></span>
+				</span>
+			</div>
+		</div>
+
+
+		<!-- Menu Mobile -->
+		<div class="menu-mobile">
+			<ul class="topbar-mobile">
+				<li>
+					<div class="left-top-bar">
+						Free shipping for standard order over $100
+					</div>
+				</li>
+
+				<li>
+					<div class="right-top-bar flex-w h-full">
+						<a href="#" class="flex-c-m p-lr-10 trans-04">
+							Help & FAQs
+						</a>
+
+						<a href="#" class="flex-c-m p-lr-10 trans-04">
+							My Account
+						</a>
+
+						<a href="#" class="flex-c-m p-lr-10 trans-04">
+							EN
+						</a>
+
+						<a href="#" class="flex-c-m p-lr-10 trans-04">
+							USD
+						</a>
+					</div>
+				</li>
+			</ul>
+
+			<ul class="main-menu-m">
+				<li>
+					<a href="MainPage.pr">Home</a>
+					<span class="arrow-main-menu-m">
+						<i class="fa fa-angle-right" aria-hidden="true"></i>
 					</span>
+				</li>
+
+				<li>
+					<a href="ProductForm.pr">Shop</a>
+				</li>
+
+				<li>
+					<a href="shoping-cart.html" class="label1 rs1" data-label1="hot">Features</a>
+				</li>
+
+				<li>
+					<a href="blog.html">Blog</a>
+				</li>
+
+				<li>
+					<a href="about.html">About</a>
+				</li>
+
+				<li>
+					<a href="contact.html">Contact</a>
+				</li>
+			</ul>
+		</div>
+
+		<!-- Modal Search -->
+		<div class="modal-search-header flex-c-m trans-04 js-hide-modal-search">
+			<div class="container-search-header">
+				<button class="flex-c-m btn-hide-modal-search trans-04 js-hide-modal-search">
+					<img src="MainPage/images/icons/icon-close2.png" alt="CLOSE">
+				</button>
+
+				<form class="wrap-search-header flex-w p-l-15">
+					<button class="flex-c-m trans-04">
+						<i class="zmdi zmdi-search"></i>
+					</button>
+					<input class="plh3" type="text" name="search" placeholder="Search...">
+				</form>
+			</div>
+		</div>
+	</header>
+
+	<!-- Cart -->
+	<div class="wrap-header-cart js-panel-cart">
+		<div class="s-full js-hide-cart"></div>
+
+		<div class="header-cart flex-col-l p-l-65 p-r-25">
+			<div class="header-cart-title flex-w flex-sb-m p-b-8">
+				<span class="mtext-103 cl2">
+					Your Cart
+				</span>
+
+				<div class="fs-35 lh-10 cl2 p-lr-5 pointer hov-cl1 trans-04 js-hide-cart">
+					<i class="zmdi zmdi-close"></i>
 				</div>
 			</div>
+			
+			<div class="header-cart-content flex-w js-pscroll">
+				<ul class="header-cart-wrapitem w-full">
+					<li class="header-cart-item flex-w flex-t m-b-12">
+						<div class="header-cart-item-img">
+							<img src="MainPage/images/item-cart-01.jpg" alt="IMG">
+						</div>
 
+						<div class="header-cart-item-txt p-t-8">
+							<a href="#" class="header-cart-item-name m-b-18 hov-cl1 trans-04">
+								White Shirt Pleat
+							</a>
 
-			<!-- Menu Mobile -->
-			<div class="menu-mobile">
-				<ul class="topbar-mobile">
-					<li>
-						<div class="left-top-bar">Free shipping for standard order
-							over $100</div>
+							<span class="header-cart-item-info">
+								1 x $19.00
+							</span>
+						</div>
 					</li>
 
-					<li>
-						<div class="right-top-bar flex-w h-full">
-							<a href="#" class="flex-c-m p-lr-10 trans-04"> Help & FAQs </a> <a
-								href="#" class="flex-c-m p-lr-10 trans-04"> My Account </a> <a
-								href="#" class="flex-c-m p-lr-10 trans-04"> EN </a> <a href="#"
-								class="flex-c-m p-lr-10 trans-04"> USD </a>
+					<li class="header-cart-item flex-w flex-t m-b-12">
+						<div class="header-cart-item-img">
+							<img src="MainPage/images/item-cart-02.jpg" alt="IMG">
+						</div>
+
+						<div class="header-cart-item-txt p-t-8">
+							<a href="#" class="header-cart-item-name m-b-18 hov-cl1 trans-04">
+								Converse All Star
+							</a>
+
+							<span class="header-cart-item-info">
+								1 x $39.00
+							</span>
+						</div>
+					</li>
+
+					<li class="header-cart-item flex-w flex-t m-b-12">
+						<div class="header-cart-item-img">
+							<img src="MainPage/images/item-cart-03.jpg" alt="IMG">
+						</div>
+
+						<div class="header-cart-item-txt p-t-8">
+							<a href="#" class="header-cart-item-name m-b-18 hov-cl1 trans-04">
+								Nixon Porter Leather
+							</a>
+
+							<span class="header-cart-item-info">
+								1 x $17.00
+							</span>
 						</div>
 					</li>
 				</ul>
+				
+				<div class="w-full">
+					<div class="header-cart-total w-full p-tb-40">
+						Total: $75.00
+					</div>
 
-				<ul class="main-menu-m">
-					<li><a href="index.html">Home</a>
-						<ul class="sub-menu-m">
-							<li><a href="index.html">Homepage 1</a></li>
-							<li><a href="home-02.html">Homepage 2</a></li>
-							<li><a href="home-03.html">Homepage 3</a></li>
-						</ul> <span class="arrow-main-menu-m"> <i
-							class="fa fa-angle-right" aria-hidden="true"></i>
-					</span></li>
+					<div class="header-cart-buttons flex-w w-full">
+						<a href="shoping-cart.html" class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-r-8 m-b-10">
+							View Cart
+						</a>
 
-					<li><a href="product.pr">Shop</a></li>
-
-					<li><a href="shoping-cart.html" class="label1 rs1"
-						data-label1="hot">Features</a></li>
-
-					<li><a href="SellForm.pr">Sell</a></li>
-
-					<li><a href="about.html">About</a></li>
-
-					<li><a href="contact.html">Contact</a></li>
-				</ul>
-			</div>
-
-			<!-- Modal Search -->
-			<div class="modal-search-header flex-c-m trans-04 js-hide-modal-search">
-				<div class="container-search-header">
-					<button class="flex-c-m btn-hide-modal-search trans-04 js-hide-modal-search">
-						<img src="MainPage/images/icons/icon-close2.png" alt="CLOSE">
-					</button>
-
-					<form class="wrap-search-header flex-w p-l-15">
-						<button class="flex-c-m trans-04">
-							<i class="zmdi zmdi-search"></i>
-						</button>
-						<input class="plh3" type="text" name="search"
-							placeholder="Search...">
-					</form>
+						<a href="shoping-cart.html" class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-b-10">
+							Check Out
+						</a>
+					</div>
 				</div>
 			</div>
-	</header>
-	<!-- 여기까지 헤더 -->
-	<!-- Cart -->
-	<jsp:include page="/MainPage/menu/pc_shopping cart.jsp" />
+		</div>
+	</div>
 
 
+	<!-- breadcrumb -->
+	<div class="container">
+		<div class="bread-crumb flex-w p-l-25 p-r-15 p-t-30 p-lr-0-lg">
+			<a href="MainPage.pr" class="stext-109 cl8 hov-cl1 trans-04">
+				Home
+				<i class="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i>
+			</a>
 
+			<a href="product.html" class="stext-109 cl8 hov-cl1 trans-04">
+				판매글
+				<i class="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i>
+			</a>
+			<span class="stext-109 cl4">
+				${sNickname }님의 판매글 작성
+			</span>
+		</div>
+	</div>
 		
 
 
@@ -280,7 +451,7 @@ function readURL4(obj) {   //사진 3장 뿌리기
 <form action="SellWritePro.pr?sell_member_code=${sCode}" name="sellForm" method="post" enctype="multipart/form-data">	
 	<section class="sec-product-detail bg0 p-t-65 p-b-60">
 		<div class="container">
-			<h3 >&nbsp;&nbsp;&nbsp;&nbsp; ${sNickname }님의 판매글 작성</h3>
+			
 			<div class="row">
 				<div class="col-md-6 col-lg-7 p-b-30">
 					<div class="p-l-25 p-r-30 p-lr-0-lg">
@@ -456,190 +627,146 @@ function readURL4(obj) {   //사진 3장 뿌리기
     });
   })();
 </script>
-<!--!!!!!!!!!!!!!!!!!! -->
-										 <input type="file" id="imgInput" name="sell_img_name1" value="" onchange="readURL(this)">
-										 <input type="file" id="imgInput" name="sell_img_name2" onchange="readURL1(this)">
-										 <input type="file" id="imgInput" name="sell_img_name3" onchange="readURL2(this)">
-<!-- 										  <input type="file" id="imgInput" name="sell_img_name4" onchange="readURL3(this)"> -->
-<!-- 										 <input type="file" id="imgInput" name="sell_img_name5" onchange="readURL4(this)">   -->
-										 	
-											</div>
-										</div>
-										
-										<div class="flex-w flex-m m-r-20 m-tb-5">
-<%--                        					 Point:<input class="stext-104 cl2 plh4 size-117 bor13 p-lr-20 m-r-10 m-tb-5" type="text" name="Point" id="MemberPoint" value="<%=memberbean.getMember_info_detail_point() %>"> --%>
-                       					 <span id="realPoint"></span>
-                       					 </div>
+									 <input type="file" id="imgInput" name="sell_img_name1" value="" onchange="readURL(this)" >
+									 <input type="file" id="imgInput" name="sell_img_name2" onchange="readURL1(this)">
+									 <input type="file" id="imgInput" name="sell_img_name3" onchange="readURL2(this)">
 								</div>
-						</div>
-				</div>				
-											
-								</div>
+							</div>
+						<div class="flex-w flex-m m-r-20 m-tb-5">
+                   	<span id="realPoint"></span>
+                 </div>
+			</div>
+		</div>
+	</div>				
+</div>
 					
-				<div class="col-md-6 col-lg-5 p-b-30">
-					<div class="p-r-50 p-t-5 p-lr-0-lg">
-						<h4 class="mtext-105 cl2 js-name-detail p-b-14">
-			                <input type="text" name="sell_title" id=""  required="required" placeholder="제목입력칸(413행)">
-						</h4>
-						<div class="mtext-106 cl2">
-							<input type="text" name="sell_price" id="sell_price" required="required" placeholder="만원단위로 판매 가능" onkeyup="this.value=this.value.replace(/[^-0-9]/g,'');">
-							<div id="realPoint"></div>
+
+			<div class="col-md-6 col-lg-5 p-b-30">
+				<div class="p-r-50 p-t-5 p-lr-0-lg">
+		            <div>  
+		                <input type="text" style="border-top: none; border-right: none; border-left: none;" name="sell_title" id=""  required="required" placeholder="제목을 입력하세요(50자)">
+					</div>
+					<div class="mtext-106 cl2">
+						<input type="text" style="border-top: none; border-right: none; border-left: none;" name="sell_price" id="sell_price" required="required" placeholder="만원단위로 판매 가능" onkeyup="this.value=this.value.replace(/[^-0-9]/g,'');">
+						<div id="realPoint"></div>
+					</div>
+	
+					<div class="mtext-106 cl2">
+								<input type="text" style="border : none;"  name="sell_brand" id=""  required="required" placeholder="브랜드를 입력해주세요."><br>
+				    </div>
+					
+					<!--  -->
+					<div class="p-t-33">
+						<div class="flex-w flex-r-m p-b-10">
+	<!-- 								<div>정확한 정보는 판매확률을 높여줍니다!</div> -->
+							
+							<div class="size-203 flex-c-m respon6">
+							Category
+							</div>
+							<div class="size-204 respon6-next">
+								<div class="rs1-select2 bor8 bg0">
+									<select class="js-select2" id="s0" name="sell_category"onchange="optionChange();" required="required" >
+										<option selected="selected">선택해주세요.</option>
+										<option value="상의">상의</option>
+										<option value="하의">하의</option>
+										<option value="신발">신발</option>
+										<option value="잡화">잡화</option>
+									</select>
+									<div class="dropDownSelect2"></div>
+								</div>
+							</div>
 						</div>
-		<script type="text/javascript">
-		$(function() {
-			  $('#sell_price').on('change', function() {
-			     var n = $(this).val(); 
-			    
-			     debugger;
-			     if(Math.floor(n%10000) ==0){		    
-			    	 alert("금액:"+Math.floor(n/10000)+"만원"); 
-				     $(this).val(n);
-			    	
-			     }else{
-			    	 alert("판매금액은 만원단위로 가능합니다!");
-			    	 $(this).val('');
-			   
-			     }
-			  });
-			});
-		</script>
-						<div class="mtext-106 cl2">
-									<input type="text" name="sell_brand" id=""  required="required" placeholder="브랜드를 입력해주세요."><br>
-					    </div>
+	
+						<div class="flex-w flex-r-m p-b-10">
+							<div class="size-203 flex-c-m respon6">
+							Category Detail
+							</div>
+	
+							<div class="size-204 respon6-next">
+								<div class="rs1-select2 bor8 bg0">
+									<select class="js-select2" id="s1" name="sell_category_detail" required="required">
+										<option>선택해주세요.</option>
+										
+									</select>
+									<div class="dropDownSelect2"></div>
+								</div>
+							</div>
+						</div>
 						
-						<!--  -->
-						<div class="p-t-33">
-							<div class="flex-w flex-r-m p-b-10">
-<!-- 								<div>정확한 정보는 판매확률을 높여줍니다!</div> -->
-								
-								<div class="size-203 flex-c-m respon6">
-								Category
-								</div>
-								<div class="size-204 respon6-next">
-									<div class="rs1-select2 bor8 bg0">
-										<select class="js-select2" id="s0" name="sell_category"onchange="optionChange();" required="required" >
-											<option selected="selected">선택해주세요.</option>
-											<option value="상의">상의</option>
-											<option value="하의">하의</option>
-											<option value="신발">신발</option>
-											<option value="잡화">잡화</option>
-										</select>
-										<div class="dropDownSelect2"></div>
-									</div>
+						<div class="flex-w flex-r-m p-b-10">
+							<div class="size-203 flex-c-m respon6">
+								Size
+							</div>
+	
+							<div class="size-204 respon6-next">
+								<div class="rs1-select2 bor8 bg0">
+									<select class="js-select2" id="s2" name="sell_size" required="required">
+										<option>선택해주세요.</option>
+										
+									</select>
+									<div class="dropDownSelect2"></div>
 								</div>
 							</div>
-
-							<div class="flex-w flex-r-m p-b-10">
-								<div class="size-203 flex-c-m respon6">
-								Category Detail
-								</div>
-
-								<div class="size-204 respon6-next">
-									<div class="rs1-select2 bor8 bg0">
-										<select class="js-select2" id="s1" name="sell_category_detail" required="required">
-											<option>선택해주세요.</option>
-											
-										</select>
-										<div class="dropDownSelect2"></div>
-									</div>
+						</div>
+						
+						<div class="flex-w flex-r-m p-b-10">
+							<div class="size-203 flex-c-m respon6">
+								Color
+							</div>
+	
+							<div class="size-204 respon6-next">
+								<div class="rs1-select2 bor8 bg0">
+									<select class="js-select2" name="sell_color1" required="required">
+										<option>선택해주세요.</option>
+										<option>Black</option>
+										<option>White</option>
+										<option>Blue</option>
+										<option>Grey</option>
+										<option>Yellow</option>
+										<option>Red</option>
+										<option>SkyBlue</option>
+									</select>
+									<div class="dropDownSelect2"></div>
 								</div>
 							</div>
-							
-							<div class="flex-w flex-r-m p-b-10">
-								<div class="size-203 flex-c-m respon6">
-									Size
-								</div>
-
-								<div class="size-204 respon6-next">
-									<div class="rs1-select2 bor8 bg0">
-										<select class="js-select2" id="s2" name="sell_size" required="required">
-											<option>선택해주세요.</option>
-											
-										</select>
-										<div class="dropDownSelect2"></div>
-									</div>
-								</div>
-							</div>
-							
-							<div class="flex-w flex-r-m p-b-10">
-								<div class="size-203 flex-c-m respon6">
-									Color
-								</div>
-
-								<div class="size-204 respon6-next">
-									<div class="rs1-select2 bor8 bg0">
-										<select class="js-select2" name="sell_color1" required="required">
-											<option>선택해주세요.</option>
-											<option>Black</option>
-											<option>White</option>
-											<option>Blue</option>
-											<option>Grey</option>
-											<option>Yellow</option>
-											<option>Red</option>
-											<option>SkyBlue</option>
-										</select>
-										<div class="dropDownSelect2"></div>
-									</div>
-								</div>
-								<div class="size-204 respon6-next">
-									<div class="rs1-select2 bor8 bg0">
-										<select class="js-select2" name="sell_color2">
-											<option>선택해주세요.</option>
-											<option>Black</option>
-											<option>White</option>
-											<option>Blue</option>
-											<option>Grey</option>
-											<option>Yellow</option>
-											<option>Red</option>
-											<option>SkyBlue</option>
-										</select>
-										<div class="dropDownSelect2"></div>
-									</div>
+							<div class="size-204 respon6-next">
+								<div class="rs1-select2 bor8 bg0">
+									<select class="js-select2" name="sell_color2">
+										<option>선택해주세요.</option>
+										<option>Black</option>
+										<option>White</option>
+										<option>Blue</option>
+										<option>Grey</option>
+										<option>Yellow</option>
+										<option>Red</option>
+										<option>SkyBlue</option>
+									</select>
+									<div class="dropDownSelect2"></div>
 								</div>
 							</div>
-							
-							<div class="flex-w flex-r-m p-b-10">
-								<div class="size-203 flex-c-m respon6">
-									Content
-								</div>
-								   <div>
-									  <textarea cols="45" rows="10"  name="sell_content"   placeholder="제품을 설명 (50자이하)" required="required"></textarea>
-								   </div>	
+						</div>
+						
+						<div class="flex-w flex-r-m p-b-10">
+							<div class="size-203 flex-c-m respon6">
 								
 							</div>
-							<div class="flex-w flex-r-m p-b-10">
-								<div class="size-204 flex-w flex-m respon6-next">
-									<input type="button" value="취소" onclick="history.back()" >&nbsp;&nbsp;
-									
-									<input type="submit" value="판매등록"  >
-
-								</div>
+							<div>
+								 <textarea cols="45" rows="10"  name="sell_content"   placeholder="제품을 설명 (50자이하)" required="required"></textarea>
 							</div>	
 						</div>
-
-						<!--  -->
-						<div class="flex-w flex-m p-l-100 p-t-40 respon7">
-							<div class="flex-m bor9 p-r-10 m-r-11">
-								<a href="#" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 js-addwish-detail tooltip100" data-tooltip="Add to Wishlist">
-									<i class="zmdi zmdi-favorite"></i>
-								</a>
+						<div class="flex-w flex-r-m p-b-10">
+							<div class="size-204 flex-w flex-m respon6-next">
+								<input class="flex-c-m stext-101 cl2 size-118 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer m-tb-5" type="button" value="판매취소" onclick="history.back()" >&nbsp;&nbsp;
+								<input class="flex-c-m stext-101 cl2 size-118 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer m-tb-5" type="submit" value="판매등록"  >
 							</div>
-
-							<a href="#" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100" data-tooltip="Facebook">
-								<i class="fa fa-facebook"></i>
-							</a>
-
-							<a href="#" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100" data-tooltip="Twitter">
-								<i class="fa fa-twitter"></i>
-							</a>
-
-							<a href="#" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100" data-tooltip="Google Plus">
-								<i class="fa fa-google-plus"></i>
-							</a>
-						</div>
+						</div>	
 					</div>
+	
+					<!--  -->
+					
 				</div>
 			</div>
+		</div>
 
 		<div class="bg6 flex-c-m flex-w size-302 m-t-73 p-tb-15">
 			<span class="stext-107 cl6 p-lr-25">
@@ -652,7 +779,7 @@ function readURL4(obj) {   //사진 3장 뿌리기
 		</div>
 	</section>
 </form>
-
+	
 	
 	<!-- Footer영역과 상단 이동 버튼-->
 	<jsp:include page="/MainPage/menu/footer.jsp"/>
@@ -819,6 +946,23 @@ function readURL4(obj) {   //사진 3장 뿌리기
 	<script src="MainPage/vendor/bootstrap/js/bootstrap.min.js"></script>
 <!--===============================================================================================-->
 	<script src="MainPage/vendor/select2/select2.min.js"></script>
+	<script type="text/javascript">
+	$(function() {
+		  $('#sell_price').on('change', function() {
+		     var n = $(this).val(); 
+		    
+		     debugger;
+		     if(Math.floor(n%10000) ==0){		    
+		    	 alert("금액:"+Math.floor(n/10000)+"만원"); 
+			     $(this).val(n);
+		    	
+		     }else{
+		    	 alert("판매금액은 만원단위로 가능합니다!");
+		    	 $(this).val('');
+		     }
+		  });
+		});
+	</script>
 	<script>
 		$(".js-select2").each(function(){
 			$(this).select2({

@@ -188,7 +188,7 @@ public class SellerDAO {
 		ResultSet rs = null;
 
 		try {
-			String sql = "SELECT a.sell_content,a.sell_num,a.sell_member_code, a.sell_size , a.sell_category, a.sell_category_detail, a.sell_title, a.sell_color, a.sell_brand, a.sell_price, a.sell_readcount,(SELECT COUNT(*) FROM like_list WHERE like_list_item_num= a.sell_num ) AS sell_likecount ,"
+			String sql = "SELECT a.sell_content,a.sell_num,a.sell_member_code, a.sell_size , a.sell_category, a.sell_category_detail, a.sell_title, a.sell_color, a.sell_brand, (a.sell_price*10000)AS sell_price , a.sell_readcount,(SELECT COUNT(*) FROM like_list WHERE like_list_item_num= a.sell_num ) AS sell_likecount ,"
 					+ " b.sell_img_name, b.sell_img_real_name ,b.sell_img_real_num ,b.sell_img_num,b.sell_img_name,b.sell_img_real_name, c.sell_list_num, c.sell_list_item_status"
 					+ " FROM sell AS a JOIN sell_img AS b ON a.sell_num = b.sell_img_real_num JOIN sell_list AS c ON a.sell_num = c.sell_list_num"
 					+ " WHERE sell_list_num= ? AND"
@@ -448,7 +448,7 @@ public class SellerDAO {
 
 		try {
 			String sql = "UPDATE   member_info_detail"
-					+ "	SET member_info_detail_point= member_info_detail_point - ?,member_info_detail_acc_money= member_info_detail_acc_money + ?"
+					+ "	SET member_info_detail_point= member_info_detail_point - ?, member_info_detail_acc_money= member_info_detail_acc_money + ROUND((?/10000),0) "        
 					+ "	WHERE member_info_detail_code= ? ";
 
 			pstmt = con.prepareStatement(sql);
