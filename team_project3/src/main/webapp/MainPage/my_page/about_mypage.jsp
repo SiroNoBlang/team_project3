@@ -152,7 +152,12 @@ td, th, td, th {
 				$('#previewDiv').append(img);
 			}
 		}
-
+	}
+	
+	function membersecession() { //회원 탈퇴
+		if (confirm("회원탈퇴 하시겠습니까?")) {
+			location.href = "./MemberSecession.ma?member_code=${memberDetail.member_code }";
+		}
 	}
 </script>
 
@@ -548,8 +553,12 @@ td, th, td, th {
 				<tr>
 					<td colspan="2"><input type="submit" value="수정하기"></td>
 				</tr>
+				<tr>
+					<td colspan="2"><input type="button" value="탈퇴하기" onclick="membersecession()"></td>
+				</tr>
 			</tbody>
 		</table>
+		
 
 	</form>
 	<!-- Footer영역과 상단 이동 버튼-->

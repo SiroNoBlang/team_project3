@@ -17,6 +17,7 @@ import action.JoinProAction;
 import action.LikeListAction;
 import action.LoginProAction;
 import action.LogoutAction;
+import action.MemberSecessionAction;
 import action.MpEventDetailAction;
 import action.MpEventListAction;
 import action.MpEventSearchAction;
@@ -277,6 +278,14 @@ public class Main extends HttpServlet {
 		} else if (command.equals("/BuyList.ma")) { // 구매목록 조회
 			// 이것도 메인 페이지 컨트롤러로 옮겨야함.
 			action = new BuyListAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		} else if (command.equals("/MemberSecession.ma")) { // 회원탈퇴 기능
+			System.out.println("회원탈퇴 컨트롤러");
+			action = new MemberSecessionAction();
 			try {
 				forward = action.execute(request, response);
 			} catch (Exception e) {

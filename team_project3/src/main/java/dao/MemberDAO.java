@@ -34,7 +34,7 @@ public class MemberDAO {
 	public int joinSuccess(MemberBean memberBean) {
         int joinCount = 0;
         
-        PreparedStatement pstmt = null, pstmt2 = null, pstmt3 = null, pstmt4 = null;
+        PreparedStatement pstmt = null, pstmt2 = null, pstmt3 = null, pstmt4 = null, pstmt5 = null , pstmt6 = null;
 
         try {
            String sql = "INSERT INTO member VALUES ((SELECT A.NUM FROM (SELECT IFNULL(MAX(CAST(member_num AS UNSIGNED)), 0) + 1 AS num FROM member) A),REPLACE(UUID(),'-',''),?,?,?,?)";
@@ -448,6 +448,7 @@ public class MemberDAO {
 	
 	//회원가입시 인증과정
 	public int selectAuthInfo(String email, String code) {
+		System.out.println("MemberDAO - selectAuthInfo");
 		
 		int result = 0;
 		
@@ -631,6 +632,7 @@ public class MemberDAO {
 				buy.setSell_size(rs.getString("s.sell_size"));
 				buy.setBuy_sell_item_date(rs.getString("b.buy_sell_item_date").substring(0,8));
 				buy.setBuy_item_status(rs.getString("b.buy_item_status"));
+//				buy.setSell_img_name(rs.getString("si.sell_img_name"));
 				buy.setSell_img_real_name(rs.getString("si.sell_img_real_name"));
 				buy.setSell_num(rs.getInt("s.sell_num"));
 				
@@ -715,6 +717,57 @@ public class MemberDAO {
 		
 		return sellarticleList;
 		
+	}
+
+	public int selectLikeSmallListCount(String tableName) {
+		int listCount = 0;
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			String sql = "SELECT COUNT(*) FROM "+tableName;
+			pstmt = con.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				listCount = rs.getInt(1);
+			}
+		} catch (SQLException e) {
+			System.out.println("SQL 구문 오류 발생! - selectListCount()");
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rs);
+		}
+		
+		return listCount;
+	}
+
+	public int getMemberSecessionCount(MemberBean member) { //회원탈퇴기능
+		System.out.println("DAO");
+		int updateCount = 0;
+		
+		PreparedStatement pstmt = null;
+		
+		try {
+			String sql = "UPDATE member_service_log b"
+					+ " JOIN member a"
+					+ " ON b.member_service_log_code=a.member_code"
+					+ " SET b.member_service_log_status='탈퇴'"
+					+ " WHERE a.member_code=?";
+			
+			pstmt = con.prepareStatement(sql);
+			pstmt .setString(1, member.getMember_code());
+			
+			updateCount = pstmt.executeUpdate(); 
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return updateCount;
 	}
 
 }
