@@ -593,7 +593,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
             pay_method : 'card',
             merchant_uid : 'merchant_' + new Date().getTime(),
 //             name : 'COZA STORE',
-            amount :  100,     // 100원으로 고치면 100원만나감 price
+            amount : document.getElementById("realPrice").value,     //포인트 차감후 최종금액 100원으로 고치면 100원만나감 price
 //             buyer_email : '${memberBean.member_email}',
             buyer_name : name,
             buyer_tel : phone,
@@ -712,7 +712,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 			document.getElementById("realPoint").value = prePoint - subPoint;//차감후 남은 포인트	
 			$("#point").empty(); //최종 결제 포인트에서 보여주는곳
 			$("#point").append(subPoint); //최종 결제 포인트에서 보여주는곳
-				
+			alert((subPoint/10000)+"만원");
 			if(prePoint<10000){
 				$("#point").empty();
 				alert("보유 포인트가 10000원 이하입니다.보유포인트:"+prePoint);
