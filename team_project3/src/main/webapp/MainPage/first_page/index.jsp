@@ -293,7 +293,7 @@ function recCount(sell_num,thisRow) { //  좋아요 갯수
 
 								<div class="shop-item">
 									<!-- 여기 -->
-									<input class="sell_num" value="${mainarticleList.sell_num}" />
+									<input class="sell_num" value="${mainarticleList.sell_num}" readonly="readonly" style="border: none;" />
 									<a
 										href="ProductDetailPro.pr?sell_num=${mainarticleList.sell_num}&sell_brand=${mainarticleList.sell_brand}">
 
@@ -589,6 +589,39 @@ function recCount(sell_num,thisRow) { //  좋아요 갯수
 	</script>
 <!--===============================================================================================-->
 	<script src="MainPage/js/main.js"></script>
+	
+	<script type="text/javascript">// 추천버튼 클릭시(추천 추가 또는 추천 제거)
+
+$(function(){
+	$(".fa-heart").click(function(a){
+	var thisRow = $(this).closest('div');  //하트표시 줄의 부모(div)를 찾아  thisRow값에 저장
+	var thisplace = thisRow.find('span:eq(5)')[0];
+	
+	var sell_num =  thisRow.find('input').val(); //thisRow의 하위 요소인 find(input)=>input이라는 value를 찾아 sell_num에 저장 == ${sell_num}
+	
+		$.ajax({
+			url: "ProductRecUpdate.pr",
+            type: "POST",
+            data: {
+         		sell_num : sell_num,    
+                id: sCode					 
+            },
+            success: function (data) {
+            	thisplace.innerHTML = data;
+            	if(data == 1){
+    				swal("LIKE!", "해당 제품을 찜 하셨습니다." );
+    			}else{
+    				swal("LIKE!", "해당 제품을 찜 취소하셨습니다" );
+    			}
+            }
+		})
+	});
+	
+});
+
+
+
+</script>
 
 </body>
 </html>

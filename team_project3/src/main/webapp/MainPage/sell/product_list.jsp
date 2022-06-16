@@ -25,45 +25,46 @@ function filter(value){
 			if(value =="brand") {
 				var tagSpan = document.getElementById("checkbox2");	
 				tagSpan.innerHTML =  
-									"<a href='ProductBrandPro.pr?sell_brand=Hermes' > Hermes </a> &nbsp;&nbsp;"
-									+"<a href='ProductBrandPro.pr?sell_brand=Louis Vuitton' > Louis Vuitton </a>&nbsp;&nbsp;"
-									+"<a href='ProductBrandPro.pr?sell_brand=Bottega Veneta'> Bottega Veneta </a>&nbsp;&nbsp;"
-									+"<a href='ProductBrandPro.pr?sell_brand=Prada' > Prada </a>&nbsp;&nbsp;"
-									+"<a href='ProductBrandPro.pr?sell_brand=Rolex'> Rolex </a>&nbsp;&nbsp;"
-									+"<a href='ProductBrandPro.pr?sell_brand=Dior' > Dior </a>&nbsp;&nbsp;"
-									+"<a href='ProductBrandPro.pr?sell_brand=Celine' > Celine </a>&nbsp;&nbsp;"
-									+"<a href='ProductBrandPro.pr?sell_brand=Balenciaga' > Balenciaga </a>&nbsp;&nbsp;"
-									+"<a href='ProductBrandPro.pr?sell_brand=Cartier' > Cartier </a>&nbsp;&nbsp;"
-									+"<a href='ProductBrandPro.pr?sell_brand=Fendi' > Fendi </a>&nbsp;&nbsp;"
-									+"<a href='ProductBrandPro.pr?sell_brand=Goyard' > Goyard </a>&nbsp;&nbsp;"
-									+"<a href='ProductBrandPro.pr?sell_brand=MiuMiu' > MiuMiu </a>"
-									+"<a href='ProductBrandPro.pr?sell_brand=Lemaire' > Lemaire </a>&nbsp;&nbsp;"
-									+"<a href='ProductBrandPro.pr?sell_brand=Loewe' > Loewe </a>&nbsp;&nbsp;"
-									+"<a href='ProductBrandPro.pr?sell_brand=Marni' > Marni </a>&nbsp;&nbsp;"
-									+"<a href='ProductBrandPro.pr?sell_brand=Off-White' > Off-White </a>&nbsp;&nbsp;"
-									+"<a href='ProductBrandPro.pr?sell_brand=Supreme' > Supreme </a>&nbsp;&nbsp;"
-									+"<a href='ProductBrandPro.pr?sell_brand=Jordan' > Jordan </a>&nbsp;&nbsp;"
-									+"<a href='ProductBrandPro.pr?sell_brand=Jordan' > Nike </a>&nbsp;&nbsp;"
-									+"<a href='ProductBrandPro.pr?sell_brand=Jordan' > Chanel </a>&nbsp;&nbsp;"
-									+"<a href='ProductBrandPro.pr?sell_brand=Jordan' > Moncler </a>&nbsp;&nbsp;"
-									+"<a href='ProductBrandPro.pr?sell_brand=Jil Sander'> Jil Sander </a>";
+									"<a href='ProductBrandPro.pr?sell_brand=Hermes' style='font-size: 1.5em' > Hermes </a> &nbsp;&nbsp;"
+									+"<a href='ProductBrandPro.pr?sell_brand=Louis Vuitton' style='font-size: 1.5em' > Louis Vuitton </a>&nbsp;&nbsp;"
+									+"<a href='ProductBrandPro.pr?sell_brand=Bottega Veneta' style='font-size: 1.5em' > Bottega Veneta </a>&nbsp;&nbsp;"
+									+"<a href='ProductBrandPro.pr?sell_brand=Prada' style='font-size: 1.5em' > Prada </a>&nbsp;&nbsp;"
+									+"<a href='ProductBrandPro.pr?sell_brand=Rolex' style='font-size: 1.5em'> Rolex </a>&nbsp;&nbsp;"
+									+"<a href='ProductBrandPro.pr?sell_brand=Dior' style='font-size: 1.5em'> Dior </a>&nbsp;&nbsp;"
+									+"<a href='ProductBrandPro.pr?sell_brand=Celine' style='font-size: 1.5em'> Celine </a>&nbsp;&nbsp;"
+									+"<a href='ProductBrandPro.pr?sell_brand=Balenciaga' style='font-size: 1.5em'> Balenciaga </a>&nbsp;&nbsp;"
+									+"<a href='ProductBrandPro.pr?sell_brand=Cartier' style='font-size: 1.5em'> Cartier </a>&nbsp;&nbsp;"
+									+"<a href='ProductBrandPro.pr?sell_brand=Fendi' style='font-size: 1.5em'> Fendi </a>&nbsp;&nbsp;"
+									+"<a href='ProductBrandPro.pr?sell_brand=Goyard' style='font-size: 1.5em'> Goyard </a>&nbsp;&nbsp;"
+									+"<a href='ProductBrandPro.pr?sell_brand=MiuMiu' style='font-size: 1.5em'> MiuMiu </a>"
+									+"<a href='ProductBrandPro.pr?sell_brand=Lemaire' style='font-size: 1.5em'> Lemaire </a>&nbsp;&nbsp;"
+									+"<a href='ProductBrandPro.pr?sell_brand=Loewe' style='font-size: 1.5em'> Loewe </a>&nbsp;&nbsp;"
+									+"<a href='ProductBrandPro.pr?sell_brand=Marni' style='font-size: 1.5em'> Marni </a>&nbsp;&nbsp;"
+									+"<a href='ProductBrandPro.pr?sell_brand=Off-White' style='font-size: 1.5em'> Off-White </a>&nbsp;&nbsp;"
+									+"<a href='ProductBrandPro.pr?sell_brand=Supreme' style='font-size: 1.5em'> Supreme </a>&nbsp;&nbsp;"
+									+"<a href='ProductBrandPro.pr?sell_brand=Jordan' style='font-size: 1.5em'> Jordan </a>&nbsp;&nbsp;"
+									+"<a href='ProductBrandPro.pr?sell_brand=Jordan' style='font-size: 1.5em'> Nike </a>&nbsp;&nbsp;"
+									+"<a href='ProductBrandPro.pr?sell_brand=Jordan' style='font-size: 1.5em'> Chanel </a>&nbsp;&nbsp;"
+									+"<a href='ProductBrandPro.pr?sell_brand=Jordan' style='font-size: 1.5em'> Moncler </a>&nbsp;&nbsp;"
+									+"<a href='ProductBrandPro.pr?sell_brand=Jil Sander' style='font-size: 1.5em'> Jil Sander </a>";
 			} 
 			else if(value =="category") {
 				var tagSpan = document.getElementById("checkbox2");
 				tagSpan.innerHTML = "<a></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
-								   +"<a href='ProductCategoryPro.pr?sell_category=상의' style='font-size: 1.0em'> Top </a>&nbsp;&nbsp;&nbsp;"
-								   +"<a href='ProductCategoryPro.pr?sell_category=하의' style='font-size: 1.0em'> Bottom </a>&nbsp;&nbsp;&nbsp;"
-								   +"<a href='ProductCategoryPro.pr?sell_category=신발' style='font-size: 1.0em'> Shoes </a>&nbsp;&nbsp;&nbsp;"
-								   +"<a href='ProductCategoryPro.pr?sell_category=잡화' style='font-size: 1.0em'> Accessories </a>";	   
+								   +"<a href='ProductCategoryPro.pr?sell_category=상의' style='font-size: 1.5em'> Top </a>&nbsp;&nbsp;&nbsp;"
+								   +"<a href='ProductCategoryPro.pr?sell_category=하의' style='font-size: 1.5em'> Bottom </a>&nbsp;&nbsp;&nbsp;"
+								   +"<a href='ProductCategoryPro.pr?sell_category=신발' style='font-size: 1.5em'> Shoes </a>&nbsp;&nbsp;&nbsp;"
+								   +"<a href='ProductCategoryPro.pr?sell_category=잡화' style='font-size: 1.5em'> Accessories </a>";	   
 			}
 			else if(value =="price") {
 				var tagSpan = document.getElementById("checkbox2");
-				tagSpan.innerHTML = "<a></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
-					+ "<a href='ProductPricePro.pr?sell_price=100000' style='font-size: 1.0em'> 10만원 이하 </a>&nbsp;&nbsp;&nbsp;"
-					+ "<a href='ProductPricePro.pr?sell_price=500000' style='font-size: 1.0em'> 10만원 - 50만원 이하 </a>&nbsp;&nbsp;&nbsp;"
-					+ "<a href='ProductPricePro.pr?sell_price=1000000' style='font-size: 1.0em'> 50만원 -100만원 이하 </a>&nbsp;&nbsp;&nbsp;"
-					+ "<a href='ProductPricePro.pr?sell_price=5000000' style='font-size: 1.0em'> 100만원 - 500만원 이하 </a>&nbsp;&nbsp;&nbsp;"
-					+ "<a href='ProductPricePro.pr?sell_price=10000000' style='font-size: 1.0em'> 500만원 이상- 1000만원 이하 </a>";
+				tagSpan.innerHTML = "<a></a>&nbsp;&nbsp;&nbsp;"
+					+ "<a href='ProductPricePro.pr?sell_price=100000' style='font-size: 1.0em'> 100,000원 이하 </a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
+					+ "<a href='ProductPricePro.pr?sell_price=500000' style='font-size: 1.0em'> 100,000원 ~ 500,000원 </a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
+					+ "<a href='ProductPricePro.pr?sell_price=1000000' style='font-size: 1.0em'> 500,000원 ~ 1,000,000원 </a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
+					+ "<a href='ProductPricePro.pr?sell_price=5000000' style='font-size: 1.0em'> 1,000,000원 ~ 5,000,000원 </a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
+					+ "<a href='ProductPricePro.pr?sell_price=10000000' style='font-size: 1.0em'> 5,000,000원 ~ 10,000,000원 </a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
+					+ "<a href='ProductPricePro.pr?sell_price=20000000' style='font-size: 1.0em'> 10,000,000원 이상 </a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
 		}
 		
 }
@@ -251,19 +252,20 @@ function filter(value){
 					<div id="checkbox1">
 						<table width=400px>
 							<tr>
-								<th><input type="button" style="font-size: 35px"
+								<th><input type="button" style="font-size: 35px; border: none;"
 									class="filter-link stext-106 trans-04" name=filter
 									value="brand" onclick="filter(this.value)"></th>
-								<th><input type="button" style="font-size: 35px"
+								<th><input type="button" style="font-size: 35px; border: none;"
 									class="filter-link stext-106 trans-04" name=filter
 									value="category" onclick="filter(this.value)"></th>
-								<th><input type=button style="font-size: 35px"
+								<th><input type=button style="font-size: 35px; border: none;"
 									class="filter-link stext-106 trans-04" name=filter
 									value="price" onclick="filter(this.value)"></th>
 							</tr>
 						</table>
 						<br>
 					</div>
+					<div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
 					<div id="checkbox2" class="filter-link stext-106 trans-04"
 						style="vertical-align: bottom; display: inline-block; margin-bottom: 2px;"></div>
 				</div>

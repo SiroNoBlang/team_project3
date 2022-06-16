@@ -42,6 +42,9 @@ public class ProductPriceProAction implements Action {
 		} else if (Price == 10000000) { 
 			 begin = 5000000; 
 			 last = 10000000; 
+		} else if (Price == 20000000) {
+			begin = 10000000;
+			last = 99999999;
 		}
 		
 		
