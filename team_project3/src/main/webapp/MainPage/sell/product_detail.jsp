@@ -976,11 +976,13 @@ $('.js-like').each(function(){
                 id: sCode					 
             },
             success: function (data) {
-            	thisplace.innerHTML = data;
-            	if(data == 1){
+            	debugger;   //JSON.parse(data).result
+            	thisplace.innerHTML = JSON.parse(data).likeCount;
+            	if(JSON.parse(data).result == 0){
     				swal("LIKE!", "해당 제품을 찜 하셨습니다." );
     			}else{
     				swal("LIKE!", "해당 제품을 찜 취소하셨습니다" );
+    				
     			}
             }
 		})

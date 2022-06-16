@@ -7,6 +7,8 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.JsonObject;
+
 import svc.ProductLikeService;
 import vo.ActionForward;
 
@@ -21,11 +23,6 @@ public class ProductRecUpdateProAction implements Action {
 		int sell_num = Integer.parseInt((request.getParameter("sell_num")));
 		int likeCount =0;
 		
-		// no와 id값을 map에 저장
-//		Map<String, String> m = new HashMap<>();
-//		m.put("sCode", request.getParameter("id"));
-//		m.put("sell_num", request.getParameter("sell_num"));
-//		System.out.println(m);
 		ProductLikeService service = new ProductLikeService();
 		int result =service.recCheck(sCode,sell_num);  //회원정보와 판매글을 이용하여 좋아요를 체크(Y)취소(N)을 했는지 구분함
 		
@@ -39,13 +36,12 @@ public class ProductRecUpdateProAction implements Action {
 		
 		ProductLikeService service1 = new ProductLikeService();
 		
-		likeCount = service1.likeCount(sell_num);
+		likeCount = service1.likeCount(sell_num);  //좋아요 갯수를 카운트 해주는 기능
 		System.out.println(likeCount);
 		PrintWriter out = response.getWriter();
-		out.print(likeCount);
-//		
-	
 		
+		out.print("{\"likeCount\":\""+likeCount); 
+		out.print("\",\"result\":\""+result+"\"}");   //result =1 좋아요 result =0좋아요 취소
 		return forward;
 	}
 

@@ -291,7 +291,8 @@ function filter(value){
                  <img src="./Upload/sell_img/${articleList.sell_img_real_name}" width="300px" height="400px" alt="Accessories Pack"/></a>
                 
                    <a href="ProductDetailPro.pr?sell_num=${articleList.sell_num}&sell_brand=${articleList.sell_brand}"> <span>${articleList.sell_img_real_name}</span></a>
-                 <a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+                 <a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
                  <i class="fa fa-eye"></i><span style="text-align: right;">${articleList.sell_readcount } </span>|
                  <span>
                	     <span>
@@ -300,10 +301,10 @@ function filter(value){
 								<span class="rec_count">세션이 만료되었습니다-로그인필요!</span>	
 							</c:if>
 							<c:if test="${ sCode ne null }">
-								<li class="w3-button w3-black w3-round" id="rec_update">
+								<i class="w3-button w3-black w3-round" id="rec_update">
 									<i class="fa fa-heart" style="font-size:16px;color:red"></i>
-									&nbsp;<span class="rec_count">${articleList.sell_likecount }</span>
-								</li> 
+									<span class="rec_count">${articleList.sell_likecount }</span>
+								</i> 
 							</c:if>
 						</span>
 					</span>
@@ -616,18 +617,19 @@ $(function(){
                 id: sCode					 
             },
             success: function (data) {
-            	thisplace.innerHTML = data;
-            	if(data == 1){
+             	debugger;   //JSON.parse(data).result
+            	thisplace.innerHTML = JSON.parse(data).likeCount;
+            	if(JSON.parse(data).result == 0){
     				swal("LIKE!", "해당 제품을 찜 하셨습니다." );
     			}else{
     				swal("LIKE!", "해당 제품을 찜 취소하셨습니다" );
+    				
     			}
             }
 		})
 	});
 	
 });
-
 
 
 </script>
