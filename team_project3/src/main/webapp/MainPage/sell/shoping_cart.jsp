@@ -392,7 +392,7 @@ MemberBean memberbean = (MemberBean) request.getAttribute("memberBean");
 							</div>
 						<div class="size-209 p-t-1">
 							<h5><input type="text" value="${sellerDTO.sell_price}" id="realPrice" readonly="readonly" style="border: none;"></h5>
-								<span class="mtext-110 cl2" id="realPrice">
+								<span class="mtext-110 cl2" id="realPrice1">
 										<h6 style="color: lightgrey;">부가세 포함 (35%)</h6>
 								</span>
 						</div>    <!-- 537         482 -->
@@ -699,11 +699,10 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 
 	
 		function sub() { //포인트 사용 스크립트
-			debugger;
+// 			debugger;
 			$("#realPoint").empty();
 			var finalPrice = ${sellerDTO.sell_price};    // 결제할 금액
-			var realprice = document.getElementById("realPrice").value;
-			alert(realprice);
+			
 			//------------------------------------------------------------------------------
 			var prePoint = ${memberBean.member_info_detail_point} //현재 보유포인트
 			var testString = document.getElementById("MemberPoint").value; // 원래 문자열
@@ -713,26 +712,28 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 			document.getElementById("realPoint").value = prePoint - subPoint;//차감후 남은 포인트	
 			$("#point").empty(); //최종 결제 포인트에서 보여주는곳
 			$("#point").append(subPoint); //최종 결제 포인트에서 보여주는곳
-// 			var pointSubPrice = ${sellerDTO.sell_price};
-			// 			pointSubPrice = finalPrice - subPoint;
-			
+				
 			if(prePoint<10000){
 				$("#point").empty();
 				alert("보유 포인트가 10000원 이하입니다.보유포인트:"+prePoint);
+				document.getElementById("MemberPoint").value =0;
 			}else if ((subPoint % 10000) != 0) { //포인트 10000단위로 사용가능
 				$("#point").empty();
 				alert("10000원 단위 사용가능!");
+				document.getElementById("MemberPoint").value =0;
 			} else if (subPoint >= finalPrice) { //포인트가  결제할금액을 초과했을 경우 
 				$("#point").empty();
 				alert("사용할 포인트가 결제금액보다 많습니다.");
+				document.getElementById("MemberPoint").value =0;
 			} else if (subPoint > prePoint) { //현재 보유포인트보다 더 많이 사용 할 경우
 				$("#point").empty();
 				alert("포인트가 부족합니다. 현재 포인트:" + prePoint);
+				document.getElementById("MemberPoint").value =0;
 			} else { //이경우가 아닐경우 화면에 뿌려줌
 				// 					finalPrice -=realPoint;
 				$("#realPoint").append(
 						"남은포인트:" + document.getElementById("realPoint").value);
-// 				${"#realPrice"}.append( '1123');
+			var realprice =(document.getElementById("realPrice").value = finalPrice - subPoint); //최종 결제할 금액(포인트 차감 후 최종 금액)
 			}
 			
 		}

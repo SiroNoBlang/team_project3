@@ -630,8 +630,6 @@ $(function(){
 	});
 	
 });
-
-
 </script>
 </body>
 </html>
