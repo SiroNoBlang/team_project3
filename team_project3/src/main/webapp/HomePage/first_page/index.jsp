@@ -3,7 +3,7 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-<title>Dimension by HTML5 UP</title>
+<title>COZA STORE 공식 온라인 스토어</title>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 <link rel="stylesheet" href="HomePage/assets/css/main.css" />
@@ -279,8 +279,9 @@ var isCheckConfirmPasswd = false, passSafe = false, isCheckEmail = false, checkN
 			</div>
 			<div class="content">
 				<div class="inner">
-					<h1>사이트 이름</h1>
-					<p>사이트 소개.</p>
+					<h1>COZA STORE</h1>
+					<p>Many of the products are like new.<br>
+					We offer our customers a quality product at a reasonable price.</p>
 				</div>
 			</div>
 			<nav>
