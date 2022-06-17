@@ -105,7 +105,7 @@ function recCount(sell_num,thisRow) { //  좋아요 갯수
 <!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="MainPage/css/util.css">
 	<link rel="stylesheet" type="text/css" href="MainPage/css/main.css">
-	
+	<link rel="stylesheet" type="text/css" href="MainPage/css/community.css">
 <!--===============================================================================================-->
 </head>
 <body class="animsition">
@@ -269,8 +269,8 @@ function recCount(sell_num,thisRow) { //  좋아요 갯수
 					<table>
 						<tr>
 							<td><input type="text" placeholder="상품을 입력해주세요."
-								name="ProductSearch"></td>
-							<td><input type="submit" value="검색" placeholder="Search">
+								name="ProductSearch"  class="form-control form-control"></td>
+							<td><input type="submit" value="검색" placeholder="Search" class="btn_sell_index">
 							</td>
 						</tr>
 					</table>

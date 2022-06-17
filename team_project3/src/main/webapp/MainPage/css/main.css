@@ -3546,3 +3546,15 @@ footer .container p, .footerColor {
     color: #888;
     font-size: 14px;
 }
+
+.btn_sell_index {
+	color:white;
+    width: 58px;
+    height: 43px;
+    border-radius: 5px;
+    font-size: 18px;
+    text-align: center;
+    line-height: 40px;
+    background-color: #717fe0;
+    margin-left: 5px;
+}
