@@ -159,3 +159,10 @@ small {
     background-color: #717fe0;
     border-color: #717fe0;
 }
+
+.btn-primary:hover {
+	color: #fff;
+    background-color:  rgb(87, 98, 171);
+    border-color:  rgb(87, 98, 171);
+}
+
