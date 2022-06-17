@@ -183,56 +183,13 @@ function readURL4(obj) {   //사진 3장 뿌리기
 		<div class="container-menu-desktop">
 			<!-- Topbar -->
 			<div class="wrap-menu-desktop how-shadow1" style="top:0px;">
-				<nav class="limiter-menu-desktop container">
-					
-					<!-- Logo desktop -->		
-					<a href="MainPage.pr" class="logo">
-						<img src="MainPage/images/icons/logo-01.png" alt="IMG-LOGO">
-					</a>
-
-					<!-- Menu desktop -->
-					<div class="menu-desktop">
-						<ul class="main-menu">
-							<li>
-								<a href="MainPage.pr">Home</a>
-							</li>
-
-							<li>
-								<a href="Product.pr">Shop</a>
-							</li>
-
-							<li>
-								<a href="SellForm.pr">Sell</a>
-							</li>
-
-							<li>
-								<a href="CommunityNotice.ma">Community</a>
-							</li>
-			
-							<li>
-								<a href="Contact.pr">Contact</a>
-							</li>
-						</ul>
-					</div>
-
-					<!-- Icon header -->
-					<div class="wrap-icon-header flex-w flex-r-m">
-						<div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 js-show-modal-search">
-							<i class="zmdi zmdi-search"></i>
-						</div>
-
-						<div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti js-show-cart" data-notify="2">
-							<i class="zmdi zmdi-shopping-cart"></i>
-						</div>
-
-						<a href="#" class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti" data-notify="0">
-							<i class="zmdi zmdi-favorite-outline"></i>
-						</a>
-					</div>
-				</nav>
-			</div>	
-		</div>
-
+					<nav class="limiter-menu-desktop container">
+						<jsp:include page="/MainPage/menu/pc_sub_header.jsp" />
+					</nav>
+				</div>
+			</div>
+			<jsp:include page="/MainPage/menu/pc_menu.jsp" />					
+				
 		<!-- Header Mobile -->
 		<div class="wrap-header-mobile">
 			<!-- Logo moblie -->		
