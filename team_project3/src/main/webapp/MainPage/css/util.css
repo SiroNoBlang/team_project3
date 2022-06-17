@@ -334,7 +334,7 @@ iframe {border: none;}
 .p-t-72, .p-tb-72, .p-all-72 {padding-top: 72px;}
 .p-t-73, .p-tb-73, .p-all-73 {padding-top: 73px;}
 .p-t-74, .p-tb-74, .p-all-74 {padding-top: 74px;}
-.p-t-75, .p-tb-75, .p-all-75 {padding-top: 75px;}
+.p-t-75, .p-tb-75, .p-all-75 {padding-top: 64px;} /* footer 패딩 */
 .p-t-76, .p-tb-76, .p-all-76 {padding-top: 76px;}
 .p-t-77, .p-tb-77, .p-all-77 {padding-top: 77px;}
 .p-t-78, .p-tb-78, .p-all-78 {padding-top: 78px;}
