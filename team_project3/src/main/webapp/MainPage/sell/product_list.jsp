@@ -8,7 +8,7 @@
 <!DOCTYPE html>
 <html >
 <head>
-<title>Product</title>
+<title>Shop</title>
 <script src="MainPage/assets/js/jquery-3.6.0.js"></script>
 <style type="text/css">
 a:link {
