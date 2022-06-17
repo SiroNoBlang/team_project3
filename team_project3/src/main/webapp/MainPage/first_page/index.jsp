@@ -20,11 +20,6 @@
 	border: 1px solid #999; /* 테두리 설정 */
 	z-index: 1;
 }
-
-a:link {
-	color: black;
-}
-
 </style>
 <script type="text/javascript">
 var sCode = '${sCode}' //좋아요 기능을 위하여 sCode 값을 script 위에 뿌려줌
