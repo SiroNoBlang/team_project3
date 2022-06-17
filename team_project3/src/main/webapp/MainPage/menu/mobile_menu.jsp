@@ -1,37 +1,50 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<script type="text/javascript">
+	function confirmLogout() {
+	if(confirm("로그아웃 하시겠습니까?")) {
+		location.href = "./Logout.ma";
+		}
+	} 
+</script>	
 	<div class="header-cart flex-col-l p-l-65 p-r-25">
 		<ul class="sidebar-link w-full">
-				<li class="p-b-13">
-					<a href="MainPage.pr" class="stext-102 cl2 hov-cl1 trans-04">
-						Home
-					</a>
-				</li>
+			<li class="p-b-13">
+				<a href="MainPage.pr" class="stext-102 cl2 hov-cl1 trans-04">
+					Home
+				</a>
+			</li>
 
-				<li class="p-b-13">
-					<a href="#" class="stext-102 cl2 hov-cl1 trans-04">
-						My Account
-					</a>
-				</li>
+			<li class="p-b-13">
+				<a href="Mypage.ma?member_code=${sCode }" class="stext-102 cl2 hov-cl1 trans-04">
+					My Page
+				</a>
+			</li>
 
-				<li class="p-b-13">
-					<a href="#" class="stext-102 cl2 hov-cl1 trans-04">
-						Track Oder
-					</a>
-				</li>
+			<li class="p-b-13">
+				<a href="SellList.ma?member_code=${sCode }" class="stext-102 cl2 hov-cl1 trans-04">
+					SellList
+				</a>
+			</li>
+			
+			<li class="p-b-13">
+				<a href="BuyList.ma?member_code=${sCode }" class="stext-102 cl2 hov-cl1 trans-04">
+					BuyList
+				</a>
+			</li>
 
-				<li class="p-b-13">
-					<a href="#" class="stext-102 cl2 hov-cl1 trans-04">
-						Refunds
-					</a>
-				</li>
+			<li class="p-b-13">
+				<a href="#" class="stext-102 cl2 hov-cl1 trans-04">
+					Refunds
+				</a>
+			</li>
 
-				<li class="p-b-13">
-					<a href="javascript:void(0)" onclick="confirmLogout()" class="stext-102 cl2 hov-cl1 trans-04">
-						LogOut
-					</a>
-				</li>
-			</ul>
+			<li class="p-b-13">
+				<a href="javascript:void(0)" onclick="confirmLogout()" class="stext-102 cl2 hov-cl1 trans-04">
+					LogOut
+				</a>
+			</li>
+		</ul>
 		
 		<div class="header-cart-content flex-w js-pscroll">
 			<ul class="header-cart-wrapitem w-full">
