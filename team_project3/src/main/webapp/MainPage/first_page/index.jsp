@@ -8,7 +8,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>Home 03</title>
+<title>COZA STORE 공식 온라인 스토어</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script src="MainPage/assets/js/jquery-3.6.0.js"></script>
