@@ -176,7 +176,7 @@ function recCount(sell_num,thisRow) { //  좋아요 갯수
 						<div class="flex-col-c-m h-full p-t-100 p-b-60 respon5">
 							<div class="layer-slick1 animated visible-false" data-appear="fadeInDown" data-delay="0">
 								<span class="ltext-202 txt-center cl0 respon2">
-									Women Collection 2018
+									Women Collection 2022
 								</span>
 							</div>
 								
