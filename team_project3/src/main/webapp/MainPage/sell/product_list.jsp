@@ -97,6 +97,11 @@ function filter(value){
    <link rel="stylesheet" type="text/css" href="MainPage/css/util.css">
    <link rel="stylesheet" type="text/css" href="MainPage/css/main.css">
 <!--===============================================================================================-->
+<style type="text/css">
+	a {
+	    color: #333;
+	}
+</style>
 </head>
 <body >
 

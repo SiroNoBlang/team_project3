@@ -3558,3 +3558,9 @@ footer .container p, .footerColor {
     background-color: #717fe0;
     margin-left: 5px;
 }
+
+
+
+input[type="text"], textarea {
+    border: 1px solid #e9ecef;
+}
