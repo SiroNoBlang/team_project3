@@ -814,7 +814,7 @@ Input, textarea : 14px/1.6 '', Arial, sans-serif;
 .sidebar-content {
 	flex-grow: 1;
 	overflow: auto;
-	align-content: space-between;
+	/* align-content: space-between; */
 }
 
 /*---------------------------------------------*/
@@ -2108,9 +2108,11 @@ input.num-product::-webkit-outer-spin-button, input.num-product::-webkit-inner-s
 }
 
 .stext-102 {
-	font-family: Poppins-Regular;
-	font-size: 14px;
-	line-height: 1.7;
+    font-family: Poppins-Regular;
+    font-size: 30px;
+    font-weight: 600;
+    line-height: 2.7;
+    padding: 31px;
 }
 
 .stext-103 {
@@ -2219,6 +2221,7 @@ input.num-product::-webkit-outer-spin-button, input.num-product::-webkit-inner-s
 	font-family: Poppins-Medium;
 	font-size: 18px;
 	line-height: 1.333333;
+	color: #717fe0;
 }
 
 .mtext-102 {
@@ -3092,6 +3095,7 @@ input.num-product::-webkit-outer-spin-button, input.num-product::-webkit-inner-s
 .hov-cl1:hover {
 	color: #717fe0;
 }
+
 
 .hov-bg1:hover {
 	background-color: #717fe0;
