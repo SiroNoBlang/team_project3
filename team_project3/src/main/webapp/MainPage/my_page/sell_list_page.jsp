@@ -217,7 +217,7 @@ MemberBean member = (MemberBean) request.getAttribute("memberDetail");
 				<tr>
 					<td>${i }</td>
 					<td id="subject">
-						<a href="">
+						<a href="ProductDetailPro.pr?sell_num=${sell_list.sell_num}">
 							${sell_list.getSell_title() }
 						</a>
 					</td>
@@ -249,9 +249,10 @@ MemberBean member = (MemberBean) request.getAttribute("memberDetail");
 			<!-- 단, 현재 페이지 번호는 링크 없이 표시 -->
 			<c:choose>
 				<c:when test="${pageNum eq i}">
+					<li class="page-item"><a class="page-link">${i }</a></li>
 				</c:when>
 				<c:otherwise>
-					<a href="">${i }</a>
+					 <li class="page-item"><a href="">${i }</a>
 				</c:otherwise>
 			</c:choose>
 <%-- 		</c:forEach> --%>
@@ -265,6 +266,7 @@ MemberBean member = (MemberBean) request.getAttribute("memberDetail");
 				<li class="page-item"><a class="page-link">다음</a></li>
 			</c:otherwise>
 		</c:choose>
+		</ul>
 	</section>
 
 	<!-- Footer영역과 상단 이동 버튼-->
