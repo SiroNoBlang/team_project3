@@ -80,7 +80,6 @@
 }
 
 @media ( max-width : 767px) {
-	
 	#com_containe  .pagination li a.page-link {
 		padding: 11px 8px !important;
 	}
@@ -102,41 +101,61 @@
 
 /*검색창 css*/
 .form-group {
-    margin-left: 900px;
+	margin-left: 900px;
 }
 
 .table td, .table th {
-    padding: 0.75rem;
-    vertical-align: top;
-    border: 1px solid #e9ecef;
-    border-right: none;
-    border-left: none;
-    text-align: center;
+	padding: 0.75rem;
+	vertical-align: top;
+	border: 1px solid #e9ecef;
+	border-right: none;
+	border-left: none;
+	text-align: center;
 }
 
 input.listMargin {
-    margin-bottom: 45px;
+	margin-bottom: 45px;
 }
 
 input.page-item.page-link.listMargin {
-    cursor: pointer;
+	cursor: pointer;
 }
 
 div#deleteCenter {
-    margin: 0 auto;
-    margin-bottom: 50px;
-    }
-    
-    
-.write textarea#board_content,input#qnaTitleId,input[type="password"] {
+	margin: 0 auto;
+	margin-bottom: 50px;
+}
+
+.write textarea#board_content, input#qnaTitleId, input[type="password"]
+	{
 	border: 1px solid #e9ecef;
 }
 
 small {
-    font-weight: bold;
-    font-size: 98%;
+	font-weight: bold;
+	font-size: 98%;
 }
 
 .row:last-child {
-    margin-right: 0px;
+	margin-right: 0px;
+}
+
+.container table td a {
+	color: #666666;
+}
+
+.page-link {
+	color: #717fe0;
+}
+
+.page-item.active .page-link {
+	z-index: 2;
+    color: #fff;
+    background-color: #717fe0;
+    border-color: #717fe0;
+}
+.btn-primary {
+    color: #fff;
+    background-color: #717fe0;
+    border-color: #717fe0;
 }
