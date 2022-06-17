@@ -136,3 +136,7 @@ small {
     font-weight: bold;
     font-size: 98%;
 }
+
+.row:last-child {
+    margin-right: 0px;
+}

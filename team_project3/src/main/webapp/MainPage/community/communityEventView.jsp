@@ -65,6 +65,7 @@
 		<!-- PC_menu_Sidebar -->
 		<jsp:include page="/MainPage/menu/pc_menu.jsp"/>
 
+
 		<!-- Header Mobile -->
 		<div class="wrap-header-mobile">
 			<!-- Logo moblie -->		
@@ -189,6 +190,7 @@
 		</h2>
 	</section>	
 
+
 	<!-- Community page -->
 		<div id="com_container">
 			<div class=" container d-flex justify-content-center" >     
@@ -200,25 +202,7 @@
 		    </div>
 	  </div>  
 	    
-	
-	<!-- 검색창  -->
-		<div class="form-group row justify-content-center">
-			<div class="w100" style="padding-right:10px">
-				<select class="form-control form-control-sm" name="searchType" id="searchType">
-					<option value="title">제목</option>
-					<option value="Content">본문</option>
-					<option value="reg_id">작성자</option>
-				</select>
-			</div>
-
-			<div class="w300" style="padding-right:10px">
-				<input type="text" class="form-control form-control-sm" name="keyword" id="keyword">
-			</div>
-			<div>
-				<button class="btn btn-sm btn-primary" name="btnSearch" id="btnSearch">검색</button>
-			</div>
-		</div>
-		
+	    
 	<!-- 리스트 뷰 -->
 	    		<div class="container">
 						<table class="table" >
@@ -240,7 +224,7 @@
 									<c:if test="${not empty eventImgFileList}">
 										<c:forEach var="eventImg" items="${eventImgFileList }">
 											<img src="./Upload/admin_event_img/${eventImg.getEvent_img_file_real_name() }"> <br>
-										</c:forEach>
+								</c:forEach>
 									</c:if> 
 								</td>
 							</tr>
@@ -250,7 +234,9 @@
 							<input class="page-item page-link listMargin" type="button" value="목록으로" onclick="history.back()">
 						</section>
   					</div>
-	
+
+
+
 	<!-- Footer영역과 상단 이동 버튼-->
 	<jsp:include page="/MainPage/menu/footer.jsp"/>
 
