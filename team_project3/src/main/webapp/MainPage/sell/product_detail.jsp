@@ -216,6 +216,7 @@
 
 					</div>
 				</div>
+
 <style>
 td{
 text-align: center;
@@ -314,14 +315,12 @@ text-align: center;
 
 <!-- 					Tab panes -->
 					<div class="tab-content p-t-43">
-						
 						<div class="tab-pane fade show active" id="description" role="tabpanel">
 							<div class="how-pos2 p-lr-15-md">
-								<div style="text-align: center;"><h4 sty>content</h4></div>
+								<div style="text-align: center;"><h4>content</h4></div>
 									<p class="stext-102 cl6">
-										<h5>${sellerdto.sell_content}</h5>
+										<h5>${sellerdto.sell_content}</h5> 
 									</p>
-									<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
 						   </div>
 					    </div>
  <!-- 이러한 상품은 어떠세요? -->
@@ -355,7 +354,7 @@ text-align: center;
 						</div>
 
 	<!-- 리뷰 입니다. -->					
-						<div class="tab-pane fade" id="reviews" role="tabpanel">
+						<div class="tab-pane fade sell_box" id="reviews" role="tabpanel" style="text-align: left;">
 <!-- 							<div class="row"> -->
 								<div class="col-sm-10 col-md-8 col-lg-6 m-lr-auto" style="width: 1733.04px;">
 									<div class="p-b-30 m-lr-15-sm">
@@ -380,7 +379,7 @@ text-align: center;
 													</span>
 												</div>
 
-												<p class="stext-102 cl6">
+												<p>
 													Quod autem in homine praestantissimum atque optimum est, id deseruit. Apud ceteros autem philosophos
 												</p>
 											</div>
@@ -392,13 +391,13 @@ text-align: center;
 												Add a review
 											</h5>
 
-											<p class="stext-102 cl6">
+											<p >
 												Your email address will not be published. Required fields are marked *
 											</p>
 
-											<div class="flex-w flex-m p-t-50 p-b-23">
-												<span class="stext-102 cl3 m-r-16">
-													Your Rating
+											<div>
+												<span>
+													<br>Your Rating
 												</span>
 
 												<span class="wrap-rating fs-18 cl11 pointer">
@@ -410,20 +409,21 @@ text-align: center;
 													<input class="dis-none" type="number" name="rating">
 												</span>
 											</div>
-
+											
+											<br><br>
 											<div class="row p-b-25">
 												<div class="col-12 p-b-5">
-													<label class="stext-102 cl3" for="review">Your review</label>
+													<label for="review">Your review</label>
 													<textarea class="size-110 bor8 stext-102 cl2 p-lr-20 p-tb-10" id="review" name="review"></textarea>
 												</div>
 
 												<div class="col-sm-6 p-b-5">
-													<label class="stext-102 cl3" for="name">Name</label>
+													<label for="name">Name</label>
 													<input class="size-111 bor8 stext-102 cl2 p-lr-20" id="name" type="text" name="name">
 												</div>
 
 												<div class="col-sm-6 p-b-5">
-													<label class="stext-102 cl3" for="email">Email</label>
+													<label for="email">Email</label>
 													<input class="size-111 bor8 stext-102 cl2 p-lr-20" id="email" type="text" name="email">
 												</div>
 											</div>
@@ -445,6 +445,10 @@ text-align: center;
 		<span class="stext-107 cl6 p-lr-25"> SKU: JAK-01 </span> <span
 			class="stext-107 cl6 p-lr-25"> Categories: Jacket, Men </span>
 	</div>
+	
+
+
+	
 	<!-- Footer영역과 상단 이동 버튼-->
 	<jsp:include page="/MainPage/menu/footer.jsp" />
 

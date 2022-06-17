@@ -3715,3 +3715,19 @@ iframe {border: none;}
 .buyListImg {
    width: 100px;
 }
+
+/*------sell------*/
+.bor10.m-t-50.p-t-43.p-b-40 {
+    margin: 0 auto;
+}
+
+div#reviews, div#information, div #description{
+    width: 1200px;
+    margin: 0 auto;
+}
+
+.sell_box {
+    font-family: Poppins-Regular;
+    font-size: 14px;
+    line-height: 1.7;
+}

@@ -10,11 +10,6 @@
 <head>
 <title>Shop</title>
 <script src="MainPage/assets/js/jquery-3.6.0.js"></script>
-<style type="text/css">
-a:link {
-	color: black;
-}
-</style>
 <script type="text/javascript" >
 //좋아요 기능을 위하여 sCode 값을 script 위에 뿌려줌
 var sCode = '${sCode}'
