@@ -45,7 +45,8 @@ public class ShoppoingSucceedAction implements Action {
 		
 		SellerBuyInsert service = new SellerBuyInsert();
 		//------------------------------------ member_info 테이블
-		memberBean.setMember_info_detail_point(usePoint);  				//사용 포인트 차감
+		
+		memberBean.setMember_info_detail_point((int)(sell_price*0.05)-usePoint);  				//사용 포인트 차감
 		memberBean.setMember_info_detail_acc_money(member_info_detail_acc_money); //누적 구매값 증가
 		memberBean.setMember_code(member_code);
 		
@@ -67,8 +68,8 @@ public class ShoppoingSucceedAction implements Action {
 		sellerDTO.setBuy_item_num(sell_num);
 		sellerDTO.setBuy_price(sell_price);
 		
-		sellerDTO.setBuy_point(sell_price);
-		//System.out.println("action에서"+sellerDTO);
+		
+		
 		InsertBuyMemberService service1 = new InsertBuyMemberService();
 		
 //----------------------------------------------------------------------------------------------------------------		

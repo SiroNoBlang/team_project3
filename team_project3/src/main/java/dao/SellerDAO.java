@@ -96,7 +96,7 @@ public class SellerDAO {
 
 		try {
 			String sql = "SELECT COUNT(sell_list_num) FROM sell_list" + " WHERE sell_list_item_status ='판매중' "; 
-
+			
 			pstmt = con.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 			if (rs.next()) {
@@ -454,7 +454,7 @@ public class SellerDAO {
 
 		try {
 			String sql = "UPDATE   member_info_detail"
-					+ "	SET member_info_detail_point= member_info_detail_point - ?, member_info_detail_acc_money= member_info_detail_acc_money + ROUND((?/10000),0) "        
+					+ "	SET member_info_detail_point= member_info_detail_point + ?, member_info_detail_acc_money= member_info_detail_acc_money + ROUND((?/10000),0) "        
 					+ "	WHERE member_info_detail_code= ? ";
 
 			pstmt = con.prepareStatement(sql);
