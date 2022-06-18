@@ -5,8 +5,37 @@
 <html lang="en">
 <head>
 <title>Sell</title>
+
+ <style>
+/*  	판매사진 슬라이드 css */
+	 	html, body { box-sizing: border-box; padding: 0; margin: 0; text-align: center; }
+	    *, *:before, *:after { box-sizing: inherit; }
+	    .clearfix:after { content: ''; display: block; clear: both; float: none; }
+	    .title { margin-bottom: 0; text-align: center; font-size: 30px; color: #333; }
+	    .link, .link:visited { display: inline-block; margin: 20px 0; color: #555; text-decoration: none; font-weight: bold; }
+	    .link:hover, .link:focus { color: #9fd6c2; }
+	    /* container - body */
+/* 	    #container { width: 1000px; margin: auto; } */
+	    .slide_wrap { position: relative; width: 400px; margin: auto; padding-bottom: 30px; }
+	    .slide_box { width: 100%; margin: auto; overflow-x: hidden; }
+	    .slide_content { display: table; float: left; width: 400px; height: 400px; }
+	    .slide_content > p { display: table-cell; vertical-align: middle; text-align: center; font-size: 100px; font-weight: bold; color: #555; }
+	    .slide_content.slide01 { background: #ddbdff; }
+	    .slide_content.slide02 { background: #9fd6c2; }
+	    .slide_content.slide03 { background: #abe2f7; }
+ 	    .slide_content.slide04 { background: #f08c78; } 
+	    .slide_content.slide05 { background: #fbdb65; } 
+	    .slide_btn_box > button { position: absolute; top: 50%; margin-top: -45px; width: 60px; height: 60px; font-size: 16px; color: #999; background: none; border: 1px solid #ddd; cursor: pointer; }
+	    .slide_btn_box > .slide_btn_prev { left: -100px; }
+	    .slide_btn_box > .slide_btn_next { right: -100px; }
+	    .slide_pagination { position: absolute; left: 50%; bottom: 0; list-style: none; margin: 0; padding: 0; transform: translateX(-50%); }
+	    .slide_pagination .dot { display: inline-block; width: 15px; height: 15px; margin: 0 5px; overflow: hidden; background: #ddd; border-radius: 50%; transition: 0.3s; }
+	    .slide_pagination .dot.dot_active { background: #333; }
+	    .slide_pagination .dot a { display: block; width: 100%; height: 100%; }
+ </style>
 <script src="MainPage/js/jquery-3.6.0.js"></script>
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+
 <script type="text/javascript">
 function optionChange() {            //대분류 소분류 <select/>
 	var ko=['반팔','긴팔','롱슬리브'];
@@ -14,6 +43,7 @@ function optionChange() {            //대분류 소분류 <select/>
 	var sh=['스니커즈','워커','슬립온','슬리퍼'];
 	var ka=['쥬얼리','모자','피규어'];
 	var sizeCl=['S','M','L','XL','XXL'];
+	var sizeFree=['FREE'];
 	var sizeSh=['230','235','240','245','250','260','265','270','275','280','285','290','295','300'];
 	var v=$('#s0').val();
 	var o;
@@ -25,7 +55,9 @@ function optionChange() {            //대분류 소분류 <select/>
 	}else if(v=='신발'){
 		o=sh; s=sizeSh;
 	} else if(v=='잡화'){
-		o=ka; s=sizeCl;
+		o=ka; s=sizeFree;
+	} else if(v=='피규어'){
+		o=ka; s=sizeFree;
 	}
 	else{
 		o=ka;
@@ -233,7 +265,7 @@ function readURL4(obj) {   //사진 3장 뿌리기
 				<li>
 					<div class="right-top-bar flex-w h-full">
 						<a href="#" class="flex-c-m p-lr-10 trans-04">
-							Help & FAQs
+							Help &#38; FAQs
 						</a>
 
 						<a href="#" class="flex-c-m p-lr-10 trans-04">
@@ -418,7 +450,6 @@ function readURL4(obj) {   //사진 3장 뿌리기
 								<div class="item-slick3" data-thumb=""> 
 									<div class="wrap-pic-w pos-relative">
 										 <!--  파일추가  -->
-								<!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
 								<div id="container">
 								    <div class="slide_wrap">
 								      <div class="slide_box">
@@ -455,135 +486,6 @@ function readURL4(obj) {   //사진 3장 뿌리기
 								    <!-- // .slide_wrap -->
 								  </div>
 								  <!-- // .container -->		   
-<!-- 	!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!	-->
- <style>
-	 	html, body { box-sizing: border-box; padding: 0; margin: 0; text-align: center; }
-	    *, *:before, *:after { box-sizing: inherit; }
-	    .clearfix:after { content: ''; display: block; clear: both; float: none; }
-	    .title { margin-bottom: 0; text-align: center; font-size: 30px; color: #333; }
-	    .link, .link:visited { display: inline-block; margin: 20px 0; color: #555; text-decoration: none; font-weight: bold; }
-	    .link:hover, .link:focus { color: #9fd6c2; }
-	    /* container - body */
-/* 	    #container { width: 1000px; margin: auto; } */
-	    .slide_wrap { position: relative; width: 400px; margin: auto; padding-bottom: 30px; }
-	    .slide_box { width: 100%; margin: auto; overflow-x: hidden; }
-	    .slide_content { display: table; float: left; width: 400px; height: 400px; }
-	    .slide_content > p { display: table-cell; vertical-align: middle; text-align: center; font-size: 100px; font-weight: bold; color: #555; }
-	    .slide_content.slide01 { background: #ddbdff; }
-	    .slide_content.slide02 { background: #9fd6c2; }
-	    .slide_content.slide03 { background: #abe2f7; }
- 	    .slide_content.slide04 { background: #f08c78; } 
-	    .slide_content.slide05 { background: #fbdb65; } 
-	    .slide_btn_box > button { position: absolute; top: 50%; margin-top: -45px; width: 60px; height: 60px; font-size: 16px; color: #999; background: none; border: 1px solid #ddd; cursor: pointer; }
-	    .slide_btn_box > .slide_btn_prev { left: -100px; }
-	    .slide_btn_box > .slide_btn_next { right: -100px; }
-	    .slide_pagination { position: absolute; left: 50%; bottom: 0; list-style: none; margin: 0; padding: 0; transform: translateX(-50%); }
-	    .slide_pagination .dot { display: inline-block; width: 15px; height: 15px; margin: 0 5px; overflow: hidden; background: #ddd; border-radius: 50%; transition: 0.3s; }
-	    .slide_pagination .dot.dot_active { background: #333; }
-	    .slide_pagination .dot a { display: block; width: 100%; height: 100%; }
- </style>
-<!--  -->
-<script type="text/javascript">
-(function () {
-    const slideList = document.querySelector('.slide_list');  // Slide parent dom
-    const slideContents = document.querySelectorAll('.slide_content');  // each slide dom
-    const slideBtnNext = document.querySelector('.slide_btn_next'); // next button
-    const slideBtnPrev = document.querySelector('.slide_btn_prev'); // prev button
-    const pagination = document.querySelector('.slide_pagination');
-    const slideLen = slideContents.length;  // slide length
-    const slideWidth = 400; // slide width
-    const slideSpeed = 300; // slide speed
-    const startNum = 0; // initial slide index (0 ~ 4)
-    
-    slideList.style.width = slideWidth * (slideLen + 2) + "px";
-    
-    // Copy first and last slide
-    let firstChild = slideList.firstElementChild;
-    let lastChild = slideList.lastElementChild;
-    let clonedFirst = firstChild.cloneNode(true);
-    let clonedLast = lastChild.cloneNode(true);
-
-    // Add copied Slides
-    slideList.appendChild(clonedFirst);
-    slideList.insertBefore(clonedLast, slideList.firstElementChild);
-
-    // Add pagination dynamically
-    let pageChild = '';
-    for (var i = 0; i < slideLen; i++) {
-      pageChild += '<li class="dot';
-      pageChild += (i === startNum) ? ' dot_active' : '';
-      pageChild += '" data-index="' + i + '"><a href="#"></a></li>';
-    }
-    pagination.innerHTML = pageChild;
-    const pageDots = document.querySelectorAll('.dot'); // each dot from pagination
-
-    slideList.style.transform = "translate3d(-" + (slideWidth * (startNum + 1)) + "px, 0px, 0px)";
-
-    let curIndex = startNum; // current slide index (except copied slide)
-    let curSlide = slideContents[curIndex]; // current slide dom
-    curSlide.classList.add('slide_active');
-
-    /** Next Button Event */
-    slideBtnNext.addEventListener('click', function() {
-      if (curIndex <= slideLen - 1) {
-        slideList.style.transition = slideSpeed + "ms";
-        slideList.style.transform = "translate3d(-" + (slideWidth * (curIndex + 2)) + "px, 0px, 0px)";
-      }
-      if (curIndex === slideLen - 1) {
-        setTimeout(function() {
-          slideList.style.transition = "0ms";
-          slideList.style.transform = "translate3d(-" + slideWidth + "px, 0px, 0px)";
-        }, slideSpeed);
-        curIndex = -1;
-      }
-      curSlide.classList.remove('slide_active');
-      pageDots[(curIndex === -1) ? slideLen - 1 : curIndex].classList.remove('dot_active');
-      curSlide = slideContents[++curIndex];
-      curSlide.classList.add('slide_active');
-      pageDots[curIndex].classList.add('dot_active');
-    });
-
-    /** Prev Button Event */
-    slideBtnPrev.addEventListener('click', function() {
-      if (curIndex >= 0) {
-        slideList.style.transition = slideSpeed + "ms";
-        slideList.style.transform = "translate3d(-" + (slideWidth * curIndex) + "px, 0px, 0px)";
-      }
-      if (curIndex === 0) {
-        setTimeout(function() {
-          slideList.style.transition = "0ms";
-          slideList.style.transform = "translate3d(-" + (slideWidth * slideLen) + "px, 0px, 0px)";
-        }, slideSpeed);
-        curIndex = slideLen;
-      }
-      curSlide.classList.remove('slide_active');
-      pageDots[(curIndex === slideLen) ? 0 : curIndex].classList.remove('dot_active');
-      curSlide = slideContents[--curIndex];
-      curSlide.classList.add('slide_active');
-      pageDots[curIndex].classList.add('dot_active');
-    });
-
-    /** Pagination Button Event */
-    let curDot;
-    Array.prototype.forEach.call(pageDots, function (dot, i) {
-      dot.addEventListener('click', function (e) {
-        e.preventDefault();
-        curDot = document.querySelector('.dot_active');
-        curDot.classList.remove('dot_active');
-        
-        curDot = this;
-        this.classList.add('dot_active');
-
-        curSlide.classList.remove('slide_active');
-        curIndex = Number(this.getAttribute('data-index'));
-        curSlide = slideContents[curIndex];
-        curSlide.classList.add('slide_active');
-        slideList.style.transition = slideSpeed + "ms";
-        slideList.style.transform = "translate3d(-" + (slideWidth * (curIndex + 1)) + "px, 0px, 0px)";
-      });
-    });
-  })();
-</script>
 									 <input type="file" id="imgInput" name="sell_img_name1" value="" onchange="readURL(this)" >
 									 <input type="file" id="imgInput" name="sell_img_name2" onchange="readURL1(this)">
 									 <input type="file" id="imgInput" name="sell_img_name3" onchange="readURL2(this)">
@@ -596,8 +498,6 @@ function readURL4(obj) {   //사진 3장 뿌리기
 		</div>
 	</div>				
 </div>
-					
-
 			<div class="col-md-6 col-lg-5 p-b-30">
 				<div class="p-r-50 p-t-5 p-lr-0-lg">
 		            <div>  
@@ -609,14 +509,10 @@ function readURL4(obj) {   //사진 3장 뿌리기
 					</div>
 	
 					<div class="mtext-106 cl2">
-								<input type="text" style="border : none;"  name="sell_brand" id=""  required="required" placeholder="브랜드를 입력해주세요."><br>
+						<input type="text" style="border : none;"  name="sell_brand" id=""  required="required" placeholder="브랜드를 입력해주세요."><br>
 				    </div>
-					
-					<!--  -->
 					<div class="p-t-33">
 						<div class="flex-w flex-r-m p-b-10">
-	<!-- 								<div>정확한 정보는 판매확률을 높여줍니다!</div> -->
-							
 							<div class="size-203 flex-c-m respon6">
 							Category
 							</div>
@@ -718,9 +614,6 @@ function readURL4(obj) {   //사진 3장 뿌리기
 							</div>
 						</div>	
 					</div>
-	
-					<!--  -->
-					
 				</div>
 			</div>
 		</div>
@@ -734,13 +627,10 @@ function readURL4(obj) {   //사진 3장 뿌리기
 				Categories: Jacket, Men
 			</span>
 		</div>
+	 </div>
 	</section>
 </form>
-	
-	
-	<!-- Footer영역과 상단 이동 버튼-->
 	<jsp:include page="/MainPage/menu/footer.jsp"/>
-	<!-- Modal1 -->
 	<div class="wrap-modal1 js-modal1 p-t-60 p-b-20">
 		<div class="overlay-modal1 js-hide-modal1"></div>
 
@@ -893,15 +783,10 @@ function readURL4(obj) {   //사진 3장 뿌리기
 			</div>
 		</div>
 	</div>
-
-<!--===============================================================================================-->	
 	<script src="MainPage/vendor/jquery/jquery-3.2.1.min.js"></script>
-<!--===============================================================================================-->
 	<script src="MainPage/vendor/animsition/js/animsition.min.js"></script>
-<!--===============================================================================================-->
 	<script src="MainPage/vendor/bootstrap/js/popper.js"></script>
 	<script src="MainPage/vendor/bootstrap/js/bootstrap.min.js"></script>
-<!--===============================================================================================-->
 	<script src="MainPage/vendor/select2/select2.min.js"></script>
 	<script type="text/javascript">
 	$(function() {
@@ -928,18 +813,14 @@ function readURL4(obj) {   //사진 3장 뿌리기
 			});
 		})
 	</script>
-<!--===============================================================================================-->
 	<script src="MainPage/vendor/daterangepicker/moment.min.js"></script>
 	<script src="MainPage/vendor/daterangepicker/daterangepicker.js"></script>
-<!--===============================================================================================-->
 	<script src="MainPage/vendor/slick/slick.min.js"></script>
 	<script src="MainPage/js/slick-custom.js"></script>
-<!--===============================================================================================-->
 	<script src="MainPage/vendor/parallax100/parallax100.js"></script>
 	<script>
         $('.parallax100').parallax100();
 	</script>
-<!--===============================================================================================-->
 	<script src="MainPage/vendor/MagnificPopup/jquery.magnific-popup.min.js"></script>
 	<script>
 		$('.gallery-lb').each(function() { // the containers for all your galleries
@@ -953,9 +834,7 @@ function readURL4(obj) {   //사진 3장 뿌리기
 		    });
 		});
 	</script>
-<!--===============================================================================================-->
 	<script src="MainPage/vendor/isotope/isotope.pkgd.min.js"></script>
-<!--===============================================================================================-->
 	<script src="MainPage/vendor/sweetalert/sweetalert.min.js"></script>
 	<script>
 		$('.js-addwish-b2, .js-addwish-detail').on('click', function(e){
@@ -983,17 +862,13 @@ function readURL4(obj) {   //사진 3장 뿌리기
 			});
 		});
 
-		/*---------------------------------------------*/
-
 		$('.js-addcart-detail').each(function(){
 			var nameProduct = $(this).parent().parent().parent().parent().find('.js-name-detail').html();
 			$(this).on('click', function(){
 				swal(nameProduct, "is added to cart !", "success");
 			});
 		});
-	
 	</script>
-<!--===============================================================================================-->
 	<script src="MainPage/vendor/perfect-scrollbar/perfect-scrollbar.min.js"></script>
 	<script>
 		$('.js-pscroll').each(function(){
@@ -1010,8 +885,107 @@ function readURL4(obj) {   //사진 3장 뿌리기
 			})
 		});
 	</script>
-<!--===============================================================================================-->
 	<script src="MainPage/js/main.js"></script>
+<script type="text/javascript">
+(function () {				//상품 판매사진 슬라이드 기능
+    const slideList = document.querySelector('.slide_list');  // Slide parent dom
+    const slideContents = document.querySelectorAll('.slide_content');  // each slide dom
+    const slideBtnNext = document.querySelector('.slide_btn_next'); // next button
+    const slideBtnPrev = document.querySelector('.slide_btn_prev'); // prev button
+    const pagination = document.querySelector('.slide_pagination');
+    const slideLen = slideContents.length;  // slide length
+    const slideWidth = 400; // slide width
+    const slideSpeed = 300; // slide speed
+    const startNum = 0; // initial slide index (0 ~ 4)
+    
+    slideList.style.width = slideWidth * (slideLen + 2) + "px";
+    
+    // Copy first and last slide
+    let firstChild = slideList.firstElementChild;
+    let lastChild = slideList.lastElementChild;
+    let clonedFirst = firstChild.cloneNode(true);
+    let clonedLast = lastChild.cloneNode(true);
 
+    // Add copied Slides
+    slideList.appendChild(clonedFirst);
+    slideList.insertBefore(clonedLast, slideList.firstElementChild);
+
+    // Add pagination dynamically
+    let pageChild = '';
+    for (var i = 0; i < slideLen; i++) {
+      pageChild += '<li class="dot';
+      pageChild += (i === startNum) ? ' dot_active' : '';
+      pageChild += '" data-index="' + i + '"><a href="#"></a></li>';
+    }
+    pagination.innerHTML = pageChild;
+    const pageDots = document.querySelectorAll('.dot'); // each dot from pagination
+
+    slideList.style.transform = "translate3d(-" + (slideWidth * (startNum + 1)) + "px, 0px, 0px)";
+
+    let curIndex = startNum; // current slide index (except copied slide)
+    let curSlide = slideContents[curIndex]; // current slide dom
+    curSlide.classList.add('slide_active');
+
+    /** Next Button Event */
+    slideBtnNext.addEventListener('click', function() {
+      if (curIndex <= slideLen - 1) {
+        slideList.style.transition = slideSpeed + "ms";
+        slideList.style.transform = "translate3d(-" + (slideWidth * (curIndex + 2)) + "px, 0px, 0px)";
+      }
+      if (curIndex === slideLen - 1) {
+        setTimeout(function() {
+          slideList.style.transition = "0ms";
+          slideList.style.transform = "translate3d(-" + slideWidth + "px, 0px, 0px)";
+        }, slideSpeed);
+        curIndex = -1;
+      }
+      curSlide.classList.remove('slide_active');
+      pageDots[(curIndex === -1) ? slideLen - 1 : curIndex].classList.remove('dot_active');
+      curSlide = slideContents[++curIndex];
+      curSlide.classList.add('slide_active');
+      pageDots[curIndex].classList.add('dot_active');
+    });
+
+    /** Prev Button Event */
+    slideBtnPrev.addEventListener('click', function() {
+      if (curIndex >= 0) {
+        slideList.style.transition = slideSpeed + "ms";
+        slideList.style.transform = "translate3d(-" + (slideWidth * curIndex) + "px, 0px, 0px)";
+      }
+      if (curIndex === 0) {
+        setTimeout(function() {
+          slideList.style.transition = "0ms";
+          slideList.style.transform = "translate3d(-" + (slideWidth * slideLen) + "px, 0px, 0px)";
+        }, slideSpeed);
+        curIndex = slideLen;
+      }
+      curSlide.classList.remove('slide_active');
+      pageDots[(curIndex === slideLen) ? 0 : curIndex].classList.remove('dot_active');
+      curSlide = slideContents[--curIndex];
+      curSlide.classList.add('slide_active');
+      pageDots[curIndex].classList.add('dot_active');
+    });
+
+    /** Pagination Button Event */
+    let curDot;
+    Array.prototype.forEach.call(pageDots, function (dot, i) {
+      dot.addEventListener('click', function (e) {
+        e.preventDefault();
+        curDot = document.querySelector('.dot_active');
+        curDot.classList.remove('dot_active');
+        
+        curDot = this;
+        this.classList.add('dot_active');
+
+        curSlide.classList.remove('slide_active');
+        curIndex = Number(this.getAttribute('data-index'));
+        curSlide = slideContents[curIndex];
+        curSlide.classList.add('slide_active');
+        slideList.style.transition = slideSpeed + "ms";
+        slideList.style.transform = "translate3d(-" + (slideWidth * (curIndex + 1)) + "px, 0px, 0px)";
+      });
+    });
+  })();
+</script>
 </body>
 </html>

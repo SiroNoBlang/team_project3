@@ -43,25 +43,9 @@ public class ProductFrontController extends HttpServlet {
 			forward = new ActionForward();
 			forward.setPath("MainPage/first_page/index.jsp");
 			forward.setRedirect(false);
-		}  else if (command.equals("/MainPage.pr")) { // 상품 판매글(FORM.JSP)
+		} else if (command.equals("/MainPage.pr")) { // 상품 판매글(FORM.JSP)
 
 			action = new MplistProAction();
-
-			try {
-				forward = action.execute(request, response);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-
-		}  else if (command.equals("/SellForm.pr")) { // 상품 판매글(FORM.JSP)
-
-			forward = new ActionForward();
-			forward.setPath("MainPage/sell/sell_write.jsp");
-			forward.setRedirect(false);
-
-		} else if (command.equals("/SellWritePro.pr")) { // 상품 판매글(비즈니스로직작업요청) 작성
-
-			action = new sellWriteProAction();
 
 			try {
 				forward = action.execute(request, response);
@@ -85,45 +69,7 @@ public class ProductFrontController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		} else if (command.equals("/ProductBrandPro.pr")) { // 상품 필터 분류 처리
-			action = new ProductBrandProAction();
-
-			try {
-				forward = action.execute(request, response);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}	
-		} else if (command.equals("/ProductPricePro.pr")) { // 상품 가격 필터 분류 처리
-			action = new ProductPriceProAction();
-
-			try {
-				forward = action.execute(request, response);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}	
-		} else if (command.equals("/Product_list.pr")) { // 상품 판매목록(product_list.jsp)
-			forward = new ActionForward();
-			forward.setPath("MainPage/sell/product_list.jsp");
-			forward.setRedirect(false);
-		}else if (command.equals("/ProductRecUpdate.pr")) { // 각상품에 대한 좋아요 UPDATE기능()//좋아요/좋아요 취소 기능 포함
-
-			action = new ProductRecUpdateProAction();
-
-			try {
-				forward = action.execute(request, response);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		} else if (command.equals("/ProductDetailPro.pr")) { // 상품 상세조회(ProductDetailProAction.java)
-
-			action = new ProductDetailProAction();
-
-			try {
-				forward = action.execute(request, response);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		} else if (command.equals("/ProductSearchPro.pr")) { // 상품 상세조회(ProductDetailProAction.java)
+		} else if (command.equals("/ProductSearchPro.pr")) { // 상품 필터 분류 처리(earch) 
 
 			action = new ProductSearchProAction();
 
@@ -133,10 +79,48 @@ public class ProductFrontController extends HttpServlet {
 				e.printStackTrace();
 			}
 
+		} else if (command.equals("/ProductBrandPro.pr")) { // 상품 필터 분류 처리(brand)
+			action = new ProductBrandProAction();
+
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}	
+		} else if (command.equals("/ProductPricePro.pr")) { // 상품 가격 필터 분류 처리(price)
+			action = new ProductPriceProAction();
+
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}	
+		} else if (command.equals("/Product_list.pr")) { // 상품 판매목록(*shop페이지)
+			forward = new ActionForward();
+			forward.setPath("MainPage/sell/product_list.jsp");
+			forward.setRedirect(false);
+		}  else if (command.equals("/ProductDetailPro.pr")) { // 상품 상세조회(ProductDetailProAction.java)
+
+			action = new ProductDetailProAction();
+
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		} else if (command.equals("/ProductDetailForm.pr")) { // 상품 판매목록 상세(product_detail.jsp)
 			forward = new ActionForward();
 			forward.setPath("MainPage/sell/product_detail.jsp");
 			forward.setRedirect(false);
+		} else if (command.equals("/ProductRecUpdate.pr")) { // 각상품에 대한 좋아요(클릭/클릭취소/좋아요 갯수 확인)기능
+
+			action = new ProductRecUpdateProAction();
+
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		} else if (command.equals("/ShopingForm.pr")) { // 쇼핑카트 오더(shoping_cart.jsp)
 			forward = new ActionForward();
 			forward.setPath("MainPage/sell/shoping_cart.jsp");
@@ -151,8 +135,8 @@ public class ProductFrontController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-
-		} else if (command.equals("/ShopingPro.pr")) { // 쇼핑카트 액션 <곧 구매 버튼 선택 후 결제하기 들어갑니다.>
+//--------------------------------------(판매자-> 구매자)----------------------------------------------------------------
+		} else if (command.equals("/ShopingPro.pr")) { // 구매할 상품 페이지로 가기 위한 비즈니스로직 작업수행
 
 			action = new ShopingProAction();
 
@@ -162,7 +146,7 @@ public class ProductFrontController extends HttpServlet {
 				e.printStackTrace();
 			}
 
-		} else if (command.equals("/SellRecentPostAddressAction.pr")) { // 배송지 주소 찾기 액션
+		} else if (command.equals("/SellRecentPostAddressAction.pr")) { // 최근배송지 주소 찾기위한 비즈니스로직 작업수행
 
 			action = new SellRecentPostAddressAction();
 			try {
@@ -177,7 +161,7 @@ public class ProductFrontController extends HttpServlet {
 			forward.setPath("MainPage/sell/recentPostAddress.jsp");
 			forward.setRedirect(false);
 			
-		} else if (command.equals("/SellMemberGrade.pr")) { // 멤버 등급표 표시하기 (action)
+		} else if (command.equals("/SellMemberGrade.pr")) { // 멤버 등급표 표시하기위한 비즈니스로직 작업수행
 
 			action = new SellMemberGradeAction();
 			try {
@@ -192,7 +176,7 @@ public class ProductFrontController extends HttpServlet {
 			forward.setPath("MainPage/sell/sellMemberGradeForm.jsp");
 			forward.setRedirect(false);
 		}
-		 else if (command.equals("/SucceedProductAction.pr")) { 
+		 else if (command.equals("/SucceedProductAction.pr")) {  //상품 구매후  테이블 UPDATE(member_info_detail,sell_list,buy) => (비즈니스로직 작업)
 			action = new ShoppoingSucceedAction();
 
 			try {
@@ -200,14 +184,29 @@ public class ProductFrontController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		}else if (command.equals("/SucceedProduct.pr")) { /// 쇼핑 결제 완료 페이지(Action에서 UPDATE 작업 진행 후 .JSP(file)로 값
-														// 가져옴)
+		} else if (command.equals("/SucceedProduct.pr")) { /// 쇼핑 결제 완료 페이지(Action에서 UPDATE 작업 진행 후 .JSP(file)로 값가져오기
 			forward = new ActionForward();
 			forward.setPath("MainPage/sell/succeedProduct.jsp");
 			forward.setRedirect(false);
+//--------------------------------------------------------
+//---------------상품 판매----------------------------------
+		} else if (command.equals("/SellForm.pr")) { // 상품 판매글(FORM.JSP)
 
-		}
-		else if (command.equals("/Contact.pr")) { // 회사 위치 등 건의 사항 메일 보내는 페이지 이동
+			forward = new ActionForward();
+			forward.setPath("MainPage/sell/sell_write.jsp");
+			forward.setRedirect(false);
+
+		} else if (command.equals("/SellWritePro.pr")) { // 상품 판매글(비즈니스로직작업요청) 작성
+
+			action = new sellWriteProAction();
+
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+//--------------------------------------------------------
+		} else if (command.equals("/Contact.pr")) { // 회사 위치 등 건의 사항 메일 보내는 페이지 이동
 
 			action = new ContactAction();
 

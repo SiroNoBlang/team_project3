@@ -31,12 +31,12 @@ public class SellerDAO {
 	public void setConnection(Connection con) {
 		this.con = con;
 	}
+	// 판매글 작성
+	public int insertArticle(SellerDTO seller, ArrayList<SellerimgDTO> sellimglist) { 
 
-	public int insertArticle(SellerDTO seller, ArrayList<SellerimgDTO> sellimglist) { // 판매글 작성
-		// INSERT 작업 결과를 리턴받아 저장할 변수 선언
 		int insertCount = 0;
 		int num = 0;
-//      int img_num=0;
+
 
 		PreparedStatement pstmt = null;
 		PreparedStatement pstmt2 = null;
@@ -59,7 +59,6 @@ public class SellerDAO {
 			pstmt.setInt(11, 0); // 조회수 컬럼
 			pstmt.setInt(12, 0);
 			pstmt.executeUpdate();
-			System.out.println("INSERT -SELL");
 			for (SellerimgDTO sellimg : sellimglist) {
 				sql = "INSERT INTO sell_img VALUES ((SELECT MAX(sell_num) FROM sell),?,?,?)";
 				pstmt2 = con.prepareStatement(sql);
@@ -70,25 +69,21 @@ public class SellerDAO {
 				pstmt2.executeUpdate();
 			}
 
-			sql = "INSERT INTO sell_list VALUES ((SELECT MAX(SELL_NUM) FROM sell), '판매중', ?, '관리자 작업필요')";// 검수자
-			// 승인날짜,닉네임
-			// 업데이트작업필요
+			sql = "INSERT INTO sell_list VALUES ((SELECT MAX(SELL_NUM) FROM sell),?,REPLACE(now(),'-',''), '관리자 작업필요')";// 검수자
+
 			pstmt3 = con.prepareStatement(sql);
-			pstmt3.setString(1, seller.getSell_list_approve_date());
+			pstmt3.setString(1, seller.getSell_list_item_status());
 			insertCount = pstmt3.executeUpdate();
 
 		} catch (SQLException e) {
-			System.out.println("SQL 구문 오류 발생! - insertArticle()");
 			e.printStackTrace();
 		} finally {
-			// DB 자원 반환(주의! Connection 객체 반환 금지!)
 			close(pstmt3);
 			close(pstmt2);
 			close(pstmt);
 
 		}
 
-		// INSERT 작업 결과 리턴
 		return insertCount;
 	}
 
@@ -100,27 +95,83 @@ public class SellerDAO {
 		ResultSet rs = null;
 
 		try {
-			String sql = "SELECT COUNT(sell_list_num) FROM sell_list" + " WHERE sell_list_item_status ='판매중' "; // 나중엔
-			// sell_list_item_status
-			// ='판매중'로
-			// 바꿔야됨
+			String sql = "SELECT COUNT(sell_list_num) FROM sell_list" + " WHERE sell_list_item_status ='판매중' "; 
+
 			pstmt = con.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 			if (rs.next()) {
 				listCount = rs.getInt(1);
 			}
 		} catch (SQLException e) {
-			System.out.println("SQL 구문 오류 발생! - selectListCount()");
 			e.printStackTrace();
 		} finally {
-			// DB 자원 반환(주의! Connection 객체 반환 금지!)
+			
 			close(pstmt);
 			close(rs);
 		}
 
 		return listCount;
 	}
+	
+	//주석달기
+		public ArrayList<SellerProductDTO> searchArticleList(int pageNum, int listLimit, String productSearch) {
+			ArrayList<SellerProductDTO> productList = null;
 
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+
+			// 조회 시작 게시물 번호(행 번호) 계산
+			int startRow = (pageNum - 1) * listLimit;
+
+			try {
+				String sql = "SELECT a.sell_num, a.sell_size , a.sell_category,a.sell_category_detail, a.sell_title, a.sell_color, a.sell_brand, a.sell_price, a.sell_readcount,"
+						+ " b.sell_img_name, b.sell_img_real_name ,b.sell_img_real_num ,b.sell_img_num,b.sell_img_name,b.sell_img_real_name, c.sell_list_num, c.sell_list_item_status"
+						+ " FROM sell AS a JOIN sell_img AS b ON a.sell_num = b.sell_img_real_num JOIN sell_list AS c ON a.sell_num = c.sell_list_num"
+						+ " WHERE sell_list_item_status='판매중' AND sell_brand Like '%" + productSearch
+						+ "%' OR sell_title Like '%" + productSearch + "%' AND "
+						+ "(sell_img_real_num,sell_img_num)  in (SELECT sell_img_real_num, MAX(sell_img_num)  FROM sell_img    GROUP BY sell_img_real_num  ORDER BY sell_img_real_num ,sell_img_num DESC  )"
+						+ " ORDER BY a.sell_num DESC LIMIT ?,? ";
+
+				pstmt = con.prepareStatement(sql);
+				pstmt.setInt(1, startRow);
+				pstmt.setInt(2, listLimit);
+
+				rs = pstmt.executeQuery();
+
+				productList = new ArrayList<SellerProductDTO>();
+
+				while (rs.next()) {
+					SellerProductDTO article = new SellerProductDTO();
+					article.setSell_num(rs.getInt("sell_num"));
+					article.setSell_size(rs.getString("sell_size"));
+					article.setSell_title(rs.getString("sell_title"));
+					article.setSell_price(rs.getInt("sell_price"));
+					article.setSell_color(rs.getString("sell_color"));
+					article.setSell_brand(rs.getString("sell_brand"));
+					article.setSell_readcount(rs.getInt("sell_readcount"));
+					article.setSell_list_num(rs.getInt("sell_list_num"));
+					article.setSell_list_item_status(rs.getString("sell_list_item_status"));
+					article.setSell_img_num(rs.getInt("Sell_img_num"));
+					article.setSell_img_real_num(rs.getInt("Sell_img_real_num"));
+					article.setSell_img_name(rs.getString("sell_img_name"));
+					article.setSell_img_real_name(rs.getString("sell_img_real_name"));
+					article.setSell_category(rs.getString("Sell_category"));
+					article.setSell_category_detail(rs.getString("Sell_category_detail"));
+
+					productList.add(article);
+
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				close(pstmt);
+
+				close(rs);
+			}
+			return productList;
+		}
+
+	// 기능 주석달기
 	public ArrayList<SellerProductDTO> selectArticleList(int pageNum, int listLimit) {
 		ArrayList<SellerProductDTO> articleList = null;
 
@@ -170,7 +221,6 @@ public class SellerDAO {
 
 			}
 		} catch (SQLException e) {
-			System.out.println("구문오류");
 			e.printStackTrace();
 		} finally {
 			close(pstmt);
@@ -180,7 +230,26 @@ public class SellerDAO {
 		return articleList;
 	}
 
-	public SellerProductDTO selectArticle(int sell_num) { // sell_num 값을 이용하여 해당 제품 판매관련정보 가져오기 &(코드 활용)상세글에서 (buy) 구매하기
+	// 조회수 증가 위한 작업
+	public void updateReadcount(int sell_num) {
+		PreparedStatement pstmt = null;
+
+		try {
+			String sql = "UPDATE sell SET sell_readcount=sell_readcount+1 WHERE sell_num=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, sell_num);
+			pstmt.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+
+	}
+
+	// sell_num 값을 이용하여 해당 제품 판매관련정보 가져오기(product_detail.jsp)
+	public SellerProductDTO selectArticle(int sell_num) { 
 		// ->Sellerdto 를 이용하여 상품의 상세정보 가져오기
 		SellerProductDTO article = null;
 
@@ -217,7 +286,6 @@ public class SellerDAO {
 				article.setSell_likecount(rs.getInt("sell_likecount"));
 			}
 		} catch (SQLException e) {
-			System.out.println("SQL 구문 오류 발생! - selectArticle()");
 			e.printStackTrace();
 		} finally {
 			close(pstmt);
@@ -226,39 +294,17 @@ public class SellerDAO {
 
 		return article;
 	}
-
-	// 조회수 증가 위한 작업
-
-	public void updateReadcount(int sell_num) {
-		PreparedStatement pstmt = null;
-
-		try {
-			String sql = "UPDATE sell SET sell_readcount=sell_readcount+1 WHERE sell_num=?";
-			pstmt = con.prepareStatement(sql);
-			pstmt.setInt(1, sell_num);
-			pstmt.executeUpdate();
-
-		} catch (SQLException e) {
-			System.out.println("SQL 구문 오류 발생! - updateReadcount()");
-			e.printStackTrace();
-		} finally {
-			close(pstmt);
-		}
-
-	}
-
-	public ArrayList<SellerProductDTO> selectProductRe(String sell_brand, int sell_num) { // 상세판매 페이지에서 관심상품 뿌리는기능
+	// 상세판매 페이지에서 관심상품 뿌리는기능(최대 4장)
+	public ArrayList<SellerProductDTO> selectProductRe(String sell_brand, int sell_num) { 
 		ArrayList<SellerProductDTO> productarr = new ArrayList<SellerProductDTO>();
 		SellerProductDTO ProductRe = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		System.out.println(sell_brand);
-		System.out.println(sell_num);
-
+		
 		try {
 			String sql = "SELECT a.sell_num, a.sell_size , a.sell_title, a.sell_brand, a.sell_price, b.sell_img_name, b.sell_img_real_name "
 					+ "FROM sell AS a JOIN sell_img AS b ON a.sell_num = b.sell_img_real_num WHERE sell_num !=? "
-					+ " AND sell_brand Like '%" + sell_brand + "%' " + " LIMIT 0,6";
+					+ " AND sell_brand Like '%" + sell_brand + "%' " + " LIMIT 0,4";
 
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, sell_num);
@@ -280,7 +326,6 @@ public class SellerDAO {
 			System.out.println(productarr);
 
 		} catch (SQLException e) {
-			System.out.println("SQL 구문 오류 발생! - selectProductRe()");
 			e.printStackTrace();
 		} finally {
 			close(pstmt);
@@ -289,26 +334,11 @@ public class SellerDAO {
 
 		return productarr;
 	}
+	// 상세 글에서 (buy)구매하기->memberBean을 이용해 구매자 정보 가져오기
 
-	public MemberBean selectMemberShop(String member_code) { // 상세 글에서 (buy)구매하기->memberBean을 이용해 구매자 정보 가져오기
+	public MemberBean selectMemberShop(String member_code) { 		
+		
 		MemberBean memberbean = null;
-		/*
-		 * member_info테이블 fk=> member_info_code <-> member_code
-		 * --------------------------------------------------------------------------
-		 * member_info_name,member_info_phone,
-		 * member_info_post_code,member_info_address,member_info_address_detail
-		 * member_info_ship_post_code, member_info_ship_address,
-		 * member_info_ship_address_detail,
-		 * 
-		 * 
-		 * ----------------------------------------------------------------------------
-		 * member_info_detail 테이블 fk => member_info_detail_code <-> member_code
-		 * -----------------------------------------------------------------------------
-		 * -- member_info_detail_point(포인트 적립금), member_info_detail_acc_money(누적 금액)
-		 * -----------------------------------------------------------------------------
-		 * -
-		 * 
-		 */
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 
@@ -345,7 +375,7 @@ public class SellerDAO {
 
 		return memberbean;
 	}
-
+	//주석달기
 	public ArrayList<SellerimgDTO> selectProductimg(int sell_num) {
 		ArrayList<SellerimgDTO> productimg = new ArrayList<SellerimgDTO>();
 		SellerimgDTO Sellerdetailimg = null;
@@ -365,14 +395,11 @@ public class SellerDAO {
 				Sellerdetailimg.setSell_img_real_num(rs.getInt("sell_img_real_num"));
 				Sellerdetailimg.setSell_img_name(rs.getString("sell_img_name"));
 				Sellerdetailimg.setSell_img_real_name(rs.getString("sell_img_real_name"));
-//            ProductRe.setSell_img_name(rs.getString("sell_img_name"));
-//            ProductRe.setSell_img_real_name(rs.getString("sell_img_real_name"));
 
 				productimg.add(Sellerdetailimg);
 			}
 
 		} catch (SQLException e) {
-			System.out.println("SQL 구문 오류 발생! - updateReadcount()");
 			e.printStackTrace();
 		} finally {
 			close(pstmt);
@@ -381,67 +408,46 @@ public class SellerDAO {
 
 		return productimg;
 	}
+	
+	// 배송지 주소 찾기
+		public ArrayList<SellerAddress> findAddress(String sell_member_code) {
+			System.out.println("sellerDAO-findAddress");
+			ArrayList<SellerAddress> addressArr = null;
+			SellerAddress address = null;
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
 
-	public ArrayList<SellerProductDTO> searchArticleList(int pageNum, int listLimit, String productSearch) {
-		ArrayList<SellerProductDTO> productList = null;
+			try {
+				String sql = "SELECT  DISTINCT address_code, post_code, member_code,  address_detail, address_name, address_phone"
+						 + "  FROM address  WHERE member_code=? ORDER BY address_num DESC LIMIT 0, 5";
+				pstmt = con.prepareStatement(sql);
+				pstmt.setString(1, sell_member_code);
 
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
+				addressArr = new ArrayList<SellerAddress>();
+				rs = pstmt.executeQuery();
 
-		// 조회 시작 게시물 번호(행 번호) 계산
-		int startRow = (pageNum - 1) * listLimit;
+				while (rs.next()) {
+					address = new SellerAddress();
+					address.setMember_code(rs.getString("member_code"));
+					address.setAddress_code(rs.getString("address_code"));
+					address.setAddress_detail(rs.getString("address_detail"));
+					address.setPost_code(rs.getString("post_code"));
+					address.setAddress_phone(rs.getString("address_phone"));
+					address.setAddress_name(rs.getString("address_name"));
 
-		try {
-			String sql = "SELECT a.sell_num, a.sell_size , a.sell_category,a.sell_category_detail, a.sell_title, a.sell_color, a.sell_brand, a.sell_price, a.sell_readcount,"
-					+ " b.sell_img_name, b.sell_img_real_name ,b.sell_img_real_num ,b.sell_img_num,b.sell_img_name,b.sell_img_real_name, c.sell_list_num, c.sell_list_item_status"
-					+ " FROM sell AS a JOIN sell_img AS b ON a.sell_num = b.sell_img_real_num JOIN sell_list AS c ON a.sell_num = c.sell_list_num"
-					+ " WHERE sell_list_item_status='판매중' AND sell_brand Like '%" + productSearch
-					+ "%' OR sell_title Like '%" + productSearch + "%' AND "
-					+ "(sell_img_real_num,sell_img_num)  in (SELECT sell_img_real_num, MAX(sell_img_num)  FROM sell_img    GROUP BY sell_img_real_num  ORDER BY sell_img_real_num ,sell_img_num DESC  )"
-					+ " ORDER BY a.sell_num DESC LIMIT ?,? ";
+					addressArr.add(address);
+				}
 
-			pstmt = con.prepareStatement(sql);
-			pstmt.setInt(1, startRow);
-			pstmt.setInt(2, listLimit);
+			} catch (Exception e) {
 
-			rs = pstmt.executeQuery();
-
-			productList = new ArrayList<SellerProductDTO>();
-
-			while (rs.next()) {
-				SellerProductDTO article = new SellerProductDTO();
-				article.setSell_num(rs.getInt("sell_num"));
-				article.setSell_size(rs.getString("sell_size"));
-				article.setSell_title(rs.getString("sell_title"));
-				article.setSell_price(rs.getInt("sell_price"));
-				article.setSell_color(rs.getString("sell_color"));
-				article.setSell_brand(rs.getString("sell_brand"));
-				article.setSell_readcount(rs.getInt("sell_readcount"));
-				article.setSell_list_num(rs.getInt("sell_list_num"));
-				article.setSell_list_item_status(rs.getString("sell_list_item_status"));
-				article.setSell_img_num(rs.getInt("Sell_img_num"));
-				article.setSell_img_real_num(rs.getInt("Sell_img_real_num"));
-				article.setSell_img_name(rs.getString("sell_img_name"));
-				article.setSell_img_real_name(rs.getString("sell_img_real_name"));
-				article.setSell_category(rs.getString("Sell_category"));
-				article.setSell_category_detail(rs.getString("Sell_category_detail"));
-
-				productList.add(article);
-
+				e.printStackTrace();
+			} finally {
+				close(rs);
+				close(pstmt);
 			}
-		} catch (SQLException e) {
-			System.out.println("구문오류");
-			e.printStackTrace();
-		} finally {
-			close(pstmt);
-
-			close(rs);
+			return addressArr;
 		}
-		return productList;
-	}
-
-	// 결제 완료 후 MemberBean 객체를 member_codo를 이용하여 action에서 받아온 MemberBean memberBeanIm
-	// 정보를 MemberBean 객체에 Update 해주기
+	// 결제 완료 후 MemberBean 객체를 member_codo를 이용하여 action에서 받아온 MemberBean memberBeanIm 정보를 MemberBean 객체에 Update 해주기
 	public int updateMemberInfo(MemberBean memberBeanIm) {
 		PreparedStatement pstmt = null;
 		int updateCount = 0;
@@ -452,28 +458,14 @@ public class SellerDAO {
 					+ "	WHERE member_info_detail_code= ? ";
 
 			pstmt = con.prepareStatement(sql);
-//			pstmt.setString(1, memberBeanIm.getMember_info_name());
-//			pstmt.setString(2, memberBeanIm.getMember_info_phone());     //삭제해도됨
-//			pstmt.setString(3, memberBeanIm.getMember_info_post_code());
-//			pstmt.setString(4, memberBeanIm.getMember_info_address());
-//			pstmt.setString(5, memberBeanIm.getMember_info_address_detail());
 			pstmt.setInt(1, memberBeanIm.getMember_info_detail_point());
 			pstmt.setInt(2, memberBeanIm.getMember_info_detail_acc_money());
 			pstmt.setString(3, memberBeanIm.getMember_code());
 
 			updateCount = pstmt.executeUpdate();
 
-//				sql=" UPDATE member_info_detail"				//price ,acc_money 업데이트해야됨.
-//						+ "	SET  member_info_detail_point=(SELECT member_info_detail_point"
-//						+ "					FROM member_info_detail"
-//						+ "						WHERE member_info_detail_code ='fb44a7c4dca011ec9fb70a0027000011' ),"
-//						+ "      member_info_detail_acc_money=(SELECT member_info_detail_acc_money"
-//						+ "					FROM member_info_detail"
-//						+ "						WHERE member_info_detail_code ='fb44a7c4dca011ec9fb70a0027000011')"
-//						+ "	WHERE member_info_detail_code='fb44a7c4dca011ec9fb70a0027000011'"; 
 
 		} catch (Exception e) {
-			System.out.println("SQL구문 오류 발생! -updateMemberInfo()");
 			e.printStackTrace();
 		} finally {
 			close(pstmt);
@@ -490,16 +482,17 @@ public class SellerDAO {
 
 		try {
 			// 현재 service와 dao에서 값이 안넘어옴
-			String sql = "INSERT INTO buy VALUES(?,?,?,?,REPLACE(now(),'-',''),'배송중');";
+			String sql = "INSERT INTO buy VALUES(?,?,ROUND((?/10000),0) ,ROUND((?*0.05),0) ,REPLACE(now(),'-',''),'배송중');";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, sellerDTO.getBuy_member_code());
 			pstmt.setInt(2, sellerDTO.getBuy_item_num());
-			pstmt.setInt(3, sellerDTO.getBuy_price());
+			pstmt.setInt(3, sellerDTO.getBuy_price());  
 			pstmt.setInt(4, sellerDTO.getBuy_point());
 
 			insertCount = pstmt.executeUpdate();
 
 		} catch (Exception e) {
+			System.out.println("구문에러!!!!");
 			e.printStackTrace();
 		} finally {
 			close(pstmt);
@@ -507,12 +500,11 @@ public class SellerDAO {
 
 		return insertCount;
 	}
-
-	public MemberBean selectMemberInfo(String member_code) { // update 완료 후 update된 내용 가져오기
+	// update 완료 후 update된 내용 가져오기
+	public MemberBean selectMemberInfo(String member_code) { 
 		MemberBean member = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		System.out.println(member_code);
 		try {
 			String sql = "SELECT a.member_info_name, a.member_info_phone, a.member_info_post_code, a.member_info_address, a.member_info_address_detail,"
 					+ " b.member_info_detail_point, b.member_info_detail_acc_money ,c.grade_name"
@@ -536,7 +528,6 @@ public class SellerDAO {
 			}
 
 		} catch (Exception e) {
-			System.out.println("구문오류");
 			e.printStackTrace();
 		}
 
@@ -553,9 +544,8 @@ public class SellerDAO {
 			pstmt.setInt(1, sell_num);
 
 			updateCount = pstmt.executeUpdate();
-//				System.out.println(updateCount);
+
 		} catch (SQLException e) {
-			System.out.println("SQL 구문오류!");
 			e.printStackTrace();
 		}
 		return updateCount;
@@ -589,16 +579,15 @@ public class SellerDAO {
 
 		return member;
 	}
-
+	//주석달기
 	public ArrayList<SellerProductDTO> CateArticleList(int pageNum, int listLimit, String category) {
 		ArrayList<SellerProductDTO> productCateList = null;
 
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 
-		// 조회 시작 게시물 번호(행 번호) 계산
+		
 		int startRow = (pageNum - 1) * listLimit;
-		System.out.println(category);
 		try {
 			String sql = "SELECT a.sell_num, a.sell_size , a.sell_category,a.sell_category_detail, a.sell_title, a.sell_color, a.sell_brand, a.sell_price, a.sell_readcount,"
 					+ " b.sell_img_name, b.sell_img_real_name ,b.sell_img_real_num ,b.sell_img_num,b.sell_img_name,b.sell_img_real_name, c.sell_list_num, c.sell_list_item_status"
@@ -639,7 +628,6 @@ public class SellerDAO {
 
 			}
 		} catch (SQLException e) {
-			System.out.println("구문오류");
 			e.printStackTrace();
 		} finally {
 			close(pstmt);
@@ -660,10 +648,8 @@ public class SellerDAO {
 			String sql = "SELECT MAX(address_num) FROM address";
 			pstmt = con.prepareStatement(sql);
 			rs = pstmt.executeQuery();
-			// rs.next()메서드를 통해 다음 레코드 존재 여부 확인
-			// =>다음 레코드가 존재하는 경우 기존 게시물이 있다는 의미이므로
-			// 조회된 값(num의 최대값) +1을 num 변수에 저장
-			if (rs.next()) {// 등록된 게시물이 하나라도 존재할 경우(= 최대값이 조회될 경우)
+
+			if (rs.next()) {
 				num = rs.getInt(1) + 1;
 			}
 
@@ -678,49 +664,11 @@ public class SellerDAO {
 			pstmt.setString(7, address.getAddress_phone());
 			pstmt.executeUpdate();
 		} catch (SQLException e) {
-			System.out.println("SQL 구문오류!");
 			e.printStackTrace();
 		}
 	}
 
-	// 배송지 주소 찾기
-	public ArrayList<SellerAddress> findAddress(String sell_member_code) {
-		System.out.println("sellerDAO-findAddress");
-		ArrayList<SellerAddress> addressArr = null;
-		SellerAddress address = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-
-		try {
-			String sql = "SELECT  DISTINCT address_code, post_code, member_code,  address_detail, address_name, address_phone"
-					 + "  FROM address  WHERE member_code=? ORDER BY address_num DESC LIMIT 0, 5";
-			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, sell_member_code);
-
-			addressArr = new ArrayList<SellerAddress>();
-			rs = pstmt.executeQuery();
-
-			while (rs.next()) {
-				address = new SellerAddress();
-				address.setMember_code(rs.getString("member_code"));
-				address.setAddress_code(rs.getString("address_code"));
-				address.setAddress_detail(rs.getString("address_detail"));
-				address.setPost_code(rs.getString("post_code"));
-				address.setAddress_phone(rs.getString("address_phone"));
-				address.setAddress_name(rs.getString("address_name"));
-
-				addressArr.add(address);
-			}
-
-		} catch (Exception e) {
-
-			e.printStackTrace();
-		} finally {
-			close(rs);
-			close(pstmt);
-		}
-		return addressArr;
-	}
+	
 
 	// grade table의 모든 컬럼의 데이터를 가져와 등급 알아볼 때 기준으로 사용할 쿼리
 	public ArrayList<MemberBean> memberGrade() {
@@ -743,7 +691,6 @@ public class SellerDAO {
 				bean.setDiscount_rate(rs.getInt("discount_rate"));
 				memberArr.add(bean);
 			}
-//				system.out.println(memberarr);
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -805,7 +752,6 @@ public class SellerDAO {
 				post.setAddress_phone(rs.getString("address_phone"));
 			}
 		} catch (Exception e) {
-			System.out.println("SQL구문오류 - getAddress()");
 			e.printStackTrace();
 		}finally {
 			close(rs);
@@ -934,7 +880,6 @@ public class SellerDAO {
 
 			}
 		} catch (SQLException e) {
-			System.out.println("구문오류");
 			e.printStackTrace();
 		} finally {
 			close(pstmt);
@@ -944,7 +889,7 @@ public class SellerDAO {
 		return productBrandList;
 
 	}
-
+	//주석달기
 	public ArrayList<SellerProductDTO> PriceArticleList(int pageNum, int listLimit, int begin, int last) {
 		ArrayList<SellerProductDTO> productPriceList = null;
 
@@ -994,7 +939,6 @@ public class SellerDAO {
 				productPriceList.add(article);
 			}
 		} catch (SQLException e) {
-			System.out.println("구문오류");
 			e.printStackTrace();
 		} finally {
 			close(pstmt);
@@ -1052,7 +996,6 @@ public class SellerDAO {
 
 			}
 		} catch (SQLException e) {
-			System.out.println("구문오류");
 			e.printStackTrace();
 		} finally {
 			close(pstmt);

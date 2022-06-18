@@ -47,7 +47,6 @@ public class ProductLikeService {
 	}
 
 	public int likeCount(int sell_num) {  //판매글을 통하여 좋아요 갯수 구하기
-		System.out.println("ProductLikeService-좋아요 갯수찾기");
 		int likeCount =0;
 		Connection con = getConnection();
 		

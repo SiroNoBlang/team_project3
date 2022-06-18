@@ -151,7 +151,7 @@ MemberBean memberbean = (MemberBean) request.getAttribute("memberBean");
 
 					<li>
 						<div class="right-top-bar flex-w h-full">
-							<a href="#" class="flex-c-m p-lr-10 trans-04"> Help & FAQs </a> <a
+							<a href="#" class="flex-c-m p-lr-10 trans-04"> Help &#38; FAQs </a> <a
 								href="#" class="flex-c-m p-lr-10 trans-04"> My Account </a> <a
 								href="#" class="flex-c-m p-lr-10 trans-04"> EN </a> <a href="#"
 								class="flex-c-m p-lr-10 trans-04"> USD </a>
@@ -241,10 +241,10 @@ MemberBean memberbean = (MemberBean) request.getAttribute("memberBean");
 										<td width="350"><img width="200"height="288"src="./Upload/sell_img/${sellerDTO.sell_img_real_name}" alt="IMG"></td>
 							
 										<td width="350">
-											Title:&nbsp&nbsp${sellerDTO.sell_title}<br>
+											Title:&nbsp;&nbsp;${sellerDTO.sell_title}<br>
 											<br>
-											Size:&nbsp&nbsp${sellerDTO.sell_size}<br><br>
-											Price:&nbsp&nbsp${sellerDTO.sell_price}
+											Size:&nbsp;&nbsp;${sellerDTO.sell_size}<br><br>
+											Price:&nbsp;&nbsp;${sellerDTO.sell_price}
 										</td>
 							
 								</tr>
@@ -360,7 +360,7 @@ MemberBean memberbean = (MemberBean) request.getAttribute("memberBean");
 
 							<div class="size-209">
 								<span class="mtext-110 cl2">
-									₩<span>&nbsp</span>${sellerDTO.sell_price}
+									₩<span>&nbsp;</span>${sellerDTO.sell_price}
 								</span>
 							</div>
 						</div>
@@ -368,10 +368,10 @@ MemberBean memberbean = (MemberBean) request.getAttribute("memberBean");
 						<div class="flex-w flex-t bor12 p-t-15 p-b-30">
 							<div class="size-208 w-full-ssm">
 								<span class="stext-110 cl2">
-									 등급<span>&nbsp&nbsp</span>${memberBean.grade_name}
+									 등급<span>&nbsp;&nbsp;</span>${memberBean.grade_name}
 									 <span><img  width="29" height="30" alt="회원등급표" src="./Upload/sell_img/sellerpart.jpg" onclick="checkMember_grade()"></span>
 								</span><br> 
-								 <span class="stext-110 cl2"> 포인트<span>&nbsp&nbsp&nbsp&nbsp</span>₩
+								 <span class="stext-110 cl2"> 포인트<span>&nbsp;&nbsp;&nbsp;&nbsp;</span>₩
 									<span id="point"></span>								 <!--style="border: none; background: transparent;"-->
 								</span><br>
 						   </div>
@@ -392,9 +392,9 @@ MemberBean memberbean = (MemberBean) request.getAttribute("memberBean");
 							</div>
 						<div class="size-209 p-t-1">
 							<h5><input type="text" value="${sellerDTO.sell_price}" id="realPrice" readonly="readonly" style="border: none;"></h5>
-								<span class="mtext-110 cl2" id="realPrice1">
-										<h6 style="color: lightgrey;">부가세 포함 (35%)</h6>
-								</span>
+								<h6 style="color: lightgrey;"><span class="mtext-110 cl2" id="realPrice1">
+										부가세 포함 (35%)
+								</span></h6>
 						</div>    <!-- 537         482 -->
 						</div>
 					  	<input id="buyCard" type="button" value="결제하기" class="flex-c-m stext-101 cl0 size-116 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer">
@@ -593,7 +593,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
             pay_method : 'card',
             merchant_uid : 'merchant_' + new Date().getTime(),
 //             name : 'COZA STORE',
-            amount : document.getElementById("realPrice").value,     //포인트 차감후 최종금액 100원으로 고치면 100원만나감 price
+            amount :  100,   //document.getElementById("realPrice").value, 
 //             buyer_email : '${memberBean.member_email}',
             buyer_name : name,
             buyer_tel : phone,
@@ -627,29 +627,6 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
                         //[4] 결제된 금액이 요청한 금액과 달라 결제를 자동취소처리하였습니다.
                     }
                 });
-        /*
-       member_code  ㅇ 무조건 있어야됨
-		sell_num	ㅇ
-		sell_price  ㅇ
-		member_info_detail_acc_money  o
-		----------------------
-		address1     x	var address1 = document.getElementById('address1').value;
-		address2	x var address2 = document.getElementById('address2').value;
-		postcode  x var postcode = document.getElementById('postcode').value;
-		name     x var name = document.getElementById('name').value;
-		phone    x var phone = document.getElementById('phone').value;
-		point.val()}      x
-		
-		<input type="hidden" value="member_nickname" name="member_nickname">
-		<input type="hidden" value="${sellerDTO.sell_num}" name="sell_num">
-		<input type="hidden"value="${sellerDTO.sell_price}"name="member_info_detail_acc_money">
-		<input type="hidden" value="${memberBean.discount_rate }">
-		<input type="hidden"value="${sCode}" name="member_code"> 
-		<input type="hidden"value="${sellerDTO.sell_price}" name="sell_price">
-		------------------------
-		1 판매에 관한 내용은 무조건 있어야됨. 하지만 2 구매자 정보는 없을 수도있음 포인트 -> 3 내보유 포인트 값은 보여주지만, 보유포인트를 얼마쓸 지는 모름 
-		*/
-       
                 //성공시 이동할 페이지
                  location.href='SucceedProductAction.pr?member_code=${sCode}&sell_num=${sellerDTO.sell_num}&sell_price=${sellerDTO.sell_price}'
                  			+'&address1='+address1+'&address2='+address2+'&postcode='+postcode+'&name='+name+'&phone='+phone+'&point='+point+'&member_info_detail_acc_money='+member_info_detail_acc_money;
@@ -687,19 +664,9 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 					"width=750,height=450");
 		}
 	</script>
-<!-- 	<script> -->
-<!-- 	$(document).ready(function){ -->
-<!-- 		debugger; -->
-<%-- 		var price =${sellerDTO.sell_price}; --%>
-<%-- 		${"#realPrice"}.append(price); --%>
-		
-<!-- }); -->
-<!-- 	</script> -->
 	<script>
-
-	
 		function sub() { //포인트 사용 스크립트
-// 			debugger;
+			debugger;
 			$("#realPoint").empty();
 			var finalPrice = ${sellerDTO.sell_price};    // 결제할 금액
 			
@@ -712,7 +679,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 			document.getElementById("realPoint").value = prePoint - subPoint;//차감후 남은 포인트	
 			$("#point").empty(); //최종 결제 포인트에서 보여주는곳
 			$("#point").append(subPoint); //최종 결제 포인트에서 보여주는곳
-			alert((subPoint/10000)+"만원");
+			
 			if(prePoint<10000){
 				$("#point").empty();
 				alert("보유 포인트가 10000원 이하입니다.보유포인트:"+prePoint);
@@ -730,15 +697,12 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 				alert("포인트가 부족합니다. 현재 포인트:" + prePoint);
 				document.getElementById("MemberPoint").value =0;
 			} else { //이경우가 아닐경우 화면에 뿌려줌
-				// 					finalPrice -=realPoint;
 				$("#realPoint").append(
 						"남은포인트:" + document.getElementById("realPoint").value);
 			var realprice =(document.getElementById("realPrice").value = finalPrice - subPoint); //최종 결제할 금액(포인트 차감 후 최종 금액)
 			}
 			
 		}
-		
-		
 	</script>
 	<script>
 		$(".js-select2").each(function(){

@@ -13,8 +13,8 @@ String member_id = (String) session.getAttribute("sId"); //아이디 값 세션
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js"
-	integrity="sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI="
-	crossorigin="anonymous"></script>
+integrity="sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI="
+crossorigin="anonymous"></script>
 <script type="text/javascript">
 
 	function useId(id) {
@@ -27,7 +27,6 @@ String member_id = (String) session.getAttribute("sId"); //아이디 값 세션
 		// 3. 자식창 닫기
 		window.close();
 	}
-	//-------------------------------------------------------------------
 	$(document).ready(
 		function() {
 			$(".checkBtn").on(

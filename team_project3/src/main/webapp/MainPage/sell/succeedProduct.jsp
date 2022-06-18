@@ -4,49 +4,31 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%	
-// 현재 페이지에서 수정할것 ----> 이 페이지를 가장마지막으로 돌리고 결제 페이지 빈페이지를 하나 보여줘서 넘기는쪽으로?어떰?
-		
 String member_nickname =(String)session.getAttribute("sNickname");
 String sell_member_code =(String)session.getAttribute("sCode");
 
 int prev_acc_money = (int)request.getAttribute("member_info_detail_acc_money");
 SellerProductDTO sellerDTO = (SellerProductDTO)request.getAttribute("sellerDTO");
 MemberBean memberbean = (MemberBean)request.getAttribute("memberBean");
-
 %>
- 
 <!DOCTYPE html>
 <html lang="en">
 <head>
 	<title>succeedProduct</title>
-
-    
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-<!--===============================================================================================-->	
 	<link rel="icon" type="image/png" href="MainPage/images/icons/favicon.png"/>
-<!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="MainPage/vendor/bootstrap/css/bootstrap.min.css">
-<!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="MainPage/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
-<!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="MainPage/fonts/iconic/css/material-design-iconic-font.min.css">
-<!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="MainPage/fonts/linearicons-v1.0.0/icon-font.min.css">
-<!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="MainPage/vendor/animate/animate.css">
-<!--===============================================================================================-->	
 	<link rel="stylesheet" type="text/css" href="MainPage/vendor/css-hamburgers/hamburgers.min.css">
-<!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="MainPage/vendor/animsition/css/animsition.min.css">
-<!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="MainPage/vendor/select2/select2.min.css">
-<!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="MainPage/vendor/perfect-scrollbar/perfect-scrollbar.css">
-<!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="MainPage/css/util.css">
 	<link rel="stylesheet" type="text/css" href="MainPage/css/main.css">
-<!--===============================================================================================-->
 </head>
 <body class="animsition">
 	
@@ -106,7 +88,7 @@ MemberBean memberbean = (MemberBean)request.getAttribute("memberBean");
 				<li>
 					<div class="right-top-bar flex-w h-full">
 						<a href="#" class="flex-c-m p-lr-10 trans-04">
-							Help & FAQs
+							Help &#38; FAQs
 						</a>
 
 						<a href="#" class="flex-c-m p-lr-10 trans-04">
@@ -265,9 +247,12 @@ MemberBean memberbean = (MemberBean)request.getAttribute("memberBean");
 		</div>
 	</div>
 	
-	<center>
-		<h2>결제 완료</h2>
-	</center>
+	<h2>
+		<span>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			결제 완료
+		</span>
+	</h2>
 <!-- 	<form action="SucceedProduct.pr" class="bg0 p-t-75 p-b-85"> -->
 		<div class="container" >
 			<div class="row" >
@@ -354,12 +339,6 @@ MemberBean memberbean = (MemberBean)request.getAttribute("memberBean");
 								    최종금액 : ${param.member_info_detail_acc_money} 
 								</td>
 							</tr>		
-							
-								
-<!--  								<span class="stext-110 cl2"> -->
-<!-- 						우리 COZA_STORE에서는 부가세포함(택배비+검수+수수료합산)하여 결제 됨을 알려드립니다. -->
-<!-- 								</span><br> -->
-						
 							</table>	
 								</div>
 							</div>
@@ -380,20 +359,9 @@ MemberBean memberbean = (MemberBean)request.getAttribute("memberBean");
 								</span>
 							</div>
 						</div>
-					 
-<!-- 					  <input type="button" value="마이페이지" onclick="location.href='MainPage.pr'"  class="flex-c-m stext-101 cl0 size-116 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer">  -->
 					</div>
 				</div>
 			</div>
-
-
-
-	
-
-	
-<%-- 		location.href="<%=request.getContextPath()%>/order/payFail"; --%>
-		
-
 	<!-- Footer -->
 	<footer class="bg3 p-t-75 p-b-32">
 		<div class="container">
@@ -530,9 +498,7 @@ MemberBean memberbean = (MemberBean)request.getAttribute("memberBean");
 				</div>
 
 				<p class="stext-107 cl6 txt-center">
-					<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
 Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | Made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a> &amp; distributed by <a href="https://themewagon.com" target="_blank">ThemeWagon</a>
-<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
 				</p>
 			</div>
 		</div>
@@ -545,21 +511,12 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 			<i class="zmdi zmdi-chevron-up"></i>
 		</span>
 	</div>
-
-<!--===============================================================================================-->	
 	<script src="MainPage/vendor/jquery/jquery-3.2.1.min.js"></script>
-<!--===============================================================================================-->
 	<script src="MainPage/vendor/animsition/js/animsition.min.js"></script>
-<!--===============================================================================================-->
 	<script src="MainPage/vendor/bootstrap/js/popper.js"></script>
 	<script src="MainPage/vendor/bootstrap/js/bootstrap.min.js"></script>
-<!--===============================================================================================-->
 	<script src="MainPage/vendor/select2/select2.min.js"></script>
-<!--=========================488<포인트차감>==========================================================-->	
-
-<!--===============================================================================================-->
 	<script src="MainPage/vendor/MagnificPopup/jquery.magnific-popup.min.js"></script>
-<!--===============================================================================================-->
 	<script src="MainPage/vendor/perfect-scrollbar/perfect-scrollbar.min.js"></script>
 	<script>
 		$('.js-pscroll').each(function(){
@@ -576,7 +533,6 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 			})
 		});
 	</script>
-<!--===============================================================================================-->
 	<script src="MainPage/js/main.js"></script>
 
 </body>

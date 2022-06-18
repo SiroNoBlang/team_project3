@@ -67,36 +67,21 @@ function filter(value){
 </script>  
    <meta charset="UTF-8">
    <meta name="viewport" content="width=device-width, initial-scale=1">
-<!--===============================================================================================-->   
    <link rel="icon" type="image/png" href="MainPage/images/icons/favicon.png"/>
-<!--===============================================================================================-->
    <link rel="stylesheet" type="text/css" href="MainPage/vendor/bootstrap/css/bootstrap.min.css">
-<!--===============================================================================================-->
    <link rel="stylesheet" type="text/css" href="MainPage/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
-<!--===============================================================================================-->
    <link rel="stylesheet" type="text/css" href="MainPage/fonts/iconic/css/material-design-iconic-font.min.css">
-<!--===============================================================================================-->
    <link rel="stylesheet" type="text/css" href="MainPage/fonts/linearicons-v1.0.0/icon-font.min.css">
-<!--===============================================================================================-->
    <link rel="stylesheet" type="text/css" href="MainPage/vendor/animate/animate.css">
-<!--===============================================================================================-->   
    <link rel="stylesheet" type="text/css" href="MainPage/vendor/css-hamburgers/hamburgers.min.css">
-<!--===============================================================================================-->
    <link rel="stylesheet" type="text/css" href="MainPage/vendor/animsition/css/animsition.min.css">    <!-- 여기인거같기도 -->
-<!--===============================================================================================-->
    <link rel="stylesheet" type="text/css" href="MainPage/vendor/select2/select2.min.css">
-<!--===============================================================================================-->   
    <link rel="stylesheet" type="text/css" href="MainPage/vendor/daterangepicker/daterangepicker.css">
-<!--===============================================================================================-->
    <link rel="stylesheet" type="text/css" href="MainPage/vendor/slick/slick.css">
-<!--===============================================================================================-->
    <link rel="stylesheet" type="text/css" href="MainPage/vendor/MagnificPopup/magnific-popup.css">
-<!--===============================================================================================-->
    <link rel="stylesheet" type="text/css" href="MainPage/vendor/perfect-scrollbar/perfect-scrollbar.css">
-<!--===============================================================================================-->
    <link rel="stylesheet" type="text/css" href="MainPage/css/util.css">
    <link rel="stylesheet" type="text/css" href="MainPage/css/main.css">
-<!--===============================================================================================-->
 <style type="text/css">
 	a {
 	    color: #333;
@@ -155,7 +140,7 @@ function filter(value){
 
 					<li>
 						<div class="right-top-bar flex-w h-full">
-							<a href="#" class="flex-c-m p-lr-10 trans-04"> Help & FAQs </a> <a
+							<a href="#" class="flex-c-m p-lr-10 trans-04"> Help &#38; FAQs </a> <a
 								href="#" class="flex-c-m p-lr-10 trans-04"> My Account </a> <a
 								href="#" class="flex-c-m p-lr-10 trans-04"> EN </a> <a href="#"
 								class="flex-c-m p-lr-10 trans-04"> USD </a>
@@ -245,12 +230,11 @@ function filter(value){
 					</table>
 				</form>
 			</div>
-
 			<!-- Filter -->
 			<div class="dis-none panel-filter w-full p-t-10">
 				<div class="wrap-filter flex-w bg6 w-full p-lr-40 p-t-27 p-lr-15-sm">
 					<div id="checkbox1">
-						<table width=400px>
+						<table >
 							<tr>
 								<th><input type="button" style="font-size: 35px; border: none;"
 									class="filter-link stext-106 trans-04" name=filter
@@ -272,11 +256,8 @@ function filter(value){
 			</div>
 		</div>
 
-
-
 		<!-- 여기서부터 사진 상세보기로 서블릿만들기 -->
 		 <table border="1" style="border: none; background:white;">
-
 <!--     </table>  구매물품 뿌려주는 곳    -->
      	<div class="container">
             <div class="row multi-columns-row">
@@ -309,8 +290,8 @@ function filter(value){
 						</span>
 					</span>
 				</span>
-                <a href="ProductDetailPro.pr?sell_num=${articleList.sell_num}&sell_brand=${articleList.sell_brand}">   <h5>${articleList.sell_title }</h5></a>
-                  <a href="ProductDetailPro.pr?sell_num=${articleList.sell_num}&sell_brand=${articleList.sell_brand}">  <h5>${articleList.sell_brand }</h5></a>
+              		 <h5> <a href="ProductDetailPro.pr?sell_num=${articleList.sell_num}&sell_brand=${articleList.sell_brand}">   ${articleList.sell_title }</a></h5>
+                 	 <h5> <a href="ProductDetailPro.pr?sell_num=${articleList.sell_num}&sell_brand=${articleList.sell_brand}"> ${articleList.sell_brand }</a></h5>
 								</div>
 							</div>
 						</c:forEach>
@@ -321,9 +302,7 @@ function filter(value){
 
 		<div class="flex-c-m flex-w w-full p-t-45">
 			<section id="pageList">
-				<!-- 페이지 번호 목록은 시작 페이지(startPage)부터 끝 페이지(endPage) 까지 표시 -->
 				<c:forEach var="i" begin="${startPage }" end="${endPage }">
-					<!-- 단, 현재 페이지 번호는 링크 없이 표시 -->
 					<c:choose>
 						<c:when test="${pageNum eq i}">
 					${i }
@@ -339,7 +318,6 @@ function filter(value){
 			</section>
 		</div>
 	</div>
-
 
 	<!-- Footer영역과 상단 이동 버튼-->
 	<jsp:include page="/MainPage/menu/footer.jsp"/>
@@ -497,14 +475,10 @@ function filter(value){
       </div>
    </div>
 
-<!--===============================================================================================-->   
    <script src="MainPage/vendor/jquery/jquery-3.2.1.min.js"></script>
-<!--===============================================================================================-->
    <script src="MainPage/vendor/animsition/js/animsition.min.js"></script>
-<!--===============================================================================================-->
    <script src="MainPage/vendor/bootstrap/js/popper.js"></script>
    <script src="MainPage/vendor/bootstrap/js/bootstrap.min.js"></script>
-<!--===============================================================================================-->
    <script src="MainPage/vendor/select2/select2.min.js"></script>
    <script>
       $(".js-select2").each(function(){
@@ -514,18 +488,14 @@ function filter(value){
          });
       })
    </script>
-<!--===============================================================================================-->
    <script src="MainPage/vendor/daterangepicker/moment.min.js"></script>
    <script src="MainPage/vendor/daterangepicker/daterangepicker.js"></script>
-<!--===============================================================================================-->
    <script src="MainPage/vendor/slick/slick.min.js"></script>
    <script src="MainPage/js/slick-custom.js"></script>
-<!--===============================================================================================-->
    <script src="MainPage/vendor/parallax100/parallax100.js"></script>
    <script>
         $('.parallax100').parallax100();
    </script>
-<!--===============================================================================================-->
    <script src="MainPage/vendor/MagnificPopup/jquery.magnific-popup.min.js"></script>
    <script>
       $('.gallery-lb').each(function() { // the containers for all your galleries
@@ -539,9 +509,6 @@ function filter(value){
           });
       });
    </script>
-<!--===============================================================================================-->
-<!--    <script src="MainPage/vendor/isotope/isotope.pkgd.min.js"></script> -->
-<!--===============================================================================================-->
    <script src="MainPage/vendor/sweetalert/sweetalert.min.js"></script>
    <script>
       $('.js-addwish-b2, .js-addwish-detail').on('click', function(e){
@@ -569,8 +536,6 @@ function filter(value){
          });
       });
 
-      /*---------------------------------------------*/
-
       $('.js-addcart-detail').each(function(){
          var nameProduct = $(this).parent().parent().parent().parent().find('.js-name-detail').html();
          $(this).on('click', function(){
@@ -579,7 +544,6 @@ function filter(value){
       });
    
    </script>
-<!--===============================================================================================-->
    <script src="MainPage/vendor/perfect-scrollbar/perfect-scrollbar.min.js"></script>
    <script>
       $('.js-pscroll').each(function(){
@@ -597,9 +561,7 @@ function filter(value){
          })
       });
   </script>
-<!--===============================================================================================-->
    <script src="MainPage/js/main.js"></script>
-<!-- ================================================================================================좋아요 기능 -->
 <script type="text/javascript">// 추천버튼 클릭시(추천 추가 또는 추천 제거)
 
 $(function(){
@@ -617,7 +579,6 @@ $(function(){
                 id: sCode					 
             },
             success: function (data) {
-             	debugger;   //JSON.parse(data).result
             	thisplace.innerHTML = JSON.parse(data).likeCount;
             	if(JSON.parse(data).result == 0){
     				swal("LIKE!", "해당 제품을 찜 하셨습니다." );

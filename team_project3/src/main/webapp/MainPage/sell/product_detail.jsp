@@ -11,55 +11,180 @@
 <html lang="en">
 <head>
 <title>Product Detail</title>
+<style>
+td{
+text-align: center;
+}
+
+html, body {
+	box-sizing: border-box;
+	padding: 0;
+	margin: 0;
+	text-align: center;
+}
+
+*, *:before, *:after {
+	box-sizing: inherit;
+}
+
+.clearfix:after {
+	content: '';
+	display: block;
+	clear: both;
+	float: none;
+}
+
+.title {
+	margin-bottom: 0;
+	text-align: center;
+	font-size: 30px;
+	color: #333;
+}
+
+.link, .link:visited {
+	display: inline-block;
+	margin: 20px 0;
+	color: #555;
+	text-decoration: none;
+	font-weight: bold;
+}
+
+.link:hover, .link:focus {
+	color: #9fd6c2;
+}
+/* container - body */
+#container {
+	width: 1000px;
+	margin: auto;
+}
+
+.slide_wrap {
+	position: relative;
+	width: 400px;
+	margin: auto;
+	padding-bottom: 30px;
+}
+
+.slide_box {
+	width: 100%;
+	margin: auto;
+	overflow-x: hidden;
+}
+
+.slide_content {
+	display: table;
+	float: left;
+	width: 400px;
+	height: 400px;
+}
+
+.slide_content>p {
+	display: table-cell;
+	vertical-align: middle;
+	text-align: center;
+	font-size: 100px;
+	font-weight: bold;
+	color: #555;
+}
+
+.slide_content.slide01 {
+	background: #ffffff;
+}
+
+.slide_content.slide02 {
+	background: #ffffff;
+}
+
+.slide_content.slide03 {
+	background: #ffffff;
+}
+
+.slide_btn_box>button {
+	position: absolute;
+	top: 50%;
+	margin-top: -45px;
+	width: 60px;
+	height: 60px;
+	font-size: 16px;
+	color: #999;
+	background: none;
+	border: 1px solid #ddd;
+	cursor: pointer;
+}
+
+.slide_btn_box>.slide_btn_prev {
+	left: -100px;
+}
+
+.slide_btn_box>.slide_btn_next {
+	right: -100px;
+}
+
+.slide_pagination {
+	position: absolute;
+	left: 50%;
+	bottom: 0;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	transform: translateX(-50%);
+}
+
+.slide_pagination .dot {
+	display: inline-block;
+	width: 15px;
+	height: 15px;
+	margin: 0 5px;
+	overflow: hidden;
+	background: #ddd;
+	border-radius: 50%;
+	transition: 0.3s;
+}
+
+.slide_pagination .dot.dot_active {
+	background: #333;
+}
+
+.slide_pagination .dot a {
+	display: block;
+	width: 100%;
+	height: 100%;
+}
+</style>
 <script type="text/javascript"> //좋아요 기능을 위하여 sCode 값을 script 위에 뿌려줌
     	var sCode = '${sCode}'	
     	var sellNum = ${param.sell_num};
 </script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<!--===============================================================================================-->
 <link rel="icon" type="image/png"
 	href="MainPage/images/icons/favicon.png" />
-<!--===============================================================================================-->
 <link rel="stylesheet" type="text/css"
 	href="MainPage/vendor/bootstrap/css/bootstrap.min.css">
-<!--===============================================================================================-->
 <link rel="stylesheet" type="text/css"
 	href="MainPage/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
-<!--===============================================================================================-->
 <link rel="stylesheet" type="text/css"
 	href="MainPage/fonts/iconic/css/material-design-iconic-font.min.css">
-<!--===============================================================================================-->
 <link rel="stylesheet" type="text/css"
 	href="MainPage/fonts/linearicons-v1.0.0/icon-font.min.css">
-<!--===============================================================================================-->
 <link rel="stylesheet" type="text/css"
 	href="MainPage/vendor/animate/animate.css">
-<!--===============================================================================================-->
 <link rel="stylesheet" type="text/css"
 	href="MainPage/vendor/css-hamburgers/hamburgers.min.css">
-<!--===============================================================================================-->
 <link rel="stylesheet" type="text/css"
 	href="MainPage/vendor/animsition/css/animsition.min.css">
-<!--===============================================================================================-->
 <link rel="stylesheet" type="text/css"
 	href="MainPage/vendor/select2/select2.min.css">
-<!--===============================================================================================-->
 <link rel="stylesheet" type="text/css"
 	href="MainPage/vendor/daterangepicker/daterangepicker.css">
-<!--===============================================================================================-->
 <link rel="stylesheet" type="text/css"
 	href="MainPage/vendor/slick/slick.css">
-<!--===============================================================================================-->
 <link rel="stylesheet" type="text/css"
 	href="MainPage/vendor/MagnificPopup/magnific-popup.css">
-<!--===============================================================================================-->
 <link rel="stylesheet" type="text/css"
 	href="MainPage/vendor/perfect-scrollbar/perfect-scrollbar.css">
-<!--===============================================================================================-->
 <link rel="stylesheet" type="text/css" href="MainPage/css/util.css">
 <link rel="stylesheet" type="text/css" href="MainPage/css/main.css">
-<!--===============================================================================================-->
 </head>
 <body class="animsition">
 
@@ -73,10 +198,7 @@
 				</nav>
 			</div>
 			</div>
-			
-			
 				<jsp:include page="/MainPage/menu/pc_menu.jsp" />
-
 			<!-- Header Mobile -->
 			<div class="wrap-header-mobile">
 				<!-- Logo moblie -->
@@ -93,8 +215,6 @@
 					</span>
 				</div>
 			</div>
-
-
 			<!-- Menu Mobile -->
 			<div class="menu-mobile">
 				<ul class="topbar-mobile">
@@ -105,7 +225,7 @@
 
 					<li>
 						<div class="right-top-bar flex-w h-full">
-							<a href="#" class="flex-c-m p-lr-10 trans-04"> Help & FAQs </a> <a
+							<a href="#" class="flex-c-m p-lr-10 trans-04"> Help &#38; FAQs </a> <a
 								href="#" class="flex-c-m p-lr-10 trans-04"> My Account </a> <a
 								href="#" class="flex-c-m p-lr-10 trans-04"> EN </a> <a href="#"
 								class="flex-c-m p-lr-10 trans-04"> USD </a>
@@ -135,7 +255,6 @@
 					<li><a href="contact.html">Contact</a></li>
 				</ul>
 			</div>
-
 			<!-- Modal Search -->
 			<div class="modal-search-header flex-c-m trans-04 js-hide-modal-search">
 				<div class="container-search-header">
@@ -155,8 +274,6 @@
 	</header>
 	<!-- Cart -->
 	<jsp:include page="/MainPage/menu/pc_shopping cart.jsp" />
-
-	
 <!-- breadcrumb -->
 	<div class="container">
 		<div class="bread-crumb flex-w p-l-25 p-r-15 p-t-30 p-lr-0-lg">
@@ -217,11 +334,7 @@
 					</div>
 				</div>
 
-<style>
-td{
-text-align: center;
-}
-</style>
+
 
 
 				<div class="col-md-6 col-lg-5 p-b-30">
@@ -268,7 +381,7 @@ text-align: center;
 							</tr>
 
 						</table>
-</form>
+
 	<div class="flex-w flex-m p-l-100 p-t-40 respon7">
 					<c:if test="${ sCode ne null }">
 						<li class="w3-button w3-black w3-round" id="rec_update">
@@ -293,7 +406,6 @@ text-align: center;
 	</table>
 	</div>
 	</div>
-	<!-- 				&nbsp;&nbsp;<h4>관련 상품</h4> 여기에 찐으로담자ㅁㄴㅇㅎㄹ> --> 
 	<!-- --------------------------------------------------------- -->
 			 <div class="bor10 m-t-50 p-t-43 p-b-40">
 				<!-- Tab01 -->
@@ -312,47 +424,38 @@ text-align: center;
 							<a class="nav-link" data-toggle="tab" href="#reviews" role="tab">판매자 리뷰</a>
 						</li>
 					</ul>
-
 <!-- 					Tab panes -->
 					<div class="tab-content p-t-43">
 						<div class="tab-pane fade show active" id="description" role="tabpanel">
 							<div class="how-pos2 p-lr-15-md">
-								<div style="text-align: center;"><h4>content</h4></div>
-									<p class="stext-102 cl6">
-										<h5>${sellerdto.sell_content}</h5> 
-									</p>
+								<div style="text-align: center;">
+									<h4>content</h4>
+								</div>
+									<h5>${sellerdto.sell_content}</h5> 
 						   </div>
 					    </div>
  <!-- 이러한 상품은 어떠세요? -->
-						
 						<div class="tab-pane fade" id="information" role="tabpanel">
-<!-- 							<div class="row"> -->
-<!-- 								<div class="col-sm-10 col-md-8 col-lg-6 m-lr-auto"> -->
+							<ul class="p-lr-28 p-lr-15-sm">
+								<li class="flex-w flex-t p-b-7">
 								
-									<ul class="p-lr-28 p-lr-15-sm">
-										<li class="flex-w flex-t p-b-7">
-										
-											<table border="1" style="border: none; background: white;">
-												<tr>
-												 <c:forEach items="${Relationdto}" var="ProductRe">
-												 	<td style="border: none;">
-													<span style="text-align: center;">	
-														<a href="ProductDetailPro.pr?sell_num=${ProductRe.getSell_num()}&sell_brand=${ProductRe.getSell_brand() }"><img src="./Upload/sell_img/${ProductRe.getSell_img_real_name() } "onerror="this.style.display='none'" width="130px"height="160px" alt="판매사진"/></a>
-															<h4>${ProductRe.getSell_title() }</h4>
-														<h5>${ProductRe.getSell_brand() }</h5>
-														<a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-														</a>
-													</span>
-												</c:forEach>
-												</tr>
-											</table>
-										</li>
-									</ul>
-<!-- 								</div>	 -->
-<!-- 								</div> -->
-							
+									<table border="1" style="border: none; background: white;">
+										<tr>
+										 <c:forEach items="${Relationdto}" var="ProductRe">
+										 	<td style="border: none;">
+											<span style="text-align: center;">	
+												<a href="ProductDetailPro.pr?sell_num=${ProductRe.getSell_num()}&sell_brand=${ProductRe.getSell_brand() }"><img src="./Upload/sell_img/${ProductRe.getSell_img_real_name() } "onerror="this.style.display='none'" width="130px"height="160px" alt="판매사진"/></a><br>
+													${ProductRe.getSell_title() }<br>
+												brand:${ProductRe.getSell_brand() }
+												<a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+												</a>
+											</span>
+										</c:forEach>
+										</tr>
+									</table>
+								</li>
+							</ul>
 						</div>
-
 	<!-- 리뷰 입니다. -->					
 						<div class="tab-pane fade sell_box" id="reviews" role="tabpanel" style="text-align: left;">
 <!-- 							<div class="row"> -->
@@ -440,14 +543,11 @@ text-align: center;
 				</div>
 			</div>
 		</div>
-<!-- ------------------------------------------------------------------ -->
 	<div class="bg6 flex-c-m flex-w size-302 m-t-73 p-tb-15">
 		<span class="stext-107 cl6 p-lr-25"> SKU: JAK-01 </span> <span
 			class="stext-107 cl6 p-lr-25"> Categories: Jacket, Men </span>
 	</div>
 	
-
-
 	
 	<!-- Footer영역과 상단 이동 버튼-->
 	<jsp:include page="/MainPage/menu/footer.jsp" />
@@ -608,18 +708,10 @@ text-align: center;
 			</div>
 		</div>
 	</div>
-	
-	
-	
-
-	<!--===============================================================================================-->
 	<script src="MainPage/vendor/jquery/jquery-3.2.1.min.js"></script>
-	<!--===============================================================================================-->
 	<script src="MainPage/vendor/animsition/js/animsition.min.js"></script>
-	<!--===============================================================================================-->
 	<script src="MainPage/vendor/bootstrap/js/popper.js"></script>
 	<script src="MainPage/vendor/bootstrap/js/bootstrap.min.js"></script>
-	<!--===============================================================================================-->
 	<script src="MainPage/vendor/select2/select2.min.js"></script>
 	<script>
 		$(".js-select2").each(function(){
@@ -629,18 +721,14 @@ text-align: center;
 			});
 		})
 	</script>
-	<!--===============================================================================================-->
 	<script src="MainPage/vendor/daterangepicker/moment.min.js"></script>
 	<script src="MainPage/vendor/daterangepicker/daterangepicker.js"></script>
-	<!--===============================================================================================-->
 	<script src="MainPage/vendor/slick/slick.min.js"></script>
 	<script src="MainPage/js/slick-custom.js"></script>
-	<!--===============================================================================================-->
 	<script src="MainPage/vendor/parallax100/parallax100.js"></script>
 	<script>
         $('.parallax100').parallax100();
 	</script>
-	<!--===============================================================================================-->
 	<script
 		src="MainPage/vendor/MagnificPopup/jquery.magnific-popup.min.js"></script>
 	<script>
@@ -655,9 +743,7 @@ text-align: center;
 		    });
 		});
 	</script>
-	<!--===============================================================================================-->
 	<script src="MainPage/vendor/isotope/isotope.pkgd.min.js"></script>
-	<!--===============================================================================================-->
 	<script src="MainPage/vendor/sweetalert/sweetalert.min.js"></script>
 	<script>
 		$('.js-addwish-b2, .js-addwish-detail').on('click', function(e){
@@ -685,8 +771,6 @@ text-align: center;
 			});
 		});
 
-		/*---------------------------------------------*/
-
 		$('.js-addcart-detail').each(function(){
 			var nameProduct = $(this).parent().parent().parent().parent().find('.js-name-detail').html();
 			$(this).on('click', function(){
@@ -703,7 +787,6 @@ text-align: center;
 		
 	
 	</script>
-	<!--===============================================================================================-->
 	<script
 		src="MainPage/vendor/perfect-scrollbar/perfect-scrollbar.min.js"></script>
 	<script>
@@ -721,7 +804,6 @@ text-align: center;
 			})
 		});
 	</script>
-	<!--===============================================================================================-->
 	<script src="MainPage/js/main.js"></script>
 	<script type="text/javascript">
 (function () {
@@ -824,151 +906,13 @@ text-align: center;
     });
   })();
 </script>
-	<style>
-html, body {
-	box-sizing: border-box;
-	padding: 0;
-	margin: 0;
-	text-align: center;
-}
-
-*, *:before, *:after {
-	box-sizing: inherit;
-}
-
-.clearfix:after {
-	content: '';
-	display: block;
-	clear: both;
-	float: none;
-}
-
-.title {
-	margin-bottom: 0;
-	text-align: center;
-	font-size: 30px;
-	color: #333;
-}
-
-.link, .link:visited {
-	display: inline-block;
-	margin: 20px 0;
-	color: #555;
-	text-decoration: none;
-	font-weight: bold;
-}
-
-.link:hover, .link:focus {
-	color: #9fd6c2;
-}
-/* container - body */
-#container {
-	width: 1000px;
-	margin: auto;
-}
-
-.slide_wrap {
-	position: relative;
-	width: 400px;
-	margin: auto;
-	padding-bottom: 30px;
-}
-
-.slide_box {
-	width: 100%;
-	margin: auto;
-	overflow-x: hidden;
-}
-
-.slide_content {
-	display: table;
-	float: left;
-	width: 400px;
-	height: 400px;
-}
-
-.slide_content>p {
-	display: table-cell;
-	vertical-align: middle;
-	text-align: center;
-	font-size: 100px;
-	font-weight: bold;
-	color: #555;
-}
-
-.slide_content.slide01 {
-	background: #ffffff;
-}
-
-.slide_content.slide02 {
-	background: #ffffff;
-}
-
-.slide_content.slide03 {
-	background: #ffffff;
-}
-
-.slide_btn_box>button {
-	position: absolute;
-	top: 50%;
-	margin-top: -45px;
-	width: 60px;
-	height: 60px;
-	font-size: 16px;
-	color: #999;
-	background: none;
-	border: 1px solid #ddd;
-	cursor: pointer;
-}
-
-.slide_btn_box>.slide_btn_prev {
-	left: -100px;
-}
-
-.slide_btn_box>.slide_btn_next {
-	right: -100px;
-}
-
-.slide_pagination {
-	position: absolute;
-	left: 50%;
-	bottom: 0;
-	list-style: none;
-	margin: 0;
-	padding: 0;
-	transform: translateX(-50%);
-}
-
-.slide_pagination .dot {
-	display: inline-block;
-	width: 15px;
-	height: 15px;
-	margin: 0 5px;
-	overflow: hidden;
-	background: #ddd;
-	border-radius: 50%;
-	transition: 0.3s;
-}
-
-.slide_pagination .dot.dot_active {
-	background: #333;
-}
-
-.slide_pagination .dot a {
-	display: block;
-	width: 100%;
-	height: 100%;
-}
-</style>
+	
 <script type="text/javascript">// 추천버튼 클릭시(추천 추가 또는 추천 제거)
 
 $('.js-like').each(function(){
 	//var nameProduct = $(this).parent().parent().parent().parent().find('.js-name-detail').html();
 	var rec_count =document.getElementsByClassName("rec_count")
 	$(this).on('click', function(){		
-			
-			debugger;
-			
 		var thisRow = $(this).closest('div');  //하트표시 줄의 부모(div)를 찾아  thisRow값에 저장
 		var thisplace = thisRow.find('span')[0];
 		

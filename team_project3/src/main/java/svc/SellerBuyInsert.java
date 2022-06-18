@@ -63,7 +63,6 @@ public class SellerBuyInsert {
 		
 		 if(updateCount>0) {  //update(dao) 작업 성공여부 결과
 			commit(con); 
-			//System.out.println("성공");
 			
 		} else {
 			rollback(con);
@@ -107,17 +106,10 @@ public class SellerBuyInsert {
 		
 		
 		 updateCount = sellerDAO.sellUpdate(sell_num);    //sell_num을 이용하여 update해주기 sell_list테이블의 sell_list_status: 판매중 ->판매완료
-//		System.out.println("dddd"+updateCount);
 		 if(updateCount>0) {
-		// commit(con);   이거 주석풀면 판매완료로 바뀝니다.
+			 commit(con);   
 		 }else {
 			 System.out.println("실패");
-//			 	response.setContentType("text/html; charset=UTF-8");
-//				PrintWriter out = response.getWriter();
-//				out.println("<script>");
-//				out.println("alert('이게 왜 뜸?')");
-//				out.println("history.back()");
-//				out.println("</script>");
 		 }
 		close(con);
 		

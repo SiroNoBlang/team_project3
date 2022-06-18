@@ -16,7 +16,6 @@ public class ProductRecUpdateProAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		System.out.println("좋아요 기능-UPDATE");
 		request.setCharacterEncoding("utf-8");
 		ActionForward forward = null;
 		String sCode = request.getParameter("id");
@@ -37,7 +36,6 @@ public class ProductRecUpdateProAction implements Action {
 		ProductLikeService service1 = new ProductLikeService();
 		
 		likeCount = service1.likeCount(sell_num);  //좋아요 갯수를 카운트 해주는 기능
-		System.out.println(likeCount);
 		PrintWriter out = response.getWriter();
 		
 		out.print("{\"likeCount\":\""+likeCount); 
