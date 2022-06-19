@@ -29,22 +29,22 @@ public class ProductPriceProAction implements Action {
 		
 		if(Price ==100000) {
 			 begin = 0; 
-			 last = 100000;
+			 last = 10;
 		} else if (Price == 500000) { 
-			 begin = 100000; 
-			 last = 500000;
+			 begin = 10; 
+			 last = 50;
 		} else if (Price == 1000000) { 
-			 begin = 500000; 
-			 last = 1000000;
+			 begin = 50; 
+			 last = 100;
 		} else if (Price == 5000000) {
-			 begin = 1000000; 
-			 last = 5000000;
+			 begin = 100; 
+			 last = 500;
 		} else if (Price == 10000000) { 
-			 begin = 5000000; 
-			 last = 10000000; 
+			 begin = 500; 
+			 last = 1000; 
 		} else if (Price == 20000000) {
-			begin = 10000000;
-			last = 99999999;
+			begin = 1000;
+			last = 9999;
 		}
 		
 		

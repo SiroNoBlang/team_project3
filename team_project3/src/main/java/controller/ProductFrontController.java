@@ -69,7 +69,7 @@ public class ProductFrontController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		} else if (command.equals("/ProductSearchPro.pr")) { // 상품 필터 분류 처리(earch) 
+		} else if (command.equals("/ProductSearchPro.pr")) { // 상품 검색필터 분류 처리
 
 			action = new ProductSearchProAction();
 
