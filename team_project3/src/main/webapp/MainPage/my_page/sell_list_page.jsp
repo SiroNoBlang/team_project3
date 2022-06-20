@@ -245,7 +245,7 @@ MemberBean member = (MemberBean) request.getAttribute("memberDetail");
 		</c:choose>
 			
 		<!-- 페이지 번호 목록은 시작 페이지(startPage)부터 끝 페이지(endPage) 까지 표시 -->
-<%-- 		<c:forEach var="i" begin="${startPage }" end="${endPage }"> --%>
+		<c:forEach var="i" begin="${startPage }" end="${endPage }">
 			<!-- 단, 현재 페이지 번호는 링크 없이 표시 -->
 			<c:choose>
 				<c:when test="${pageNum eq i}">
@@ -255,7 +255,7 @@ MemberBean member = (MemberBean) request.getAttribute("memberDetail");
 					 <li class="page-item"><a href="">${i }</a>
 				</c:otherwise>
 			</c:choose>
-<%-- 		</c:forEach> --%>
+		</c:forEach>
 
 		<!-- 현재 페이지 번호(pageNum)가 총 페이지 수보다 작을 때만 [다음] 링크 동작 -->
 		<c:choose>
