@@ -3749,6 +3749,7 @@ a.sell_listBrand {
     text-overflow: ellipsis;
     border-bottom: 1px solid #222;
     margin-top: 4px;
+    margin-bottom: 80px;
 }
 
 
@@ -3763,3 +3764,6 @@ a.sell_listTile {
     color: #717fe0;
 }
 
+input.sell_num {
+    color: white;
+}
