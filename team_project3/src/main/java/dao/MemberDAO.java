@@ -544,13 +544,13 @@ public class MemberDAO {
 		try {
 			String sql = "SELECT a.member_code, s.sell_title, b.sell_img_name, b.sell_img_real_name, s.sell_num, l.like_list_member_code, l.like_list_item_num"
 					+ " FROM sell s"
-					+ " JOIN sell_img b"
+					+ " JOIN (SELECT * FROM sell_img WHERE sell_img_num = 1) b"
 					+ " ON b.sell_img_real_num = s.sell_num"
 					+ " JOIN member a"
 					+ " ON a.member_code = s.sell_member_code"
 					+ " JOIN like_list l"
-					+ " ON l.like_list_member_code = a.member_code"
-					+ " WHERE a.member_code=?"
+					+ " ON l.like_list_item_num = s.sell_num"
+					+ " WHERE l.like_list_member_code=?"
 					+ " ORDER BY s.sell_num DESC LIMIT ?,?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, member_code);
@@ -565,9 +565,6 @@ public class MemberDAO {
 				article.setSell_num(rs.getInt("sell_num"));
 				article.setSell_title(rs.getString("sell_title"));
 				article.setSell_img_real_name(rs.getString("sell_img_real_name"));
-//				article.setLike_list_count(rs.getInt("like_list_count"));
-//				article.setLike_list_title(rs.getString("like_list_title"));
-//				article.setLike_list_img_name(rs.getString("like_list_img_name"));
 				
 				articleList.add(article);
 			}
@@ -695,7 +692,7 @@ public class MemberDAO {
 		try {
 			String sql = "SELECT a.member_code, s.sell_title, s.sell_price, b.sell_img_name, b.sell_img_real_name, s.sell_num, s.sell_category, s.sell_write_date"
 					+ " FROM sell s"
-					+ " JOIN sell_img b"
+					+ " JOIN (SELECT * FROM sell_img WHERE sell_img_num = 1) b"
 					+ " ON b.sell_img_real_num = s.sell_num"
 					+ " JOIN member a"
 					+ " ON a.member_code = s.sell_member_code "
