@@ -1009,4 +1009,62 @@ public class SellerDAO {
 		return mainarticleList;
 	}
 
+	public ArrayList<SellerProductDTO> selectLikeArticleList(int pageNum, int listLimit) {
+		ArrayList<SellerProductDTO> likearticleList = null;
+
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		// 조회 시작 게시물 번호(행 번호) 계산
+		int startRow = (pageNum - 1) * listLimit;
+
+		try {
+			String sql = "select a.sell_num, a.sell_size , a.sell_category, a.sell_category_detail, a.sell_title, a.sell_color, a.sell_brand, a.sell_price, (SELECT COUNT(*) FROM like_list WHERE like_list_item_num= a.sell_num ) AS sell_likecount , a.sell_readcount, a.sell_member_code,"
+				+"	b.sell_img_name, b.sell_img_real_name ,b.sell_img_real_num ,b.sell_img_num,b.sell_img_name,b.sell_img_real_name, "
+				+"	c.sell_list_num, c.sell_list_item_status"
+				+"	FROM sell AS a JOIN sell_img AS b ON a.sell_num = b.sell_img_real_num JOIN sell_list AS c ON a.sell_num = c.sell_list_num"
+				+"	WHERE sell_list_item_status='판매중'  AND (sell_brand) IN ( select b.member_info_detail_like_brand FROM sell AS A join member_info_detail AS b on a.sell_member_code = b. member_info_detail_code )"
+				+" AND (sell_img_real_num,sell_img_num)  in (SELECT  sell_img_real_num, MAX(sell_img_num)  FROM sell_img    GROUP BY sell_img_real_num  ORDER BY sell_img_real_num ,sell_img_num DESC  )"
+				+ "	ORDER BY a.sell_num DESC LIMIT 0,3";
+
+			pstmt = con.prepareStatement(sql);
+//			pstmt.setInt(1, startRow);
+//			pstmt.setInt(2, listLimit);
+
+			rs = pstmt.executeQuery();
+
+			likearticleList = new ArrayList<SellerProductDTO>();
+
+			while (rs.next()) {
+				SellerProductDTO article = new SellerProductDTO();
+				article.setSell_num(rs.getInt("sell_num"));
+				article.setSell_size(rs.getString("sell_size"));
+				article.setSell_title(rs.getString("sell_title"));
+				article.setSell_price(rs.getInt("sell_price"));
+				article.setSell_color(rs.getString("sell_color"));
+				article.setSell_brand(rs.getString("sell_brand"));
+				article.setSell_readcount(rs.getInt("sell_readcount"));
+				article.setSell_list_num(rs.getInt("sell_list_num"));
+				article.setSell_list_item_status(rs.getString("sell_list_item_status"));
+				article.setSell_img_num(rs.getInt("Sell_img_num"));
+				article.setSell_img_real_num(rs.getInt("Sell_img_real_num"));
+				article.setSell_img_name(rs.getString("sell_img_name"));
+				article.setSell_img_real_name(rs.getString("sell_img_real_name"));
+				article.setSell_category(rs.getString("Sell_category"));
+				article.setSell_category_detail(rs.getString("Sell_category_detail"));
+				article.setSell_likecount(rs.getInt("sell_likecount"));
+
+				likearticleList.add(article);
+
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+
+			close(rs);
+		}
+		return likearticleList;
+	}
+
 }

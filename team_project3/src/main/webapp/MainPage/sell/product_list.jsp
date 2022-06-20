@@ -276,8 +276,6 @@ function filter(value){
                 
                    <a href="ProductDetailPro.pr?sell_num=${articleList.sell_num}&sell_brand=${articleList.sell_brand}"> 
                    </a>
-                 <a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
                  <i class="fa fa-eye marginEye"></i><span style="text-align: right;">${articleList.sell_readcount } </span>|
                  <span>
                	     <span>
