@@ -277,7 +277,7 @@ function filter(value){
                    </a>
                  <a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
-                 <i class="fa fa-eye"></i><span style="text-align: right;">${articleList.sell_readcount } </span>|
+                 <i class="fa fa-eye marginEye"></i><span style="text-align: right;">${articleList.sell_readcount } </span>|
                  <span>
                	     <span>
 						<span class="w3-border w3-center w3-padding">      <!-- 좋아요 기능을 위한 스크립트(Ajax)는 892행  -->
@@ -293,8 +293,8 @@ function filter(value){
 						</span>
 					</span>
 				</span>
-              		 <h5> <a href="ProductDetailPro.pr?sell_num=${articleList.sell_num}&sell_brand=${articleList.sell_brand}">   ${articleList.sell_title }</a></h5>
-                 	 <h5> <a href="ProductDetailPro.pr?sell_num=${articleList.sell_num}&sell_brand=${articleList.sell_brand}"> ${articleList.sell_brand }</a></h5>
+              		 <h5><a href="ProductDetailPro.pr?sell_num=${articleList.sell_num}&sell_brand=${articleList.sell_brand}" class="sell_listTile">   ${articleList.sell_title }</a></h5>
+                 	 <h5><a href="ProductDetailPro.pr?sell_num=${articleList.sell_num}&sell_brand=${articleList.sell_brand}" class="sell_listBrand"> ${articleList.sell_brand }</a></h5>
 								</div>
 							</div>
 						</c:forEach>
