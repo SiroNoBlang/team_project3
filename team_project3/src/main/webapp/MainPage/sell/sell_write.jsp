@@ -94,7 +94,7 @@ function readURL(obj) {   //사진 3장 뿌리기
     for(let i=0;i<obj.files.length;i++){
     reader.readAsDataURL(obj.files[i]);
     reader.onload = function (e) {
-        let img = $('<img  width= 400,height=400 />');
+        let img = $('<img width= 400 height=400 />');
         $(img).attr('src', e.target.result);
         $('#previewDiv').append(img);
         
@@ -112,7 +112,7 @@ function readURL1(obj) {   //사진 3장 뿌리기
     for(let i=0;i<obj.files.length;i++){
     reader.readAsDataURL(obj.files[i]);
     reader.onload = function (e) {
-        let img = $('<img  width=400,height=400 />');
+        let img = $('<img  width=400 height=400 />');
         $(img).attr('src', e.target.result);
         $('#previewDiv1').append(img);
        
@@ -130,7 +130,7 @@ function readURL2(obj) {   //사진 3장 뿌리기
     for(let i=0;i<obj.files.length;i++){
     reader.readAsDataURL(obj.files[i]);
     reader.onload = function (e) {
-        let img = $('<img  width=400,height=400 />');
+        let img = $('<img>');
         $(img).attr('src', e.target.result);
         $('#previewDiv2').append(img);
        
@@ -148,7 +148,7 @@ function readURL3(obj) {   //사진 3장 뿌리기
     for(let i=0;i<obj.files.length;i++){
     reader.readAsDataURL(obj.files[i]);
     reader.onload = function (e) {
-        let img = $('<img  width=400,height=400 />');
+        let img = $('<img  width=400 height=400 />');
         $(img).attr('src', e.target.result);
         $('#previewDiv3').append(img);
        
@@ -486,7 +486,7 @@ function readURL4(obj) {   //사진 3장 뿌리기
 								    <!-- // .slide_wrap -->
 								  </div>
 								  <!-- // .container -->		   
-									 <input type="file" id="imgInput" name="sell_img_name1" value="" onchange="readURL(this)" >
+									 <input type="file" id="imgInput" name="sell_img_name1" onchange="readURL(this)" >
 									 <input type="file" id="imgInput" name="sell_img_name2" onchange="readURL1(this)">
 									 <input type="file" id="imgInput" name="sell_img_name3" onchange="readURL2(this)">
 								</div>
