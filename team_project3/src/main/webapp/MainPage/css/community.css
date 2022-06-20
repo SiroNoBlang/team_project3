@@ -3,8 +3,11 @@
 }
 
 #com_container .page-link {
-	padding: 1.5rem 5.75rem;
 	margin-bottom: 50px;
+    width: 296px;
+    height: 90px;
+    text-align: center;
+    line-height: 74px;
 }
 
 #com_containe .demo {
@@ -165,4 +168,6 @@ small {
     background-color:  rgb(87, 98, 171);
     border-color:  rgb(87, 98, 171);
 }
-
+.page-link:focus, .page-link:hover{
+	color:  #717fe0;
+}
