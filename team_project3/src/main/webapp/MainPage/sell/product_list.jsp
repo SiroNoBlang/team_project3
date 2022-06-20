@@ -39,9 +39,9 @@ function filter(value){
 									+"<a href='ProductBrandPro.pr?sell_brand=슈프림' style='font-size: 1.5em'> Supreme </a>&nbsp;&nbsp;"
 									+"<a href='ProductBrandPro.pr?sell_brand=톰브라운' style='font-size: 1.5em'> Jordan </a>&nbsp;&nbsp;"
 									+"<a href='ProductBrandPro.pr?sell_brand=루이비통' style='font-size: 1.5em'> Louis Vuitton </a>&nbsp;&nbsp;"
-									+"<a href='ProductBrandPro.pr?sell_brand=조단' style='font-size: 1.5em'> Chanel </a>&nbsp;&nbsp;"
-									+"<a href='ProductBrandPro.pr?sell_brand=질센더' style='font-size: 1.5em'> Moncler </a>&nbsp;&nbsp;"
-									+"<a href='ProductBrandPro.pr?sell_brand=파텍필립' style='font-size: 1.5em'> Jil Sander </a>";
+									+"<a href='ProductBrandPro.pr?sell_brand=조던' style='font-size: 1.5em'> jordan </a>&nbsp;&nbsp;"
+									+"<a href='ProductBrandPro.pr?sell_brand=몽클레어' style='font-size: 1.5em'> Moncler </a>&nbsp;&nbsp;"
+									+"<a href='ProductBrandPro.pr?sell_brand=질센더' style='font-size: 1.5em'> Jil Sander </a>";
 			} 
 			else if(value =="category") {
 				var tagSpan = document.getElementById("checkbox2");
