@@ -165,7 +165,7 @@ function readURL4(obj) {   //사진 3장 뿌리기
     for(let i=0;i<obj.files.length;i++){
     reader.readAsDataURL(obj.files[i]);
     reader.onload = function (e) {
-        let img = $('<img  width=400,height=400 />');
+        let img = $('<img  width=400 height=400 />');
         $(img).attr('src', e.target.result);
         $('#previewDiv4').append(img);
         
