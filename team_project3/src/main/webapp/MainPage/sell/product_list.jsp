@@ -45,7 +45,7 @@ function filter(value){
 			} 
 			else if(value =="category") {
 				var tagSpan = document.getElementById("checkbox2");
-				tagSpan.innerHTML = "<a></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
+				tagSpan.innerHTML = "<a></a>&nbsp;&nbsp;&nbsp;&nbsp;"
 								   +"<a href='ProductCategoryPro.pr?sell_category=상의' style='font-size: 1.5em'> Top </a>&nbsp;&nbsp;&nbsp;"
 								   +"<a href='ProductCategoryPro.pr?sell_category=하의' style='font-size: 1.5em'> Bottom </a>&nbsp;&nbsp;&nbsp;"
 								   +"<a href='ProductCategoryPro.pr?sell_category=신발' style='font-size: 1.5em'> Shoes </a>&nbsp;&nbsp;&nbsp;"
@@ -53,9 +53,9 @@ function filter(value){
 			}
 			else if(value =="price") {
 				var tagSpan = document.getElementById("checkbox2");
-				tagSpan.innerHTML = "<a></a>&nbsp;&nbsp;&nbsp;"
-					+ "<a href='ProductPricePro.pr?sell_price=100000' style='font-size: 1.0em'> 100,000원 이하 </a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
-					+ "<a href='ProductPricePro.pr?sell_price=500000' style='font-size: 1.0em'> 100,000원 ~ 500,000원 </a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
+				tagSpan.innerHTML = "<a></a>&nbsp;"
+					+ "<a href='ProductPricePro.pr?sell_price=100000' style='font-size: 1.0em'> 100,000원 이하 </a>&nbsp;&nbsp;&nbsp;"
+					+ "<a href='ProductPricePro.pr?sell_price=500000' style='font-size: 1.0em'> 100,000원 ~ 500,000원 </a>&nbsp;&nbsp;&nbsp;"
 					+ "<a href='ProductPricePro.pr?sell_price=1000000' style='font-size: 1.0em'> 500,000원 ~ 1,000,000원 </a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
 					+ "<a href='ProductPricePro.pr?sell_price=5000000' style='font-size: 1.0em'> 1,000,000원 ~ 5,000,000원 </a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
 					+ "<a href='ProductPricePro.pr?sell_price=10000000' style='font-size: 1.0em'> 5,000,000원 ~ 10,000,000원 </a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
@@ -232,17 +232,19 @@ function filter(value){
 			</div>
 			<!-- Filter -->
 			<div class="dis-none panel-filter w-full p-t-10">
-				<div class="wrap-filter flex-w bg6 w-full p-lr-40 p-t-27 p-lr-15-sm">
+				<div class="wrap-filter flex-w bg6 w-full p-lr-40 p-t-27 p-lr-15-sm" style="justify-content: center;">
 					<div id="checkbox1">
-						<table >
+						<table>
 							<tr>
-								<th><input type="button" style="font-size: 35px; border: none;"
+								<th><input type="button" style="font-size: 35px; padding:1px;"
 									class="filter-link stext-106 trans-04" name=filter
 									value="brand" onclick="filter(this.value)"></th>
-								<th><input type="button" style="font-size: 35px; border: none;"
+									<th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+								<th><input type="button" style="font-size: 35px; padding:1px; "
 									class="filter-link stext-106 trans-04" name=filter
 									value="category" onclick="filter(this.value)"></th>
-								<th><input type=button style="font-size: 35px; border: none;"
+									<th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+								<th><input type=button style="font-size: 35px; padding:1px; "
 									class="filter-link stext-106 trans-04" name=filter
 									value="price" onclick="filter(this.value)"></th>
 							</tr>

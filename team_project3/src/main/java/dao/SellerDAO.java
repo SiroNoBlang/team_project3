@@ -96,7 +96,7 @@ public class SellerDAO {
 
 		try {
 			String sql = "SELECT COUNT(sell_list_num) FROM sell_list" + " WHERE sell_list_item_status ='판매중' "; 
-			
+
 			pstmt = con.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 			if (rs.next()) {
@@ -113,7 +113,7 @@ public class SellerDAO {
 		return listCount;
 	}
 	
-	//주석달기
+	// 상품리스트 검색 필터
 		public ArrayList<SellerProductDTO> searchArticleList(int pageNum, int listLimit, String productSearch) {
 			ArrayList<SellerProductDTO> productList = null;
 
@@ -171,7 +171,7 @@ public class SellerDAO {
 			return productList;
 		}
 
-	// 기능 주석달기
+	// 판매중인 상품 리스트 조회
 	public ArrayList<SellerProductDTO> selectArticleList(int pageNum, int listLimit) {
 		ArrayList<SellerProductDTO> articleList = null;
 
@@ -375,7 +375,7 @@ public class SellerDAO {
 
 		return memberbean;
 	}
-	//주석달기
+	// 상품 디테일에 사진 뿌리기위한 작업
 	public ArrayList<SellerimgDTO> selectProductimg(int sell_num) {
 		ArrayList<SellerimgDTO> productimg = new ArrayList<SellerimgDTO>();
 		SellerimgDTO Sellerdetailimg = null;
@@ -454,7 +454,7 @@ public class SellerDAO {
 
 		try {
 			String sql = "UPDATE   member_info_detail"
-					+ "	SET member_info_detail_point= member_info_detail_point + ?, member_info_detail_acc_money= member_info_detail_acc_money + ROUND((?/10000),0) "        
+					+ "	SET member_info_detail_point= member_info_detail_point - ?, member_info_detail_acc_money= member_info_detail_acc_money + ROUND((?/10000),0) "        
 					+ "	WHERE member_info_detail_code= ? ";
 
 			pstmt = con.prepareStatement(sql);
@@ -579,7 +579,7 @@ public class SellerDAO {
 
 		return member;
 	}
-	//주석달기
+	// 상품리스트 카테고리 나누기
 	public ArrayList<SellerProductDTO> CateArticleList(int pageNum, int listLimit, String category) {
 		ArrayList<SellerProductDTO> productCateList = null;
 
@@ -833,6 +833,8 @@ public class SellerDAO {
 		return likeCount;
 	}
 
+	
+	// 상품 필터 브랜드별로 나누기
 	public ArrayList<SellerProductDTO> BrandArticleList(int pageNum, int listLimit, String brand) {
 		ArrayList<SellerProductDTO> productBrandList = null;
 
@@ -889,7 +891,7 @@ public class SellerDAO {
 		return productBrandList;
 
 	}
-	//주석달기
+	// 상품 필터 가격별로 나누기
 	public ArrayList<SellerProductDTO> PriceArticleList(int pageNum, int listLimit, int begin, int last) {
 		ArrayList<SellerProductDTO> productPriceList = null;
 
@@ -946,7 +948,9 @@ public class SellerDAO {
 		}
 		return productPriceList;
 	}
-
+	
+	
+	// 메인 페이지 최근 상품 뿌리기
 	public ArrayList<SellerProductDTO> selectMainArticleList(int pageNum, int listLimit) {
 		ArrayList<SellerProductDTO> mainarticleList = null;
 
