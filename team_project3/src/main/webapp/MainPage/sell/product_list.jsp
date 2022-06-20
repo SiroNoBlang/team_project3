@@ -82,6 +82,8 @@ function filter(value){
    <link rel="stylesheet" type="text/css" href="MainPage/vendor/perfect-scrollbar/perfect-scrollbar.css">
    <link rel="stylesheet" type="text/css" href="MainPage/css/util.css">
    <link rel="stylesheet" type="text/css" href="MainPage/css/main.css">
+   <link rel="stylesheet" type="text/css" href="MainPage/css/community.css">
+   
 <style type="text/css">
 	a {
 	    color: #333;
@@ -222,9 +224,8 @@ function filter(value){
 				<form action="ProductSearchPro.pr">
 					<table>
 						<tr>
-							<td><input type="text" placeholder="상품을 입력해주세요."
-								name="ProductSearch"></td>
-							<td><input type="submit" value="검색" placeholder="Search">
+							<td><input type="text" placeholder="상품을 입력해주세요." name="ProductSearch"  class="form-control form-control"></td>
+							<td><input type="submit" value="검색" placeholder="Search" class="btn_sell_index">
 							</td>
 						</tr>
 					</table>
