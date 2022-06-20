@@ -69,7 +69,7 @@ public class SellerDAO {
 				pstmt2.executeUpdate();
 			}
 
-			sql = "INSERT INTO sell_list VALUES ((SELECT MAX(SELL_NUM) FROM sell),?,REPLACE(now(),'-',''), '관리자 작업필요')";// 검수자
+			sql = "INSERT INTO sell_list VALUES ((SELECT MAX(SELL_NUM) FROM sell),?,NULL, '관리자 작업필요')";// 검수자
 
 			pstmt3 = con.prepareStatement(sql);
 			pstmt3.setString(1, seller.getSell_list_item_status());

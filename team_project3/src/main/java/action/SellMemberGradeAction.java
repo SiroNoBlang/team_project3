@@ -26,9 +26,9 @@ public class SellMemberGradeAction implements Action {
 		
 		ArrayList< MemberBean> gradeArr = new ArrayList<MemberBean>();  //모든 grade 테이블의 정보를 받아옴
 		gradeArr =service.MemberGrade();
-		System.out.println("배열"+gradeArr);
+//		System.out.println("배열"+gradeArr);
 		memberbean = service.memberHasGrade(member_code);  //회원의 등급정보
-		System.out.println("객체"+memberbean);
+//		System.out.println("객체"+memberbean);
 		
 //		request.setAttribute("memberbean", memberbean);	
 //		request.setAttribute("gradeArr", gradeArr);		

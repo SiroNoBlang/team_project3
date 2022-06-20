@@ -271,7 +271,8 @@ function filter(value){
                 <a href="ProductDetailPro.pr?sell_num=${articleList.sell_num}&sell_brand=${articleList.sell_brand}">
                  <img src="./Upload/sell_img/${articleList.sell_img_real_name}" width="300px" height="400px" alt="Accessories Pack"/></a>
                 
-                   <a href="ProductDetailPro.pr?sell_num=${articleList.sell_num}&sell_brand=${articleList.sell_brand}"> <span>${articleList.sell_img_real_name}</span></a>
+                   <a href="ProductDetailPro.pr?sell_num=${articleList.sell_num}&sell_brand=${articleList.sell_brand}"> 
+                   </a>
                  <a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
                  <i class="fa fa-eye"></i><span style="text-align: right;">${articleList.sell_readcount } </span>|
@@ -567,7 +568,7 @@ function filter(value){
 $(function(){
 	$(".fa-heart").click(function(a){
 	var thisRow = $(this).closest('div');  //하트표시 줄의 부모(div)를 찾아  thisRow값에 저장
-	var thisplace = thisRow.find('span:eq(5)')[0];
+	var thisplace = thisRow.find('span:eq(4)')[0];
 	
 	var sell_num =  thisRow.find('input').val(); //thisRow의 하위 요소인 find(input)=>input이라는 value를 찾아 sell_num에 저장 == ${sell_num}
 	
