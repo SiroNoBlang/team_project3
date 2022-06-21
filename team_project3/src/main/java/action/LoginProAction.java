@@ -35,6 +35,7 @@ public class LoginProAction implements Action {
 				HttpSession session = request.getSession();
 				session.setAttribute("sCode", isLogin.getMember_code());
 				session.setAttribute("sNickname", isLogin.getMember_nickname());
+				session.setAttribute("sGradeName", isLogin.getGrade_name());
 				forward = new ActionForward();
 				forward.setPath("MemberManagement.co");
 				forward.setRedirect(true);
