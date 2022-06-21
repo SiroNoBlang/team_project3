@@ -601,7 +601,7 @@ public class MemberDAO {
 		return listCount;
 	}
 
-	//구매목록 담아오기
+	//구매목록 담아오기 
 	public ArrayList<SellerProductDTO> selectBuyList(int pageNum, int listLimit, String code) {
 		ArrayList<SellerProductDTO> buyList = null;
 		SellerProductDTO buy = null;
@@ -615,7 +615,7 @@ public class MemberDAO {
 					+ " FROM sell s"
 					+ " JOIN buy b"
 					+ " ON s.sell_num = b.buy_item_num"
-					+ " JOIN sell_img si"
+					+ " JOIN (SELECT * FROM sell_img WHERE sell_img_num = 1) si"
 					+ " ON si.sell_img_real_num = s.sell_num"
 					+ " JOIN sell_list sl"
 					+ " ON sl.sell_list_num = s.sell_num"
@@ -638,7 +638,6 @@ public class MemberDAO {
 				buy.setSell_size(rs.getString("s.sell_size"));
 				buy.setBuy_sell_item_date(rs.getString("b.buy_sell_item_date").substring(0,8));
 				buy.setBuy_item_status(rs.getString("b.buy_item_status"));
-//				buy.setSell_img_name(rs.getString("si.sell_img_name"));
 				buy.setSell_img_real_name(rs.getString("si.sell_img_real_name"));
 				buy.setSell_num(rs.getInt("s.sell_num"));
 				
@@ -681,6 +680,7 @@ public class MemberDAO {
 		return listCount;
 	}
 
+	
 	public ArrayList<SellerProductDTO> selectSellArticleList(int pageNum, int listLimit, String member_code) { //판매리스트 조회
 		ArrayList<SellerProductDTO> sellarticleList = null;
 		

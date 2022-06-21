@@ -1,7 +1,10 @@
 <%@page import="vo.PageInfo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>     
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%
+String code = (String) session.getAttribute("sCode");
+%>     
 <!DOCTYPE html>
 <html>
 <head>
@@ -181,7 +184,7 @@
 	<!-- Title page -->
 	<section class="bg-img1 txt-center p-lr-15 p-tb-92" style="background-image: url('MainPage/images/bg-01.jpg');">
 		<h2 class="ltext-105 cl0 txt-center">
-			좋아요 리스트
+			찜목록
 		</h2>
 	</section>	
 	
@@ -228,9 +231,6 @@
 			</c:forEach>
 <%-- 		</c:if> --%>
 			
-				
-			
-			
 	</table>
 	<input type="button" value="구매하기" id="buyCard" >
 	
@@ -240,7 +240,7 @@
 		<ul class="pagination justify-content-center">
 		<c:choose>
 			<c:when test="${pageNum > 1}">
-				<li class="page-item"><a class="page-link" href="">이전</a></li>
+				<li class="page-item"><a class="page-link" href="LikeList.ma?member_code=${sCode }&page=${pageNum - 1 }">이전</a></li>
 			</c:when>
 			<c:otherwise>
 				<li class="page-item"><a class="page-link" >이전</a></li>
@@ -255,7 +255,7 @@
 					<li class="page-item"><a class="page-link">${i }</a></li>
 				</c:when>
 				<c:otherwise>
-					<a href="">${i }</a>
+					<li class="page-item"><a class="page-link" href="LikeList.ma?member_code=${sCode }&page=${i }">${i }</a>
 				</c:otherwise>
 			</c:choose>
 		</c:forEach>
@@ -263,7 +263,7 @@
 		<!-- 현재 페이지 번호(pageNum)가 총 페이지 수보다 작을 때만 [다음] 링크 동작 -->
 		<c:choose>
 			<c:when test="${pageNum < maxPage}">
-				<li class="page-item"><a class="page-link" href="">다음</a></li>
+				<li class="page-item"><a class="page-link" href="LikeList.ma?member_code=${sCode }&page=${pageNum + 1 }">다음</a></li>
 			</c:when>
 			<c:otherwise>
 				<li class="page-item"><a class="page-link">다음</a></li>

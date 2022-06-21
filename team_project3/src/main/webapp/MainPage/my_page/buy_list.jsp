@@ -230,7 +230,7 @@
 						<tr>
 							<td style="vertical-align : middle;">${listCount -(listCount -((pageNum-1)* listLimit + status.index)-1)} </td> 
 							<td><img src="./Upload/sell_img/${buy.getSell_img_real_name() }" class="buyListImg"></td>
-							<td style="vertical-align : middle;">${buy.getSell_title() } </td>
+							<td style="vertical-align : middle;"><a href="ProductDetailPro.pr?sell_num=${buy.sell_num}"> ${buy.getSell_title() }</a> </td>
 							<td style="vertical-align : middle;">${buy.getSell_size() }</td>
 							<td style="vertical-align : middle;">${buy.getBuy_sell_item_date() } </td>
 							<td style="vertical-align : middle;">${buy.getBuy_item_status() } </td>

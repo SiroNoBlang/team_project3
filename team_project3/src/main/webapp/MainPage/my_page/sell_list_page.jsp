@@ -6,8 +6,6 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%
 String code = (String) session.getAttribute("sCode");
-String nickname = (String) session.getAttribute("sNickname");
-MemberBean member = (MemberBean) request.getAttribute("memberDetail");
 %>
 <!DOCTYPE html>
 <html>
@@ -237,7 +235,7 @@ MemberBean member = (MemberBean) request.getAttribute("memberDetail");
 		<ul class="pagination justify-content-center">
 		<c:choose>
 			<c:when test="${pageNum > 1}">
-				<li class="page-item"><a class="page-link" href="">이전</a></li>
+				<li class="page-item"><a class="page-link" href="SellList.ma?member_code=${sCode }&page=${pageNum - 1 }">이전</a></li>
 			</c:when>
 			<c:otherwise>
 				<li class="page-item"><a class="page-link" >이전</a></li>
@@ -252,7 +250,7 @@ MemberBean member = (MemberBean) request.getAttribute("memberDetail");
 					<li class="page-item"><a class="page-link">${i }</a></li>
 				</c:when>
 				<c:otherwise>
-					 <li class="page-item"><a href="">${i }</a>
+					<li class="page-item"><a class="page-link" href="SellList.ma?member_code=${sCode }&page=${i }">${i }</a>
 				</c:otherwise>
 			</c:choose>
 		</c:forEach>
@@ -260,7 +258,7 @@ MemberBean member = (MemberBean) request.getAttribute("memberDetail");
 		<!-- 현재 페이지 번호(pageNum)가 총 페이지 수보다 작을 때만 [다음] 링크 동작 -->
 		<c:choose>
 			<c:when test="${pageNum < maxPage}">
-				<li class="page-item"><a class="page-link" href="">다음</a></li>
+				<li class="page-item"><a class="page-link" href="SellList.ma?member_code=${sCode }&page=${pageNum + 1 }">다음</a></li>
 			</c:when>
 			<c:otherwise>
 				<li class="page-item"><a class="page-link">다음</a></li>
@@ -268,7 +266,7 @@ MemberBean member = (MemberBean) request.getAttribute("memberDetail");
 		</c:choose>
 		</ul>
 	</section>
-
+	</div>
 	<!-- Footer영역과 상단 이동 버튼-->
 	<jsp:include page="/MainPage/menu/footer.jsp"/>
 
