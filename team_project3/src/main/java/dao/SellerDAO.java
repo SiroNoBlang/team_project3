@@ -302,9 +302,12 @@ public class SellerDAO {
 		ResultSet rs = null;
 		
 		try {
-			String sql = "SELECT a.sell_num, a.sell_size , a.sell_title, a.sell_brand, a.sell_price, b.sell_img_name, b.sell_img_real_name "
-					+ "FROM sell AS a JOIN sell_img AS b ON a.sell_num = b.sell_img_real_num WHERE sell_num !=? "
-					+ " AND sell_brand Like '%" + sell_brand + "%' " + " LIMIT 0,4";
+			String sql = " SELECT a.sell_num, a.sell_size , a.sell_title, a.sell_brand, a.sell_price, b.sell_img_name, b.sell_img_real_name , c.sell_list_num, c.sell_list_item_status"
+					+" FROM sell AS a JOIN sell_img AS b ON a.sell_num = b.sell_img_real_num JOIN sell_list AS c ON a.sell_num = c.sell_list_num WHERE sell_num !=?"
+		            +" AND sell_list_item_status='판매중'"
+					+" AND sell_brand Like '%" + sell_brand + "%' " + " LIMIT 0,4";
+			
+		
 
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, sell_num);
