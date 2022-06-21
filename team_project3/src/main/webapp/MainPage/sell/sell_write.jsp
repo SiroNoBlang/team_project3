@@ -438,7 +438,7 @@ function readURL4(obj) {   //사진 3장 뿌리기
 
 	<!-- Product Detail -->
 <form action="SellWritePro.pr?sell_member_code=${sCode}" name="sellForm" method="post" enctype="multipart/form-data">	
-	<section class="sec-product-detail bg0 p-t-65 p-b-60">
+	<section class="sec-product-detail bg0 p-b-60">
 		<div class="container">
 			
 			<div class="row">

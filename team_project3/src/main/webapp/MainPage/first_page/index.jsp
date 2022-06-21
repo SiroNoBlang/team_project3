@@ -267,7 +267,7 @@ function recCount(sell_num,thisRow) { //  좋아요 갯수
                 <div class="shop-item">   <!-- 여기 -->
                <input class="sell_num" value="${likearticleList.sell_num}" readonly="readonly" style="border: none;">
                 <a href="ProductDetailPro.pr?sell_num=${likearticleList.sell_num}&sell_brand=${likearticleList.sell_brand}">
-                 <img src="./Upload/sell_img/${likearticleList.sell_img_real_name}" width="300px" height="400px" alt="Accessories Pack"/></a>
+                 <img src="./Upload/sell_img/${likearticleList.sell_img_real_name}" width="300px" height="300px" alt="Accessories Pack"/></a>
                 
                    <a href="ProductDetailPro.pr?sell_num=${likearticleList.sell_num}&sell_brand=${likearticleList.sell_brand}"> 
                    </a>
@@ -352,7 +352,7 @@ function recCount(sell_num,thisRow) { //  좋아요 갯수
                 <div class="shop-item">   <!-- 여기 -->
                <input class="sell_num" value="${mainarticleList.sell_num}" readonly="readonly" style="border: none;">
                 <a href="ProductDetailPro.pr?sell_num=${mainarticleList.sell_num}&sell_brand=${mainarticleList.sell_brand}">
-                 <img src="./Upload/sell_img/${mainarticleList.sell_img_real_name}" width="300px" height="400px" alt="Accessories Pack"/></a>
+                 <img src="./Upload/sell_img/${mainarticleList.sell_img_real_name}" width="300px" height="300px" alt="Accessories Pack"/></a>
                 
                    <a href="ProductDetailPro.pr?sell_num=${mainarticleList.sell_num}&sell_brand=${mainarticleList.sell_brand}"> 
                    </a>

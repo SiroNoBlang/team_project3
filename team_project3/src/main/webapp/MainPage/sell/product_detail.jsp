@@ -310,7 +310,7 @@ html, body {
 													<div class="slide_content slide01">
 														<img
 															src="./Upload/sell_img/${sellerimg.getSell_img_real_name() }"
-															width="400" height="600"> &nbsp;
+															width="400px" height="400px"> &nbsp;
 													</div>
 												</c:forEach>
 											</div>
@@ -444,7 +444,8 @@ html, body {
 										 <c:forEach items="${Relationdto}" var="ProductRe">
 										 	<td style="border: none;">
 											<span style="text-align: center;">	
-												<a href="ProductDetailPro.pr?sell_num=${ProductRe.getSell_num()}&sell_brand=${ProductRe.getSell_brand() }"><img src="./Upload/sell_img/${ProductRe.getSell_img_real_name() } "onerror="this.style.display='none'" width="130px"height="160px" alt="판매사진"/></a><br>
+												<a href="ProductDetailPro.pr?sell_num=${ProductRe.getSell_num()}&sell_brand=${ProductRe.getSell_brand() }">
+												<img src="./Upload/sell_img/${ProductRe.getSell_img_real_name() } "onerror="this.style.display='none'" width="130px" height="130px" alt="판매사진"/></a><br>
 													${ProductRe.getSell_title() }<br>
 												brand:${ProductRe.getSell_brand() }
 												<a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
