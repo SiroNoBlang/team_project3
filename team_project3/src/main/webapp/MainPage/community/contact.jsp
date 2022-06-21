@@ -162,7 +162,7 @@
 							</span>
 
 							<p class="stext-115 cl1 size-213 p-t-18">
-								contact@admin.com
+								admin@admin.com
 							</p>
 						</div>
 					</div>

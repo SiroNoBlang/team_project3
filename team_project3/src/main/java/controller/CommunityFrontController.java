@@ -20,6 +20,7 @@ import action.EventDetailAction;
 import action.EventListAction;
 import action.EventModifyFormAction;
 import action.EventSearchAction;
+import action.MemberDeleteAction;
 import action.MemberDetailAction;
 import action.MemberManagementListAction;
 import action.MemberUpdateAction;
@@ -240,6 +241,13 @@ public class CommunityFrontController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+		} else if (command.equals("/MemberDelete.co")) { // 탈퇴회원의 삭제 요청 _이효민 06.21 확인
+			action = new MemberDeleteAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		} else if (command.equals("/Classification.co")) { // 상태와 등급에 따른 회원 목록 _이효민 06.12 확인
 			action = new ClassificationAction();
 			try {
@@ -261,7 +269,7 @@ public class CommunityFrontController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		} else if (command.equals("/ClassificationDelete.co")) { // 공지사항 삭제(/NoticeDelete.co) 요청
+		} else if (command.equals("/ClassificationDelete.co")) { // 탈퇴회원 삭제(/ClassificationDelete.co) 요청 _이효민 06.21 확인
 			action = new ClassificationDeleteAction();
 			try {
 				forward = action.execute(request, response);

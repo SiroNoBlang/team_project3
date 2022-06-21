@@ -183,7 +183,7 @@
 					<section id="commandCell">
 						<input type="submit" value="수정">
 						<c:if test="${memberDetail.getMember_service_log_status() eq '탈퇴'}">
-							<input type="button" value="회원탈퇴" onclick="">
+							<input type="button" value="회원탈퇴" onclick="location.href='MemberDelete.co?page=${param.page }&member_code=${member_code }">
 						</c:if>
 						<input type="button" value="목록" onclick="location.href='MemberManagement.co?page=${param.page }'">
 					</section>
