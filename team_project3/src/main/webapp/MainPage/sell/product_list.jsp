@@ -20,28 +20,28 @@ function filter(value){
 			if(value =="brand") {
 				var tagSpan = document.getElementById("checkbox2");	
 				tagSpan.innerHTML =  
-									"<a href='ProductBrandPro.pr?sell_brand=에르메스' style='font-size: 1.5em' > Hermes </a> &nbsp;&nbsp;"
-									+"<a href='ProductBrandPro.pr?sell_brand=샤넬' style='font-size: 1.5em' > Chanel </a>&nbsp;&nbsp;"
-									+"<a href='ProductBrandPro.pr?sell_brand=베테가베네타' style='font-size: 1.5em' > Bottega Veneta </a>&nbsp;&nbsp;"
-									+"<a href='ProductBrandPro.pr?sell_brand=프라다' style='font-size: 1.5em' > Prada </a>&nbsp;&nbsp;"
-									+"<a href='ProductBrandPro.pr?sell_brand=롤렉스' style='font-size: 1.5em'> Rolex </a>&nbsp;&nbsp;"
-									+"<a href='ProductBrandPro.pr?sell_brand=디올' style='font-size: 1.5em'> Dior </a>&nbsp;&nbsp;"
-									+"<a href='ProductBrandPro.pr?sell_brand=셀린느' style='font-size: 1.5em'> Celine </a>&nbsp;&nbsp;"
-									+"<a href='ProductBrandPro.pr?sell_brand=발렌시아가' style='font-size: 1.5em'> Balenciaga </a>&nbsp;&nbsp;"
-									+"<a href='ProductBrandPro.pr?sell_brand=까르띠에' style='font-size: 1.5em'> Cartier </a>&nbsp;&nbsp;"
-									+"<a href='ProductBrandPro.pr?sell_brand=펜디' style='font-size: 1.5em'> Fendi </a>&nbsp;&nbsp;"
-									+"<a href='ProductBrandPro.pr?sell_brand=고야드' style='font-size: 1.5em'> Goyard </a>&nbsp;&nbsp;"
-									+"<a href='ProductBrandPro.pr?sell_brand=미우미우' style='font-size: 1.5em'> MiuMiu </a>"
-									+"<a href='ProductBrandPro.pr?sell_brand=르메르' style='font-size: 1.5em'> Lemaire </a>&nbsp;&nbsp;"
-									+"<a href='ProductBrandPro.pr?sell_brand=로에베' style='font-size: 1.5em'> Loewe </a>&nbsp;&nbsp;"
-									+"<a href='ProductBrandPro.pr?sell_brand=마르니' style='font-size: 1.5em'> Marni </a>&nbsp;&nbsp;"
-									+"<a href='ProductBrandPro.pr?sell_brand=오프화이트' style='font-size: 1.5em'> Off-White </a>&nbsp;&nbsp;"
-									+"<a href='ProductBrandPro.pr?sell_brand=슈프림' style='font-size: 1.5em'> Supreme </a>&nbsp;&nbsp;"
-									+"<a href='ProductBrandPro.pr?sell_brand=톰브라운' style='font-size: 1.5em'> Jordan </a>&nbsp;&nbsp;"
-									+"<a href='ProductBrandPro.pr?sell_brand=루이비통' style='font-size: 1.5em'> Louis Vuitton </a>&nbsp;&nbsp;"
-									+"<a href='ProductBrandPro.pr?sell_brand=조던' style='font-size: 1.5em'> jordan </a>&nbsp;&nbsp;"
-									+"<a href='ProductBrandPro.pr?sell_brand=몽클레어' style='font-size: 1.5em'> Moncler </a>&nbsp;&nbsp;"
-									+"<a href='ProductBrandPro.pr?sell_brand=질센더' style='font-size: 1.5em'> Jil Sander </a>";
+									"<a href='ProductBrandPro.pr?sell_brand=에르메스' style='font-size: 1.5em' > 에르메스 </a> &nbsp;&nbsp;"
+									+"<a href='ProductBrandPro.pr?sell_brand=샤넬' style='font-size: 1.5em' > 샤넬 </a>&nbsp;&nbsp;"
+									+"<a href='ProductBrandPro.pr?sell_brand=베테가베네타' style='font-size: 1.5em' > 베테가베네타 </a>&nbsp;&nbsp;"
+									+"<a href='ProductBrandPro.pr?sell_brand=프라다' style='font-size: 1.5em' > 프라다 </a>&nbsp;&nbsp;"
+									+"<a href='ProductBrandPro.pr?sell_brand=롤렉스' style='font-size: 1.5em'> 롤렉스 </a>&nbsp;&nbsp;"
+									+"<a href='ProductBrandPro.pr?sell_brand=디올' style='font-size: 1.5em'> 디올 </a>&nbsp;&nbsp;"
+									+"<a href='ProductBrandPro.pr?sell_brand=셀린느' style='font-size: 1.5em'> 셀린느 </a>&nbsp;&nbsp;"
+									+"<a href='ProductBrandPro.pr?sell_brand=발렌시아가' style='font-size: 1.5em'> 발렌시아가 </a>&nbsp;&nbsp;"
+									+"<a href='ProductBrandPro.pr?sell_brand=까르띠에' style='font-size: 1.5em'> 까르띠에 </a>&nbsp;&nbsp;"
+									+"<a href='ProductBrandPro.pr?sell_brand=펜디' style='font-size: 1.5em'> 펜디 </a>&nbsp;&nbsp;"
+									+"<a href='ProductBrandPro.pr?sell_brand=고야드' style='font-size: 1.5em'> 고야드 </a>&nbsp;&nbsp;"
+									+"<a href='ProductBrandPro.pr?sell_brand=미우미우' style='font-size: 1.5em'> 미우미우 </a>"
+									+"<a href='ProductBrandPro.pr?sell_brand=르메르' style='font-size: 1.5em'> 르메르 </a>&nbsp;&nbsp;"
+									+"<a href='ProductBrandPro.pr?sell_brand=로에베' style='font-size: 1.5em'> 로에베 </a>&nbsp;&nbsp;"
+									+"<a href='ProductBrandPro.pr?sell_brand=마르니' style='font-size: 1.5em'> 마르니 </a>&nbsp;&nbsp;"
+									+"<a href='ProductBrandPro.pr?sell_brand=오프화이트' style='font-size: 1.5em'> 오프화이트 </a>&nbsp;&nbsp;"
+									+"<a href='ProductBrandPro.pr?sell_brand=슈프림' style='font-size: 1.5em'> 슈프림 </a>&nbsp;&nbsp;"
+									+"<a href='ProductBrandPro.pr?sell_brand=톰브라운' style='font-size: 1.5em'> 톰브라운 </a>&nbsp;&nbsp;"
+									+"<a href='ProductBrandPro.pr?sell_brand=루이비통' style='font-size: 1.5em'> 루이비통 </a>&nbsp;&nbsp;"
+									+"<a href='ProductBrandPro.pr?sell_brand=조던' style='font-size: 1.5em'> 조던 </a>&nbsp;&nbsp;"
+									+"<a href='ProductBrandPro.pr?sell_brand=몽클레어' style='font-size: 1.5em'> 몽클레어 </a>&nbsp;&nbsp;"
+									+"<a href='ProductBrandPro.pr?sell_brand=질센더' style='font-size: 1.5em'> 질센더 </a>";
 			} 
 			else if(value =="category") {
 				var tagSpan = document.getElementById("checkbox2");
@@ -272,7 +272,7 @@ function filter(value){
                 <div class="shop-item">   <!-- 여기 -->
                <input class="sell_num" value="${articleList.sell_num}" readonly="readonly" style="border: none;">
                 <a href="ProductDetailPro.pr?sell_num=${articleList.sell_num}&sell_brand=${articleList.sell_brand}">
-                 <img src="./Upload/sell_img/${articleList.sell_img_real_name}" width="300px" height="300px" alt="Accessories Pack"/></a>
+                 <img src="./Upload/sell_img/${articleList.sell_img_real_name}" width="300px" height="400px" alt="Accessories Pack"/></a>
                 
                    <a href="ProductDetailPro.pr?sell_num=${articleList.sell_num}&sell_brand=${articleList.sell_brand}"> 
                    </a>
