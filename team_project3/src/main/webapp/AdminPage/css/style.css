@@ -591,3 +591,7 @@ i.icon.ion-ios-home {
     margin-right: 10px;
 }
     
+    
+td.leftTd {
+    text-align: left !important;
+}

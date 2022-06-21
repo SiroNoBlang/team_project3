@@ -82,7 +82,7 @@
 								                <tr>
 							            <%--         <td>${notice.getNotice_num() }</td>  --%>
 							                    	<td>${listCount -(listCount -((pageNum-1)* listLimit + status.index)-1)} </td> 
-								                    <td>
+								                    <td class="leftTd">
 														<a href="NoticeDetail.co?notice_num=${notice.getNotice_num() }&page=${pageNum}">
 								                    		${notice.getNotice_title() } </a>
 								                    </td>

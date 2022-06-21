@@ -81,7 +81,7 @@
 											<c:forEach var="event" items="${eventList }" varStatus="status">
 								                <tr>
 							                    	<td>${listCount -(listCount -((pageNum-1)* listLimit + status.index)-1)} </td> 
-								                    <td>
+								                    <td class="leftTd">
 														<a href="EventDetail.co?event_num=${event.getEvent_num() }&page=${pageNum}">
 								                    		${event.getEvent_title() } </a>
 								                    </td>
