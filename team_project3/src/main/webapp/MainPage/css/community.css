@@ -171,3 +171,7 @@ small {
 .page-link:focus, .page-link:hover{
 	color:  #717fe0;
 }
+
+td.leftTd {
+    text-align: left !important;
+}

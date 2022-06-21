@@ -248,7 +248,7 @@
 					<c:forEach var="notice" items="${noticeList }" varStatus="status">
 		                <tr>
 	                    	<td>${listCount -(listCount -((pageNum-1)* listLimit + status.index)-1)} </td> 
-		                    <td>
+		                    <td class="leftTd">
 								<a href="CommunityNoticeDetail.ma?notice_num=${notice.getNotice_num() }&page=${pageNum}">
 		                    		${notice.getNotice_title() } </a>
 		                    </td>

@@ -129,7 +129,7 @@
 							                    <td>${listCount -(listCount -((pageNum-1)* listLimit + status.index)-1)} </td> 
 							                    <td>${confirm.getSell_category() } </td>
 							                    <td>${confirm.getSell_brand() } </td>
-							                     <td class="leftTd">
+							                     <td>
 													<a href="ProductConfirmDetail.co?sell_num=${confirm.getSell_num() }&page=${pageNum}">
 								                    	${confirm.getSell_title() } </a>
 								                    </td>
