@@ -1009,14 +1009,11 @@ public class SellerDAO {
 		return mainarticleList;
 	}
 
-	public ArrayList<SellerProductDTO> selectLikeArticleList(int pageNum, int listLimit) {
+	public ArrayList<SellerProductDTO> selectLikeArticleList() {
 		ArrayList<SellerProductDTO> likearticleList = null;
 
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-
-		// 조회 시작 게시물 번호(행 번호) 계산
-		int startRow = (pageNum - 1) * listLimit;
 
 		try {
 			String sql = "select a.sell_num, a.sell_size , a.sell_category, a.sell_category_detail, a.sell_title, a.sell_color, a.sell_brand, a.sell_price, (SELECT COUNT(*) FROM like_list WHERE like_list_item_num= a.sell_num ) AS sell_likecount , a.sell_readcount, a.sell_member_code,"
@@ -1028,8 +1025,7 @@ public class SellerDAO {
 				+ "	ORDER BY a.sell_num DESC LIMIT 0,3";
 
 			pstmt = con.prepareStatement(sql);
-//			pstmt.setInt(1, startRow);
-//			pstmt.setInt(2, listLimit);
+
 
 			rs = pstmt.executeQuery();
 

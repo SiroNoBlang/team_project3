@@ -60,7 +60,7 @@ public class productListProService {
 		return mainarticleList;
 	}
 
-	public ArrayList<SellerProductDTO> getLikeArticleList(int pageNum, int listLimit) {
+	public ArrayList<SellerProductDTO> getLikeArticleList() {
 	ArrayList<SellerProductDTO> likearticleList = null;
 		
 		Connection con = getConnection();
@@ -70,7 +70,7 @@ public class productListProService {
 		sellerDAO.setConnection(con);
 		
 		// BoardDAO 객체의 selectArticleList() 메서드를 호출
-		likearticleList = sellerDAO.selectLikeArticleList(pageNum, listLimit);
+		likearticleList = sellerDAO.selectLikeArticleList();
 		
 		close(con);
 		

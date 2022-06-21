@@ -55,8 +55,6 @@ public class ProductPriceProAction implements Action {
 		productSearchProService service = new productSearchProService();
 		int listCount = service.getSearchListCount();
 		
-		
-		
 
 		ArrayList<SellerProductDTO> ProductPriceList = service.getProductPriceList(pageNum, listLimit, begin, last);
 
