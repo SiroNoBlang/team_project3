@@ -22,7 +22,7 @@ function filter(value){
 				tagSpan.innerHTML =  
 									"<a href='ProductBrandPro.pr?sell_brand=에르메스' style='font-size: 1.5em' > 에르메스 </a> &nbsp;&nbsp;"
 									+"<a href='ProductBrandPro.pr?sell_brand=샤넬' style='font-size: 1.5em' > 샤넬 </a>&nbsp;&nbsp;"
-									+"<a href='ProductBrandPro.pr?sell_brand=베테가베네타' style='font-size: 1.5em' > 베테가베네타 </a>&nbsp;&nbsp;"
+									+"<a href='ProductBrandPro.pr?sell_brand=보테가베네타' style='font-size: 1.5em' > 보테가베네타 </a>&nbsp;&nbsp;"
 									+"<a href='ProductBrandPro.pr?sell_brand=프라다' style='font-size: 1.5em' > 프라다 </a>&nbsp;&nbsp;"
 									+"<a href='ProductBrandPro.pr?sell_brand=롤렉스' style='font-size: 1.5em'> 롤렉스 </a>&nbsp;&nbsp;"
 									+"<a href='ProductBrandPro.pr?sell_brand=디올' style='font-size: 1.5em'> 디올 </a>&nbsp;&nbsp;"

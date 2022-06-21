@@ -41,7 +41,7 @@ function optionChange() {            //대분류 소분류 <select/>
 	var ko=['반팔','긴팔','롱슬리브'];
 	var ja=['반바지','긴바지','와이드','슬랙스'];
 	var sh=['스니커즈','워커','슬립온','슬리퍼'];
-	var ka=['쥬얼리','모자','피규어'];
+	var ka=['쥬얼리','모자','피규어','가방','지갑'];
 	var sizeCl=['S','M','L','XL','XXL'];
 	var sizeFree=['FREE'];
 	var sizeSh=['230','235','240','245','250','260','265','270','275','280','285','290','295','300'];
@@ -578,6 +578,11 @@ function readURL4(obj) {   //사진 3장 뿌리기
 										<option>Yellow</option>
 										<option>Red</option>
 										<option>SkyBlue</option>
+										<option>Gold</option>
+										<option>Silver</option>
+										<option>Green</option>
+										<option>Purple</option>
+										<option>Orange</option>
 									</select>
 									<div class="dropDownSelect2"></div>
 								</div>
@@ -593,6 +598,11 @@ function readURL4(obj) {   //사진 3장 뿌리기
 										<option>Yellow</option>
 										<option>Red</option>
 										<option>SkyBlue</option>
+										<option>Gold</option>
+										<option>Silver</option>
+										<option>Green</option>
+										<option>Purple</option>
+										<option>Orange</option>
 									</select>
 									<div class="dropDownSelect2"></div>
 								</div>
