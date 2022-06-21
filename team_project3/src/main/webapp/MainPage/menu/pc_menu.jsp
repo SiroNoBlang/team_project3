@@ -50,12 +50,6 @@
 				</a>
 			</li>
 
-			<li class="p-b-13">
-				<a href="javascript:void(0)" onclick="confirmLogout()" class="stext-102 cl2 hov-cl1 trans-04">
-					LogOut
-				</a>
-			</li>
-			
 			 <c:if test="${sGradeName eq 'Admin'}">
 				<li class="p-b-13">
 					<a href="MemberManagement.co" class="stext-102 cl2 hov-cl1 trans-04">
@@ -63,6 +57,13 @@
 					</a>
 				</li>
 			</c:if>
+			
+			<li class="p-b-13">
+				<a href="javascript:void(0)" onclick="confirmLogout()" class="stext-102 cl2 hov-cl1 trans-04">
+					LogOut
+				</a>
+			</li>
+			
 		</ul>
 		<span class="mtext-101 cl5">
 			@ CozaStore
