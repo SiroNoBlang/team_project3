@@ -275,14 +275,14 @@
 		             	 <li class="page-item"><a class="page-link" href="CommunityQna.ma?page=${pageNum - 1}">이전</a></li>
 					</c:when>
 					<c:otherwise>
-		            	<li class="page-item"><a class="page-link" >이전</a></li>
+		            	<li class="page-item page-link linkColor" >이전</li>
 			        </c:otherwise>
 				</c:choose>
 				
 				<c:forEach var="i" begin="${startPage }" end="${endPage }">
 					<c:choose>
 						<c:when test="${pageNum eq i}">
-		             		 <li class="page-item"><a class="page-link">${i }</a></li>
+		             		 <li class="page-item page-link linkColor">${i }</li>
 			       		</c:when>
 						<c:otherwise>     
 			              	<li class="page-item"><a href="CommunityQna.ma?page=${i }" class="page-link">${i }</a></li>
@@ -295,7 +295,7 @@
 			            	<li class="page-item"><a class="page-link" href="CommunityQna.ma?page=${pageNum + 1}">다음</a></li>
 			       	 	</c:when>
 						<c:otherwise>   
-		              		<li class="page-item"><a class="page-link">다음</a></li>
+		              		<li class="page-item page-link linkColor">다음</li>
 		       		 	</c:otherwise>
 				</c:choose>
             </ul>

@@ -175,3 +175,7 @@ small {
 td.leftTd {
     text-align: left !important;
 }
+
+.linkColor {
+    color: #666;
+}
