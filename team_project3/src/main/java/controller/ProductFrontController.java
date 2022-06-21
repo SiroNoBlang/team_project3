@@ -206,7 +206,7 @@ public class ProductFrontController extends HttpServlet {
 				e.printStackTrace();
 			}
 //--------------------------------------------------------
-		} else if (command.equals("/Contact.pr")) { // 회사 위치 등 건의 사항 메일 보내는 페이지 이동
+		} else if (command.equals("/Contact.pr")) { // 회사 위치 등 건의 사항 메일 보내는 페이지 이동 _이효민 06.21 확인
 
 			action = new ContactAction();
 
@@ -216,7 +216,7 @@ public class ProductFrontController extends HttpServlet {
 				e.printStackTrace();
 			}
 
-		} else if (command.equals("/SendAdmin.pr")) {//
+		} else if (command.equals("/SendAdmin.pr")) { // 건의 사항 관리자에세 메일 보내기 _이효민 06.21 확인
 
 			action = new SendAdminAction();
 

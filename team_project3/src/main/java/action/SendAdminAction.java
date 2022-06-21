@@ -23,12 +23,6 @@ public class SendAdminAction implements Action {
 		boolean isSendAdmin = service.isSendAdmin(email, msg, nickname, request);
 		
 		if(isSendAdmin) {
-			response.setContentType("text/html; charset=UTF-8");
-			PrintWriter out = response.getWriter();
-			out.println("<script>");
-			out.println("alert('메일이 정상적으로 전송되었습니다!')");
-//			out.println("location.href='Contact.pr?member_code=" + code + "'"); // 이걸보여줄까 고민중인거 뿐임.
-			out.println("</script>");
 			forward = new ActionForward("Contact.pr?member_code=" + code, true);
 		} else {
 			response.setContentType("text/html; charset=UTF-8");

@@ -6,30 +6,18 @@
 	<title>Contact</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-<!--===============================================================================================-->	
 	<link rel="icon" type="image/png" href="MainPage/images/icons/favicon.png"/>
-<!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="MainPage/vendor/bootstrap/css/bootstrap.min.css">
-<!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="MainPage/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
-<!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="MainPage/fonts/iconic/css/material-design-iconic-font.min.css">
-<!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="MainPage/fonts/linearicons-v1.0.0/icon-font.min.css">
-<!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="MainPage/vendor/animate/animate.css">
-<!--===============================================================================================-->	
 	<link rel="stylesheet" type="text/css" href="MainPage/vendor/css-hamburgers/hamburgers.min.css">
-<!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="MainPage/vendor/animsition/css/animsition.min.css">
-<!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="MainPage/vendor/select2/select2.min.css">
-<!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="MainPage/vendor/perfect-scrollbar/perfect-scrollbar.css">
-<!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="MainPage/css/util.css">
 	<link rel="stylesheet" type="text/css" href="MainPage/css/main.css">
-<!--===============================================================================================-->
 </head>
 <body class="animsition">
 	
@@ -109,8 +97,6 @@
 					<div class="flex-w w-full p-b-42">
 						<div id="daumRoughmapContainer1649291103479" class="root_daum_roughmap root_daum_roughmap_landing"></div>
 						<span class="fs-18 cl5 txt-center size-211">
-							<!-- 위치 정보를 지도로 가져와서 입력해둔 코드 -->
-							
 							<script charset="UTF-8" class="daum_roughmap_loader_script" src="https://ssl.daumcdn.net/dmaps/map_js_init/roughmapLoader.js"></script>
 							
 							<script charset="UTF-8">
@@ -173,14 +159,8 @@
 
 	<!-- Footer영역과 상단 이동 버튼-->
 	<jsp:include page="/MainPage/menu/footer.jsp"/>
-<!--===============================================================================================-->	
 	<script src="MainPage/vendor/jquery/jquery-3.2.1.min.js"></script>
-<!--===============================================================================================-->
 	<script src="MainPage/vendor/animsition/js/animsition.min.js"></script>
-<!--===============================================================================================-->
-<!-- 	<script src="MainPage/vendor/bootstrap/js/popper.js"></script> -->
-<!-- 	<script src="MainPage/vendor/bootstrap/js/bootstrap.min.js"></script> -->
-<!--===============================================================================================-->
 	<script src="MainPage/vendor/select2/select2.min.js"></script>
 	<script>
 		$(".js-select2").each(function(){
@@ -190,9 +170,7 @@
 			});
 		})
 	</script>
-<!--===============================================================================================-->
 	<script src="MainPage/vendor/MagnificPopup/jquery.magnific-popup.min.js"></script>
-<!--===============================================================================================-->
 	<script src="MainPage/vendor/perfect-scrollbar/perfect-scrollbar.min.js"></script>
 	<script>
 		$('.js-pscroll').each(function(){
@@ -209,10 +187,6 @@
 			})
 		});
 	</script>
-<!--===============================================================================================-->
-<!-- 	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAKFWBqlKAGCeS1rMVoaNlwyayu0e0YRes"></script> -->
-<!-- 	<script src="MainPage/js/map-custom.js"></script> -->
-<!--===============================================================================================-->
 	<script src="MainPage/js/main.js"></script>
 
 </body>

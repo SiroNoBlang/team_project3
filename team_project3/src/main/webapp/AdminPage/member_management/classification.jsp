@@ -102,7 +102,6 @@
 						<table class="board-table">
 							<thead>
 								<tr>
-									<th scope="col" class="th-num"></th>
 									<th scope="col" class="th-num">상태</th>
 									<th scope="col" class="th-title">닉네임</th>
 									<th scope="col" class="th-date">누적금액 (만원)</th>
@@ -113,7 +112,6 @@
 								<c:if test="${not empty classificationList and pageInfo.getListCount() > 0}">
 									<c:forEach var="classification" items="${classificationList }" varStatus="status">
 										<tr>
-											<td><input type="checkbox" value="${classification.getMember_code() }"></td>
 											<td>${classification.getMember_service_log_status() }</td>
 											<td><a href="ClassificationDetail.co?member_code=${classification.getMember_code() }&page=${pageNum }&value=${param.value }">
 													${classification.getMember_nickname() } </a></td>
@@ -124,15 +122,6 @@
 								</c:if>
 							</tbody>
 						</table>
-						<c:set var="value" value="${param.value }" />
-						<c:choose>
-							<c:when test="${value eq '2'}">
-								<button type="button" class="btn btn-primary" onclick="#">일괄 정상 변경</button>
-							</c:when>
-							<c:when test="${value eq '3'}">
-								<button type="button" class="btn btn-danger" onclick="#">일괄 탈퇴 승인</button>
-							</c:when>
-						</c:choose>
 					</div>
 				</div>
 				<section id="pageList">
