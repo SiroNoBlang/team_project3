@@ -32,7 +32,7 @@ public class MpQnaConfirmProAction implements Action {
 		String result = mmd.getHashedData();
 		qna_confirm = result;
 		
-		System.out.println(qna_confirm);
+//		System.out.println(qna_confirm);
 		
 		
 		QnaDeleteProService service = new QnaDeleteProService();
