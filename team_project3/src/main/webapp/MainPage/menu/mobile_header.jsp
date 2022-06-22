@@ -1,6 +1,25 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
+<script src="MainPage/js/jquery-3.6.0.js"></script>
+<script>
+$(function() {
+	$("#chat").on("click", function() {
+		debugger;
+		$.ajax({
+			type: "POST",
+			url: "Chat.pr",
+			data: {
+                id: sCode					 
+            }, // 응답 데이터가 JSON 형식이므로 JSON 타입 지정
+		}).done(function(data) { // 요청 성공 시 자동으로 호출되는 함수 정의
+			$("#resultArea").html(data);
+			
+		}).fail(function() {
+			$("#resultArea").html("요청 실패!");
+		});
+	});
+});
+</script>
 <div class="wrap-header-mobile">
 	<!-- Logo moblie -->		
 <div class="logo-mobile">
@@ -17,7 +36,7 @@
 </div>
 
 <!-- Button show menu -->
-	<div class="btn-show-menu-mobile hamburger hamburger--squeeze">
+	<div class="btn-show-menu-mobile hamburger hamburger--squeeze" id="chat">
 		<span class="hamburger-box">
 			<span class="hamburger-inner"></span>
 		</span>
@@ -27,30 +46,9 @@
 
 <!-- Menu Mobile -->
 <div class="menu-mobile">
-	<ul class="main-menu-m">
-		<li>
-			<a href="MainPage.pr">Home</a>
-			<span class="arrow-main-menu-m">
-				<i class="fa fa-angle-right" aria-hidden="true"></i>
-			</span>
-		</li>
-		
-		<li>
-			<a href="Product.pr">Shop</a>
-		</li>
-		
-		<li>
-			<a href="SellForm.pr">Sell</a>
-		</li>
-
-		<li>
-			<a href="CommunityNotice.ma">Community</a>
-		</li>
-
-		<li>
-			<a href="Contact.pr">Contact</a>
-		</li>
-	</ul>
+	<div class="main-menu-m">
+		<%@ include file="/MainPage/menu/chatBot.jsp" %>
+	</div>
 </div>
 
 

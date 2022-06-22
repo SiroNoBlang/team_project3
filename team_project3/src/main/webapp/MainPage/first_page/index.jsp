@@ -185,12 +185,6 @@ function recCount(sell_num,thisRow) { //  좋아요 갯수
 									New arrivals
 								</h2>
 							</div>
-								
-							<!-- <div class="layer-slick1 animated visible-false" data-appear="zoomIn" data-delay="1600">
-								<a href="product.html" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn2 p-lr-15 trans-04">
-									Shop Now
-								</a>
-							</div> -->
 						</div>
 					</div>
 				</div>
@@ -209,12 +203,6 @@ function recCount(sell_num,thisRow) { //  좋아요 갯수
 									Jackets & Coats
 								</h2>
 							</div>
-								
-							<!-- <div class="layer-slick1 animated visible-false" data-appear="slideInUp" data-delay="1600">
-								<a href="product.html" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn2 p-lr-15 trans-04">
-									Shop Now
-								</a>
-							</div> -->
 						</div>
 					</div>
 				</div>
@@ -233,12 +221,6 @@ function recCount(sell_num,thisRow) { //  좋아요 갯수
 									NEW SEASON
 								</h2>
 							</div>
-								
-						<!-- 	<div class="layer-slick1 animated visible-false" data-appear="rotateIn" data-delay="1600">
-								<a href="product.html" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn2 p-lr-15 trans-04">
-									Shop Now
-								</a>
-							</div> -->
 						</div>
 					</div>
 				</div>
@@ -251,7 +233,6 @@ function recCount(sell_num,thisRow) { //  좋아요 갯수
 	<!-- Product -->
 	<div>&nbsp;&nbsp;&nbsp;&nbsp;</div>
 	<table border="1" style="border: none; background:white;">
-		
 		
 <!--     </table>  구매물품 뿌려주는 곳    -->
      	<div class="container">

@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import action.Action;
+import action.ChatAction;
 import action.ContactAction;
 import action.MplistProAction;
 import action.ProductBrandProAction;
@@ -219,6 +220,16 @@ public class ProductFrontController extends HttpServlet {
 		} else if (command.equals("/SendAdmin.pr")) { // 건의 사항 관리자에세 메일 보내기 _이효민 06.21 확인
 
 			action = new SendAdminAction();
+
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
+		} else if (command.equals("/Chat.pr")) { // 건의 사항 관리자에세 메일 보내기 _이효민 06.21 확인
+
+			action = new ChatAction();
 
 			try {
 				forward = action.execute(request, response);
