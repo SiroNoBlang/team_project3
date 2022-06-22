@@ -43,7 +43,7 @@ public class productListProService {
 		return articleList;
 	}
 	
-	public ArrayList<SellerProductDTO> getMainArticleList(int pageNum, int listLimit) {
+	public ArrayList<SellerProductDTO> getMainArticleList() {
 			ArrayList<SellerProductDTO> mainarticleList = null;
 		
 		Connection con = getConnection();
@@ -53,7 +53,7 @@ public class productListProService {
 		sellerDAO.setConnection(con);
 		
 		// BoardDAO 객체의 selectArticleList() 메서드를 호출
-		mainarticleList = sellerDAO.selectMainArticleList(pageNum, listLimit);
+		mainarticleList = sellerDAO.selectMainArticleList();
 		
 		close(con);
 		

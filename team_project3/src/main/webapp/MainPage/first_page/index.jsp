@@ -676,8 +676,7 @@ function recCount(sell_num,thisRow) { //  좋아요 갯수
 		});
 		
 	});
-
-
+	
 
 </script>
 
