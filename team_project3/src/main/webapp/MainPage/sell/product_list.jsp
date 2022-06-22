@@ -192,10 +192,23 @@ function filter(value){
 	</header>
 	<!-- 여기까지 헤더 -->
 	<!-- Cart -->
+	<div style="float: right;">
+     		<table border="1">
+     			<tr>
+     				<th colspan="4" style="text-align: center;">최근 본 상품</th><th></th><th></th>
+     			</tr>
+     			<tr>
+     				<td colspan="4"><img src="./Upload/sell_img/hermes1.jpg" width="200" height="180"></td><td></td><td></td>
+     			</tr>
+     			<tr>
+     				<td colspan="4" style="text-align: center;">내가찜한상품</td><td></td><td></td>
+     			</tr>
+     		</table>
+     	</div>
 	<jsp:include page="/MainPage/menu/pc_shopping cart.jsp" />
 <!--     우리가 필터링으로 구분해줘야될 곳 -->
    <!-- Product -->
-
+		
 	<div class="container">
 		<div class="flex-w flex-sb-m p-b-52">
 			<div class="flex-w flex-l-m filter-tope-group m-tb-10"></div>
@@ -231,6 +244,7 @@ function filter(value){
 					</table>
 				</form>
 			</div>
+			
 			<!-- Filter -->
 			<div class="dis-none panel-filter w-full p-t-10">
 				<div class="wrap-filter flex-w bg6 w-full p-lr-40 p-t-27 p-lr-15-sm" style="justify-content: center;">
@@ -255,13 +269,15 @@ function filter(value){
 					<div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
 					<div id="checkbox2" class="filter-link stext-106 trans-04"
 						style="vertical-align: bottom; display: inline-block; margin-bottom: 2px;"></div>
+						
 				</div>
 			</div>
 		</div>
-
+		
 		<!-- 여기서부터 사진 상세보기로 서블릿만들기 -->
 		 <table border="1" style="border: none; background:white;">
 <!--     </table>  구매물품 뿌려주는 곳    -->
+     	
      	<div class="container">
             <div class="row multi-columns-row">
       
