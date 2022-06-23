@@ -25,36 +25,6 @@
 var sCode = '${sCode}' //좋아요 기능을 위하여 sCode 값을 script 위에 뿌려줌
 var sell_num
 
-	
-$(function(){
-	
-	
-	
-	$(".fa-heart").click(function(a){
-	var thisRow = $(this).closest('div');  //하트표시 줄의 부모(div)를 찾아  thisRow값에 저장
-	var thisplace = thisRow.find('span:eq(5)')[0];
-	
-	var sell_num =  thisRow.find('input').val(); //thisRow의 하위 요소인 find(input)=>input이라는 value를 찾아 sell_num에 저장 == ${sell_num}
-	
-//			var sell_num = thisRow.children('div').find('input');
-//			var sell_num = document.getElementsByClassName('sell_num:eq(0)');
-//			alert(JSON.stringify(sell_num));
-//			alert("관심상품 등록되었습니다. <찜 취소시, 취소되었습니다 출력되게해야됨>")			
-//		debugger;
-		$.ajax({
-			url: "ProductRecUpdate.pr",
-            type: "POST",
-            data: {
-         		sell_num : sell_num,    
-                id: sCode					 
-            },
-            success: function (data) {
-            	thisplace.innerHTML = data;
-            }
-		})
-	});
-	
-});
 
 function recCount(sell_num,thisRow) { //  좋아요 갯수
 	

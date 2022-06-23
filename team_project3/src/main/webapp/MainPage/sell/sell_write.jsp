@@ -570,7 +570,7 @@ function readURL4(obj) {   //사진 3장 뿌리기
 							<div class="size-204 respon6-next">
 								<div class="rs1-select2 bor8 bg0">
 									<select class="js-select2" name="sell_color1" required="required">
-										<option>선택해주세요.</option>
+									<option selected="selected">선택해주세요.</option>
 										<option>Black</option>
 										<option>White</option>
 										<option>Blue</option>
@@ -590,7 +590,7 @@ function readURL4(obj) {   //사진 3장 뿌리기
 							<div class="size-204 respon6-next">
 								<div class="rs1-select2 bor8 bg0">
 									<select class="js-select2" name="sell_color2">
-										<option>선택해주세요.</option>
+									<option selected="selected">선택해주세요.</option>
 										<option>Black</option>
 										<option>White</option>
 										<option>Blue</option>
