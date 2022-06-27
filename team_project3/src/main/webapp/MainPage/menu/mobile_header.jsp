@@ -1,25 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <script src="MainPage/js/jquery-3.6.0.js"></script>
-<script>
-$(function() {
-	$("#chat").on("click", function() {
-		debugger;
-		$.ajax({
-			type: "POST",
-			url: "Chat.pr",
-			data: {
-                id: sCode					 
-            }, // 응답 데이터가 JSON 형식이므로 JSON 타입 지정
-		}).done(function(data) { // 요청 성공 시 자동으로 호출되는 함수 정의
-			$("#resultArea").html(data);
-			
-		}).fail(function() {
-			$("#resultArea").html("요청 실패!");
-		});
-	});
-});
-</script>
 <div class="wrap-header-mobile">
 	<!-- Logo moblie -->		
 <div class="logo-mobile">

@@ -335,7 +335,7 @@ function filter(value){
                 <div class="shop-item">   <!-- 여기 -->
                <input class="sell_num" value="${articleList.sell_num}" readonly="readonly" style="border: none;">
                 <a href="ProductDetailPro.pr?sell_num=${articleList.sell_num}&sell_brand=${articleList.sell_brand}">
-                 <img src="./Upload/sell_img/${articleList.sell_img_real_name}" width="300px" height="400px" alt="Accessories Pack"/></a>
+                 <img src="./Upload/sell_img/${articleList.sell_img_real_name}" width="300px" height="300px" alt="Accessories Pack"/></a>
                 
                    <a href="ProductDetailPro.pr?sell_num=${articleList.sell_num}&sell_brand=${articleList.sell_brand}"> 
                    </a>
