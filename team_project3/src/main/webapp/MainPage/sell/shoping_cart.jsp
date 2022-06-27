@@ -574,7 +574,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 	$(document).ready(function () {
 		
 		 $("#buyCard").click(function () { 
-			 debugger;         
+			          
 				var address1 = document.getElementById('address1').value;
 				var address2 = document.getElementById('address2').value;
 				var postcode = document.getElementById('postcode').value;

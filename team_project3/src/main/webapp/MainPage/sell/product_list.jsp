@@ -1,10 +1,33 @@
+<%@page import="java.io.Console"%>
+<%@page import="org.apache.ibatis.reflection.SystemMetaObject"%>
 <%@page import="vo.SellerProductDTO"%>
 <%@page import="vo.PageInfo"%>
 <%@page import="vo.SellerDTO"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>     
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
+ 
+<% //쿠키설정
+String language ="";   //파싱하기 위해 문자열 담는 변수
+String img ="";			//쿠키 이미지
+String sellNum ="";		//쿠키 판매번호
+String sellBrand="";	//쿠키 브랜드
+
+String cookieHeader = request.getHeader("cookie");
+
+	if(cookieHeader != null){
+		Cookie[] cookies = request.getCookies();
+		for(Cookie cookie:cookies){
+			language +=cookie.getValue()+"/";  //배열로 구분하기 위한 작업
+		}
+		String[] array =language.split("/");	//배열의 인덱스로 나누기 위한 작업
+		img = array[1];
+		sellNum= array[2];
+		sellBrand= array[3];
+	}
+%> 
+
 <!DOCTYPE html>
 <html >
 <head>
@@ -65,6 +88,7 @@ function filter(value){
 }
 
 </script>  
+
    <meta charset="UTF-8">
    <meta name="viewport" content="width=device-width, initial-scale=1">
    <link rel="icon" type="image/png" href="MainPage/images/icons/favicon.png"/>
@@ -87,6 +111,9 @@ function filter(value){
 <style type="text/css">
 	a {
 	    color: #333;
+	}
+	#cookie{
+	pointer-events: none;
 	}
 </style>
 </head>
@@ -193,15 +220,35 @@ function filter(value){
 	<!-- 여기까지 헤더 -->
 	<!-- Cart -->
 	<div style="float: right;">
-     		<table border="1">
+     		<table border="1"  style=" width: 100%; height: 100%; border: none; background:white;">
      			<tr>
      				<th colspan="4" style="text-align: center;">최근 본 상품</th><th></th><th></th>
      			</tr>
+     			<%if(cookieHeader != null){ %>
      			<tr>
-     				<td colspan="4"><img src="./Upload/sell_img/hermes1.jpg" width="200" height="180"></td><td></td><td></td>
+     				<td colspan="4" >
+     					<a href="ProductDetailPro.pr?sell_num=<%=sellNum %>&sell_brand=<%=sellBrand %>">
+     						<img src="./Upload/sell_img/<%=img %>" width="200" height="180">
+     					</a>
+     				</td>
+     				<td></td>
+     				<td></td>
      			</tr>
+     				<%} else{%>
+     					<tr>
+     				<td colspan="4" >
+     					<i class="fa fa-eye marginEye" id="cookie"></i><span style="text-align: right;">최근 본 상품이 없습니다. </span>|
+     				</td>
+     				<td></td>
+     				<td></td>
+     			</tr>
+     				<%} %>
      			<tr>
-     				<td colspan="4" style="text-align: center;">내가찜한상품</td><td></td><td></td>
+     				
+     				<td colspan="4" style="text-align: center;">
+     					<i class="fa fa-heart" style="font-size:16px;color:red" id="cookie"></i>찜한상품
+     				</td>
+     				<td></td><td></td>
      			</tr>
      		</table>
      	</div>
