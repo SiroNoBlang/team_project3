@@ -6,22 +6,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%    //쿠키 설정
-SellerProductDTO dto = (SellerProductDTO)request.getAttribute("sellerdto");
-	String sell_num =  String.valueOf(dto.getSell_num()); //int ->String 형변환
-	
-	Cookie cookie = new Cookie("cookie_img",dto.getSell_img_real_name());    //쿠키(사진)
-	Cookie cookieNum = new Cookie("cookie_num",sell_num);					//쿠키(판매번호)
-	Cookie cookieBrand = new Cookie("cookie_brand",dto.getSell_brand());	//쿠키 (브랜드)
-	
-// 	int time = 60 * 60 * 24; //쿠키 유효기간
-// 	cookie.setMaxAge(time);
-	response.addCookie(cookie);
-	response.addCookie(cookieNum);
-	response.addCookie(cookieBrand);
-	cookie.setDomain("./MainPage/sell/product_list.jsp");
-	
-%>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
