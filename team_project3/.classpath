@@ -17,5 +17,6 @@
 	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/mybatis-3.5.9.jar"/>
 	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/mail-1.4.7.jar"/>
 	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/gson-2.9.0.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/5"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
